@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  cursor: default;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: NanumGothic;
+  src: url("NanumGothicCoding-Regular.woff");
+}
+
+.tile-body {
+  letter-spacing: 1px;
+  color: #424654;
+  background-image: url("background.jpg");
+  background-size: 25px;
+  padding: 10px;
+  font-family: NanumGothic;
+  font-size: 13px;
+}
+
+.container {
+  background-color: #e9edf2;
+  border: 1px solid #a7bad1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+header {
+  color: #fff;
+  background: #a7bad1;
+  padding: 2px 5px;
+}
+
+main {
+  background-color: #e9edf2;
+  padding: 5px;
+}
+
+h2 {
+  text-align: center;
+  color: #e85454;
+}
+
+.inner {
+  background-color: #fff;
+  border: 1px solid #a7bad1;
+  border-radius: 4px;
+  column-gap: 5px;
+  margin: 5px 0;
+  padding: 5px;
+  display: flex;
+}
+
+#pfp {
+  border: 1px solid #ffe560;
+  width: 50px;
+}
+
+.links {
+  justify-content: center;
+  column-gap: 5px;
+  display: flex;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  background: #d5e0eb;
+  border: 1px solid #a7bad1;
+  border-radius: 3px;
+  padding: 2px 5px;
+  transition: all .2s ease-in-out;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #e9edf2;
+}
+
+a button {
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>Nebula</header>
+        <main>
+            <h2>Welcome</h2>
+            <div class="inner">
+                <img id="pfp" src="pfp.jpg">
+                <div>
+                    <p><font size="4">Hello,</font><br>I'm Bianca.</p>
+                </div>
+            </div>
+            <div class="links">
+                <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Website</button></a>
+            	<a href="https://neocities.org/site/nogood-angel" target="_blank"><button>Profile</button></a>
+            	<a href="https://nogood-angel.atabook.org/" target="_blank"><button>Guestbook</button></a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

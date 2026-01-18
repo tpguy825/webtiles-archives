@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Atlantis Headline;
+  src: url("AtlantisHeadline-Bold.otf") format("opentype"), ;
+}
+
+@font-face {
+  font-family: Monopix;
+  src: url("monopix.otf") format("opentype");
+}
+
+html {
+  scroll-behavior: smooth;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.tile-body {
+  -webkit-text-size-adjust: none;
+  color: #f4e0fd;
+  background-color: #000;
+  background-image: url("vfx/tilingBg.jpg");
+  background-size: 300px;
+  margin: 0;
+  padding: 0;
+  font-family: Monopix;
+  font-size: 12px;
+  animation: 180s linear infinite scrollbg;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: Atlantis Headline;
+  font-weight: normal;
+  line-height: 140%;
+  display: inline-block;
+}
+
+h1 {
+  color: #9a10c8;
+  padding-right: 4px;
+  font-size: 38px;
+}
+
+.h1 {
+  text-shadow: 0 0 30px #ca50da;
+}
+
+h2, h3 {
+  color: #ca50da;
+  word-spacing: .25em;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+.h2 {
+  text-shadow: 1px 1px #611685, -1px 1px #611685, -1px -1px #611685, 1px -1px #611685, .1em .1em #000, 0 0 24px #ca50da;
+}
+
+h3 {
+  font-size: 10px;
+}
+
+p, li, .caption, .plaintext {
+  text-shadow: .1em .1em #000, 0 0 8px #f4e0fd;
+  line-height: 130%;
+}
+
+p, .plaintext {
+  color: #f4e0fd;
+  margin: 0 0 1em;
+
+  &:last-of-type {
+    margin: 0;
+  }
+}
+
+ul {
+  margin: 16px 0 0 6px;
+  padding: 0;
+  line-height: 120%;
+  list-style-type: none;
+}
+
+li {
+  margin: 0 0 16px;
+}
+
+span {
+  font: inherit;
+}
+
+a {
+  text-decoration: inherit;
+
+  &:hover {
+    opacity: .7;
+    cursor: pointer;
+  }
+
+  &:active {
+    opacity: .4;
+  }
+}
+
+.link {
+  color: #e7a4f0;
+  text-shadow: .5px .5px #9a10c8, -.5px .5px #9a10c8, -.5px -.5px #9a10c8, .5px -.5px #9a10c8, .1em .1em #000, 0 0 16px #c518ff;
+}
+
+table, tr, td {
+  vertical-align: top;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+marquee {
+  margin: 0;
+  padding: 0;
+  font-size: 9px;
+  transform: translateY(-1px);
+}
+
+.textshadow {
+  color: #000;
+  z-index: -1;
+  position: absolute;
+}
+
+.card {
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: #000;
+  border: 1px solid #fff4;
+  border-radius: 6px;
+  margin: 6px 3px;
+  padding: 4px 6px;
+  position: relative;
+
+  &:first-child {
+    margin-top: 3px;
+  }
+
+  &:last-child {
+    margin-bottom: 3px;
+  }
+}
+
+.mainCard {
+  background-image: url("images/streetlamp.jpg");
+  background-size: cover;
+  margin-top: 2px;
+}
+
+.caption {
+  opacity: .6;
+  font-size: 75%;
+}
+
+.success {
+  color: #0c0;
+}
+
+.success.textshadow {
+  text-shadow: 0 0 24px #0c0;
+}
+
+.successCard {
+  background-color: #030 !important;
+}
+
+.warning {
+  color: red;
+  text-shadow: .5px .5px #400, -.5px .5px #400, -.5px -.5px #400, .5px -.5px #400, .1em .1em #000, 0 0 24px red;
+}
+
+.warningCard {
+  background-color: #400 !important;
+}
+
+.highlight {
+  color: #ca50da;
+  text-shadow: .5px .5px #611685, -.5px .5px #611685, -.5px -.5px #611685, .5px -.5px #611685, .1em .1em #000, 0 0 24px #ca50da;
+}
+
+.highlightCard {
+  border-color: #ca50da;
+  background-color: #222 !important;
+}
+
+.flickering {
+  animation: .1s infinite flickering;
+}
+
+@keyframes flickering {
+  from {
+    filter: brightness();
+  }
+
+  to {
+    filter: brightness(.85);
+  }
+}
+
+@keyframes scrollbg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 1600px 800px;
+  }
+}
+</style>
+    <script defer type="text/tilescript"></script>
+</head>
+<body>
+    <a href="https://aivi.party/" target="_blank">
+        <div style="position: absolute; width: 100%; z-index: 0;">
+            <img src="images/aivi-horiz-banner2.png" style="width: 100%;">
+        </div>
+        <div style="position: relative; margin-left: 7px; transform: translateY(4px); z-index: 3;">
+            <h1 class="flickering">
+                <span class="textshadow h1">AIVI</span>
+                <span class="textshadow" style="transform: translate(0.1em, 0.1em);">AIVI</span>
+                <span class="textshadow" style="transform: translate(0.02em, 0.02em); color: #f4e0fd;">AIVI</span>
+                <span class="textshadow" style="transform: translate(-0.02em, -0.02em); color: #f4e0fd;">AIVI</span>
+                <span class="textshadow" style="transform: translate(-0.02em, 0.02em); color: #f4e0fd;">AIVI</span>
+                <span class="textshadow" style="transform: translate(0.02em, -0.02em); color: #f4e0fd;">AIVI</span>
+                <span>AIVI</span>
+            </h1>
+            <br>
+            <h2 class="flickering">
+                <span class="textshadow success">.PARTY!</span>
+                <span class="textshadow" style="transform: translate(0.1em, 0.1em);">.PARTY!</span>
+                <span class="textshadow" style="transform: translate(0.04em, 0.04em); color: #030;">.PARTY!</span>
+                <span class="textshadow" style="transform: translate(-0.04em, -0.04em); color: #030;">.PARTY!</span>
+                <span class="textshadow" style="transform: translate(-0.04em, 0.04em); color: #030;">.PARTY!</span>
+                <span class="textshadow" style="transform: translate(0.04em, -0.04em); color: #030;">.PARTY!</span>
+                <span class="success">.PARTY!</span>
+            </h2>
+        </div>
+
+        <div style="position: absolute; top: -1px; right: 0; z-index: 10; filter: opacity(0.4);">
+			<img src="https://webtiles.kicya.net/t/aivi.party/images/drip2.png" style="width: 140px;">
+    	</div>
+    </a>
+    <div class="card successCard" style="position: absolute; top: 62px; right: 0px;">
+        <p class="success" style="font-size: 8px;">(3,-7)<br>&nbsp;</p>
+    </div>
+  	<div class="card highlightCard mainCard" style="text-align: center; position: relative; z-index: 1;">
+
+        <h3 class="highlight">Where would you like to go?</h3>
+		<div style="height: 4px"></div>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 50%;">
+                	<a class="link" href="https://aivi.party/about" target="_blank"><u>About</u></a>
+                	<br><a class="link" href="https://aivi.party/art" target="_blank"><u>Art</u></a>
+                	<br><a class="link" href="https://aivi.party/commissions" target="_blank"><u>Commissions</u></a>
+                </td>
+                <td style="width: 50%;">
+                	<a class="link" href="https://aivi.party/projects" target="_blank"><u>Projects</u></a>
+                	<br><a class="link" href="https://aivi.party/blog" target="_blank"><u>Blog</u></a>
+                	<br><a class="link" href="https://aivi.party/guestbook" target="_blank"><u>Guestbook</u></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card">
+
+        <p>*epic clan sounds*</p>
+    </div>
+    <div class="flickering" style="position: absolute; bottom: 0; height: 24px; width: 100%; background-image: linear-gradient(0deg, #b70ae0, #0000); z-index: 0;"></div>
+    <div style="position: absolute; right: 0; top: 0; height: 100%; width: 6px; background-image: linear-gradient(270deg, #000, #0000); z-index: 0;"></div>
+    <div style="position: absolute; left: 0; top: 0; height: 100%; width: 6px; background-image: linear-gradient(90deg, #d4edfd, #0000); z-index: 0;"></div>
+    <div style="position: absolute; bottom: 0; height: 8px; width: 100%; background-image: linear-gradient(90deg, #b69aea, #bb0de4, #a777d6);">
+        <marquee class="caption" behavior="alternate" scrolldelay="60" scrollamount="1px">MINUS 7 TRAIN</marquee>
+    </div>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  margin: 0;
+  padding: 0;
+  transition: all .25s;
+}
+
+.tile-body {
+  background: #000;
+}
+
+.container {
+  color: #f1f3f5;
+  background: url("room/wall.png");
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: Inter Variable, sans-serif;
+  display: flex;
+}
+
+main {
+  z-index: 2;
+  text-align: left;
+  padding: 20px;
+
+  & h1 {
+    font-size: 3em;
+
+    & a {
+      text-decoration: none;
+    }
+  }
+}
+
+#bg {
+  z-index: 0;
+  opacity: .75;
+  flex-direction: row;
+  width: auto;
+  height: 250px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  & > div > img {
+    min-width: 88px;
+    min-height: 31px;
+  }
+
+  & > div {
+    flex-direction: column;
+    display: flex;
+    position: absolute;
+    top: 0;
+  }
+}
+
+a {
+  color: #30b8e6;
+
+  &:hover {
+    color: #4dc4eb;
+  }
+}
+
+img {
+  image-rendering: pixelated !important;
+}
+
+button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  &#dev {
+    position: fixed;
+    top: 84px;
+    right: 72px;
+  }
+
+  &#socials {
+    position: fixed;
+    top: 47px;
+    right: 20px;
+  }
+
+  &#dev, &#socials {
+    & img {
+      z-index: 5;
+      position: relative;
+    }
+  }
+
+  &#dev:hover, &#socials:hover {
+    &:before {
+      content: "";
+      z-index: 2;
+      position: absolute;
+      top: 1px;
+      left: 1px;
+    }
+
+    &#dev:before {
+      width: 22px;
+      height: 34px;
+      top: 4px;
+      left: 4px;
+      box-shadow: 0 0 7px #00f;
+    }
+
+    &#socials:before {
+      width: 50px;
+      height: 24px;
+      top: 4px;
+      left: 4px;
+      box-shadow: 0 0 11px #00f;
+    }
+  }
+}
+
+div:where(.dev, .socials) {
+  background: #fff;
+  gap: 3px;
+  width: fit-content;
+  max-width: 0;
+  padding-block: 3px;
+  display: flex;
+  position: fixed;
+
+  &.dev {
+    top: 89px;
+    right: 106px;
+  }
+
+  &.socials {
+    top: 48px;
+    right: 85px;
+  }
+
+  & > a {
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      min-width: 24px !important;
+      min-height: 24px !important;
+    }
+  }
+
+  &[data-visible="true"] {
+    opacity: 1;
+    max-width: 100px;
+    padding-inline: 3px;
+
+    & > a {
+      opacity: 1;
+    }
+  }
+}
+
+#links {
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 225px;
+  margin-top: 12px;
+  display: flex;
+
+  & > * {
+    background: #062f44;
+    padding: 4px;
+  }
+}
+
+.foreBg {
+  z-index: 25;
+  pointer-events: none;
+  z-index: 255;
+  position: fixed;
+  inset: 0;
+}
+
+@keyframes animate {
+  from {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translate(-45%, -45%);
+  }
+}
+</style>
+</head>
+<body>
+    <div class="bgContainer">
+        <div id="bg">
+			<div><img src="btns/32enoki.jpg">
+            <img src="btns/adamngshrine.jpg">
+            <img src="btns/afellowu.neocities.org.gif">
+            <img src="btns/amoebalous.jpg">
+            <img src="btns/ari.jpg">
+            <img src="btns/biofreak.jpg">
+            <img src="btns/bntarwarn.jpg">
+            <img src="btns/cathaks.jpg">
+            <img src="btns/ceat.jpg">
+            <img src="btns/chataigne.jpg">
+            <img src="btns/code2craft.jpg"></div>
+            <div style="left: 88px"><img src="btns/commpol.jpg">
+            <img src="btns/cufustis-cool-kitchen.jpg">
+            <img src="btns/dabric.jpg">
+            <img src="btns/deadon.rip.gif">
+            <img src="btns/demgoze.jpg">
+            <img src="btns/denpagirl.nekoweb.org.gif">
+            <img src="btns/drfred.jpg">
+            <img src="btns/duducat.svg">
+            <img src="btns/eyeorb.net.gif">
+            <img src="btns/glassy-website.jpg"></div>
+            <div style="left: 176px"><img src="btns/goatgirl.nekoweb.org.gif">
+            <img src="btns/hijpixel.nekoweb.org.gif">
+            <img src="btns/ivrry.jpg">
+            <img src="btns/jae.gg.gif">
+            <img src="btns/joo.sh.gif">
+            <img src="btns/july.lol.gif">
+            <img src="btns/laura.jpg">
+            <img src="btns/layercake.nekoweb.org.gif">
+            <img src="btns/lel@Button.jpg">
+            <img src="btns/lexpdev-webring-1.jpg">
+            <img src="btns/lucastheguy.nekoweb.org.gif">
+            <img src="btns/luxfero.nekoweb.org.gif">
+                <img src="btns/mattware.jpg"></div>
+        </div>
+    </div>
+	<div class="container">
+        <div class="elmCnt">
+            <button id="close">
+                Close
+            </button>
+        </div>
+        <main style="width: 250px; height: 250px; z-index: 5;">
+            <a href="https://jbc.lol/" style="position: fixed; left: 0; top: 3px; width: 100%; text-align: center; z-index: 2;" target="_blank">
+            	<img src="room/jbclogoshort.png">
+            </a>
+            <div class="dev">
+                <a href="https://github.com/jbcarreon123" target="_blank"><img src="icons/Github.png"></a>
+                <a href="https://codeberg.org/jbcarreon123" target="_blank"><img src="icons/Codeberg.png"></a>
+                <a href="https://git.jbc.lol/jbcrn" target="_blank"><img src="icons/Git.png"></a>
+            </div>
+            <button id="dev">
+                <img src="room/JB9.png">
+            </button>
+            <div class="socials">
+                <a href="https://waf.moe/blog/jb" target="_blank"><img src="icons/Wafrn.png"></a>
+                <a href="https://bsky.app/profile/jbc.lol" target="_blank"><img src="icons/Bluesky.png"></a>
+            </div>
+            <button id="socials">
+                <img src="room/JB8.png">
+            </button>
+        </main>
+        <div class="foreBg" style="z-index: 1;">
+            <img src="room/jbtiles.png">
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var btns = [
+    "/btns/32enoki.jpg",
+    "/btns/adamngshrine.jpg",
+    "/btns/afellowu.neocities.org.gif",
+    "/btns/amoebalous.jpg",
+    "/btns/ari.jpg",
+    "/btns/biofreak.jpg",
+    "/btns/bntarwarn.jpg",
+    "/btns/cathaks.jpg",
+    "/btns/ceat.jpg",
+    "/btns/chataigne.jpg",
+    "/btns/code2craft.jpg",
+    "/btns/commpol.jpg",
+    "/btns/cufustis-cool-kitchen.jpg",
+    "/btns/dabric.jpg",
+    "/btns/deadon.rip.gif",
+    "/btns/demgoze.jpg",
+    "/btns/denpagirl.nekoweb.org.gif",
+    "/btns/drfred.jpg",
+    "/btns/duducat.svg",
+    "/btns/eyeorb.net.gif",
+    "/btns/glassy-website.jpg",
+    "/btns/goatgirl.nekoweb.org.gif",
+    "/btns/hijpixel.nekoweb.org.gif",
+    "/btns/ivrry.jpg",
+    "/btns/jae.gg.gif",
+    "/btns/joo.sh.gif",
+    "/btns/july.lol.gif",
+    "/btns/laura.jpg",
+    "/btns/layercake.nekoweb.org.gif",
+    "/btns/lel@Button.jpg",
+    "/btns/lexpdev-webring-1.jpg",
+    "/btns/lucastheguy.nekoweb.org.gif",
+    "/btns/luxfero.nekoweb.org.gif",
+    "/btns/mattware.jpg",
+    "/btns/max.nekoweb.org.gif",
+    "/btns/mec-v02.nekoweb.org.gif",
+    "/btns/mechagic.jpg",
+    "/btns/medjed.jpg",
+    "/btns/melankorin.net.gif",
+    "/btns/metakabe.nekoweb.org.gif",
+    "/btns/metatronius.jpg",
+    "/btns/modularity.nekoweb.org.gif",
+    "/btns/nomaakip.jpg",
+    "/btns/nonomo.nekoweb.org.gif",
+    "/btns/nyscyra.jpg",
+    "/btns/olivia.nekoweb.org.gif",
+    "/btns/pancontinental.nekoweb.org.gif",
+    "/btns/petrapixel.neocities.org.gif",
+    "/btns/planet-bluto.jpg",
+    "/btns/pocketbroto.jpg",
+    "/btns/pokestitch.nekoweb.org.gif",
+    "/btns/puddingpudd.com.gif",
+    "/btns/racc.jpg",
+    "/btns/raccoonbutt.com.gif",
+    "/btns/redtail.works.gif",
+    "/btns/reduxflakes.nekoweb.org.gif",
+    "/btns/reigen.moe.gif",
+    "/btns/remblanc.jpg",
+    "/btns/rice.jpg",
+    "/btns/rover.nekoweb.org.gif",
+    "/btns/satorikeiko.jpg",
+    "/btns/scythe.jpg",
+    "/btns/seeingstarz.nekoweb.org.gif",
+    "/btns/sheep.nekoweb.org.gif",
+    "/btns/splashy.neocities.org.gif",
+    "/btns/stel-at-moondvsted.gif",
+    "/btns/stupied.jpg",
+    "/btns/syfish.dev.gif",
+    "/btns/tagasa.ing.gif",
+    "/btns/theoliveoli.jpg",
+    "/btns/thepersonever.net.gif",
+    "/btns/thinliquid.jpg",
+    "/btns/toasty.jpg",
+    "/btns/wiggle.monster.gif",
+    "/btns/xan.lol.gif",
+    "/btns/xavierhm.com.gif",
+    "/btns/yumeo.gif"
+]
+
+function chunkArray(arr, pushArr, size) {
+    for (var i = 0; i < arr.length; i += size) {
+        pushArr.push(arr.slice(i, i + size));
+    }
+    return pushArr;
+}
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array
+}
+
+var bg = document.getElementById('bg')
+
+bg.textContent = ''
+
+var initialBtns = shuffleArray(btns).slice(0, 39)
+var initialBtnElms = []
+
+var buttons = []
+
+var latBtnX = 0
+var latBtnY = 0
+
+chunkArray(initialBtns, [], 13).forEach(function (c, a) {
+    var cot = document.createElement('div')
+    cot.className = 'btnColContainer'
+    latBtnX = (3 * (a * 1.5))
+    latBtnY = (88 * a)
+    cot.style.setProperty('top', latBtnX + 'px')
+    cot.style.setProperty('left', latBtnY + 'px')
+    c.forEach(function (b) {
+        var btn = document.createElement('img')
+        btn.src = b
+        cot.appendChild(btn)
+    })
+    buttons.push(cot)
+    bg.appendChild(cot)
+})
+
+function toggle(el, el2) {
+    var e = document.querySelector(el);
+    var e2 = document.querySelector(el2);
+    e.addEventListener('click', function () {
+        console.log(e2.dataset)
+        if (e2.dataset.visible === 'true') {
+            e2.dataset.set('visible', 'false')
+        } else {
+            e2.dataset.set('visible', 'true')
+        }
+    })
+}
+
+toggle('#dev', '.dev')
+toggle('#socials', '.socials')
+
+var x = 0
+var y = 0
+var chunk = 0
+var chunk2 = 0
+var ap = 3
+
+setInterval(function (e) {
+    x-=1
+    y-=3
+    chunk++
+    chunk2+=3
+    
+    bg.style.setProperty('top', x + 'px')
+    bg.style.setProperty('left', y + 'px')
+    
+    if (chunk > 7 && (y * -1) > (latBtnY - (130 + (ap * 25))) && buttons.length < 7) {
+        var cot = document.createElement('div')
+        cot.className = 'btnColContainer'
+        latBtnX = (3 * (ap * 2))
+        latBtnY = (88 * ap)
+        cot.style.setProperty('top', latBtnX + 'px')
+        cot.style.setProperty('left', latBtnY + 'px')
+        var btnNum = Math.min(Math.max((270 + (y * -1)) / 22, 1), 12 + ap)
+        shuffleArray(btns).slice(0, btnNum).forEach(function (b) {
+            var btn = document.createElement('img')
+            btn.src = b
+            cot.appendChild(btn)
+        })
+        buttons.push(cot)
+        bg.appendChild(cot)
+        chunk = 0
+        ap++
+    }
+    
+    console.log(chunk, chunk2, latBtnX, latBtnY, x, y, ap)
+    
+    if (chunk2 > 90) {
+        buttons[0].remove()
+        buttons = buttons.slice(1)
+        chunk2 = 0
+    }
+}, 250)
+
+console.log(btns)</script>
+</body>
+</html>

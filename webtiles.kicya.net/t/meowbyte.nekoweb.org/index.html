@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  text-align: center;
+  background: #111;
+  margin: 0;
+  overflow: hidden;
+}
+
+canvas {
+  background: #70c5ce;
+  margin: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#menu {
+  color: #000;
+  z-index: 10;
+  background: #fff;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+
+#title {
+  color: #fff;
+  background: #000;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+#buttons {
+  flex: 1;
+  width: 100%;
+  display: flex;
+}
+
+button {
+  cursor: pointer;
+  color: #000;
+  background: #fff;
+  border: 1px solid #000;
+  flex: 1;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+button:hover {
+  color: #fff;
+  background: #000;
+}
+
+#img {
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+img {
+  object-fit: contain;
+  background: #fff;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+#red {
+  color: #ff0;
+  background: red;
+  width: 250px;
+  font-size: 23px;
+}
+</style>
+</head>
+<body>
+    <div id="menu">
+        <div id="red">
+            Meow meow meow :3
+        </div>
+        <div id="buttons">
+        	<button id="start">Start</button>
+            <button> 
+            	<a href="https://meowbyte.nekoweb.org/" target="_blank">
+    				Site
+				</a>
+            </button>
+        </div>
+        <p id="title">Meowbyte's Mini Flappy Bird</p>
+    </div>
+    
+    <canvas id="game" width="250" height="250"></canvas>
+    <script type="text/tilescript">var canvas = document.getElementById("game");
+var ctx = canvas.getContext("2d");
+
+var menu = document.getElementById("menu");
+var title = document.getElementById("title");
+var subtitle = document.getElementById("subtitle");
+var start = document.getElementById("start");
+
+var STATE_TITLE = 0;
+var STATE_PLAY = 1;
+var STATE_DEAD = 2;
+
+var state = STATE_TITLE;
+var score = 0;
+
+function showTitle() {
+    state = STATE_TITLE;
+   
+    menu.style.display = "flex"
+}
+
+function showRestart() {
+    state = STATE_DEAD;
+    
+    menu.style.display = "flex";
+}
+
+function startGame() {
+    reset();
+    state = STATE_PLAY;
+    menu.style.display = "none";
+}
+
+showTitle();
+start.addEventListener("click", startGame);
+
+var W = canvas.width;
+var H = canvas.height;
+var GRAVITY = 900;
+var FLAP = -300;
+
+var bird = {
+    x: 80,
+    y: H / 2,
+    vy: 0,
+    r: 10,
+};
+
+var pipes = [];
+
+var PIPE_W_MIN = 40;
+var PIPE_W_MAX = 70;
+var GAP_MIN = 90;
+var GAP_MAX = 150;
+var SPEED = 120;
+
+
+function flap() {
+    if (state === STATE_PLAY) {
+    	bird.vy = FLAP;
+    }
+}
+
+canvas.addEventListener("click", flap);
+// window.addEventListener("keydown", function(e) {
+//     if (e.keyCode === 32) {
+//         flap();
+//     }
+// });
+
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function addPipe() {
+    var gap = random(GAP_MIN, GAP_MAX);
+    var pipeW = random(PIPE_W_MIN, PIPE_W_MAX);
+    
+    var y = random(50, H - gap - 50);
+    pipes.push({
+        x: W,
+        y: y,
+        w: pipeW,
+        gap: gap,
+        passed: false,
+    });
+}
+
+function reset() {
+	bird.y = H / 2;
+ 	bird.vy = 0;
+  	pipes = [];
+  	score = 0;
+}
+
+var last = Date.now();
+var spawnTimer = 0;
+var spawnDelay = 1.4
+
+setInterval(function() {
+    var now = Date.now();
+    var dt = (now - last) / 1000;
+    last = now;
+    
+    update(dt);
+    render();
+}, 16);
+
+function update(dt) {
+    if (state !== STATE_PLAY) return;
+    
+    bird.vy += GRAVITY * dt;
+    bird.y += bird.vy * dt;
+    
+    spawnTimer += dt;
+    if (spawnTimer > spawnDelay) {
+        spawnTimer = 0;
+        spawnDelay = random(1.0, 1.8);
+        addPipe();
+    }
+
+	for (var i = pipes.length - 1; i >= 0; i--) {
+        var p = pipes[i];
+        p.x -= SPEED * dt;
+        
+        if (!p.passed && p.x + p.w < bird.x) {
+            p.passed = true;
+            score++;
+        }
+        
+        if (p.x + p.w < 0) {
+            pipes.splice(i, 1);
+        }
+        
+        if (
+            bird.x + bird.r > p.x &&
+           	bird.x - bird.r < p.x + p.w &&
+			(
+                bird.y - bird.r < p.y ||
+            	bird.y + bird.r > p.y + p.gap
+           	)
+           ) {
+            showRestart();
+        }
+    }
+    
+    if (bird.y > H || bird.y < 0) {
+        showRestart();
+    }
+}
+
+function render() {
+    ctx.clearRect(0, 0, W, H);
+    
+    ctx.fillStyle = "#ff0";
+    ctx.beginPath();
+    ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.fillStyle = "#2ecc71";
+    for (var i = 0; i < pipes.length; i++) {
+        var p = pipes[i];
+        ctx.fillRect(p.x, 0, p.w, p.y);
+        ctx.fillRect(p.x, p.y + p.gap, p.w, H);
+    }
+    
+    ctx.fillStyle = "#fff";
+    ctx.font = "20px sans-serif";
+    ctx.fillText(score, 10, 30);
+}
+</script>
+</body>
+</html>

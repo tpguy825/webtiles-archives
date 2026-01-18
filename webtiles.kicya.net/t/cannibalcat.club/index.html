@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #ff0;
+  background-color: red;
+  font-family: times new roman;
+}
+
+.miau {
+  z-index: 100;
+  text-align: center;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  top: 153px;
+  left: 28px;
+}
+
+.nya {
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .4s, opacity .3s;
+  position: absolute;
+  top: -10px;
+  left: 55px;
+  transform: translateY(0);
+}
+
+.miau:hover .nya {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+.arrow {
+  width: 20px;
+  height: 40px;
+  position: absolute;
+  top: 30px;
+  left: 220px;
+}
+
+.cat {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  transition: transform .4s, opacity .3s;
+  position: absolute;
+  top: -30px;
+  left: -220px;
+  transform: translateX(250px);
+}
+
+.arrow:hover .cat {
+  opacity: 1;
+  transform: translateX(0);
+}
+</style>
+</head>
+<body>
+    <a href="https://cannibalcat.club" target="_blank"><img src="chipi.gif" style="width:248px;border:solid blue 1px;border-top:none;"></a>
+    <div style="text-align:center;">
+        
+    <p id="wawa">
+        mew mrrp mmiaow mew mraow miauw meow mrrp nyauw meow mrrp mew mew
+    </p></div>
+    <img src="grass.gif" style="position:absolute;top:167px;left:0px;">
+    <img src="grass.gif" style="position:absolute;top:167px;right:0px;">
+  <div class="miau">
+    <p class="meow" style="font-family:ms gothic;font-size:16px;z-index:10;">
+        <img src="yellowredyinyangicon.gif"> <span style="background-color:red;"><b>cannibalcat<span style="color:blue;">.</span>club</b></span> 
+      <img src="yellowredyinyangicon.gif">
+    </p>
+      <a href="https://cannibalcat.club" target="_blank"><img src="button.gif" class="nya"></a>
+  </div>
+    <marquee style="width:100%;position:absolute;top:0;font-family:ms gothic;">hold still as the hunt continues for you, a neko! floating between life and death. (つKE ke keKE KE)</marquee>
+    <img src="starrow.gif" style="position:absolute;top:150px;left:95px;">
+    <img src="stitch.png" style="position:absolute;bottom:0;">
+    <img src="neko.gif" style="position:absolute;bottom:0px;left:2px;">
+    <img src="pawpillar_left.png" style="position:absolute;top:15px;left:6px;">    
+    <img src="pawpillar_right.png" style="position:absolute;top:15px;right:6px;">
+<div class="arrow">
+    <img src="cat_1.png" class="cat">
+    <img src="arrow.gif" style="position:absolute;top:80px;right:30px;">
+</div>
+
+    <audio id="catcall" src="catcall.mp3" preload="metadata"></audio>
+<script type="text/tilescript">
+var wawa = document.getElementById("wawa");
+var catcall = document.getElementById("catcall");
+
+wawa.addEventListener("click", function () {
+  catcall.currentTime = 0;
+  catcall.play();
+});
+</script>
+</body>
+</html>

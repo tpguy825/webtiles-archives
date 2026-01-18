@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+
+    <style>.tile-body {
+  color: #111;
+  background-color: #000;
+  background-image: url("webtilebg2.png");
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom-center {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.jump {
+  width: 62px;
+  height: 62px;
+  animation: .6s infinite jump;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-30px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+</style>
+
+    <style>.lines {
+  pointer-events: none;
+  z-index: 300;
+  opacity: .6;
+  animation: 3s linear infinite opacityFlicker;
+  position: fixed;
+  inset: 0;
+}
+
+.lines:before {
+  content: "";
+  background: linear-gradient(#0000 50%, #00000080 51%) 0 0 / 100% 4px;
+  animation: .2s linear infinite scanlines;
+  position: absolute;
+  inset: 0;
+}
+
+@media (width <= 600px) {
+  .lines {
+    opacity: .03;
+  }
+}
+
+.noise {
+  pointer-events: none;
+  z-index: 450;
+  position: fixed;
+  inset: 0;
+}
+
+.noise:before {
+  content: "";
+  background: url("https://webtiles.kicya.net/t/oshikatsuangel.nekoweb.org/blocked");
+  animation: 1s infinite alternate noise;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes scanlines {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 4px;
+  }
+}
+
+@keyframes noise {
+  0%, 100% {
+    background-position: 0 0;
+  }
+
+  20% {
+    background-position: -15% 5%;
+  }
+
+  40% {
+    background-position: 20% 25%;
+  }
+
+  60% {
+    background-position: 15% 5%;
+  }
+
+  80% {
+    background-position: 25% 35%;
+  }
+}
+
+@keyframes opacityFlicker {
+  0% {
+    opacity: .6;
+  }
+
+  30% {
+    opacity: .3;
+  }
+
+  60% {
+    opacity: .8;
+  }
+
+  100% {
+    opacity: .6;
+  }
+}
+
+@keyframes rgbText {
+  0% {
+    text-shadow: -1px 1px 8px #fff9, 1px -1px 8px #ffffebb3, 0 0 3px #fb00e7cc, 0 0 3px #00e9ebcc, 0 0 3px #00f20ecc;
+  }
+
+  50% {
+    text-shadow: 5px 0 1px #fb00e7cc, 0 5px 1px #00e9ebcc, -5px 0 1px #00f20ecc;
+  }
+
+  100% {
+    text-shadow: -5px 0 1px #fb00e7cc, 0 -5px 1px #00e9ebcc, 5px 0 1px #00f20ecc;
+  }
+}
+</style>
+</head>
+
+<body>
+    <div class="lines"></div>
+    <div class="noise"></div>
+   <div class="bottom-center">
+          <p style="color: #008080;"> <a href="https://oshikatsuangel.nekoweb.org" target="_blank">.𖥔 ˖Visit me!.𖥔 ˖</a> /   <a href="https://discord.gg/ebjs7Ea4rC" target="_blank">.𖥔 ˖Join my server!.𖥔 </a> </p>
+    </div>
+
+<img src="cassiespritenew.png" class="jump">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
+

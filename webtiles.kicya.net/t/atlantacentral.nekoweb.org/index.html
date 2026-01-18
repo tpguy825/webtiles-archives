@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+<body>
+    <div id="logo">
+        <img id="logoimg" src="acrrlogov3.png" alt="The ACRR Logo">
+    </div>
+    <div id="train">
+        <marquee>
+            <img src="train/np_F-1ani.gif">
+            <img src="train/c_o_7000.gif">
+            <img src="train/nkp13300.gif">
+            <img src="train/pfe_r-40-10.gif">
+            <img src="train/atsfwvcab.gif">
+        </marquee>
+    </div>
+    <div id="text">
+        <h1>
+            <a href="https://atlantacentral.nekoweb.org/" target="_blank">
+            	<i><b>tap in?</b></i>
+            </a>
+        </h1>
+    </div>
+        
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+<style>.tile-body {
+  background-image: url("stars3.gif");
+}
+
+#logo {
+  padding-top: 5px;
+  padding-left: 40px;
+}
+
+#logoimg {
+  height: 170px;
+}
+
+#text {
+  color: violet;
+  float: center;
+  text-align: center;
+  text-shadow: -3px 3px purple;
+  margin: -20px;
+
+  & a {
+    color: violet;
+    transition: color .4s ease-out;
+  }
+
+  & a:hover {
+    color: #fff;
+  }
+}
+</style>
+</html>

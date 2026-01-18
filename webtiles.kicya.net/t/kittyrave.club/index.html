@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background: url("catrave-rave.gif") 0 0 / 100%;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+}
+
+#music {
+  opacity: 0;
+  color: #fff;
+  width: 250px;
+  height: 250px;
+  transition: all .2s;
+  position: relative;
+}
+
+#music:hover {
+  opacity: 1;
+}
+
+p {
+  position: absolute;
+  bottom: 30px;
+}
+
+audio {
+  width: 250px;
+  position: absolute;
+  bottom: 0;
+}
+</style>
+</head>
+<body>
+    <div id="music">
+        <p>
+            come jam with me!!!!
+        </p>
+        <audio controls src="Ravers-World-Paradise-Of-Rave.mp3" preload="metadata">
+        </audio>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    <style>.tile-body {
+  background: #0b0f14;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+  overflow: hidden;
+}
+
+.space {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.space:before, .space:after {
+  content: "";
+  pointer-events: none;
+  background-repeat: repeat;
+  position: absolute;
+  inset: 0;
+}
+
+.space:before {
+  background-image: radial-gradient(1px 1px at 20px 30px, #fff6 50%, #0000 51%), radial-gradient(1px 1px at 80px 120px, #fff5 50%, #0000 51%), radial-gradient(1px 1px at 200px 90px, #fff4 50%, #0000 51%);
+  background-size: 300px 300px;
+  animation: 120s linear infinite drift;
+}
+
+.space:after {
+  background-image: radial-gradient(1px 1px at 50px 60px, #fff3 50%, #0000 51%), radial-gradient(1px 1px at 150px 200px, #fff2 50%, #0000 51%);
+  background-size: 400px 400px;
+  animation: 180s linear infinite driftReverse;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-300px);
+  }
+}
+
+@keyframes driftReverse {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(300px);
+  }
+}
+
+.alert {
+  z-index: 1;
+  box-sizing: border-box;
+  color: #d6e8ff;
+  background: linear-gradient(#0f1620cc, #0a0e14cc);
+  border: 1px solid #3fa9f5;
+  width: 100%;
+  height: 100%;
+  padding: 14px;
+  position: relative;
+  box-shadow: 0 0 12px #3fa9f540, inset 0 0 8px #ffffff0d;
+}
+
+.alert p {
+  margin: 0 0 6px;
+  font-size: .8rem;
+  line-height: 1.3;
+}
+
+.alert p:last-child {
+  margin-bottom: 0;
+}
+
+.title {
+  color: #7fc8ff;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.title:hover {
+  color: #b6e2ff;
+  text-shadow: 0 0 6px #7fc8ff99;
+}
+
+.status {
+  color: #9fffa0;
+}
+
+.note {
+  color: #9fb3c8;
+  font-style: italic;
+}
+
+.cursor:after {
+  content: "▮";
+  margin-left: 2px;
+  animation: 1s step-end infinite blink;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="space">
+        <div class="alert">
+            <p>
+                <a href="https://multiverseemployeehandbook.com" class="title" target="_blank" rel="noopener">
+                  Multiverse Monitoring System
+                </a>
+            </p>
+            <p>STATUS: <span class="status cursor">NOMINAL</span></p>
+            <p class="note">(Definitions subject to change)</p>
+        </div>
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

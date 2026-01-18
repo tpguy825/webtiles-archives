@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #05ffe2;
+  width: 245px;
+  height: 245px;
+  margin: 0;
+  font-family: monospace;
+}
+
+img :hover {
+  transform: scale(1.005);
+}
+
+.wip-banner {
+  text-align: center;
+  text-shadow: 5px 0 3px #000;
+  width: auto;
+  font-size: 22px;
+  animation: 8s ease-in-out 2s infinite backwards myAnim;
+}
+
+@keyframes myAnim {
+  0% {
+    transform: translate(0);
+  }
+
+  10% {
+    transform: translate(-2px, -2px);
+  }
+
+  20% {
+    transform: translate(2px, -2px);
+  }
+
+  30% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(2px, 2px);
+  }
+
+  50% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, -2px);
+  }
+
+  70% {
+    transform: translate(-2px, 2px);
+  }
+
+  80% {
+    transform: translate(-2px, -2px);
+  }
+
+  90% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.wip-div {
+  background-color: #7f7fa4;
+  background-image: url("https://webtiles.kicya.net/t/stc.nekoweb.org/assets/Setup.gif");
+  border-radius: 15px;
+  align-content: baseline;
+  width: 220px;
+  height: 220px;
+}
+
+.music-tab {
+  box-sizing: border-box;
+  background-image: url("assets/setup.gif");
+  background-position: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: .5rem;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.SP-track-name, .SP-artist-name {
+  text-wrap: nowrap;
+  background-color: #00052535;
+  width: 99.5%;
+  display: none;
+  overflow: hidden;
+}
+
+.StarrPlayer {
+  color: #fff;
+  background-color: #182fc829;
+  border-radius: 7%;
+  place-content: flex-start left;
+  width: 125px;
+  padding: 5px;
+  display: flex;
+}
+
+.blurb {
+  margin-top: 0;
+  font-size: .8rem;
+}
+
+.SP-track-info {
+  background-color: #00052535;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  position: relative;
+}
+
+.SP-track {
+  background-color: #00052535;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.SP-artist {
+  background-color: #00052535;
+  flex-flow: row;
+  justify-content: flex-start;
+  width: 100%;
+  font-size: 1.25rem;
+  font-style: italic;
+  display: flex;
+  overflow: hidden;
+}
+
+.SP-duration {
+  background-color: #00052535;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+}
+
+.SP-progress-bar {
+  background-color: #ffffff63;
+  width: 100%;
+  height: .2rem;
+  margin: .5rem 0;
+}
+
+.SP-progress-bar-fill {
+  background-color: #8f41fb;
+  height: 100%;
+  position: relative;
+}
+
+.SP-progress-bar-knob {
+  background-color: #d093ff;
+  border-radius: 50%;
+  width: .75rem;
+  height: .75rem;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translate(50%, -50%);
+}
+
+.Media-buttons {
+  background-color: #0c0a7b32;
+  background-image: linear-gradient(to right, #0c0a9b42, #eada2332);
+  border-radius: 5%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: .1rem;
+  width: 140px;
+  padding-top: 4px;
+  padding-bottom: 10px;
+  display: flex;
+  position: absolute;
+  bottom: -5px;
+  left: 55px;
+}
+
+.SP-button {
+  color: #f2e8e8;
+  cursor: pointer;
+  user-select: none;
+  background-color: #14eef500;
+  border: none;
+  border-radius: 10%;
+  width: 20px;
+  padding: .2rem;
+  display: flex;
+}
+
+.SP-button img {
+  place-self: center;
+  padding-left: 3px;
+}
+
+.SP-button:hover {
+  background-color: #1b154f63;
+}
+
+.hidden {
+  display: none;
+}
+
+.WB26 {
+  z-index: 50;
+  color: #e4edf2;
+  pointer-events: auto;
+  background: #00052500;
+  border-radius: 6%;
+  justify-items: center;
+  width: 100px;
+  height: auto;
+  padding: .5rem;
+  position: absolute;
+  top: 5px;
+  left: 150px;
+}
+
+.WB26 :link {
+  color: #e4edf2;
+  text-shadow: -2px 2px 5px #000000b6;
+  text-decoration: none;
+}
+
+.WB26 :hover {
+  color: #e4edf2;
+  text-shadow: -2px 2px 10px #2bc6ffb6;
+}
+
+.WB26 img {
+  padding-top: 4px;
+  padding-left: 5px;
+  animation: 3s ease-in-out infinite backwards pulse;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
+</head>
+<body>
+	<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+// Wait for the DOM so elements exist no matter where the script is placed
+
+    var audio = document.getElementById('wb2602_bc');
+    var playButton = document.getElementById('play-btn');
+    var pauseButton = document.getElementById('pause-btn');
+    var stopButton = document.getElementById('stop-btn');
+    if (audio && playButton && pauseButton && stopButton) {
+        playButton.addEventListener('click', function () {
+            // Play the audio — browsers allow this on user interaction (click)
+            audio.play();
+        });
+        pauseButton.addEventListener('click', function () {
+            // pause any playing audio
+            audio.pause();
+        });
+        stopButton.addEventListener('click', function () {
+            // stop any playing audio (this is done with pause + currenttime = 0)
+            audio.pause();
+            audio.currentTime = 0;
+        });
+
+    };
+</script>
+    <div class="music-tab">  
+    <audio id="wb2602_bc" src="assets/body_chaos.mp3" preload="metadata"></audio>
+    <div class="StarrPlayer">
+        <p class="blurb">
+            I make stuff, sometimes synths, sometimes bad synth music :&rbrack;
+        </p>
+        <div class="Media-buttons">  
+            <div class="SP-play SP-button" id="play-btn">
+                <img src="assets/play.png" alt="play">
+            </div>
+            <div class="SP-pause SP-button" id="pause-btn">
+                <img src="assets/pause.png" alt="pause">
+            </div>
+            <div class="SP-stop SP-button" id="stop-btn">
+                <img src="assets/stop.png" alt="stop">
+            </div>
+        </div>
+    </div>
+    <div class="WB26">
+        <a href="https://weeklybeats.com/homeostatic/" target="_blank">
+        	WeeklyBeats
+        	<img src="assets/wb75.png">
+        </a>
+    </div>
+    </div>
+</body>
+</html>

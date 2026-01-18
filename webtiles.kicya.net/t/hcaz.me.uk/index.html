@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Courier New, monospace;
+  display: flex;
+}
+
+.terminal {
+  background: #000;
+  border: 1px solid #3f3;
+  align-items: center;
+  width: 250px;
+  height: 25px;
+  padding: 0 6px;
+  display: flex;
+  box-shadow: 0 0 10px #33ff334d;
+}
+
+.prompt {
+  color: #3f3;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.prompt a {
+  color: #3f3;
+  margin-left: 3px;
+  text-decoration: none;
+}
+
+.prompt a:hover {
+  text-shadow: 0 0 5px #3f3;
+  text-decoration: underline;
+}
+
+.cursor {
+  background: #3f3;
+  width: 6px;
+  height: 12px;
+  margin-left: 2px;
+  animation: 1s infinite blink;
+  display: inline-block;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+
+  51%, 100% {
+    opacity: 0;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="prompt">
+            &gt; <a href="https://hcaz.me.uk" target="_blank">hcaz.me.uk</a><span class="cursor"></span>
+        </div>
+    </div>
+</body>
+</html>

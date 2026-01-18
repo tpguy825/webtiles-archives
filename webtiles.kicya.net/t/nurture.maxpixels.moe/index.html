@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #f0f0f0;
+  background-image: url("Nurture.jpg");
+  background-size: cover;
+  transition: all .3s ease-in-out;
+  margin: 0 !important;
+}
+
+#hover {
+  opacity: 0;
+  backdrop-filter: blur(6px);
+  width: 250px;
+  height: 250px;
+  padding: 10px;
+  transition: all .2s ease-in-out;
+  position: absolute;
+  overflow: scroll;
+}
+
+.tile-body:hover #hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+    <div id="hover">
+        <h1>
+            nurture
+        </h1>
+        <p>
+            Released seven years after his debut album <i>Worlds</i>, <b>Nurture</b> is the second studio album by American electronic music producer Porter Robinson.
+        </p>
+        <p>
+            After the release of <i>Worlds</i>, Robinson would undergo "an intense period of depression and creative drought, where he struggled to overcome feelings of self-doubt and questioned whether he’d ever make music again." <a href="https://ourculturemag.com/2021/04/29/album-review-porter-robinson-nurture/" target="_blank">(source)</a>
+        </p>
+        <br>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

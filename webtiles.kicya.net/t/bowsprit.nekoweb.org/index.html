@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>@font-face {
+  font-family: FranklinGothicItalic;
+  src: url("FranklinGothicITALIC.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: FrankGo;
+  src: url("FRANKGO.ttf") format("truetype");
+}
+
+.fade {
+  opacity: 1;
+  transition: opacity .5s;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+img {
+  width: 300px;
+  position: absolute;
+  top: 0;
+  left: -30px;
+}
+
+#base {
+  cursor: pointer;
+}
+
+.hitbox {
+  cursor: pointer;
+  z-index: 10;
+  background: #f000;
+  width: 136px;
+  height: 70px;
+  position: absolute;
+  top: 110px;
+  left: -30px;
+}
+
+.framing1, .framing2 {
+  z-index: 999;
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  position: absolute;
+  left: -30px;
+}
+
+.framing1 {
+  top: 0;
+}
+
+.framing2 {
+  top: 200px;
+}
+
+.frame-text {
+  color: orange;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  font-family: FranklinGothicItalic, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  transition: opacity .5s;
+}
+
+.fire-text {
+  text-align: center;
+  color: red;
+  z-index: 20;
+  width: 300px;
+  font-family: FrankGo, sans-serif;
+  font-size: 12px;
+  position: absolute;
+  top: 100px;
+  left: -100px;
+  transform: rotate(-3deg);
+}
+
+#linkText {
+  color: red;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  text-align: center;
+  font-family: Times New Roman, sans-serif;
+  font-size: 10px;
+  transition: opacity .5s;
+  position: absolute;
+  top: 92px;
+  left: 187px;
+}
+
+#linkText a {
+  color: red;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+#linkText a:hover {
+  color: #00f;
+}
+
+#followText a, #meText a {
+  color: orange;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+#followText a:hover, #meText a:hover {
+  color: #0ff;
+}
+</style>
+</head>
+<body>
+  <div id="fireText" class="fire-text">CLICK TO FIRE!</div>
+  <img id="base" src="basecannon.png" class="fade">
+  <img id="cannon" src="cannon.png" class="fade hidden">
+  <img id="explosion" src="explosion.png" class="fade hidden">
+  <div id="hitbox" class="hitbox"></div>
+
+  <div id="framing1" class="framing1">
+    <div id="followText" class="frame-text"><a href="https://nekoweb.org/follow/bowsprit.nekoweb.org" target="_blank">FOLLOW</a></div>
+  </div>
+  <div id="framing2" class="framing2">
+    <div id="meText" class="frame-text"><a href="https://nekoweb.org/follow/bowsprit.nekoweb.org" target="_blank">ME!</a></div>
+  </div>
+
+  <div id="linkText" class="frame-text"><a href="https://bowsprit.nekoweb.org" target="_blank">Click<br>for my<br>website!</a></div>
+
+  <audio id="shotSound" src="shootsound.mp3" preload="metadata"></audio>
+
+<script type="text/tilescript">
+  var base = document.getElementById('base');
+  var cannon = document.getElementById('cannon');
+  var explosion = document.getElementById('explosion');
+  var hitbox = document.getElementById('hitbox');
+  var followText = document.getElementById('followText');
+  var meText = document.getElementById('meText');
+  var linkText = document.getElementById('linkText');
+  var fireText = document.getElementById('fireText');
+  var shotSound = document.getElementById('shotSound'); 
+
+  hitbox.onclick = function () {
+  hitbox.style.pointerEvents = 'none';
+  base.className = 'fade hidden';
+  setTimeout(function () {
+    shotSound.currentTime = 0; 
+    shotSound.play(); 
+  }, 10); //thinking about this 
+
+  setTimeout(function () {
+    cannon.className = 'fade';
+    explosion.className = 'fade';
+
+    followText.style.opacity = 1;
+    followText.style.pointerEvents = 'auto';
+    meText.style.opacity = 1;
+    meText.style.pointerEvents = 'auto';
+    linkText.style.opacity = 1;
+    linkText.style.pointerEvents = 'auto';
+
+    fireText.style.display = 'none';
+  }, 80);
+};
+
+  function highlightBoth() {
+    followText.querySelector('a').style.color = 'cyan';
+    meText.querySelector('a').style.color = 'cyan';
+  }
+
+  function unhighlightBoth() {
+    followText.querySelector('a').style.color = 'orange';
+    meText.querySelector('a').style.color = 'orange';
+  }
+
+  followText.addEventListener('mouseenter', highlightBoth);
+  followText.addEventListener('mouseleave', unhighlightBoth);
+
+  meText.addEventListener('mouseenter', highlightBoth);
+  meText.addEventListener('mouseleave', unhighlightBoth);
+</script>
+
+</body>
+</html>

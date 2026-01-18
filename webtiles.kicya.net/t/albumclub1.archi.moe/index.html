@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("weezer.jpg") center / cover no-repeat fixed;
+}
+</style>
+</head>
+<body>
+    <audio id="theaudio" preload="metadata"></audio>
+    <script type="text/tilescript">var audiofiles = [
+    'BuddyHolly'
+];
+
+var theaudio = document.getElementById('theaudio');
+
+function randomaudio() {
+    return audiofiles[Math.floor(Math.random() * audiofiles.length)];
+}
+
+function plr() {
+    var randomselect = randomaudio();
+
+    theaudio.src = 'audio/' + randomselect + '.mp3';
+    
+    theaudio.volume = 0.4;
+
+    var playqzes = theaudio.play();
+
+    if (playqzes !== undefined && playqzes.catch) {
+        playqzes.catch(function (error) {
+            theart.classList.add('paused');
+
+            function clickHandler() {
+                theaudio.play();
+                theart.classList.remove('paused');
+                document.removeEventListener('click', clickHandler);
+            }
+
+            document.addEventListener('click', clickHandler);
+        });
+    }
+}
+
+theaudio.addEventListener('play', function () {
+    theart.classList.remove('paused');
+});
+
+theaudio.addEventListener('ended', function () {
+    plr();
+});
+
+plr();</script>
+</body>
+</html>

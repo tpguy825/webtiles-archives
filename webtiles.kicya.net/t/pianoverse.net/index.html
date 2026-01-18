@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Nunito;
+  src: url("Nunito-Bold.ttf");
+}
+
+@keyframes press {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 250px;
+  }
+}
+
+@keyframes release {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-250px);
+  }
+}
+
+.tile-body {
+  user-select: none;
+  background-color: #0c0d14;
+
+  & .header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    width: 250px;
+    height: 150px;
+    margin-top: 15px;
+    display: flex;
+
+    &:before {
+      content: "";
+      background: url("twinkle2.gif") center / cover no-repeat;
+      position: absolute;
+      inset: 0;
+      mask-image: linear-gradient(to right, #000 0%, #0000 18% 30%);
+    }
+
+    & > * {
+      z-index: 1;
+      position: relative;
+    }
+
+    & svg {
+      fill: #fff;
+      width: 48px;
+      height: 48px;
+    }
+
+    & img {
+      width: 48px;
+      height: 48px;
+    }
+
+    & .span {
+      color: #fff;
+      opacity: .7;
+      margin-bottom: 3px;
+      font-family: Nunito, Tahoma;
+      font-size: 22px;
+    }
+
+    & .links {
+      flex-direction: row;
+      justify-content: center;
+      gap: 8px;
+      width: 250px;
+      margin-bottom: 24px;
+      display: flex;
+
+      & a {
+        color: #0c0d14;
+        background-color: #fff;
+        border-radius: 2px;
+        padding: 2px 4px;
+        font-family: Nunito, Tahoma;
+        font-weight: bold;
+        text-decoration: none;
+        transition: all .12s;
+        box-shadow: 0 5px #1d7add66, 0 10px #1d7add4d, 0 15px #1d7add33, 0 20px #1d7add1a, 0 25px #1d7add0d;
+
+        &:hover {
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+
+  & .piano {
+    flex-direction: row;
+    gap: 1px;
+    width: 250px;
+    height: 85px;
+    display: flex;
+
+    & .key {
+      opacity: 1;
+      cursor: pointer;
+      flex: 1;
+      position: relative;
+
+      & .white {
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        transition-property: background-color, opacity;
+        transition-duration: .3s;
+        transition-timing-function: ease-out;
+      }
+
+      & .black {
+        z-index: 20;
+        background-color: #1b1b1b;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        width: 60%;
+        height: 64%;
+        transition-property: background-color, opacity;
+        transition-duration: .2s;
+        transition-timing-function: ease-out;
+        position: absolute;
+        top: 0;
+        left: 70%;
+      }
+
+      & .white:active, & .black:active {
+        background-color: #d85252;
+        transition: all;
+      }
+    }
+  }
+
+  & .note {
+    box-sizing: border-box;
+    pointer-events: none;
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    min-height: 6px;
+    animation-name: press;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    position: absolute;
+    bottom: 85px;
+    box-shadow: 0 5px #d8525266, 0 10px #d852524d, 0 15px #d8525233, 0 20px #d852521a, 0 25px #d852520d;
+
+    &.released {
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      animation-name: release;
+    }
+  }
+}
+
+#border-right:before {
+  content: "";
+  z-index: 9999;
+  border-top: 4px;
+  border-image: url("durkaborder.png") 28 / 28px round;
+  width: 14px;
+  height: 100%;
+  position: absolute;
+  top: -85%;
+  right: -4px;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <img src="pianoverse.svg">
+        <span class="span">Pianoverse</span>
+        <div class="links">
+            <a href="https://pianoverse.net" target="_blank">Website</a>
+            <a href="https://discord.gg/QDgARxhx" target="_blank">Discord</a>
+            <a href="https://github.com/charleprr" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+    <div class="piano" id="piano">
+        <div class="key">
+          <div class="white" data-key="60"></div>
+          <div class="black" data-key="61"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="62"></div>
+          <div class="black" data-key="63"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="64"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="65"></div>
+          <div class="black" data-key="66"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="67"></div>
+          <div class="black" data-key="68"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="69"></div>
+          <div class="black" data-key="70"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="71"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="72"></div>
+          <div class="black" data-key="73"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="74"></div>
+          <div class="black" data-key="75"></div>
+        </div>
+        <div class="key">
+          <div class="white" data-key="76"></div>
+        </div>
+    </div>
+
+    <audio id="sound-60" src="sounds/60.mp3" preload="metadata"></audio>
+    <audio id="sound-61" src="sounds/61.mp3" preload="metadata"></audio>
+    <audio id="sound-62" src="sounds/62.mp3" preload="metadata"></audio>
+    <audio id="sound-63" src="sounds/63.mp3" preload="metadata"></audio>
+    <audio id="sound-64" src="sounds/64.mp3" preload="metadata"></audio>
+    <audio id="sound-65" src="sounds/65.mp3" preload="metadata"></audio>
+    <audio id="sound-66" src="sounds/66.mp3" preload="metadata"></audio>
+    <audio id="sound-67" src="sounds/67.mp3" preload="metadata"></audio>
+    <audio id="sound-68" src="sounds/68.mp3" preload="metadata"></audio>
+    <audio id="sound-69" src="sounds/69.mp3" preload="metadata"></audio>
+    <audio id="sound-70" src="sounds/70.mp3" preload="metadata"></audio>
+    <audio id="sound-71" src="sounds/71.mp3" preload="metadata"></audio>
+    <audio id="sound-72" src="sounds/72.mp3" preload="metadata"></audio>
+    <audio id="sound-73" src="sounds/73.mp3" preload="metadata"></audio>
+    <audio id="sound-74" src="sounds/74.mp3" preload="metadata"></audio>
+    <audio id="sound-75" src="sounds/75.mp3" preload="metadata"></audio>
+    <audio id="sound-76" src="sounds/76.mp3" preload="metadata"></audio>
+
+    <div id="border-right"></div>
+
+    <script type="text/tilescript">var header = document.querySelectorAll(".header")[0];
+var audios = document.getElementsByTagName("audio");
+var keys = document.querySelectorAll(".key");
+
+var whites = [60,62,64,65,67,69,71,72,74,76];
+var sharps = [61,63,66,68,70,73,75];
+
+// Event listeners
+for (var i = 0; i < keys.length; i++) {
+    keys[i].addEventListener("pointerdown", press);
+	keys[i].addEventListener("pointerup", release);
+}
+
+// Functions
+function getLeftPosition(key) {
+    return whites.indexOf(key) * 226 / (whites.length - 1);
+}
+
+function getLeftPositionSharp(key) {
+    return getLeftPosition(key - 1) + 17;
+}
+
+function press(e) {
+    var key = e.target.dataset.key;
+    audios[key - 60].currentTime = 0;
+    audios[key - 60].play();
+   
+    var note = document.createElement("div");
+	var isSharp = sharps.indexOf(parseInt(key)) !== -1;
+
+    if (isSharp) {
+    	note.className = "note sharp";
+        note.style.left = getLeftPositionSharp(parseInt(key)) + "px";
+    	note.style.width = "14px";
+    } else {
+    	note.className = "note";
+        note.style.left = getLeftPosition(parseInt(key)) + "px";
+    	note.style.width = "24px";
+    }
+    
+    header.appendChild(note);
+}
+
+function release() {
+    var notes = document.querySelectorAll(".note");
+    for (var i = 0; i < notes.length; i++) {
+        if (!notes[i].classList.contains("released")) {
+            notes[i].style.height = Math.max(notes[i].clientHeight + 2, 10) + "px";
+            notes[i].className = "note released";
+            (function(note) {
+                note.addEventListener("animationend", function() {
+                    note.remove();
+                })
+            })(notes[i]);
+        }
+    }
+}</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: #000;
+}
+
+#hero {
+  animation: 1s linear infinite hue;
+  position: absolute;
+  top: 0;
+}
+
+#hero > img {
+  mask-image: linear-gradient(#0000 5%, #000 25%);
+}
+
+#hero > span {
+  z-index: 2;
+  letter-spacing: .5px;
+  font-family: VCR;
+  font-size: 20px;
+  position: absolute;
+}
+
+#hero > #pause {
+  top: 6px;
+  left: 7px;
+}
+
+#hero > #time {
+  top: 6px;
+  right: 7px;
+}
+
+#title {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
+}
+
+#title > h1 {
+  text-align: center;
+  z-index: 10;
+  margin: 0;
+  font-family: Gloock, serif;
+  font-size: 3rem;
+}
+
+@font-face {
+  font-family: Gloock;
+  src: url("Gloock-Regular.ttf");
+}
+
+@font-face {
+  font-family: VCR;
+  src: url("VCR_OSD_MONO.ttf");
+}
+
+@keyframes hue {
+  from {
+    filter: hue-rotate();
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+    <div id="title">
+        <h1>L.E.L</h1>
+    </div>
+    <div  id="hero">
+        <span id="pause">PAUSE</span>
+        <span id="time">00:12:22</span>
+    <img src="VCR.webp" height="250" width="250" fetchpriority="high" loading="eager">
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+// console.log("Hello world!");</script>
+</body>
+</html>

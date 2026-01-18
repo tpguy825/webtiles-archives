@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Consolas, monospace;
+}
+
+.tile-body {
+  color: #fff;
+  background: #000;
+  border: 1px solid #333;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  overflow: hidden;
+}
+
+.album-cover {
+  z-index: 100;
+  pointer-events: none;
+  background: url("cover_tiles.png") center no-repeat;
+  width: 250px;
+  height: 250px;
+  transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tile-body:hover .album-cover, .tile-body:focus-within .album-cover {
+  transform: translateX(-100%);
+}
+
+.header-area {
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.rainbow {
+  background: linear-gradient(to right, #00fff2, #001eff, #bd00ff, #ff00c8, red, #ff8c00, #fffb00, #00ff0d, #00fff2) 0 0 / 200%;
+  width: 100%;
+  height: 2px;
+  animation: 3s linear infinite move-rainbow;
+  box-shadow: 0 0 8px #ff00c8;
+}
+
+@keyframes move-rainbow {
+  to {
+    background-position: -200%;
+  }
+}
+
+.canvas-container {
+  background: #000;
+  height: 90px;
+  margin: 8px 8px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#imageLayer {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#doorContainer {
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.door {
+  background-color: #000;
+  width: 50%;
+  height: 100%;
+  transition: transform .6s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+#doorContainer.open #doorLeft {
+  transform: translateX(-105%);
+}
+
+#doorContainer.open #doorRight {
+  transform: translateX(105%);
+}
+
+#mainCanvas {
+  z-index: 10;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ui-controls {
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 8px;
+  display: flex;
+}
+
+.sub-header {
+  align-items: center;
+  margin-bottom: 2px;
+  display: flex;
+}
+
+.red-bar {
+  background: #ff1e1e;
+  width: 5px;
+  height: 14px;
+  margin-right: 8px;
+}
+
+input {
+  color: #fff;
+  background: #000;
+  border: 1px solid #fff;
+  outline: none;
+  width: 100%;
+  padding: 3px;
+  font-size: 11px;
+}
+
+.btn-row {
+  gap: 5px;
+  margin-top: 2px;
+  display: flex;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background: #000;
+  border: 1px solid #fff;
+  flex: 1;
+  padding: 4px;
+  font-size: 10px;
+}
+
+button:active {
+  background: #333;
+}
+
+.footer {
+  text-align: right;
+  padding: 0 8px 5px 0;
+  font-size: 10px;
+}
+</style>
+</head>
+<body>
+	<div class="album-cover"></div>
+    <audio id="music" preload="metadata"></audio>
+    <div class="header-area">
+        <div class="title">Bang1338's Keygen</div>
+        <div class="rainbow"></div>
+    </div>
+
+	<div class="canvas-container" id="stage">
+		<canvas id="imageLayer"></canvas>
+        <div id="doorContainer">
+            <div id="doorLeft" class="door"><canvas id="canvasL"></canvas></div>
+            <div id="doorRight" class="door"><canvas id="canvasR"></canvas></div>
+        </div>
+		<canvas id="mainCanvas"></canvas>
+	</div>
+
+    <div class="ui-controls">
+        <div class="sub-header">
+            <div class="red-bar"></div>
+            <span>Irfanview Commercial</span>
+        </div>
+        <input type="text" id="writeBox" autocomplete="off">
+        <input type="text" id="readBox" readonly autocomplete="off">
+        <div class="btn-row">
+            <button id="btnGen">Generate</button>
+            <button id="btnAbt">About</button>
+        </div>
+    </div>
+
+    <div class="footer">bang1338</div>
+
+	<script type="text/tilescript">
+    // ======================= Music =======================
+	var themusic = document.getElementById('music');
+	function playmus() {
+		themusic.src = './mov.ogg';
+		var mCtx = themusic.play();
+		if (mCtx !== undefined && mCtx.catch) {
+			mCtx.catch(function (error) {
+				theart.classList.add('paused');
+
+				function clickHandler() {
+					themusic.play();
+					document.removeEventListener('click', clickHandler);
+				}
+
+				document.addEventListener('click', clickHandler);
+			});
+		}
+	}
+	themusic.addEventListener('ended', function () {
+		playmus();
+	});
+
+	playmus();
+	
+	// ======================= FX things =======================
+	var canvas = document.getElementById('mainCanvas');
+	var ctx = canvas.getContext('2d');
+	var imgCanvas = document.getElementById('imageLayer');
+	var imgCtx = imgCanvas.getContext('2d');
+    
+    var cL = document.getElementById('canvasL');
+    var cR = document.getElementById('canvasR');
+    var ctxL = cL.getContext('2d');
+    var ctxR = cR.getContext('2d');
+
+	var xWidth = 234; // Using fixed values or calculated for the container
+	var xHeight = 90;
+	var lineLength = 60; 
+	var speed = 6;   
+
+	canvas.width = imgCanvas.width = xWidth;
+	canvas.height = imgCanvas.height = xHeight;
+    cL.width = cR.width = Math.ceil(xWidth / 2);
+    cL.height = cR.height = xHeight;
+
+    var isAboutOpen = false;
+    var squares = [];
+    var spawnFrameCount = 0;
+    var spawnInterval = 30; 
+    var growSpeed = 3.0;    
+    var credits = ["Irfanview Commercial", "", "Protection", "Checksum/Custom", "", "Keygenned by", "Bang1338", "", "Designs", "Bang1338", "reACTor1998", "", "Music", "C418", "", "Tester", "You"];
+    var easings = [0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1];
+    var creditY = xHeight;
+    var scrollSpeed = 0.25;
+    var easingFrequency = 0.004; 
+    var easingAmplitude = 40;
+
+	var bgImage = document.createElement('img')
+	bgImage.src = './mc.png';
+	bgImage.onload = function () {
+		// don't ask me why i adjust this manually
+		//   drawImage(image,   sx,             sy, sWidth,    sHeight, dx, dy, dWidth,       dHeight)
+		ctxL.drawImage(bgImage, 0,              0, xWidth / 2, xHeight, 1,  0,  xWidth / 2+1, xHeight);
+		ctxR.drawImage(bgImage, xWidth / 2 - 1, 0, xWidth / 2, xHeight, 0,  0,  xWidth / 2+2, xHeight);
+	};
+
+	var pts = [
+		{ x: lineLength,          y: 0,           color: '#FFFFFF', type: 'lead' },
+		{ x: 0,                   y: 0,           color: null,      type: 'eraser' },
+		{ x: xWidth - lineLength, y: xHeight - 1, color: '#FFFFFF', type: 'lead' },
+		{ x: xWidth - 1,          y: xHeight - 1, color: null,      type: 'eraser' }
+	];
+
+	function movePoint(p) {
+		if (p.y === 0 && p.x < xWidth - 1) p.x++;
+		else if (p.x === xWidth - 1 && p.y < xHeight - 1) p.y++;
+		else if (p.y === xHeight - 1 && p.x > 0) p.x--;
+		else if (p.x === 0 && p.y > 0) p.y--;
+	}
+
+	function animate() {
+		for (var i = 0; i < speed; i++) { 
+			for (var j = 0; j < pts.length; j++) {
+				var p = pts[j];
+				movePoint(p);
+				if (p.type === 'lead') {
+					ctx.fillStyle = p.color;
+					ctx.fillRect(p.x, p.y, 1, 1);
+				} else {
+					ctx.clearRect(p.x, p.y, 1, 1);
+				}
+			}
+		}
+
+        if (isAboutOpen) {
+            imgCtx.clearRect(0, 0, xWidth, xHeight);
+            spawnFrameCount++;
+            if (spawnFrameCount >= spawnInterval) {
+                squares.push({
+                    size: 1,
+                    angle: Math.random() * (Math.PI * 2),
+                    spin: (Math.random() - 0.5) * 0.06
+                });
+                spawnFrameCount = 0;
+            }
+
+            imgCtx.strokeStyle = '#444';
+            for (var s = squares.length - 1; s >= 0; s--) {
+                var sq = squares[s];
+                sq.size += growSpeed;
+                sq.angle += sq.spin;
+                
+                imgCtx.save();
+                imgCtx.translate(xWidth / 2, xHeight / 2);
+                imgCtx.rotate(sq.angle);
+                imgCtx.strokeRect(-sq.size/2, -sq.size/2, sq.size, sq.size);
+                imgCtx.restore();
+
+                if (sq.size > xWidth * 2.5) squares.splice(s, 1);
+            }
+            creditY -= scrollSpeed;
+            if (creditY < -(credits.length * 30)) creditY = xHeight + 10;
+
+            imgCtx.font = "10px Consolas";
+            imgCtx.textAlign = "center";
+            imgCtx.fillStyle = "#fff";
+
+            for (var k = 0; k < credits.length; k++) {
+                var yPos = creditY + (k * 10);
+                if (yPos > -20 && yPos < xHeight + 20) {
+                    var xPos = xWidth / 2;
+                    if (easings[k] === 1) {
+                        xPos += Math.sin((Date.now() * easingFrequency) + (k * 0.8)) * easingAmplitude;
+                    }
+                    imgCtx.fillText(credits[k], xPos, yPos);
+                }
+            }
+        }
+	}
+	setInterval(animate, 8);
+	
+	// ======================= Algo =======================
+	function checksumName(name) {
+		var text;
+		try {
+			var num = 0;
+			for (var i = 0; i < name.length; i++) {
+				num += name.charCodeAt(i) & 0xFF;
+			}
+			num = 472 * (Math.abs(260 - num) + 332);
+			var numStr = num.toString();
+			var array = numStr.split('');
+			while (array.length < 9) { array.push('\0'); }
+			if (array.length > 9) { array = array.slice(0, 9); }
+
+			var num2;
+			if (num > 999999) {
+				array[8] = array[6]; array[6] = array[5]; array[3] = array[2];
+				array[2] = array[1]; array[5] = array[4];
+				num2 = Math.abs(((array[8].charCodeAt(0) * 9) << 2) - ((array[6].charCodeAt(0) << 6) - array[6].charCodeAt(0)));
+				array[7] = String.fromCharCode(((num2 * 9 * 4) % 9) + 48);
+				num2 = (array[4].charCodeAt(0) + 32);
+				num2 = Math.abs((((array[3].charCodeAt(0) * 5) << 3) - array[3].charCodeAt(0)) * 2 + ((num2 * 8 - num2) * 4 + num2) * 3);
+				array[4] = String.fromCharCode(((num2 * 8 - num2) * 4 + num2) * 3 % 9 + 48);
+				num2 = Math.abs((((array[0].charCodeAt(0) * 8 - array[0].charCodeAt(0)) * 4 + array[0].charCodeAt(0)) << 1) - ((array[1].charCodeAt(0) << 4) + array[1].charCodeAt(0)) * 5);
+				array[1] = String.fromCharCode(((num2 * 8 - num2) * 4 + (num2 << 1)) % 9 + 48);
+			} else {
+				array[6] = array[4]; array[8] = array[5]; array[5] = array[3];
+				array[3] = array[2]; array[2] = array[1];
+				num2 = Math.abs(((array[8].charCodeAt(0) * 5) << 3) - array[8].charCodeAt(0) - ((array[4].charCodeAt(0) << 5) - array[4].charCodeAt(0)) * 3);
+				array[7] = String.fromCharCode(((num2 * 5 << 3) - num2) % 9 + 48);
+				num2 = Math.abs(((array[5].charCodeAt(0) * 9 * 4 + array[5].charCodeAt(0)) * 2) + ((array[3].charCodeAt(0) * 3 << 4) - array[3].charCodeAt(0)));
+				array[4] = String.fromCharCode((num2 * 9 * 4 + (num2 << 1)) % 9 + 48);
+				num2 = Math.abs(((array[0].charCodeAt(0) * 3 * 9) << 1) - array[0].charCodeAt(0) - ((array[1].charCodeAt(0) * 8 - array[1].charCodeAt(0)) * 5));
+				array[1] = String.fromCharCode(((num2 * 3 * 9 << 1) - num2) % 9 + 48);
+			}
+			text = array.join('');
+		} catch (e) {
+			text = "";
+		}
+		return text;
+	}
+
+    // Event Bindings
+    document.getElementById('btnGen').addEventListener('click', function() {
+        document.getElementById('readBox').value = checksumName(document.getElementById('writeBox').value);
+    });
+
+    document.getElementById('btnAbt').addEventListener('click', function() {
+var doorCont = document.getElementById('doorContainer');
+isAboutOpen = !isAboutOpen;
+
+if (isAboutOpen) {
+    doorCont.setAttribute('class', 'open'); 
+} else {
+    doorCont.setAttribute('class', ''); 
+    
+    setTimeout(function() { 
+        imgCtx.clearRect(0, 0, xWidth, xHeight); 
+        squares = []; 
+    }, 600);
+}
+    });
+	</script>
+</body>
+</html>

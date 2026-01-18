@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>.tile-body {
+  -webkit-user-select: none;
+  user-select: none;
+  background: #000;
+  width: 248px;
+  height: 248px;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+#container {
+  width: 248px;
+  height: 248px;
+  position: relative;
+}
+
+#grid {
+  width: 248px;
+  height: 248px;
+}
+
+.tile {
+  float: left;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 31px;
+  height: 31px;
+  image-rendering: pixelated;
+  background: #222 center / cover;
+  border: 1px solid #333;
+  position: relative;
+}
+
+.tile:hover {
+  z-index: 1;
+  border-color: #fff;
+}
+
+.tile.empty:after {
+  content: "+";
+  color: #444;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tile:hover:after {
+  color: #fff;
+}
+
+#center-logo {
+  z-index: 10;
+  cursor: pointer;
+  width: 62px;
+  height: 62px;
+  image-rendering: pixelated;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#center-logo:hover {
+  filter: brightness(1.2);
+}
+
+.hidden {
+  display: none !important;
+}
+
+#modal-overlay {
+  z-index: 20;
+  background: #000c;
+  justify-content: center;
+  align-items: center;
+  width: 248px;
+  height: 248px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#modal-content {
+  color: #fff;
+  text-align: center;
+  background: #3c3c44;
+  border: 2px solid #889;
+  width: 200px;
+  padding: 10px;
+  font-size: 10px;
+  box-shadow: 4px 4px #222;
+}
+
+#modal-title {
+  color: #4f4;
+  text-shadow: 0 0 2px #0f0;
+  background: #222;
+  border: 1px solid #555;
+  margin: 0 0 10px;
+  padding: 2px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+input[type="password"], input[type="file"] {
+  box-sizing: border-box;
+  color: #4f4;
+  background: #111;
+  border: 1px solid #555;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 2px;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background: #556;
+  border: 2px outset #778;
+  margin-top: 5px;
+  padding: 4px 8px;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+button:active {
+  border-style: inset;
+}
+
+button:hover {
+  background: #667;
+}
+
+.error {
+  color: #f55;
+  text-shadow: 1px 1px #000;
+  margin-bottom: 5px;
+}
+
+.success {
+  color: #5f5;
+  text-shadow: 1px 1px #000;
+  margin-bottom: 5px;
+}
+
+@keyframes glitch {
+  0% {
+    filter: hue-rotate();
+    transform: translate(0);
+  }
+
+  20% {
+    filter: hue-rotate(90deg);
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    filter: hue-rotate(180deg);
+    transform: translate(2px, -2px);
+  }
+
+  60% {
+    filter: hue-rotate(270deg);
+    transform: translate(-2px);
+  }
+
+  80% {
+    filter: hue-rotate();
+    transform: translate(2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-active {
+  animation: .3s cubic-bezier(.25, .46, .45, .94) infinite both glitch;
+}
+
+#editor-canvas {
+  cursor: crosshair;
+  image-rendering: pixelated;
+  background: #000;
+  border: 1px solid #555;
+  width: 186px;
+  height: 186px;
+  margin: 10px auto;
+  display: block;
+  box-shadow: 0 0 10px #000;
+}
+
+#color-picker {
+  cursor: pointer;
+  background: #222;
+  border: 1px solid #555;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.editor-controls {
+  justify-content: space-between;
+  gap: 5px;
+  width: 186px;
+  margin: 5px auto;
+  display: flex;
+}
+
+#editor-btn {
+  flex-grow: 1;
+  height: 30px;
+  margin: 0;
+}
+</style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="grid">
+        </div>
+        <img id="center-logo" src="tile_logo.gif" alt="Menu">
+    </div>
+
+    
+    <div id="modal-overlay" style="display: none;">
+        <div id="modal-content">
+            <h2 id="modal-title">Tile Info</h2>
+            <div id="modal-body"></div>
+            <button id="modal-close">Close</button>
+        </div>
+    </div>
+
+    <script type="text/tilescript">// Config - CHANGE THIS if your API is elsewhere
+var API_URL = "https://cockgobl.in/webtiles/api/estate.php";
+
+// State
+var tiles = [];
+var currentTileId = -1;
+var isDrawing = false; // Global drawing state
+
+// DOM Elements (assigned in init)
+var grid, modalOverlay, modalBody, modalTitle, modalClose, centerBtn;
+
+function init() {
+    grid = document.getElementById('grid');
+    modalOverlay = document.getElementById('modal-overlay');
+    modalBody = document.getElementById('modal-body');
+    modalTitle = document.getElementById('modal-title');
+    modalClose = document.getElementById('modal-close');
+    modalClose = document.getElementById('modal-close');
+    var centerLogo = document.getElementById('center-logo');
+
+    if (grid) renderGrid();
+    fetchGrid();
+
+    if (centerLogo) {
+        centerLogo.addEventListener('click', openMainMenu);
+    }
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+
+    // Global mouseup to stop drawing (Attached to overlay since document.addEventListener fails in sandbox)
+    if (modalOverlay) modalOverlay.addEventListener('mouseup', function () { isDrawing = false; });
+}
+
+function clearElement(el) {
+    while (el.firstChild) {
+        el.removeChild(el.firstChild);
+    }
+}
+
+function renderGrid() {
+    clearElement(grid);
+    for (var i = 0; i < 64; i++) {
+        var tile = document.createElement('div');
+        tile.className = 'tile empty';
+        tile.setAttribute('data-id', i);
+        tile.addEventListener('click', function (e) {
+            onTileClick(parseInt(e.currentTarget.getAttribute('data-id')));
+        });
+        grid.appendChild(tile);
+    }
+}
+
+function updateGridUI() {
+    var domTiles = document.querySelectorAll('.tile');
+    for (var i = 0; i < domTiles.length; i++) {
+        var domTile = domTiles[i];
+        var data = tiles[i];
+
+        // special case: Middle 4 tiles (Indices 27, 28, 35, 36)
+        // Ensure they remain empty/unclaimable but logic is handled by overlay now
+        if (i === 27 || i === 28 || i === 35 || i === 36) {
+            domTile.className = 'tile empty'; // Keep them looking like tiles underneath? Or just empty.
+            domTile.style.backgroundImage = 'none'; // Clear any potential junk
+            clearElement(domTile);
+            domTile.style.cursor = 'default';
+            continue;
+        }
+
+        if (data && data.pixel_data) {
+            // Optimization: Skip if data hasn't changed
+            if (domTile.getAttribute('data-rendered-hash') === data.pixel_data) {
+                continue;
+            }
+
+            domTile.className = 'tile claimed';
+            domTile.style.backgroundImage = 'none';
+            domTile.setAttribute('data-rendered-hash', data.pixel_data);
+
+            // Check for existing canvas
+            var c = domTile.querySelector('canvas');
+            if (!c) {
+                // Clear any other content (like empty +)
+                clearElement(domTile);
+
+                c = document.createElement('canvas');
+                c.width = 31;
+                c.height = 31;
+                c.style.width = '100%';
+                c.style.height = '100%';
+                c.style.display = 'block';
+                domTile.appendChild(c);
+            }
+
+            var ctx = c.getContext('2d');
+            ctx.clearRect(0, 0, 31, 31); // Clear for redraw
+
+            try {
+                var pixels = JSON.parse(data.pixel_data);
+                if (Array.isArray(pixels)) {
+                    for (var y = 0; y < 31; y++) {
+                        for (var x = 0; x < 31; x++) {
+                            var color = pixels[y * 31 + x];
+                            if (color) {
+                                ctx.fillStyle = color;
+                                ctx.fillRect(x, y, 1, 1);
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                // Ignore legacy data
+            }
+        } else {
+            // Only clear if it wasn't already empty (optimization)
+            if (domTile.className !== 'tile empty') {
+                domTile.removeAttribute('data-rendered-hash');
+                clearElement(domTile);
+                domTile.className = 'tile empty';
+                domTile.style.backgroundImage = 'none';
+            }
+        }
+    }
+}
+
+function fetchGrid() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", API_URL + "?action=get_grid");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            try {
+                var resp = JSON.parse(xhr.responseText);
+                if (resp.success && resp.data) {
+                    tiles = new Array(64);
+                    for (var i = 0; i < resp.data.length; i++) {
+                        var t = resp.data[i];
+                        tiles[parseInt(t.id)] = t;
+                    }
+                    updateGridUI();
+                }
+            } catch (e) {
+                console.error("JSON Parse error");
+            }
+        }
+    };
+    xhr.send();
+}
+
+function onTileClick(id) {
+    if (id === 27 || id === 28 || id === 35 || id === 36) return;
+    currentTileId = id;
+
+    // FETCH FRESH DATA (Live Check)
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", API_URL + "?action=get_tile&tile_id=" + id);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    var resp = JSON.parse(xhr.responseText);
+                    if (resp.success && resp.data) {
+                        var t = resp.data;
+                        var isClaimed = (t.is_claimed == 1);
+                        // Launch Editor with canonical data
+                        showPixelEditor(id, t.pixel_data, isClaimed);
+                    } else {
+                        console.error("Failed to load tile info");
+                    }
+                } catch (e) {
+                    console.error("JSON Error in tile fetch");
+                }
+            }
+        }
+    };
+    xhr.send();
+}
+
+function showPixelEditor(id, existingData, isUpdate) {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'wizard-wrapper';
+
+    // --- STATE ---
+    var currentStep = 0;
+    var steps = [];
+    var pixelDataURL = existingData;
+    var password = "";
+
+    // --- STEP 1: WELCOME / LOGIN ---
+    var step1 = document.createElement('div');
+    var h3 = document.createElement('h3');
+    h3.style.color = "#4f4";
+    h3.innerText = isUpdate ? "Locked Tile" : "Claim Tile";
+    step1.appendChild(h3);
+
+    var p1 = document.createElement('p');
+    p1.innerText = isUpdate ? "Enter password to edit." : "You are claiming a tile.";
+    step1.appendChild(p1);
+
+    var msgDivS1 = document.createElement('div'); // Message area for Step 1
+
+    if (isUpdate) {
+        var loginPass = document.createElement('input');
+        loginPass.type = 'password';
+        loginPass.placeholder = "Enter Password";
+        step1.appendChild(loginPass);
+
+        var btnUnlock = document.createElement('button');
+        btnUnlock.innerText = "Unlock & Edit >";
+        btnUnlock.style.marginTop = "10px";
+        btnUnlock.onclick = function () {
+            if (!loginPass.value.trim()) {
+                showMsg(msgDivS1, "Password required", "error");
+                return;
+            }
+            btnUnlock.disabled = true;
+            btnUnlock.innerText = "Verifying ID: " + id + "...";
+            console.log("Sending Verify for Tile ID:", id);
+
+            verifyPassword(id, loginPass.value.trim(), function (success) {
+                btnUnlock.disabled = false;
+                btnUnlock.innerText = "Unlock & Edit >";
+                if (success) {
+                    password = loginPass.value.trim(); // Store for final save
+                    goToStep(1);
+                } else {
+                    showMsg(msgDivS1, "Wrong Password!", "error");
+                }
+            });
+        };
+        step1.appendChild(document.createElement('br'));
+        step1.appendChild(btnUnlock);
+    } else {
+        // Claim Mode
+        var p2 = document.createElement('p');
+        p2.innerText = "Draw 31x31px pixel art & lock it.";
+        step1.appendChild(p2);
+
+        var btn1 = document.createElement('button');
+        btn1.innerText = "Start Drawing >";
+        btn1.onclick = function () { goToStep(1); };
+        step1.appendChild(document.createElement('br'));
+        step1.appendChild(btn1);
+    }
+
+    step1.appendChild(msgDivS1);
+    steps.push(step1);
+
+    // --- STEP 2: EDITOR ---
+    var step2 = document.createElement('div');
+
+    // Canvas
+    var canvas = document.createElement('canvas');
+    canvas.id = 'editor-canvas';
+    canvas.width = 31;
+    canvas.height = 31;
+    canvas.style.backgroundColor = '#111';
+    step2.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+
+    // Pixel State: Array of 961 items (31x31). 
+    // Null = transparent. Hex string = color.
+    var pixelState = new Array(961);
+    for (var i = 0; i < 961; i++) pixelState[i] = null;
+
+    // Init Logic
+    if (existingData) {
+        try {
+            var parsed = JSON.parse(existingData);
+            if (Array.isArray(parsed)) {
+                pixelState = parsed;
+            }
+        } catch (e) { }
+    }
+
+    // Helper to redraw canvas from state
+    function renderCanvasState() {
+        ctx.clearRect(0, 0, 31, 31);
+        for (var y = 0; y < 31; y++) {
+            for (var x = 0; x < 31; x++) {
+                var c = pixelState[y * 31 + x];
+                if (c) {
+                    ctx.fillStyle = c;
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+        }
+    }
+
+    // Initial Render
+    renderCanvasState();
+
+    // Controls
+    var controls = document.createElement('div');
+    controls.className = 'editor-controls';
+    step2.appendChild(controls);
+
+    var colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.id = 'color-picker';
+    colorPicker.value = '#ffffff';
+    colorPicker.title = "Left Click to Draw";
+    controls.appendChild(colorPicker);
+
+    // Eraser Instructions / Mode
+    var hint = document.createElement('div');
+    hint.innerText = "Left Click: Draw | Right Click: Erase";
+    hint.style.fontSize = "9px";
+    hint.style.color = "#888";
+    hint.style.marginTop = "2px";
+
+    var btn2 = document.createElement('button');
+    btn2.innerText = "Next: Save >";
+    btn2.id = 'editor-btn';
+    btn2.onclick = function () {
+        // Save state as JSON string
+        pixelDataURL = JSON.stringify(pixelState);
+        goToStep(2);
+    };
+    controls.appendChild(btn2);
+    step2.appendChild(hint);
+
+    // Drawing Logic
+    // var isDrawing = false; // Now global
+    var isErasing = false;
+
+    function draw(x, y) {
+        if (x < 0 || x >= 31 || y < 0 || y >= 31) return;
+        var idx = y * 31 + x;
+
+        if (isErasing) {
+            ctx.clearRect(x, y, 1, 1);
+            pixelState[idx] = null;
+        } else {
+            ctx.fillStyle = colorPicker.value;
+            ctx.fillRect(x, y, 1, 1);
+            pixelState[idx] = colorPicker.value;
+        }
+    }
+
+    function getCoords(e) {
+        var rect = canvas.getBoundingClientRect();
+        var scaleX = canvas.width / rect.width;
+        var scaleY = canvas.height / rect.height;
+        return {
+            x: Math.floor((e.clientX - rect.left) * scaleX),
+            y: Math.floor((e.clientY - rect.top) * scaleY)
+        };
+    }
+
+    // Disable context menu for right click erase
+    canvas.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+    canvas.addEventListener('mousedown', function (e) {
+        isDrawing = true;
+        isErasing = (e.button === 2); // Right click
+        var c = getCoords(e);
+        draw(c.x, c.y);
+    });
+
+    canvas.addEventListener('mousemove', function (e) {
+        if (isDrawing) {
+            var c = getCoords(e);
+            draw(c.x, c.y);
+        }
+    });
+
+    // Removed repeated listener: modalOverlay.addEventListener('mouseup', ...);
+    steps.push(step2);
+
+    // --- STEP 3: PASSWORD / SAVE ---
+    var step3 = document.createElement('div');
+    var pSecure = document.createElement('p');
+
+    // If update, we already have password. If claim, we need to create one.
+    pSecure.innerText = isUpdate ? "Ready to update?" : "Secure your tile.";
+    step3.appendChild(pSecure);
+
+    var passInput = document.createElement('input');
+    passInput.type = 'password';
+
+    if (isUpdate) {
+        // Hidden input or just don't show it? 
+        // We already have 'password' var set from Step 1.
+        // Let's just not show an input, but we'll use the variable.
+    } else {
+        passInput.placeholder = 'Create Password';
+        step3.appendChild(passInput);
+    }
+
+    var msgDiv = document.createElement('div');
+    step3.appendChild(msgDiv);
+
+    var row = document.createElement('div');
+    row.style.display = 'flex';
+    row.style.justifyContent = 'space-between';
+
+    var backBtn = document.createElement('button');
+    backBtn.innerText = "< Back";
+    backBtn.onclick = function () { goToStep(1); };
+
+    var finishBtn = document.createElement('button');
+    finishBtn.innerText = isUpdate ? "Update Tile" : "Claim!";
+    finishBtn.style.color = "#4f4";
+    finishBtn.onclick = function () {
+        // For Claim: must have input. For Update: usage 'password' var.
+        var finalPass = isUpdate ? password : passInput.value.trim();
+
+        if (!finalPass) {
+            showMsg(msgDiv, "Password required!", "error");
+            return;
+        }
+
+        // Prevent double-click
+        finishBtn.disabled = true;
+        finishBtn.innerText = "Saving...";
+
+        uploadPixelData(isUpdate ? 'update' : 'claim', id, pixelDataURL, finalPass, msgDiv);
+    };
+
+    row.appendChild(backBtn);
+    row.appendChild(finishBtn);
+    step3.appendChild(row);
+    steps.push(step3);
+
+    // MANAGER
+    function goToStep(n) {
+        currentStep = n;
+        clearElement(wrapper);
+        wrapper.appendChild(steps[n]);
+        // Update Title based on step?
+        var titles = ["Welcome", "Pixel Editor", "Security"];
+        modalTitle.innerText = titles[n];
+
+        // If entering Editor (index 1), force redraw
+        if (n === 1) {
+            setTimeout(renderCanvasState, 10); // Check next tick
+        }
+    }
+
+    // Init
+    showModal("Welcome", wrapper);
+    goToStep(0);
+}
+
+function uploadPixelData(action, id, pixelData, password, msgEl) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", API_URL + "?action=" + action);
+
+    // Using simple encoded form data string since we are just sending text
+    // Manually building body to avoid FormData issues if any remain
+    var body = "tile_id=" + id + "&pixel_data=" + encodeURIComponent(pixelData);
+    if (password) body += "&password=" + encodeURIComponent(password);
+
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    showMsg(msgEl, "Saving...", "info");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    var resp = JSON.parse(xhr.responseText);
+                    if (resp.success) {
+                        if (action === 'claim') {
+                            clearElement(msgEl);
+                            var d1 = document.createElement('div');
+                            d1.innerText = "Success! Password: " + resp.data.password;
+                            d1.style.color = "#4f4";
+                            msgEl.appendChild(d1);
+
+                            var d2 = document.createElement('small');
+                            d2.innerText = "Save this password!";
+                            msgEl.appendChild(d2);
+                        } else {
+                            showMsg(msgEl, "Saved!", "success");
+                            closeModal();
+                        }
+                        fetchGrid();
+                    } else {
+                        showMsg(msgEl, "Error: " + resp.data, "error");
+                    }
+                } catch (e) {
+                    showMsg(msgEl, "Server Error/JSON", "error");
+                    console.log(xhr.responseText);
+                }
+            } else {
+                showMsg(msgEl, "Conn Fail", "error");
+            }
+        }
+    };
+    xhr.send(body);
+}
+
+function showMsg(el, text, type) {
+    if (el) {
+        el.innerText = text;
+        el.setAttribute('class', type);
+    }
+}
+
+function showModal(title, contentNode) {
+    modalTitle.innerText = title;
+    clearElement(modalBody);
+    if (typeof contentNode === 'string') {
+        modalBody.innerText = contentNode;
+    } else {
+        modalBody.appendChild(contentNode);
+    }
+    modalOverlay.style.display = 'flex';
+}
+
+function closeModal() {
+    modalOverlay.style.display = 'none';
+}
+
+// Helper for Step 1
+function verifyPassword(id, password, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", API_URL + "?action=verify");
+    var body = "tile_id=" + id + "&password=" + encodeURIComponent(password);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    var resp = JSON.parse(xhr.responseText);
+                    console.log("[Verify] Response:", resp); // Debug log
+                    if (resp.success && resp.data && resp.data.success) {
+                        callback(true);
+                    } else {
+                        console.warn("[Verify] Server refused:", resp);
+                        callback(false);
+                    }
+                } catch (e) {
+                    console.error("[Verify] JSON Parse Error. Raw response:", xhr.responseText);
+                    callback(false);
+                }
+            } else {
+                console.error("[Verify] HTTP Error:", xhr.status);
+                callback(false);
+            }
+        }
+    };
+    xhr.send(body);
+}
+
+function openMainMenu() {
+    var wrapper = document.createElement('div');
+    var p = document.createElement('div');
+    p.innerText = "Welcome to Pixel Estate.";
+    wrapper.appendChild(p);
+
+    var p2 = document.createElement('div');
+    p2.innerText = "Click a tile to claim it.";
+    wrapper.appendChild(p2);
+
+    var p3 = document.createElement('div');
+    p3.innerText = "Upload max 200KB image.";
+    wrapper.appendChild(p3);
+
+    showModal("Main Menu", wrapper);
+}
+
+// Start
+// Sandbox safe: Script is at end of body, so DOM is ready.
+init();
+</script>
+</body>
+
+</html>

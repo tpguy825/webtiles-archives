@@ -1,0 +1,220 @@
+<!DOCTYPE html>                                                                                                                                                                         
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile-body {
+  color: #111;
+  background: url("brand.png") 0 100%;
+  animation: 60s infinite ScreenSaver;
+}
+
+@keyframes ScreenSaver {
+  0% {
+    background-image: url("brand.png");
+  }
+
+  5% {
+    background-image: url("brand.png");
+  }
+
+  10% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  20% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  25% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  35% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  40% {
+    background-image: url("Fountains.png");
+  }
+
+  50% {
+    background-image: url("Fountains.png");
+  }
+
+  55% {
+    background-image: url("brand.png");
+  }
+
+  100% {
+    background-image: url("brand.png");
+  }
+}
+
+#screensaver {
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  background: #fff3 url("https://webtiles.kicya.net/t/minimos11.neocities.org/img.jpg") 0 100%;
+  width: 100%;
+  height: 100%;
+  transition: all 2s;
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#screensaver:hover {
+  opacity: 1;
+  transition: all .2s;
+}
+
+#startMessage {
+  color: #fff;
+  padding: 5px;
+  transition-delay: .5s;
+  animation: 3s infinite Pulse;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#screensaver:hover ~ #startMessage {
+  opacity: 0;
+}
+
+@keyframes Pulse {
+  0% {
+    filter: opacity();
+  }
+
+  50% {
+    filter: opacity(.05);
+  }
+
+  100% {
+    filter: opacity();
+  }
+}
+
+main {
+  flex-grow: 1;
+  height: 100vh;
+  padding: 3px;
+  overflow: auto;
+}
+
+nav {
+  color: #000;
+  backdrop-filter: blur(5px);
+  background: #d2b48cbf;
+  width: 29px;
+  min-width: max-content;
+  height: 100vh;
+  max-height: 100%;
+  padding-top: 10px;
+  padding-left: 0;
+  transition: all .2s ease-out .2s;
+  display: flex;
+  overflow: hidden;
+}
+
+nav div {
+  filter: blur(1px);
+  width: 0;
+  margin-left: 0;
+  transition: all .2s linear .2s;
+  overflow: hidden auto;
+}
+
+nav:hover div, nav.activated div, #screensaver:hover nav div {
+  filter: blur();
+  width: 120px;
+  margin-left: 10px;
+  transition-delay: 0s;
+}
+
+nav h4 {
+  margin: 5px;
+}
+
+nav ul li {
+  white-space: nowrap;
+  margin: 3px 3px 10px;
+}
+
+nav a {
+  color: inherit;
+  padding: 2px;
+  text-decoration: none;
+}
+
+nav:hover, nav.activated, #screensaver:hover nav {
+  width: 150px;
+  transition-delay: 0s;
+}
+
+a:hover {
+  text-decoration: underline 2px;
+}
+
+nav i {
+  writing-mode: vertical-rl;
+  border-left: 1px solid #00000080;
+  height: 100%;
+  margin-left: -1px;
+  padding-block: 5px;
+  font-weight: bold;
+}
+
+nav input[type="checkbox"] {
+  margin: 8px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+nav .minimos11 {
+  width: 132px;
+  position: absolute;
+  bottom: 0;
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <div id="screensaver">
+    	<main>
+            
+            <a href="https://pi-hole.net" target="_blank"><img src="pi-holenow.gif"></a>
+            <a href="https://consumerrights.wiki/" target="_blank"><img src="right2repair.gif"></a>
+            <a href="https://nextcloud.com/" target="_blank"><img src="nextcloud.gif"></a>
+        </main>    
+    	<nav>
+            <div>
+        <ul>
+          <li><a href="https://minimos11.neocities.org/about-me.html" target="_blank">About me</a></li>
+          <li><a href="https://minimos11.neocities.org/fun-stuff.html" target="_blank">Fun stuff</a></li>
+          <li><a href="https://minimos11.neocities.org/other-websites.html" target="_blank">Other websites</a></li>
+          <li><a href="https://minimos11.neocities.org/guestbook.html" target="_blank">Guestbook</a></li>
+          <li><a href="https://neocities.org/site/minimos11" target="_blank">Profile</a></li>
+        </ul> 
+        <br>
+        <a href="http://minimos11.net/enter.html" class="minimos11" target="_blank"><img width="88" src="minimos11-website_button.gif"></a>
+      </div>
+      <label for="navCheckbox"><i>Navigation</i></label>
+      <input type="checkbox" id="navCheckbox" autocomplete="off">
+        </nav>
+        
+    </div>
+    
+    <span id="startMessage">Click on any tile to begin...</span>
+</body>
+</html>

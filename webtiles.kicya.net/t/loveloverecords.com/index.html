@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<style>.tile-body {
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+.tile {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hover-core {
+  cursor: pointer;
+  z-index: 2;
+  background: none;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+    </head>
+    <body>  
+        <div class="tile">
+            <img class="overlay" src="text2.gif" alt>
+            <img class="bg" src="webtile1.gif" alt>
+            <a class="hover-core" href="https://loveloverecords.com" target="_blank" rel="noopener noreferrer" aria-label="Love Love Records"></a>
+            <div class="circle-text"></div>
+        </div>
+        <audio id="theaudio" preload="metadata" data-webtiles-paused="false"></audio>
+        <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var tile = document.getElementsByClassName('tile')[0];
+var hoverCore = document.getElementsByClassName('hover-core')[0];
+var theaudio = document.getElementById('theaudio');
+
+var tracks = [
+    'track1.mp3',
+    'track2.mp3'
+];
+
+var trackIndex = 0;
+var lastClick = 0;
+var cooldown = 300;
+var loadedTrack = null;
+
+function ensureTrackLoaded() {
+    if (loadedTrack !== tracks[trackIndex]) {
+        theaudio.src = tracks[trackIndex];
+        theaudio.volume = 0.5;
+        loadedTrack = tracks[trackIndex];
+    }
+}
+
+function safePlay() {
+    var p = theaudio.play();
+    if (p !== undefined && p.catch) {
+        p.catch(function () {
+            function clickHandler() {
+                theaudio.play();
+                document.removeEventListener('click', clickHandler);
+            }
+            document.addEventListener('click', clickHandler);
+        });
+    }
+}
+
+tile.onclick = function () {
+    var now = Date.now();
+    if (now - lastClick < cooldown) return;
+    lastClick = now;
+
+    if (!theaudio.paused) {
+        theaudio.pause();
+        return;
+    }
+
+    ensureTrackLoaded();
+    safePlay();
+};
+
+theaudio.addEventListener('ended', function () {
+    trackIndex = (trackIndex + 1) % tracks.length;
+    loadedTrack = null;
+});
+
+hoverCore.onclick = function (e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+};</script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<style>.tile-body {
+  box-sizing: border-box;
+  border-top: 1px solid #0000000f;
+  border-right: 1px solid #0000000f;
+}
+
+.free {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.free > p {
+  text-align: center;
+  color: #777;
+  user-select: none;
+}
+</style>
+	</head>
+	<body>
+		<div class="free">
+			<p id="text">Free tile -4, -8</p>
+            <p id="listening">
+                
+            </p>
+		</div>
+		<script type="text/tilescript">
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'https://api.counterapi.dev/v1/webtiles_counter/trolled/up', true);
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					var json = JSON.parse(xhr.responseText);
+					var count = json.count;
+					document.getElementById('text').innerText = 'Trolled: ' + count;
+				}
+			};
+
+			xhr.send(null);
+		</script>
+	</body>
+</html>

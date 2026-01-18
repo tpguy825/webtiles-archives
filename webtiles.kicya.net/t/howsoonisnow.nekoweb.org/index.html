@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  user-select: none;
+  background-image: url("img/bg1.gif");
+  margin: 0;
+}
+
+.knight {
+  text-align: center;
+  border-style: solid none solid solid;
+  border-width: 12px medium 12px 12px;
+  border-right-color: currentColor;
+  border-image: url("img/bb12.gif") 12 fill round;
+  width: 238px;
+  height: 226px;
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+}
+
+canvas {
+  backdrop-filter: blur(6px);
+  background-color: #fff3;
+}
+
+#reset {
+  backdrop-filter: blur(6px);
+  color: #fff9fbc0;
+  background-color: #fff3;
+  border: 1px solid #fff9fbc0;
+  margin: 5px auto auto;
+  display: block;
+
+  &:hover {
+    filter: invert();
+  }
+}
+
+h1 {
+  color: #fff9fbc0;
+  text-shadow: 1px 1px #00000080;
+  margin: 0 0 5px;
+  font-size: 1rem;
+}
+
+#choose-box {
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  background: #0006;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.choose-inner {
+  color: #3c1100;
+  text-shadow: 1px 1px #fff9;
+  text-align: center;
+  background: #fffc;
+  border: 1px solid #ff0;
+  border-radius: 10px;
+  padding: 20px 30px;
+  font-family: monospace;
+}
+
+.choose-btn {
+  color: #4f4954;
+  cursor: pointer;
+  background-color: #fdf7ea;
+  border: 1px solid #00000080;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 24px;
+
+  &:hover {
+    filter: invert();
+  }
+}
+</style>
+</head>
+<body>
+<div class="knight">
+<h1>
+    tic tac toe
+    </h1>
+<canvas id="board" width="170" height="170" style="border:2px solid #fff9fbc0;"></canvas>
+<div id="choose-box">
+  <div class="choose-inner">
+    <p>choose your symbol</p>
+    <button id="chooseX" class="choose-btn">X</button>
+    <button id="chooseO" class="choose-btn">O</button>
+  </div>
+</div>
+<button id="reset">reset</button>
+</div>
+<script type="text/tilescript">var canvas = document.getElementById('board');
+var ctx = canvas.getContext('2d');
+var resetButton = document.getElementById('reset');
+var chooseBox = document.getElementById('choose-box');
+var chooseX = document.getElementById('chooseX');
+var chooseO = document.getElementById('chooseO');
+
+var board, player, aiPlayer, winner, cellSize;
+var phase;
+
+function init(){
+  board = [0,0,0,0,0,0,0,0,0];
+  winner = null;
+  cellSize = canvas.width / 3;
+  player = null;
+  aiPlayer = null;
+  phase = "choose";
+  chooseBox.style.display = "none";
+  drawBoard();
+}
+
+function startGame(sym){
+  player = sym;
+  aiPlayer = (sym === "X") ? "O" : "X";
+  phase = "play";
+  chooseBox.style.display = "none";
+  drawBoard();
+}
+
+chooseX.onclick = function(){ startGame("X"); };
+chooseO.onclick = function(){ startGame("O"); };
+
+function drawBoard(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.filter = winner ? 'invert(100%) hue-rotate(180deg)' : 'none';
+  ctx.strokeStyle = "rgba(255, 249, 251, 0.75)";
+  ctx.lineWidth = 2;
+
+  for (var i=1;i<3;i++){
+    ctx.beginPath();
+    ctx.moveTo(i*cellSize,0);
+    ctx.lineTo(i*cellSize,canvas.height);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0,i*cellSize);
+    ctx.lineTo(canvas.width,i*cellSize);
+    ctx.stroke();
+  }
+
+  for (var i=0;i<9;i++){
+    var x = (i%3)*cellSize;
+    var y = Math.floor(i/3)*cellSize;
+    if(board[i] === 'X'){
+      ctx.strokeStyle = "#fdfd00";
+      ctx.beginPath();
+      ctx.moveTo(x+10, y+10);
+      ctx.lineTo(x+cellSize-10, y+cellSize-10);
+      ctx.moveTo(x+cellSize-10, y+10);
+      ctx.lineTo(x+10, y+cellSize-10);
+      ctx.stroke();
+    } else if(board[i] === 'O'){
+      ctx.strokeStyle = "#d7cdbc";
+      ctx.beginPath();
+      ctx.arc(x+cellSize/2, y+cellSize/2, cellSize/2-10, 0, Math.PI*2);
+      ctx.stroke();
+    }
+  }
+
+  ctx.filter = 'none';
+}
+
+function checkWin(sym){
+  var lines = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  for(var i=0;i<lines.length;i++){
+    var a=lines[i][0], b=lines[i][1], c=lines[i][2];
+    if(board[a]===sym && board[b]===sym && board[c]===sym) return true;
+  }
+  return false;
+}
+
+function checkDraw(){
+  for(var i=0;i<9;i++) if(board[i]===0) return false;
+  return true;
+}
+
+function aiMove(){
+  if(phase !== "play") return;
+
+  var move = null;
+  var lines = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+
+  for(var i=0;i<lines.length;i++){
+    var a=lines[i][0], b=lines[i][1], c=lines[i][2];
+    var line=[board[a],board[b],board[c]];
+    for(var j=0;j<3;j++){
+      if(line[j]===0 && line[(j+1)%3]===aiPlayer && line[(j+2)%3]===aiPlayer){
+        move = lines[i][j];
+        break;
+      }
+    }
+    if(move!==null) break;
+  }
+
+  if(move===null){
+    for(var i=0;i<lines.length;i++){
+      var a=lines[i][0], b=lines[i][1], c=lines[i][2];
+      var line=[board[a],board[b],board[c]];
+      for(var j=0;j<3;j++){
+        if(line[j]===0 && line[(j+1)%3]===player && line[(j+2)%3]===player){
+          move = lines[i][j];
+          break;
+        }
+      }
+      if(move!==null) break;
+    }
+  }
+
+  if(move===null && board[4]===0) move = 4;
+  var corners=[0,2,6,8];
+  if(move===null){
+    for(var i=0;i<corners.length;i++){
+      if(board[corners[i]]===0){ move=corners[i]; break; }
+    }
+  }
+  if(move===null){
+    for(var i=0;i<9;i++){
+      if(board[i]===0){ move=i; break; }
+    }
+  }
+
+  board[move] = aiPlayer;
+
+  if(checkWin(aiPlayer)){
+    winner = aiPlayer;
+    phase = "done";
+    drawBoard();
+    return;
+  }
+  if(checkDraw()){
+    winner = 'draw';
+    phase = "done";
+    drawBoard();
+    return;
+  }
+
+  drawBoard();
+}
+
+canvas.onclick = function(e){
+  if(phase === "choose"){
+    chooseBox.style.display = "flex";
+    return;
+  }
+
+  if(phase !== "play") return;
+
+  var rect = canvas.getBoundingClientRect();
+  var x = e.clientX - rect.left;
+  var y = e.clientY - rect.top;
+  var col = Math.floor(x / cellSize);
+  var row = Math.floor(y / cellSize);
+  var index = row*3 + col;
+
+  if(board[index] !== 0) return;
+
+  board[index] = player;
+
+  if(checkWin(player)){
+    winner = player;
+    phase = "done";
+    drawBoard();
+    return;
+  }
+  if(checkDraw()){
+    winner = 'draw';
+    phase = "done";
+    drawBoard();
+    return;
+  }
+
+  drawBoard();
+  setTimeout(aiMove, 200);
+};
+
+resetButton.onclick = function(){
+  init();
+};
+
+init();
+</script>
+</body>
+</html>

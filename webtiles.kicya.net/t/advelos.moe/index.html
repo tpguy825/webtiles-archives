@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: theheart;
+  src: url("theheart.ttf");
+}
+
+.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  justify-content: center;
+  align-items: center;
+  font-family: theheart;
+  display: flex;
+}
+
+#background1 {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#background1overlay {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#background2 {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#purinbutton {
+  z-index: 5;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#purincookie {
+  z-index: 4;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#advelostitle {
+  z-index: 4;
+  width: 190px;
+  position: absolute;
+  top: -3px;
+}
+
+#advelosbutton {
+  z-index: 3;
+  width: 85px;
+  position: absolute;
+  top: 70px;
+  right: 25px;
+}
+
+#textbox {
+  z-index: 3;
+  color: #8d4330;
+  scrollbar-color: #ff8ba6 #fff;
+  scrollbar-width: thin;
+  text-align: center;
+  background-color: #fff;
+  border: 9px solid;
+  border-image: url("textborder.png") 8 /  / 2px round;
+  border-radius: 20px;
+  width: 80px;
+  height: 90px;
+  padding: 2px;
+  position: absolute;
+  top: 70px;
+  left: 28px;
+  overflow: hidden scroll;
+}
+
+#purinroll {
+  float: left;
+}
+
+#pinkbutton {
+  background-color: #ffd5df;
+  border: 1px dashed #ff8ba6;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  padding: 3px;
+}
+
+#pinkbutton > a {
+  color: #962a43;
+}
+
+#yellowbutton {
+  background-color: #ffebb4;
+  border: 1px dashed #ffc179;
+  border-radius: 5px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 3px;
+}
+
+#yellowbutton > a {
+  color: #973e2e;
+}
+</style>
+</head>
+<body>
+    <img id="background1" src="background1.gif" width="100" height="100" loading="lazy">
+    <img id="background1overlay" src="background1overlay.png" width="100" height="100">
+    <img id="background2" src="background2.png" width="100" height="100" loading="eager">
+    <img id="purinbutton" src="purinbutton.gif" width="100" height="100" loading="lazy">
+    <img id="purincookie" src="purincookie.gif" width="100" height="100">
+    <img id="advelostitle" src="advelostitle.png" width="150">
+    <img id="advelosbutton" src="advelosbutton.gif" width="70">
+    <div id="textbox">
+        <img id="purinroll" src="purinroll.gif" height="25">
+        hello little cursors!! if webtiles were a whole dessert shop, then id be a humble cheesecake here... mmm cheescak 🤤🤤 
+        <br> 
+        <div id="pinkbutton">
+            <a href="https://advelos.moe/" target="_blank">main site</a>
+        </div>
+        <img src="starpix.gif" width="13">
+         <div id="yellowbutton">
+            <a href="lain.html">my lain nendoroid</a>
+        </div>
+        <img src="starpix.gif" width="13">
+                 <div id="pinkbutton">
+            <a href="https://youtu.be/tFrz0kA8Q-k?si=L2MdZlID2m6qjYEd" target="_blank">webtiles theme song</a>
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

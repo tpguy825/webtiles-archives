@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-blend-mode: hard-light;
+  background-image: url("images/300px-MAX_300.jpg");
+  background-size: 250px;
+  animation: 10s linear infinite rainbow-bg;
+}
+
+.stretchV {
+  letter-spacing: 2px;
+  transform-origin: 0 0;
+  justify-content: center;
+  margin-bottom: -50%;
+  font-size: 50px;
+  display: flex;
+  transform: scaleY(.5);
+}
+
+.ravin {
+  mix-blend-mode: hard-light;
+  animation: linear infinite shake;
+}
+
+h2 {
+  mix-blend-mode: exclusion;
+  color: #bf0;
+  text-shadow: 0 10px 10px #10f, 1px 2px #f0a, 1px 5px #f0a, 0 0 #000;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h3 {
+  color: #0ff;
+  text-shadow: 0 3px 10px #f0a, 1px 2px #f0a, 1px 2px #f0a, 0 0 #000;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+hr {
+  border-color: #0ff;
+  height: 1px;
+}
+
+.container {
+  width: 100%;
+  height: 900px;
+}
+
+.leftbar {
+  float: left;
+  width: 15%;
+  height: 100%;
+  padding-top: 0%;
+}
+
+header {
+  height: 20%;
+  margin-top: 0%;
+  margin-bottom: 10px;
+}
+
+header img {
+  width: 100%;
+  height: 100%;
+}
+
+.newshr {
+  justify-content: center;
+  height: 10%;
+  margin-top: 5px;
+  display: flex;
+}
+
+.newshrimg {
+  width: 100%;
+  height: 100%;
+}
+
+.updatelog {
+  text-align: center;
+  background-color: #009;
+  background-image: url("https://webtiles.kicya.net/t/radioworld.neocities.org/images/hexbg3.png");
+  background-position: -66px, 0;
+  border: 1px solid #0ff;
+  border-width: 1px 1px 0 4px;
+  border-radius: 40px 0 0;
+  height: 69%;
+  margin: 12px;
+  box-shadow: inset 0 0 20px #00f;
+}
+
+nav {
+  height: 10%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  background-image: url("https://webtiles.kicya.net/t/radioworld.neocities.org/images/hexbg1.png");
+  width: 50%;
+  height: 90%;
+  margin: 0;
+  display: inline-block;
+}
+
+.about {
+  text-align: center;
+  background-color: #0003b1;
+  border: 2px solid #ff0;
+  height: 784px;
+  margin: 0;
+  padding: 20px;
+}
+
+.about h1 {
+  color: #ff0;
+  text-shadow: 1px 3px 2px #f0a, 1px 3px 2px #f0a, 1px 3px 2px #f0a, 1px 3px 2px #f0a;
+  background-color: #00f;
+  font-family: Impact, Arial Narrow Bold, sans-serif;
+  font-size: 35px;
+  font-weight: 100;
+}
+
+.about img {
+  float: left;
+  border-style: solid;
+  border-radius: 5px;
+  margin-bottom: 0;
+  margin-right: 15px;
+}
+
+.about article {
+  text-align: justify;
+  color: #fff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.aboutimg {
+  width: inherit;
+  max-width: 200px;
+}
+
+.rightbar {
+  float: RIGHT;
+  width: 35%;
+  height: 80%;
+  padding: 0;
+}
+
+.weekobject {
+  text-align: center;
+  background-color: #0000be;
+  background-image: url("https://webtiles.kicya.net/t/radioworld.neocities.org/images/hexbg1.png");
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 2px #00f;
+}
+
+.weekobject hr {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.weekobject h3 {
+  text-align: center;
+  background-color: #00f;
+  height: 39px;
+  margin: 0;
+  padding-top: 20px;
+}
+
+.weekimg {
+  width: inherit;
+  outline: auto;
+}
+
+.status {
+  text-align: center;
+  float: right;
+  background-color: #00008b;
+  background-image: url("https://webtiles.kicya.net/t/radioworld.neocities.org/images/constructionbg.png");
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+}
+
+.stampzone {
+  background-color: #00009c;
+  background-image: url("https://webtiles.kicya.net/t/radioworld.neocities.org/images/hexbg3.png");
+  border: 1px inset #0ff;
+  height: 12%;
+  margin: 0;
+  padding: 10px;
+  display: block;
+  box-shadow: inset 0 0 15px #00f;
+}
+
+footer {
+  justify-content: right;
+  height: 5%;
+  margin: 0;
+}
+
+p {
+  color: #f0f8ff;
+  margin: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+  color: #f0f8ff;
+}
+
+@keyframes rainbow-bg {
+  0% {
+    background-color: red;
+  }
+
+  8% {
+    background-color: #ff7f00;
+  }
+
+  16% {
+    background-color: #ff0;
+  }
+
+  25% {
+    background-color: #7fff00;
+  }
+
+  33% {
+    background-color: #0f0;
+  }
+
+  41% {
+    background-color: #00ff7f;
+  }
+
+  50% {
+    background-color: #0ff;
+  }
+
+  58% {
+    background-color: #007fff;
+  }
+
+  66% {
+    background-color: #00f;
+  }
+
+  75% {
+    background-color: #7f00ff;
+  }
+
+  83% {
+    background-color: #f0f;
+  }
+
+  91% {
+    background-color: #ff007f;
+  }
+
+  100% {
+    background-color: #e10000;
+  }
+}
+
+@keyframes infspincw {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(2%);
+  }
+}
+</style>
+</head>
+<body>
+    <span style="margin: 0; padding: 0;">
+        
+        <a href="https://www.youtube.com/watch?v=2fsZdfixj60" target="_blank">
+            <img width="250" class="ravin" src="images/reverseluinobj.gif">  
+        </a>
+    
+    </span>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: DEP;
+  src: url("DEP.woff2") format("woff2");
+}
+
+*, :before, :after {
+  box-sizing: border-box;
+}
+
+.tile-body {
+  image-rendering: pixelated;
+  background: #306850 url("bg.png") 50% 0 / 960px fixed;
+  flex-direction: column;
+  gap: 5px;
+  font-family: DEP;
+  display: flex;
+  overflow-y: auto;
+}
+
+.tile-body article:first-of-type {
+  margin-top: 2.5px;
+}
+
+.tile-body article:last-of-type {
+  margin-bottom: 2.5px;
+}
+
+article {
+  color: #e0f8cf;
+  background-color: #000;
+  border: 3.5px solid #e0f8cf;
+  padding: 5px;
+  font-size: 12px;
+}
+
+article[who] {
+  min-height: 64px;
+}
+
+article[who]:before {
+  content: "";
+  float: left;
+  width: 48px;
+  height: 48px;
+  margin-right: 5px;
+  display: block;
+  position: relative;
+}
+
+article[who="nahua" i][emotion="smug" i]:before {
+  background-image: url("faces/nahua/Smug.png");
+  background-size: 100% 100%;
+}
+
+article:after {
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .1s linear;
+}
+
+article:hover:after {
+  opacity: 1;
+}
+
+a, a:visited {
+  color: #86c06c;
+}
+
+a:hover {
+  color: #e0f8cf;
+}
+
+a:active {
+  color: #306850;
+}
+</style>
+</head>
+<body>
+    <article who="nahua" emotion="smug">You should visit <a href="https://spax.zone" target="_blank">spax.zone</a></article>
+    <article>(More stuff coming soon!)</article>
+    
+    <article>Tiles I own:<br>
+    	<a href="index.html#5125,-4875" target="_parent">(20, -20)</a>
+    	<a href="index.html#5125,1125" target="_parent">(20, 4)</a>
+        <a href="index.html#-5875,6125" target="_parent">(-24, 24)</a>
+        <a href="index.html#-4625,-4875" target="_parent">(-19, -20)</a>
+        <a href="index.html#-4125,-5125" target="_parent">(-17, -21)</a><br>
+        
+    </article>
+</body>
+</html>

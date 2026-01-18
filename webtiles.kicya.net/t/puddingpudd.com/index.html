@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #190e00;
+  background-color: #fff15a;
+  background-image: url("Full_Background_FINAL.png");
+}
+
+.Pudd {
+  z-index: 3;
+}
+
+.GooeyBorder {
+  z-index: 2;
+}
+
+.Pudd, .GooeyBorder {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#ATile .Idle {
+  display: block;
+}
+
+#ATile .Active, #ATile.focused .Idle {
+  display: none;
+}
+
+#ATile.focused .Active {
+  display: block;
+}
+</style>
+</head>
+<body>
+    <img class="Pudd" src="wip.png">
+   <div id="ATile">
+    <div class="Idle">
+     <img class="Pudd" src="Pudd.png">
+     <img class="GooeyBorder" src="Border.png">
+    </div>
+    <div class="Active">
+     <img class="Pudd" src="Pudd_Wave_2.gif">
+     <img class="GooeyBorder" src="Border_2.png">
+    </div>
+   </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+        var mainDiv = document.getElementById('ATile');
+
+        function enter() {
+            if (mainDiv.className.indexOf('focused') === -1) {
+                mainDiv.className += ' focused';
+                // You can add things here, for example, changing images !
+                // document.getElementById('coolimg').src = "/t/kuurp.nekoweb.org/img2.png";
+            }
+        }
+
+        function exit() {
+            mainDiv.className = mainDiv.className.replace(' focused', '');
+                // You can add things here, for example, changing images ! (Part 2 : resetting to first one)
+                // document.getElementById('coolimg').src = "/t/kuurp.nekoweb.org/img1.png";
+        }
+
+        mainDiv.onmouseenter = function() {
+            enter();  
+        };
+        mainDiv.onmouseleave = function() {
+            exit();
+        };
+
+        enter(); // Necessary because mouse is already in on load</script>
+</body>
+</html>

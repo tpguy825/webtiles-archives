@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>/*! 7.css v0.21.1 - https://khang-nd.github.io/7.css */
+a {
+  color: #191724;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.window {
+  z-index: 0;
+  border: 1px solid #000000b3;
+  font-family: Verdana;
+  font-size: 7pt;
+  position: relative;
+  box-shadow: 2px 2px 10px 1px #000000b3, inset 0 0 0 1px #fffa;
+}
+
+.window, .window:before {
+  border-radius: 6px;
+}
+
+.window:before {
+  content: "";
+  z-index: -1;
+  background: linear-gradient(#0000 20%, #ffffffb3 40%, #0000 41%), linear-gradient(to right, #fff6, #0000001a, #fff3), #4580c4;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: inset 0 0 0 1px #fffd;
+}
+
+.window-body {
+  background: #f0f0f0;
+  border: 1px solid #000000b3;
+  margin: 0 6px 6px;
+  box-shadow: 0 0 0 1px #fff9;
+}
+
+.window-body.has-space {
+  padding: 6px;
+}
+
+.window-body pre {
+  margin: -6px;
+}
+
+.window-footer {
+  margin: 6px;
+  margin-top: calc(6px * -1)  - 1px;
+  background: #f0f0f0;
+  border: 1px solid #000000b3;
+  border-top: 0;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 .5px 1px .5px #fff;
+}
+
+.window-footer:before {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: inset 0 1px #0000004d, inset 0 -1px #fff;
+}
+
+.window.is-bright .window-body {
+  background: #fff;
+}
+
+.window.is-bright .window-footer {
+  background: #eee;
+  box-shadow: inset 0 1px 3px #ddd, 0 1px #fff9, 1px 1px #fff9, -1px 1px #fff9;
+}
+
+.window.is-bright .window-footer:before {
+  content: none;
+}
+
+.window.glass:before {
+  opacity: .6;
+}
+
+.window.glass:after {
+  backdrop-filter: blur(4px);
+  content: "";
+  z-index: -10;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.window.glass > .title-bar {
+  background-color: #0000;
+  background-image: linear-gradient(135deg, #fff5 70px, #0000 100px), linear-gradient(225deg, #fff5 70px, #0000 100px), linear-gradient(54deg, #0002 0 4%, #6661 6% 6%, #0002 8% 10%, #0002 15% 16%, #aaa1 17% 18%, #0002 23% 24%, #bbb2 25% 26%, #0002 31% 33%, #0002 34% 34.5%, #bbb2 36% 40%, #0002 41% 41.5%, #bbb2 44% 45%, #bbb2 46% 47%, #0002 48% 49%, #0002 50% 50.5%, #0002 56% 56.5%, #bbb2 57% 63%, #0002 67% 69%, #bbb2 69.5% 70%, #0002 73.5% 74%, #bbb2 74.5% 79%, #0002 80% 84%, #aaa2 85% 86%, #0002 87%, #bbb1 90%);
+  background-position: 0 0, 0 0, 0;
+  background-repeat: repeat, repeat, no-repeat;
+  background-size: auto, auto, 100vw 100vh;
+  background-attachment: fixed;
+  background-origin: padding-box, padding-box, padding-box;
+  background-clip: border-box, border-box, border-box;
+}
+
+.window > .title-bar {
+  border: 0;
+  box-shadow: inset 0 1px #fffd, inset 1px 0 #fffd, inset -1px 0 #fffd;
+}
+
+.window fieldset {
+  margin-bottom: 9px;
+}
+
+.title-bar {
+  background: linear-gradient(to right, #fff6, #0000001a, #fff3), #4580c4;
+  border: 1px solid #000;
+  border-radius: 6px 6px 0 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px 6px;
+  font-family: Segoe UI;
+  font-size: 9pt;
+  display: flex;
+  box-shadow: inset 0 0 0 1px #fff9;
+}
+
+.title-bar-text {
+  color: #000;
+  letter-spacing: 0;
+  text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff;
+  padding-top: 6px;
+  line-height: 15px;
+}
+
+.title-bar-controls {
+  background: #fff3;
+  border: 1px solid #000;
+  border-top: 0;
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  box-shadow: 0 1px #fffa, 1px 0 #fffa, -1px 0 #fffa;
+}
+
+.title-bar-controls button {
+  box-shadow: none;
+  box-sizing: border-box;
+  background: none;
+  border: 0;
+  border-right: 1px solid #000;
+  border-radius: 0;
+  min-width: 29px;
+  min-height: 19px;
+  padding: 0;
+  position: relative;
+}
+
+.title-bar-controls button:after {
+  content: none;
+}
+
+.title-bar-controls button:active, .title-bar-controls button:hover {
+  background: none;
+}
+
+.title-bar-controls button:disabled:before {
+  opacity: .4;
+}
+
+.title-bar-controls button:before {
+  content: "";
+  opacity: 1;
+  border-radius: 0;
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px #fff5;
+}
+
+.title-bar-controls button:not(:hover):before {
+  opacity: 1;
+  transition: none;
+}
+
+.title-bar-controls button.is-restore:before, .title-bar-controls button[aria-label="Restore"]:before {
+  background: url("windows.png") 50% no-repeat;
+}
+
+.title-bar-controls button.is-close, .title-bar-controls button[aria-label="Close"] {
+  min-width: 48px;
+}
+
+.title-bar-controls button.is-close:before, .title-bar-controls button[aria-label="Close"]:before {
+  background: url("x.png") 50% no-repeat;
+}
+
+.title-bar-controls button:first-child, .title-bar-controls button:first-child:before {
+  border-bottom-left-radius: 6px;
+}
+
+.title-bar-controls button:last-child, .title-bar-controls button:last-child:before {
+  border: 0;
+  border-bottom-right-radius: 6px;
+}
+
+.title-bar-controls button:focus {
+  outline: none;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.title-bar.active .title-bar-controls, .window.active .title-bar .title-bar-controls {
+  border-color: #000;
+}
+
+.title-bar.active .title-bar-controls button, .window.active .title-bar .title-bar-controls button {
+  border-color: #000;
+  box-shadow: inset 0 0 0 1px #fffa;
+}
+
+.title-bar.active .title-bar-controls button:after, .window.active .title-bar .title-bar-controls button:after {
+  content: none;
+}
+
+.title-bar.active .title-bar-controls button.is-minimize, .title-bar.active .title-bar-controls button[aria-label="Minimize"], .window.active .title-bar .title-bar-controls button.is-minimize, .window.active .title-bar .title-bar-controls button[aria-label="Minimize"] {
+  background: url("minimize.png") 50% 10px no-repeat, linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80);
+}
+
+.title-bar.active .title-bar-controls button.is-minimize:before, .title-bar.active .title-bar-controls button[aria-label="Minimize"]:before, .window.active .title-bar .title-bar-controls button.is-minimize:before, .window.active .title-bar .title-bar-controls button[aria-label="Minimize"]:before {
+  content: "";
+  opacity: 0;
+  background: url("minimize.png") 50% 10px no-repeat, radial-gradient(circle at bottom, #2aceda, #0000 65%), linear-gradient(#b6d9ee 50%, #1a6ca1 0);
+  border-bottom-left-radius: 6px;
+  transition: opacity .3s linear;
+  box-shadow: 0 0 7px 3px #5dc4f0, inset 0 0 0 1px #fffa;
+}
+
+.title-bar.active .title-bar-controls button.is-minimize:focus-visible:before, .title-bar.active .title-bar-controls button.is-minimize:hover:before, .title-bar.active .title-bar-controls button[aria-label="Minimize"]:focus-visible:before, .title-bar.active .title-bar-controls button[aria-label="Minimize"]:hover:before, .window.active .title-bar .title-bar-controls button.is-minimize:focus-visible:before, .window.active .title-bar .title-bar-controls button.is-minimize:hover:before, .window.active .title-bar .title-bar-controls button[aria-label="Minimize"]:focus-visible:before, .window.active .title-bar .title-bar-controls button[aria-label="Minimize"]:hover:before {
+  opacity: 1;
+  transition: opacity .1s linear;
+}
+
+.title-bar.active .title-bar-controls button.is-minimize:active:before, .title-bar.active .title-bar-controls button[aria-label="Minimize"]:active:before, .window.active .title-bar .title-bar-controls button.is-minimize:active:before, .window.active .title-bar .title-bar-controls button[aria-label="Minimize"]:active:before {
+  background: url("minimize.png") 50% 10px no-repeat;
+}
+
+.title-bar.active .title-bar-controls button.is-maximize, .title-bar.active .title-bar-controls button[aria-label="Maximize"], .window.active .title-bar .title-bar-controls button.is-maximize, .window.active .title-bar .title-bar-controls button[aria-label="Maximize"] {
+  background: url("windows.png") 50% no-repeat, linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80);
+}
+
+.title-bar.active .title-bar-controls button.is-maximize:before, .title-bar.active .title-bar-controls button[aria-label="Maximize"]:before, .window.active .title-bar .title-bar-controls button.is-maximize:before, .window.active .title-bar .title-bar-controls button[aria-label="Maximize"]:before {
+  content: "";
+  opacity: 0;
+  background: url("windows.png") 50% no-repeat, radial-gradient(circle at bottom, #2aceda, #0000 65%), linear-gradient(#b6d9ee 50%, #1a6ca1 0);
+  transition: opacity .3s linear;
+  box-shadow: 0 0 7px 3px #5dc4f0, inset 0 0 0 1px #fffa;
+}
+
+.title-bar.active .title-bar-controls button.is-maximize:focus-visible:before, .title-bar.active .title-bar-controls button.is-maximize:hover:before, .title-bar.active .title-bar-controls button[aria-label="Maximize"]:focus-visible:before, .title-bar.active .title-bar-controls button[aria-label="Maximize"]:hover:before, .window.active .title-bar .title-bar-controls button.is-maximize:focus-visible:before, .window.active .title-bar .title-bar-controls button.is-maximize:hover:before, .window.active .title-bar .title-bar-controls button[aria-label="Maximize"]:focus-visible:before, .window.active .title-bar .title-bar-controls button[aria-label="Maximize"]:hover:before {
+  opacity: 1;
+  transition: opacity .1s linear;
+}
+
+.title-bar.active .title-bar-controls button.is-maximize:active:before, .title-bar.active .title-bar-controls button[aria-label="Maximize"]:active:before, .window.active .title-bar .title-bar-controls button.is-maximize:active:before, .window.active .title-bar .title-bar-controls button[aria-label="Maximize"]:active:before {
+  background: url("windows.png") 50% no-repeat;
+}
+
+.title-bar.active .title-bar-controls button.is-help:focus-visible:before, .title-bar.active .title-bar-controls button.is-help:hover:before, .title-bar.active .title-bar-controls button[aria-label="Help"]:focus-visible:before, .title-bar.active .title-bar-controls button[aria-label="Help"]:hover:before, .window.active .title-bar .title-bar-controls button.is-help:focus-visible:before, .window.active .title-bar .title-bar-controls button.is-help:hover:before, .window.active .title-bar .title-bar-controls button[aria-label="Help"]:focus-visible:before, .window.active .title-bar .title-bar-controls button[aria-label="Help"]:hover:before {
+  opacity: 1;
+  transition: opacity .1s linear;
+}
+
+.title-bar.active .title-bar-controls button.is-restore, .title-bar.active .title-bar-controls button[aria-label="Restore"], .window.active .title-bar .title-bar-controls button.is-restore, .window.active .title-bar .title-bar-controls button[aria-label="Restore"] {
+  background: url("windows.png") 50% no-repeat, linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80);
+}
+
+.title-bar.active .title-bar-controls button.is-restore:before, .title-bar.active .title-bar-controls button[aria-label="Restore"]:before, .window.active .title-bar .title-bar-controls button.is-restore:before, .window.active .title-bar .title-bar-controls button[aria-label="Restore"]:before {
+  content: "";
+  opacity: 0;
+  background: url("windows.png") 50% no-repeat, radial-gradient(circle at bottom, #2aceda, #0000 65%), linear-gradient(#b6d9ee 50%, #1a6ca1 0);
+  transition: opacity .3s linear;
+  box-shadow: 0 0 7px 3px #5dc4f0, inset 0 0 0 1px #fffa;
+}
+
+.title-bar.active .title-bar-controls button.is-restore:focus-visible:before, .title-bar.active .title-bar-controls button.is-restore:hover:before, .title-bar.active .title-bar-controls button[aria-label="Restore"]:focus-visible:before, .title-bar.active .title-bar-controls button[aria-label="Restore"]:hover:before, .window.active .title-bar .title-bar-controls button.is-restore:focus-visible:before, .window.active .title-bar .title-bar-controls button.is-restore:hover:before, .window.active .title-bar .title-bar-controls button[aria-label="Restore"]:focus-visible:before, .window.active .title-bar .title-bar-controls button[aria-label="Restore"]:hover:before {
+  opacity: 1;
+  transition: opacity .1s linear;
+}
+
+.title-bar.active .title-bar-controls button.is-restore:active:before, .title-bar.active .title-bar-controls button[aria-label="Restore"]:active:before, .window.active .title-bar .title-bar-controls button.is-restore:active:before, .window.active .title-bar .title-bar-controls button[aria-label="Restore"]:active:before {
+  background: url("windows.png") 50% no-repeat;
+}
+
+.title-bar.active .title-bar-controls button.is-close, .title-bar.active .title-bar-controls button[aria-label="Close"], .window.active .title-bar .title-bar-controls button.is-close, .window.active .title-bar .title-bar-controls button[aria-label="Close"] {
+  background: url("x.png") 50% no-repeat, linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80), radial-gradient(circle at -60%, #0007 5% 10%, #0000 50%), radial-gradient(circle at 160%, #0007 5% 10%, #0000 50%), linear-gradient(#e0a197e5, #cf796a 25% 50%, #d54f36 50%);
+  box-shadow: inset 0 0 0 1px #fffa;
+}
+
+.title-bar.active .title-bar-controls button.is-close:before, .title-bar.active .title-bar-controls button[aria-label="Close"]:before, .window.active .title-bar .title-bar-controls button.is-close:before, .window.active .title-bar .title-bar-controls button[aria-label="Close"]:before {
+  content: "";
+  opacity: 0;
+  background: url("x.png") 50% no-repeat, linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80), radial-gradient(circle at 50% 170%, #f4e676 10% 20%, #0000 60%), radial-gradient(circle at -60%, #000a 5% 10%, #0000 50%), radial-gradient(circle at 160%, #000a 5% 10%, #0000 50%), linear-gradient(#fb9d8b, #ee6d56 25% 50%, #d42809 50%);
+  border-bottom-right-radius: 6px;
+  transition: opacity .3s linear;
+  box-shadow: 0 0 7px 3px #e68e75, inset 0 0 0 1px #fffa;
+}
+
+.title-bar.active .title-bar-controls button.is-close:focus-visible:before, .title-bar.active .title-bar-controls button.is-close:hover:before, .title-bar.active .title-bar-controls button[aria-label="Close"]:focus-visible:before, .title-bar.active .title-bar-controls button[aria-label="Close"]:hover:before, .window.active .title-bar .title-bar-controls button.is-close:focus-visible:before, .window.active .title-bar .title-bar-controls button.is-close:hover:before, .window.active .title-bar .title-bar-controls button[aria-label="Close"]:focus-visible:before, .window.active .title-bar .title-bar-controls button[aria-label="Close"]:hover:before {
+  opacity: 1;
+  transition: opacity .1s linear;
+}
+
+.title-bar.active .title-bar-controls button.is-close:active:before, .title-bar.active .title-bar-controls button[aria-label="Close"]:active:before, .window.active .title-bar .title-bar-controls button.is-close:active:before, .window.active .title-bar .title-bar-controls button[aria-label="Close"]:active:before {
+  background: url("x.png") 50% no-repeat, linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80), radial-gradient(circle at 50% 170%, #dcc03f 10% 20%, #0000 60%), radial-gradient(circle at -60%, #000 5% 10%, #0000 50%), radial-gradient(circle at 160%, #000 5% 10%, #0000 50%), linear-gradient(#d1a894, #b67562 25% 50%, #7d0d01 50%);
+}
+
+.title-bar.active .title-bar-controls button:disabled.is-minimize, .title-bar.active .title-bar-controls button:disabled[aria-label="Minimize"], .window.active .title-bar .title-bar-controls button:disabled.is-minimize, .window.active .title-bar .title-bar-controls button:disabled[aria-label="Minimize"] {
+  background: linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80);
+}
+
+.title-bar.active .title-bar-controls button:disabled.is-minimize:before, .title-bar.active .title-bar-controls button:disabled[aria-label="Minimize"]:before, .window.active .title-bar .title-bar-controls button:disabled.is-minimize:before, .window.active .title-bar .title-bar-controls button:disabled[aria-label="Minimize"]:before {
+  box-shadow: none;
+  content: "";
+  opacity: .4;
+  background: url("minimize.png") 50% 10px no-repeat;
+}
+
+.title-bar.active .title-bar-controls button:disabled.is-maximize, .title-bar.active .title-bar-controls button:disabled[aria-label="Maximize"], .window.active .title-bar .title-bar-controls button:disabled.is-maximize, .window.active .title-bar .title-bar-controls button:disabled[aria-label="Maximize"] {
+  background: linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80);
+}
+
+.title-bar.active .title-bar-controls button:disabled.is-maximize:before, .title-bar.active .title-bar-controls button:disabled[aria-label="Maximize"]:before, .window.active .title-bar .title-bar-controls button:disabled.is-maximize:before, .window.active .title-bar .title-bar-controls button:disabled[aria-label="Maximize"]:before {
+  box-shadow: none;
+  content: "";
+  opacity: .4;
+  background: url("windows.png") 50% no-repeat;
+}
+
+.title-bar.active .title-bar-controls button:disabled.is-close, .title-bar.active .title-bar-controls button:disabled[aria-label="Close"], .window.active .title-bar .title-bar-controls button:disabled.is-close, .window.active .title-bar .title-bar-controls button:disabled[aria-label="Close"] {
+  filter: contrast(.7) brightness(1.1);
+  background: linear-gradient(#ffffff80, #ffffff4d 45%, #0000001a 50% 75%, #ffffff80), radial-gradient(circle at -60%, #0007 5% 10%, #0000 50%), radial-gradient(circle at 160%, #0007 5% 10%, #0000 50%), linear-gradient(#e0a197e5, #cf796a 25% 50%, #d54f36 50%);
+}
+
+.title-bar.active .title-bar-controls button:disabled.is-close:before, .title-bar.active .title-bar-controls button:disabled[aria-label="Close"]:before, .window.active .title-bar .title-bar-controls button:disabled.is-close:before, .window.active .title-bar .title-bar-controls button:disabled[aria-label="Close"]:before {
+  box-shadow: none;
+  content: "";
+  opacity: .4;
+  background: url("x.png") 50% no-repeat;
+}
+
+.status-bar {
+  background: #f0f0f0;
+  border: 1px solid #000;
+  border-top: 0;
+  margin: -6px 6px 6px;
+  display: flex;
+  box-shadow: 0 1px #fff9, 1px 0 #fff9, -1px 0 #fff9;
+}
+
+.status-bar-field {
+  border-right: 1px solid #cfcfcf;
+  flex-grow: 1;
+  margin: 0;
+  padding: 2px 3px;
+}
+
+.status-bar-field:last-child {
+  border-right: 0;
+}
+</style>
+    </head>
+    <body>
+<div class="window active" style="max-width: 250px;min-height:250px;">
+  <div class="title-bar">
+    <div class="title-bar-text">WinTile Explorer</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Close"></button>
+    </div>
+  </div>
+  <div class="window-body has-space" style="min-height:200px">
+    <p></p>
+    <a href="https://esterhazy.nekoweb.org" target="_blank"><img src="peepee.webp" style="max-height:191px;min-width:224px;"></a>
+  </div>
+</div>
+    </body>
+</html>

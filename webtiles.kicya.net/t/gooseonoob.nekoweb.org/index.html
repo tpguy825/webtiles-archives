@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: EarlyGameBoy;
+  src: url("EarlyGameBoy.ttf") format("truetype");
+}
+
+* {
+  image-rendering: pixelated;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: EarlyGameBoy;
+  font-size: 8px;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.tile-body {
+  color: #111;
+  margin: 0;
+  font-family: EarlyGameBoy;
+  font-size: 8px;
+}
+
+canvas {
+  display: block;
+}
+
+ul li {
+  list-style: none;
+  position: relative;
+}
+
+ul li.check:before {
+  content: "";
+  background-image: url("bullet_tick.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  list-style: none;
+  position: absolute;
+  top: -4px;
+  left: -16px;
+}
+
+.custom-container {
+  display: none;
+}
+
+.counter {
+  display: flex;
+}
+
+.counter-border {
+  border: 1px solid #0000;
+  border-image-source: url("border-counter.png");
+  border-image-slice: 1;
+  border-image-repeat: stretch;
+  width: fit-content;
+  height: fit-content;
+}
+
+.digit {
+  background-image: url("digits.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  width: 13px;
+  height: 23px;
+}
+
+.d0 {
+  background-position: 0 0;
+}
+
+.d1 {
+  background-position: -13px 0;
+}
+
+.d2 {
+  background-position: -26px 0;
+}
+
+.d3 {
+  background-position: -39px 0;
+}
+
+.d4 {
+  background-position: -52px 0;
+}
+
+.d5 {
+  background-position: -65px 0;
+}
+
+.d6 {
+  background-position: -78px 0;
+}
+
+.d7 {
+  background-position: -91px 0;
+}
+
+.d8 {
+  background-position: -104px 0;
+}
+
+.d9 {
+  background-position: -117px 0;
+}
+
+.dblank {
+  background-position: -130px 0;
+}
+
+.dminus {
+  background-position: -143px 0;
+}
+
+.header-container {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.btn-face:hover:active {
+  background: url("btn-face-pressed.png");
+}
+
+.btn-face {
+  background: url("btn-face.png");
+  border: none;
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.btn-border {
+  border: 1px solid #0000;
+  border-image-source: url("btn-border.png");
+  border-image-slice: 1;
+  border-image-repeat: stretch;
+  width: fit-content;
+  height: fit-content;
+}
+
+.outer-border {
+  border: 8px solid #0000;
+  border-image-source: url("border-outer.png");
+  border-image-slice: 4 fill;
+  border-image-repeat: stretch;
+  height: 100%;
+  padding: 9px 4px 4px 9px;
+}
+
+p {
+  margin: 3px;
+}
+
+.inner-border {
+  border: 2px solid #0000;
+  border-image-source: url("border-inner.png");
+  border-image-slice: 2 fill;
+  border-image-repeat: stretch;
+  padding: 3px 5px;
+}
+
+.game-border {
+  box-sizing: border-box;
+  border: 3px solid #0000;
+  border-image-source: url("border-game.png");
+  border-image-slice: 3 fill;
+  border-image-repeat: stretch;
+  margin-top: 6px;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.focus-text {
+  z-index: 1;
+  text-align: center;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+input[type="number"] {
+  width: 36px;
+}
+</style>
+    
+</head>
+<body>
+    <div class="outer-border" style="display: flex; flex-direction: column;">
+        <div class="inner-border header-container" style="flex-shrink: 0;">
+            <div class="counter-border">
+                <div class="counter" id="counter-mines">
+                    <div class="digit"></div>
+                    <div class="digit"></div>
+                    <div class="digit"></div>
+                </div>
+            </div>
+            
+            <div class="btn-border">
+                <button id="btn-new" class="btn-face"></button>
+            </div>
+            
+            <div class="counter-border">
+                <div class="counter" id="counter-time">
+                    <div class="digit"></div>
+                    <div class="digit"></div>
+                    <div class="digit"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-border" style="flex-grow: 1;">
+            <div style="box-sizing: border-box; height: 100%;">
+                <canvas id="canvas" class="game" width="150" height="150"></canvas>
+            </div>
+        </div>
+        
+        <div class="header-container" style="flex-shrink: 0;">
+            <select name="difficulty" id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="intermediate">Normal</option>
+                <option value="expert">Expert</option>
+                <option value="custom">Custom</option>
+            </select>
+            <div id="custom" class="custom-container">
+                <input type="number" name="custom-width" id="custom-width" value="8" autocomplete="off">
+                X
+                <input type="number" name="custom-height" id="custom-height" value="8" autocomplete="off">
+                P
+                <input type="number" name="mine-density" id="custom-mine-density" value="15" autocomplete="off">%
+            </div>
+        </div>
+        
+        <div class="header-container" style="flex-shrink: 0;">
+            <a href="info.html">Info</a><span>shift + click = flag</span>
+        </div>
+    </div>
+
+    <div id="logo">
+        <span class="focus-text">!! UPDATE !!<br>Click to play!</span>
+        <img src="minesweeper-webtiles-2.png" class="logo">
+    </div>
+    <script type="text/tilescript">var logo = document.getElementById("logo");
+logo.style.display = "none";
+
+var custom = document.getElementById("custom");
+var difficulty = document.getElementById("difficulty");
+
+var random_numbers = [
+    0.19003376613363243
+];
+
+//not finished
+//custom seedable random numbers to save possible seeds
+function imul32(a, b) {
+    var ah = (a >>> 16) & 0xffff;
+    var al = a & 0xffff;
+    var bh = (b >>> 16) & 0xffff;
+    var bl = b & 0xffff;
+
+    return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0)) | 0;
+}
+
+
+function hash_seed(_seed) {
+    _seed = String(_seed);
+    var _h = 458439028;
+    
+    for (var i = 0; i < _seed.length; i++) {
+        _h ^= _seed.charCodeAt(i);
+        _h = imul32(_h, 98534123076);
+    }
+    
+    return _h >>> 0;
+}
+
+function next_state(_state) {
+    return (imul32(_state, 12094824) + 9398771904) >>> 0;
+}
+
+function shuffle_array(_seed, _array) {
+    var _state = hash_seed(_seed);
+    var _result = _array.slice();
+    
+    for (var i = _result.length-1; i > 0; i--) {
+        _state = next_state(_state);
+        var j = _state % (i+1);
+        var _buffer = _result[i];
+        _result[i] = _result[j];
+        _result[j] = _buffer;
+    }
+    
+    return _result;
+}
+
+function create_rng_array(_seed) {
+    var _shuffled = shuffle_array(_seed, random_numbers);
+    var _state = hash_seed(_seed);
+    
+    return function random() {
+        _state = next_state(_state);
+        return _shuffled[_state % _shuffled.length];
+    };
+}
+
+var presets = {
+    easy: {
+        width: 12,
+        height: 8,
+        density: 12.35,
+    },
+    intermediate: {
+        width: 21,
+        height: 15,
+        density: 15.63,
+    },
+    expert: {
+        width: 26,
+        height: 18,
+        density: 20.63,
+    },
+}
+
+var current_preset = presets.easy;
+var preset_name = "easy";
+
+var interval = undefined;
+
+var current_board = [];
+board_width = 0;
+board_height = 0;
+tile_size = 0;
+
+game_state = -1; //-1: unavailable, 0: playing, 1: loss, 2: win
+
+var COUNT_MASK = 15;
+var BIT_OPEN = 1 << 4;
+var BIT_FLAG = 1 << 5;
+
+//var _tile = 0;
+//setting flag and open
+//_tile |= BIT_FLAG;
+//_tile |= BIT_OPEN;
+
+//setting count
+//_tile = (_tile & ~COUNT_MASK) | 9;
+
+//reading count
+//var _count = _tile & COUNT_MASK;
+
+//toggle flag
+//_tile ^= BIT_FLAG;
+
+//console.log(_tile.toString(2));
+//console.log(_count.toString());
+
+var counter_mines = document.getElementById("counter-mines");
+var counter_time = document.getElementById("counter-time");
+
+var time = 0;
+
+function set_digit(_element, _value) {
+    _element.className = "digit";
+    if (_value === -2) {
+        _element.className += " dblank";
+        return;
+    }
+    if (_value === -1) {
+        _element.className += " dminus";
+        return;
+    }
+    _element.className += " d"+_value.toString();
+}
+
+function set_counter(_counter, _value) {
+    _value = Math.max(-99, Math.min(999, _value));
+    
+    var _digits = _counter.children;
+    var _str = _value.toString();
+    
+    switch (_str.length) {
+        case 1: //set right digit
+            set_digit(_digits[2], _str.charAt(0));
+            set_digit(_digits[1], 0); //empty digit
+            set_digit(_digits[0], 0); //empty digit
+            break;
+		case 2: //set right and middle digit
+            set_digit(_digits[2], _str.charAt(1));
+            set_digit(_digits[1], _str.charAt(0));
+            set_digit(_digits[0], 0); //empty digit
+            break;
+		case 3: //set all digits
+            set_digit(_digits[2], _str.charAt(2));
+            set_digit(_digits[1], _str.charAt(1));
+            set_digit(_digits[0], _str.charAt(0));
+            break;
+    }
+}
+
+function board_index(_x, _y, _w) {
+    return _y * _w + _x;
+}
+
+function board_get_tile_size(_w, _h, _canvas) {
+    return Math.min(_canvas.width/_w, _canvas.height/_h);
+}
+
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var sprite_sheet = document.createElement("img");
+sprite_sheet.src = "spritesheet.png";
+
+function resize_canvas() {
+    var _p_width = canvas.parentElement.clientWidth;
+    var _p_height = canvas.parentElement.clientHeight;
+    canvas.width = _p_width;
+    canvas.height = _p_height;
+
+    console.log(canvas.width+","+canvas.height);
+    
+    tile_size = board_get_tile_size(board_width, board_height, canvas);
+}
+
+resize_canvas();
+
+var button_new = document.getElementById("btn-new");
+
+var sprite_size = 16;
+
+var sprites = {
+    tile: 			[0,0],
+    num_1:			[1,0],
+    num_2:			[2,0],
+    num_3:			[3,0],
+    num_4:			[0,1],
+    num_5:			[1,1],
+    num_6:			[2,1],
+    num_7:			[3,1],
+    num_8:			[0,2],
+    empty:			[1,2],
+    unknown_open:	[2,2],
+    flag:			[3,2],
+    mine_hit:		[0,3],
+	mine:			[1,3],
+	unknown:		[2,3],
+	false_flag:		[3,3]
+};
+
+var dx = [-1,  0,  1, -1, 1, -1, 0, 1];
+var dy = [-1, -1, -1,  0, 0,  1, 1, 1];
+
+function tile_get_sprite(_tile) {
+    if (_tile & BIT_OPEN) {
+        var _count = _tile & COUNT_MASK;
+        if (_count > 0 && _count <= 8) {
+            return sprites["num_"+_count.toString()];
+        }
+        if (_count === 9) {
+            return sprites.mine;
+        }
+        return sprites.empty;
+    } else {
+        if (_tile & BIT_FLAG) {
+            return sprites.flag;
+        }
+        return sprites.tile;
+    }
+}
+
+function tile_draw_custom(_i, _sprite) {
+    ctx.drawImage(
+        sprite_sheet,
+        _sprite[0]*sprite_size,
+        _sprite[1]*sprite_size,
+        sprite_size,
+        sprite_size,
+        tile_size*(_i % board_width),
+        tile_size*((_i / board_width)|0),
+        tile_size,
+        tile_size
+    );
+}
+
+function tile_draw(_i) {
+    var _sprite = tile_get_sprite(current_board[_i]);
+    
+    ctx.drawImage(
+        sprite_sheet,
+        _sprite[0]*sprite_size,
+        _sprite[1]*sprite_size,
+        sprite_size,
+        sprite_size,
+        tile_size*(_i % board_width),
+        tile_size*((_i / board_width)|0),
+        tile_size,
+        tile_size
+    );
+}
+
+function get_mouse_pos(_canvas, _event, _to_board) {
+    var _rect = _canvas.getBoundingClientRect();
+    var _scale_x = _canvas.width / _rect.width;
+    var _scale_y = _canvas.height / _rect.height;
+
+    var _pos = {
+        x: (_event.clientX - _rect.left) * _scale_x,
+		y: (_event.clientY - _rect.top) * _scale_y
+    };
+    
+    if (!_to_board) {
+        return _pos;
+    }
+    
+    _pos.x = Math.floor(_pos.x/tile_size);
+    _pos.y = Math.floor(_pos.y/tile_size);
+    
+    return _pos;
+}
+
+function count_flagged_neighbors(_i) {
+    var _x = _i % board_width;
+    var _y = (_i / board_width) | 0;
+    var _count = 0;
+
+    for (var n = 0; n < 8; n++) {
+        var _nx = _x + dx[n];
+        var _ny = _y + dy[n];
+
+        if (_nx < 0 || _ny < 0 || _nx >= board_width || _ny >= board_height) continue;
+
+        var _ni = _nx + _ny * board_width;
+        if (current_board[_ni] & BIT_FLAG) _count++;
+    }
+
+    return _count;
+}
+
+function push_unopened_neighbors(_stack, _i) {
+    var _x = _i % board_width;
+    var _y = (_i / board_width)|0;
+
+    for (var n = 0; n < 8; n++) {
+        var _nx = _x+dx[n];
+        var _ny = _y+dy[n];
+
+        if (_nx < 0 || _ny < 0 || _nx >= board_width || _ny >= board_height) continue;
+
+        var _ni = _nx+_ny*board_width;
+        var _neighbor = current_board[_ni];
+        if (!(_neighbor & BIT_OPEN) && !(_neighbor & BIT_FLAG)) {
+            _stack.push(_ni);
+        }
+    }
+}
+
+function tile_open(_i_start) {
+    var _stack = [_i_start];
+    
+    while (_stack.length > 0) {
+        var _i = _stack.pop();
+        var _tile = current_board[_i];
+        
+        if (_tile & BIT_FLAG) continue;
+        
+        if ((_tile & COUNT_MASK) === 9) {
+            //lose
+            console.log("You lost D:");
+            button_new.style.display = "url('btn-face-loss.png')"; //doesnt work idk
+            for (var i = 0; i < current_board.length; i++) {
+                if ((current_board[i] & COUNT_MASK) === 9) {
+                    if (current_board[i] & BIT_FLAG) {
+                        continue;
+                    }
+                    current_board[i] |= BIT_OPEN;
+                    tile_draw(i);
+                }
+            }
+            tile_draw_custom(_i, sprites.mine_hit);
+            game_state = 1;
+            continue;
+        }
+        
+        if (_tile & BIT_OPEN) {
+            var _count = _tile & COUNT_MASK;
+            if (_count > 0 && count_flagged_neighbors(_i) === _count) {
+                push_unopened_neighbors(_stack, _i);
+            }
+            continue;
+        }
+        
+        current_board[_i] = _tile | BIT_OPEN;
+        tile_draw(_i);
+        opened++;
+        
+        var _count = _tile & COUNT_MASK;
+        if (_count === 0) {
+            push_unopened_neighbors(_stack, _i);
+        }
+    }
+}
+
+var mines = 0;
+var flags = 0;
+var opened = 0;
+var total = 0;
+
+function check_game_condition() {
+    if (opened >= total-mines) {
+        game_state = 2;
+        console.log("WINNER!");
+        for (var i = 0; i < current_board.length; i++) {
+            if (current_board[i] & BIT_OPEN) {
+                continue;
+            }
+            current_board[i] |= BIT_FLAG;
+            flags++;
+            tile_draw(i);
+        }
+        set_counter(counter_mines, mines-flags);
+    }
+}
+
+function canvas_click(_event) {
+    if (game_state !== 0) {
+        return;
+    }
+    
+	var _pos = get_mouse_pos(canvas, _event, true);
+    var _index = board_index(_pos.x, _pos.y, board_width);
+    
+    if (_index < 0 || _index > current_board.length) {
+        return;
+    }
+    
+    if (_event.shiftKey) {
+        current_board[_index] ^= BIT_FLAG;
+        if (current_board[_index] & BIT_FLAG) {
+            flags++;
+        } else {
+            flags--;
+        }
+        tile_draw(_index);
+		set_counter(counter_mines, mines-flags);
+    } else {
+		tile_open(_index);
+    }
+    check_game_condition();
+}
+
+canvas.addEventListener("click", canvas_click, false);
+
+difficulty.addEventListener("change", function(_event) {
+    preset_name = _event.target.value;
+    console.log(preset_name);
+    if (_event.target.value === "custom") {
+        custom.style.display = "block";
+    } else {
+        custom.style.display = "none";
+        current_preset = presets[_event.target.value];
+    }
+});
+
+var input_width = document.getElementById("custom-width");
+var input_height = document.getElementById("custom-height");
+var input_mine = document.getElementById("custom-mine-density");
+
+button_new.addEventListener("click", function() {
+    game_state = -1;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    var _seed = "test-seed";
+    //var _rng = create_rng_array(_seed);
+    
+    if (preset_name === "custom") {
+        var _width = Math.min(100, Math.max(1, Math.ceil(Number(input_width.value))));
+        var _height = Math.min(100, Math.max(1, Math.ceil(Number(input_height.value))));
+        var _mine_density = Math.min(100, Math.max(0, Number(input_mine.value)))/100;
+        var _mines = Math.ceil(_width*_height*_mine_density);
+    } else {
+        var _width = current_preset.width;
+        var _height = current_preset.height;
+        var _mine_density = current_preset.density;
+        var _mines = Math.ceil(_width*_height*_mine_density/100);
+    }
+    
+    
+    current_board = new Array(_width * _height)
+    for (var _x = 0; _x < _width; _x++) {
+        for (var _y = 0; _y < _height; _y++) {
+            current_board[board_index(_x, _y, _width)] = 0;
+        }
+    }
+    
+    board_width = _width;
+    board_height = _height;
+    tile_size = board_get_tile_size(board_width, board_height, canvas);
+    
+    var _total = _width*_height;
+    for (var i = 0; i < _mines; i++) {
+        var _pos_i = Math.random()*_total|0;
+        if ((current_board[_pos_i] & COUNT_MASK) === 9) {
+            i--;
+            continue;
+        }
+        current_board[_pos_i] = (current_board[_pos_i] & ~COUNT_MASK) | 9;
+        var _x = _pos_i % board_width;
+    	var _y = (_pos_i / board_width) | 0;
+        for (var n = 0; n < 8; n++) {
+            var _nx = _x + dx[n];
+            var _ny = _y + dy[n];
+
+            if (_nx < 0 || _ny < 0 || _nx >= board_width || _ny >= board_height) continue;
+
+            var _ni = _nx + _ny * board_width;
+            var _tile = current_board[_ni];
+
+            var _count = (_tile & COUNT_MASK);
+            if (_count===9) continue;
+            _count++;
+            current_board[_ni] = (_tile & ~COUNT_MASK) | _count;
+        }
+    }
+    
+	mines = _mines;
+	flags = 0;
+    opened = 0;
+    total = board_width*board_height;
+    
+    for (var i = 0; i < current_board.length; i++) {
+        tile_draw(i);
+    }
+    
+    time = 0;
+    set_counter(counter_time, time);
+    set_counter(counter_mines, mines-flags);
+    
+    if (interval !== undefined) {
+        clearInterval(interval);
+    }
+    
+    interval = setInterval(function() {
+        if (game_state !== 0) return;
+        time++;
+        set_counter(counter_time, time);
+    }, 1000);
+    
+    game_state = 0;
+});</script>
+</body>
+</html>

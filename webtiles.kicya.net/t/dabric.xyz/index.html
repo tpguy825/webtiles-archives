@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>#app {
+  background-color: #fff;
+  position: fixed;
+  inset: 0;
+}
+
+#app:not(:focus) {
+  opacity: .5;
+}
+</style>
+</head>
+<body>
+    <div id="placeholder">
+        <p>
+            placeholder for what would be a microgames collection, if it pans out
+            
+            (click to see it in its current state ...)
+        </p>
+    </div>
+    <div id="app">
+        
+    </div>
+    
+    <script type="text/tilescript">console.log("run at " + Date.now())
+
+var width = 250
+var height = 250
+
+var body = document.getElementById("app")
+
+var id = 0;
+
+var loadTasks = [];
+
+var keys = {}
+
+function isKeyDown(key) {
+    return !!keys[key]
+}
+
+function isKeyJustDown(key) {
+    return keys[key] === 1
+}
+
+body.setAttribute("tabindex", "0")
+body.focus()
+body.addEventListener("keydown", function(e) {
+    if (e.code !== "Tab") {    
+	    e.preventDefault()
+    }
+    if (!keys[e.code]) {keys[e.code] = 1}
+})
+body.addEventListener("keyup", function(e) {
+    if (e.code !== "Tab") {    
+	    e.preventDefault()
+    }
+    delete keys[e.code]
+})
+
+function setElementRect(e, x, y, w, h) {
+    e.style.left = x + "px"
+    e.style.top = y + "px"
+    
+    e.style.width = w + "px"
+    e.style.height = h + "px"
+}
+
+function newElement(parent) {
+	var element = document.createElement("div")
+    
+    element.style.position = "absolute"
+    
+    if (parent) {
+
+        parent.appendChild(element) 
+    } else {
+        body.appendChild(element)
+    }
+    return element
+}
+
+
+var microgameLogics = {
+    transition: function(m, args) {
+       	var text = m.newElement()
+        
+        return {
+            mount: function() {
+                m.game.deleteAllButActiveMicrogames()
+            },
+            
+            stop: function() {
+              
+            },
+            
+            tick: function(dt) {
+                var maxTime = 0;
+                
+                if (args.isIntro) {
+                        if (m.time < 2) {
+                            text.textContent = "hi"
+                            return
+                        }
+                    } else {
+
+                    if (args.isLoss) {           
+                        maxTime += 2
+
+                        if (m.time < maxTime) {
+
+                            text.textContent = "aww."
+
+                            return
+                        }    
+                    } else {
+                        maxTime += 2
+
+                        if (m.time < maxTime) {
+                            text.textContent = "woot!"
+                            return
+                        }    
+                    }
+
+                    if (args.isGameOver) {
+                        maxTime += 5
+
+                        if (m.time < maxTime) {
+                            text.textContent = "game over"
+                            return
+                        }    
+                        
+                        m.game.stop()
+                        m.delete()
+
+                    }
+
+
+                    if (args.isLevelUp)  {
+                        maxTime += 2
+                        if (m.time < maxTime) {
+                            text.textContent = "LEVEL UP!!!!!!!!!!!"
+                            return
+                        }    
+                    } else if (args.isSpeedUp) {
+                        maxTime += 2
+
+                        if (m.time < maxTime) {
+                            text.textContent = "SPEED UP!!!"
+                            return
+                        }    
+
+                    }
+
+                    maxTime += 1
+                    if (m.time < maxTime) {
+                        text.textContent = "score: " + m.game.score
+                        return
+                     }    
+                }
+                
+                
+                
+                    
+                m.game.startNewMicrogameRound()
+                m.delete()
+                
+            }
+        }  
+    }
+}
+
+var randomMicrogames = [
+    // pong
+    function(m) {
+        var paddleRender = m.newColoredElement("red")
+        var ballRender = m.newColoredElement("black")
+        
+        m.setDefaultWin()
+        
+        
+        var paddleWidth;
+        
+        if (m.game.level === 1) {
+            paddleWidth = 90
+        } else if (m.game.level === 2) {
+            paddleWidth = 70
+        } else {
+            paddleWidth = 60
+        }
+        
+        var paddleX = Math.random() * (width - paddleWidth);
+        var speed = 400
+        
+        var timer;
+        
+        if (m.game.level === 1) {
+            timer = 2.75
+        } else  {
+            timer = 3.75
+        }
+        
+        
+        
+        var ball = {
+            x: Math.random() * width, 
+            y: Math.random() * 20, 
+            dx: (Math.random() > 0.5 ? 1 : -1) + ((Math.random() - 0.5) * m.game.level === 1 ? 0.4 : 0.5),
+            dy: (Math.random() > 0.2 ? 1 : -1) + ((Math.random() - 0.5) * 0.2),
+            size: 10,
+            speed: 200}
+        var isBallInPaddleZone = false
+        
+        
+        return {
+            mount: function() {
+                
+            },
+            
+            stop: function() {
+               
+            },
+            
+            tick: function(dt) {
+          		
+                
+                if (isKeyDown("KeyD")) {
+                    paddleX += dt * speed
+                }
+                
+                if (isKeyDown("KeyA")) {
+                    paddleX -= dt * speed
+                }
+                
+                if (paddleX < 0) {
+                    paddleX = 0
+                }
+                
+                if (paddleX > width - paddleWidth) {
+                    paddleX = width - paddleWidth
+                }
+                
+                function moveBall() {
+                    ball.x += ball.dx * ball.speed * dt
+                	ball.y += ball.dy * ball.speed * dt
+                }
+                
+                moveBall()
+                
+                if (ball.y + ball.size > height - 20) {
+               		if (isBallInPaddleZone && ball.y > height - 10) {
+                        m.lose()
+                    } else if (ball.x + ball.size > paddleX && ball.x < paddleX + paddleWidth) {
+                    	ball.dy = -1
+                    	moveBall()
+                    }
+                        
+                        
+                  	isBallInPaddleZone = true
+                    
+                } else {
+                        isBallInPaddleZone =false
+                }
+                
+                if (ball.y < 0) {
+                    ball.dy = 1
+                    moveBall()
+                }
+                
+                
+                if (ball.x + ball.size > width && ball.dx > 0) {
+                    ball.dx *= -1
+                    moveBall()
+                } else if (ball.x < 0 && ball.dx < 0) {
+                    ball.dx *= -1
+                    moveBall()
+                }
+                
+                setElementRect(paddleRender, paddleX, height - 20, paddleWidth, 10)
+                setElementRect(ballRender, ball.x, ball.y, ball.size, ball.size)
+                
+                if (m.time > timer) {
+                    m.end()
+                }
+            }
+        }
+    }
+]
+
+function newMicrogame(game, Microgame, args) {
+    var context = {
+        
+        
+        game: game,
+        
+
+        time: 0,
+        
+        win: function() {
+            context.currentJudgement = "won"
+        },
+        
+        lose: function() {
+            context.currentJudgement = "loss"
+        },
+        
+        setDefaultWin: function() {
+            context.currentJudgement = "won"
+        },
+        
+        end: function() {
+            context.complete = true;
+        },
+        
+        delete: function() {
+        	context.shouldDelete = true;
+            context.body.remove()
+    	},
+        
+        redirect: function(microgame) {
+			this.redirectMicrogame = microgame
+        },
+        
+        body: newElement(game.body),
+        
+        redirectMicrogame: null,
+        
+        complete: false,
+        
+        currentJudgement: "none",
+        
+        newElement: function(parent) {
+            if (parent) {
+                return newElement(parent)
+            } else {
+                return newElement(context.body)
+            }
+        },
+        
+        newColoredElement: function(color, parent) {
+            var element = context.newElement(parent)
+            element.style.backgroundColor = color
+            return element
+        }
+    }
+    
+    context.logic = Microgame(context, args)
+    
+    return context
+}
+
+
+function newGame() {
+    var lastTime = Infinity
+    
+    
+    
+    
+    var currentMicrogame;
+    
+    var state = "intro";
+    
+    var game = {
+        currentMicrogames: [],
+        
+        getCurrentMicrogame: function() {
+            return game.currentMicrogames[0]
+        },
+        
+        body: newElement(),
+        
+        tick: function() {
+            var thisTime = Date.now() / 1000
+            var realDeltaTime = thisTime - lastTime
+            lastTime = thisTime
+            
+            if (realDeltaTime <= 0) {
+                return;
+            }
+            
+            var deltaTime = realDeltaTime * game.speed
+            
+            var microgame = game.getCurrentMicrogame()
+            
+            if (microgame) {
+                microgame.logic.tick(deltaTime)
+                microgame.time += deltaTime;
+                
+                if (microgame.shouldDelete) {
+                    microgame.logic.stop()
+                    game.currentMicrogames.splice(0, 1)
+                }
+                
+                if (microgame.complete && game.isInMicrogameRound && game.currentMicrogameRound === microgame) {
+                    game.endMicrogameRound()
+                }
+                
+                if (microgame.redirectMicrogame) {
+                    microgame.delete()
+                    microgame.logic.stop()
+                  	microgame = game.replaceCurrentMicrogame(microgame.redirectMicrogame)
+                	microgame.logic.tick(0)
+                    
+                }
+            }
+            
+            var keysDown = Object.keys(keys)
+            
+            for (var i = 0; i < keysDown.length; i++) {
+                keys[keysDown[i]]++
+            }
+        },
+        
+        createMicrogameInFront: function(Microgame, args) {
+            var microgame = newMicrogame(game, Microgame, args)
+            game.currentMicrogames.unshift(microgame)
+            microgame.logic.mount()
+            return microgame
+        },
+        
+        createMicrogameInBack: function(Microgame, args) {
+            var microgame = newMicrogame(game, Microgame, args)
+            game.currentMicrogames.push(microgame)
+            microgame.logic.mount()
+            return microgame
+        },
+            
+        replaceCurrentMicrogame: function(Microgame, args, args) {
+            if (game.currentMicrogames[0]) {    
+	            game.currentMicrogames[0].logic.stop()
+            }
+            
+            var microgame = newMicrogame(game, Microgame)
+            game.currentMicrogames[0] = microgame
+            microgame.logic.mount()
+            return microgame
+        },
+        
+        deleteAllButActiveMicrogames: function() {
+            for (var i = 1; i < game.currentMicrogames.length; i++) {
+                game.currentMicrogames[i].delete()
+                game.currentMicrogames.splice(i, 1) 
+            }
+        },
+        
+        stop: function() {
+            
+        },
+              
+        score: 0,
+        lives: 4,
+        level: 1,
+        speed: 1,
+        
+        runMicrogame: function(Microgame) {
+            var context = newMicrogame(game, Microgame);
+            var microgame = Microgame(context)
+            game.currentMicrogame = context;
+        }, 
+        
+        endMicrogameRound: function() {
+            if (!game.isInMicrogameRound) return;
+            
+            var microgame = game.currentMicrogameRound
+            
+            var isLoss = microgame.currentJudgement !== "won"
+            
+            game.isInMicrogameRound = false;
+            game.currentMicrogameRound = null
+
+            
+            game.score += 1
+            
+            var showSpeedUp = false
+            var showLevelUp = false
+            
+            if (game.score >= 75) {
+                game.speed += 0.05
+            } else if (game.score % 20 === 0 && game.score > 0) {
+                game.speed = 1
+                game.level++
+                showLevelUp = true
+            } else if (game.score % 5 === 0 && game.score > 0) {
+                game.speed += 0.25
+                showSpeedUp = true
+            }
+            
+            if (isLoss) {
+                game.lives -= 1
+            }
+            
+            var isGameOver = game.lives <= 0
+            
+            
+            game.createMicrogameInFront(microgameLogics.transition, {isSpeedUp: showSpeedUp, isLevelUp: showLevelUp, isLoss: isLoss, isGameOver: isGameOver})
+        },
+        
+        isInMicrogameRound: false,
+        currentMicrogameRound: null,
+        startNewMicrogameRound: function() {
+            if (game.isInMicrogameRound) return;
+            game.isInMicrogameRound = true
+            
+            var microgameLogic = randomMicrogames[Math.floor(Math.random() * randomMicrogames.length)]
+            
+            game.currentMicrogameRound = game.createMicrogameInBack(microgameLogic)
+        },  
+    }
+    
+    setInterval(function() {
+        game.tick()
+    }, 1000 / 60)
+    
+    return game
+}
+
+document.getElementById("placeholder").remove()
+
+var game = newGame()
+
+
+
+game.createMicrogameInFront(microgameLogics.transition, {isIntro: true})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// tfw editor has no deadzone at the bottom</script>
+</body>
+</html>

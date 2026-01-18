@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>html, .tile-body {
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.tile {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+.tile img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tile-text {
+  color: #0f6;
+  text-shadow: 2px 2px #000;
+  font-family: Bitcount, monospace;
+  font-size: 15px;
+  font-weight: 300;
+  animation: 2s infinite flicker;
+  position: absolute;
+  top: 90%;
+  left: 63%;
+}
+
+@keyframes flicker {
+  0%, 19%, 22%, 62%, 64%, 70%, 100% {
+    opacity: .99;
+    text-shadow: 0 0 2px #0f6, 0 0 5px #0f6, 0 0 10px #0f6, 0 -2px 8px #0c5, 0 0 2px #0c5, 0 0 5px #3fa, 0 0 15px #0cf, 0 0 2px #3fa, 0 2px 3px #001a00;
+  }
+
+  20%, 21%, 63%, 65%, 69.9% {
+    opacity: .4;
+    text-shadow: none;
+  }
+}
+
+.tile:after {
+  content: "";
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(#ffffff0d 0 2px, #0000000d 4px);
+  width: 100%;
+  height: 100%;
+  animation: 1s linear infinite scroll;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes scroll {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 4px;
+  }
+}
+
+.commission-btn {
+  color: #0f6;
+  pointer-events: auto;
+  background-color: #000c;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-family: monospace;
+  font-size: 10px;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  position: fixed;
+  top: 88%;
+  left: 2%;
+}
+</style>
+</head>
+<body>
+
+
+    <div class="tile">
+        <a href="https://gob.nekoweb.org" class="tile" target="_blank">
+        <img src="WEBTILE.jpg">
+        <div class="tile-text">gob's room</div>
+    </a></div>
+        
+
+    <a href="https://goblinpng.nekoweb.org/commissions.html" class="commission-btn" target="_blank">commission info</a>
+        
+        
+</body>
+</html>
+
+    
+    
+         
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    
+    
+    
+    
+    
+
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+</style>
+    
+    <style>@keyframes speen {
+}
+
+#crouton {
+  width: 50%;
+  image-rendering: pixelated;
+  margin-bottom: 4px;
+  animation: 1s linear infinite forwards speen;
+  rotate: -14.3239deg;
+}
+
+@font-face {
+  font-family: Atkinson;
+  src: url("AtkinsonHyperlegibleNext-Regular.otf") format("otf");
+}
+
+@font-face {
+  font-family: Darumadrop;
+  src: url("DarumadropOne-Regular.ttf") format("ttf");
+}
+
+.tile-body {
+  color: #203;
+  text-align: center;
+  vertical-align: middle;
+  background: url("bg.png"), radial-gradient(#9ac 20%, #79b 50%, #489 70%, #357 100%);
+  margin: 0;
+  font-family: Atkinson, sans-serif;
+}
+
+.jp {
+  font-family: Darumadrop, sans-serif;
+}
+
+#main-shit {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2px;
+  display: flex;
+}
+
+h2 > p {
+  margin: .25rem 0;
+  font-size: .83em;
+}
+
+h2, h3 {
+  background-color: #aef4;
+  margin: 1px 0;
+  padding: 0 6px;
+  font-weight: 550;
+  position: relative;
+  box-shadow: 0 0 2px #2466, inset 0 0 4px #2466;
+}
+
+h2 > * > b, h3 > b {
+  font-size: 1.25em;
+  font-weight: 800;
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <center id="main-shit">
+        <img id="crouton" src="crouton.png">
+        <h2><p> 
+            This is an <b>cat's</b> tile now.
+            </p></h2>
+        <h3 class="jp"><b>猫</b>のタイルだぜ。</h3>
+	</center>
+</body>
+</html>

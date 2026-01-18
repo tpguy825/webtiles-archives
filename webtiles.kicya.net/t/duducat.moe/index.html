@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  box-sizing: border-box;
+  color: #fff;
+  background: conic-gradient(#000 12.5%, #0000 12.5% 87.5%, #000 87.5%) 0 0 / 2em 2em repeat-x, conic-gradient(#fffa 12.5%, #0000 12.5% 87.5%, #fffa 87.5%) 0 2px / 2em 2em repeat-x, conic-gradient(#0000 25%, #0007 25% 50%, #0000 50% 75%, #0007 75%) 0 0 / 4em 4em, linear-gradient(#000039, #1f0085);
+  border: 1px solid #000;
+  border-bottom: none;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  animation: 2s linear infinite body-background;
+}
+
+.tile-container {
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  z-index: 1;
+  border: 2px solid #fff;
+  width: 220px;
+  position: absolute;
+  inset: 0 14px auto;
+  overflow: hidden;
+}
+
+.tile-holder {
+  aspect-ratio: 1;
+  width: 216px;
+  transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(0, 1, 0, 1);
+  position: absolute;
+  transform: perspective(1000px)translateZ(-110px)rotateY(0);
+}
+
+.tile-holder.auto {
+  transition-timing-function: cubic-bezier(1, 0, 0, 1);
+}
+
+.tile-holder .tile {
+  background: #000;
+  outline: 2px solid #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.tile-holder .tile:first-child {
+  transform: translateZ(110px);
+}
+
+.tile-holder .tile:nth-child(2) {
+  transform: translateX(-110px)rotateY(-90deg);
+}
+
+.tile-holder .tile:nth-child(3) {
+  transform: translateZ(-110px)rotateY(180deg);
+}
+
+.tile-holder .tile:nth-child(4) {
+  transform: translateX(110px)rotateY(90deg);
+}
+
+.tile-holder .tile-link {
+  color: #fff;
+  box-sizing: border-box;
+  align-items: end;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+.tile-holder .tile-link > img {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.tile-holder .tile-name {
+  box-sizing: border-box;
+  color: #fff;
+  z-index: 1;
+  background: linear-gradient(#0000, #0001, #0004, #0009, #000c);
+  width: 100%;
+  padding: 24px 8px 8px;
+  display: block;
+  position: absolute;
+  inset: auto 0 0;
+}
+
+#tile-nav-previous, #tile-nav-next {
+  z-index: 2;
+  color: #fff;
+  opacity: 0;
+  background: none;
+  border: none;
+  padding: 0 .05em .25em;
+  font-size: 3em;
+  transition: opacity 2s;
+  position: absolute;
+  inset: 1.5em auto;
+  transform: translateY(0);
+}
+
+.tile-body:hover :is(#tile-nav-previous, #tile-nav-next) {
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+#tile-nav-previous:active, #tile-nav-next:active {
+  color: #fffa;
+}
+
+#tile-nav-previous {
+  background: radial-gradient(at 0, #000, #0000 75%);
+  padding-right: .1em;
+  left: 0;
+}
+
+#tile-nav-next {
+  background: radial-gradient(at 100%, #000, #0000 75%);
+  padding-left: .1em;
+  right: 0;
+}
+
+#quote-box {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 20px;
+}
+
+#marquee-box {
+  background: #000;
+  border-top: 2px solid #fff;
+  padding: 5px 10px 10px;
+  position: absolute;
+  inset: auto 0 0;
+}
+
+#border {
+  pointer-events: none;
+  border: 5px solid #fff;
+  border-top: none;
+  outline: 10px solid #000;
+  position: absolute;
+  inset: -1px 0 1px;
+}
+
+a {
+  color: #0ff;
+  text-decoration: underline 1px dashed;
+}
+
+a:hover {
+  text-decoration: underline 1px;
+}
+
+@keyframes body-background {
+  from {
+    background-position: 0 0, 0 2px, 0 0, 0 0;
+  }
+
+  to {
+    background-position: -20em 0, -20em 2px, -4em -4em, 0 0;
+  }
+}
+
+#notes {
+  color: #000;
+  background: linear-gradient(#ffe 95%, #aa7 95%) 5px 1.15em / 100% 1.3em;
+}
+
+#notes > div {
+  padding: 1.3em;
+  font-family: cursive;
+  line-height: 1.3em;
+}
+
+.tile-body:not(.active) * {
+  pointer-events: none !important;
+}
+
+#rotometer {
+  transform-style: preserve-3d;
+  border: 5px solid #000;
+  outline: 2px solid #fff;
+  transform: translateZ(-10px);
+}
+
+#rotometer-holder {
+  transform-style: preserve-3d;
+  flex-flow: row-reverse;
+  align-items: center;
+  gap: 2px;
+  height: 28px;
+  padding-inline: 4px;
+  display: flex;
+  transform: translateZ(-50px);
+}
+
+#rotometer-holder > span {
+  width: calc(1ch + 2px);
+  height: 1em;
+  transform-style: preserve-3d;
+  font-size: 28px;
+  display: block;
+  position: relative;
+}
+
+#rotometer-holder > span > span {
+  transform-style: preserve-3d;
+  text-align: center;
+  color: #000;
+  background: #fff;
+  align-items: center;
+  font-weight: 700;
+  line-height: 0;
+  display: flex;
+  position: absolute;
+  inset: .02em 0;
+  transform: translateZ(40px);
+}
+
+#rotometer-holder > span:first-child > span {
+  color: #fff;
+  background: red;
+  margin-left: 2px;
+}
+
+#rotometer-holder > span > span:nth-child(2) {
+  transform: rotateX(-36deg)translateZ(40px);
+}
+
+#rotometer-holder > span > span:nth-child(3) {
+  transform: rotateX(36deg)translateZ(40px);
+}
+</style>
+</head>
+<body>
+    <div class="tile-container">
+        <div class="tile-holder" style="animation-play-state: running">
+            <div id="notes" class="tile">
+                <div>
+                    "I wonder how many of the sites people used to register to this event will still be accessible 5 or 10 years from now"
+                </div>
+            	<span class="tile-name">
+                	Notes
+                </span>
+            </div>
+            <div class="tile">
+            	<span class="tile-name">
+                	WIP D:
+                </span>
+            </div>
+            <div class="tile" style="background: transparent; transform-style: preserve-3d; pointer-events: none">
+                <div style="position: absolute; inset: 0; transform-style: preserve-3d; display: flex; align-items: center; justify-content: center">
+                    <div id="rotometer" style="background: linear-gradient(#0000, #0004)">
+                        <div id="rotometer-holder">
+							
+                        </div>
+                    	<div style="position: absolute; inset: -5px; transform-style: preserve-3d; transform: translateZ(-50px) rotateX(36deg) translateZ(50px); background: black; border-inline: 2px solid white">
+							<div style="font-size: 0.8em; text-align: center; margin-top: 8px">
+                                Spin me!!!
+                            </div>
+                        </div>
+                    	<div style="position: absolute; inset: -5px; transform-style: preserve-3d; transform: translateZ(-50px) rotateX(-36deg) translateZ(50px); background: black; border-inline: 2px solid white">
+                        	<button id="rotometer-clear" style="display: block; margin: auto; margin-top: 12px; transform-style: preserve-3d; transform: translateZ(5px); pointer-events: all; font-size: 0.8em">
+                                Clear
+                            </button>
+                        </div>
+                    	<div style="position: absolute; inset: -5px; transform-style: preserve-3d; transform: translateZ(-50px) rotateX(72deg) translateZ(50px); background: black; border-inline: 2px solid white">
+
+                        </div>
+                    	<div style="position: absolute; inset: -5px; transform-style: preserve-3d; transform: translateZ(-50px) rotateX(-72deg) translateZ(50px); background: black; border-inline: 2px solid white">
+							
+                        </div>
+                    	<div style="position: absolute; inset: -5px; transform-style: preserve-3d; transform: translateZ(-50px) rotateX(180deg) translateZ(50px); background: black">
+                            
+                        </div>
+                    	<div style="position: absolute; inset: 50% -5px auto auto; width: 100px; height: 100px; transform-style: preserve-3d; transform-origin: right; transform: rotateY(-90deg) translateY(-50%); border-radius: 50px; border: 2px solid white; background: black">
+                            
+                        </div>
+                    	<div style="position: absolute; inset: 50% auto auto -5px; width: 100px; height: 100px; transform-style: preserve-3d; transform-origin: left; transform: rotateY(90deg) translateY(-50%); border-radius: 50px; border: 2px solid white; background: black">
+                            
+                        </div>
+                    </div>
+                    <div style="position: absolute; inset: 0; transform-style: preserve-3d; transform: translateZ(-210px); background: radial-gradient(circle at top, #fffa, #777a, #000 80%)">
+
+                    </div>
+                </div>
+            	<span class="tile-name">
+                	Rotometer
+                </span>
+            </div>
+            <div class="tile">
+            	<span class="tile-name">
+                	WIP D:
+                </span>
+            </div>
+        </div>
+        <button id="tile-nav-previous">&lsaquo;</button>
+        <button id="tile-nav-next">&rsaquo;</button>
+    </div>
+    <div id="marquee-box">
+        <a href="https://duducat.moe" target="_blank"><b>duducat.moe</b></a>
+    </div>
+    <div id="border">
+    </div>
+    <script type="text/tilescript">var index = 0;
+var auto = true;
+
+function updateIndex() {
+    var element = document.getElementsByClassName("tile-holder")[0];
+    element.style.transform = "perspective(1000px) translateZ(-110px) rotateY(" + (index * 90) + "deg)";
+   	
+    element.style.transitionTimingDuration = auto ? "cubic-bezier(0, 1, 0, 1)" : "cubic-bezier(1, 0, 0, 1)";
+
+    addRotometer();
+}
+
+setInterval(function() {
+    if (!auto) return;
+	index++;
+    updateIndex();
+}, 10000)
+
+
+function movePrevious() {
+    auto = false;
+    index++;
+    updateIndex();
+}
+
+function moveNext() {
+    auto = false;
+    index--;
+    updateIndex();
+}
+
+
+document.getElementById("tile-nav-previous").onclick = movePrevious;
+document.getElementById("tile-nav-next").onclick = moveNext;
+
+
+
+var game = {
+    rotometer: 0
+}
+
+var rotometerDisplay = 0;
+var rotometerDigits = [];
+
+function loadGame() {
+    var obj = JSON.parse(localStorage.getItem("duducat"));
+    game = fixObject(game, obj);
+}
+
+function saveGame() {
+    localStorage.setItem("duducat", JSON.stringify(game));
+}
+
+function fixObject(from, to) {
+    for (var key in from) {
+        if (key in to) from[key] = to[key]
+        if (typeof from == "object") fixObject(from[key], to[key]);
+    }
+    return from;
+}
+
+loadGame();
+
+function addRotometer() {
+    game.rotometer += Math.PI / 2;
+    saveGame();
+    updateRotometer();
+}
+
+function updateRotometer() {
+    var digitString = Math.floor(rotometerDisplay).toFixed(0);
+    console.log(digitString);
+    var decimal = rotometerDisplay % 1;
+    for (var i = 0; i < 6; i++) {
+        var digit;
+		if (rotometerDigits.length <= i) {
+            digit = document.createElement("span");
+            document.getElementById("rotometer-holder").appendChild(digit);
+            rotometerDigits.push(digit);
+            digit.$front = document.createElement("span");
+            digit.appendChild(digit.$front);
+            digit.$back = document.createElement("span");
+            digit.appendChild(digit.$back);
+        } else {
+            digit = rotometerDigits[i];
+        }
+        
+        var digitNumber = +digitString[digitString.length - 1 - i] || 0;
+        digit.$front.textContent = digitNumber;
+        digit.$back.textContent = (1 + digitNumber) % 10;
+        digit.style.transform = "rotateX(" + (decimal * 36) + "deg)";
+        if (digitNumber != 9) decimal = 0;
+    }
+    
+}
+
+var time = Date.now();
+var delta = 0;
+
+setInterval(function() {
+    var wrappedIndex = ((index % 4 + 4) % 4);
+    delta = Date.now() - time;
+    time += delta;
+   	if (wrappedIndex == 2) {
+        if (rotometerDisplay != game.rotometer) {
+            rotometerDisplay += (game.rotometer - rotometerDisplay) * (1 - Math.pow(0.001, delta / 1000));
+            if (Math.abs(rotometerDisplay - game.rotometer) < 0.01) rotometerDisplay = game.rotometer;
+            updateRotometer();
+        }
+    }
+}, 33);
+
+document.getElementById("rotometer-clear").onclick = function () {
+    game.rotometer = 0;
+    saveGame();
+    updateRotometer();
+}</script>
+</body>
+</html>

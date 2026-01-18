@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+</style>
+<head>
+    <style>.tile-body {
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  background-image: url("67kid.gif");
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+h1 {
+  position: above;
+  color: #fff;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+p {
+  position: above;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+}
+
+.bounce-text span {
+  animation: .5s ease-in-out infinite bounce;
+  display: inline-block;
+}
+
+.bounce-text span:first-child {
+  animation-delay: 0s;
+}
+
+.bounce-text span:nth-child(2) {
+  animation-delay: .1s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+</style>
+</head>
+<body>
+<h1 class="bounce-text">
+    <span>6</span><span>7</span>
+    </h1>
+    <p>
+       WELCOME SUPERHS!!!!!!!
+    </p>
+<p>
+    THANK YOU DIMDEN FOR LOCKING MY TILE YOU ARE THE GOAT
+    </p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

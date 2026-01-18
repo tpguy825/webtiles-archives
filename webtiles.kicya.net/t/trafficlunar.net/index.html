@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+#kawaii {
+  z-index: 11;
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  transform: translateY(-50%);
+}
+
+#gradient {
+  z-index: 10;
+  background: linear-gradient(to top, #fff0 90%, #fff 100%), linear-gradient(to left, #0000 90%, #000 100%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+</style>
+</head>
+<body>
+    <div id="gradient"></div>
+    <img src="yotsugi.webp" id="yotsugi" width="256" height="256">
+    <img src="kawaii.webp" id="kawaii" width="256" height="128">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.</script>
+</body>
+</html>

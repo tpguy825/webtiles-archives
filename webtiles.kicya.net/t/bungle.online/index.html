@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>@font-face {
+  font-family: KiwiSoda;
+  font-display: swap;
+  src: url("KiwiSoda.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: LycheeSoda;
+  font-display: swap;
+  src: url("LycheeSoda.woff2") format("woff2");
+}
+
+.tile-body {
+  text-shadow: 2px 2px #000;
+  color: #c9bfff;
+  background-color: #242e42;
+  background-image: linear-gradient(to left, #2f3b52 5px, #0000 5px), linear-gradient(#2f3b52 5px, #0000 5px);
+  background-size: 68px 68px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  font-family: KiwiSoda;
+  line-height: 1.1;
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+}
+
+main {
+  z-index: 3;
+  height: fit-content;
+  margin: .3rem;
+}
+
+h1 {
+  text-align: center;
+  margin: .3rem 0 0;
+  font-size: 1.3rem;
+}
+
+a {
+  color: #85e8fc;
+  text-align: center;
+  background-color: #2f3b52;
+  border: 1px solid #c6e25f;
+  border-radius: 10px;
+  width: 100%;
+  padding: .3rem;
+  font-size: 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+a:hover {
+  color: #c6e25f;
+  background-color: #fff;
+  border-color: #c9bfff;
+  box-shadow: inset 1px 1px 2px #2f3b52;
+}
+
+ul, menu, ol {
+  margin-block: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+menu li {
+  margin: .5rem 0;
+}
+
+.window {
+  -webkit-box-shadow: 4px 4px #00000028;
+  background-color: #2f3b52;
+  border: 2px outset #c6e25f;
+  border-radius: 15px;
+  padding-bottom: .3rem;
+  box-shadow: 2px 2px #0000005e;
+}
+
+.buttongroup {
+  justify-content: space-around;
+  align-self: center;
+  width: 50px;
+  height: fit-content;
+  display: flex;
+}
+
+.dot {
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+}
+
+.pink {
+  background-color: #c9bfff;
+}
+
+.blue {
+  background-color: #85e8fc;
+}
+
+.green {
+  background-color: #c6e25f;
+}
+
+.bar {
+  text-transform: uppercase;
+  border-bottom: 1px inset #c6e25f;
+  border-radius: 15px 15px 0 0;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: .2rem .4rem;
+  font-family: LycheeSoda;
+  font-size: 1rem;
+  display: flex;
+}
+
+.inner {
+  background-color: #242e42;
+  border-radius: 15px;
+  flex-direction: column;
+  gap: .3rem;
+  margin: .3rem .3rem 0;
+  padding: .4rem;
+  display: flex;
+}
+
+.wrap {
+  justify-content: space-between;
+  display: flex;
+}
+
+#bean {
+  object-fit: contain;
+  width: 50%;
+}
+
+.alt-bg {
+  z-index: 1;
+  background-image: url("background1.png");
+  background-position: -22%;
+  background-size: 75px;
+  width: 5%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+}
+
+#banner {
+  z-index: 5;
+  filter: drop-shadow(1px 1px #0000004d);
+  width: 110%;
+  position: absolute;
+  top: 30px;
+  left: 235px;
+}
+
+#blood {
+  position: absolute;
+  top: 114px;
+  left: 1px;
+}
+</style>
+</head>
+<body>
+    <div class="alt-bg"></div>
+
+    <img id="banner" src="header.png">
+
+    <main class="window">
+      <img src="blood2.png" alt id="blood">
+      <section class="bar">
+        <div class="bar-title">WebTile</div>
+        <div class="buttongroup">
+          <div class="pink dot"></div>
+          <div class="blue dot"></div>
+          <div class="green dot"></div>
+        </div>
+      </section>
+      <section class="inner">
+        <h1>More cool stuff awaits you on BungleOnline!</h1>
+        <div class="wrap">
+          <menu>
+            <li><a href="https://bungle.online" target="_blank">Website</a></li>
+            <li>
+              <a href="https://bungle.online/media-diary" target="_blank">Media Diary</a>
+            </li>
+            <li>
+              <a href="https://bungle.online/quizdex" target="_blank">Quizzes</a>
+            </li>
+          </menu>
+          <img id="bean" src="3DBean.gif" alt>
+        </div>
+      </section>
+    </main>
+</body>
+</html>

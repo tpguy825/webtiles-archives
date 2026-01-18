@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Noto Serif;
+  font-style: italic;
+  font-weight: 100 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("https://webtiles.kicya.net/t/flo.stellbr.ink/noto-serif.woff2") format("woff2");
+  unicode-range: U+??, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tile-body {
+  font-optical-sizing: auto;
+  font-family: Noto Serif, serif;
+  font-weight: < weight> ;
+  font-variation-settings: "wdth" 100;
+  font-style: normal;
+}
+
+a {
+  text-decoration: unset;
+  color: unset;
+}
+
+.content {
+  color: #000;
+  background: #fcf6ed;
+  padding: 36px 16px 16px;
+  transform: translateY(-250px);
+
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+    background: #000;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-size: unset;
+  font-weight: 400;
+}
+
+.text-lg {
+  font-size: 18px;
+}
+
+.text-base {
+  font-size: 16px;
+}
+
+.inactive {
+  opacity: .6;
+  transform: scale(.99);
+}
+</style>
+</head>
+<body>
+    <a href="https://discovox.org/books/en-dickens-a-tale-of-two-cities" target="_blank">
+        <div class="content">
+            <h2 class="text-lg">
+Chapter I. The Period
+            </h2>
+            <p class="active text-base">
+It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, 
+            </p>
+            <p class="inactive text-base">
+it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness,
+            </p>
+            <p class="inactive text-base">
+it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us,
+            </p>
+            <p class="inactive text-base">
+            we were all going direct to Heaven, we were all going direct the other way—in short,
+            </p>
+            <p class="inactive text-base">
+            the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.
+            </p>
+            <p class="inactive text-base">
+            There were a king with a large jaw and a queen with a plain face, on the throne of England;
+            </p>
+            <p class="inactive text-base">
+            there were a king with a large jaw and a queen with a fair face, on the throne of France.
+            </p>
+            <p class="inactive text-base">
+            In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.
+            </p>
+            <p class="inactive text-base">
+            It was the year of Our Lord one thousand seven hundred and seventy-five.
+            </p>
+            <p class="inactive text-base">
+            Spiritual revelations were conceded to England at that favoured period, as at this.
+            </p>
+            <p class="inactive text-base">
+			Mrs. Southcott had recently attained her five-and-twentieth blessed birthday, of whom a prophetic private in the Life Guards had heralded the sublime appearance by announcing that arrangements were made for the swallowing up of London and Westminster.
+            </p>
+        </div>
+    </a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

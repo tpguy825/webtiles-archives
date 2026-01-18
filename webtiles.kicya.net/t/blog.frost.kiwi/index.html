@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+#tile {
+  background: url("bg.png");
+  width: 250px;
+  height: 250px;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+#tile:before {
+  content: "";
+  background: #1e1e23bf;
+  position: absolute;
+  inset: 0;
+}
+
+#stage {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.kiwi {
+  pointer-events: none;
+  width: 75px;
+  height: 75px;
+  position: absolute;
+}
+
+#text {
+  text-align: center;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#title, #secrets {
+  color: #e26f7a;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#title {
+  white-space: nowrap;
+  line-height: 1;
+}
+
+#url {
+  margin-top: 12px;
+  font-size: 20px;
+  animation: 4s linear infinite rainbow;
+}
+
+@keyframes rainbow {
+  0%, 100% {
+    color: #ff6b6b;
+  }
+
+  50% {
+    color: #feca57;
+  }
+}
+
+#title, #secrets, #url {
+  -webkit-text-stroke: 4px black;
+  paint-order: stroke fill;
+}
+
+#tile:hover #title, #tile:hover #secrets {
+  color: #da4453;
+}
+</style>
+</head>
+<body>
+    <a href="https://blog.frost.kiwi" id="tile" target="_blank">
+        <div id="stage"><img src="kiwis.svg"></div>
+        <div id="text">
+            <div id="title">Graphics Programming</div>
+            <div id="secrets">Secrets</div>
+            <div id="url">blog.frost.kiwi</div>
+        </div>
+    </a>
+</body>
+</html>

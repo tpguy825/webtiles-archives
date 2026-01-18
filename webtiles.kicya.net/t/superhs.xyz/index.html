@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: impactFont;
+  src: url("ast/fonts/impact.woff") format("woff");
+}
+
+@font-face {
+  font-family: chicagoFont;
+  src: url("ast/fonts/CHICAGO.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: zerofourbFont;
+  src: url("ast/fonts/04B08.TTF") format("truetype");
+}
+
+.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+  font-family: chicagoFont, Chicago, Impact, sans-serif;
+}
+
+p {
+  font-size: 8px;
+}
+
+button {
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  background-color: #000;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 35px;
+  font-family: chicagoFont, Chicago, Impact, sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all .2s;
+  display: inline-block;
+}
+
+button:hover {
+  background-color: gray;
+  padding: 5px 40px;
+  transition: all .2s;
+}
+</style>
+</head>
+<body>
+    <img id="logo" src="ast/images/logo.png" style="width:225px;margin:auto;">
+    <div style="width:210px;margin:auto;">
+		<p style="font-size:12px;">
+			My tile is currently under construction. <em>In the meantime, you can check out my Nekoweb site!</em>
+    	</p>
+        <button style="font-size:14px;">GO >></button>
+        <p style="font-size:10px;">
+            if you're reading this go listen to<br>
+            "スーパーモデル 15th Anniversary Edition" trust
+        </p>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

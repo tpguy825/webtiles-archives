@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Emilys Candy;
+  src: url("https://webtiles.kicya.net/t/sproutvale.nekoweb.org/EmilysCandy-Regular.tff");
+}
+
+.tile-body {
+  color: #977258;
+  background-color: #fecfd7;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 10px 3px 3px;
+  font-family: Emilys Candy, serif;
+}
+
+img {
+  transition: all .25s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.07);
+}
+
+.heart {
+  transition: all .25s ease-in-out;
+  transform: rotate(10deg);
+}
+
+.heart:hover {
+  transform: scale(1.07);
+}
+</style>
+</head>
+<body>
+    <main>
+    	<p style="font-size:large;">check out sproutvale for blogs, ponies, and more!</p>
+        <p style="font-size:large; width:45%; text-align:center; margin-left:20px; margin-top:2px;">click the heart to enter!</p>
+    </main>
+    <img src="minty1.webp" style="height:150px; position:absolute; bottom:5px; left:5px;">
+    <a href="https://sproutvale.nekoweb.org/" target="_blank"><img src="heart-graphic.png" class="heart" style="position:absolute; right:7px; top:50px;"></a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

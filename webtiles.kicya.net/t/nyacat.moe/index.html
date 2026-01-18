@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  transition: backdrop-filter, filter 2s;
+  position: fixed;
+  top: 0;
+  background-color: #f000 !important;
+}
+
+.bluurr {
+  filter: blur(20px);
+}
+</style>
+    
+</head>
+<body>
+     <video loop="true" muted src="awhat.webm" preload="metadata">
+    </video> 
+    <div id="contanererer">
+    	<p>This is 100% legit, nothing diffrent, example tile. (totally shouldn't click it)</p>
+    </div>
+    <script type="text/tilescript">document.querySelector("video").play();
+document.querySelector("#contanererer").style.filter = "blur(20px)"</script>
+</body>
+</html>

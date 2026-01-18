@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>#hover {
+  display: hidden;
+  opacity: .1;
+  z-index: 3;
+  background: #fff;
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+}
+
+#hover a:on-hover {
+  display: block;
+}
+
+#wm {
+  z-index: 4;
+  position: absolute;
+  bottom: 220px;
+  left: 0;
+}
+
+#album img {
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+    <div id="album">
+        <img src="toromihearts.png" width="250">
+    </div>
+    <div id="hover">
+    	<a></a>
+    </div>
+    <div id="wm">
+        <p>
+            managed by rek
+        </p>
+    </div>
+    
+    <audio id="myAudio" src="toromiaud.mp3" preload="metadata"></audio>
+    
+    <script type="text/tilescript">
+            var audio = document.getElementById('myAudio');
+        if (audio) {
+            audio.play();
+        }
+    </script>
+</body>
+</html>

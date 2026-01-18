@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  user-select: none;
+  background-image: url("img/bg2.gif");
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+knight {
+  border-style: solid none;
+  border-width: 12px medium;
+  border-left-color: currentColor;
+  border-right-color: currentColor;
+  border-image: url("img/bb12.gif") 12 fill round;
+  width: 250px;
+  height: 226px;
+  display: inline-block;
+}
+
+header {
+  filter: drop-shadow(0 0 20px #fffc);
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+
+  & .headertext {
+    color: #fff9fbc0;
+    text-align: center;
+    letter-spacing: .5rem;
+    margin-top: 2.7em;
+    font-family: blue;
+    font-size: 2rem;
+    font-weight: 100;
+    line-height: 2rem;
+
+    & .crazy .question {
+      opacity: .94;
+      filter: blur(.444px);
+      margin-left: -4px;
+      font-family: moskito;
+      font-size: 2.1rem;
+    }
+
+    @media (width >= 769px) {
+      &:hover {
+        text-indent: 15px;
+        filter: drop-shadow(0 0 20px #8cb8705d);
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        letter-spacing: 6px;
+        background-image: url("img/yellowfill.gif");
+        background-position: center;
+        -webkit-background-clip: text;
+        background-clip: text;
+        margin-top: 3.2em;
+        margin-left: -10px;
+        font-family: ginga;
+        line-height: .5;
+        transform: scale(2.1);
+
+        & .crazy .question {
+          margin-left: unset;
+          opacity: 1;
+          font-family: ginga;
+          font-size: 1.7rem;
+        }
+
+        & .crazy span {
+          display: inline;
+        }
+      }
+    }
+
+    & .crazy {
+      white-space: pre;
+
+      & span {
+        transition: transform .2s;
+        display: inline-block;
+      }
+    }
+
+    & .crazy span.active {
+      -webkit-text-fill-color: transparent;
+      background-image: url("img/yellowfill.gif");
+      background-position: center;
+      -webkit-background-clip: text;
+      background-clip: text;
+      transform: scaleX(-1);
+    }
+  }
+}
+
+@font-face {
+  font-family: blue;
+  src: url("fonts/blue.ttf");
+}
+
+@font-face {
+  font-family: ginga;
+  src: url("fonts/ginga.ttf");
+}
+
+@font-face {
+  font-family: moskito;
+  src: url("fonts/moskito.ttf");
+}
+</style>
+</head>
+<body>
+<a href="https://howsoonisnow.org" target="_blank">
+<knight>
+        <header>
+            <div class="headertext">
+<div class="crazy">how soon
+is now?</div>
+            </div>
+        </header>
+</knight>
+</a>
+<script type="text/tilescript">function crazyFlip() {
+  var crazyItems = document.querySelectorAll(".crazy");
+
+  for (var i = 0; i < crazyItems.length; i++) {
+    createSpans(crazyItems[i]);
+  }
+}
+
+function createSpans(item) {
+  var text = item.textContent;
+
+  while (item.firstChild) {
+    item.removeChild(item.firstChild);
+  }
+
+  var spans = [];
+
+  for (var i = 0; i < text.length; i++) {
+    var ch = text.charAt(i);
+
+    if (ch === "\n") {
+      item.appendChild(document.createElement("br"));
+      continue;
+    }
+
+    var span = document.createElement("span");
+    span.innerText = ch;
+
+    if (ch === "?") {
+      span.className = "question";
+    }
+
+    item.appendChild(span);
+    spans.push(span);
+  }
+
+  startCycle(spans);
+}
+
+function startCycle(spans) {
+  var cnt = 0;
+
+  window.setInterval(function () {
+
+    for (var i = 0; i < spans.length; i++) {
+      removeActive(spans[i]);
+    }
+
+    addActive(spans[cnt]);
+
+    cnt++;
+    if (cnt >= spans.length) {
+      cnt = 0;
+    }
+
+  }, 250);
+}
+
+function removeActive(el) {
+  var classes = el.className.split(" ");
+  var newClasses = [];
+  for (var i = 0; i < classes.length; i++) {
+    if (classes[i] !== "active" && classes[i] !== "") {
+      newClasses.push(classes[i]);
+    }
+  }
+  el.className = newClasses.join(" ");
+}
+
+function addActive(el) {
+  if (el.className.indexOf("active") === -1) {
+    if (el.className === "") {
+      el.className = "active";
+    } else {
+      el.className += " active";
+    }
+  }
+}
+
+crazyFlip();</script>
+</body>
+</html>

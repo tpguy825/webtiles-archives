@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  background: #0a0e27;
+  width: 100vw;
+  height: 100vh;
+  font-family: Courier New, monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+#heroLayer {
+  z-index: 20;
+  background: #0a0e27;
+  width: 100%;
+  height: 100%;
+  transition: opacity .5s ease-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#heroLayer.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#heroAnimationWrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+#heroAnimationCanvas {
+  display: block;
+}
+
+.orbiting-tag {
+  color: #00ff88e6;
+  text-shadow: 0 0 8px #0f8c;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 21;
+  font-size: 11px;
+  font-weight: bold;
+  position: absolute;
+}
+
+#clickOverlay {
+  cursor: pointer;
+  z-index: 25;
+  background: linear-gradient(to top, #0a0e27cc, #0000 30%);
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.click-hint {
+  color: #fff9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  font-size: 10px;
+  animation: 2s infinite blink;
+}
+
+#contentLayer {
+  z-index: 10;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  transition: opacity .5s ease-in;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#contentLayer.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.content {
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.brand {
+  margin-bottom: 10px;
+}
+
+.icon {
+  margin-bottom: 5px;
+  font-size: 32px;
+  animation: 2s ease-in-out infinite pulse;
+}
+
+.name {
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.accent {
+  color: #0f8;
+  text-shadow: 0 0 15px #0f89;
+  animation: 2s ease-in-out infinite glow;
+}
+
+.promise {
+  color: #aaa;
+  min-height: 20px;
+  margin: 10px 0 15px;
+  font-size: 13px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.promise:after {
+  content: "|";
+  color: #0f8;
+  animation: 1s step-end infinite blink;
+}
+
+.promise.typing-done:after {
+  content: none;
+  display: none;
+}
+
+.services-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 15px 0;
+  display: grid;
+}
+
+.service-tag {
+  color: #0f8;
+  opacity: 0;
+  background: #00ff8814;
+  border: 1px solid #00ff884d;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 10px;
+  transition: all .3s;
+}
+
+.service-tag.visible {
+  opacity: 1;
+}
+
+.cta-btn {
+  color: #0a0e27;
+  cursor: pointer;
+  background: #0f8;
+  border-radius: 5px;
+  margin: 15px 0 10px;
+  padding: 10px 24px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 25px #0f86;
+}
+
+.status {
+  color: #6c9cff;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 9px;
+  display: flex;
+}
+
+.status-dot {
+  background: #0f8;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  animation: 2s ease-in-out infinite blink;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: .8;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .3;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 15px #0f89;
+  }
+
+  50% {
+    text-shadow: 0 0 25px #0f8c;
+  }
+}
+</style>
+</head>
+<body>
+    
+    <div id="heroLayer">
+        <div id="heroAnimationWrapper">
+            <canvas id="heroAnimationCanvas"></canvas>
+        </div>
+        
+        <div id="clickOverlay">
+            <div class="click-hint">Click to Start</div>
+        </div>
+    </div>
+   
+    
+    <div id="contentLayer" class="hidden">
+        <div class="content">
+            <div class="brand">
+                <div class="icon">⚡</div>
+                <div class="name">SOLVE<span class="accent">THIS</span></div>
+            </div>
+           
+            <div class="promise" id="promise"></div>
+           
+            <div class="services-grid">
+                <div class="service-tag">Custom Scripts</div>
+                <div class="service-tag">Data Pipelines</div>
+                <div class="service-tag">Workflow Automation</div>
+                <div class="service-tag">Quick Solutions</div>
+            </div>
+           
+            <a href="https://solvethis.qzz.io/?lang=pt" class="cta-btn" id="ctaBtn" target="_blank">
+                HIRE ME →
+            </a>
+           
+            <div class="status">
+                <span class="status-dot"></span>
+                Available for projects
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/tilescript">(function () {
+    // --- STATE MANAGEMENT ---
+    // false = Hero Animation running (Initial state)
+    // true = Content/Typewriter running
+    var isActive = false; 
+    var heroTimer = null; 
+
+    /* -----------------------------------------------
+       1. HERO ANIMATION LOGIC
+       ----------------------------------------------- */
+    function initHeroAnimation() {
+        var canvas = document.getElementById('heroAnimationCanvas');
+        var wrapper = document.getElementById('heroAnimationWrapper');
+
+        if (!canvas || !wrapper || !canvas.getContext) return;
+
+        var ctx = canvas.getContext('2d');
+        var lastTimestamp = 0;
+
+        // Variables for Dynamic Resizing
+        var w = 0;
+        var h = 0;
+
+        var availableModes = ['flow', 'spiral', 'pulse', 'morph', 'greenSpectrum', 'pixelSwarm'];
+        var currentModeIndex = 0;
+        var currentModeName = availableModes[currentModeIndex];
+        var previousModeName = currentModeName;
+        var modeSwitchTimestamp = 0;
+        var MODE_DURATION_MS = 9000; 
+        var TRANSITION_DURATION_MS_HALF = 750;
+        var transitionState = 'none';
+        var transitionProgress = 0;
+        
+        // RESTORED HIGH COMPLEXITY
+        var baseComplexity = 140; 
+        var params = {
+            speed: 0.5,
+            complexity: baseComplexity,
+            scale: 100, // Will be updated dynamically
+            colorIntensity: 1.0,
+            time: 0,
+            phase: Math.random() * 2 * Math.PI
+        };
+        var pi = 4 * Math.atan(1);
+        var r_const = 2 * pi / 235;
+        var t_math = 4 * Math.random();
+        var x_val = 0, u_val = 0, v_val = 0;
+        var orange_dot_x_state = Math.random() * 4;
+        var orange_dot_u_state = 0;
+        var orange_dot_v_state = 0;
+        var ORANGE_DOT_SIZE = 2.5;
+        var ORANGE_DOT_COLOR = '#fd7e14';
+        
+        // Setup Tags
+        var tagsData = [
+            { text: "AI", angle: Math.random() * 2 * pi, radiusFactor: 1.08, speed: 0.0008, el: null },
+            { text: "Automation", angle: Math.random() * 2 * pi, radiusFactor: 1.12, speed: -0.0007, el: null },
+            { text: "Scripts", angle: Math.random() * 2 * pi, radiusFactor: 1.06, speed: 0.0009, el: null },
+            { text: "Data", angle: Math.random() * 2 * pi, radiusFactor: 1.14, speed: -0.0006, el: null },
+            { text: "Solve", angle: Math.random() * 2 * pi, radiusFactor: 1.09, speed: 0.00075, el: null }
+        ];
+
+        for (var t = 0; t < tagsData.length; t++) {
+            var tagEl = document.createElement('div');
+            tagEl.className = 'orbiting-tag';
+            tagEl.textContent = tagsData[t].text;
+            wrapper.appendChild(tagEl);
+            tagsData[t].el = tagEl;
+        }
+
+        // Color Helper
+        function hsvToRgb(h, s, v) {
+            h /= 60;
+            var c = v * s;
+            var x_color = c * (1 - Math.abs((h % 2) - 1));
+            var m = v - c;
+            var r_rgb = 0, g_rgb = 0, b_rgb = 0;
+            if (h < 1) { r_rgb = c; g_rgb = x_color; b_rgb = 0; }
+            else if (h < 2) { r_rgb = x_color; g_rgb = c; b_rgb = 0; }
+            else if (h < 3) { r_rgb = 0; g_rgb = c; b_rgb = x_color; }
+            else if (h < 4) { r_rgb = 0; g_rgb = x_color; b_rgb = c; }
+            else if (h < 5) { r_rgb = x_color; g_rgb = 0; b_rgb = c; }
+            else { r_rgb = c; g_rgb = 0; b_rgb = x_color; }
+            return {
+                r: Math.floor((r_rgb + m) * 255),
+                g: Math.floor((g_rgb + m) * 255),
+                b: Math.floor((b_rgb + m) * 255)
+            };
+        }
+
+        function updateTagsPosition(deltaTime) {
+            var centerX = w / 2;
+            var centerY = h / 2;
+            var baseRadius = w / 2;
+            for (var t = 0; t < tagsData.length; t++) {
+                var tag = tagsData[t];
+                tag.angle += tag.speed * deltaTime;
+                var currentRadius = baseRadius * tag.radiusFactor;
+                var x = centerX + currentRadius * Math.cos(tag.angle);
+                var y = centerY + currentRadius * Math.sin(tag.angle);
+                tag.el.style.left = x + 'px';
+                tag.el.style.top = y + 'px';
+            }
+        }
+
+        function animateHero() {
+            // STOP CONDITION: If clicked (isActive), stop drawing
+            if (isActive) return;
+
+            // --- DYNAMIC RESIZING FIX ---
+            // We check the wrapper size every frame. If it changes, we update canvas.
+            // This fixes the "stands still" issue when loading in a collapsed iframe.
+            var rect = wrapper.getBoundingClientRect();
+            var newW = Math.floor(rect.width);
+            var newH = Math.floor(rect.height);
+
+            // Sanity check: if tile is super small/hidden, don't draw
+            if (newW > 0 && newH > 0) {
+                if (newW !== w || newH !== h) {
+                    w = newW;
+                    h = newH;
+                    canvas.width = w;
+                    canvas.height = h;
+                    params.scale = w / 4.2; // Update scale based on new width
+                }
+            } else {
+                // Keep looping until size appears
+                heroTimer = setTimeout(animateHero, 50);
+                return;
+            }
+            // -----------------------------
+
+            var timestamp = new Date().getTime();
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            var deltaTime = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+
+            if (!modeSwitchTimestamp) modeSwitchTimestamp = timestamp;
+
+            // Mode switching logic
+            if (transitionState === 'none' && timestamp - modeSwitchTimestamp > MODE_DURATION_MS) {
+                previousModeName = currentModeName;
+                transitionState = 'fadingOut';
+                transitionProgress = 0;
+                modeSwitchTimestamp = timestamp;
+            }
+
+            params.time += (0.016 * params.speed) * (deltaTime / 16.66);
+
+            ctx.clearRect(0, 0, w, h);
+
+            var activeMode = currentModeName;
+            var currentGlobalAlpha = 1;
+
+            if (transitionState === 'fadingOut') {
+                transitionProgress += deltaTime / TRANSITION_DURATION_MS_HALF;
+                currentGlobalAlpha = 1 - Math.min(1, transitionProgress);
+                activeMode = previousModeName;
+                if (transitionProgress >= 1) {
+                    currentModeIndex = (currentModeIndex + 1) % availableModes.length;
+                    currentModeName = availableModes[currentModeIndex];
+                    t_math = 4 * Math.random();
+                    params.phase = Math.random() * 2 * Math.PI;
+                    // RESTORED COMPLEXITY FOR SWARM
+                    params.complexity = (currentModeName === 'pixelSwarm') ? 250 : baseComplexity;
+                    orange_dot_x_state = Math.random() * 4;
+                    orange_dot_u_state = 0;
+                    orange_dot_v_state = 0;
+                    transitionState = 'fadingIn';
+                    transitionProgress = 0;
+                }
+            } else if (transitionState === 'fadingIn') {
+                activeMode = currentModeName;
+                transitionProgress += deltaTime / TRANSITION_DURATION_MS_HALF;
+                currentGlobalAlpha = Math.min(1, transitionProgress);
+                if (transitionProgress >= 1) {
+                    transitionState = 'none';
+                    currentGlobalAlpha = 1;
+                }
+            }
+
+            var iterations = Math.floor(params.complexity / 5);
+            x_val = t_math * (1 + Math.sin(params.time * 0.1) * 0.1);
+            ctx.globalAlpha = currentGlobalAlpha;
+            var particleSize = (activeMode === 'pixelSwarm') ? 1.5 : 2;
+
+            // DRAWING PATTERNS
+            for (var i = 0; i < iterations; i++) {
+                for (var j = 0; j < iterations; j++) {
+                    var animatedI = i, animatedJ = j, timeOffset = 0;
+                    
+                    if (activeMode === 'flow') timeOffset = params.time;
+                    else if (activeMode === 'spiral') {
+                        timeOffset = Math.atan2(j - iterations/2, i - iterations/2) + params.time;
+                        particleSize = (Math.sin(params.time + (i+j)*0.1) + 1.5);
+                    }
+                    else if (activeMode === 'pulse') {
+                         var dist = Math.sqrt(Math.pow(i - iterations/2, 2) + Math.pow(j - iterations/2, 2));
+                         timeOffset = Math.sin(params.time * 1.5 + dist * 0.05) * 0.5;
+                         particleSize = 1 + Math.abs(Math.sin(params.time * 2 + dist * 0.1)) * 2;
+                    }
+                    else if (activeMode === 'morph') {
+                        animatedI = i + Math.sin(params.time + j * 0.1) * 8;
+                        animatedJ = j + Math.cos(params.time + i * 0.1) * 8;
+                    }
+                    else if (activeMode === 'greenSpectrum') timeOffset = params.time * 1.5;
+                    else if (activeMode === 'pixelSwarm') {
+                        timeOffset = params.time * 0.3 + Math.sin(i * 0.1 + params.time) * 0.2;
+                        particleSize = 1 + Math.random();
+                    }
+
+                    u_val = Math.sin(animatedI + v_val + timeOffset + params.phase) + Math.sin(r_const * animatedI + x_val);
+                    v_val = Math.cos(animatedI + v_val + timeOffset + params.phase) + Math.cos(r_const * animatedI + x_val);
+                    x_val = u_val + t_math;
+
+                    var px = Math.floor(w / 2 + params.scale * u_val);
+                    var py = Math.floor(h / 2 + params.scale * v_val);
+
+                    if (px >= 0 && px < w && py >= 0 && py < h) {
+                        var R, G, B;
+                        var iFactor = animatedI / iterations, jFactor = animatedJ / iterations;
+
+                        if (activeMode === 'greenSpectrum') {
+                            var hue = 90 + ((iFactor * 50) + (jFactor * 20) + (params.time * 15)) % 100;
+                            var sat = 0.6 + Math.sin(params.time * 0.8 + animatedI * 0.05) * 0.4;
+                            var val = 0.5 + Math.cos(params.time * 0.6 + animatedJ * 0.08) * 0.5;
+                            var hsv = hsvToRgb(hue, sat, val);
+                            R = hsv.r; G = hsv.g; B = hsv.b;
+                        } else if (activeMode === 'pixelSwarm') {
+                            var intensity = (Math.sin(params.time * 0.5 + (i * 0.05 + j * 0.03)) + 1) / 2;
+                            intensity = 0.4 + intensity * 0.6;
+                            R = Math.floor(intensity * (180 + Math.random() * 50));
+                            G = Math.floor(intensity * (230 + Math.random() * 25));
+                            B = Math.floor(intensity * (200 + Math.random() * 50));
+                        } else {
+                             var rRaw = (animatedI * 1.2 * params.colorIntensity + timeOffset * 15);
+                             var gRaw = (animatedJ * 2.0 * params.colorIntensity + timeOffset * 25 + iFactor * 60);
+                             var bRaw = (220 - (animatedI + animatedJ) * 0.7 * params.colorIntensity + timeOffset * 20 + jFactor * 40);
+                             R = Math.floor(rRaw % 80 + 30);
+                             G = Math.floor(gRaw % 135 + 120);
+                             B = Math.floor(bRaw % 100 + 60);
+                             G = Math.max(G, (R + B) * 0.7);
+                             R = Math.min(R, G * 0.8, 150);
+                             B = Math.min(B, G * 0.9, 180);
+                        }
+                        
+                        // GLOW EFFECTS
+                        ctx.shadowBlur = 0;
+                        if (activeMode === 'pulse' || activeMode === 'spiral') {
+                            var boost = Math.max(0, Math.sin(params.time + (i + j) * 0.05)) * 30;
+                            R = Math.min(255, R + boost);
+                            G = Math.min(255, G + boost);
+                            B = Math.min(255, B + boost);
+                            ctx.shadowColor = 'rgba(' + Math.floor(R) + ',' + Math.floor(G) + ',' + Math.floor(B) + ', 0.7)';
+                            ctx.shadowBlur = Math.random() * 3 + 1;
+                        }
+
+                        ctx.fillStyle = 'rgb(' + Math.floor(R) + ', ' + Math.floor(G) + ', ' + Math.floor(B) + ')';
+                        ctx.fillRect(px, py, particleSize, particleSize);
+                    }
+                }
+            }
+
+            // Orange Dot Logic
+            var pseudo_i_orange = iterations * 0.42;
+            orange_dot_u_state = Math.sin(params.time * 0.35 + orange_dot_v_state + params.phase * 0.5) +
+                Math.sin(r_const * pseudo_i_orange + orange_dot_x_state);
+            orange_dot_v_state = Math.cos(params.time * 0.35 + orange_dot_v_state + params.phase * 0.5) +
+                Math.cos(r_const * pseudo_i_orange + orange_dot_x_state);
+            orange_dot_x_state = orange_dot_u_state + t_math * 0.25;
+
+            var od_px = Math.floor(w / 2 + params.scale * orange_dot_u_state);
+            var od_py = Math.floor(h / 2 + params.scale * orange_dot_v_state);
+
+            if (od_px >= 0 && od_px < w && od_py >= 0 && od_py < h) {
+                ctx.fillStyle = ORANGE_DOT_COLOR;
+                ctx.shadowColor = 'rgba(253, 126, 20, 0.7)';
+                ctx.shadowBlur = 6;
+                ctx.beginPath();
+                ctx.arc(od_px, od_py, ORANGE_DOT_SIZE, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            ctx.globalAlpha = 1;
+            updateTagsPosition(deltaTime);
+
+            // Loop roughly 50-60FPS
+            heroTimer = setTimeout(animateHero, 16);
+        }
+
+        // START HERO LOOP
+        animateHero();
+    }
+
+    /* -----------------------------------------------
+       2. TYPEWRITER / CONTENT LOGIC
+       ----------------------------------------------- */
+    function initContentLogic() {
+        var promiseElem = document.getElementById('promise');
+        var promiseText = "I automate the boring stuff";
+        var typeIndex = 0;
+        var restartDelay = 4000;
+
+        function resetAnimation() {
+            if (!isActive) return; 
+            
+            promiseElem.textContent = "";
+            typeIndex = 0;
+            promiseElem.className = promiseElem.className.replace(" typing-done", "");
+
+            var serviceTags = document.querySelectorAll('.service-tag');
+            for (var i = 0; i < serviceTags.length; i++) {
+                serviceTags[i].className = serviceTags[i].className.replace(" visible", "");
+            }
+
+            typeWriter();
+        }
+
+        function typeWriter() {
+            if (typeIndex < promiseText.length) {
+                promiseElem.textContent += promiseText.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 50);
+            } else {
+                if (promiseElem.className.indexOf("typing-done") === -1) {
+                    promiseElem.className += " typing-done";
+                }
+                fadeServicesIn();
+                setTimeout(resetAnimation, restartDelay);
+            }
+        }
+
+        function fadeServicesIn() {
+            var serviceTags = document.querySelectorAll('.service-tag');
+            for (var j = 0; j < serviceTags.length; j++) {
+                (function(k) {
+                    setTimeout(function() {
+                        var tag = serviceTags[k];
+                        if (tag.className.indexOf("visible") === -1) {
+                            tag.className += " visible";
+                        }
+                    }, 200 + k * 200);
+                })(j);
+            }
+        }
+
+        resetAnimation();
+    }
+
+    /* -----------------------------------------------
+       3. EVENTS
+       ----------------------------------------------- */
+    
+    // Attempt to start animation immediately
+    initHeroAnimation();
+
+    var clickOverlay = document.getElementById('clickOverlay');
+    var heroLayer = document.getElementById('heroLayer');
+    var contentLayer = document.getElementById('contentLayer');
+    
+    if (clickOverlay) {
+        clickOverlay.addEventListener('click', function() {
+            if (!isActive) {
+                // ONE CLICK TRANSITION
+                isActive = true;
+                
+                // Kill Hero Timer
+                if (heroTimer) clearTimeout(heroTimer);
+                
+                // Visual Switch
+                heroLayer.className += " fade-out";
+                contentLayer.className = contentLayer.className.replace("hidden", "");
+                
+                // Start Content Logic
+                setTimeout(initContentLogic, 200);
+            }
+        });
+    }
+
+})();</script>
+</body>
+</html>

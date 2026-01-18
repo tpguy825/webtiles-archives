@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  flex-direction: column;
+  font-family: MS UI Gothic, Verdana, sans-serif;
+  font-size: 12px;
+  display: flex;
+}
+
+.tile-body:before {
+  content: "";
+  z-index: 3;
+  content: "";
+  z-index: 3;
+  border-left: 4px;
+  border-image: url("durkaborder.png") 28 / 28px round;
+  width: 14px;
+  height: 120%;
+  position: absolute;
+  top: -10px;
+  left: -4px;
+}
+
+h2 {
+  text-shadow: 1px 1px 1px #000;
+  color: #000;
+  text-align: right;
+  user-select: none;
+  background: linear-gradient(90deg, #0000, pink);
+  font-size: 15px;
+}
+
+h1 {
+  text-shadow: 1px 1px 1px #000;
+  color: #fff;
+  text-align: left;
+  user-select: none;
+  background: linear-gradient(-90deg, #0000, pink);
+  margin: 0 5px 5px -5px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #000;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  transition: background-color .2s, color .2s;
+}
+
+a {
+  color: pink;
+  font-size: 12px;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+a:hover {
+  color: #0ff;
+  text-decoration: underline;
+}
+
+#station-grid {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(, auto);
+  padding: 4px;
+  list-style: none;
+  display: grid;
+}
+
+#station-grid li {
+  text-align: center;
+  padding: 4px;
+}
+
+#station-grid a {
+  padding: 4px;
+  text-decoration: none;
+  display: block;
+}
+</style>
+    <style>#headertext {
+  text-align: center;
+  background: none;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+#border-bottom:before {
+  content: "";
+  z-index: 2;
+  border-image: url("durkaborder.png") 28 / 28px round;
+  width: 120%;
+  height: 14px;
+  position: absolute;
+  bottom: -4px;
+  left: -10px;
+}
+
+#border-top {
+  content: "";
+  border-left: 4px;
+  border-image: url("durkaborder.png") 28 / 28px round;
+  width: 120%;
+  height: 14px;
+  position: absolute;
+  top: -4px;
+  left: -10px;
+}
+</style>
+</head>
+<body>
+    <div id="border-top"></div>
+    
+    <div class="top-container">
+        <div id="content">
+            <h1>
+                Blackspace Radio : Stations
+            </h1>
+            <div>
+                <ul id="station-grid">
+                    <li><a target="_blank" href="http://147.185.221.27:29891/brth">Top Hits</a></li>
+                    <li><a target="_blank" href="http://147.185.221.27:29891/braxii">Nerdcore</a></li>
+                    <li><a target="_blank" href="http://147.185.221.27:29891/wdep">Melancholic</a></li>
+
+                    <li><a target="_blank" href="http://147.185.221.27:29891/brd">Rock</a></li>
+                </ul>
+            </div>
+            <h1>
+                Blackspace
+            </h1>
+            <p>
+                station names are usually wrong. <a href="https://blackspace.atabook.org" target="_blank">leave a nice message, i need some</a>
+            </p>
+            <p>
+                links: 
+            <a href="https://blackspace.lol/" target="_blank">blackspace</a>,
+            <a href="https://blackspace.lol/radio" target="_blank">radio</a>,
+            <a href="https://blackspace.lol/about" target="_blank">about</a>,
+            <a href="https://blackspace.lol/diary" target="_blank">diary</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
+<div id="border-bottom"></div>

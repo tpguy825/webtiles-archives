@@ -1,0 +1,942 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <style>@font-face {
+  font-family: pretendo;
+  src: url("Pretendo.ttf");
+}
+
+.tile-body {
+  color: #dfdeef;
+  background-color: #23164f;
+  background-image: linear-gradient(90deg, #170138 1px, #0000 1px), linear-gradient(#170138 1px, #0000 1px);
+  background-size: 10px 10px;
+}
+
+#menal-fade {
+  z-index: 2;
+  inset: 0 0 0 calc(100% - 1rem);
+  background: linear-gradient(90deg, #fff0, #fff 90%);
+  position: absolute;
+  inset: 0 0 0 calc(100% - 1rem);
+  -webkit-mask-image: linear-gradient(#0000, #000 .5rem, #000), linear-gradient(0deg, #0000, #000 .5rem, #000);
+  mask-image: linear-gradient(#0000, #000 .5rem, #000), linear-gradient(0deg, #0000, #000 .5rem, #000);
+}
+
+#sank-fade {
+  pointer-events: none;
+  background-image: url("sank-fade.png");
+  position: absolute;
+  inset: 0;
+}
+
+#ballspace {
+  background-color: #161616;
+  background-image: linear-gradient(90deg, #170138 1px, #0000 1px), linear-gradient(#170138 1px, #0000 1px);
+  background-position: -1rem -1rem;
+  background-size: 10px 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  margin: 1rem;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.row {
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 2px 0;
+  display: flex;
+  position: relative;
+}
+
+.brick {
+  background: linear-gradient(90deg, #41acd6, #a855f7, #ec4899, #f59e0b, #41acd6) 0 0 / 400% 100%;
+  border-radius: 2px;
+  width: 33px;
+  height: 10px;
+  animation: 4s ease-in-out infinite alternate colorShift;
+  position: relative;
+  overflow: hidden;
+}
+
+.brick.broken {
+  visibility: hidden;
+}
+
+@keyframes colorShift {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 100%;
+  }
+}
+
+.phase0 {
+  animation-delay: 0s;
+}
+
+.phase1 {
+  animation-delay: -1s;
+}
+
+.phase2 {
+  animation-delay: -2s;
+}
+
+.phase3 {
+  animation-delay: -3s;
+}
+
+.phase4 {
+  animation-delay: -.5s;
+}
+
+.phase5 {
+  animation-delay: -2.5s;
+}
+
+p {
+  text-align: center;
+  margin: 0;
+}
+
+h2 {
+  text-align: center;
+  text-shadow: -2px -2px #7960ce, 2px -2px #160b27, -2px 1px #7960ce, 2px 2px #160b27;
+  margin: 0;
+  font-family: pretendo;
+  font-weight: 100;
+}
+
+.normalFont {
+  font-family: initial;
+}
+
+img {
+  width: 50px;
+}
+
+#paddle {
+  border-radius: 4px;
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  top: calc(100% - 5px);
+  overflow: hidden;
+}
+
+#ball {
+  border-radius: 15px;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 90%;
+  overflow: hidden;
+}
+
+.scrollBG {
+  z-index: 0;
+  filter: blur(4px);
+  background-color: #41acd6;
+  background-size: 150px 131.25px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.shiftBG {
+  background: linear-gradient(90deg, #41acd6, #a855f7, #ec4899, #f59e0b, #41acd6) 0 0 / 400% 100%;
+  animation: 4s ease-in-out infinite alternate colorShift;
+}
+
+#notice {
+  height: 1rem;
+  font-family: ＭＳ Ｐゴシック, Osaka;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#score-board {
+  z-index: 5;
+  text-shadow: -1px -1px #000, 1px -1px #000, -1px 1px #000, 1px 1px #000;
+  white-space: nowrap;
+  font-family: ＭＳ Ｐゴシック, Osaka;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.popup-text {
+  text-shadow: 2px 2px 4px #000c;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 1;
+  font-weight: bold;
+  transition: opacity .5s ease-out;
+  position: absolute;
+}
+</style> 
+    </head> 
+    <body>
+        <span id="score-board">
+            <span>
+                Score: <span id='score-value'>000000</span>
+            </span> 
+            <span title='Your person '>
+               Your High Score: <span id='high-score-value'>------</span>
+            </span>
+        </span>
+        <div id='ballspace'> 
+            <h2 id='breakout-title'>
+                Piinro<span class='normalFont'>'</span>s
+                <br>Brick Breaker
+            </h2> 
+            <button id='start-button'> Play </button>
+            <span id='ball' class='shiftBG'>
+
+            </span> 
+            <span id='paddle' class='shiftBG'> </span> 
+        </div> 
+
+        <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+console.log("Hello world! :3");
+
+// ============================================================================
+//                              CONFIGURATION
+// ============================================================================
+
+var CONFIG = {
+    // Ball
+    baseBallSpeed: 7,
+    maxBallSpeed: 14,
+    maxBounceAngle: Math.PI * 0.39,  // ~71°
+    minVerticalSpeed: 0.75,
+    
+    // Bricks
+    bricksPerRow: 6,
+    startingRows: 3,
+    maxRows: 15,
+    
+    // Speed increases
+    speedPerBrick: 0.075,
+    speedPerRow: 0.3,
+    speedPerFullClear: 0.7,
+    speedPerFullClearBonus: 0.2,
+    
+    // Timing
+    frameRate: 30,
+    brickSpawnInterval: 30000,  // 30 seconds
+    
+    // Scrolling background
+    bgScrollSpeed: 0.4
+};
+
+// ============================================================================
+//                              GAME STATE
+// ============================================================================
+
+var state = {
+    // Score tracking
+    bricksBroken: 0,
+    rowsCleared: 0,
+    fullClears: 0,
+    bottomOuts: 0,
+    
+    // Ball physics
+    ballVelocityX: 0,
+    ballVelocityY: 0,
+    currentBallSpeed: CONFIG.baseBallSpeed,
+    
+    // Game flags
+    spawnBricksOnNextBounce: false,
+    gameLoopInterval: null,
+    brickSpawnInterval: null,
+    
+    // High score
+    highScore: 0
+};
+
+// ============================================================================
+//                              DOM REFERENCES
+// ============================================================================
+
+var dom = {
+    ballspace: document.getElementById('ballspace'),
+    startButton: document.getElementById('start-button'),
+    paddle: document.getElementById('paddle'),
+    ball: document.getElementById('ball'),
+    ballBG: document.getElementById('ballBG'),
+    scoreValue: document.getElementById('score-value'),
+    highScoreValue: document.getElementById('high-score-value')
+};
+
+// ============================================================================
+//                              UTILITIES
+// ============================================================================
+
+function getScale() {
+    var rect = dom.ballspace.getBoundingClientRect();
+    return {
+        x: rect.width / dom.ballspace.offsetWidth,
+        y: rect.height / dom.ballspace.offsetHeight
+    };
+}
+
+function padScore(num, length) {
+    var str = num + '';
+    while (str.length < length) {
+        str = '0' + str;
+    }
+    return str;
+}
+
+function clamp(value, min, max) {
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+}
+
+// ============================================================================
+//                              POPUP TEXT SYSTEM
+// ============================================================================
+
+/**
+ * Shows a popup text that fades out
+ * @param {string} text - The text to display
+ * @param {number} duration - How long before fade starts (ms), -1 for permanent
+ * @param {object} options - Optional: rotation, x, y, color, size
+ */
+function showPopup(text, duration, options) {
+    options = options || {};
+    
+    var rotation = options.rotation !== undefined 
+        ? options.rotation 
+        : (Math.random() - 0.5) * 30;
+    
+    var x = options.x !== undefined ? options.x : 20 + Math.random() * 30;
+    var y = options.y !== undefined ? options.y : 30 + Math.random() * 30;
+    var color = options.color || '#ffffff';
+    var size = options.size || '24px';
+    
+    var popup = document.createElement('div');
+    popup.className = 'popup-text';
+    popup.innerText = text;
+    popup.style.left = x + '%';
+    popup.style.top = y + '%';
+    popup.style.color = color;
+    popup.style.fontSize = size;
+    popup.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
+    
+    dom.ballspace.appendChild(popup);
+    
+    if (duration === -1) return;
+    
+    setTimeout(function() {
+        popup.style.opacity = '0';
+    }, duration);
+    
+    setTimeout(function() {
+        if (popup.parentNode) {
+            popup.parentNode.removeChild(popup);
+        }
+    }, duration + 500);
+}
+
+function showFullClearPopup() {
+    setTimeout(function() {
+        showPopup('Full Clear!', 1600, { color: '#4ade80', size: '32px' });
+    }, 200);
+    setTimeout(function() {
+        showPopup('+1000', 1200, { color: '#83d72c' });
+    }, 500);
+}
+
+function showBottomOutPopup() {
+    showPopup('Bummer!', 1500, { color: '#ef4444', size: '28px' });
+    setTimeout(function() {
+        showPopup('-50 pts', 1200, { color: '#f87171', size: '20px' });
+    }, 300);
+}
+
+function showRowClearPopup() {
+    setTimeout(function() {
+        showPopup('Row Clear!', 1100, { color: '#83d72c', size: '20px' });
+    }, 100);
+    setTimeout(function() {
+        showPopup('+100', 900, { color: '#beff7a' });
+    }, 300);
+}
+
+function showBrickBreakPopup() {
+    showPopup('+10', 800, { color: '#658ecd', size: '1rem' });
+}
+
+function showGameOverPopup() {
+    showPopup('Game Over', -1, {
+        color: 'red', size: '2rem', rotation: 0, x: 50, y: 25
+    });
+    showPopup('Score: ' + padScore(calculateScore(), 6), -1, {
+        color: 'red', size: '1rem', rotation: 0, x: 50, y: 50
+    });
+    showPopup('High Score: ' + padScore(state.highScore, 6), -1, {
+        color: 'red', size: '1rem', rotation: 0, x: 50, y: 75
+    });
+}
+
+// ============================================================================
+//                          SCROLLING BACKGROUNDS
+// ============================================================================
+
+var bgElements = [];
+
+function initScrollingBackground() {
+    var containers = document.getElementsByClassName("scrollBG");
+    
+    for (var i = 0; i < containers.length; i++) {
+        var container = containers[i];
+        
+        if (container.querySelector('img')) continue;
+        
+        var tile = createBackgroundTile();
+        container.appendChild(tile);
+        
+        bgElements.push(createBgElementData(tile, container));
+    }
+}
+
+function createBackgroundTile() {
+    var tile = document.createElement("img");
+    tile.src = "./tiledIllusion.jpg";
+    tile.style.position = "absolute";
+    tile.style.width = "200px";
+    tile.style.height = "200px";
+    tile.style.left = "0px";
+    tile.style.top = "0px";
+    return tile;
+}
+
+function createBgElementData(tile, container) {
+    var randomPhase = Math.random() * 150;
+    var speedVariation = 0.8 + Math.random() * 0.4;
+    var axis = Math.floor(Math.random() * 2);
+    
+    if (container.parentNode.id === 'paddle') {
+        axis = 1;
+    }
+    
+    return {
+        el: tile,
+        offset: -randomPhase,
+        direction: -1,
+        minOffset: -150,
+        maxOffset: 0,
+        speed: CONFIG.bgScrollSpeed * speedVariation,
+        axis: axis
+    };
+}
+
+function moveScrollingBackground() {
+    for (var i = 0; i < bgElements.length; i++) {
+        var bg = bgElements[i];
+        
+        bg.offset += bg.speed * bg.direction;
+        
+        if (bg.offset <= bg.minOffset) {
+            bg.offset = bg.minOffset;
+            bg.direction = 1;
+        } else if (bg.offset >= bg.maxOffset) {
+            bg.offset = bg.maxOffset;
+            bg.direction = -1;
+        }
+        
+        if (bg.axis === 0) {
+            bg.el.style.left = bg.offset + "px";
+            bg.el.style.top = "0px";
+        } else {
+            bg.el.style.left = "0px";
+            bg.el.style.top = bg.offset + "px";
+        }
+    }
+}
+
+// ============================================================================
+//                              SCORING
+// ============================================================================
+
+function calculateScore() {
+    return (
+        (state.bricksBroken * 10) +
+        (state.rowsCleared * 100) +
+        (state.fullClears * 1000) +
+        (state.bottomOuts * -50)
+    );
+}
+
+function updateScoreDisplay() {
+    dom.scoreValue.innerText = padScore(calculateScore(), 6);
+}
+
+function loadHighScore() {
+    state.highScore = parseInt(window.localStorage.getItem('highScore'), 10) || 0;
+    dom.highScoreValue.innerText = padScore(state.highScore, 6);
+}
+
+function saveHighScore() {
+    var currentScore = calculateScore();
+    if (currentScore > state.highScore) {
+        state.highScore = currentScore;
+        dom.highScoreValue.innerText = padScore(state.highScore, 6);
+        window.localStorage.setItem('highScore', state.highScore + '');
+        return true;
+    }
+    return false;
+}
+
+// ============================================================================
+//                              BALL PHYSICS
+// ============================================================================
+
+function initBallVelocity() {
+    state.currentBallSpeed = CONFIG.baseBallSpeed;
+    state.ballVelocityX = state.currentBallSpeed * 0.7;
+    state.ballVelocityY = -state.currentBallSpeed * 0.7;
+}
+
+function increaseBallSpeed(amount) {
+    state.currentBallSpeed = Math.min(
+        state.currentBallSpeed + amount,
+        CONFIG.maxBallSpeed
+    );
+    normalizeVelocity();
+}
+
+function normalizeVelocity() {
+    var magnitude = Math.sqrt(
+        state.ballVelocityX * state.ballVelocityX +
+        state.ballVelocityY * state.ballVelocityY
+    );
+    
+    if (magnitude > 0) {
+        var scale = state.currentBallSpeed / magnitude;
+        state.ballVelocityX *= scale;
+        state.ballVelocityY *= scale;
+    }
+}
+
+function moveBall() {
+    var nextX = dom.ball.offsetLeft + state.ballVelocityX;
+    var nextY = dom.ball.offsetTop + state.ballVelocityY;
+    
+    // If paddle was hit, position is already set - skip the rest
+    if (detectPaddleHit(nextX, nextY)) {
+        return;
+    }
+    
+    var result = handleWallCollisions(nextX, nextY);
+    
+    dom.ball.style.left = result.x + 'px';
+    dom.ball.style.top = result.y + 'px';
+}
+
+function handleWallCollisions(nextX, nextY) {
+    var width = dom.ballspace.clientWidth;
+    var height = dom.ballspace.clientHeight;
+    var ballW = dom.ball.offsetWidth;
+    var ballH = dom.ball.offsetHeight;
+    
+    // Bottom wall
+    if (nextY + ballH > height) {
+        state.ballVelocityY *= -1;
+        nextY = height - ballH;
+        onBottomOut();
+    }
+    
+    // Top wall
+    if (nextY < 0) {
+        state.ballVelocityY *= -1;
+        nextY = 0;
+    }
+    
+    // Right wall
+    if (nextX + ballW > width) {
+        state.ballVelocityX *= -1;
+        nextX = width - ballW;
+    }
+    
+    // Left wall
+    if (nextX < 0) {
+        state.ballVelocityX *= -1;
+        nextX = 0;
+    }
+    
+    return { x: nextX, y: nextY };
+}
+
+// ============================================================================
+//                              PADDLE
+// ============================================================================
+
+function trackMouse(event) {
+    var scale = getScale();
+    var rect = dom.ballspace.getBoundingClientRect();
+    
+    var mouseX = (event.clientX - rect.left) / scale.x;
+    var paddleX = mouseX - (dom.paddle.offsetWidth / 2);
+    
+    var maxX = dom.ballspace.clientWidth - dom.paddle.offsetWidth;
+    paddleX = clamp(paddleX, 0, maxX);
+    
+    dom.paddle.style.left = paddleX + 'px';
+}
+
+function detectPaddleHit(nextBallX, nextBallY) {
+    var paddleBounds = getPaddleBounds();
+    
+    var startX = dom.ball.offsetLeft;
+    var startY = dom.ball.offsetTop;
+    
+    var steps = Math.max(4, Math.ceil(state.currentBallSpeed / 3));
+    
+    for (var s = 1; s <= steps; s++) {
+        var t = s / steps;
+        var checkX = startX + (nextBallX - startX) * t;
+        var checkY = startY + (nextBallY - startY) * t;
+        
+        var ballBounds = {
+            left: checkX,
+            right: checkX + dom.ball.offsetWidth,
+            top: checkY,
+            bottom: checkY + dom.ball.offsetHeight
+        };
+        
+        var isColliding = (
+            ballBounds.right >= paddleBounds.left &&
+            ballBounds.left <= paddleBounds.right &&
+            ballBounds.bottom >= paddleBounds.top &&
+            ballBounds.top <= paddleBounds.bottom &&
+            state.ballVelocityY > 0
+        );
+        
+        if (isColliding) {
+            var bounceAngle = calculateBounceAngle(checkX, paddleBounds);
+            applyBounceAngle(bounceAngle);
+            
+            // Ensure ball is above paddle with a small buffer
+            var safeY = paddleBounds.top - dom.ball.offsetHeight - 1;
+            dom.ball.style.top = safeY + 'px';
+            dom.ball.style.left = checkX + 'px';
+            
+            // Force upward velocity
+            if (state.ballVelocityY > 0) {
+                state.ballVelocityY *= -1;
+            }
+            
+            if (state.spawnBricksOnNextBounce) {
+                spawnNextBrickWave();
+            }
+            
+            return true;  // Signal that we handled the collision
+        }
+    }
+    
+    return false;  // No collision
+}
+
+
+function getPaddleBounds() {
+    var scale = getScale();
+    var ballspaceRect = dom.ballspace.getBoundingClientRect();
+    var paddleRect = dom.paddle.getBoundingClientRect();
+    
+    return {
+        left: (paddleRect.left - ballspaceRect.left) / scale.x,
+        right: (paddleRect.right - ballspaceRect.left) / scale.x,
+        top: (paddleRect.top - ballspaceRect.top) / scale.y,
+        bottom: (paddleRect.bottom - ballspaceRect.top) / scale.y
+    };
+}
+
+function calculateBounceAngle(ballX, paddleBounds) {
+    var ballCenterX = ballX + dom.ball.offsetWidth / 2;
+    var paddleCenterX = paddleBounds.left + dom.paddle.offsetWidth / 2;
+    
+    var relativeX = ballCenterX - paddleCenterX;
+    var normalizedX = relativeX / (dom.paddle.offsetWidth / 2);
+    normalizedX = clamp(normalizedX, -1, 1);
+    
+    return normalizedX * CONFIG.maxBounceAngle;
+}
+
+function applyBounceAngle(angle) {
+    state.ballVelocityX = state.currentBallSpeed * Math.sin(angle);
+    state.ballVelocityY = -state.currentBallSpeed * Math.cos(angle);
+    
+    if (Math.abs(state.ballVelocityY) < CONFIG.minVerticalSpeed) {
+        state.ballVelocityY = state.ballVelocityY < 0
+            ? -CONFIG.minVerticalSpeed
+            : CONFIG.minVerticalSpeed;
+    }
+}
+
+// ============================================================================
+//                              BRICKS
+// ============================================================================
+
+function spawnBrick(parentRow) {
+    var brick = document.createElement("span");
+    var phase = Math.floor(Math.random() * 6);
+    brick.className = 'brick shiftBG phase' + phase;
+    parentRow.appendChild(brick);
+}
+
+function spawnBrickRow() {
+    var row = document.createElement('div');
+    row.className = 'row';
+    
+    for (var i = 0; i < CONFIG.bricksPerRow; i++) {
+        spawnBrick(row);
+    }
+    
+    dom.ballspace.insertBefore(row, dom.ballspace.firstChild);
+    initScrollingBackground();
+}
+
+function initBricks() {
+    for (var i = 0; i < CONFIG.startingRows; i++) {
+        spawnBrickRow();
+    }
+}
+
+function spawnNextBrickWave() {
+    state.spawnBricksOnNextBounce = false;
+    var rowCount = Math.min(CONFIG.startingRows + state.fullClears, 12);
+    
+    for (var i = 0; i < rowCount; i++) {
+        spawnBrickRow();
+    }
+}
+
+function checkBrickCollision() {
+    var rows = document.getElementsByClassName('row');
+    if (rows.length === 0) return;
+    
+    var scale = getScale();
+    var ballspaceRect = dom.ballspace.getBoundingClientRect();
+    var ballBounds = getBallBounds();
+    
+    for (var r = 0; r < rows.length; r++) {
+        var row = rows[r];
+        
+        if (!isRowOverlapping(row, ballBounds, ballspaceRect, scale)) continue;
+        
+        var hitBrick = checkBricksInRow(row, ballBounds, ballspaceRect, scale);
+        if (hitBrick) return;
+    }
+}
+
+function getBallBounds() {
+    return {
+        left: dom.ball.offsetLeft,
+        right: dom.ball.offsetLeft + dom.ball.offsetWidth,
+        top: dom.ball.offsetTop,
+        bottom: dom.ball.offsetTop + dom.ball.offsetHeight
+    };
+}
+
+function isRowOverlapping(row, ballBounds, ballspaceRect, scale) {
+    var rowRect = row.getBoundingClientRect();
+    var rowTop = (rowRect.top - ballspaceRect.top) / scale.y;
+    var rowBottom = (rowRect.bottom - ballspaceRect.top) / scale.y;
+    
+    return !(ballBounds.bottom < rowTop || ballBounds.top > rowBottom);
+}
+
+function checkBricksInRow(row, ballBounds, ballspaceRect, scale) {
+    var bricks = row.getElementsByClassName('brick');
+    
+    for (var i = 0; i < bricks.length; i++) {
+        var brick = bricks[i];
+        
+        if (brick.className.indexOf('broken') !== -1) continue;
+        
+        var brickBounds = getBrickBounds(brick, ballspaceRect, scale);
+        
+        if (isColliding(ballBounds, brickBounds)) {
+            handleBrickHit(brick, row, bricks, ballBounds, brickBounds);
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+function getBrickBounds(brick, ballspaceRect, scale) {
+    var rect = brick.getBoundingClientRect();
+    return {
+        left: (rect.left - ballspaceRect.left) / scale.x,
+        right: (rect.right - ballspaceRect.left) / scale.x,
+        top: (rect.top - ballspaceRect.top) / scale.y,
+        bottom: (rect.bottom - ballspaceRect.top) / scale.y
+    };
+}
+
+function isColliding(a, b) {
+    return (
+        a.right >= b.left &&
+        a.left <= b.right &&
+        a.bottom >= b.top &&
+        a.top <= b.bottom
+    );
+}
+
+function handleBrickHit(brick, row, bricks, ballBounds, brickBounds) {
+    breakBrick(brick);
+    bounceOffBrick(ballBounds, brickBounds);
+    
+    if (isRowCleared(bricks)) {
+        handleRowClear(row);
+    }
+    
+    updateScoreDisplay();
+    increaseBallSpeed(CONFIG.speedPerBrick);
+}
+
+function breakBrick(brick) {
+    brick.className += ' broken';
+    state.bricksBroken += 1;
+    showBrickBreakPopup();
+}
+
+function isRowCleared(bricks) {
+    return Array.prototype.every.call(bricks, function(brick) {
+        return brick.className.indexOf('broken') !== -1;
+    });
+}
+
+function handleRowClear(row) {
+    row.parentNode.removeChild(row);
+    state.rowsCleared += 1;
+    showRowClearPopup();
+    increaseBallSpeed(CONFIG.speedPerRow);
+    
+    var rows = document.getElementsByClassName('row');
+    if (rows.length === 0) {
+        handleFullClear();
+    }
+}
+
+function handleFullClear() {
+    state.fullClears += 1;
+    showFullClearPopup();
+    state.spawnBricksOnNextBounce = true;
+    
+    var speedBonus = CONFIG.speedPerFullClear +
+        (state.fullClears * CONFIG.speedPerFullClearBonus);
+    increaseBallSpeed(speedBonus);
+}
+
+function bounceOffBrick(ballBounds, brickBounds) {
+    var overlapLeft = ballBounds.right - brickBounds.left;
+    var overlapRight = brickBounds.right - ballBounds.left;
+    var overlapTop = ballBounds.bottom - brickBounds.top;
+    var overlapBottom = brickBounds.bottom - ballBounds.top;
+    
+    var minOverlapX = Math.min(overlapLeft, overlapRight);
+    var minOverlapY = Math.min(overlapTop, overlapBottom);
+    
+    if (minOverlapX < minOverlapY) {
+        state.ballVelocityX *= -1;
+    } else {
+        state.ballVelocityY *= -1;
+    }
+}
+
+// ============================================================================
+//                              GAME LIFECYCLE
+// ============================================================================
+
+function onBottomOut() {
+    state.bottomOuts += 1;
+    updateScoreDisplay();
+    spawnBrickRow();
+    showBottomOutPopup();
+    
+    if (state.spawnBricksOnNextBounce) {
+        spawnNextBrickWave();
+    }
+    
+    if (isGameOver()) {
+        endGame();
+    }
+}
+
+function isGameOver() {
+    var rows = document.getElementsByClassName('row');
+    return rows.length >= CONFIG.maxRows;
+}
+
+function endGame() {
+    clearInterval(state.gameLoopInterval);
+    clearInterval(state.brickSpawnInterval);
+    showGameOverPopup();
+    saveHighScore();
+}
+
+function clearTitleMenu() {
+    dom.startButton.parentNode.removeChild(dom.startButton);
+    dom.ballspace.removeChild(document.getElementById('breakout-title'));
+}
+
+function gameLoop() {
+    moveBall();
+    checkBrickCollision();
+}
+
+function initBreakout() {
+    clearTitleMenu();
+    initBallVelocity();
+    initBricks();
+    initScrollingBackground();
+    
+    state.gameLoopInterval = setInterval(gameLoop, 1000 / CONFIG.frameRate);
+    state.brickSpawnInterval = setInterval(spawnBrickRow, CONFIG.brickSpawnInterval);
+    
+    dom.ballspace.addEventListener('mousemove', trackMouse);
+}
+
+// ============================================================================
+//                              INITIALIZATION
+// ============================================================================
+
+function init() {
+    loadHighScore();
+    initScrollingBackground();
+    setInterval(moveScrollingBackground, 1000 / CONFIG.frameRate);
+    
+    dom.startButton.addEventListener('click', initBreakout);
+}
+
+init();</script>
+        <span id='sank-fade'></span>
+        <span id='menal-fade'></span>
+        <span id='sank-fade-2'></span>
+
+    </body> 
+</html>
+
+
+
+

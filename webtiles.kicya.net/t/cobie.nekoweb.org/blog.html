@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style>::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #211f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #454545;
+  border: 1px outset #000;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #fff;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px dotted;
+  margin: 3px 0;
+}
+
+@font-face {
+  font-family: LastRite;
+  src: url("stuff/LastRite.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ;
+  src: url("stuff/FoglihtenPCS-068.otf") format("opentype");
+  font-display: swap;
+}
+
+.tile-body {
+  background: url("stuff/purplespace-grayscaled-bg.png");
+  font-family: Times New Roman, Times, serif;
+  font-size: 13px;
+}
+
+a {
+  color: #9f9f9f;
+  z-index: 999;
+  background: linear-gradient(to right, #0000 -10%, #252348, #0000 110%);
+  text-decoration: underline 1px dotted;
+}
+
+a:hover {
+  filter: brightness(.8);
+}
+
+a:active {
+  filter: brightness(.6);
+}
+
+.titular-instance {
+  text-shadow: 1px 1px 5px #fff, 0 0 2px #000;
+  color: #151515;
+  z-index: 99;
+  text-align: center;
+  background: linear-gradient(to right, #0000 -10%, #00000080, #0000 110%);
+  margin: -45px -15px -5px 0;
+  font-family: LastRite;
+  font-size: 55px;
+  font-weight: 100;
+  text-decoration: none;
+  display: block;
+}
+
+.main {
+  color: #999;
+  background: linear-gradient(#6a666a9c, #0000);
+  flex-direction: column;
+  width: 210px;
+  height: 215px;
+  margin: 40px auto 15px;
+  padding: 5px;
+  display: flex;
+}
+
+.box {
+  background: #000;
+  flex-grow: 1;
+  margin-top: -10px;
+  padding: 3px;
+}
+
+.row {
+  gap: 3px;
+  display: flex;
+}
+
+.LS {
+  min-width: 60px;
+}
+
+.LSNav-EX {
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  display: flex;
+}
+
+.LSNav-EX a {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px inset #000;
+  margin: 0;
+  padding: 1px;
+  font-family: Fog, Times New Roman, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.LSNav {
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  display: flex;
+}
+
+.LSNav a {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px inset #000;
+  margin: 0 0 0 -15px;
+  padding: 1px;
+  font-family: Fog, Times New Roman, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.LSNav a:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#68677794, #00000014);
+  border-radius: 0 0 200px 200px;
+  width: 100%;
+  height: 38%;
+  padding: 2px;
+  transition: background .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.LSNav a:hover {
+  text-shadow: 0 0 11px #fff;
+  margin: 0 0 0 -10px;
+  padding-right: 10px;
+}
+
+.LSNav a:active {
+  text-shadow: 0 0 11px #000;
+  margin: 0 0 0 3px;
+  padding-right: 5px;
+}
+
+.LSNav-EX a {
+  margin: 0;
+}
+
+.LSNav-EX a::hover {
+  margin: 4px 2px;
+}
+
+.LSNav-EX a::active {
+  margin: 5px 3px;
+  padding-right: 0;
+}
+
+.introbar {
+  text-transform: lowercase;
+  background: linear-gradient(to right, #6a666a, #0000);
+  padding: 4px;
+}
+
+.introbar span {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  z-index: 999;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px dotted #6c6c6c;
+  padding: 2px 5px;
+  font-size: 11px;
+  font-style: italic;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.introbar span:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#68677799, #00000014);
+  border-radius: 0 0 200px 200px;
+  width: 100%;
+  height: 38%;
+  padding: 2px;
+  transition: background .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sub-box {
+  background: #0006;
+  border: 1px inset #000;
+  width: 100%;
+  font-size: 11px;
+}
+
+.sub-box p {
+  background: #00000087;
+  margin: 2px 0;
+  padding: 2px;
+}
+
+.sub-box i {
+  background: linear-gradient(to right, #6a666a8c, #0000);
+  padding: 1px 3px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline 1px dotted;
+  display: block;
+}
+</style>
+<style>.sub-box p {
+  text-indent: 20px;
+}
+</style>
+</head>
+<body>
+<div class="main">
+<a class="titular-instance" href="https://cobie.nekoweb.org/" target="_blank">cobiesitE</a>
+<div class="box">
+<div class="introbar">
+</div>
+<div class="row">
+<div class="LS">
+<div class="LSNav">
+<a href="index.html">Go Back</a>
+<img style="margin-left: -15px" src="stuff/sitebutton.gif">
+</div>
+</div>
+<div class="sub-box" style="max-height: 150px; overflow-y: auto; overflow-x: hidden">
+<p><i>11/29/2025</i></p>
+<p>I’m sleep deprived when I’m writing this so be aware.</p>
+<p>
+I’ve been thinking on the concept of loneliness. I thrive on it, everything I do and make is
+a product of my own loneliness. It’s difficult being fundamentally incompatible off the bat
+with a lot of people around you for different reasons. For me, it’s that I seem to be
+attractive to everyone and yet have nothing they want… I’m perfect to me, and every part of
+my personality is the way I want it, but at the same time, it’s difficult to be as I am.
+</p>
+<p>
+In addition, even though I loathe it, I want to say I have no social media. This website and
+blog is for the me that exists anonymously, who wants to create and be known as someone new.
+I have nothing to share with anyone, and sometimes, even though I know better, it feels like
+I’m empty compared to their world.
+</p>
+<p>
+Living like this, estranged while still on familiar wavelengths, is interesting. Such small
+little details, like not having social media, not liking typical American things, being
+alternative without the style and neurodivergent in general… it’s very hard for me to cope
+with.
+</p>
+<p>
+Still, I have to help others, to connect with them even in the little moments. It would be
+horrible to lose my love for goodness just because I want to become bitter over sentiments
+that would erase me. 
+</p>
+<p>It’s… interesting. That’s all I can say about it. </p>
+<p>
+But on the same note, isn’t it weird to anyone else how people can get together just based
+off a face or one little string? Maybe the reason I struggle so hard with these things is
+because I’m seeing some sort of superficiality in a place that isn’t there. Maybe it’s my
+apathy, or the slight pull to the void I feel when someone even looks at me. Who knows,
+really.
+</p>
+<p>
+All I know is, if I lose myself, I’ll fail to keep what I’ve built, and yet it’s a double
+edged sword that keeps me weak in my community. 
+</p>
+<p>
+I honestly love it for me, but I know you’d be horrified if I ended this on the idea of this
+being a positive note, so I’ll hold my tongue.
+</p>
+<hr>
+<p><i>11/29/2025</i></p>
+<p>
+I wrote this after some thought. I think I’ll put it in fun posts because I think it’s funny
+or fun or something, and also because it’s not that serious for the serious posts. Plus when
+I write about me, I’m always in a good mood since it means it’s probably healthy.
+</p>
+<p>
+I’ve considered the topic of gender before… in real life, I’m not sure what I look like in
+the world. My outside self does not match what I want to express myself as, and yet I don’t
+feel any problem with that. I think my true self exists inside my head only, controlling
+this body like a robot while only I get to see myself.
+</p>
+<p>
+Besides, like I said in my webmaster page somewhere, my ideal would be a whimsigoth maven,
+gothic and moody and snarky.. knowledgeable and wise, peppy and all cool and whatever. I can
+walk the walk, talk the talk, but why am I wearing Hello Kitty LOL
+</p>
+<p>And gender, right.. I mentioned gender.</p>
+<p>
+Being sapphic while aroace, I wonder if that’s like a beacon to others that I am also
+nonbinary… but even if it was, I have no idea how to explain that I’m also lowkey like
+desiring to be this masculine enby who’s androgynous enough that it comes back to being
+feminine? I’m gorgeous irl if you didn’t know (you never will) and I get hit on by STUPID
+GUYS because I can’t dress like I want to… one day, though. Once I find out where to get
+clothes lol
+</p>
+<p>
+Btw.. the only thing stopping me from making my own clothes is that I lost the needle’s foot
+for my sewing machine. Literally the machine is in my bedroom and I can make whatever I
+want, but I can’t. And I can’t hand-sew because I have shaky hands and second guess
+everything, plus my adhd makes me useless at it. Plus, if you wanted to feel bad about it
+(or indifferent but slightly amused about it) some more, my mother would kill me if I just
+up and dyed all my clothes black (although I’ve tried, I can’t find any ethical or cheap
+dyes. I might do it the opposite way and just bleach all my clothes… I LOVE white-styled
+goths… and with my black hair?? girl…)
+</p>
+<p><i>11/25/2025</i></p>
+<p>
+I got to thinking of what makes good media 'good' today. (aka my ramblings about this one
+facet of nothing basically)
+</p>
+<p>
+I think I like something with a hidden motive or just complexity in general... something
+very sweet on the surface - or not even sweet and just this straightforward narrative - that
+gives way to something else. I love things that make you almost wish they were something
+else. I've heard it said about HxH before, how they wish Gon listened when he was told it
+was dangerous (and therefore stayed a little bitty peanut forever).
+</p>
+<p>
+When media makes us have these kinds of reactions, like oh, I loved how simple it was back
+then (bonus points if it started out innocent or was some random story who changed just out
+of opportunity), I see it almost bittersweet. On one hand, you can go forward and then look
+back, seeing how far you came, but at the same time, you'd never be at the start again. I
+think that applies very heavily to life too, so that's just how it is, isn't it?
+</p>
+<p>
+This reminds me a lot of Steven Universe, actually, but I've seen the artbooks for that. She
+had that all planned out, so I'm not counting it in this post for anything other than
+nostalgia.
+</p>
+<p><i>11/21/2025</i></p>
+<p>
+I wish I knew why people don't mind their own business... people in this world can have
+nothing to do with one another, and when they do come together, its based on a group of
+common threads. Ideally, those that do not align themselves with those threads would just
+break themselves off from them, but instead, we see that they just shame and attack those
+who they don't like. Are we to say that anyone one finds disgusting should be abhored in the
+eyes of the many? Why are others weak to the words of the few when they could be true to
+their individual selves?
+</p>
+<p>
+There are days I wonder if one truly knows what they're talking about, or if it's more of a
+prerecorded message planted in their head by an anonymous friend. How much of what you say,
+if you even stop to consider it, is your own words? Would you have said this, what, a week,
+a month ago? What have you learned, or yet, what are you assuming you know?
+</p>
+<p>
+It's hard to say things like this in earnest, as nothing changes from one person's view.
+Others would read it, maybe, and then think for three seconds, but be washed back to the
+corporate shore that came from Atlanta, Georgia. We make rules like Ethical Consumption
+Under Capitalism because, at its core, we are powerless to do anything but 'say this'.
+People would be drinking away home-grown civil rights in a bottle for 5 cents. Three people
+came together to put in their 2 cents, and the fourth spent it just like that. Now they
+can't even spare 2 pennies. But when you bite into the barbed wire and tear down the wall,
+things improve. And in about... we'll say, ten to thirty years, you become a tack on the
+wall of people who 'tried' something. Almost like a moodboard that girls get off of
+pinterest to dress their next day away.
+</p>
+<p>
+If you can't imagine that, go to Wikipedia on your google dot com and look up punk culture,
+then go down and down until you get to recent days. And then go look at the music and our
+lives.
+</p>
+<p>
+This isn't related, or perhaps it is, but I often wonder why people don't just collectively
+stop. I think of the over-romantisized 1970s, where it's said everyone did just that. They
+couldn't bite the wire, as they bled out when it wouldn't give, so they all gave up. There's
+nothing to lose, either, as if everyone gave up, then nothing would have a consequence since
+nothing is real. Is that too evil of me to think of? I think it is lol
+</p>
+<p>
+Anyway if you want a tldr, basically people want world peace but don't want to give each
+other peace. Shoutout to the peace, love, unity, and respect of those who are still good in
+this world. Probably the majority of my indieweb girlies (all genders).
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div style="
+position: absolute;
+bottom: 0;
+height: 8px;
+width: 100%;
+background-image: linear-gradient(90deg, #a777d6, #8aa6c8, #8aa6c8);
+"></div>
+</body>
+</html>

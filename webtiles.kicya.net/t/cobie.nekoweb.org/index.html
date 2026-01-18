@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style>::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #211f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #454545;
+  border: 1px outset #000;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #fff;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px dotted;
+  margin: 3px 0;
+}
+
+@font-face {
+  font-family: LastRite;
+  src: url("stuff/LastRite.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ;
+  src: url("stuff/FoglihtenPCS-068.otf") format("opentype");
+  font-display: swap;
+}
+
+.tile-body {
+  background: url("stuff/purplespace-grayscaled-bg.png");
+  font-family: Times New Roman, Times, serif;
+  font-size: 13px;
+}
+
+a {
+  color: #9f9f9f;
+  z-index: 999;
+  background: linear-gradient(to right, #0000 -10%, #252348, #0000 110%);
+  text-decoration: underline 1px dotted;
+}
+
+a:hover {
+  filter: brightness(.8);
+}
+
+a:active {
+  filter: brightness(.6);
+}
+
+.titular-instance {
+  text-shadow: 1px 1px 5px #fff, 0 0 2px #000;
+  color: #151515;
+  z-index: 99;
+  text-align: center;
+  background: linear-gradient(to right, #0000 -10%, #00000080, #0000 110%);
+  margin: -45px -15px -5px 0;
+  font-family: LastRite;
+  font-size: 55px;
+  font-weight: 100;
+  text-decoration: none;
+  display: block;
+}
+
+.main {
+  color: #999;
+  background: linear-gradient(#6a666a9c, #0000);
+  flex-direction: column;
+  width: 210px;
+  height: 215px;
+  margin: 40px auto 15px;
+  padding: 5px;
+  display: flex;
+}
+
+.box {
+  background: #000;
+  flex-grow: 1;
+  margin-top: -10px;
+  padding: 3px;
+}
+
+.row {
+  gap: 3px;
+  display: flex;
+}
+
+.LS {
+  min-width: 60px;
+}
+
+.LSNav-EX {
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  display: flex;
+}
+
+.LSNav-EX a {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px inset #000;
+  margin: 0;
+  padding: 1px;
+  font-family: Fog, Times New Roman, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.LSNav {
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  display: flex;
+}
+
+.LSNav a {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px inset #000;
+  margin: 0 0 0 -15px;
+  padding: 1px;
+  font-family: Fog, Times New Roman, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.LSNav a:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#68677794, #00000014);
+  border-radius: 0 0 200px 200px;
+  width: 100%;
+  height: 38%;
+  padding: 2px;
+  transition: background .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.LSNav a:hover {
+  text-shadow: 0 0 11px #fff;
+  margin: 0 0 0 -10px;
+  padding-right: 10px;
+}
+
+.LSNav a:active {
+  text-shadow: 0 0 11px #000;
+  margin: 0 0 0 3px;
+  padding-right: 5px;
+}
+
+.LSNav-EX a {
+  margin: 0;
+}
+
+.LSNav-EX a::hover {
+  margin: 4px 2px;
+}
+
+.LSNav-EX a::active {
+  margin: 5px 3px;
+  padding-right: 0;
+}
+
+.introbar {
+  text-transform: lowercase;
+  background: linear-gradient(to right, #6a666a, #0000);
+  padding: 4px;
+}
+
+.introbar span {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  z-index: 999;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px dotted #6c6c6c;
+  padding: 2px 5px;
+  font-size: 11px;
+  font-style: italic;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.introbar span:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#68677799, #00000014);
+  border-radius: 0 0 200px 200px;
+  width: 100%;
+  height: 38%;
+  padding: 2px;
+  transition: background .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sub-box {
+  background: #0006;
+  border: 1px inset #000;
+  width: 100%;
+  font-size: 11px;
+}
+
+.sub-box p {
+  background: #00000087;
+  margin: 2px 0;
+  padding: 2px;
+}
+
+.sub-box i {
+  background: linear-gradient(to right, #6a666a8c, #0000);
+  padding: 1px 3px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline 1px dotted;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="main">
+<a class="titular-instance" href="https://cobie.nekoweb.org/" target="_blank">cobiesitE</a>
+<div class="box">
+<div class="introbar">
+<span>Cobie</span>
+<span>20y</span>
+<span>Any Prns</span>
+<i>(4,-7)</i>
+</div>
+<div class="row">
+<div class="LS">
+<div class="LSNav">
+<a href="about.html">about</a>
+<a href="bookshelf.html">books.</a>
+<a href="blog.html">blog</a>
+<a href="art.html">art</a>
+<a href="fandom.html">fandom</a>
+<img style="margin-left: -15px" src="stuff/sitebutton.gif">
+</div>
+</div>
+<div class="sub-box">
+<p><a href="https://cobie.nekoweb.org/webmaster/minicliques.html#BLACKCAT#BLACKCAT" target="_blank">Black Cat</a> | Magical, Unlucky, Strange</p>
+<p>
+My name is cobie, and i'm goth & a gothic writer who doesn't want to publish my works publicly. I find more joy in just the act of writing itself, so sharing it with the odd anon of the day is more than fine with me.
+</p>
+<p><a href="https://cobie.nekoweb.org/contact.html" target="_blank">(Click Here to Contact Me)
+</a></p></div>
+</div>
+
+</div>
+</div>
+
+<div style="position: absolute;bottom: 0;height: 8px;width: 100%;background-image: linear-gradient(90deg, #a777d6, #8aa6c8, #8aa6c8);"></div>
+</body>
+</html>

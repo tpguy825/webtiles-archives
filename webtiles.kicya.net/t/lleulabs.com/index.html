@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    <style>.tile-body {
+  color: #000;
+  background: #ccc;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Andale Mono, Courier New, monospace;
+  display: flex;
+}
+
+#dance {
+  height: 100%;
+  margin-top: 44px;
+}
+
+.center {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+}
+
+.link {
+  margin-top: 2rem;
+}
+
+a {
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 1px #00f;
+}
+
+a:hover {
+  color: #ccc;
+  box-shadow: inset 0 1rem #00f;
+}
+</style>
+</head>
+<body>
+    <div class="link center">
+        <a href="https://lleulabs.com" target="_blank">lleulabs.com</a>
+    </div>
+    
+    <pre id="dance" class="center">
+        o    
+       /|\   
+       / \   
+
+    </pre>
+    
+    
+    
+    <script type="text/tilescript">function main() {
+    var danceDiv = document.getElementById('dance');
+    
+    var frames = [
+        '    o    \n   /|\\   \n   / \\   ',
+        '    o    \n   \\|/   \n   | |  ',
+        '    o    \n   /|\\   \n   < >   ',
+        '   \\o/   \n    |    \n   / \\   ',
+        '    o    \n   <|>   \n   | |   ',
+        '   \\o    \n    |\\   \n   / \\   ',
+        '    o/   \n   /|    \n   / \\   ',
+        '    o    \n   /|\\   \n   > <   '
+    ];
+    
+    var frameIndex = 0;
+    
+    function animate() {
+        danceDiv.textContent = frames[frameIndex];
+        frameIndex = (frameIndex + 1) % frames.length;
+        setTimeout(animate, 200);
+    }
+    
+    animate();
+}
+
+main();</script>
+</body>
+</html>

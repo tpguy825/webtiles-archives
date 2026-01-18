@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: #fff url("grid.svg");
+  font-family: MS Gothic, sans-serif;
+  animation: 1s linear infinite body;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.love {
+  padding-left: 8px;
+  bottom: 71px;
+}
+
+.buyme {
+  padding-left: 8px;
+  font-size: 10px;
+  line-height: 10px;
+  bottom: 25px;
+}
+
+.pxla {
+  z-index: 85;
+  width: 120px;
+  height: 35px;
+  padding-left: 8px;
+  position: absolute;
+  bottom: 9px;
+}
+
+img {
+  image-rendering: pixelated;
+}
+
+@keyframes body {
+  to {
+    background-position: 0 0;
+  }
+
+  0% {
+    background-position: -16px -16px;
+  }
+}
+</style>
+</head>
+<body class="bg">
+    <img src="pxla-ad-webtile.svg" width="250" height="250" style="position: absolute; z-index: 61">
+    <img src="wmap.gif" style="position: absolute; z-index: 420">
+    <img src="pxla.svg" class="pxla" width="137" height="40">
+    <p class="love" style="position: absolute; z-index: 90">
+        <b>scepixel.fla
+        <br>
+        Loves You!</b>
+    </p>
+    <p class="buyme" style="position: absolute; z-index: 67">
+        New & Used.<br>
+        Mass Produced Magic.<br>
+        Less Is More Is Less.<br>
+        Now 20% Less Artificial.<br>
+        萌え燃えキル！！
+    </p>
+</body>
+</html>

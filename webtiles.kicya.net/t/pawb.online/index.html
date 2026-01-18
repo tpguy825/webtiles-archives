@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>* {
+  box-sizing: border-box;
+}
+
+html, .tile-body {
+  height: 100%;
+}
+
+.tile-body {
+  color: #fff;
+  background: #000;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Courier New, monospace;
+  overflow: hidden;
+}
+
+.tile {
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.top {
+  background: #ffffff0a;
+  border: 1px solid #ffffff38;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 10px;
+  display: flex;
+}
+
+.brand {
+  flex-direction: column;
+  display: flex;
+}
+
+.title {
+  letter-spacing: .6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sub {
+  opacity: .85;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.cta {
+  color: #fff;
+  white-space: nowrap;
+  background: #00f5c814;
+  border: 1px solid #00f5c88c;
+  padding: 6px 8px;
+  font-size: 12px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #00f5c840;
+}
+
+.cta:hover {
+  background: #00f5c824;
+  box-shadow: 0 0 14px #00f5c859;
+}
+
+.mid {
+  flex-direction: column;
+  flex: auto;
+  gap: 8px;
+  min-height: 0;
+  display: flex;
+}
+
+.gameWrap {
+  background: #000;
+  border: 1px solid #00f5c859;
+  flex: auto;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 0 16px #00f5c81f;
+}
+
+#rhythmCanvas {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cmd {
+  background: #ffffff0a;
+  border: 1px solid #ffffff38;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+}
+
+.prompt {
+  color: #fff;
+  opacity: .9;
+}
+
+.cmdtext {
+  opacity: .92;
+  letter-spacing: .6px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.status {
+  color: #fff;
+  background: #00f5c81a;
+  border: 1px solid #00f5c88c;
+  padding: 2px 6px;
+}
+
+.statusLive {
+  box-shadow: 0 0 10px #00f5c88c, 0 0 18px #00f5c840;
+}
+
+.bot {
+  flex: none;
+}
+
+.links {
+  opacity: .9;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  display: flex;
+}
+
+.links a {
+  color: #fff;
+  border-bottom: 1px dotted #00f5c88c;
+  text-decoration: none;
+}
+
+.links a:hover {
+  border-bottom-color: #00f5c8e6;
+}
+
+.sep {
+  opacity: .55;
+}
+
+a:focus {
+  outline-offset: 2px;
+  outline: 2px solid #00f5c8cc;
+}
+</style>
+</head>
+<body>
+  <div class="tile">
+    <div class="top">
+      <div class="brand">
+        <div class="title">pawb.online</div>
+        <div class="sub">cyber rhythm node</div>
+      </div>
+
+      <a class="cta" href="https://pawb.online" target="_blank" rel="noopener noreferrer">
+        enter →
+      </a>
+    </div>
+
+    <div class="mid">
+      <div class="gameWrap">
+        <canvas id="rhythmCanvas"></canvas>
+      </div>
+
+      <div class="cmd">
+        <span class="prompt">/:</span>
+        <span class="cmdtext">RHYTHM // autoplay</span>
+        <span class="spacer"></span>
+        <span class="status statusLive">LIVE</span>
+      </div>
+    </div>
+
+    <div class="bot">
+      <div class="links">
+        <a href="https://pawb.online" target="_blank" rel="noopener noreferrer">home</a>
+        <span class="sep">·</span>
+        <a href="https://pawb.online/widget" target="_blank" rel="noopener noreferrer">widget</a>
+      </div>
+    </div>
+
+    <script type="text/tilescript">// ES5 Canvas Rhythm Tile (setInterval-driven; right-to-left; small notes; cyber theme)
+
+(function () {
+  var canvas = document.getElementById('rhythmCanvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var LANES = 4;
+  var COLORS = ["#00f5c8", "#2ae6ff", "#7cff3a", "#ff2bd6"];
+
+  // Deterministic PRNG
+  var seed = 13371337;
+  function rand32() {
+    seed ^= (seed << 13);
+    seed ^= (seed >>> 17);
+    seed ^= (seed << 5);
+    return (seed >>> 0);
+  }
+  function randInt(n) { return (rand32() % n) | 0; }
+  function rand01() { return (rand32() / 4294967296); }
+
+  // Resize tracking (quantized)
+  var lastW = 0, lastH = 0;
+  function fitCanvasIfNeeded() {
+    var w = Math.floor(canvas.clientWidth || 1);
+    var h = Math.floor(canvas.clientHeight || 1);
+    if (w !== lastW || h !== lastH) {
+      lastW = w; lastH = h;
+      canvas.width = w;
+      canvas.height = h;
+      return true;
+    }
+    return false;
+  }
+
+  function layout() {
+    var cw = canvas.width, ch = canvas.height;
+
+    var pad = Math.floor(Math.min(cw, ch) * 0.07);
+    if (pad < 10) pad = 10;
+
+    var fieldW = cw - pad * 2;
+    var fieldH = ch - pad * 2;
+
+    var ox = pad;
+    var oy = pad;
+
+    var laneH = Math.floor(fieldH / LANES);
+    fieldH = laneH * LANES;
+
+    var hitW = Math.max(10, Math.floor(fieldW * 0.06));
+    var hitX = ox + Math.max(6, Math.floor(fieldW * 0.06));
+
+    var noteH = Math.max(8, Math.floor(laneH * 0.42));
+    var noteW = Math.max(10, Math.floor(fieldW * 0.06));
+
+    return {
+      cw: cw, ch: ch,
+      ox: ox, oy: oy,
+      fieldW: fieldW, fieldH: fieldH,
+      laneH: laneH,
+      hitX: hitX, hitW: hitW,
+      noteW: noteW, noteH: noteH
+    };
+  }
+
+  function laneY(L, lane, noteH) {
+    var top = L.oy + lane * L.laneH;
+    return top + Math.floor((L.laneH - noteH) / 2);
+  }
+
+  var notes = [];
+  var spawnTimer = 0;
+  var speed = 220;
+  var bump = 0, bumpVel = 0;
+
+  function spawnNote(L) {
+    var lane = randInt(LANES);
+    var ci = randInt(COLORS.length);
+
+    var x0 = L.ox + L.fieldW + 20 + randInt(30);
+    notes.push({ lane: lane, x: x0, w: L.noteW, h: L.noteH, colorIndex: ci });
+
+    if (randInt(10) === 0) {
+      var lane2 = (lane + 1 + randInt(LANES - 1)) % LANES;
+      notes.push({
+        lane: lane2,
+        x: x0 + randInt(12),
+        w: L.noteW,
+        h: L.noteH,
+        colorIndex: randInt(COLORS.length)
+      });
+    }
+  }
+
+  function update(dt, L) {
+    spawnTimer -= dt;
+    if (spawnTimer <= 0) {
+      spawnNote(L);
+      spawnTimer = 0.18 + rand01() * 0.32;
+    }
+
+    for (var i = 0; i < notes.length; i++) {
+      notes[i].x -= speed * dt;
+      notes[i].w = L.noteW;
+      notes[i].h = L.noteH;
+    }
+
+    var hit0 = L.hitX;
+    var hit1 = L.hitX + L.hitW;
+
+    for (i = notes.length - 1; i >= 0; i--) {
+      var n = notes[i];
+      var nx0 = n.x;
+      var nx1 = n.x + n.w;
+
+      if (nx1 >= hit0 && nx0 <= hit1) {
+        notes.splice(i, 1);
+        bumpVel += 7.0;
+        if (bumpVel > 12) bumpVel = 12;
+      } else if (nx1 < (L.ox - 40)) {
+        notes.splice(i, 1);
+      }
+    }
+
+    bumpVel -= bump * 20 * dt;
+    bumpVel *= (1 - Math.min(0.75, dt * 6));
+    bump += bumpVel * dt;
+    if (bump < 0) { bump = 0; bumpVel = 0; }
+    if (bump > 1) bump = 1;
+  }
+
+  function drawBackground(L) {
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, L.cw, L.ch);
+
+    ctx.strokeStyle = "rgba(0,245,200,0.22)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(L.ox + 0.5, L.oy + 0.5, L.fieldW - 1, L.fieldH - 1);
+
+    for (var i = 1; i < LANES; i++) {
+      var y = L.oy + i * L.laneH;
+      ctx.strokeStyle = "rgba(0,245,200,0.12)";
+      ctx.beginPath();
+      ctx.moveTo(L.ox, y + 0.5);
+      ctx.lineTo(L.ox + L.fieldW, y + 0.5);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = "rgba(255,255,255,0.035)";
+    for (i = 0; i < 56; i++) {
+      var x = L.ox + ((L.fieldW / 56) * i);
+      ctx.beginPath();
+      ctx.moveTo(x + 0.5, L.oy);
+      ctx.lineTo(x + 0.5, L.oy + L.fieldH);
+      ctx.stroke();
+    }
+  }
+
+  function drawHUD(L) {
+    ctx.font = "12px Courier New, monospace";
+    ctx.textBaseline = "top";
+
+    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillText("NODE//", L.ox + 8, L.oy + 6);
+
+    ctx.fillStyle = "rgba(0,245,200,0.80)";
+    ctx.fillText("PAWB", L.ox + 66, L.oy + 6);
+
+    var bx = L.ox + L.fieldW - 52;
+    var by = L.oy + 8;
+    for (var k = 0; k < 4; k++) {
+      var bh = 4 + k * 3;
+      ctx.fillStyle = "rgba(0,245,200," + (0.25 + k * 0.12) + ")";
+      ctx.fillRect(bx + k * 10, by + (12 - bh), 6, bh);
+    }
+  }
+
+  function drawNotes(L) {
+    for (var i = 0; i < notes.length; i++) {
+      var n = notes[i];
+      var x = n.x;
+      var y = laneY(L, n.lane, n.h);
+
+      ctx.fillStyle = COLORS[n.colorIndex];
+      ctx.fillRect(x, y, n.w, n.h);
+
+      ctx.fillStyle = "rgba(255,255,255,0.12)";
+      ctx.fillRect(x + 2, y + 2, Math.max(1, n.w - 4), 2);
+
+      ctx.strokeStyle = "rgba(0,0,0,0.65)";
+      ctx.strokeRect(x + 0.5, y + 0.5, n.w - 1, n.h - 1);
+    }
+  }
+
+  function drawHitBar(L) {
+    var pop = bump;
+    var extra = Math.floor(pop * 4);
+
+    var x = L.hitX - extra;
+    var w = L.hitW + extra * 2;
+    var y = L.oy + 2;
+    var h = L.fieldH - 4;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(x, y, w, h);
+
+    ctx.strokeStyle = "rgba(0,245,200,0.75)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x + 0.5, y + 0.5, w - 1, h - 1);
+
+    ctx.fillStyle = "rgba(0,0,0,0.22)";
+    ctx.fillRect(x + 3, y + 10, Math.max(4, w - 6), 3);
+    ctx.fillRect(x + 3, y + h - 14, Math.max(4, w - 6), 3);
+  }
+
+  function draw(L) {
+    drawBackground(L);
+    drawHUD(L);
+    drawNotes(L);
+    drawHitBar(L);
+  }
+
+  fitCanvasIfNeeded();
+  var last = +new Date();
+  spawnTimer = 0.12;
+
+  setInterval(function () {
+    fitCanvasIfNeeded();
+
+    var now = +new Date();
+    var dt = (now - last) / 1000;
+    if (dt > 0.05) dt = 0.05;
+    last = now;
+
+    var L = layout();
+    update(dt, L);
+    draw(L);
+  }, 33); // ~30fps
+})();
+</script>
+  </div>
+</body>
+</html>

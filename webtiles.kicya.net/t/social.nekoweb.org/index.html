@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  overflow: scroll;
+}
+</style>
+</head>
+<body>
+    <a href="https://social.nekoweb.org" target="_blank">visit nekocafe!! NOW!</a>
+    
+    <p id="loading">
+        not intruged yet? click on this webtile for the feed :3
+    </p>
+    
+    <div id="feed"></div>
+    
+    <button>
+        prev
+    </button>
+    <button>
+        next
+    </button>
+    ← ts dont work will come back to it later
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var feed = document.getElementById("feed");
+
+var page = 1
+
+loadFeed(page);
+
+function loadFeed(page) {
+    fetchXhr('https://cafe.frizzbees.dev/feeds/recent/' + String(page), 'GET', function (e, posts) {
+        posts.forEach(function (post) {
+            var nameEl = document.createElement("p")
+            nameEl.textContent = post.name
+            
+            var contentEl = document.createElement("p")
+            contentEl.textContent = post.post
+            
+            feed.appendChild(nameEl)
+            feed.appendChild(contentEl)
+            feed.appendChild(document.createElement("hr"))
+        })
+    })
+    
+    document.getElementById('loading').remove()
+}
+
+function fetchXhr(url, method, callback, errorCallback, data) {
+    var xhr = new XMLHttpRequest()
+    xhr.open(method, url)
+    xhr.onload = function (e) {
+        callback(e, JSON.parse(xhr.responseText))
+    }
+    xhr.errorCallback = function (e) {
+        errorCallback(e)
+    }
+    if (method === 'POST') {
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.send(JSON.stringify(data))
+    } else {
+        if (data) {
+            // lets assume this is a token
+            xhr.setRequestHeader('Authorization', 'Bearer ' + data)
+        }
+        xhr.send()
+    }
+}
+
+function next() {
+    page++;
+    feed.replaceChildren()
+    loadFeed(page)
+}
+
+function prev() {
+    if (page === 1) { return }
+    page--;
+    feed.replaceChildren()
+    loadFeed(page)
+}</script>
+</body>
+</html>

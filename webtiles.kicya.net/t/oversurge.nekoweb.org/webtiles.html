@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  font-family: times new roman;
+  overflow: hidden;
+}
+
+#container {
+  background: url("cec-bg.jpg") 0 0 / 100px;
+  width: 230px;
+  height: 230px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+p {
+  margin: 0;
+  font-size: 15px;
+}
+
+a {
+  color: #fff;
+  filter: drop-shadow(0 1px #72b5ff) drop-shadow(0 -1px #72b5ff) drop-shadow(1px 0 #72b5ff) drop-shadow(-1px 0 #72b5ff);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #72b5ff;
+  filter: drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff);
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#cont-1st {
+  filter: drop-shadow(0 0 4px #0000004f);
+  border-style: solid;
+  border-width: 12px;
+  border-image: url("https://webtiles.kicya.net/t/oversurge.nekoweb.org/https:/webtiles.kicya.net/t/oversurge.nekoweb.org/fluff.png") 10 fill round;
+  margin-top: 5px;
+  position: relative;
+}
+
+.scroller {
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+#cont-1st .scroller {
+  height: 105px;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+#gv-1 {
+  filter: drop-shadow(0 0 4px #0000004f);
+  z-index: 2;
+  pointer-events: none;
+  background: url("gv-land.png") 0 0 / 100%;
+  width: 95px;
+  height: 82px;
+  position: absolute;
+  bottom: -50px;
+  left: -40px;
+}
+
+#sitebtn {
+  position: absolute;
+  bottom: -25px;
+  left: 120px;
+}
+
+#marqueecont {
+  z-index: 1;
+  width: 213px;
+  position: absolute;
+  bottom: -53px;
+  left: 0;
+}
+
+#navi {
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+#navi li {
+  text-align: center;
+  background: linear-gradient(#c5f0ff 10%, #0dc0ff 20%, #a8e8ff, #a0e4fc);
+  border: 1px solid #1b95c2;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 3px;
+}
+
+#navi a {
+  color: #fff;
+  filter: drop-shadow(0 1px #1b95c2) drop-shadow(0 -1px #1b95c2) drop-shadow(1px 0 #1b95c2) drop-shadow(-1px 0 #1b95c2);
+  font-weight: bold;
+  text-decoration: underline;
+  transition: letter-spacing .2s ease-in-out;
+}
+
+#navi a:hover {
+  color: #1b95c2;
+  filter: drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff);
+  letter-spacing: 2px;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+hr {
+  border: 2px dashed #0dc0ff;
+}
+
+#music {
+  margin-top: 5px;
+  position: relative;
+}
+
+#recordplayer {
+  z-index: 2;
+  background: url("https://webtiles.kicya.net/t/oversurge.nekoweb.org/https:/webtiles.kicya.net/t/oversurge.nekoweb.org/recordplayer-front.png") 0 0 / 100%;
+  width: 110px;
+  height: 100px;
+  position: absolute;
+  top: 10px;
+  left: -20px;
+}
+
+#cd {
+  background: url("https://webtiles.kicya.net/t/oversurge.nekoweb.org/https:/webtiles.kicya.net/t/oversurge.nekoweb.org/admiration-to-peace.png") 0 0 / 100%;
+  width: 70px;
+  height: 70px;
+  animation: 2s linear infinite spin;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+h2 {
+  color: #fff;
+  text-align: right;
+  background: #4bd5ff;
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 3px 10px 3px 3px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+#music p {
+  text-align: right;
+  float: right;
+  width: 180px;
+  margin-top: -10px;
+}
+
+#music span {
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#updates {
+  color: #fff;
+  background: #725f59;
+  border: 7px inset #acacac;
+  margin-top: 15px;
+  box-shadow: inset 0 0 10px 3px #494341d4, 0 0 5px 5px #00000069;
+}
+
+#updates .scroller {
+  height: 100px;
+}
+
+#updates li:first-child {
+  margin-left: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+  list-style: "!! ";
+}
+
+#updates li {
+  margin-left: 14px;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#updates p {
+  margin-bottom: 5px;
+}
+
+#footer {
+  text-align: center;
+  color: #90a1b6;
+  background: #fff;
+  margin: 20px -10px -10px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.prinzessin mark {
+  color: #fff;
+  filter: drop-shadow(0 1px #0dc0ff) drop-shadow(0 -1px #4bd5ff) drop-shadow(1px 0 #0dc0ff) drop-shadow(-1px 0 #0dc0ff);
+  background: none;
+  font-family: times new roman;
+  font-size: 33px;
+  font-style: italic;
+  font-weight: bold;
+  animation: 2s cubic-bezier(.25, .85, .4, 1) infinite princess;
+}
+
+.prinzessin mark:first-child {
+  animation-delay: 0s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(2) {
+  animation-delay: .2s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(3) {
+  animation-delay: .4s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(4) {
+  animation-delay: .6s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(5) {
+  animation-delay: .8s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(6) {
+  animation-delay: 1s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(7) {
+  animation-delay: 1.2s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(8) {
+  animation-delay: 1.4s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(9) {
+  animation-delay: 1.6s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(10) {
+  animation-delay: 1.8s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(11) {
+  animation-delay: 2s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(12) {
+  animation-delay: 2.2s;
+  display: inline-block;
+}
+
+@-webkit-keyframes princess {
+  from {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+
+  50% {
+    color: #fff;
+    transform: translate(0);
+  }
+
+  to {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+}
+
+@keyframes princess {
+  from {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+
+  50% {
+    color: #fff;
+    transform: translate(0);
+  }
+
+  to {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    <div id="container">
+        <div class="prinzessin"><mark>O</mark><mark>V</mark><mark>E</mark><mark>R</mark><mark>S</mark><mark>U</mark><mark>R</mark><mark>G</mark><mark>E</mark><mark>!</mark></div>
+        
+        <h2>Other Webtiles</h2>
+        <p style="margin-top: -5px; margin-bottom: 10px">All images are screenshots<br>Last updated 2026 1/9</p>
+        <p>
+            <b>NOTICE: none of these go to their links for some reason sighhhhh ill js add their section in tooltips</b>
+        </p>
+        <p style="text-align: right"><a href="home.html">GO HOME</a></p>
+        
+        <hr>
+        
+        <a href="index.html" title="#1375,1125" target="_blank"><img src="webtile-ss/demogozetile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#1625,1125" target="_blank"><img src="webtile-ss/ext4nttile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#-875,625" target="_blank"><img src="webtile-ss/layertile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#375,-2375" target="_blank"><img src="webtile-ss/keajtile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#2875,2875" target="_blank"><img src="webtile-ss/trefletile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#125,-625" target="_blank"><img src="webtile-ss/nyscyratile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#1375,-375" target="_blank"><img src="webtile-ss/reilekytile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#-125,-1125" target="_blank"><img src="webtile-ss/pianoversetile.jpg" style="height: 105px; width: 105px;"></a>
+        
+        <a href="index.html" title="#-2875,-625" target="_blank"><img src="webtile-ss/soontile.jpg" style="width: 100%;"></a>
+    </div>
+    
+</body>
+</html>

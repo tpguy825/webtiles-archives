@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Nunito;
+  src: url("https://webtiles.kicya.net/t/cut-up-hearts.nekoweb.org/blocked");
+}
+
+.tile-body {
+  color: #cc22f2;
+  background-color: #000;
+  font-family: Nunito, sans-serif;
+}
+
+.quick-grid {
+  grid-template-areas: "header header"
+                       "left right"
+                       "footer footer";
+  gap: 3px;
+  padding: 3px;
+  display: grid;
+}
+
+.quick-grid > div {
+  padding: 3px;
+}
+
+.left {
+  grid-area: left;
+}
+
+.right {
+  grid-area: right;
+}
+</style>
+</head>
+<body>
+    <div class="quick-grid">
+        <div class="left">
+            <img src="img/alma-talksprite-animated.gif" width="220">
+        </div>
+        <div class="right" >
+            <p>
+                !
+           </p>
+        </div>
+    </div>
+</body>
+</html>

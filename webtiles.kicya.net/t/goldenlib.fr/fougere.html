@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    
+    <style>.tile-body {
+  color: #fffffe;
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  background: #0f0e17;
+  margin: 0;
+  font-family: Tahoma, sans-serif;
+  font-size: 6px;
+  overflow: hidden;
+}
+
+#container {
+  height: 100%;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 1px solid #f00069;
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+}
+
+.title {
+  color: #f00069;
+  margin: 0 0 1px;
+  font-size: 8px;
+}
+
+.subtitle {
+  color: #888;
+  margin: 0;
+  font-size: 5px;
+}
+
+.nav {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 6px;
+  display: flex;
+}
+
+.nav a {
+  color: #fffffe;
+  background: #00000020;
+  border: 1px solid #444;
+  border-radius: 2px;
+  padding: 1px 3px;
+  font-size: 5px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  border-color: #f00069;
+}
+
+.nav a.active {
+  color: #fff;
+  background: #f00069;
+}
+
+.box {
+  background: #00000010;
+  border: 1px solid #444;
+  border-radius: 3px;
+  margin-bottom: 4px;
+  padding: 3px;
+}
+
+.box h3 {
+  color: #2ba6b2;
+  align-items: center;
+  gap: 2px;
+  margin: 0 0 2px;
+  font-size: 7px;
+  display: flex;
+}
+
+.icon {
+  color: #f00069;
+}
+
+.link {
+  color: #2ba6b2;
+  border: 1px solid #0000;
+  margin: 1px 0;
+  padding: 1px;
+  font-size: 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.link:hover {
+  background: #00000020;
+  border-color: #f00069;
+}
+
+.back {
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+}
+
+.copyright {
+  color: #888;
+  font-size: 5px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <h1 class="title">GoldenLib.fr</h1>
+            <p class="subtitle">Fougère</p>
+        </div>
+        
+        <div class="nav">
+            <a href="index.html">Accueil</a>
+            <a href="blog.html">Blog</a>
+            <a href="fougere.html" class="active">Fougère</a>
+            <a href="apropos.html">À propos</a>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Liens utiles</h3>
+            <a href="https://goldenlib.fr/this-website-is-all-you-need/" class="link" target="_blank">Page 22min (Nouveau!)</a>
+            <a href="https://goldenlib.fr/fougere/laucher-aventure-pingouin/" class="link" target="_blank">Laucher Aventure Pingouin</a>
+            <a href="https://goldenlib.fr/fougere/thread-twitter/" class="link" target="_blank">Thread Twitter</a>
+            <a href="https://goldenlib.fr/fougere/glossaire/" class="link" target="_blank">Glossaire</a>
+            <a href="https://goldenlib.fr/mediatracker/" class="link" target="_blank">Avis médias</a>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Statistiques</h3>
+            <p>Visites: 1,234</p>
+            <p>Articles: 89</p>
+            <p>En ligne: <span style="color:#0f0;">Oui</span></p>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Dernière activité</h3>
+            <p>Mise à jour: 2025-03-28</p>
+            <p>Dernier article: Bilan 2025</p>
+            <p>Prochain projet: En préparation</p>
+        </div>
+        
+        <a href="index.html" class="link back">← Accueil</a>
+        <p class="copyright">© 2025</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>.tile-body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 244px;
+  height: 244px;
+  margin: 0;
+}
+
+* {
+  color: #fff;
+  font-family: MS UI Gothic;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+canvas {
+  width: 240px;
+  height: 200px;
+  margin-bottom: -3px;
+}
+
+.gutter {
+  margin: 0;
+  padding: 1px;
+  display: block;
+  position: relative;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px gray, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+}
+
+.info {
+  text-align: center;
+  width: 240px;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.content {
+  box-sizing: border-box;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.color-box {
+  width: 10px;
+  height: 10px;
+}
+
+.color-box-container {
+  justify-content: center;
+  align-items: center;
+  margin-top: 3px;
+  display: flex;
+}
+
+.window {
+  background: silver;
+  flex-direction: column;
+  width: 244px;
+  height: 244px;
+  padding: 3px;
+  display: flex;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px gray, inset 2px 2px #fff;
+}
+
+.titlebar {
+  background: linear-gradient(90deg, navy, #1084d0);
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 2px 3px 3px;
+  display: flex;
+}
+
+button {
+  box-sizing: border-box;
+  color: #0000;
+  text-shadow: 0 0 #222;
+  background: silver;
+  border: none;
+  border-radius: 0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px gray, inset 2px 2px #dfdfdf;
+}
+
+.close-button {
+  min-width: 16px;
+  min-height: 14px;
+  margin-left: 2px;
+}
+</style>
+</head>
+<body>
+    <div class="window" id="window">
+        <div class="titlebar">
+            draw.prefetcher.net
+            <div>
+                <button class="close-button">x</button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="gutter">
+                <canvas id="draw" width="240" height="200"></canvas>
+                <div class="info" id="info">Click to load canvas!</div>
+            </div>
+            <div class="color-box-container">
+                <div class="gutter color-box" style="background: #14131a;" id="1"></div>
+                <div class="gutter color-box" style="background: #474d5d;" id="2"></div>
+                <div class="gutter color-box" style="background: #8f9aa1;" id="3"></div>
+                <div class="gutter color-box" style="background: #a72751;" id="4"></div>
+                <div class="gutter color-box" style="background: #ff3d3d;" id="5"></div>
+                <div class="gutter color-box" style="background: #ffb72a;" id="6"></div>
+                <div class="gutter color-box" style="background: #f6ed03;" id="7"></div>
+                <div class="gutter color-box" style="background: #4bde3c;" id="8"></div>
+                <div class="gutter color-box" style="background: #33766c;" id="9"></div>
+                <div class="gutter color-box" style="background: #25bfe2;" id="10"></div>
+                <div class="gutter color-box" style="background: #317de9;" id="11"></div>
+                <div class="gutter color-box" style="background: #4a3c95;" id="12"></div>
+                <div class="gutter color-box" style="background: #a55b99;" id="13"></div>
+                <div class="gutter color-box" style="background: #fe827d;" id="14"></div>
+                <div class="gutter color-box" style="background: #fed0b1;" id="15"></div>
+                <div class="gutter color-box" style="background: #ffffff;" id="16"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/tilescript">var canvas = document.getElementById("draw")
+var context = canvas.getContext("2d")
+var cellX = 0, cellY = 0;
+var bw = 240, bh = 220;
+var cellSize = 10;
+var cells = {}
+var cursorColorIndex = 0
+var colors = ["#14131a", "#474d5d", "#8f9aa1", "#a72751", "#ff3d3d", "#ffb72a", "#f6ed03", "#4bde3c", "#33766c", "#25bfe2", "#317de9", "#4a3c95", "#a55b99", "#fe827d", "#fed0b1", "#ffffff"]
+var lastUpdateTime = 0
+var dirtyCells = []
+var pressSound
+
+function drawBg() {
+    context.fillStyle = "white"
+    context.fillRect(0, 0, bw, bh)
+}
+
+function drawCursor() {
+    context.fillStyle = colors[cursorColorIndex]
+    context.fillRect(cellX * cellSize, cellY * cellSize, cellSize, cellSize)
+}
+
+function drawCell(key) {
+    var color = cells[key] !== undefined ? colors[cells[key]] : "white"
+    var pos = key.split(',')
+    var x = parseInt(pos[0]) * cellSize
+    var y = parseInt(pos[1]) * cellSize
+    context.fillStyle = color
+    context.fillRect(x, y, cellSize, cellSize)
+}
+
+function drawDirtyCells() {
+    if (dirtyCells.length < 1) {
+        return
+    }
+
+    for (var cell in dirtyCells) {
+        drawCell(dirtyCells[cell])
+    }
+
+    dirtyCells = []
+}
+
+function onMouseOver(e) {
+    var bounds = canvas.getBoundingClientRect();
+    var posX = e.clientX - bounds.left;
+    var posY = e.clientY - bounds.top;
+    var newCellX = Math.floor(posX / cellSize)
+    var newCellY = Math.floor(posY / cellSize)
+
+    if (newCellX != cellX || newCellY != cellY) {
+        dirtyCells.push(cellX.toString() + "," + cellY.toString())
+    }
+
+    cellX = newCellX
+    cellY = newCellY
+
+    redraw()
+}
+
+function redraw() {
+    drawDirtyCells()
+    drawCursor()
+}
+
+function onMouseDown() {
+    cells[cellX + "," + cellY] = cursorColorIndex
+    sendCell()
+    playSound()
+}
+
+function setColor(elem) {
+    var id = elem.id
+    var colorId = parseInt(id) - 1
+    cursorColorIndex = colorId
+
+    drawCursor()
+}
+
+function setupColors() {
+    var colorCount = 16;
+    for (var i = 1; i <= colorCount; i++) {
+        var colorId = i.toString()
+        var colorName = colors[i - 1]
+        var element = document.getElementById(colorId)
+        element.setAttribute("style", "background:" + colorName)
+        element.addEventListener("click", function(e) {
+            setColor(e.target)
+        })
+    }
+}
+
+function getCellData() {
+    var req = new XMLHttpRequest()
+    req.onload = function(e) {
+    	var newCells = JSON.parse(req.responseText)
+        var didChange = false
+        for (var newCell in newCells) {
+            if (cells[newCell] === undefined || cells[newCell] != newCells[newCell]) {
+                dirtyCells.push(newCell)
+                didChange = true
+            }
+        }
+        
+        if (didChange) {
+            playSound()
+        }
+
+        cells = newCells
+    	redraw()    
+    }
+    req.open("GET", "https://prefetcher.net/draw.php")
+    req.send()
+}
+
+function sendCell() {
+    var req = new XMLHttpRequest()
+    req.open("GET", "https://prefetcher.net/draw.php?x=" + cellX.toString() + "&y=" + cellY.toString() + "&i=" + cursorColorIndex.toString())
+    req.send()    
+}
+
+function loadAudio() {
+    var wnd = document.getElementById("window")
+    pressSound = document.createElement("audio")
+    wnd.appendChild(pressSound)
+
+    pressSound.src = "/press.wav"
+    pressSound.load()
+}
+
+function playSound() {
+    pressSound.play()
+}
+
+function setup() {
+    document.getElementById("info").setAttribute("style", "display: none")
+    canvas.addEventListener("mousemove", onMouseOver)
+    canvas.addEventListener("mousedown", onMouseDown)
+    loadAudio()
+    drawBg()
+    getCellData()
+    setupColors()  
+    
+    setInterval(function() {
+        getCellData()
+    }, 2000)
+}
+
+
+setup()</script>
+</body>
+</html>

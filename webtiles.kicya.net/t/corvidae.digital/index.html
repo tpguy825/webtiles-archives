@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #d8f0fc;
+  text-align: center;
+  image-rendering: pixelated;
+  background: radial-gradient(closest-side, #033588, #090713);
+  margin: 0 auto;
+  font-size: 2em;
+}
+
+img {
+  height: 180px;
+  margin-top: 7px;
+  margin-bottom: -5px;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+    <div id="layer"></div>
+    <img class="logo" src="https://webtiles.kicya.net/t/corvidae.digital/logo.png" style="width:150px; height:45px; margin-bottom:-10px;">
+    <img src="https://webtiles.kicya.net/t/corvidae.digital/the.png">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

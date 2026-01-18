@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("bg.png");
+  background-position: 0 0;
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+a {
+  color: #00c900;
+}
+
+a:hover {
+  color: #008a00;
+}
+
+button {
+  color: #000;
+  cursor: pointer;
+  background-color: #00c900;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 2px;
+  padding: 5px 10px;
+  transition: background-color .3s;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #008a00;
+}
+
+.codystitlecontainer {
+  box-sizing: border-box;
+  text-align: center;
+  border: 2px solid #00c900;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.title {
+  color: #fff;
+  text-shadow: 0 0 5px #00c900;
+  margin: 5px 0 2px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.descrtext {
+  color: #fff;
+  margin: 0 0 8px;
+  font-size: 10px;
+}
+
+img {
+  border: none;
+  max-width: 60px;
+  max-height: 60px;
+  display: block;
+}
+
+#status-container {
+  color: #fff;
+  text-align: center;
+  width: 90%;
+  min-height: 12px;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#status-container span {
+  text-transform: lowercase;
+}
+
+.status-label {
+  color: #fff;
+  text-align: center;
+  width: 90%;
+  min-height: 12px;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+    <div class="codystitlecontainer">
+        <img src="mii.png" alt="Cody Mii">
+        <div class="title">CodyMKW</div>
+        <div class="descrtext">Just a random fan of Nintendo and anime lol</div>
+        <a href="https://codymkw.nekoweb.org" target="_blank"><button>View homepage</button></a>
+        <div class="status-label">Nintendo Switch Status:</div>
+        <div id="status-container"></div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var apiUrl = 'https://nxapi-presence.fancy.org.uk/api/presence/644cd5195d154bd5?include-splatoon3=1';
+
+function updatePresence() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', apiUrl, true);
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            var statusContainer = document.getElementById('status-container');
+            if (!statusContainer) return;
+
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                
+                if (data && data.friend && data.friend.presence) {
+                    var state = data.friend.presence.state.toLowerCase();
+                    var gameName = data.friend.presence.game ? data.friend.presence.game.name : null;
+                    
+                    var statusColor = '#ffffff';
+                    if (state === 'playing' || state === 'online') {
+                        statusColor = '#00C900';
+                    } else if (state === 'inactive') {
+                        statusColor = 'yellow';
+                    } else if (state === 'offline') {
+                        statusColor = '#ff4444';
+                    }
+
+                    statusContainer.textContent = '';
+
+                    var prefix = document.createTextNode('Cody is currently ');
+                    var statusSpan = document.createElement('span');
+                    statusSpan.style.color = statusColor;
+                    statusSpan.textContent = state;
+                    
+                    statusContainer.appendChild(prefix);
+                    statusContainer.appendChild(statusSpan);
+
+                    if (gameName && (state === 'playing' || state === 'online')) {
+                        var suffix = document.createTextNode(' playing ' + gameName);
+                        statusContainer.appendChild(suffix);
+                    }
+                }
+            } else {
+                statusContainer.textContent = 'Status currently unavailable';
+            }
+        }
+    };
+
+    xhr.onerror = function() {
+        var statusContainer = document.getElementById('status-container');
+        if (statusContainer) {
+            statusContainer.textContent = 'Status currently unavailable';
+        }
+    };
+
+    xhr.send();
+}
+
+updatePresence();
+setInterval(updatePresence, 30000);</script>
+</body>
+</html>

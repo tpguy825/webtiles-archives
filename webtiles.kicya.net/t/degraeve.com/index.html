@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+<head>
+<style>#answer1, #answer2, #answer3, #answer4, #answer5, #a1, #a2, #a3, #a4, #a5, #b1, #b2, #b3, #b4, #b5, #c1, #c2, #c3, #c4, #c5, #d1, #d2, #d3, #d4, #d5, #e1, #e2, #e3, #e4, #e5, #f1, #f2, #f3, #f4, #f5, #g1, #g2, #g3, #g4, #g5, #h1, #h2, #h3, #h4, #h5, #guesstd1, #guesstd2, #guesstd3, #guesstd4 {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: arial, verdana, sans-serif;
+  display: inline;
+}
+
+#newgamebutton, #helpbutton {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+#submitbutton {
+  border: 0;
+  margin: 0;
+  padding: 0 0 0 6px;
+  display: inline;
+}
+
+.row {
+  text-align: left;
+  background: #fff;
+  border: 0;
+  width: 120px;
+  margin: 0;
+  padding: 0;
+  font-family: arial, verdana, sans-serif;
+}
+
+.hiddenrow, .guessrow {
+  text-align: left;
+  background: #fff;
+  border: 0;
+  width: 120px;
+  margin: 0;
+  padding: 3px 0 0;
+  font-family: arial, verdana, sans-serif;
+  font-size: 8pt;
+}
+
+p {
+  text-align: left;
+  background: #fff;
+  border: 0;
+  margin: 0;
+  padding: 6px 0 0;
+  font-family: arial, verdana, sans-serif;
+  font-size: 8pt;
+}
+
+#helpPanel {
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+img.clickable {
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<center>
+
+  
+  <div id="helpPanel" style="padding:10px;">
+    <p>
+      <img id="helpClose" class="clickable" src="close.png" width="15" height="15" align="right" alt="Close">
+      Guess the colors of the hidden pegs at the top of the board.
+    </p>
+    <p>Click on the pegs at the bottom of the board to make your selection and then press 'guess'.</p>
+    <p>
+      For each peg that is the correct color but not in the correct place, a small white peg will appear.
+      For each peg that is the correct color AND in the correct place, a small black peg will appear.
+    </p>
+  </div>
+
+  
+  <div id="game" style="margin-top:10px;">
+<div class="hiddenrow"><div id="answer1"><img id="answerImg1" src="pegunknown.png" width="15" height="15" alt="Answer 1"></div><div id="answer2"><img id="answerImg2" src="pegunknown.png" width="15" height="15" alt="Answer 2"></div><div id="answer3"><img id="answerImg3" src="pegunknown.png" width="15" height="15" alt="Answer 3"></div><div id="answer4"><img id="answerImg4" src="pegunknown.png" width="15" height="15" alt="Answer 4"></div><div id="answer5"></div></div><div class="row"><div id="a1"><img src="pegblank.png" width="15" height="15" alt="a1"></div><div id="a2"><img src="pegblank.png" width="15" height="15" alt="a2"></div><div id="a3"><img src="pegblank.png" width="15" height="15" alt="a3"></div><div id="a4"><img src="pegblank.png" width="15" height="15" alt="a4"></div><div id="a5"></div></div><div class="row"><div id="b1"><img src="pegblank.png" width="15" height="15" alt="b1"></div><div id="b2"><img src="pegblank.png" width="15" height="15" alt="b2"></div><div id="b3"><img src="pegblank.png" width="15" height="15" alt="b3"></div><div id="b4"><img src="pegblank.png" width="15" height="15" alt="b4"></div><div id="b5"></div></div><div class="row"><div id="c1"><img src="pegblank.png" width="15" height="15" alt="c1"></div><div id="c2"><img src="pegblank.png" width="15" height="15" alt="c2"></div><div id="c3"><img src="pegblank.png" width="15" height="15" alt="c3"></div><div id="c4"><img src="pegblank.png" width="15" height="15" alt="c4"></div><div id="c5"></div></div><div class="row"><div id="d1"><img src="pegblank.png" width="15" height="15" alt="d1"></div><div id="d2"><img src="pegblank.png" width="15" height="15" alt="d2"></div><div id="d3"><img src="pegblank.png" width="15" height="15" alt="d3"></div><div id="d4"><img src="pegblank.png" width="15" height="15" alt="d4"></div><div id="d5"></div></div><div class="row"><div id="e1"><img src="pegblank.png" width="15" height="15" alt="e1"></div><div id="e2"><img src="pegblank.png" width="15" height="15" alt="e2"></div><div id="e3"><img src="pegblank.png" width="15" height="15" alt="e3"></div><div id="e4"><img src="pegblank.png" width="15" height="15" alt="e4"></div><div id="e5"></div></div><div class="row"><div id="f1"><img src="pegblank.png" width="15" height="15" alt="f1"></div><div id="f2"><img src="pegblank.png" width="15" height="15" alt="f2"></div><div id="f3"><img src="pegblank.png" width="15" height="15" alt="f3"></div><div id="f4"><img src="pegblank.png" width="15" height="15" alt="f4"></div><div id="f5"></div></div><div class="row"><div id="g1"><img src="pegblank.png" width="15" height="15" alt="g1"></div><div id="g2"><img src="pegblank.png" width="15" height="15" alt="g2"></div><div id="g3"><img src="pegblank.png" width="15" height="15" alt="g3"></div><div id="g4"><img src="pegblank.png" width="15" height="15" alt="g4"></div><div id="g5"></div></div><div class="row"><div id="h1"><img src="pegblank.png" width="15" height="15" alt="h1"></div><div id="h2"><img src="pegblank.png" width="15" height="15" alt="h2"></div><div id="h3"><img src="pegblank.png" width="15" height="15" alt="h3"></div><div id="h4"><img src="pegblank.png" width="15" height="15" alt="h4"></div><div id="h5"></div></div><div class="guessrow"><div id="guesstd1"><img id="guessImg1" class="clickable" src="peg1.png" width="15" height="15" alt="Guess 1"></div><div id="guesstd2"><img id="guessImg2" class="clickable" src="peg1.png" width="15" height="15" alt="Guess 2"></div><div id="guesstd3"><img id="guessImg3" class="clickable" src="peg1.png" width="15" height="15" alt="Guess 3"></div><div id="guesstd4"><img id="guessImg4" class="clickable" src="peg1.png" width="15" height="15" alt="Guess 4"></div><div id="submitbutton"><img id="guessButton" class="clickable" src="guess.png" width="40" height="15" alt="Guess"></div></div>    <div class="row"><div id="newgamebutton"><img id="newGameButton" class="clickable" src="newgame.png" width="15" height="15" alt="New game"></div><div id="helpbutton"><img id="helpButton" class="clickable" src="help.png" width="15" height="15" alt="Help"></div></div>
+
+  </div> 
+
+</center>
+<script type="text/tilescript">
+"use strict";
+
+var currentrow = 0;
+var pg = "";
+var answer = getanswer();
+var rowprefixes = ["a","b","c","d","e","f","g","h"];
+
+// guess state (1..6 each)
+var guessValues = [1, 1, 1, 1];
+
+// --- CACHED ELEMENT REFERENCES (key fix) ---
+var guessImgEls = [
+  document.getElementById("guessImg1"),
+  document.getElementById("guessImg2"),
+  document.getElementById("guessImg3"),
+  document.getElementById("guessImg4")
+];
+
+var guessTdEls = [
+  document.getElementById("guesstd1"),
+  document.getElementById("guesstd2"),
+  document.getElementById("guesstd3"),
+  document.getElementById("guesstd4")
+];
+
+var guessButtonEl   = document.getElementById("guessButton");
+var newGameButtonEl = document.getElementById("newGameButton");
+var helpButtonEl    = document.getElementById("helpButton");
+var helpCloseEl     = document.getElementById("helpClose");
+
+var answerImgEls = [
+  document.getElementById("answerImg1"),
+  document.getElementById("answerImg2"),
+  document.getElementById("answerImg3"),
+  document.getElementById("answerImg4")
+];
+
+// -----------------------------------------------------
+// DOM utilities (ES5-compatible, no innerHTML)
+// -----------------------------------------------------
+
+function clearChildren(el) {
+  while (el && el.firstChild) {
+    el.removeChild(el.firstChild);
+  }
+}
+
+function setCellPeg(divId, src) {
+  var div = document.getElementById(divId);
+  if (!div) return;
+  var img = div.getElementsByTagName("img")[0];
+  if (img) img.src = src;
+}
+
+function clearCell(divId) {
+  var div = document.getElementById(divId);
+  if (!div) return;
+  clearChildren(div);
+}
+
+function setResultPegs(divId, pegTypes) {
+  var div = document.getElementById(divId);
+  if (!div) return;
+
+  clearChildren(div);
+
+  var i, img;
+  for (i = 0; i < pegTypes.length; i++) {
+    img = document.createElement("img");
+    img.width = 7;
+    img.height = 7;
+    img.alt = pegTypes[i];
+    img.src = (pegTypes[i] === "black") ? "pegblacksmall.png" : "pegwhitesmall.png";
+    div.appendChild(img);
+  }
+}
+
+// Reattach cached guess images back into the guess row containers
+function showGuessControls() {
+  var i, container, img;
+  for (i = 0; i < 4; i++) {
+    container = guessTdEls[i];
+    img = guessImgEls[i];
+
+    if (container && img && img.parentNode !== container) {
+      clearChildren(container);
+      container.appendChild(img);
+    }
+  }
+}
+
+// Replace the guess row UI with a message, without losing the guess <img> elements
+function setGuessMessage(text, color) {
+  var g1 = guessTdEls[0];
+  var g2 = guessTdEls[1];
+  var g3 = guessTdEls[2];
+  var g4 = guessTdEls[3];
+
+  // Move images out by clearing, but they remain in memory via guessImgEls[]
+  clearChildren(g1);
+  clearChildren(g2);
+  clearChildren(g3);
+  clearChildren(g4);
+
+  var span = document.createElement("span");
+  span.style.color = color;
+  span.style.fontWeight = "bold";
+  span.appendChild(document.createTextNode(text));
+  g1.appendChild(span);
+}
+
+// -----------------------------------------------------
+// Game logic (no forms)
+// -----------------------------------------------------
+
+function cyclechoice(guessnum) {
+  // guessnum is 1..4
+  var idx = guessnum - 1;
+  var next = guessValues[idx] + 1;
+  if (next > 6) next = 1;
+
+  guessValues[idx] = next;
+
+  var img = guessImgEls[idx];
+  if (img) img.src = "peg" + next + ".png";
+}
+
+function newgame() {
+  answer = getanswer();
+  currentrow = 0;
+  pg = "";
+
+  // reset hidden answer row
+  if (answerImgEls[0]) answerImgEls[0].src = "pegunknown.png";
+  if (answerImgEls[1]) answerImgEls[1].src = "pegunknown.png";
+  if (answerImgEls[2]) answerImgEls[2].src = "pegunknown.png";
+  if (answerImgEls[3]) answerImgEls[3].src = "pegunknown.png";
+  clearCell("answer5");
+
+  // reset guess values + images
+  guessValues = [1, 1, 1, 1];
+
+  if (guessImgEls[0]) guessImgEls[0].src = "peg1.png";
+  if (guessImgEls[1]) guessImgEls[1].src = "peg1.png";
+  if (guessImgEls[2]) guessImgEls[2].src = "peg1.png";
+  if (guessImgEls[3]) guessImgEls[3].src = "peg1.png";
+
+  // restore active guess row
+  showGuessControls();
+
+  // ensure guess button visible again
+  if (guessButtonEl) guessButtonEl.style.display = "inline";
+
+  // reset board rows
+  var r, c;
+  var cols = ["1","2","3","4"];
+  for (r = 0; r < rowprefixes.length; r++) {
+    for (c = 0; c < cols.length; c++) {
+      setCellPeg(rowprefixes[r] + cols[c], "pegblank.png");
+    }
+    clearCell(rowprefixes[r] + "5");
+  }
+}
+
+function makeamove() {
+  pg = accumulateguesses();
+  var moves = pg.split(",");
+  var i, move;
+
+  for (i = 0; i < moves.length; i++) {
+    move = moves[i];
+
+    outputrow(move, currentrow);
+    currentrow = currentrow + 1;
+
+    if ((currentrow === 8) && (move !== answer)) {
+      youlose();
+      break;
+    }
+    if (move === answer) {
+      youwin();
+      break;
+    }
+  }
+
+  currentrow = 0;
+}
+
+function getanswer() {
+  var peg1 = Math.ceil(Math.random() * 6);
+  var peg2 = Math.ceil(Math.random() * 6);
+  var peg3 = Math.ceil(Math.random() * 6);
+  var peg4 = Math.ceil(Math.random() * 6);
+  return String(peg1) + String(peg2) + String(peg3) + String(peg4);
+}
+
+function accumulateguesses() {
+  var guessStr =
+    String(guessValues[0]) +
+    String(guessValues[1]) +
+    String(guessValues[2]) +
+    String(guessValues[3]);
+
+  if (pg === "") pg = guessStr;
+  else pg = pg + "," + guessStr;
+
+  return pg;
+}
+
+function outputrow(m, cr) {
+  var rowPrefix = rowprefixes[cr];
+  if (!rowPrefix) return;
+
+  setCellPeg(rowPrefix + "1", "peg" + m.substring(0,1) + ".png");
+  setCellPeg(rowPrefix + "2", "peg" + m.substring(1,2) + ".png");
+  setCellPeg(rowPrefix + "3", "peg" + m.substring(2,3) + ".png");
+  setCellPeg(rowPrefix + "4", "peg" + m.substring(3,4) + ".png");
+
+  evaluaterow(m, cr);
+}
+
+function evaluaterow(m, cr) {
+  var gg1 = m.substring(0,1);
+  var gg2 = m.substring(1,2);
+  var gg3 = m.substring(2,3);
+  var gg4 = m.substring(3,4);
+
+  var aa1 = answer.substring(0,1);
+  var aa2 = answer.substring(1,2);
+  var aa3 = answer.substring(2,3);
+  var aa4 = answer.substring(3,4);
+
+  var results = [];
+
+  // exact matches -> black
+  if (gg1 === aa1) { results.push("black"); gg1 = "X1"; aa1 = "Y1"; }
+  if (gg2 === aa2) { results.push("black"); gg2 = "X2"; aa2 = "Y2"; }
+  if (gg3 === aa3) { results.push("black"); gg3 = "X3"; aa3 = "Y3"; }
+  if (gg4 === aa4) { results.push("black"); gg4 = "X4"; aa4 = "Y4"; }
+
+  // color matches wrong position -> white
+  if (gg1 === aa2) { results.push("white"); gg1 = "Z1"; aa2 = "W2"; }
+  if (gg1 === aa3) { results.push("white"); gg1 = "Z1"; aa3 = "W3"; }
+  if (gg1 === aa4) { results.push("white"); gg1 = "Z1"; aa4 = "W4"; }
+
+  if (gg2 === aa1) { results.push("white"); gg2 = "Z2"; aa1 = "W1"; }
+  if (gg2 === aa3) { results.push("white"); gg2 = "Z2"; aa3 = "W3"; }
+  if (gg2 === aa4) { results.push("white"); gg2 = "Z2"; aa4 = "W4"; }
+
+  if (gg3 === aa1) { results.push("white"); gg3 = "Z3"; aa1 = "W1"; }
+  if (gg3 === aa2) { results.push("white"); gg3 = "Z3"; aa2 = "W2"; }
+  if (gg3 === aa4) { results.push("white"); gg3 = "Z3"; aa4 = "W4"; }
+
+  if (gg4 === aa1) { results.push("white"); gg4 = "Z4"; aa1 = "W1"; }
+  if (gg4 === aa2) { results.push("white"); gg4 = "Z4"; aa2 = "W2"; }
+  if (gg4 === aa3) { results.push("white"); gg4 = "Z4"; aa3 = "W3"; }
+
+  setResultPegs(rowprefixes[cr] + "5", results);
+}
+
+function youwin() {
+  if (answerImgEls[0]) answerImgEls[0].src = "peg" + answer.substring(0,1) + ".png";
+  if (answerImgEls[1]) answerImgEls[1].src = "peg" + answer.substring(1,2) + ".png";
+  if (answerImgEls[2]) answerImgEls[2].src = "peg" + answer.substring(2,3) + ".png";
+  if (answerImgEls[3]) answerImgEls[3].src = "peg" + answer.substring(3,4) + ".png";
+  clearCell("answer5");
+
+  if (guessButtonEl) guessButtonEl.style.display = "none";
+  setGuessMessage("win!", "#090");
+}
+
+function youlose() {
+  if (answerImgEls[0]) answerImgEls[0].src = "peg" + answer.substring(0,1) + ".png";
+  if (answerImgEls[1]) answerImgEls[1].src = "peg" + answer.substring(1,2) + ".png";
+  if (answerImgEls[2]) answerImgEls[2].src = "peg" + answer.substring(2,3) + ".png";
+  if (answerImgEls[3]) answerImgEls[3].src = "peg" + answer.substring(3,4) + ".png";
+  clearCell("answer5");
+
+  if (guessButtonEl) guessButtonEl.style.display = "none";
+  setGuessMessage("lose!", "#c00");
+}
+
+// -----------------------------------------------------
+// Help panel show/hide
+// -----------------------------------------------------
+
+function showHelp() {
+  var helpPanel = document.getElementById("helpPanel");
+  var game = document.getElementById("game");
+  if (!helpPanel || !game) return;
+
+  helpPanel.style.visibility = "visible";
+  helpPanel.style.display = "block";
+
+  game.style.visibility = "hidden";
+  game.style.display = "none";
+}
+
+function hideHelp() {
+  var helpPanel = document.getElementById("helpPanel");
+  var game = document.getElementById("game");
+  if (!helpPanel || !game) return;
+
+  helpPanel.style.visibility = "hidden";
+  helpPanel.style.display = "none";
+
+  game.style.visibility = "visible";
+  game.style.display = "block";
+}
+
+// -----------------------------------------------------
+// Wire up events (NO DOMContentLoaded)
+// -----------------------------------------------------
+
+function bindEvents() {
+  if (guessImgEls[0]) guessImgEls[0].addEventListener("click", function () { cyclechoice(1); });
+  if (guessImgEls[1]) guessImgEls[1].addEventListener("click", function () { cyclechoice(2); });
+  if (guessImgEls[2]) guessImgEls[2].addEventListener("click", function () { cyclechoice(3); });
+  if (guessImgEls[3]) guessImgEls[3].addEventListener("click", function () { cyclechoice(4); });
+
+  if (guessButtonEl) guessButtonEl.addEventListener("click", function () { makeamove(); });
+  if (newGameButtonEl) newGameButtonEl.addEventListener("click", function () { newgame(); });
+
+  if (helpButtonEl) helpButtonEl.addEventListener("click", function () { showHelp(); });
+  if (helpCloseEl) helpCloseEl.addEventListener("click", function () { hideHelp(); });
+}
+
+bindEvents();
+</script>
+
+</body>
+</html>

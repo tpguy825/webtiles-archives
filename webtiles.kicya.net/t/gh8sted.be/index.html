@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>:root {
+  background-color: #111;
+}
+
+.tile-body {
+  background-color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: DeterminationMono;
+  src: url("font/DTM-MONO.OTF") format("opentype");
+}
+
+* {
+  color: #fff;
+  font-family: DeterminationMono, sans-serif;
+  text-decoration: none;
+}
+
+.text {
+  font-size: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-70%, -35%);
+}
+
+.greytext {
+  color: #272727;
+  font-size: 7px;
+  position: absolute;
+}
+
+.container {
+  z-index: 1;
+  background-image: url("imgs/coolbggrid.png");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  width: 250px;
+  height: 250px;
+  animation: 4s linear infinite moveGrid;
+  position: absolute !important;
+}
+
+.buttons {
+  flex-direction: column;
+  justify-content: center;
+  align-self: flex-end;
+  align-items: flex-end;
+  gap: 10px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(10%)translateY(-30%);
+}
+
+.button {
+  color: #fff;
+  background-color: #000;
+  border: 2px solid #fff;
+  padding: 5px 10px;
+  transition: all .5s;
+
+  &:hover {
+    cursor: pointer;
+    color: #d0ff00;
+    border: 2px solid #d0ff00;
+
+    & a {
+      color: #d0ff00;
+      transition: all .5s;
+    }
+  }
+}
+
+@keyframes moveGrid {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 200px 200px;
+  }
+}
+
+img {
+  image-rendering: auto;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+}
+</style>
+</head>
+
+<body id="body">
+    <div class="container">
+        <img src="imgs/IconForWebtile.png">
+
+
+        <div class="text">
+            Look my cool tile <br>
+            <span class="greytext"> (click for some cool stuff to happen) </span>
+            <br>
+            there is nothing interesting on my site bruhhhh            
+        </div>    
+
+        <div class="buttons">
+            <button class="button"><a href="fightPage/index.html">Fight :)</a></button>
+            <button class="button"><a href="https://gh8sted.be/dustcalculator/" target="_blank">Dust Calc</a></button>
+        </div>
+    </div>
+
+    <div id="sfx">
+        <audio src="sfx/riff.ogg" class="riff" preload="metadata"></audio>
+        <audio src="sfx/normalSelect.mp3" class="normalSelect" preload="metadata"></audio>
+        <audio src="sfx/moveSelect.mp3" class="moveSelect" preload="metadata"></audio>
+    </div>
+
+    <script type="text/tilescript">var body = document.querySelector('body') || document.querySelector('div .container').parentElement;
+
+var audio = document.querySelector('.riff');
+var normalSelect = document.querySelector('.normalSelect');
+var moveSelect = document.querySelector('.moveSelect');
+
+var buttons = document.querySelectorAll('.button');
+var anchor = document.querySelector('.backButton');
+
+
+buttons.forEach(function (button) {
+    var anchor = button.querySelector('a');
+    var targetHref = anchor ? anchor.href : null;
+    
+    // Handle button clicks (includes clicks on anchor due to bubbling)
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        if (targetHref !== null) {
+            normalSelect.play();
+            normalSelect.currentTime = 0.2;
+
+            setTimeout(function () {
+                window.location.href = targetHref;
+            }, 400);
+        }
+    });
+    
+    // Also prevent default on anchor clicks directly (in case bubbling doesn't work)
+    if (anchor) {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+        });
+    }
+    
+    button.addEventListener('mouseenter', function () {
+        moveSelect.currentTime = 0;
+        moveSelect.play();
+    });
+});
+
+if (anchor) {
+    anchor.addEventListener('mouseenter', function () {
+        moveSelect.currentTime = 0;
+        moveSelect.play();
+    });
+
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        normalSelect.play();
+        normalSelect.currentTime = 0.2;
+
+        setTimeout(function () {
+            window.location.href = anchor.href;
+        }, 400);
+    });
+}
+
+
+audio.volume = 0;
+//audio.play();
+
+//console.log(body);
+
+body.addEventListener('mouseenter', function (event) {
+    /*console.log(event);
+    console.log("entered");*/
+    audio.currentTime = 0;
+    //audio.play();
+});
+
+/*body.addEventListener('mouseleave', function (event) {
+    console.log(event);
+    console.log("left");
+    //audio.pause();
+});*/</script>
+</body>
+
+</html>

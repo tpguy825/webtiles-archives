@@ -1,0 +1,225 @@
+<!DOCTYPE html>                                                                                                                                                                                                                                                         
+<html lang="en">
+<head>
+	<style>@font-face {
+  font-family: PixelifySans;
+  src: url("fonts/PixelifySans.ttf") format("truetype");
+}
+
+.tile-body {
+  color: #fff;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+#puzzle {
+  border-spacing: 0;
+  margin-top: 8px;
+}
+
+#puzzle th, td {
+  margin: 0;
+  padding: 0;
+}
+
+.selected {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #ff0;
+}
+
+.puzzle-block {
+  background-image: url("puzzle260117.png");
+  width: 53px;
+  height: 50px;
+}
+
+.p1A {
+  background-position: 0 0;
+}
+
+.p1B {
+  background-position: -53px 0;
+}
+
+.p1C {
+  background-position: -106px 0;
+}
+
+.p1D {
+  background-position: -159px 0;
+}
+
+.p2A {
+  background-position: 0 -50px;
+}
+
+.p2B {
+  background-position: -53px -50px;
+}
+
+.p2C {
+  background-position: -106px -50px;
+}
+
+.p2D {
+  background-position: -159px -50px;
+}
+
+.p3A {
+  background-position: 0 -100px;
+}
+
+.p3B {
+  background-position: -53px -100px;
+}
+
+.p3C {
+  background-position: -106px -100px;
+}
+
+.p3D {
+  background-position: -159px -100px;
+}
+
+.p4A {
+  background-position: 0 -150px;
+}
+
+.p4B {
+  background-position: -53px -150px;
+}
+
+.p4C {
+  background-position: -106px -150px;
+}
+
+.p4D {
+  background-position: -159px -150px;
+}
+
+.pixel {
+  font-family: PixelifySans, MS Ghotic, Arial;
+}
+
+.main-window {
+  background-image: url("bg_collab.gif");
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.main-windowp {
+  background-image: url("bgwbackbtn.png");
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.deepFried {
+  image-rendering: pixelated;
+}
+
+.game-button {
+  image-rendering: pixelated;
+  color: #fff;
+  cursor: pointer;
+  border-style: solid;
+  background-color: #000;
+  border-image-source: url("9slice_buttonlink.png");
+  border-image-slice: 9;
+  border-image-width: 8px;
+  border-image-repeat: round;
+  margin: 4px;
+}
+
+.game-button:hover {
+  border-image-source: url("9slice_buttonlinkhover.png");
+}
+
+.nineslice {
+  image-rendering: pixelated;
+  color: #fff;
+  cursor: pointer;
+  border-style: solid;
+  background-color: #000;
+  border-image-source: url("9slice_buttonlink.png");
+  border-image-slice: 9;
+  border-image-width: 8px;
+  border-image-repeat: round;
+  min-width: 96px;
+  min-height: 16px;
+  padding: 7px;
+  font-size: 16px;
+}
+
+.nineslice:hover {
+  border-image-source: url("9slice_buttonlinkhover.png");
+}
+
+.container {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 212px;
+  margin: 12px 12px 25px 16px;
+  padding-left: 4px;
+  padding-right: 4px;
+  display: flex;
+  overflow-y: auto;
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: #625198;
+}
+
+.container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #a093c5;
+}
+</style>
+</head>
+    <body>
+        <div class="main-window pixel deepFried"> 
+			<div class="container" style="align-items: center; justify-items: center;">
+				<a href="https://yumekuni.moe" target="_blank" style="color: white; text-decoration: none;">
+                    <span style="display: flex; flex-direction: row; gap: 4px; align-items:center; justify-items: center; ">
+                        <img style="width: 43px; height: 43px; margin-top: 8px;" src="moon.gif">
+
+                        <p style="font-size: 16px;">
+                            YUMEKUNI POCKET
+                        </p>
+                    </span>
+                </a>
+                
+                <div style="margin-top: 24px; display: flex; flex-direction: column; flex-wrap: wrap; gap: 4px; align-items: center;">
+                    <a target="_blank" href="https://yumekuni.moe/gallery">
+                        <button class="nineslice pixel" >
+                            Arts
+                        </button></a>
+                    <a target="_blank" href="https://yumekuni.moe/blog">   
+                        <button class="nineslice pixel">
+                            Blog
+                        </button>
+                    </a> 
+					 <a href="puzzlev2.html">   
+                    <button class="nineslice pixel">
+                        Daily Puzzle game
+                    </button>
+                    </a>
+
+                </div>
+				
+                
+         
+            </div>
+        </div>
+        <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    </body>
+</html>

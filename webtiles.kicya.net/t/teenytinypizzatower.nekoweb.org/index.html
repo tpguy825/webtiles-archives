@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    
+    <style>.tile-body {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.container {
+  width: 500%;
+  height: 500%;
+}
+
+.scrolling-bg {
+  background-image: url("assets/tiles.jpg");
+  background-repeat: repeat;
+  width: 400%;
+  height: 400%;
+  animation: 3s linear infinite slide;
+  position: absolute;
+  overflow: hidden;
+}
+
+.grad {
+  background: linear-gradient(#0000 0%, #000 100%);
+  width: 400%;
+  height: 50px;
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+
+.logo {
+  transform-origin: 480px 280px;
+  background-image: url("assets/logoV2.png");
+  background-repeat: no-repeat;
+  width: 400%;
+  height: 400%;
+  animation: 4s ease-in-out infinite logo-rot, 1s ease-out infinite logo-scale;
+  position: absolute;
+  top: -62.5%;
+  left: -145%;
+  overflow: hidden;
+}
+
+.pep {
+  transform-origin: 125px 125px;
+  background-image: url("assets/pepwalk-export.gif");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  animation: 4s linear infinite pep;
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  scale: 75%;
+}
+
+.noi {
+  transform-origin: 125px 125px;
+  background-image: url("assets/noiwalk-export.gif");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  animation: 4s linear infinite noi;
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  scale: 75%;
+}
+
+@keyframes pep {
+  0% {
+    transform: translate3d(125%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-125%, 0, 0);
+  }
+}
+
+@keyframes noi {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-125%, 0, 0);
+  }
+
+  50.01% {
+    transform: translate3d(-125%, -150%, 0);
+  }
+
+  50.02% {
+    transform: translate3d(125%, -150%, 0);
+  }
+
+  50.03% {
+    transform: translate3d(125%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translate3d(-200px, -400px, 0);
+  }
+
+  100% {
+    transform: translate3d(-400px, -200px, 0);
+  }
+}
+
+@keyframes logo-rot {
+  0% {
+    rotate: 5deg;
+  }
+
+  50% {
+    rotate: -5deg;
+  }
+
+  100% {
+    rotate: 5deg;
+  }
+}
+
+@keyframes logo-scale {
+  0% {
+    transform: scaleX(30%)scaleY(30%);
+  }
+
+  .1% {
+    transform: scaleX(20%)scaleY(40%);
+  }
+
+  50% {
+    transform: scaleX(30%)scaleY(30%);
+  }
+
+  50.1% {
+    transform: scaleX(45%)scaleY(20%);
+  }
+
+  100% {
+    transform: scaleX(30%)scaleY(30%);
+  }
+}
+
+p {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 40%;
+}
+</style>
+</head>
+<body>
+    <a href="https://x.com/PT_TeenyTiny" title="Check out Teeny Tiny Pizza Tower on Twitter!" target="_blank">
+        <div>
+            <p>
+               Loading...
+            </p>
+        </div>
+        <div class="scrolling-bg"></div>
+        <div class="logo"></div>
+        <div class="pep"></div>
+        <div class="noi"></div>
+        <div class="grad"></div>
+    </a>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    <style>html, .tile-body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.tile {
+  color: #eaeaea;
+  background-color: #000;
+  background-image: url("bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #222;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.tile:before {
+  content: "";
+  background: #0009;
+  transition: background .2s;
+  position: absolute;
+  inset: 0;
+}
+
+.content {
+  z-index: 1;
+  text-align: center;
+  padding: 8px;
+  position: relative;
+}
+
+.title {
+  letter-spacing: .22em;
+  opacity: .95;
+  margin-bottom: 8px;
+  font-size: 1.35rem;
+}
+
+.subtitle {
+  opacity: .85;
+  font-size: .7rem;
+  line-height: 1.45;
+}
+
+.tile:hover:before, .tile:focus:before {
+  background: #0006;
+}
+
+.tile:hover .subtitle {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+    <a class="tile" href="https://rpmn0ise.neocities.org/" target="_blank" rel="noopener">
+        <div class="content">
+            <div class="title">RPMN0ISE</div>
+            <div class="subtitle">
+                A personal place for tech, Linux, audio, gaming, and cyber culture.<br>
+                Honest, clean, and built with purpose.
+            </div>
+        </div>
+    </a>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+// Tile active only
+console.log("RPMN0ISE tile loaded");
+</script>
+</body>
+</html>

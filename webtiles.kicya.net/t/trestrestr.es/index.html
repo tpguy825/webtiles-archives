@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>.tile-body {
+  color: #000;
+  background: #fff;
+  font-family: MS Gothic, sans-serif;
+}
+
+.border {
+  outline-offset: -2px;
+  pointer-events: none;
+  border: 1px solid #000;
+  outline: 1px solid #fff;
+  width: 248px;
+  height: 248px;
+  margin: 0;
+  position: absolute;
+}
+
+header {
+  background: #fff url("checker.gif");
+  border-bottom: 1px solid #000;
+  outline: 1px solid #fff;
+  margin: 0;
+  padding: 6px;
+}
+
+header h1, nav ul li {
+  background: #fff;
+  border: 1px solid #000;
+  outline: 1px solid #fff;
+  max-width: fit-content;
+}
+
+header h1 {
+  margin: 0;
+  padding: 3px;
+  font-size: 21px;
+}
+
+nav ul {
+  margin: 5px 0 0;
+  padding: 0;
+}
+
+ul li {
+  padding: 2px;
+  font-size: 12px;
+  list-style-type: none;
+  display: inline;
+}
+
+ul li a:any-link {
+  color: #000;
+  text-decoration: none;
+}
+
+ul li a:hover:before {
+  content: ">";
+}
+
+a:any-link {
+  color: #000;
+}
+
+main {
+  margin-left: 10px;
+}
+</style>
+</head>
+<body>
+<span class="border"></span>
+<header>
+<h1>333's Tile<img style="margin:0 3px 0 6px" src="mini-me.png"></h1>
+<nav>
+<ul>
+<li><a href="https://trestrestr.es" target="_blank">website</a></li>
+<li><a href="https://dumb.trestrestr.es" target="_blank">DUMB webring</a></li>
+<li><a href="https://trestrestr-es.tumblr.com/post/803511610005209088/commissions-are-open-limited-slots-because-i" target="_blank">commissions</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<p>Making steady progress.</p>
+<p>Open to being part of clan, by <br>the way. :&gt;</p>
+<p>by <a href="https://trestrestr.es" target="_blank">333/Mateo</a></p>
+</main>
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

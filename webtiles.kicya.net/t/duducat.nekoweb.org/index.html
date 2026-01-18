@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  box-sizing: border-box;
+  color: #fff;
+  background: #000;
+  border: 1px solid #000;
+  border-bottom: none;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.tile-container {
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  z-index: 1;
+  border: 2px solid #fff;
+  width: 220px;
+  position: absolute;
+  inset: 20px 14px auto;
+  overflow: hidden;
+}
+
+.tile-holder {
+  aspect-ratio: 1;
+  width: 216px;
+  transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(0, 1, 0, 1);
+  position: absolute;
+  transform: perspective(1000px)translateZ(-110px);
+}
+
+.tile-holder .tile {
+  background: #000;
+  outline: 2px solid #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.tile-holder .tile:first-child {
+  transform: translateZ(110px);
+}
+
+.tile-holder .tile:nth-child(2) {
+  transform: translateX(-110px)rotateY(-90deg);
+}
+
+.tile-holder .tile:nth-child(3) {
+  transform: translateZ(-110px)rotateY(180deg);
+}
+
+.tile-holder .tile:nth-child(4) {
+  transform: translateX(110px)rotateY(90deg);
+}
+
+.tile-holder .tile-link {
+  color: #fff;
+  box-sizing: border-box;
+  align-items: end;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+.tile-holder .tile-link > img {
+  z-index: -1;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.tile-holder .tile-name {
+  box-sizing: border-box;
+  color: #fff;
+  z-index: 1;
+  background: linear-gradient(#0000, #0001, #0004, #0009, #000c);
+  width: 100%;
+  padding: 24px 8px 8px;
+  display: block;
+  position: absolute;
+  inset: auto 0 0;
+}
+
+#tile-nav-previous, #tile-nav-next {
+  z-index: 2;
+  color: #fff;
+  opacity: 0;
+  background: none;
+  border: none;
+  padding: 0 .05em .25em;
+  font-size: 3em;
+  transition: opacity 2s;
+  position: absolute;
+  inset: 1.5em auto;
+  transform: translateY(0);
+}
+
+.tile-body:hover :is(#tile-nav-previous, #tile-nav-next) {
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+#tile-nav-previous:active, #tile-nav-next:active {
+  color: #fffa;
+}
+
+#tile-nav-previous {
+  background: radial-gradient(at 0, #000, #0000 75%);
+  padding-right: .1em;
+  left: 0;
+}
+
+#tile-nav-next {
+  background: radial-gradient(at 100%, #000, #0000 75%);
+  padding-left: .1em;
+  right: 0;
+}
+
+#quote-box {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 20px;
+}
+
+#border {
+  pointer-events: none;
+  border: 5px solid #fff;
+  border-bottom: none;
+  outline: 10px solid #000;
+  position: absolute;
+  inset: 0;
+}
+</style>
+    
+</head>
+<body>
+    <div class="tile-container">
+        <div class="tile-holder" style="animation-play-state: running">
+            <div class="tile" style="background: transparent; transform-style: preserve-3d; pointer-events: none">
+                <div style="position: absolute; inset: 0; transform: rotateX(90deg); transform-origin: bottom; background: black">
+                </div>
+                <div style="position: absolute; inset: 0; transform: translateZ(-200px); display: flex; flex-flow: column; justify-content: top;">
+        			<div style="font-size: 40px; line-height: 0.8em; transform: scaleY(1.5); transform-origin: top left">
+                        duducat's webtiles<i>!</i>
+                    </div>
+                </div>
+                <div style="position: absolute; inset: auto 25% 0 0; transform: translateZ(-50px) rotateY(10deg) rotateX(10deg); transform-origin: bottom left; font-size: 0.8em; border: 2px solid white; background: black; padding: .5em">
+                    (click a tile, then press arrow buttons to navigate)
+                </div>
+            </div>
+            <div class="tile">
+                <a class="tile-link" href="https://duducat.moe/gacha" target="_blank">
+                    <img src="images/gacha.png">
+                    <span class="tile-name" style="transform: translateZ(0.001px); backface-visibility: hidden">One Trillion Free Draws</span>
+                </a>
+            </div>
+            <div class="tile">
+                <a class="tile-link" href="https://github.com/FFF40/JANOARG" target="_blank">
+                    <img src="images/fff40.gif">
+                    <span class="tile-name" style="transform: translateZ(0.001px); backface-visibility: hidden">JANOARG</span>
+                </a>
+            </div>
+            <div class="tile">
+                <a href="https://duducat.moe/stuff/bingo/?board=indie-web" target="_blank">
+                    <img src="images/bingo.png">
+                    <span class="tile-name" style="transform: translateZ(0.001px); backface-visibility: hidden">Indie Web Site Bingo</span>
+                </a>
+            </div>
+        </div>
+        <button id="tile-nav-previous">&lsaquo;</button>
+        <button id="tile-nav-next">&rsaquo;</button>
+    </div>
+    <div id="border">
+    </div>
+    <script type="text/tilescript">var index = 0;
+var auto = true;
+
+function updateIndex() {
+    var element = document.getElementsByClassName("tile-holder")[0];
+    element.style.transform = "perspective(1000px) translateZ(-110px) rotateY(" + (index * 90) + "deg)";
+    element.style.transitionTimingDuration = auto ? "cubic-bezier(0, 1, 0, 1)" : "cubic-bezier(1, 0, 0, 1)";
+}
+
+setInterval(function() {
+    if (!auto) return;
+	index++;
+    updateIndex();
+}, 10000)
+
+function movePrevious() {
+    auto = false;
+    index++;
+    updateIndex();
+}
+
+function moveNext() {
+    auto = false;
+    index--;
+    updateIndex();
+}
+
+
+document.getElementById("tile-nav-previous").onclick = movePrevious;
+document.getElementById("tile-nav-next").onclick = moveNext;</script>
+</body>
+</html>

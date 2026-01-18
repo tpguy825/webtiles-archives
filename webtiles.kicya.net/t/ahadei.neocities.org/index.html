@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>.tile-body {
+  background-color: #111;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#tile {
+  cursor: none;
+  user-select: none;
+  background-color: #111;
+  border: 1px solid #333;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#buffer2 {
+  display: none;
+}
+
+.hud {
+  color: #555;
+  pointer-events: none;
+  z-index: 10;
+  font-family: Courier New, monospace;
+  font-size: 10px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+</style>
+</head>
+<body>
+
+<div id="tile">
+  <canvas id="buffer1" width="250" height="250"></canvas>
+  <canvas id="buffer2" width="250" height="250"></canvas>
+  <div class="hud" id="statusDiv">...</div>
+</div>
+
+<script type="text/tilescript">
+(function() {
+  var attempts = 0;
+  var loader = setInterval(function() {
+    var b1 = document.getElementById('buffer1');
+    var b2 = document.getElementById('buffer2');
+    
+    if (b1 && b2) {
+      clearInterval(loader);
+      try {
+        startFastEngine(b1, b2);
+      } catch (e) {}
+    } else {
+      attempts++;
+      if (attempts > 100) clearInterval(loader);
+    }
+  }, 50);
+
+  function startFastEngine(c1, c2) {
+    var ctx1 = c1.getContext('2d');
+    var ctx2 = c2.getContext('2d');
+    var statusDiv = document.getElementById('statusDiv');
+    var tile = document.getElementById('tile');
+    
+    var currentCanvas = c1;
+    var ctx = ctx1;
+
+    statusDiv.innerText = "high perf mode";
+
+    var mx = 125, my = 125;
+    var food = [];
+    
+    var px = 125, py = 125;
+    var vx = 0, vy = 0;
+    var mood = 0; 
+    var blink = 0;
+
+    tile.onmousemove = function(e) {
+      var r = tile.getBoundingClientRect();
+      mx = e.clientX - r.left;
+      my = e.clientY - r.top;
+    };
+
+    tile.onmousedown = function(e) {
+      var r = tile.getBoundingClientRect();
+      food.push({
+        x: e.clientX - r.left,
+        y: e.clientY - r.top,
+        life: 100
+      });
+      statusDiv.innerText = "feed";
+      statusDiv.style.color = "#fff";
+      return false; 
+    };
+
+    function swap() {
+      if (currentCanvas === c1) {
+        c1.style.display = 'none';
+        c2.style.display = 'block';
+        currentCanvas = c2;
+        ctx = ctx2;
+      } else {
+        c2.style.display = 'none';
+        c1.style.display = 'block';
+        currentCanvas = c1;
+        ctx = ctx1;
+      }
+    }
+
+    function run() {
+      ctx.fillStyle = 'rgba(17, 17, 17, 0.3)';
+      ctx.fillRect(0, 0, 250, 250);
+
+      var tx = mx;
+      var ty = my;
+      var speed = 0.03;
+      
+      if (food.length > 0) {
+        tx = food[0].x;
+        ty = food[0].y;
+        speed = 0.07;
+        mood = 1; 
+      } else {
+        mood = 0; 
+        statusDiv.innerText = "idling";
+        statusDiv.style.color = "#555";
+      }
+
+      var dx = tx - px;
+      var dy = ty - py;
+      
+      vx += dx * speed;
+      vy += dy * speed;
+      vx *= 0.85;
+      vy *= 0.85;
+      px += vx;
+      py += vy;
+
+      
+      for (var i = food.length - 1; i >= 0; i--) {
+        var f = food[i];
+        ctx.fillStyle = 'rgba(255, 255, 100, ' + (f.life/100) + ')';
+        
+        var jx = (Math.random()-0.5)*4;
+        ctx.fillRect(f.x + jx - 2, f.y + jx - 2, 4, 4);
+        
+        
+        var distSq = (f.x - px)*(f.x - px) + (f.y - py)*(f.y - py);
+        if (distSq < 900) { 
+          food.splice(i, 1);
+          statusDiv.innerText = "yum";
+          statusDiv.style.color = "#fa0";
+        }
+      }
+
+
+      
+      var jx = (Math.random()-0.5) * 3;
+      var jy = (Math.random()-0.5) * 3;
+      
+
+      ctx.fillStyle = (mood === 1) ? '#522' : '#225';
+      ctx.fillRect(px + jx - 12, py + jy - 12, 24, 24);
+
+
+      ctx.fillStyle = (mood === 1) ? '#f88' : '#acf';
+      ctx.fillRect(px + jx - 10, py + jy - 10, 20, 20);
+
+      
+      blink--;
+      if (blink < -150) blink = 10;
+
+      if (blink <= 0) {
+
+        var lx = (dx > 0) ? 2 : -2;
+        var ly = (dy > 0) ? 2 : -2;
+        
+        ctx.fillStyle = '#000';
+        
+        ctx.fillRect(px + jx - 6 + lx, py + jy - 4 + ly, 4, 4);
+        
+        ctx.fillRect(px + jx + 2 + lx, py + jy - 4 + ly, 4, 4);
+      } else {
+        
+        ctx.fillStyle = '#000';
+        ctx.fillRect(px + jx - 8, py + jy - 2, 16, 2);
+      }
+      
+      
+      ctx.fillStyle = '#444';
+      ctx.fillRect(mx - 1, my - 5, 2, 10);
+      ctx.fillRect(mx - 5, my - 1, 10, 2);
+
+      swap();
+      setTimeout(run, 0);
+    }
+
+    run();
+  }
+})();
+</script>
+
+</body>
+</</html>

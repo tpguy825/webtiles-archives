@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>* {
+  box-sizing: border-box;
+}
+
+html, .tile-body {
+  height: 100%;
+}
+
+.tile-body {
+  color: #000;
+  background: #fff;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  overflow: hidden;
+}
+
+.tile {
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.top {
+  background: #00000008;
+  border: 1px solid #00000059;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 10px;
+  display: flex;
+}
+
+.brand {
+  flex-direction: column;
+  display: flex;
+}
+
+.title {
+  letter-spacing: .3px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sub {
+  opacity: .85;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.cta {
+  color: #000;
+  white-space: nowrap;
+  background: #0000000d;
+  border: 1px solid #00000073;
+  padding: 6px 8px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.cta:hover {
+  background: #0000001f;
+  border-color: #000000bf;
+}
+
+.mid {
+  flex-direction: column;
+  flex: auto;
+  gap: 8px;
+  min-height: 0;
+  display: flex;
+}
+
+.gameWrap {
+  background: #fff;
+  border: 1px solid #00000059;
+  flex: auto;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#snakeCanvas {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cmd {
+  background: #00000008;
+  border: 1px solid #00000059;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+}
+
+.prompt {
+  color: #000;
+  opacity: .9;
+}
+
+.cmdtext {
+  opacity: .95;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.status {
+  color: #000;
+  background: #0000000d;
+  border: 1px solid #00000040;
+  padding: 2px 6px;
+}
+
+.statusLive {
+  color: #fff;
+  background: #c00;
+  border-color: #00000059;
+  box-shadow: 0 0 8px #cc0000a6, 0 0 16px #cc000059;
+}
+
+.bot {
+  flex: none;
+}
+
+.links {
+  opacity: .9;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  display: flex;
+}
+
+.links a {
+  color: #000;
+  border-bottom: 1px dotted #00000073;
+  text-decoration: none;
+}
+
+.links a:hover {
+  border-bottom-color: #000000d9;
+}
+
+.sep {
+  opacity: .6;
+}
+
+a:focus {
+  outline-offset: 2px;
+  outline: 2px solid #000000b3;
+}
+</style>
+</head>
+<body>
+  <div class="tile">
+    <div class="top">
+      <div class="brand">
+        <div class="title">RedtailWorks</div>
+        <div class="sub">personal slice of the net</div>
+      </div>
+
+      <a class="cta" href="https://www.redtail.works" target="_blank" rel="noopener noreferrer">
+        enter →
+      </a>
+    </div>
+
+    <div class="mid">
+      <div class="gameWrap" aria-label="Snake preview (auto-play)">
+        <canvas id="snakeCanvas"></canvas>
+      </div>
+
+      <div class="cmd">
+        <span class="prompt">/:</span>
+        <span class="cmdtext">Snake (auto)</span>
+        <span class="spacer"></span>
+        <span class="status statusLive" id="rwStatus">ONLINE</span>
+      </div>
+    </div>
+
+    <div class="bot">
+      <div class="links">
+        <a href="https://www.redtail.works/#whois#whois" target="_blank" rel="noopener noreferrer">whois</a>
+        <span class="sep">·</span>
+        <a href="https://www.redtail.works/#projects#projects" target="_blank" rel="noopener noreferrer">projects</a>
+        <span class="sep">·</span>
+        <a href="https://www.redtail.works/#photos#photos" target="_blank" rel="noopener noreferrer">photos</a>
+      </div>
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+//
+// Snake: pseudo-random movement + growth + random fruit spawns.
+// Safety rule: until 20 fruits are eaten, it avoids self-collision (and avoids instant reverse).
+// After 20 fruits, it stops playing safe and will eventually die and reset.
+
+(function () {
+  var canvas = document.getElementById('snakeCanvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  // Grid
+  var COLS = 18;
+  var ROWS = 12;
+
+  // Timing
+  var TICK_MS = 110;
+
+  // Game tuning
+  var START_LEN = 4;
+  var FRUITS_SAFE = 20;       // play safe until this many fruits eaten
+  var GROW_PER_FRUIT = 5;     // growth steps added per fruit
+  var POST_SAFE_GRACE = 90;   // after FRUITS_SAFE, allow collisions; force a reset if still alive this long
+
+  // Rendering / resize
+  var lastW = 0, lastH = 0;
+
+  // State
+  var snake = [];  // head at [0]
+  var dir = { x: 1, y: 0 };
+  var grow = 0;
+  var fruitsEaten = 0;
+  var postSafeSteps = 0;
+  var fruit = { x: 0, y: 0 };
+
+  // Deterministic PRNG (so it "looks random" but is stable)
+  var seed = 2463534242; // change this number for a different pattern
+
+  function rand32() {
+    // xorshift32
+    seed ^= (seed << 13);
+    seed ^= (seed >>> 17);
+    seed ^= (seed << 5);
+    return (seed >>> 0);
+  }
+
+  function randInt(n) {
+    return (rand32() % n) | 0;
+  }
+
+  function fitCanvasIfNeeded() {
+    var w = canvas.clientWidth || 1;
+    var h = canvas.clientHeight || 1;
+    if (w !== lastW || h !== lastH) {
+      lastW = w;
+      lastH = h;
+      canvas.width = w;
+      canvas.height = h;
+      return true;
+    }
+    return false;
+  }
+
+  function inBounds(x, y) {
+    return x >= 0 && x < COLS && y >= 0 && y < ROWS;
+  }
+
+  function cellInSnake(x, y, ignoreTail) {
+    var len = snake.length;
+    var max = ignoreTail ? (len - 1) : len;
+    for (var i = 0; i < max; i++) {
+      if (snake[i].x === x && snake[i].y === y) return true;
+    }
+    return false;
+  }
+
+  function spawnFruit() {
+    var tries = 0;
+    while (tries < 400) {
+      var fx = randInt(COLS);
+      var fy = randInt(ROWS);
+      if (!cellInSnake(fx, fy, false)) {
+        fruit.x = fx;
+        fruit.y = fy;
+        return;
+      }
+      tries++;
+    }
+
+    for (var y = 0; y < ROWS; y++) {
+      for (var x = 0; x < COLS; x++) {
+        if (!cellInSnake(x, y, false)) {
+          fruit.x = x;
+          fruit.y = y;
+          return;
+        }
+      }
+    }
+
+    fruit.x = snake[0].x;
+    fruit.y = snake[0].y;
+  }
+
+  function reset() {
+    fitCanvasIfNeeded();
+
+    snake = [];
+    fruitsEaten = 0;
+    postSafeSteps = 0;
+    grow = 0;
+
+    var sx = (COLS / 2) | 0;
+    var sy = (ROWS / 2) | 0;
+
+    for (var i = 0; i < START_LEN; i++) {
+      snake.push({ x: sx - i, y: sy });
+    }
+
+    dir.x = 1; dir.y = 0;
+
+    spawnFruit();
+    draw();
+  }
+
+  function reverseOf(d) {
+    return d.x === -dir.x && d.y === -dir.y;
+  }
+
+  function scoreDir(d) {
+    var head = snake[0];
+    var nx = head.x + d.x;
+    var ny = head.y + d.y;
+
+    var dist = Math.abs(fruit.x - nx) + Math.abs(fruit.y - ny);
+    var noise = (randInt(9) - 4); // -4..+4
+    return (dist * 10) + noise;
+  }
+
+  function pickDirection(safeMode) {
+    var dirs = [
+      { x: 1, y: 0 },
+      { x: -1, y: 0 },
+      { x: 0, y: 1 },
+      { x: 0, y: -1 }
+    ];
+
+    // Shuffle deterministically
+    for (var i = dirs.length - 1; i > 0; i--) {
+      var j = randInt(i + 1);
+      var tmp = dirs[i]; dirs[i] = dirs[j]; dirs[j] = tmp;
+    }
+
+    var head = snake[0];
+    var best = null;
+    var bestScore = 1e9;
+
+    var ignoreTail = (grow === 0);
+
+    for (var k = 0; k < 4; k++) {
+      var d = dirs[k];
+
+      // avoid instant reverse
+      if (reverseOf(d)) continue;
+
+      var nx = head.x + d.x;
+      var ny = head.y + d.y;
+
+      if (!inBounds(nx, ny)) continue;
+
+      if (safeMode) {
+        if (cellInSnake(nx, ny, ignoreTail)) continue;
+      }
+
+      var s = scoreDir(d);
+      if (s < bestScore) {
+        bestScore = s;
+        best = d;
+      }
+    }
+
+    if (best) return best;
+
+    // Relaxation
+    if (safeMode) {
+      for (k = 0; k < 4; k++) {
+        d = dirs[k];
+        if (reverseOf(d)) continue;
+        nx = head.x + d.x;
+        ny = head.y + d.y;
+        if (!inBounds(nx, ny)) continue;
+        return d;
+      }
+    }
+
+    // Fallback
+    var keepNx = head.x + dir.x;
+    var keepNy = head.y + dir.y;
+    if (inBounds(keepNx, keepNy)) return { x: dir.x, y: dir.y };
+    return { x: -dir.x, y: -dir.y };
+  }
+
+  function step() {
+    if (fitCanvasIfNeeded()) draw();
+
+    var safeMode = (fruitsEaten < FRUITS_SAFE);
+
+    var nd = pickDirection(safeMode);
+    dir.x = nd.x; dir.y = nd.y;
+
+    var head = snake[0];
+    var nx = head.x + dir.x;
+    var ny = head.y + dir.y;
+
+    if (!inBounds(nx, ny)) {
+      reset();
+      return;
+    }
+
+    var ignoreTail = (grow === 0);
+    if (cellInSnake(nx, ny, ignoreTail)) {
+      reset();
+      return;
+    }
+
+    snake.unshift({ x: nx, y: ny });
+
+    if (nx === fruit.x && ny === fruit.y) {
+      fruitsEaten += 1;
+      grow += GROW_PER_FRUIT;
+      spawnFruit();
+    }
+
+    if (grow > 0) {
+      grow -= 1;
+    } else {
+      snake.pop();
+    }
+
+    if (!safeMode) {
+      postSafeSteps += 1;
+      if (postSafeSteps >= POST_SAFE_GRACE) {
+        reset();
+        return;
+      }
+    }
+
+    draw();
+  }
+
+  function draw() {
+    var cw = canvas.width;
+    var ch = canvas.height;
+
+    var cell = Math.floor(Math.min(cw / COLS, ch / ROWS));
+    if (cell < 2) cell = 2;
+
+    var gw = cell * COLS;
+    var gh = cell * ROWS;
+    var ox = Math.floor((cw - gw) / 2);
+    var oy = Math.floor((ch - gh) / 2);
+
+    ctx.clearRect(0, 0, cw, ch);
+
+    // Background (white)
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, cw, ch);
+
+    // Border
+    ctx.strokeStyle = "rgba(0,0,0,0.25)";
+    ctx.strokeRect(ox + 0.5, oy + 0.5, gw - 1, gh - 1);
+
+    // Fruit (red)
+    ctx.fillStyle = "#cc0000";
+    ctx.fillRect(ox + fruit.x * cell, oy + fruit.y * cell, cell, cell);
+
+    // Snake (black)
+    ctx.fillStyle = "#000000";
+    for (var i = 0; i < snake.length; i++) {
+      var s = snake[i];
+      ctx.fillRect(ox + s.x * cell, oy + s.y * cell, cell, cell);
+    }
+  }
+
+  reset();
+  setInterval(step, TICK_MS);
+})();
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<style>.tile-body {
+  background-image: url("image.jpg");
+  background-size: cover;
+  font-family: cursive;
+
+  & div {
+    color: #fff;
+    background: #000;
+    border: 3px solid #fff;
+    outline: 1px solid #000;
+    margin: 1rem;
+    padding: 1rem;
+    transition: all .125s ease-in-out;
+    position: absolute;
+    bottom: 0;
+    transform: scaleY(0);
+  }
+}
+</style>
+<script type="text/tilescript">document
+    .getElementsByTagName("div")[0]
+    .style
+    .transform = "scaleY(1)";</script>
+<div>Waiting for something to happen?</div>

@@ -1,0 +1,105 @@
+<style>html, .tile-body {
+  background-color: #000;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.void-container {
+  background-color: #000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: Courier New, Courier, monospace;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.stars {
+  pointer-events: none;
+  opacity: .6;
+  will-change: transform, opacity;
+  background-image: radial-gradient(2px 2px at 20px 30px, #eee, #0000), radial-gradient(1.5px 1.5px at 140px 70px, #fff, #0000), radial-gradient(2px 2px at 50px 160px, #ddd, #0000), radial-gradient(1px 1px at 80px 120px, #fff, #0000), radial-gradient(2.5px 2.5px at 110px 10px, #ccc, #0000), radial-gradient(1.5px 1.5px at 150px 50px, #fff, #0000);
+  background-size: 180px 180px;
+  animation: 6s ease-in-out infinite alternate breathe;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes breathe {
+  from {
+    opacity: .4;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.logo-link {
+  letter-spacing: 2px;
+  text-align: center;
+  z-index: 2;
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+  will-change: background-position;
+  background: linear-gradient(to left, #444 20%, #fff 40% 60%, #444 80%) 0 0 / 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  animation: 3s linear infinite shine;
+}
+
+@keyframes shine {
+  from {
+    background-position: 200%;
+  }
+
+  to {
+    background-position: 0%;
+  }
+}
+
+.enter-btn {
+  text-transform: lowercase;
+  cursor: pointer;
+  z-index: 2;
+  background: #000000b3;
+  border: 1px solid #444;
+  border-radius: 50px;
+  margin-top: 15px;
+  padding: 5px 16px;
+  font-family: Courier New, Courier, monospace;
+  font-size: 10px;
+  text-decoration: none;
+  transition: all .3s;
+  display: inline-block;
+  color: #888 !important;
+}
+
+.enter-btn:hover {
+  background: #111;
+  border-color: #fff;
+  color: #fff !important;
+}
+</style>
+
+<div class="void-container">
+  <div class="stars"></div>
+  
+  <a href="https://voiders.party" class="logo-link" target="_blank">
+    voiders.party
+  </a>
+  
+  <a href="https://voiders.party" class="enter-btn" target="_blank">
+    enter
+  </a>
+</div>

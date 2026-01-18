@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  user-select: none;
+  color: #fff;
+  background: linear-gradient(#000, #333 100%);
+  margin: 0;
+  padding: 0;
+}
+
+.absolute {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.color-bands {
+  height: 20px;
+  display: flex;
+}
+
+.color-bands div {
+  flex-grow: 1;
+}
+
+.color-bands .x {
+  background-color: #366fff;
+}
+
+.color-bands .y {
+  background-color: #ff3636;
+}
+
+.color-bands .z {
+  background-color: #36cd36;
+}
+
+.color-bands .dx {
+  background-color: #363636;
+}
+
+.w-u-a-s {
+  text-align: center;
+  filter: drop-shadow(3px 3px #000);
+  width: 90%;
+  font-family: Roboto, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  transform: rotate3d(1, 0, 1, 16deg);
+}
+
+.logo {
+  aspect-ratio: 1;
+  width: 50%;
+  animation: 2s ease-in-out infinite alternate swooming;
+}
+
+@keyframes swooming {
+  0% {
+    transform: scale(.7);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+</style>
+</head>
+<body>
+    
+    <div class="absolute">
+        <div id="wuas-show" style="margin-top: 30px; padding-left: 10px; padding-right: 10px; text-align: center; font-size: 0.8rem; opacity: 0.6; color: #FFF; display: none;">
+            <p>
+                (🔁 Reload the Tile to get new fortune. Click again to go to my site.)
+            </p>
+        </div>
+    </div>
+    <div class="absolute">
+        <a href="https://webtiles.kicya.net/t/glitchypsi.xyz/glitchypsi.xyz">
+        <div class="color-bands">
+            <div class="x"></div>
+            <div class="y"></div>
+            <div class="z"></div>
+            <div class="dx"></div>
+        </div>
+            </a>
+    </div>
+    <div class="absolute">
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+        <img class="logo" src="Starseal.png">    
+        </div>
+    </div>
+    <img src="picky.png" style="position: absolute; top: 0; right: 0; transform: translateX(20%); width: 20%;">
+    <div class="absolute" style="display: flex; flex-direction: column; justify-content: end;">
+        <div style="height: 50%; position: relative; bottom: 0; display:flex; align-items: center; justify-content: center; perspective: 30px;">
+            <p class="w-u-a-s">
+                CLICK TILE FOR RANDOM FORTUNE
+            </p>
+        </div>
+    </div>
+    <a class="absolute" href="https://glitchypsi.xyz" target="_blank"></a>
+    <script type="text/tilescript">var fortune = 
+[
+    "WISH UPON A STAR!",
+    "DRINK WATER.",
+    "YOU'RE DOING GREAT!",
+    "PLAY BRICKBREAKER SPRINT",
+    "YOU WILL FIND GREAT JOOJ IN A YOUTUBE POOP",
+    "LOWER YOUR USE OF SOCIAL MEDIA FOR PEACE",
+    "HAVE YOU TRIED BALATRO?",
+    "LOVE IS IN THE AIR? WRONG! CSS",
+    "YOU WILL SWOOCE RIGHT IN",
+    "YOU SHOULD NOT ENTERTAIN GENAI.",
+    "CAT PEOPLE ARE NEAT",
+    "DOG PEOPLE ARE NEAT",
+    "[Advertisement Blocked]",
+    ".NET ROCKS!!",
+    "YOU EVER DREAM THIS NAZ?",
+    "DO YOU KNOW WHO NAZ IS? I AM HE",
+    "MAJOR ARCANA IX",
+    "MAJOR ARCANA XX",
+    "MAJOR ARCANA XXI",
+]
+
+var wuas = document.querySelector(".w-u-a-s");
+var wuasShow = document.getElementById("wuas-show");
+
+function randomFortune(){
+    var index = Math.floor(Math.random() * fortune.length);
+    wuas.innerText = fortune[index];
+    wuasShow.style.display = "block";
+}
+
+setInterval(randomFortune(), 3000)</script>
+</body>
+</html>

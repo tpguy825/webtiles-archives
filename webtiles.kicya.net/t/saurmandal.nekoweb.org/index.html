@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>@font-face {
+  font-family: LibreBodoni;
+  src: url("LibreBodoni.ttf") format("truetype");
+}
+
+.tile-body {
+  background: url("tilebg.webp");
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+div {
+  color: #0000;
+  text-align: center;
+  word-break: break-all;
+  filter: blur(.5px);
+  -o-transition-duration: .2s;
+  background: url("tile.gif") center no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  width: 100%;
+  font-family: LibreBodoni, serif;
+  font-size: 190%;
+  font-weight: 700;
+  line-height: .3;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+  -webkit-transform: scale(1, 1.8);
+  -ms-transform: scale(1, 1.8);
+  transform: scale(1, 1.8);
+}
+
+.active div {
+  -o-transition-duration: .2s;
+  word-break: break-word;
+  font-size: 120%;
+  line-height: .7;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
+a {
+  color: #0000;
+  -o-transition-duration: .2s;
+  text-decoration: none;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+}
+
+.active a {
+  color: #fe77c3;
+  -o-transition-duration: .2s;
+  mix-blend-mode: exclusion;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+}
+</style>
+</head>
+
+<body>
+    <div><a href="https://saurmandal.nekoweb.org" target="_blank">saurmanđal.nekoweb.org</a> visit now</div>
+</body>
+
+</html>

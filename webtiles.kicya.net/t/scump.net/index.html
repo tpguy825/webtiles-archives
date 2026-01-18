@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("bg.webp");
+  margin: 0;
+}
+
+#pug {
+  z-index: 2;
+  width: 180px;
+  display: block;
+  position: absolute;
+  top: 128px;
+  left: 80px;
+  transform: scale(1);
+}
+
+#thisdog {
+  z-index: 3;
+  display: block;
+  position: absolute;
+}
+
+#health-bar {
+  z-index: 9;
+  color: #fff;
+  width: 250px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+</style>
+</head>
+<body>
+    <img src="pug.webp" id="pug">
+    <a id="thisdog" href="https://scump.net" target="_blank"><img src="thisdog.webp"></a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var pug = document.getElementById("pug");
+var health_bar = document.getElementById("health-bar");
+
+var scale = 1;
+var max_health = 99999;
+var health = max_health;
+
+function update()
+{
+    if (scale < 5) {
+        scale += 0.01;
+    	pug.style['transform'] = 'scale(' + scale + ')';
+    }
+}
+
+function damage()
+{
+    health_bar.style.background = null;
+    health = Math.max(health - 11640, 0);
+    var percent = Math.floor(health / max_health * 100);
+    var gradient =
+        "linear-gradient(to right, " +
+    	"green " + percent + "%, " +
+        "green " + percent + "%, " +
+        "red "   + percent + "%, " +
+        "red)";
+    health_bar.setAttribute("style", "background:"+gradient);
+    health_bar.innerText = "HP " + health;
+}
+
+setInterval(damage, 1000);
+setInterval(update, 16.666);
+
+//"linear-gradient(to right, green 50%, green 50%, red 50%, red);"
+</script>
+    
+    <div id="health-bar" style="background:green">
+        HP 99999
+    </div>
+    
+    <img src="tetris-tile.webp" style="display:block;position:absolute;z-index:999" id="tetris-tile">
+    <script type="text/tilescript">document.getElementById("tetris-tile").style["display"]="none"</script>
+
+    
+</body>
+</html>

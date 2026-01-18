@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<style>.tile-body {
+  background-color: #000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+  height: 100vw;
+  margin: 0;
+  display: flex;
+}
+
+#clock {
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: #fff;
+  font-family: monospace;
+  font-size: 2em;
+}
+
+#clock__desc {
+  color: #fff;
+  opacity: .35;
+  font-style: italic;
+  font-weight: bold;
+}
+</style>
+	</head>
+	<body>
+        <div id="clock">#00000</div>
+        <small id="clock__desc">click me...</small>
+		<script type="text/tilescript">var clock = document.querySelector("#clock");
+var desc  = document.querySelector("#clock__desc");
+
+function
+zeroPad(str)
+{ return str.length == 1 ? "0"+str : str }
+
+function
+get_hex()
+{
+    var now = new Date();
+    var hrs = zeroPad(now.getHours().toString(16));
+    var mins = zeroPad(now.getMinutes().toString(16));
+    var secs = zeroPad(now.getSeconds().toString(16));
+    return "#"+hrs+mins+secs;
+}
+
+function
+set_hex()
+{
+    document.body.style.backgroundColor = clock.textContent = get_hex();
+}
+
+desc.textContent = "hexclock"
+
+set_hex();
+setInterval(set_hex, 1000);</script>
+	</body>
+</html>

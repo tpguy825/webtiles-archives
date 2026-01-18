@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  
+  
+  <style>.filter-btn {
+  color: #000;
+  background-color: bisque;
+  border-radius: 10px;
+  padding: .5rem 1rem;
+
+  &.checked {
+    color: bisque;
+    background-color: #000;
+  }
+
+  & input {
+    display: none;
+  }
+}
+
+.filters {
+  margin-bottom: 1rem;
+}
+
+#items {
+  color: #fff;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+
+  & li {
+    text-align: center;
+    padding: 5rem 0;
+  }
+}
+
+#items [data-category="red"] {
+  background-color: red;
+}
+
+#items [data-category="blue"] {
+  background-color: #00f;
+}
+
+#items [data-category="green"] {
+  background-color: green;
+}
+</style>
+</head>
+
+<body>
+    <h1>こんにちは！</h1>
+    <b>だい</b>です。
+    
+    
+    <p><a href="https://dai.nekoweb.org" target="_blank">dai</a>  <br><br>だよ </p>
+    
+    <figure>
+        
+    </figure>
+    
+    
+    
+  <div class="filters">
+    <label class="filter-btn"><input type="checkbox" value="red" autocomplete="off">Red</label>
+    <label class="filter-btn"><input type="checkbox" value="blue" autocomplete="off">Blue</label>
+    <label class="filter-btn"><input type="checkbox" value="green" autocomplete="off">Green</label>
+  </div>
+
+  <ul id="items">
+    <li data-category="red">a</li>
+    <li data-category="red">b</li>
+    <li data-category="blue">c</li>
+    <li data-category="blue">d</li>
+    <li data-category="green">e</li>
+    <li data-category="green">f</li>
+  </ul>
+
+  <script type="text/tilescript">
+    const filters = document.querySelectorAll('.filters input');
+    const items = document.querySelectorAll('#items li');
+    const filteredCat = new Set();
+
+    // Basic
+    filters.forEach(filter => {
+      filter.addEventListener('change', () => {
+        if (filter.checked) {
+          filteredCat.add(filter.value);
+          filter.parentElement.classList.add('checked');
+        } else {
+          filteredCat.delete(filter.value);
+          filter.parentElement.classList.remove('checked');
+        }
+
+        items.forEach(item => {
+          const cat = item.dataset.category;
+          item.hidden = filteredCat.has(cat);
+        });
+      });
+    });
+
+    // Extra Opt
+    // const itemsByCategory = {};
+
+    // items.forEach(item => {
+    //   const cat = item.dataset.category;
+    //   if (!itemsByCategory[cat]) {
+    //     itemsByCategory[cat] = [];
+    //   }
+    //   itemsByCategory[cat].push(item);
+    // });
+
+    // filters.forEach(filter => {
+    //   filter.addEventListener('change', () => {
+    //     const cat = filter.value;
+    //     const shouldHide = filter.checked;
+
+    //     if (shouldHide) {
+    //       filteredCat.add(cat);
+    //       filter.parentElement.classList.add('checked');
+    //     } else {
+    //       filteredCat.delete(cat);
+    //       filter.parentElement.classList.remove('checked');
+    //     }
+
+    //     itemsByCategory[cat].forEach(item => {
+    //       item.hidden = shouldHide;
+    //     });
+    //   });
+    // });
+  </script>
+
+</body>
+
+</html>

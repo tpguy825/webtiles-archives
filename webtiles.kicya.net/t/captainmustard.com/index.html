@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>.tile-body, html {
+  background-color: #87ceeb;
+  justify-content: center;
+  align-items: flex-start;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.artsy-text {
+  text-align: center;
+  z-index: 10;
+  color: #f4f4ed;
+  text-shadow: 0 0 10px #ffffe6cc, 2px 2px 4px #0000004d;
+  pointer-events: none;
+  width: 100%;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-style: italic;
+  position: absolute;
+  top: 25px;
+  transform: rotate(-3deg);
+}
+
+.cow-wrapper {
+  cursor: default;
+  user-select: none;
+  margin-top: 80px;
+  font-size: 100px;
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+
+<div class="artsy-text">rotate a cow<br>in your mind</div>
+
+<div id="cow" class="cow-wrapper">🐄</div>
+
+<script type="text/tilescript">
+  var cow = document.getElementById('cow');
+  var degree = 0;
+
+  // The same JavaScript loop to force-rotate the cow
+  setInterval(function() {
+    degree += 2; 
+    if (degree >= 360) {
+      degree = 0;
+    }
+    // We only rotate the cow element, not the text
+    cow.style.transform = "rotate(" + degree + "deg)";
+    cow.style.webkitTransform = "rotate(" + degree + "deg)";
+  }, 30);
+</script>
+
+</body>
+</html>

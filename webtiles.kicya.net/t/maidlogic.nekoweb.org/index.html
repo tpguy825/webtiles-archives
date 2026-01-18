@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("cate.png");
+  background-position: center;
+  background-size: cover;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+span {
+  position: absolute;
+  inset: 0;
+}
+
+:before {
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  background-image: url("maruchan.gif");
+  background-position: center;
+  background-size: cover;
+  transition: opacity .15s;
+  position: absolute;
+  inset: 0;
+}
+
+:hover:before {
+  opacity: 1;
+}
+
+p {
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<a href="https://conejo.website/coalition/cvlc" target="_blank" rel="noopener noreferrer">
+    <span></span>
+    </a>
+</body>
+</html>

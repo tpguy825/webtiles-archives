@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>* {
+  box-sizing: border-box;
+}
+
+a {
+  all: unset;
+  color: #fff;
+}
+
+.tile-body {
+  background: linear-gradient(#5b8d8d 0%, #3e6161 100%);
+  margin: 0;
+  font-family: monospace;
+}
+
+#flex {
+  flex-flow: column wrap;
+  display: flex;
+}
+
+.sgi-frame {
+  padding: 6px;
+}
+
+.sgi-gradient {
+  position: absolute;
+  border-width: 2.33px !important;
+}
+
+.sgi-gradient:first-child {
+  border: inset #ddd;
+  border-top: outset #5f5f5f;
+  border-left: outset #5f5f5f;
+  inset: 4px;
+}
+
+.sgi-gradient:nth-child(2) {
+  border: solid #aaa;
+  inset: 2px;
+}
+
+.sgi-gradient:nth-child(3) {
+  border: inset #5f5f5f;
+  border-top: outset #ddd;
+  border-left: outset #ddd;
+  inset: 0;
+}
+
+.joint {
+  pointer-events: none;
+  z-index: 6;
+  position: absolute;
+}
+
+.tlr {
+  clip-path: polygon(33% 0%, 33% 100%, 66% 100%, 100% 0%);
+  border-right: 6px groove #ddd;
+  width: 0;
+  height: 6px;
+  top: 0;
+  left: 32px;
+}
+
+.tlb {
+  clip-path: polygon(0% 33%, 100% 33%, 100% 66%, 0% 100%);
+  border-bottom: 6px groove #ddd;
+  width: 6px;
+  height: 0;
+  top: 32px;
+  left: 0;
+}
+
+.trl {
+  clip-path: polygon(33% 0%, 33% 100%, 66% 100%, 100% 0%);
+  border-right: 6px groove #ddd;
+  width: 0;
+  height: 6px;
+  top: 0;
+  right: 32px;
+}
+
+.trb {
+  clip-path: polygon(100% 33%, 0% 33%, 0% 66%, 100% 100%);
+  border-bottom: 6px groove #ddd;
+  width: 6px;
+  height: 0;
+  top: 32px;
+  right: 0;
+}
+
+.blr {
+  clip-path: polygon(33% 100%, 33% 0%, 66% 0%, 100% 100%);
+  border-right: 6px groove #ddd;
+  width: 0;
+  height: 6px;
+  bottom: 0;
+  left: 32px;
+}
+
+.blt {
+  clip-path: polygon(0% 33%, 100% 33%, 100% 66%, 0% 100%);
+  border-bottom: 6px groove #ddd;
+  width: 6px;
+  height: 0;
+  bottom: 32px;
+  left: 0;
+}
+
+.brl {
+  clip-path: polygon(33% 100%, 33% 0%, 66% 0%, 100% 100%);
+  border-left: 6px groove #ddd;
+  width: 0;
+  height: 6px;
+  bottom: 0;
+  right: 32px;
+}
+
+.brt {
+  clip-path: polygon(100% 33%, 0% 33%, 0% 66%, 100% 100%);
+  border-bottom: 6px groove #ddd;
+  width: 6px;
+  height: 0;
+  bottom: 32px;
+  right: 0;
+}
+
+h3 {
+  margin-top: 8px;
+  padding-bottom: 8px;
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 5px;
+}
+
+th {
+  text-align: left;
+  border-bottom: 1px solid #333;
+  padding: 5px;
+  font-size: 11px;
+}
+
+td {
+  border-bottom: 1px solid #2a2a2a;
+  padding: 5px;
+  font-size: 12px;
+}
+</style>
+</head>
+<a href="https://molecule31.co.ua/indexnew.html" target="_blank"><body>
+    
+	<div class="sgi-frame" id="flex">
+                <div class="sgi-gradient"></div>
+                <div class="sgi-gradient"></div>
+                <div class="sgi-gradient"></div>
+                <div class="joint tlr"></div><div class="joint trl"></div>
+                <div class="joint tlb"></div><div class="joint trb"></div>
+                <div class="joint blt"></div><div class="joint brt"></div>
+                <div class="joint blr"></div><div class="joint brl"></div>
+    <div class="container">
+        <center><h3>Harmony Cluster Report</h3></center>
+        <table>
+            <thead>
+                <tr>
+                    <th>HOST</th>
+                    <th>STATUS</th>
+                    <th>UPTIME</th>
+                    <th>TEMP</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr><td colspan="4" style="text-align:center;">click on me to load</td></tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <script type="text/tilescript">
+        function updateClusterData() {
+            var tbody = document.getElementById('table-body');
+
+            var targetUrl = 'https://molecule31.co.ua/notindex/serverstatus/report.json';
+            var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(targetUrl);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', proxyUrl, true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            var hosts = data.hosts;
+
+                            while (tbody.firstChild) {
+                                tbody.removeChild(tbody.firstChild);
+                            }
+
+                            for (var i = 0; i < hosts.length; i++) {
+                                var host = hosts[i];
+                                var tr = document.createElement('tr');
+
+                                if (host.status) {
+                                    tr.className = host.status.toLowerCase();
+                                }
+
+                                var addCell = function(text) {
+                                    var td = document.createElement('td');
+                                    td.appendChild(document.createTextNode(text || '--'));
+                                    tr.appendChild(td);
+                                };
+
+                                addCell(host.hostname);
+                                addCell(host.status);
+                                addCell(host.uptime);
+                                addCell(host.temp);
+
+                                tbody.appendChild(tr);
+                            }
+
+                        } catch (err) {}
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        updateClusterData();
+    </script>
+    </body></a>
+</html>

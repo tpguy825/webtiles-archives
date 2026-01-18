@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: willow;
+  src: url("fonts/willow.ttf");
+}
+
+@font-face {
+  font-family: val;
+  src: url("fonts/AdorableDoll.ttf");
+}
+
+@font-face {
+  font-family: dico;
+  src: url("fonts/Dico.ttf");
+}
+
+.tile-body {
+  background-blend-mode: soft-light, normal;
+  color: #111;
+  background: linear-gradient(#0009 100%), url("imgs/pattern2.jpg") center / 30px;
+  margin: 0;
+  image-rendering: pixelated !important;
+}
+
+h1 {
+  color: #000;
+  font-family: val;
+  font-size: 23px;
+  font-weight: lighter;
+}
+
+h2 {
+  color: #000;
+  font-family: dico;
+  font-size: 9px;
+  font-weight: lighter;
+}
+
+button {
+  content: "";
+  pointer-events: none;
+  z-index: 2;
+  background: none;
+  border: 5px solid;
+  border-image: url("imgs/border2.png") 6 fill round;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  width: 9em;
+  height: 70px;
+  display: flex;
+  position: absolute;
+  top: 135px;
+  right: 22px;
+  overflow: hidden;
+}
+
+a {
+  background: url("imgs/pattern7.gif") center / 20px;
+  justify-content: center;
+  align-items: center;
+  width: 105px;
+  height: 90%;
+  font-family: dico;
+  display: flex;
+  color: #000 !important;
+}
+
+#decos {
+  content: "";
+  pointer-events: none;
+  z-index: 3;
+  background: url("imgs/decos.png") center / 100% no-repeat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+}
+
+#border {
+  content: "";
+  pointer-events: none;
+  background: url("imgs/webtilestest2.webp") center / 100% no-repeat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+}
+
+#container {
+  content: "";
+  background: url("imgs/container2.png") 50% 100% no-repeat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+}
+
+#containerwrapper {
+  background: url("imgs/pattern7.gif") center / 20px;
+  width: 105px;
+  height: 80%;
+  padding: 4px;
+  overflow: hidden;
+}
+
+#container * {
+  margin: 0;
+}
+</style>
+</head>
+<body>
+    <div id="title"></div>
+    <div id="decos"></div>
+   
+    <div id="container"></div>
+    <div id="border"></div>
+    
+   
+    <h1>
+        
+    </h1>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

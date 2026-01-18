@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>* {
+  font-family: monospace;
+}
+
+.tile-body {
+  color: #b4adbe;
+  background-image: linear-gradient(#70409c80, #381d5280), url("background.gif");
+  background-attachment: fixed;
+  padding: 5px;
+}
+
+.popup {
+  aspect-ratio: 1;
+  border: 3px solid #d2bff3;
+  border-radius: 15px;
+  flex-direction: column;
+  width: 232px;
+  display: flex;
+}
+
+.popup .title {
+  color: #d2bff3;
+  background: #8865a8a0;
+  border-radius: 12px 12px 0 0;
+  margin: 0;
+  padding: 3px 0 3px 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.popup .title button {
+  aspect-ratio: 1;
+  color: #d2bff3;
+  background: #a476cfa0;
+  border: 2px solid #d2bff3;
+  border-radius: 6px;
+  width: 20px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.popup .title button:hover {
+  filter: brightness(1.1);
+}
+
+.popup .title button:active {
+  filter: brightness(.9);
+}
+
+.popup .content {
+  text-align: center;
+  background: #4a3371a0;
+  border-radius: 0 0 10px 10px;
+  flex: 1;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 5px;
+  text-decoration: none;
+  display: flex;
+  color: inherit !important;
+}
+
+.content img, .content .message {
+  width: 50%;
+}
+
+.giviblend {
+  background-image: linear-gradient(#0000 0%, #5ecef9 60% 100%);
+  width: 250px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+</style>
+    </head>
+    <body>
+        <div class="popup">
+            <div class="title">
+                <span>skyla.moe ~ Hai :3</span>
+                <button>X</button>
+            </div>
+            <a href="https://skyla.moe/" target="_blank" class="content">
+                <img src="me.png">
+                <div class="message">
+                    <p style="font-weight: bold; font-size: 16px;">
+                        Seems you are trying to scroll WebTiles.
+                        <br>
+                        Need help with that?
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="giviblend"></div>
+    </body>
+</html>

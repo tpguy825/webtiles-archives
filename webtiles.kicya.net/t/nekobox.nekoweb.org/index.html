@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #f1f3f5;
+  background: #062f44;
+  padding: 6px;
+  overflow-y: auto;
+}
+
+a {
+  color: #30b8e6;
+
+  &:hover {
+    color: #4dc4eb;
+  }
+}
+
+.stat {
+  background: #2f366a;
+  margin-top: 6px;
+  padding: 6px;
+}
+</style>
+</head>
+<body>
+    <p>Some WebTiles Stats (by <a href="https://jbc.lol/" target="_blank">jbc.lol</a>)</p>
+    <div class="stat">
+        <p>
+            Total claimed tiles
+        </p>
+        <h1 id='totalClaimed'>
+            ----
+        </h1>
+    </div>
+    <div class="stat">
+        <p>
+            Total unclaimed tiles
+        </p>
+        <h1 id='totalUnclaimed'>
+            ----
+        </h1>
+    </div>
+    <div class="stat">
+        <p>
+            Locked tiles
+        </p>
+        <h1 id='locked'>
+            ----
+        </h1>
+    </div>
+    <div class="stat">
+        <p>
+            Days since WebTiles worm
+        </p>
+        <h1 id='sinceWorm'>
+            ----
+        </h1>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+function fetchXhr(url, callback) {
+    try {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.onload = function (e) {
+            try {
+                callback(JSON.parse(xhr.responseText))
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        xhr.send()
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+var totalClaimed = document.getElementById('totalClaimed')
+var totalUnclaimed = document.getElementById('totalUnclaimed')
+var locked = document.getElementById('locked')
+var sinceWorm = document.getElementById('sinceWorm')
+
+var dateSinceWorm = new Date('2026-01-16T00:46:56.852Z')
+
+fetchXhr('https://waftiles.waf.moe/webtilesStats', function (stats) {
+    totalClaimed.textContent = stats.claimedTiles
+    totalUnclaimed.textContent = stats.availableTiles
+    locked.textContent = stats.locks.join('; ')
+    
+    sinceWorm.textContent = new Date().getDate() - dateSinceWorm.getDate()
+})</script>
+</body>
+</html>

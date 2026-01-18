@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+<style>@keyframes floating-y {
+  0% {
+    transform: translateY(-5%);
+  }
+
+  100% {
+    transform: translateY(5%);
+  }
+}
+
+.tile-body {
+  background: url("250x250.jpg") no-repeat;
+}
+
+#🟦 {
+  white-space: nowrap;
+  display: flex;
+}
+
+#🎈 {
+  background: url("https://webtiles.kicya.net/t/fusen-k.pages.dev/fu-sen.png") no-repeat;
+  width: 225px;
+  height: 225px;
+  animation: 2.5s ease-in-out infinite alternate-reverse floating-y;
+  position: fixed;
+  top: 5px;
+  left: 18px;
+}
+
+#🔗 {
+  font-size: 15px;
+}
+
+a {
+  padding: 15px 250px 250px 15px;
+  text-decoration: none;
+  position: absolute;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div id="🟦">
+<div id="🎈"></div>
+<div id="🔗"><a href="https://fusen-k.pages.dev/" target="_blank">ふう🎀 せん🐰</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  margin: 0;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  34% {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  34.001% {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+#images a {
+  pointer-events: none;
+  opacity: 0;
+  animation-name: fade;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  position: absolute;
+  inset: 0;
+}
+
+#images a img {
+  width: 100%;
+  height: 100%;
+}
+
+#images #versus {
+  animation-delay: 0s;
+}
+
+#images #replay {
+  animation-delay: 2s;
+}
+
+#images #sleep {
+  animation-delay: 0s;
+}
+
+#images #force {
+  animation-delay: 2s;
+}
+
+#images #goin {
+  animation-delay: 4s;
+}
+
+#images #moving {
+  animation-delay: 10s;
+}
+
+:not(.active) #images a {
+  pointer-events: none !important;
+}
+
+#images .disabled {
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+</style>
+</head>
+<body>
+    <div id="images">
+        <a id="versus" class="disabled" href="https://kc-versus.tumblr.com/" target="_blank">
+        	<img src="covers/versus.webp">
+        </a>
+        <a id="replay" class="disabled" href="https://confetto.chu.jp/replay/" target="_blank">
+        	<img src="covers/replay.webp">
+        </a>
+        <a id="sleep" href="https://confetto.chu.jp/3leep/" target="_blank">
+        	<img src="covers/sleep.webp">
+        </a>
+        <a id="force" href="https://confetto.chu.jp/4orce/" target="_blank">
+        	<img src="covers/4orce.webp">
+        </a>
+        <a id="goin" href="https://nanahira.jp/goin/" target="_blank">
+        	<img src="covers/goin.webp">
+        </a>
+        <a id="moving" class="disabled" href="https://nanahira.jp/moving/" target="_blank">
+            <img src="covers/moving.webp">
+        </a>
+    </div>
+</body>
+</html>

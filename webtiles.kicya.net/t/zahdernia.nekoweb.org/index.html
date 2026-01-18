@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@keyframes headerGlow {
+  0% {
+    text-shadow: 0 0 3px #fff;
+  }
+
+  100% {
+    text-shadow: 0 0 5px #fff;
+  }
+}
+
+.hidden {
+  opacity: 0;
+  transition: all .5s;
+}
+
+html {
+  color: #fff;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.tile-body {
+  background-color: #200;
+  background-image: url("bg_stars.png");
+  background-attachment: fixed;
+  flex-direction: column;
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 250px;
+  min-height: 250px;
+  max-height: 250px;
+  display: flex;
+}
+
+main {
+  min-height: 0;
+  max-height: auto;
+  text-align: center;
+  background-color: #ffcccc70;
+  background-image: url("bg_plaid_overlay.png");
+  border-radius: 6px;
+  flex-direction: column;
+  flex-grow: 1;
+  height: auto;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  box-shadow: 0 0 5px #ffaaaa70;
+}
+
+div.fortune {
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+#fortune {
+  flex-grow: 1;
+  font-size: 1em;
+}
+
+#luckynumbers {
+  font-size: .7em;
+}
+
+#promise {
+  font-size: 1em;
+}
+
+p#promise {
+  min-height: 1em;
+  color: unset;
+}
+
+p#promise:hover {
+  text-shadow: 0 0 3px red;
+}
+
+footer, header {
+  text-align: center;
+  background-color: #ffcccc70;
+  background-image: url("bg_plaid_overlay.png");
+  border-radius: 6px;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 0 0 5px #ffcccc70;
+}
+
+header p {
+  animation: 1s ease-in-out infinite alternate headerGlow;
+}
+
+p {
+  color: #fff;
+  text-shadow: 0 0 5px #fcc;
+  margin: 2px;
+  padding: 2px;
+  font-family: Libertinus Mono, serif;
+  font-size: 1em;
+}
+
+a, a:visited {
+  color: #fff;
+  text-decoration: none;
+  transition: all .5s;
+}
+
+a:hover, a:hover:visited {
+  color: red;
+  text-shadow: 0 0 3px red;
+  text-decoration: none;
+  transition: all .5s;
+}
+
+button {
+  color: #fff;
+  background-color: #ffaaaa70;
+  border: none;
+  border-radius: 6px;
+  margin: 5px;
+  padding: 5px;
+  font-family: Libertinus Mono, serif;
+  text-decoration: none;
+  transition: all .5s;
+  box-shadow: 0 0 5px #ffaaaa70;
+}
+
+button:hover {
+  color: #100;
+  background-color: #fff;
+  border: none;
+  border-radius: 6px;
+  margin: 5px;
+  padding: 5px;
+  font-family: Libertinus Mono, serif;
+  transition: all .5s;
+  box-shadow: 0 0 5px #fff;
+}
+</style>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var fortuneButton = document.getElementById("generate"); 
+fortuneButton.addEventListener("click", getFortune);
+
+var fortune = document.getElementById("fortune");
+var luckynumbers = document.getElementById("luckynumbers");
+var promise = document.getElementById("promise");
+
+// Need a variable to hold the lucky numbers.
+
+var lucky1 = 0;
+var lucky2 = 0;
+var lucky3 = 0;
+var lucky4 = 0;
+var lucky5 = 0;
+var luckylist = [lucky1, lucky2, lucky3, lucky4, lucky5];
+
+var fortuneList = [
+    "You shall find the truth hidden in the weeds.",
+    "You shall obtain great wisdom within your near future.",
+    "You shall discover something new about yourself soon.",
+    "A new beginning awaits you. Go forth with wonder!",
+    "Love shall arrive in an unexpected way.",
+    "You will find great happiness in an odd, unexpected place.",
+    "A very important decision is on its way. Trust your heart.",
+    "You shall soon stumble upon a new hobby that grants you peace.",
+    "You are destined to find peace.",
+    "You will find meaning in something others find mundane.",
+    "A revelation is on its way to you.",
+    "You shall experience a breakthrough in something unexpected.",
+    "You are soon to reconnect with someone long forgotten.",
+    "You are about to enter a new stage of your life."
+]
+var pickedFortune = "";
+
+function getFortune() {
+	fortune.style="hidden";
+    luckynumbers.style="hidden";
+    
+    fortune.innerText = pickFortune();
+    luckynumbers.innerText = pickLuckyNumbers();
+    promise.innerText = "The world is at your fingertips."// "<a href='https://zahdernia.nekoweb.org'>The world is at your fingertips.</a>"
+    
+    fortune.style="";
+    luckynumbers.style="";
+}
+
+function pickFortune() {
+    pickedFortune = Math.floor(Math.random()*(fortuneList.length - 1));
+    
+    return fortuneList[pickedFortune];
+	}
+    
+function pickLuckyNumbers() {
+    
+    lucky1 = Math.floor(Math.random()*99) + 1;
+    
+    lucky2 = Math.floor(Math.random()*99) + 1;
+    while (lucky2 == lucky1) { 
+    	lucky2 = Math.floor(Math.random()*99) + 1;
+    }
+    
+    lucky3 = Math.floor(Math.random()*99) + 1;
+    while (lucky3 == lucky2) { 
+    	lucky3 = Math.floor(Math.random()*99) + 1;
+    }
+    
+    lucky4 = Math.floor(Math.random()*99) + 1;
+    while (lucky4 == lucky3) { 
+    	lucky4 = Math.floor(Math.random()*99) + 1;
+    }
+    
+    lucky5 = Math.floor(Math.random()*99) + 1;
+    while (lucky5 == lucky4) { 
+    	lucky5 = Math.floor(Math.random()*99) + 1;
+    }
+    
+    luckylist = [lucky1, lucky2, lucky3, lucky4, lucky5];
+    luckylist = luckylist.sort(function (a, b) {  return a - b;  });
+    
+    
+    return luckylist + "";
+    
+    
+}
+
+
+</script>
+</head>
+<body>
+    <header>
+        <p>
+            Queen's Fortune
+        </p>
+    </header>
+    <main>
+    	<div class="fortune">
+            <p id="fortune">
+            	<button id="generate">
+                    Click to acquire your fortune!
+                </button>
+        	</p>
+        </div>
+        <p id="luckynumbers"></p>
+    </main>
+    <footer>
+        <a href="https://zahdernia.nekoweb.org/" target="_blank" rel="noopener noreferrer">
+    		<p id="promise">❖</p>
+        </a>
+    </footer>
+</body>
+</html>

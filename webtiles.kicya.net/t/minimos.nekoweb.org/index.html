@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background: url("brand.png") 100% 0;
+  animation: 60s infinite ScreenSaver;
+}
+
+@keyframes ScreenSaver {
+  0% {
+    background-image: url("brand.png");
+  }
+
+  5% {
+    background-image: url("brand.png");
+  }
+
+  10% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  20% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  25% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  35% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  40% {
+    background-image: url("Fountains.png");
+  }
+
+  50% {
+    background-image: url("Fountains.png");
+  }
+
+  55% {
+    background-image: url("brand.png");
+  }
+
+  100% {
+    background-image: url("brand.png");
+  }
+}
+
+#screensaver {
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  background: url("https://webtiles.kicya.net/t/minimos.nekoweb.org/blocked") 100% 0;
+  width: 100%;
+  height: 100%;
+  transition: all 2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#screensaver:hover {
+  opacity: 1;
+  transition: all .2s;
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+    var audio = document.createElement("audio");
+    audio.src = "/Bad Apple.mp3";
+    audio.autoplay = true;
+    audio.loop = true;
+    document.body.appendChild(audio);
+ 	document.getElementById("screensaver").style.display ="block";
+    </script>
+    <div id="screensaver" style="display:none;background: url('https://cdn.discordapp.com/attachments/1461390422357049547/1461832409111855166/output_12.webp?ex=696bfd05&is=696aab85&hm=24d1ca61209789dd6cd519ef639dc23fc94583f797a370e89bcdbfbca444e622&')">
+        
+        <h6 style="position:absolute; bottom:-20px;">
+            This website is currently unsupported?
+        </h6>
+        
+    </div>
+</body>
+</html>

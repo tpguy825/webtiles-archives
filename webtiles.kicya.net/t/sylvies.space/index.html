@@ -1,0 +1,55 @@
+<style>@font-face {
+  font-family: Z;
+  src: url("https://webtiles.kicya.net/t/sylvies.space/Z.woff2");
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(15deg);
+  }
+
+  to {
+    transform: rotate(13deg);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 16px 16px;
+  }
+}
+
+.tile-body {
+  background: #181a1b url("b.webp");
+  animation: 1s linear infinite scroll;
+}
+
+.tile-body, a {
+  color: #e8e6e3;
+  border-color: #736b5e;
+}
+
+.tile-body {
+  text-shadow: 1px 1px #000;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+}
+
+h1 {
+  font-family: Z, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  font-size: 2.3em;
+  animation: .2s linear infinite alternate wiggle;
+  transform: rotate(-15deg);
+}
+
+#window {
+  image-rendering: unset;
+}
+</style>
+<center>
+	<h1>sylvie</h1>
+    <a href="https://sylvies.space" target="_blank"><img id="window" width="200" src="7window.png"></a>
+</center>

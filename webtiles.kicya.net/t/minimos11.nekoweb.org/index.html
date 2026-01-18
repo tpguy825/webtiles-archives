@@ -1,0 +1,280 @@
+<!DOCTYPE html>                                                                                                                                                                         
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@font-face {
+  font-family: roundedfont;
+  src: url("ARLRDBD.TTF");
+}
+
+.tile-body {
+  color: #111;
+  background: url("brand.png") 100% 100%;
+  font-family: roundedfont, arial;
+  font-size: 16px;
+  line-height: 1.2;
+  animation: 60s infinite ScreenSaver;
+}
+
+@keyframes ScreenSaver {
+  0% {
+    background-image: url("brand.png");
+  }
+
+  5% {
+    background-image: url("brand.png");
+  }
+
+  10% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  20% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  25% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  35% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  40% {
+    background-image: url("Fountains.png");
+  }
+
+  50% {
+    background-image: url("Fountains.png");
+  }
+
+  55% {
+    background-image: url("brand.png");
+  }
+
+  100% {
+    background-image: url("brand.png");
+  }
+}
+
+@keyframes ScreenSaverBG {
+  0% {
+    background-image: url("brand4.jpg");
+  }
+
+  10% {
+    background-image: url("brand4.jpg");
+  }
+
+  15% {
+    background-image: url("Mossy_surfaces4.jpg");
+  }
+
+  25% {
+    background-image: url("Mossy_surfaces4.jpg");
+  }
+
+  30% {
+    background-image: url("Fountains4.jpg");
+  }
+
+  40% {
+    background-image: url("Fountains4.jpg");
+  }
+
+  45% {
+    background-image: url("brand4.jpg");
+  }
+
+  100% {
+    background-image: url("brand4.jpg");
+  }
+}
+
+#screensaver {
+  opacity: 0;
+  background: #fff3 url("https://webtiles.kicya.net/t/minimos11.nekoweb.org/img.jpg") 100% 100%;
+  width: 100%;
+  height: 100%;
+  transition: all 2s;
+  animation: 60s infinite ScreenSaverBG;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#screensaver:hover {
+  opacity: 1;
+  transition: all .2s;
+}
+
+a {
+  cursor: default;
+  text-decoration: underline 1px;
+}
+
+a:hover {
+  text-decoration: underline 2px;
+}
+
+a.WLinkPBox {
+  color: #fffcf4;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: none;
+  color-scheme: dark only;
+  background-color: #8a2be2;
+  border: 3px solid #2e2e2e80;
+  border-top: 3px outset #80808080;
+  border-left: 3px outset #80808080;
+  border-radius: 5px;
+  padding: 3px 7px;
+}
+
+a.WLinkPBox:active {
+  border: 3px outset #70707080;
+}
+
+nav {
+  backdrop-filter: blur(8px);
+  color-scheme: dark only;
+  background: #252526e6;
+  border-bottom: 1px solid #ffffff13;
+  height: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+nav ul {
+  float: right;
+  margin-block: 10px;
+}
+
+nav ul li {
+  line-height: 10px;
+  display: inline-block;
+}
+
+nav h1 {
+  color: green;
+  padding-inline: 5px;
+  font-size: 23px;
+  line-height: 40px;
+  text-decoration: underline 1px #551a8b;
+  display: inline-block;
+}
+
+main {
+  backdrop-filter: blur(4px);
+  height: calc(100% - 40px);
+  padding: 5px;
+}
+
+main h4 {
+  text-shadow: 1px 0 #fff, 0 -1px #fff, 0 1px #fff, -1px 0 #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  padding-top: 4px;
+  padding-bottom: 2px;
+}
+
+main ul li {
+  padding-block: 10px;
+}
+
+#white {
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 10px 2px #fff !important;
+}
+</style>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+/*
+var body = document.getElementById('body');
+var screensaver = document.getElementById('screensaver');
+
+var getCurrentAnimationProgress = function() {
+  var computedStyle = window.getComputedStyle(firstElement);
+  var animationDuration = parseFloat(computedStyle.getPropertyValue('animation-duration')) * 1000; // Convert to ms
+  
+  // Get the current animation time
+  var elapsedTime = (animationDuration *  
+                       (1 - parseFloat(computedStyle.getPropertyValue('animation-play-state') === 'running' ? '0' : '1')));
+  return Math.min(elapsedTime, animationDuration); // Ensure it doesn't exceed duration
+};
+
+body.addEventListener('hover', function() {
+  var currentProgress = getCurrentAnimationProgress();
+  var percentage = currentProgress / 60000; // 60s
+  secondElement.style.animationPlayState = 'running';
+  secondElement.style.animationDelay = `${-currentProgress / 1000}s`;
+});
+firstElement.style.animationPlayState = 'running';*/</script>
+</head>
+<body id="body">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+var audio = document.createElement("audio");
+        audio.src = "/load.wav";
+        audio.autoplay = true;
+        document.body.appendChild(audio);
+/*
+var body = document.getElementById('body');
+var screensaver = document.getElementById('screensaver');
+
+var getCurrentAnimationProgress = function() {
+  var computedStyle = window.getComputedStyle(firstElement);
+  var animationDuration = parseFloat(computedStyle.getPropertyValue('animation-duration')) * 1000; // Convert to ms
+  
+  // Get the current animation time
+  var elapsedTime = (animationDuration *  
+                       (1 - parseFloat(computedStyle.getPropertyValue('animation-play-state') === 'running' ? '0' : '1')));
+  return Math.min(elapsedTime, animationDuration); // Ensure it doesn't exceed duration
+};
+
+body.addEventListener('hover', function() {
+  var currentProgress = getCurrentAnimationProgress();
+  var percentage = currentProgress / 60000; // 60s
+  secondElement.style.animationPlayState = 'running';
+  secondElement.style.animationDelay = `${-currentProgress / 1000}s`;
+});
+firstElement.style.animationPlayState = 'running';*/</script>
+    <div id="white">
+        
+    </div>
+    <div id="screensaver">
+        <nav>
+        	<h1>minimos11 tile</h1>
+            <ul>
+                <li><a href="http://minimos11.net/enter.html" class="WLinkPBox" target="_blank">site</a></li>
+            </ul>
+    	</nav>
+        <main>
+            <h4>Cool pages:</h4>
+            <ul>
+                <li><a href="http://minimos11.net/me/" class="WLinkPBox" target="_blank">about me</a></li>
+                <li><a href="http://minimos11.net/abouts/" class="WLinkPBox" target="_blank">abouts</a></li>
+                <li><a href="http://minimos11.net/fountains/warning.html" class="WLinkPBox" target="_blank">fountains</a></li>
+                <li><a href="more.html" class="WLinkPBox">More</a></li>
+        	</ul>
+            <img src="clippy.png" width="70" style="position: absolute; right: 0; bottom: 0;">
+        </main>
+    </div>
+</body>
+</html>

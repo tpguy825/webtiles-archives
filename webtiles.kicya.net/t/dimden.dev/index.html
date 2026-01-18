@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Pixel NES;
+  src: url("fonts/Pixel_NES.ttf");
+}
+
+@font-face {
+  font-family: NEC;
+  src: url("fonts/NEC.woff");
+}
+
+.tile-body {
+  color: #fff;
+  scrollbar-width: none;
+  background: url("images/bg.png");
+  font-family: MS UI Gothic, NEC;
+  font-size: 7px;
+  overflow: hidden auto;
+}
+
+#border-left {
+  content: "";
+  z-index: 3;
+  border-left: 4px;
+  border-image: url("durkaborder.png") 28 / 28px round;
+  width: 14px;
+  height: 120%;
+  position: absolute;
+  top: -10px;
+  left: -4px;
+}
+
+#border-top {
+  z-index: 1;
+  background: linear-gradient(#00100c 50%, #000 100%);
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#border-bottom-right {
+  content: "";
+  z-index: 4;
+  border-left: 4px;
+  border-image: url("durkaborder.png") 28 / 28px round;
+  width: 14px;
+  height: 24px;
+  position: absolute;
+  bottom: -15px;
+  right: -4px;
+}
+
+#body {
+  z-index: 2;
+  margin: 5px 7px 7px;
+  position: relative;
+}
+
+#logo {
+  text-align: center;
+  margin-right: 16px;
+  padding: 0;
+}
+
+#logo > a {
+  text-decoration: none;
+}
+
+.box {
+  color: #fff;
+  background-color: #0000000d;
+  border: 1px solid #383838;
+  border-radius: 4px;
+  margin: 2px 1px;
+  padding: 2px 4px;
+}
+
+h2 {
+  color: #2ba6b2;
+  margin: 0;
+  font-family: Pixel NES;
+  font-size: 8px;
+}
+
+h2 img {
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 8px;
+}
+
+p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+a {
+  color: #2ba6b2;
+}
+
+ul {
+  margin-block-start: 0;
+  padding-left: 10px;
+}
+
+.letter {
+  height: 20px;
+}
+
+#table {
+  display: flex;
+}
+
+#main {
+  flex: 1;
+}
+
+#sidebar {
+  width: 70px;
+}
+
+#links {
+  flex-direction: column;
+  display: flex;
+}
+
+#links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#links a:hover {
+  text-decoration: underline;
+}
+
+#eyeborder {
+  pointer-events: none;
+  z-index: 10;
+  height: 250px;
+  position: fixed;
+  top: 9px;
+  right: -80px;
+}
+
+#footer {
+  text-align: center;
+}
+
+#logo-n {
+  transition: all .2s ease-in;
+}
+</style>
+    <style>#projects a {
+  margin-top: 2px;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+}
+
+#projects a:hover {
+  text-decoration: underline;
+}
+
+#online-status {
+  color: #ff0;
+  font-family: Pixel NES;
+}
+
+#song {
+  gap: 2px;
+  margin-top: 2px;
+  display: flex;
+}
+
+#song-name {
+  font-size: 7px;
+}
+
+#visits-box {
+  color: #0f0;
+  font-family: monospace;
+}
+
+#visits-box > div {
+  justify-content: space-between;
+  display: flex;
+}
+</style>
+    <script type="text/tilescript">function request(method, url, callback) {
+  var xhr = new XMLHttpRequest();
+
+  xhr.open(method, url, true);
+
+  xhr.onload = function () {
+    if (xhr.readyState === 4) {
+      callback(xhr.status, xhr.responseText);
+    }
+  };
+
+  xhr.onerror = function () {
+    callback(0, null);
+  };
+
+  xhr.send(null);
+}</script>
+</head>
+<body>
+    <div id="border-top"></div>
+    <div id="border-left"></div>
+    <div id="border-bottom-right"></div>
+    <div id="body">
+        <div id="logo">
+            <a href="https://dimden.dev/" target="_blank">
+                <img src="images/l/D1.png" class="letter" style="margin-right: -5px;" id="logo-d0">
+                <img src="images/l/IM.png" class="letter" style="margin-right: -7px;">
+                <img src="images/l/D2.png" class="letter" style="margin-right: -4px; margin-left:4px" id="logo-d">
+                <img src="images/l/E.png" class="letter" style="margin-right: -5px;">
+            </a>
+                <img src="images/l/N.png" class="letter" style="margin-left: 4px;position:absolute;" id="logo-n">
+        </div>
+        <div id="table">
+            <div id="main">
+                <div class="box">
+                    <h2><img src="images/moon.png" width="10" class="lil-moon">Welcome to dimden.dev!</h2>
+                    <p>
+                        This is my little website and blog. It's inspired by all these neocities sites (and my older site). It was created on June 1st, 2022.
+                    </p>
+                    <p>
+                        I'm quite obviously a programmer. I code some random things when I feel like it. You can read more about me <a href="https://dimden.dev/about.html" target="_blank">here</a>!
+                    </p>
+                </div>
+                <div class="box" id="projects">
+                    <h2><img src="images/moon.png" width="10" class="lil-moon">Projects</h2>
+                    <div>
+                        <a href="https://dimden.dev/webtiles.html" target="_blank">
+                        	<h3>☾ WebTiles</h3>
+                        </a>
+                        You're here.
+                    </div>
+                    <div>
+                        <a href="https://nekoweb.org/" target="_blank">
+                        	<h3>☾ Nekoweb</h3>
+                        </a>
+                        Web-hosting, similar to Neocities but cooler!!
+                    </div>
+                    <div>
+                        <a href="https://atabook.org/" target="_blank">
+                        	<h3>☾ Atabook</h3>
+                        </a>
+                       My guestbook service, made in response to 123Guestbook death.
+                    </div>
+                    <div>
+                        <a href="https://github.com/dimdenGD/OldTwitter/" target="_blank">
+                        	<h3>☾ OldTwitter</h3>
+                        </a>
+                        Chrome & Firefox extension to return old Twitter UI from 2015.
+                    </div>
+                    <div>
+                        <a href="https://github.com/dimdenGD/ultimate-express/" target="_blank">
+                        	<h3>☾ Ultimate Express</h3>
+                        </a>
+                        Fastest http server with full Express compatibility, based on µWebSockets.
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar">
+                <div class="box">
+                    <h2><img src="images/warpstar.png" width="10" id="kirby">Stars</h2>
+                    <div id="links">
+                        <a href="https://dimden.dev/" target="_blank">✩ Home</a>
+                        <a href="https://dimden.dev/about.html" target="_blank">✩ About me</a>
+                        <a href="https://diary.dimden.dev/" target="_blank">✩ Diary</a>
+                        <a href="https://album.dimden.dev/" target="_blank">✩ Photo Album</a>
+                        <a href="https://dimden.dev/blogindex" target="_blank">✩ Blog</a>
+                        <a href="https://discord.gg/yaqzbDBaAA" target="_blank">✩ Discord</a>
+                        <a href="https://x.com/dimden" target="_blank">✩ Twitter</a>
+                        <a href="https://github.com/dimdenGD" target="_blank">✩ Github</a>
+                    </div>
+                </div>
+                <div class="box">
+                    I'm <span id="online-status">checking</span>
+                </div>
+                <div class="box">
+                    <div><b id="current-song">Last song:</b></div>
+                    <div id="song">
+                        <div>
+                            <img src="images/default_song.webp" id="song-image" width="10">
+                        </div>
+                        <div id="song-name">Loading...</div>
+                    </div>
+                </div>
+                <div class="box" id="visits-box">
+                    <div>
+                        <span>Hits:</span>
+						<span id="hits">0</span>
+                    </div>
+                    <div>
+                        <span>Visitors:</span>
+						<span id="visitors">0</span>
+                    </div>
+                </div>
+                <div>
+                    <a href="https://dimden.dev/warm.html" target="_blank">
+                        <img src="images/kelvin.gif" width="60">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            (c) 2019-2026 dimden. All Rights Reserved.
+        </div>
+    </div>
+    <img src="images/eyeborder.png" id="eyeborder">
+    <script type="text/tilescript">
+    	var logoN = document.getElementById("logo-n");
+    	var kirby = document.getElementById("kirby");
+    	var onlineStatus = document.getElementById("online-status");
+        var currentSong = document.getElementById("current-song");
+        var songName = document.getElementById("song-name");
+        var hits = document.getElementById("hits");
+        var visitors = document.getElementById("visitors");
+        var lilMoons = document.getElementsByClassName("lil-moon");
+         
+        function checkOnlineStatus() {
+            request("GET", "https://dimden.dev/services/slave/status/", function(code, text) {
+                if(code !== 200) return;
+                var json = JSON.parse(text);
+                if(json.dimden === "online") {
+                    onlineStatus.innerText = "Online!";
+                    onlineStatus.style.color = "lime";
+                } else {
+                    onlineStatus.innerText = "Offline!";
+                    onlineStatus.style.color = "red";
+                }
+            });
+        }
+        function checkSong() {
+            request("GET", "https://dimden.dev/services/nowplaying", function(code, text) {
+                if(code !== 200) return;
+                var json = JSON.parse(text);
+                currentSong.innerText = (json['@attr'] && json['@attr'].nowplaying === 'true') ? 'Current song: ' : 'Last song: ';
+                songName.innerText = json.artist['#text'] + ' - ' + json.name;
+            });
+        }
+        function checkCounter() {
+            request("GET", "https://dimden.dev/tiles/counter/get", function(code, text) {
+                if(code !== 200) return;
+                var json = JSON.parse(text);
+                hits.innerText = json.counter.toString();
+                visitors.innerText = json.visitors.toString();
+            });
+        }
+        
+        checkOnlineStatus();
+        checkSong();
+        checkCounter();
+        setInterval(function() {
+         	checkOnlineStatus();
+            checkSong();
+            checkCounter();
+        }, 20000);
+        
+        logoN.addEventListener("click", function() {
+           	logoN.style.transform = "translate(0, 120px) rotate(20deg)"; 
+        });
+        if(!embedded) {
+            request("GET", "https://dimden.dev/tiles/counter/count", function(code, text) {});
+        } else {
+            document.getElementById("eyeborder").hidden = true;
+            document.getElementById("border-left").hidden = true;
+            document.getElementById("border-top").hidden = true;
+            document.getElementById("border-bottom-right").hidden = true;
+        }
+    </script>
+</body>
+</html>

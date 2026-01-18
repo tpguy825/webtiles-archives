@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>html, .tile-body {
+  background-color: #0a0a0d;
+  width: 250px;
+  max-width: 250px;
+  height: 250px;
+  max-height: 250px;
+  margin: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;
+  image-rendering: pixelated;
+  display: block;
+  position: absolute;
+}
+
+#layer1 {
+  filter: blur(8px);
+  height: 1280px;
+  animation-name: layer1ani;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  top: -800px;
+}
+
+#layer2 {
+  animation-name: layer2ani;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  top: -70px;
+}
+
+#layer3 {
+  height: 160px;
+  animation-name: layer3ani;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  top: 60px;
+}
+
+#layer4 {
+  height: 80px;
+  animation-name: layer4ani;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  top: 125px;
+}
+
+#layer5 {
+  height: 40px;
+  animation-name: layer5ani;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  top: 158px;
+}
+
+@keyframes layer1ani {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: -1000px;
+  }
+}
+
+@keyframes layer2ani {
+  from {
+    left: -20px;
+  }
+
+  to {
+    left: -270px;
+  }
+}
+
+@keyframes layer3ani {
+  from {
+    left: -70px;
+  }
+
+  to {
+    left: -195px;
+  }
+}
+
+@keyframes layer4ani {
+  from {
+    left: -30px;
+  }
+
+  to {
+    left: -155px;
+  }
+}
+
+@keyframes layer5ani {
+  from {
+    left: -13px;
+  }
+
+  to {
+    left: -44px;
+  }
+}
+
+#pcsite {
+  text-align: center;
+  color: #fff;
+  z-index: 10;
+  text-shadow: 0 0 4px #0ff;
+  user-select: none;
+  width: 100%;
+  font-family: Brush Script MT;
+  font-size: 28px;
+  position: absolute;
+  bottom: 0;
+}
+
+#pcsite:hover {
+  color: #0ff;
+  cursor: pointer;
+}
+
+#streetlights {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  background-image: url("novatilebg.png");
+  animation: 10s infinite slblur;
+}
+
+.header {
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 4px #0ff;
+  font-family: MS PGothic;
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+  position: absolute;
+  top: 100px;
+}
+
+#aboutme {
+  animation: 12s linear infinite aboutme;
+}
+
+#guestbook {
+  animation: 12s linear infinite guestbook;
+}
+
+#picsvids {
+  animation: 12s linear infinite picsvids;
+}
+
+#artanims {
+  animation: 12s linear infinite artanims;
+}
+
+#writings {
+  animation: 12s linear infinite writings;
+}
+
+#coding {
+  animation: 12s linear infinite coding;
+}
+
+.header:hover {
+  color: #0ff;
+}
+
+@keyframes aboutme {
+  from {
+    left: 325px;
+  }
+
+  to {
+    left: -1175px;
+  }
+}
+
+@keyframes guestbook {
+  from {
+    left: 575px;
+  }
+
+  to {
+    left: -925px;
+  }
+}
+
+@keyframes picsvids {
+  from {
+    left: 835px;
+  }
+
+  to {
+    left: -665px;
+  }
+}
+
+@keyframes artanims {
+  from {
+    left: 1075px;
+  }
+
+  to {
+    left: -425px;
+  }
+}
+
+@keyframes writings {
+  from {
+    left: 1320px;
+  }
+
+  to {
+    left: -180px;
+  }
+}
+
+@keyframes coding {
+  0% {
+    opacity: 1;
+    left: 75px;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 0;
+  }
+
+  19% {
+    opacity: 0;
+    left: -210px;
+  }
+
+  20% {
+    opacity: 0;
+    left: 1275px;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    left: 75px;
+  }
+}
+
+#prev {
+  z-index: 100;
+  opacity: 1;
+  animation: 30s linear infinite prevfade;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#prev:hover {
+  z-index: 9;
+  opacity: 0;
+}
+
+@keyframes prevfade {
+  0% {
+    display: block;
+  }
+
+  1% {
+    display: none;
+  }
+
+  99% {
+    display: none;
+  }
+
+  100% {
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+    <div id="streetlights">
+        <img id="layer5" src="webtiletile10.png">
+        <img id="layer4" src="webtiletile10.png">
+        <img id="layer3" src="webtiletile10.png">
+        <img id="layer2" src="webtiletile3.png">
+        <img id="layer1" src="webtiletile3.png">
+        <a class="header" id="aboutme" href="https://percycho.net/aboutme.html" target="_blank">About<br>Me</a>
+        <a class="header" id="guestbook" href="https://percycho.atabook.org/" target="_blank">Guest<br>Book</a>
+        <a class="header" id="picsvids" href="https://percycho.net/picsvideos.html" target="_blank">Pics<br>Vids</a>
+        <a class="header" id="artanims" href="https://percycho.net/artanimations.html" target="_blank">Art<br>Anims</a>
+        <a class="header" id="writings" href="https://percycho.net/writings.html" target="_blank">Writings</a>
+        <a class="header" id="coding" href="https://percycho.net/codinggames.html" target="_blank">Coding<br>Games</a>
+    </div>
+    <div id="randomartblur"></div>
+    <div id="randomart"></div>
+    <a href="https://percycho.net" target="_blank"><div id="pcsite">PercyCho's Website!</div></a>
+    <img id="prev" src="newwebtilepreview.gif">
+    <audio id="ambience" src="webtile-feeldown.mp3" preload="metadata" loop="loop"></audio>
+    <script type="text/tilescript">
+        var audio = document.getElementById("ambience");
+        audio.play();
+    </script>
+    
+</body>
+</html>

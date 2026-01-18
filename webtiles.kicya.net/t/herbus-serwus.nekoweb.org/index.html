@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #d0dae5;
+  background-color: #2d263e;
+  background-position: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Comic Sans MS, sans-serif;
+  display: flex;
+}
+
+.spinning {
+  animation: 4s linear infinite rotation;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.meow-meow {
+  text-align: center;
+  background-color: #353960;
+  background-image: repeating-linear-gradient(-45deg, #23263e, #23263e 10px, #353960 10px 20px);
+  background-size: 28px 28px;
+  border: 2px dashed #d0dae5;
+  border-radius: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  width: 220px;
+  height: 220px;
+  animation: 17s linear infinite animated-pattern;
+  display: flex;
+}
+
+.meow-meow p, span {
+  margin: 2px;
+}
+
+@keyframes animated-pattern {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+a {
+  color: #7f6fa7;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dab1fb;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+        <div class="meow-meow">
+        <img src="files/me.png" style="width: 100px; height: auto;" class="spinning">
+            <p>hi. check out my <a href="https://herbus-serwus.nekoweb.org" target="_blank">cool website</a>. bye.</p>
+        <span style="font-size: 10px;">(my clans websites too.)</span>
+        <span style="font-size: 8px;">&lt;- the thing that you did is so cool twin</span>
+        </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

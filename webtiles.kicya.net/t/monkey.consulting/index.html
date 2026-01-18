@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@keyframes anim {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 218px 218px;
+  }
+}
+
+.tile-body {
+  box-sizing: border-box;
+  background: repeating-linear-gradient(-45deg, #000, #000 25.6915px, #fff 25.6915px 51.3831px);
+  border: 16px solid #000;
+  animation: 5s linear infinite anim;
+}
+
+.content {
+  background: #000;
+  line-height: 0;
+}
+
+#fps {
+  color: #fff;
+}
+
+.tile-body > .content > canvas {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  filter: invert() !important;
+}
+</style>
+</head>
+<body>
+    <div class="content">
+        <div id="fps"></div>
+        <canvas id="canvas" width="0" height="0"></canvas>
+    </div>
+    <script type="text/tilescript">
+        (function() {
+            "use strict";
+            document.body.style.background = "#000";
+
+            var width = 16;
+            var height = 16;
+
+            var xend = width - 1;
+            var yend = height - 1;
+
+            var canvas = document.getElementById("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+
+            //var b0 = Array(width * height);
+            //var b1 = Array(width * height);
+            var b0 = [];
+            var b1 = [];
+
+            for (var y = 0; y < height; y++) {
+                for (var x = 0; x < width; x++) {
+                    b0[y * width + x] = Math.random() < 0.3 ? 1 : 0;
+                }
+            }
+
+            var last = Date.now();
+
+            function step() {
+                for (var y = 0; y < height; y++) {
+                    var up = (y === 0 ? yend : y - 1) * width,
+                        yc = y * width,
+                        down = (y === yend ? 0 : y + 1) * width;
+
+                    for (var x = 0; x < width; x++) {
+                        var left = x === 0 ? xend : x - 1,
+                            right = x === xend ? 0 : x + 1,
+
+                            neigh =
+                            b0[up + left] +
+                            b0[up + x] +
+                            b0[up + right] +
+
+                            b0[yc + left] +
+                            b0[yc + right] +
+
+                            b0[down + left] +
+                            b0[down + x] +
+                            b0[down + right],
+
+                            i = yc + x;
+                        if (neigh < 2 || neigh > 3) {
+                            b1[i] = 0;
+                        } else if (neigh === 3) {
+                            b1[i] = 1;
+                        } else {
+                            b1[i] = b0[i];
+                        }
+                    }
+                }
+
+                var tmp = b0;
+                b0 = b1;
+                b1 = tmp;
+
+                render();
+            }
+
+            var img = new ImageData(width, height);
+            var img_data = img.data;
+
+            function render() {
+                document.getElementById("fps").textContent = Math.round(1000 / (Date.now() - last) * 100) / 100;
+                last = Date.now();
+
+                var i = 3;
+                var j = 0;
+                for (var y = 0; y < height; y++) {
+                    for (var x = 0; x < width; x++) {
+                        img_data[i] = b0[j] * 255;
+                        i += 4;
+                        j++;
+                    }
+                }
+
+                ctx.putImageData(img, 0, 0);
+            }
+
+            render();
+
+            while (true) {
+                step();
+            }
+        })();
+    </script>
+</body>
+</html>

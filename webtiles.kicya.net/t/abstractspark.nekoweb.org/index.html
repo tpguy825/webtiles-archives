@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: AtlanticFuture;
+  src: url("fonts/AtlanticFuture.otf");
+}
+
+@font-face {
+  font-family: SairaSemiCondensedRegular;
+  src: url("fonts/SairaSemiCondensed-Regular.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #fff;
+  margin: none;
+  background-color: #111;
+  background-image: url("img/stars.gif");
+  font-family: SairaSemiCondensedRegular, sans-serif;
+  overflow: hidden;
+}
+
+header {
+  text-align: center;
+  align-content: end;
+  width: 100%;
+  height: 65px;
+  margin-top: 5px;
+  font-family: AtlanticFuture, sans-serif;
+  font-size: 10px;
+  position: relative;
+}
+
+header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header h1 {
+  z-index: 2;
+  position: relative;
+}
+
+header .deco {
+  filter: blur(1px);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.triangles {
+  background: linear-gradient(0deg, #fd49fdd9 10%, #f1e5ff82 85%);
+  width: 88%;
+  height: 57px;
+  margin: auto;
+  transform: scale(.9, 1);
+  mask: conic-gradient(from 137deg at top, #0000, #000 7deg 80deg, #0000 84deg) 50% / 73px 100%;
+}
+
+.gradient {
+  background: radial-gradient(at 49% 160%, #fd49fdba 10%, #ff1ed200 70%);
+  width: 100%;
+  height: 57px;
+  position: absolute;
+  top: 0;
+}
+
+.content {
+  border-radius: 10px;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  position: relative;
+}
+
+#nav {
+  z-index: 2;
+  width: fit-content;
+  height: fit-content;
+  margin: 5px auto auto;
+  position: relative;
+}
+
+#nav ul {
+  text-align: center;
+  -webkit-box-shadow: 0 0 15px 3px #7ce6ff;
+  background: linear-gradient(-45deg, #0e2624, #352b33a0 100%);
+  border: 4px double #37b1b2;
+  border-radius: 10px;
+  flex-direction: row;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 0 20px -4px #99e7f8;
+}
+
+#nav ul li {
+  cursor: pointer;
+  color: #fff;
+  border-right: 3px double #37b1b2;
+  list-style-type: none;
+  position: relative;
+
+  &:last-of-type {
+    border-right: none;
+  }
+
+  & a {
+    color: #fff;
+    padding: 3px 8px;
+    text-decoration: none;
+    display: block;
+  }
+
+  & a:visited {
+    color: inherit;
+  }
+
+  & a:hover {
+    background: linear-gradient(0deg, #971897b3 0%, #37b1b200 100%);
+  }
+}
+
+.char {
+  width: 100px;
+
+  & img {
+    margin: 0;
+  }
+}
+
+.Galo, .Galo2 {
+  background-image: url("img/galo1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 141px;
+  height: 160px;
+  margin-left: -10px;
+  position: absolute;
+  bottom: -15px;
+}
+
+.food {
+  z-index: 2;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.3rem;
+
+  & p {
+    width: 100px;
+    margin-top: 12px;
+  }
+
+  & img {
+    margin-top: 2px;
+  }
+}
+
+.pizza {
+  opacity: 1;
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 45px;
+}
+
+@keyframes move {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+}
+
+@keyframes eat {
+  0% {
+    background-image: url("img/galo2.png");
+  }
+
+  49% {
+    background-image: url("img/galo1.png");
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(-5deg);
+  }
+
+  to {
+    transform: rotate(20deg);
+  }
+}
+
+#button {
+  user-select: none;
+  transition: scale .1s ease-in-out;
+  animation: 1s ease-in-out infinite alternate rotate;
+  position: relative;
+}
+
+#button:hover {
+  scale: 1.15;
+}
+
+#button:active {
+  scale: 1;
+}
+
+.clickArea {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 25px;
+}
+
+.f2, .Galo2 {
+  display: none;
+}
+
+.content:has(input#feed:checked) {
+  & .f1 {
+    display: none;
+  }
+
+  & .f2 {
+    display: block;
+  }
+
+  & .Galo {
+    animation: 1s linear eat;
+  }
+
+  & .pizza.p1 {
+    animation-name: move;
+    animation-duration: .3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    display: block;
+  }
+}
+
+.content:has(input#feed2:checked) {
+  & .pizza.p2 {
+    animation-name: move;
+    animation-duration: .3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    display: block;
+  }
+
+  & .Galo2 {
+    animation: 1s linear eat;
+    display: block;
+  }
+}
+
+#frame2, input[type="radio"] {
+  display: none;
+}
+
+.arrow {
+  background-image: url("img/arrow.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 38px;
+  position: absolute;
+  top: 35px;
+  right: -5px;
+}
+
+.navActive {
+  background: linear-gradient(0deg, #971897b3 0%, #37b1b200 100%);
+}
+
+.container {
+  width: 100%;
+  height: 75%;
+  margin: 6px auto auto;
+}
+
+.picsContainer {
+  width: max-content;
+  margin: auto;
+  overflow: hidden;
+}
+
+.pics {
+  margin-bottom: -2px;
+}
+
+.pics img {
+  border: 4px double #37b1b2;
+  border-radius: 10px;
+}
+
+.arrows {
+  width: max-content;
+  margin: auto;
+  position: relative;
+
+  & .arrowBtn {
+    color: #fff;
+    text-align: center;
+    -webkit-box-shadow: 0 0 15px 3px #7ce6ff;
+    background: linear-gradient(-45deg, #0e2624, #352b33a0 100%);
+    border: 4px double #37b1b2;
+    border-radius: 10px;
+    padding: 1px 6px;
+    display: inline-block;
+    box-shadow: 0 0 20px -4px #99e7f8;
+  }
+}
+
+.arrowArea {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+
+  &.A2 {
+    top: 0;
+    right: 0;
+  }
+}
+
+.arrows:has(.A1:hover) {
+  & .arrowBtn.b1 {
+    background: linear-gradient(0deg, #971897b3 0%, #37b1b200 100%);
+  }
+}
+
+.arrows:has(.A2:hover) {
+  & .arrowBtn.b2 {
+    background: linear-gradient(0deg, #971897b3 0%, #37b1b200 100%);
+  }
+}
+
+#img2, #img3, #img4, .A1.p1, .A1.p2, .A1.p3, .A2.p3, .A2.p4, .A2.p1 {
+  display: none;
+}
+
+.container:has(input#pic1:checked) {
+  & #img1 {
+    display: block;
+  }
+}
+
+.container:has(input#pic2:checked) {
+  & #img2 {
+    display: block;
+  }
+
+  & #img1, & #img3, & #img4, & .A2.p2, & .A2.p4, & .A2.p1, & .A1.p4, & .A1.p2, & .A1.p3 {
+    display: none;
+  }
+
+  & .A1.p1, & .A2.p3 {
+    display: block;
+  }
+}
+
+.container:has(input#pic3:checked) {
+  & #img3 {
+    display: block;
+  }
+
+  & #img1, & #img42, & #img4, & .A2.p2, & .A2.p3, & .A2.p1, & .A1.p4, & .A1.p3, & .A1.p1 {
+    display: none;
+  }
+
+  & .A1.p2, & .A2.p4 {
+    display: block;
+  }
+}
+
+.container:has(input#pic4:checked) {
+  & #img1, & #img2, & #img3 {
+    display: none;
+  }
+
+  & #img4 {
+    display: block;
+  }
+
+  & .A2.p2, & .A2.p3, & .A2.p4, & .A1.p4, & .A1.p2, & .A1.p1 {
+    display: none;
+  }
+
+  & .A1.p3, & .A2.p1 {
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+    <header>
+            <div class="deco">
+                <div class="triangles"></div>
+                <div class="gradient"></div>
+            </div>
+            <h1><a href="https://abstractspark.nekoweb.org/" target="_blank">AbstractSpark</a></h1>
+        </header>
+
+        <div id="nav">
+            <ul>
+                <li><a href="miniGallery.html">Mini Gallery</a></li>
+                <li><a href="https://abstractspark.nekoweb.org/" target="_blank">Go to Website</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="char">
+                <div class="Galo"></div>
+                <div class="Galo2"></div>
+                <img id="frame2" src="img/galo2.png" alt="Galo Thymos" style="display: none">
+                <div class="pizza p1" ><img src="img/pizza.png" alt></div>
+                <div class="pizza p2" ><img src="img/pizza.png" alt></div>
+            </div>
+            <div class="food">
+                <p>Click to feed him pizza</p>
+                <div id="button">
+                    <label for="feed"><div class="clickArea f1"></div></label>
+                    <label for="feed2"><div class="clickArea f2"></div></label>
+                    <p><img src="img/pizza.png" alt></p>
+                </div>
+                <input id="feed" type="radio" name="buttons" autocomplete="off">
+                <input id="feed2" type="radio" name="buttons" autocomplete="off">
+                <div class="arrow"></div>
+            </div>
+        </div>
+
+</body>
+</html>

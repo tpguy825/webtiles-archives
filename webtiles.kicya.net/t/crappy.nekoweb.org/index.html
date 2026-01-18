@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>.tile-body {
+  background-image: url("me_lookin.webp");
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+
+  & h1 {
+    color: #e8bc38;
+    webkit-background-clip: text;
+    webkit-text-fill-color: transparent;
+    background-image: linear-gradient(45deg, #cfb96b 41%, #bd8857 50%, #6e5a96 100%);
+    background-clip: text;
+    display: inline-block;
+    position: relative;
+    top: -20px;
+  }
+
+  & p {
+    color: #6e5a96;
+    position: relative;
+    top: 90px;
+    right: -90px;
+  }
+
+  & #cyat {
+    transition: transform .5s ease-out;
+    position: relative;
+    top: -15px;
+    transform: perspective(1px)translateZ(0);
+
+    & #cyat:hover {
+      display: block;
+      transform: scale(1.4);
+    }
+  }
+
+  & #linktree {
+    transition: transform .5s ease-out;
+    position: relative;
+    top: -210px;
+    left: 180px;
+    transform: perspective(1px)translateZ(0);
+  }
+
+  & #linktree:hover {
+    display: block;
+    transform: scale(1.4);
+  }
+
+  & #titlestuff span {
+    animation: 2s ease-in-out infinite wave1;
+    display: inline-block;
+  }
+
+  & #titlestuff span:first-child {
+    animation-delay: 0s;
+  }
+
+  & #titlestuff span:nth-child(2) {
+    animation-delay: .2s;
+  }
+
+  & #titlestuff span:nth-child(3) {
+    animation-delay: .4s;
+  }
+
+  & #titlestuff span:nth-child(4) {
+    animation-delay: .6s;
+  }
+
+  & #titlestuff span:nth-child(5) {
+    animation-delay: .8s;
+  }
+
+  & #titlestuff span:nth-child(6) {
+    animation-delay: 1.9s;
+  }
+}
+
+@keyframes wave1 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(.1);
+  }
+
+  100% {
+    transform: scale(.1);
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: scale(.1);
+  }
+
+  100% {
+    transform: scale(.1);
+  }
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <div class="titles">
+        
+  
+    <div id= "titlestuff"> 
+    <h1> <span>h</span> <span>e</span> <span>l</span> <span>l</span> <span>o</span> <span>.</span> <span>.</span> <span>.</span>
+    </h1>
+        </div>
+    <p>
+        HI FERRIS HI MINERVA
+        <br>ANIMATING MY PART
+         <br> very SOON
+        <br> - crappykatio i think 
+    </p>
+        <div id= "cyat">
+        <img title="⋆ who in the fooly" src="catgrad.webp" width="100" height="100">
+            </div>
+        
+        <a href="https://linktr.ee/crappyk" target="_blank">
+        <img id="linktree" title="⋆ my links" src="linktree.webp" width="50" height="50">
+            
+          </a></div>
+         
+   
+</body>
+</html>

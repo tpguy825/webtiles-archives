@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+}
+
+.logo {
+  color: #fff;
+  font-family: Zyzol, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  position: absolute;
+  top: -5px;
+  left: 110px;
+  transform: rotate(10deg);
+}
+
+.bar {
+  color: #ffa9db;
+  text-align: left;
+  z-index: 5;
+  background-color: #00008b;
+  border: 2px solid #00ffd9;
+  padding: 7px;
+  font-family: Arcade;
+  font-size: 20px;
+  position: relative;
+  top: 40px;
+  left: 0;
+}
+
+.close_sym2 {
+  float: right;
+  height: 19px;
+}
+
+.m20 {
+  z-index: 40;
+  width: 254px;
+  position: absolute;
+  bottom: 0;
+}
+
+.bg_color2 {
+  opacity: .8;
+  background-color: #052645;
+  border: 2px solid #00ffd9;
+  height: 100%;
+}
+
+.tile-body {
+  background-color: #181a1b;
+  background-image: url("assets/bg.png");
+  animation: 1s linear infinite scroll;
+}
+
+@keyframes scroll {
+  0% {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 16px 16px;
+  }
+}
+
+.main_img {
+  opacity: .7;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+}
+
+.t1 {
+  left: -14px;
+}
+
+.t2 {
+  left: -8px;
+}
+
+.t3 {
+  opacity: .8;
+}
+</style>
+</head>
+<body>
+
+    
+    <img src="assets/m20.png" class="m20">
+    
+
+    
+    <div class="bar">
+        MIKU
+        <img src="assets/close_symbol2.png" class="close_sym2">
+    </div>
+    
+    <div class="bg_color2">
+        
+    </div>
+    
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello, Miku Here!");</script>
+</body>
+</html>

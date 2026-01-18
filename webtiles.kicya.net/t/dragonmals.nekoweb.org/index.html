@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #000;
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  cursor: url("https://webtiles.kicya.net/t/dragonmals.nekoweb.org/cursor.png") auto;
+  background: linear-gradient(135deg, #333, #555, #777);
+  font-family: Consolas, Courier New, monospace;
+  overflow: hidden;
+}
+
+.title-bar {
+  background: linear-gradient(silver, gray);
+  border-bottom: 2px solid #000;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 8px;
+  display: flex;
+}
+
+.title-bar img {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+  border: 1px solid #000;
+}
+
+.title-bar h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.main {
+  text-align: center;
+  padding: 6px;
+}
+
+.what {
+  color: #fff;
+  margin: 8px 0 12px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.buttons {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  display: flex;
+}
+
+.big-btn {
+  color: #fff;
+  background: #333;
+  border: 2px solid #000;
+  width: 200px;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .15s;
+}
+
+.big-btn:hover {
+  background: #555;
+  transform: scale(1.06);
+}
+</style>
+</head>
+<body>
+
+  <div class="title-bar">
+    <img src="avatar.png" alt="avatar">
+    <h1>My Webtitle</h1>
+  </div>
+
+  <div class="main">
+    <div class="what">What're you here for?</div>
+
+    <div class="buttons">
+      <a href="https://dragonmals.nekoweb.org/" class="big-btn" target="_blank">The Creator's Website</a>
+      <a href="https://dragonmals.bearblog.dev/" class="big-btn" target="_blank">Blogs/Gaming Reviews</a>
+      
+      
+    </div>
+  </div>
+
+</body>
+</html>

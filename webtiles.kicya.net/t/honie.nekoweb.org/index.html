@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  background-image: url("wt-bg1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+p {
+  text-align: center;
+}
+
+#info {
+  background-color: #a9a9a9;
+  padding: 5px 8px;
+  position: absolute;
+  top: 5%;
+}
+
+#time-of-day {
+  background-color: red;
+  font-weight: 800;
+}
+
+#honie {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.speech-bubble {
+  z-index: 5;
+  background-color: beige;
+  border-radius: 6px;
+  padding: 4px 8px;
+  position: absolute;
+  bottom: 12%;
+}
+
+.speech-bubble p {
+  text-align: left;
+  font-size: 11px;
+}
+
+#speech-bubble-end {
+  position: absolute;
+  top: -20px;
+  right: 30%;
+}
+
+.popup {
+  background-color: beige;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 3px 5px;
+  display: flex;
+  position: absolute;
+  bottom: 10%;
+}
+
+.popup p {
+  margin: 10px 0;
+}
+
+.icon {
+  font-size: 1.4em;
+  line-height: 1;
+}
+
+.content {
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.tile-body:hover .icon {
+  display: none;
+}
+
+.tile-body:hover .content {
+  opacity: 1;
+  pointer-events: auto;
+  max-height: 200px;
+}
+</style>
+</head>
+<body>
+    <img src="gardening.webp" id="honie">
+    
+    
+    
+    
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+</script>
+
+	<div id='speech-bubble'></div>
+</body>
+</html>

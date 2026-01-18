@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>html, .tile-body {
+  z-index: -2;
+  background-image: url("space.gif");
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#bg {
+  z-index: -1;
+  background-image: url("index.html");
+  background-repeat: repeat;
+  background-size: 256px;
+  width: 100%;
+  height: 100%;
+  animation: 8s linear infinite bg-scroll-diagonal;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@keyframes bg-scroll-diagonal {
+  from {
+    background-position: 512px 512px;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+.content {
+  z-index: 1;
+  position: relative;
+}
+</style>
+    
+</head>
+<body>
+    <canvas id="bg"></canvas>
+  	<div class="content">
+    	<div style="display: flex; align-items: center; justify-content: center">
+        	<img class="milky" style="height:220px; margin-top:12px;" src="milkyspeen.gif">
+    	</div>
+  	</div>
+</body>
+    
+
+    
+</html>

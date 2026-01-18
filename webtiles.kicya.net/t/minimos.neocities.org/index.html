@@ -1,0 +1,107 @@
+<!DOCTYPE html>                                                                                                                                                                        
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background: url("brand.png");
+  animation: 60s infinite ScreenSaver;
+}
+
+@keyframes ScreenSaver {
+  0% {
+    background-image: url("brand.png");
+  }
+
+  5% {
+    background-image: url("brand.png");
+  }
+
+  10% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  20% {
+    background-image: url("Bad-Apple.png");
+  }
+
+  25% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  35% {
+    background-image: url("Mossy_surfaces.png");
+  }
+
+  40% {
+    background-image: url("Fountains.png");
+  }
+
+  50% {
+    background-image: url("Fountains.png");
+  }
+
+  55% {
+    background-image: url("brand.png");
+  }
+
+  100% {
+    background-image: url("brand.png");
+  }
+}
+
+#screensaver {
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  background: url("img.jpg");
+  width: 100%;
+  height: 100%;
+  transition: all 2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#screensaver:hover {
+  opacity: 1;
+  transition: all .2s;
+}
+
+#bang {
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  box-shadow: 0 0 10px 2px #000 !important;
+}
+
+#green {
+  z-index: 2;
+  height: 100%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  box-shadow: 0 0 10px 2px green !important;
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    <div id="green">
+    </div>
+    <div id="bang">
+    </div>
+    <div id="screensaver">
+        <h3>
+            This website is currently unsupported
+        </h3>
+        <p>
+            Please visit the tile bellow ⬊
+           	Any content ofr this tile or slide idea is welcome!
+        </p>
+    </div>
+</body>
+</html>

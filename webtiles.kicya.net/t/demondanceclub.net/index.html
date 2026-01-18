@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+    <style>.tile-body {
+  background: #000 url("index.html") 0 -5% / cover;
+  margin: 0;
+  font-family: Verdana;
+  font-size: 11px;
+}
+
+p {
+  color: red;
+}
+
+a, a:visited {
+  color: #000;
+  font-weight: strong;
+  text-decoration: underline;
+}
+
+#frame {
+  border-style: solid;
+  border-left-width: medium;
+  border-left-color: currentColor;
+  border-image: url("starbord.gif") 30 28 28 31 / 18px 17px 17px 18px / 0 0 50px repeat;
+  width: 200px;
+  height: 163px;
+  margin-top: 3px;
+  margin-left: 2px;
+  padding: 20px;
+}
+
+#titlebar {
+  z-index: 8;
+  background: red;
+  height: 35px;
+  position: relative;
+}
+
+#content {
+  margin-top: -13px;
+  display: none;
+}
+
+#pull-down {
+  width: 240px;
+  height: 190px;
+  left: px;
+  background: red;
+  padding: 5px;
+  transition: margin-top .5s ease-out;
+  position: absolute;
+  top: 0;
+}
+
+#pull-down p {
+  color: #000;
+  margin-top: 0;
+}
+
+input:checked ~ div {
+  margin-top: -200px;
+}
+
+input {
+  display: none;
+  position: absolute;
+}
+
+label {
+  z-index: ;
+  background-color: ;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+
+label img {
+  position: relative;
+  left: 195px;
+}
+
+hr {
+  color: #000;
+  border: 1px solid #000;
+  border-top: 0;
+  width: 250px;
+  margin-top: -3px;
+  margin-left: -5px;
+}
+
+td {
+  border-top: 2px solid #000;
+  width: 250px;
+  margin-left: -5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+table {
+  width: 250px;
+  margin-left: -5px;
+}
+</style>
+</head>
+<body>
+    <div id="titlebar">
+        <a href="https://demondanceclub.net/" target="_blank"><img src="ddcnetoldenglish.gif" width="240" height="40" style="margin-left: 5px; margin-top: -1px; transform: rotate(deg)"></a>
+    </div>
+    <div style="position: relative; z-index: 7">
+    	<input type="checkbox" id="shelf" checked autocomplete="off">
+    	<div id="pull-down">
+            <table>
+                <tr>
+                    <td>About</td>
+                </tr>
+                <tr>
+                    <td><a href="gallery.html">Gallery</a></td>
+                </tr>
+            </table>
+        	<p>
+                Hii I'm <b>Moxie Excess</b>!! I'm an <b>artist</b>, <b>vtuber</b>, and all-round internet nuisance!!<br> <br><b>I'm on the move looking for a place to settle next to active tiles!!</b> If I am lost in battle please send my body to the Internet Archive for study.
+                <audio controls style="display: ;" src="soundtrack.mp3" width="250" preload="metadata">
+                    
+                </audio>
+                <label for="shelf"><img src="blooddrip.gif"></label>
+       		 </p>
+    	</div>
+        
+     </div>
+    <img src="boxie.gif" width="250" style="position: absolute; top: 35px; z-index: 6">
+    <div id="frame">
+      	<div id="content">
+            <p>This is Moxie's (wip) tile.</p>
+        	<p>
+            Blood! Death! Emo boys!<br> We got it all!
+        </p>
+        </div>  
+        
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

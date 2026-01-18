@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    <style>.tile-body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.gradient-bg {
+  background: linear-gradient(90deg, red, #ff7f00, #ff0, #0f0, #0ff, #00f, #8b00ff, #f0f, red) 0 0 / 200% 100%;
+  width: 100%;
+  height: 100%;
+  animation: 2s linear infinite seamlessFlow;
+}
+
+@keyframes seamlessFlow {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+</style>
+  </head>
+  <body>
+    <div class="gradient-bg"></div>
+  </body>
+</html>

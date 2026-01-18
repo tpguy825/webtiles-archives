@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #404040;
+  background-image: url("goober.webp");
+  width: 250px;
+  height: 250px;
+}
+
+img {
+  max-width: calc(100% - 20px);
+  max-height: 100%;
+  margin: 10px auto;
+  display: block;
+}
+
+h4 {
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+h6 {
+  text-align: center;
+  color: #aaa;
+  margin-top: 0;
+}
+
+.niko {
+  filter: drop-shadow(0 1px 4px #1118);
+  margin: 0;
+  position: fixed;
+  top: 52px;
+  right: -24px;
+}
+
+.teto {
+  filter: drop-shadow(0 1px 4px #1118);
+  margin: 0;
+  position: fixed;
+  bottom: 52px;
+  right: -24px;
+}
+</style>
+</head>
+<body>
+    <img src="niko.gif">
+    <img src="niko.webp" style="width: 50%;">
+    <h4>
+        bottom text
+    </h4>
+    <h6>
+        I love this goober :3
+    </h6>
+    <img src="niko.png" class="niko">
+    <img src="smol-teto.png" class="teto">
+    <div style="position:absolute; left: 4px; top: 2px; color: #aaa"><small>&lt- sent u one back</small></div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.</script>
+</body>
+</html>

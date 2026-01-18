@@ -1,0 +1,142 @@
+<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                    
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+    <div style="background: #2d2d2d" id="top">
+        <span class="active">Search</span>
+        <span>Images</span>
+        <span>Maps</span>
+        <span>Play</span>
+        <span>YouTube</span>
+        <span>News</span>
+        <span>Gmail</span>
+        <span>Drive</span>
+        <span>More <small style="font-size: 3px;">▼</small></span>
+        <div style="flex:1;"></div>
+        <div style="display:flex;justify-content:center;align-items:flex-end;">
+            <span style="padding-right:0;"><b>Sign in</b></span>
+        	<span style="color:white;"><b>⛭</b></span>
+        </div>
+    </div>
+    
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+        <img src="google.png" style="width: 130px;margin-bottom: 12px">
+        <div style="display:flex;align-items: center;gap:5px;align-items:flex-start;">
+            <div style="width:100%;">
+                <input type="text" id="q" name="q" style="width:100%;" autocomplete="off">
+            	<div style="margin-top:2px;display:flex;gap:2px;justify-content:center;align-items:center;">
+                    <button type="submit" name="btnG">Google Search</button>
+        			<button type="submit" name="btnI" value="Im Feeling Lucky">I'm Feeling Lucky</button>
+                </div>
+            </div>
+            <p style="font-size: 5px;white-space:nowrap;text-align:left;margin-top:2px;">
+                <a href="https://google.com/advanced_search" target="_blank">Advanced search</a><br>
+                <a href="https://google.com/language_tools?lang=1" target="_blank">Language tools</a>
+            </p>
+        </div>
+    </form>
+
+    <div class="extra">
+        <div style="display:flex;gap:10px;align-items:center;justify-content:center;">
+            <a href="https://business.google.com/en-all/google-ads/" target="_blank">Advertising Programs</a>
+            <a href="https://google.com/services/" target="_blank">Business Solutions</a>
+            <a href="https://plus.google.com" target="_blank">+Google</a>
+            <a href="https://about.google" target="_blank">About Google</a>
+        </div>
+        <br>
+        <small style="color:#767676;">
+        	© 20XX - <a href="https://policies.google.com" target="_blank">Privacy &amp; Terms</a>
+        </small>
+    </div>
+    
+    <style>* {
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  font-family: Arial, sans-serif;
+}
+
+.tile-body {
+  text-align: center;
+  background: #fff;
+  flex-direction: column;
+  margin: 0;
+  display: flex;
+}
+
+button {
+  border: 1px solid #999;
+  border-color: #ccc #999 #999 #ccc;
+  border-radius: 0;
+  padding: 3px 2px;
+  font-size: 6px;
+}
+
+form {
+  width: 100%;
+  padding: 16px;
+}
+
+#top {
+  text-align: left;
+  color: #ccc;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 5px;
+  display: flex;
+}
+
+#top span {
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 3px;
+  display: flex;
+}
+
+#top > .active {
+  color: #fff;
+  border-top: .1px solid #dd4b39;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+form a {
+  color: #36c;
+}
+
+input {
+  border: 1px solid #999;
+  border-radius: 0;
+  outline: none;
+  padding: 1.25px 2px 0 1.5px;
+  font-size: 10px;
+}
+
+.extra {
+  margin-top: 20px;
+  font-size: 5px;
+}
+</style>
+    
+    <script type="text/tilescript">
+        document.body.addEventListener('click', function (event) {
+          if (event.target === document.body) {
+            document.querySelector('input').focus()
+          }
+        });
+    	document.querySelector('input').focus()
+    </script>
+</body>
+</html>

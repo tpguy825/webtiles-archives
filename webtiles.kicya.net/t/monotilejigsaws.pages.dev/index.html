@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>html, .tile-body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+a {
+  transform-origin: center;
+  background-image: url("piece.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  animation: 60s linear infinite spin;
+  display: block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+</head>
+    <body><a href="https://monotilejigsaws.pages.dev" target="_blank"></a></body>
+</html>

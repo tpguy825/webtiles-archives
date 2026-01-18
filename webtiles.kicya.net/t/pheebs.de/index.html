@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+p, h1 {
+  text-align: center;
+}
+
+.gradient-border {
+  border-radius: 0;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-border:before {
+  content: "";
+  background: linear-gradient(0deg, #d52d00 0%, #ff9a56 25%, #fff 50%, #f5a9b8 75%, #5bcefa 100%);
+  width: 200%;
+  height: 200%;
+  animation: 20s ease-in-out infinite rotate;
+  position: absolute;
+  inset: -50%;
+}
+
+.gradient-border__content {
+  z-index: 2;
+  color: #333;
+  background: #fff;
+  border-radius: -8px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 16px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+    <div class="gradient-border">
+        <div class="gradient-border__content">
+            <span>
+                <h1>Hi, I'm Phoebe!</h1>
+    			<p>Transbian<br>Indie Dev<br>Environment Artist<br>Level Designer</p>
+    			<p>Check out my<br><a href="https://pheebs.de/" target="_blank">Portfolio</a></p>
+            </span>
+        </div>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

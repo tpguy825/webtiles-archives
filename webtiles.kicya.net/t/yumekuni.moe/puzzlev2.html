@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: PixelifySans;
+  src: url("fonts/PixelifySans.ttf") format("truetype");
+}
+
+.tile-body {
+  color: #fff;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+#puzzle {
+  border-spacing: 0;
+  margin-top: 8px;
+}
+
+#puzzle th, td {
+  margin: 0;
+  padding: 0;
+}
+
+.selected {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #ff0;
+}
+
+.puzzle-block {
+  background-image: url("puzzle260117.png");
+  width: 53px;
+  height: 50px;
+}
+
+.p1A {
+  background-position: 0 0;
+}
+
+.p1B {
+  background-position: -53px 0;
+}
+
+.p1C {
+  background-position: -106px 0;
+}
+
+.p1D {
+  background-position: -159px 0;
+}
+
+.p2A {
+  background-position: 0 -50px;
+}
+
+.p2B {
+  background-position: -53px -50px;
+}
+
+.p2C {
+  background-position: -106px -50px;
+}
+
+.p2D {
+  background-position: -159px -50px;
+}
+
+.p3A {
+  background-position: 0 -100px;
+}
+
+.p3B {
+  background-position: -53px -100px;
+}
+
+.p3C {
+  background-position: -106px -100px;
+}
+
+.p3D {
+  background-position: -159px -100px;
+}
+
+.p4A {
+  background-position: 0 -150px;
+}
+
+.p4B {
+  background-position: -53px -150px;
+}
+
+.p4C {
+  background-position: -106px -150px;
+}
+
+.p4D {
+  background-position: -159px -150px;
+}
+
+.pixel {
+  font-family: PixelifySans, MS Ghotic, Arial;
+}
+
+.main-window {
+  background-image: url("bg_collab.gif");
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.main-windowp {
+  background-image: url("bgwbackbtn.png");
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.deepFried {
+  image-rendering: pixelated;
+}
+
+.game-button {
+  image-rendering: pixelated;
+  color: #fff;
+  cursor: pointer;
+  border-style: solid;
+  background-color: #000;
+  border-image-source: url("9slice_buttonlink.png");
+  border-image-slice: 9;
+  border-image-width: 8px;
+  border-image-repeat: round;
+  margin: 4px;
+}
+
+.game-button:hover {
+  border-image-source: url("9slice_buttonlinkhover.png");
+}
+
+.nineslice {
+  image-rendering: pixelated;
+  color: #fff;
+  cursor: pointer;
+  border-style: solid;
+  background-color: #000;
+  border-image-source: url("9slice_buttonlink.png");
+  border-image-slice: 9;
+  border-image-width: 8px;
+  border-image-repeat: round;
+  min-width: 96px;
+  min-height: 16px;
+  padding: 7px;
+  font-size: 16px;
+}
+
+.nineslice:hover {
+  border-image-source: url("9slice_buttonlinkhover.png");
+}
+
+.container {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 212px;
+  margin: 12px 12px 25px 16px;
+  padding-left: 4px;
+  padding-right: 4px;
+  display: flex;
+  overflow-y: auto;
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: #625198;
+}
+
+.container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #a093c5;
+}
+</style>
+</head>
+    <body>
+
+        <div class="main-windowp pixel deepFried"> 
+                    <a href="index.html" style="min-width: 23px; max-height: 12px; background-color: transparent; position: absolute; top: 227px; right: 138px; border: 0px; font-size: 10px; text-align: center; cursor: pointer;">
+     	&nbsp;
+                    </a>
+            <p id="countdown" style=" position: absolute; top: 10%; left: 45%; transform: translate(-50% -50%); color:yellow; font-size:64px; width:100%; height: 100%;">
+                
+                
+            </p>
+            
+			<div class="container" style="align-items: center; justify-items: center; background-color: black; font-size: 12px;">
+				
+                <div id="instructions" style="display:flex; align-items: center; justify-items: center; flex-direction:column;">
+                    
+               
+                <img src="puzzle_label.png" style="margin-top: 4px;">
+
+                <button id="gameButton" class=" game-button pixel deepFried" >
+                    Play
+                </button>
+                <p> Instructions </p>
+                1. Try to memorize the images, you have 3 seconds for it!<br>
+                2. Click on one block then click on another to swap places<br><br>
+                Future plans for this game:<br> * Add global highscore <br> *Add timeattack
+
+
+            	 </div>
+                <table id="puzzle">
+                    <th>
+                    	<tr>
+                            <td id="1A" class="puzzle-block p1A"></td>
+                            <td id="1B" class="puzzle-block p1B"></td>
+                            <td id="1C" class="puzzle-block p1C"></td>
+                            <td id="1D" class="puzzle-block p1D"></td>
+                        </tr>
+                    </th>
+                    <th>
+                    	<tr>
+                            <td id="2A" class="puzzle-block p2A"></td>
+                            <td id="2B" class="puzzle-block p2B"></td>
+                            <td id="2C" class="puzzle-block p2C"></td>
+                            <td id="2D" class="puzzle-block p2D"></td>
+                        </tr>
+                    </th>
+                    <th>
+                    	<tr>
+                            <td id="3A" class="puzzle-block p3A"></td>
+                            <td id="3B" class="puzzle-block p3B"></td>
+                            <td id="3C" class="puzzle-block p3C"></td>
+                            <td id="3D" class="puzzle-block p3D"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td id="4A" class="puzzle-block p4A"></td>
+                            <td id="4B" class="puzzle-block p4B"></td>
+                            <td id="4C" class="puzzle-block p4C"></td>
+                            <td id="4D" class="puzzle-block p4D"></td>
+                        </tr>
+                    </th>
+                </table>
+               
+         
+            </div>
+        </div>
+        <script type="text/tilescript">var gameStart = false;
+
+var cursor = "";
+var timeleft = 4;
+var win = false;
+
+var puzzleContainer = document.getElementById("puzzle");
+puzzleContainer.style.display = "none";
+
+
+var gameButton = document.getElementById("gameButton");
+gameButton.addEventListener("click", function (e) {
+   startGame(); 
+});
+
+//Add click events
+function addTilesEventListener (){
+    var letters = ["A", "B", "C", "D"];
+    for(i =1; i < 5; i++){
+        for (j = 0; j <4; j++) {
+            var obj = document.getElementById(i+letters[j]);
+            obj.name = i+letters[j];
+            obj.addEventListener("click", function (e) {
+    			setOrChangePosition(e.target.id);
+			});
+        }
+    }
+}
+
+
+function setOrChangePosition(pos) {
+    if (timeleft <= 0 && !win){
+        if (cursor == "") {
+            cursor = pos;
+            var obj = document.getElementById(pos);
+            obj.className += " selected";
+        }
+        else {
+            changePosition(cursor, pos);
+            cursor = "";
+        }
+        
+        checkWinCondition();
+    }
+    
+    
+
+}
+
+
+//This change tiles positions
+function changePosition(from, to) {
+    var fromDOM = document.getElementById(from);
+    var toDOM = document.getElementById(to);
+    
+    fromDOM.className = "puzzle-block p" + to;
+    toDOM.className = "puzzle-block p" + from;
+   
+    fromDOM.id = to;
+    toDOM.id = from;
+    
+}
+
+
+//Mixup tiles
+function initialRandomizer() {
+
+    var tilesLength = 4*4;
+    var letters = ["A", "B", "C", "D"];
+    
+    for(i =0; i < tilesLength; i++){
+        var x1 = Math.floor(Math.random() * 4) + 1;
+        var x2 = Math.floor(Math.random() * 4) + 1;
+        
+        changePosition(
+            x1.toString() + letters[Math.floor(Math.random() * 4)], 		
+            x2.toString() + letters[Math.floor(Math.random() * 4)]);
+                                         
+    }
+
+}
+
+
+
+// setTimeout(initialRandomizer, 3000);
+
+
+
+function checkWinCondition (){
+    var letters = ["A", "B", "C", "D"];
+    for(i =1; i < 5; i++){
+        for (j = 0; j <4; j++) {
+            var obj = document.getElementById(i+letters[j]);
+			if (obj.name != obj.id) return;
+            
+        }
+    }
+    var p = document.getElementById("countdown");
+    p.style.display = "block";
+    p.textContent  =" WIN!!";
+	win = true;
+}
+
+addTilesEventListener();
+
+
+function startGame() {
+ 	var puzzleContainer = document.getElementById("puzzle");
+	puzzleContainer.style.display = "block";
+    
+    var instructions = document.getElementById("instructions");
+    instructions.style.display = "none";
+    
+    var downloadTimer = setInterval(function(){
+    var p = document.getElementById("countdown");
+    if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        initialRandomizer();
+        p.style.display = "none";
+    }
+    var remaining= 4 - timeleft;
+    
+    p.textContent  = remaining;
+    
+    timeleft -= 1;
+}, 1000);
+}
+
+</script>
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>html, .tile-body {
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  display: flex;
+}
+
+canvas {
+  image-rendering: pixelated;
+  background: #000;
+  border: 3px solid #333;
+  display: block;
+}
+</style>
+  </head>
+  <body>
+    <canvas id="view" width="250" height="250"></canvas>
+    <script type="text/tilescript">console.log("we're dooming")
+var canvas = document.getElementById("view");
+var ctx = canvas.getContext("2d");
+var W = canvas.width, H = canvas.height;
+var HALF_H = H/2;
+var RAYS = 120, FOV = Math.PI/3;
+var ANG_STEP = FOV/RAYS;
+var WALL_H = 120;
+
+var player = {x:6.5,y:6.5,a:0};
+
+function makeMap(w,h){
+  var m=[];
+  for(var y=0;y<h;y++){
+    var r="";
+    for(var x=0;x<w;x++){
+      r += x===0||y===0||x===w-1||y===h-1||(x===4&&y>2&&y<h-3)||(y===5&&x>3&&x<w-3)?"1":"0";
+    }
+    m.push(r);
+  }
+  return m;
+}
+
+var map = makeMap(12,12);
+
+var wallTex = new Image();
+wallTex.src = "056.png"; // make sure this file exists in same folder
+
+wallTex.onload = function(){
+    requestAnimationFrame(tick);
+};
+
+function castRay(a){
+  var sin = Math.sin(a), cos = Math.cos(a),
+      mx = player.x|0, my = player.y|0;
+  var dx = Math.abs(1/cos), dy = Math.abs(1/sin);
+  var sx = cos<0?-1:1, sy = sin<0?-1:1;
+  var rx = (sx<0?player.x-mx:mx+1-player.x)*dx;
+  var ry = (sy<0?player.y-my:my+1-player.y)*dy;
+  var side;
+  while(true){
+    if(rx<ry){rx+=dx; mx+=sx; side=0;}
+    else{ry+=dy; my+=sy; side=1;}
+    if(map[my][mx]!=="0") break;
+  }
+  var dist = side===0?(mx-player.x+(1-sx)/2)/cos:(my-player.y+(1-sy)/2)/sin;
+  var hitX = side===0?player.y+dist*sin:player.x+dist*cos;
+  hitX -= Math.floor(hitX);
+  return {dist:dist, texX:hitX, side:side};
+}
+
+function drawFrame(){
+  ctx.fillStyle="#333"; ctx.fillRect(0,0,W,HALF_H);
+  ctx.fillStyle="#111"; ctx.fillRect(0,HALF_H,W,HALF_H);
+
+  for(var i=0;i<RAYS;i++){
+    var rayAng = player.a - FOV/2 + i*ANG_STEP;
+    var r = castRay(rayAng);
+    var d = r.dist * Math.cos(rayAng-player.a);
+    var h = (WALL_H/d)|0;
+    var x = i*(W/RAYS);
+    var texX = (r.texX*wallTex.width)|0;
+    ctx.drawImage(
+        wallTex,
+        texX,0,1,wallTex.height,
+        x,HALF_H-h/2,(W/RAYS)+1,h
+    );
+  }
+}
+
+function tick(){
+  player.a += 0.005;
+  drawFrame();
+  requestAnimationFrame(tick);
+}</script>
+    
+  </body>
+</html>

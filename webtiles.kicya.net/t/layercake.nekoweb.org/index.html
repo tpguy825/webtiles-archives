@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+}
+
+.tile-body {
+  user-select: none;
+  background-image: url("assets/left.jpg");
+  margin: 0;
+}
+
+border {
+  border-style: solid;
+  border-width: 10px 0 10px 10px;
+  border-image: url("assets/border.webp") 20 round;
+  width: 252px;
+  height: 252px;
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  right: 1px;
+}
+
+inner {
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  filter: drop-shadow(0 0 10px #0f315260);
+}
+
+.redbar {
+  text-align: center;
+  color: #ff0;
+  z-index: 999;
+  background: red;
+  width: 100%;
+  padding: 5px;
+  font-size: 13px;
+  position: fixed;
+  bottom: 0;
+}
+</style>
+</head>
+    <body>
+        <div class="redbar">
+            Got way too silly
+        </div>
+        <a href="https://layercake.moe/" target="_blank">
+        <border>
+            <inner>
+            <img class="logo" src="assets/logo.webp">
+            </inner>        
+        </border>  
+            </a>
+    </body>
+</html>

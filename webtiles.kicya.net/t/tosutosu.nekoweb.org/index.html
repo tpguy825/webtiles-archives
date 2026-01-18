@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+  
+
+  <style>html, .tile-body {
+  height: 100%;
+  margin: 0;
+}
+
+.tile-body {
+  color: #fff;
+  background-color: #000;
+  font-family: ms gothic, monospace;
+  font-size: 14px;
+  position: relative;
+}
+
+main {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+header {
+  letter-spacing: 1px;
+  justify-content: center;
+  align-items: center;
+  width: 138px;
+  height: 75px;
+  font-size: 32px;
+  display: flex;
+}
+
+.box {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.btnlink {
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  background-color: #000;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 3px 12px;
+  font-family: ms gothic, monospace;
+  font-size: 24px;
+  text-decoration: none;
+  transition: all .3s;
+  display: inline-block;
+}
+
+.btnlink:hover {
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+.btnlink:focus-visible {
+  outline-offset: 3px;
+  outline: 2px solid #fff;
+}
+
+.follow-frame {
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#rice {
+  z-index: 10;
+  opacity: .9;
+  user-select: none;
+  width: auto;
+  height: auto;
+  font-size: 16px;
+  position: absolute;
+  bottom: 7px;
+  right: 20px;
+}
+</style>
+</head>
+
+<body class="tile-body">
+  <main>
+    <header aria-label="logo">TOSUTOSU</header>
+
+    <div class="box">
+      <a class="btnlink" href="https://tosutosu.nekoweb.org/" target="_blank" rel="noopener noreferrer">Visit</a>
+
+      
+    </div>
+
+    <div id="rice" aria-hidden="true">◻</div>
+  </main>
+</body>
+</html>

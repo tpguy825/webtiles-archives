@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: JetBrains Mono;
+  src: local(JetBrainsMono NF), local(JetBrains Mono), url("font.woff2") format("woff");
+}
+
+.tile-body {
+  color: #000;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  font-family: JetBrains Mono, monospace;
+  overflow: hidden;
+
+  & > video {
+    z-index: -1;
+    position: absolute;
+  }
+}
+
+main {
+  background-color: #fff;
+  height: 100%;
+  font-size: 12px;
+  transition: scale 50ms;
+  scale: 1;
+
+  &.hidden {
+    display: none;
+    scale: 0;
+  }
+
+  & > header {
+    background-color: #ffd35c;
+
+    & > div.top {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 0 0 .2rem;
+      font-size: 10px;
+      display: flex;
+
+      & img {
+        max-width: 1em;
+        max-height: 1em;
+      }
+
+      & > span {
+        padding: .4rem .8rem;
+      }
+
+      & > .x {
+        box-sizing: border-box;
+
+        &:hover {
+          color: #fff;
+          background: red;
+        }
+      }
+    }
+
+    & > div.bottom {
+      padding: 0 1rem .5rem;
+      font-size: 12px;
+    }
+  }
+
+  & > div.program {
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+    padding: 1rem 1rem .5rem;
+    font-size: 14px;
+    display: flex;
+
+    & > img {
+      border-radius: 10px;
+      max-height: 40px;
+    }
+  }
+
+  & > div.info {
+    padding: 0 1rem .5rem;
+    font-size: 11px;
+    line-height: 14px;
+
+    & a {
+      text-decoration: none;
+    }
+  }
+
+  & > div.buttons {
+    flex-direction: row;
+    gap: 1px;
+    padding: 0 1rem;
+    font-size: 11px;
+    display: flex;
+
+    & > a, & > span {
+      box-sizing: border-box;
+      color: #000;
+      text-align: center;
+      background-color: #b7b7b7;
+      flex-grow: 1;
+      height: 2.5em;
+      padding: .6em 0;
+      text-decoration: none;
+    }
+
+    & > a:active {
+      background-color: #a4a4a4;
+    }
+
+    & > a:hover {
+      background-color: silver;
+    }
+
+    & > span {
+      color: #606060;
+      cursor: default;
+      background-color: #b0b0b0;
+    }
+  }
+}
+
+.textDimensionCalculation {
+  visibility: hidden;
+  white-space: nowrap;
+  width: auto;
+  height: auto;
+  position: absolute;
+}
+</style>
+</head>
+<body>
+    <video id="video" playsinline src="boom.webm" style="width: 100%; height: 100%" preload="metadata"></video>
+    <audio id="audio" src="uac.mp3" style="display: none" preload="metadata"></audio>
+    <main id="main">
+        <header>
+            <div class="top">
+                <span>User Account Control</span>
+            	<span class="x" id="x" style="cursor: pointer"><img src="x.svg"></span>
+            </div>
+            <div class="bottom">
+                Do you want to allow this tile from an unknown publisher to make changes to your device?
+            </div>
+        </header>
+        <div class="program">
+            <img src="pfp.png">
+            <a style="color: black; text-decoration: none;" href="https://bscit.dev" target="_blank">bscit.dev</a>
+        </div>
+        <div class="info">
+            <span>Publisher: Unknown</span>
+            <br>
+            <span>File Origin: On le web</span>
+            <br>
+            <br>
+            <a href="https://bscit.dev" target="_blank">Show more details</a>
+        </div>
+        <div class="buttons">
+            <a href="https://bscit.dev" target="_blank">Yes</a>
+            <a id="no" style="cursor: pointer">No</a>
+        </div>
+    </main>
+
+    <script type="text/tilescript">console.log("Stay hydrated!!!")
+</script>
+    <script type="text/tilescript">
+        var main = document.getElementById("main");
+        var video = document.getElementById("video");
+        var audio = document.getElementById("audio");
+        var x = document.getElementById("x");
+        var no = document.getElementById("no");
+
+        audio.play();
+
+        // 4166.67 ms
+        var reset = function()
+        {
+            video.pause();
+            main.className = "";
+        }
+        video.addEventListener("ended", reset);
+
+        var boom = function()
+        {
+            main.className = "hidden";
+            video.src = "/boom.webm";
+            video.controls = false;
+            if(Math.random() < 1/40)
+            {
+                video.src = "/steelball.mp4"
+            	video.controls = true;
+            }
+            video.play();
+            video.currentTime = 0;
+            if(video.src == "/boom.webm")
+            	setTimeout(reset, 4166.67);
+        }
+        x.onclick = boom;
+        no.onclick = boom;
+    </script>
+</body>
+</html>

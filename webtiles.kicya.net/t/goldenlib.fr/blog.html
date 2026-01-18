@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    
+    <style>.tile-body {
+  color: #fffffe;
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  background: #0f0e17;
+  margin: 0;
+  font-family: Tahoma, sans-serif;
+  font-size: 6px;
+  overflow: hidden;
+}
+
+#container {
+  height: 100%;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 1px solid #f00069;
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+}
+
+.title {
+  color: #f00069;
+  margin: 0 0 1px;
+  font-size: 8px;
+}
+
+.subtitle {
+  color: #888;
+  margin: 0;
+  font-size: 5px;
+}
+
+.nav {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 6px;
+  display: flex;
+}
+
+.nav a {
+  color: #fffffe;
+  background: #00000020;
+  border: 1px solid #444;
+  border-radius: 2px;
+  padding: 1px 3px;
+  font-size: 5px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  border-color: #f00069;
+}
+
+.nav a.active {
+  color: #fff;
+  background: #f00069;
+}
+
+.box {
+  background: #00000010;
+  border: 1px solid #444;
+  border-radius: 3px;
+  margin-bottom: 4px;
+  padding: 3px;
+}
+
+.box h3 {
+  color: #2ba6b2;
+  align-items: center;
+  gap: 2px;
+  margin: 0 0 2px;
+  font-size: 7px;
+  display: flex;
+}
+
+.icon {
+  color: #f00069;
+}
+
+ul {
+  margin: 2px 0;
+  padding-left: 10px;
+}
+
+li {
+  margin: 1px 0;
+}
+
+.link {
+  color: #2ba6b2;
+  font-size: 5px;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.back {
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+}
+
+.copyright {
+  color: #888;
+  font-size: 5px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+
+.date {
+  color: #aaa;
+  font-size: 5px;
+}
+
+.article {
+  border-bottom: 1px dotted #333;
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <h1 class="title">GoldenLib.fr</h1>
+            <p class="subtitle">Blog</p>
+        </div>
+        
+        <div class="nav">
+            <a href="index.html">Accueil</a>
+            <a href="blog.html" class="active">Blog</a>
+            <a href="fougere.html">Fougère</a>
+            <a href="apropos.html">À propos</a>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Catégories</h3>
+            <ul>
+                <li>Aventure Pingouin (41)</li>
+                <li>Numérique (7)</li>
+                <li>Politique (8)</li>
+                <li>Télévision (8)</li>
+                <li>Minecraft (4)</li>
+                <li>Santé (3)</li>
+                <li>Fiction (2)</li>
+            </ul>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Derniers articles</h3>
+            
+            <div class="article" id="2025">
+                <strong>Bilan de l'année 2025</strong><br>
+                <span class="date">31 décembre 2025</span><br>
+                Réflexions sur l'année écoulée et l'avenir du site.
+            </div>
+            
+            <div class="article">
+                <strong>Projet Secret</strong><br>
+                <span class="date">15 novembre 2025</span><br>
+                Nouvelle fonctionnalité en développement.
+            </div>
+            
+            <div class="article">
+                <strong>Retour sur Twitter</strong><br>
+                <span class="date">1 octobre 2025</span><br>
+                Expériences avec les réseaux sociaux.
+            </div>
+            
+            <div class="article">
+                <strong>Aventure Pingouin</strong><br>
+                <span class="date">5 septembre 2025</span><br>
+                Dernières nouvelles du projet.
+            </div>
+        </div>
+        
+        <a href="index.html" class="link back">← Accueil</a>
+        <p class="copyright">© 2025</p>
+    </div>
+</body>
+</html>

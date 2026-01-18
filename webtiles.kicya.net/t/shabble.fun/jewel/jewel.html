@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>.tile-body {
+  text-align: center;
+  background: #000;
+  margin: 0;
+}
+
+#game {
+  border: 1px solid red;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+</style>
+</head>
+<body>
+<canvas id="game" width="240" height="240"></canvas>
+<script type="text/tilescript">(function () {
+  var marked = [];  
+  var canvas = document.getElementById("game");
+  var ctx = canvas.getContext("2d");
+
+  var COLS = 8;
+  var ROWS = 8;
+  var SIZE = 30;
+
+  var colors = [
+      "#e74c3c", // red
+      "#3498db", // blue
+      "#f1c40f", // yellow
+      "#2ecc71", // green
+      "#9b59b6", // purple
+      "#e67e22", // orange
+      "#ffffff", // white
+  ];
+  var grid = [];
+  var selected = null;
+  var anim = [];
+var gemImage = document.createElement("img");
+var SPRITE_SIZE = 30;
+var spritesLoaded = true; // FORCE IT
+
+gemImage.src = "/jewel/gems.png";
+    
+  function randomGem() {
+    return Math.floor(Math.random() * colors.length);
+  }
+
+function initGrid() {
+  for (var y = 0; y < ROWS; y++) {
+grid[y] = [];
+marked[y] = [];
+anim[y] = [];
+    for (var x = 0; x < COLS; x++) {
+
+      var gem;
+      do {
+        gem = randomGem();
+      } while (
+        (x >= 2 &&
+          grid[y][x - 1] === gem &&
+          grid[y][x - 2] === gem) ||
+        (y >= 2 &&
+          grid[y - 1][x] === gem &&
+          grid[y - 2][x] === gem)
+      );
+
+      grid[y][x] = gem;
+      marked[y][x] = false;
+      anim[y][x] = {
+  scale: 1,
+  offsetY: 0,
+  popping: false
+}
+    }
+  }
+}
+
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = "#111";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+ctx.strokeStyle = "#222";
+for (var i = 0; i <= 8; i++) {
+  ctx.beginPath();
+  ctx.moveTo(i * SIZE, 0);
+  ctx.lineTo(i * SIZE, canvas.height);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(0, i * SIZE);
+  ctx.lineTo(canvas.width, i * SIZE);
+  ctx.stroke();
+}
+
+    for (var y = 0; y < ROWS; y++) {
+      for (var x = 0; x < COLS; x++) {
+var gem = grid[y][x];
+
+if (gem !== -1 && spritesLoaded) {
+  ctx.drawImage(
+    gemImage,
+    gem * SPRITE_SIZE, // source x
+    0,                 // source y
+    SPRITE_SIZE,       // source width
+    SPRITE_SIZE,       // source height
+x * SIZE + 3,
+y * SIZE + 3,
+SIZE - 6,
+SIZE - 6
+  );
+}
+if (gem !== -1 && !spritesLoaded) {
+  ctx.fillStyle = "#444";
+  ctx.fillRect(x * SIZE, y * SIZE, SIZE - 2, SIZE - 2);
+}
+
+if (marked[y][x]) {
+  ctx.strokeStyle = "#3d3d3d";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(x * SIZE + 2, y * SIZE + 2, SIZE - 6, SIZE - 6);
+}
+        if (selected && selected.x === x && selected.y === y) {
+          ctx.strokeStyle = "#3d3d3d";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(x * SIZE + 1, y * SIZE + 1, SIZE - 4, SIZE - 4);
+        }
+      }
+    }
+  }
+
+  function getCell(mx, my) {
+    return {
+      x: Math.floor(mx / SIZE),
+      y: Math.floor(my / SIZE)
+    };
+  }
+function isAdjacent(a, b) {
+  var dx = Math.abs(a.x - b.x);
+  var dy = Math.abs(a.y - b.y);
+  return (dx + dy === 1);
+}
+    function swap(a, b) {
+  var temp = grid[a.y][a.x];
+  grid[a.y][a.x] = grid[b.y][b.x];
+  grid[b.y][b.x] = temp;
+}
+    function findMatches() {
+  var found = false;
+  for (var y = 0; y < ROWS; y++) {
+    for (var x = 0; x < COLS; x++) {
+      marked[y][x] = false;
+    }
+  }
+         for (var y = 0; y < ROWS; y++) {
+    var run = 1;
+    for (var x = 1; x <= COLS; x++) {
+      if (x < COLS && grid[y][x] === grid[y][x - 1]) {
+        run++;
+      } else {
+        if (run >= 3) {
+          found = true;
+          for (var k = 0; k < run; k++) {
+            marked[y][x - 1 - k] = true;
+          }
+        }
+        run = 1;
+      }
+    }
+  }
+         for (var x = 0; x < COLS; x++) {
+    var run = 1;
+    for (var y = 1; y <= ROWS; y++) {
+      if (y < ROWS && grid[y][x] === grid[y - 1][x]) {
+        run++;
+      } else {
+        if (run >= 3) {
+          found = true;
+          for (var k = 0; k < run; k++) {
+            marked[y - 1 - k][x] = true;
+          }
+        }
+        run = 1;
+      }
+    }
+  }
+
+  return found;
+}
+    function clearMatches() {
+  var cleared = false;
+
+  for (var y = 0; y < ROWS; y++) {
+    for (var x = 0; x < COLS; x++) {
+      if (marked[y][x]) {
+        grid[y][x] = -1;      
+        marked[y][x] = false;
+        cleared = true;
+      }
+    }
+  }
+  return cleared;
+}
+function applyGravity() {
+  for (var x = 0; x < COLS; x++) {
+    for (var y = ROWS - 1; y >= 0; y--) {
+      if (grid[y][x] === -1) {
+        for (var k = y - 1; k >= 0; k--) {
+          if (grid[k][x] !== -1) {
+            grid[y][x] = grid[k][x];
+            grid[k][x] = -1;
+            break;
+          }
+        }
+      }
+    }
+  }
+}
+function refill() {
+  for (var y = 0; y < ROWS; y++) {
+    for (var x = 0; x < COLS; x++) {
+if (grid[y][x] === -1) {
+  grid[y][x] = randomGem();
+  anim[y][x] = {
+    scale: 1,
+    offsetY: -SIZE,
+    popping: false
+  };
+}
+    }
+  }
+}
+function hasValidMove() {
+  for (var y = 0; y < ROWS; y++) {
+    for (var x = 0; x < COLS; x++) {
+
+      
+      if (x < COLS - 1) {
+        swap({ x: x, y: y }, { x: x + 1, y: y });
+        if (findMatches()) {
+          swap({ x: x, y: y }, { x: x + 1, y: y });
+          clearMarked();  
+          return true;
+        }
+        swap({ x: x, y: y }, { x: x + 1, y: y });
+        clearMarked();     
+      }
+
+      // try down
+      if (y < ROWS - 1) {
+        swap({ x: x, y: y }, { x: x, y: y + 1 });
+        if (findMatches()) {
+          swap({ x: x, y: y }, { x: x, y: y + 1 });
+          clearMarked();   
+          return true;
+        }
+        swap({ x: x, y: y }, { x: x, y: y + 1 });
+        clearMarked();     
+      }
+    }
+  }
+
+  return false;
+}
+
+function resolveBoard() {
+  while (findMatches()) {
+    clearMatches();
+    applyGravity();
+    refill();
+  }
+   if (!hasValidMove()) {
+    initGrid();
+    resolveBoard();
+  }
+}
+function clearMarked() {
+  for (var y = 0; y < ROWS; y++) {
+    for (var x = 0; x < COLS; x++) {
+      marked[y][x] = false;
+    }
+  }
+}
+canvas.addEventListener("click", function (e) {
+  var rect = canvas.getBoundingClientRect();
+  var mx = e.clientX - rect.left;
+  var my = e.clientY - rect.top;
+
+  var cell = getCell(mx, my);
+
+  if (!selected) {
+    selected = cell;
+  } else {
+if (isAdjacent(selected, cell)) {
+  swap(selected, cell);
+  if (findMatches()) {
+    resolveBoard();
+  } else {
+    swap(selected, cell);
+  }
+}
+selected = null;
+  }
+
+  draw();
+});
+
+  initGrid();
+  resolveBoard();
+  draw();
+})();</script>
+</body>
+</html>

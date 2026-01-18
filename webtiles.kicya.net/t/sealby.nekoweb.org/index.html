@@ -1,0 +1,148 @@
+
+<style>* {
+  box-sizing: border-box;
+  font-family: Arial Rounded MT Bold, Arial, sans-serif;
+}
+
+.fighter-box {
+  color: #ff6fb1;
+  background: url("pinkheart.gif");
+  border-radius: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  height: 250px;
+  padding: 10px;
+  display: flex;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+  letter-spacing: 1px;
+  color: #de6b9b;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.fighter-display {
+  background: repeating-linear-gradient(45deg, #fff, #fff 8px, #ffe9f4 8px 16px);
+  border: 2px solid #ffb3dd;
+  border-radius: 0;
+  flex-grow: 1;
+  margin: 6px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.fighter-display img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.nameplate {
+  text-align: center;
+  letter-spacing: .5px;
+  color: #4b1d5a;
+  background: none;
+  width: 100%;
+  padding: 0;
+  font-size: 11px;
+  position: absolute;
+  bottom: 6px;
+}
+
+.controls {
+  gap: 6px;
+  display: flex;
+}
+
+.controls button {
+  cursor: pointer;
+  color: #ff6fb1;
+  background: linear-gradient(#fff7fb, #ffd6eb);
+  border: 2px solid #ff9fd6;
+  border-radius: 0;
+  flex: 1;
+  padding: 6px 0;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.controls button:active {
+  transform: scale(.95);
+}
+</style>
+
+<div class="fighter-box">
+  <div class="title"><b>CHOOSE YOUR UMA</b></div>
+
+  <div class="fighter-display">
+    <img id="fighterImage" src="wonder.png">
+    <div id="fighterName" class="nameplate">wonder acute</div>
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn">◀</button>
+    <button id="randomBtn">RANDOM</button>
+    <button id="nextBtn">▶</button>
+  </div>
+</div>
+
+<script type="text/tilescript">
+(function () {
+
+  var fighters = [
+      { name: 'wonder acute', img: 'wonder.png' },
+      { name: 'almond eye', img: 'almond.png' },
+      { name: 'rhein kraft', img: 'rheink.png' },
+      { name: 'narita brian', img: 'brian.png' }
+    ];
+
+  var index = 0;
+  var imgEl, nameEl, prevBtn, nextBtn, randomBtn;
+
+  function update() {
+    imgEl.src = fighters[index].img;
+    nameEl.textContent = fighters[index].name;
+  }
+
+  function init() {
+    imgEl = document.getElementById('fighterImage');
+    nameEl = document.getElementById('fighterName');
+    prevBtn = document.getElementById('prevBtn');
+    nextBtn = document.getElementById('nextBtn');
+    randomBtn = document.getElementById('randomBtn');
+
+    if (!imgEl || !nameEl || !prevBtn || !nextBtn || !randomBtn) {
+      setTimeout(init, 50);
+      return;
+    }
+
+    prevBtn.addEventListener('click', function () {
+      index = (index - 1 + fighters.length) % fighters.length;
+      update();
+    });
+
+    nextBtn.addEventListener('click', function () {
+      index = (index + 1) % fighters.length;
+      update();
+    });
+
+    randomBtn.addEventListener('click', function () {
+      var newIndex = index;
+      while (newIndex === index) {
+        newIndex = Math.floor(Math.random() * fighters.length);
+      }
+      index = newIndex;
+      update();
+    });
+
+    update();
+  }
+
+  init();
+
+})();
+</script>

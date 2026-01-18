@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    
+    <style>.tile-body {
+  color: #fffffe;
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  background: #0f0e17;
+  margin: 0;
+  font-family: Tahoma, sans-serif;
+  font-size: 6px;
+  overflow: hidden;
+}
+
+#container {
+  height: 100%;
+  padding: 5px;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 1px solid #f00069;
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+}
+
+.title {
+  color: #f00069;
+  margin: 0 0 1px;
+  font-size: 8px;
+}
+
+.subtitle {
+  color: #888;
+  margin: 0;
+  font-size: 5px;
+}
+
+.nav {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 6px;
+  display: flex;
+}
+
+.nav a {
+  color: #fffffe;
+  background: #00000020;
+  border: 1px solid #444;
+  border-radius: 2px;
+  padding: 1px 3px;
+  font-size: 5px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  border-color: #f00069;
+}
+
+.nav a.active {
+  color: #fff;
+  background: #f00069;
+}
+
+.box {
+  background: #00000010;
+  border: 1px solid #444;
+  border-radius: 3px;
+  margin-bottom: 4px;
+  padding: 3px;
+}
+
+.box h3 {
+  color: #2ba6b2;
+  align-items: center;
+  gap: 2px;
+  margin: 0 0 2px;
+  font-size: 7px;
+  display: flex;
+}
+
+.icon {
+  color: #f00069;
+}
+
+.box p {
+  margin: 2px 0;
+  line-height: 1.2;
+}
+
+.small {
+  font-size: 5px;
+}
+
+.gray {
+  color: #aaa;
+}
+
+.link {
+  color: #2ba6b2;
+  font-size: 5px;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 3px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+}
+
+.social {
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 2px;
+  display: flex;
+}
+
+.social a {
+  color: #fff;
+  background: #00000020;
+  border: 1px solid #444;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  font-size: 6px;
+  text-decoration: none;
+  display: flex;
+}
+
+.social a:hover {
+  border-color: #f00069;
+}
+
+.copyright {
+  color: #888;
+  margin: 0;
+  font-size: 5px;
+}
+
+.poll {
+  color: #0f0;
+  font-family: monospace;
+  font-size: 5px;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <h1 class="title">GoldenLib.fr</h1>
+            <p class="subtitle">Le site que personne ne lira</p>
+        </div>
+        
+        <div class="nav">
+            <a href="index.html" class="active">Accueil</a>
+            <a href="blog.html">Blog</a>
+            <a href="fougere.html">Fougère</a>
+            <a href="apropos.html">À propos</a>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Bienvenue</h3>
+            <p>Site personnel de GoldenLib. Projets, réflexions et bricolages numériques.</p>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Dernier article</h3>
+            <p><strong>Bilan 2025 et avenir</strong></p>
+            <p class="small gray">31 décembre 2025</p>
+            <a href="blog.html#2025" class="link">Lire →</a>
+        </div>
+        
+        <div class="box">
+            <h3><span class="icon">★</span> Sondage</h3>
+            <p>Aimez-vous ce site?</p>
+            <p class="poll">Oui: 42% | Non: 58%</p>
+        </div>
+        
+        <div class="footer">
+            <div class="social">
+                <a href="https://twitter.com/golden_lib" title="Twitter" target="_blank">𝕏</a>
+                <a href="https://github.com/goldenlib" title="GitHub" target="_blank">⎇</a>
+                <a href="https://youtube.com/c/goldenlib" title="YouTube" target="_blank">▶</a>
+                <a href="https://webtiles.kicya.net/cdn-cgi/l/email-protection#187b77766c797b6c587f77747c7d7674717a367e6a#187b77766c797b6c587f77747c7d7674717a367e6a" title="Email" target="_blank">✉</a>
+            </div>
+            <p class="copyright">© 2025 GoldenLib.fr</p>
+        </div>
+    </div>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

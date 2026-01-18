@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #00bfff;
+  background-color: #000;
+  background-image: url("tiletemp.gif");
+  justify-content: center;
+  align-items: center;
+  font-family: MS UI Gothic, MS PGothic, sans-serif;
+  display: flex;
+}
+
+a {
+  color: #ff0;
+}
+
+p {
+  text-align: center;
+}
+
+#star {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+#button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#icon {
+  position: absolute;
+  top: 50px;
+}
+
+#play {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+#flash {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+#click {
+  position: absolute;
+  bottom: 85px;
+}
+
+#discord {
+  position: absolute;
+  bottom: 62px;
+}
+</style>
+</head>
+<body>
+    <a id="icon" href="https://starcade.nekoweb.org" target="_blank"><img src="starcade_icon_transparent.png" width="240"></a>
+    
+    <div>
+    	<img id="star" src="starsc.png" style="width:69px;height:52px;">
+   	 	
+        <img id="button" src="starcadebutton.gif">
+        <img id="play" src="playmygames.gif" width="96">
+        <img id="flash" src="FLASH8.png" width="64">
+    </div>
+    <div id="click">
+        <p>
+            <a href="https://starcade.nekoweb.org/sdd2" target="_blank">SDD2 v1.0 is OUT NOW! CLICK TO PLAY!</a>
+        </p>
+    </div>
+    <div id="discord">
+        <p>
+            <a href="https://discord.gg/w4xz4phFUW" target="_blank">Talk to me in my Discord Server!</a>
+        </p>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

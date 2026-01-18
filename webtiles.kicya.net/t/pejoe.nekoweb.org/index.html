@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    
+    
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #fff;
+  background: #4a4a8a;
+  flex-direction: column;
+  width: 250px;
+  height: 250px;
+  font-family: Courier New, monospace;
+  display: flex;
+  overflow: hidden;
+}
+
+.container {
+  background: linear-gradient(135deg, #6b5b95 0%, #4a4a8a 100%);
+  border: 2px solid #2a1a5a;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  position: relative;
+}
+
+.header {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+h1 {
+  color: #ff9;
+  text-shadow: 1px 1px 2px #000;
+  text-align: center;
+  flex: 1;
+  margin: 0;
+  font-size: 11px;
+}
+
+.timer {
+  color: #666;
+  text-align: center;
+  background: #1a0a3a;
+  border: 1px solid #666;
+  border-radius: 2px;
+  min-width: 50px;
+  padding: 2px 4px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.timer.active {
+  color: #9f9;
+  border-color: #9f9;
+}
+
+.timer.finished {
+  color: #ff9;
+  background: #2a1a5a;
+  border-color: #ff9;
+}
+
+.reset-btn {
+  color: #f9f;
+  cursor: pointer;
+  background: #8a2a2a;
+  border: 1px solid #aa4a4a;
+  border-radius: 2px;
+  padding: 2px 4px;
+  font-family: Courier New, monospace;
+  font-size: 6px;
+  font-weight: bold;
+}
+
+.reset-btn:hover {
+  background: #aa3a3a;
+}
+
+.stats {
+  background: #2a1a5a;
+  border: 1px solid #ff9;
+  border-radius: 2px;
+  padding: 3px;
+  font-size: 7px;
+}
+
+.stat-line {
+  color: #9f9;
+  justify-content: space-between;
+  margin: 1px 0;
+  display: flex;
+}
+
+.stat-value {
+  color: #ff9;
+  font-weight: bold;
+}
+
+.tabs {
+  gap: 2px;
+  margin-bottom: 2px;
+  display: flex;
+}
+
+.tab-button {
+  color: #9f9;
+  cursor: pointer;
+  background: #4a7a2a;
+  border: 1px solid #7aaa4a;
+  border-radius: 2px;
+  flex: 1;
+  padding: 2px;
+  font-family: Courier New, monospace;
+  font-size: 6px;
+  font-weight: bold;
+}
+
+.tab-button.active {
+  color: #fff;
+  background: #6aaa4a;
+}
+
+.clicker-area {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 50px;
+  display: flex;
+}
+
+.click-button {
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  border: 2px solid #8a0a0a;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  font-family: Courier New, monospace;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 50ms;
+  box-shadow: 0 2px #5a0a0a;
+}
+
+.click-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 #5a0a0a;
+}
+
+.premium-button {
+  color: #000;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff0 0%, #fa0 100%);
+  border: 2px solid #a60;
+  border-radius: 4px;
+  width: 40px;
+  height: 30px;
+  margin: 0 auto;
+  font-family: Courier New, monospace;
+  font-size: 8px;
+  font-weight: bold;
+  transition: transform 50ms;
+  box-shadow: 0 2px #640;
+}
+
+.premium-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 #640;
+}
+
+.premium-button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.mystical-button {
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f0f 0%, #a0f 100%);
+  border: 2px solid #609;
+  border-radius: 4px;
+  width: 40px;
+  height: 30px;
+  margin: 0 auto;
+  font-family: Courier New, monospace;
+  font-size: 8px;
+  font-weight: bold;
+  transition: transform 50ms;
+  box-shadow: 0 2px #406;
+}
+
+.mystical-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 #406;
+}
+
+.mystical-button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.shop {
+  background: #2a1a5a;
+  border: 1px solid #9f9;
+  border-radius: 2px;
+  flex: 1;
+  height: 95px;
+  padding: 3px;
+  font-size: 6px;
+  overflow-y: auto;
+}
+
+.shop-title {
+  color: #9f9;
+  text-align: center;
+  background: #2a1a5a;
+  margin-bottom: 2px;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
+
+.shop-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  display: grid;
+}
+
+.shop-item {
+  background: #1a0a3a;
+  border: 1px solid #6b5b95;
+  border-radius: 2px;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 28px;
+  padding: 2px;
+  display: flex;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  color: #ff9;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 5px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.item-cost {
+  color: #9f9;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 4px;
+  overflow: hidden;
+}
+
+.buy-button {
+  color: #9f9;
+  cursor: pointer;
+  white-space: nowrap;
+  background: #4a7a2a;
+  border: 1px solid #7aaa4a;
+  border-radius: 2px;
+  margin-top: 2px;
+  padding: 1px 2px;
+  font-family: Courier New, monospace;
+  font-size: 4px;
+  font-weight: bold;
+}
+
+.buy-button:disabled {
+  color: #666;
+  opacity: .5;
+  cursor: not-allowed;
+  background: #2a3a1a;
+}
+
+.floaty {
+  pointer-events: none;
+  text-shadow: 1px 1px 2px #000;
+  font-size: 11px;
+  font-weight: bold;
+  position: fixed;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="timer" id="timer">--:--</div>
+            <h1>CLICKER</h1>
+            <button class="reset-btn" id="resetBtn">RESET</button>
+        </div>
+
+        <div class="stats" id="statsContainer">
+            <div class="stat-line">
+                <span>CLICKS:</span>
+                <span class="stat-value" id="clickCount">0</span>
+            </div>
+            <div class="stat-line">
+                <span>/sec:</span>
+                <span class="stat-value" id="perSecond">0</span>
+            </div>
+            <div class="stat-line">
+                <span>PS/s:</span>
+                <span class="stat-value" id="psPerSecond">0</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" id="tab-clicks">CLICKS</button>
+            <button class="tab-button" id="tab-mystical">MYSTICAL</button>
+        </div>
+
+        <div class="clicker-area" id="clickerClicks">
+            <button class="click-button" id="clickBtn">!</button>
+            <button class="premium-button hidden" id="premiumBtn">MEGA</button>
+        </div>
+
+        <div class="clicker-area hidden" id="clickerMystical">
+            <button class="mystical-button hidden" id="mysticalBtn">✦</button>
+        </div>
+
+        <div class="shop">
+            <div class="shop-title" id="shopTitle">SHOP</div>
+            <div class="shop-grid" id="shopContainer"></div>
+        </div>
+    </div>
+
+    <script type="text/tilescript">
+        var GAME_ID = 'clicker_v1.5';
+
+        var defaultGameState = {
+            gameID: GAME_ID,
+            clicks: 0,
+            perSecond: 0,
+            psPerSecond: 0,
+            hasPremium: false,
+            mysticalClicks: 0,
+            mysticalPerSecond: 0,
+            hasMystical: false,
+            currentTab: 'clicks',
+            speedrunStartTime: 0,
+            speedrunFinished: false,
+            timerActive: false,
+            items: [
+                { id: 'auto1', name: '+1/s', baseCost: 100, costMult: 1.01, owned: 0, perSec: 1 },
+                { id: 'auto5', name: '+5/s', baseCost: 500, costMult: 1.03, owned: 0, perSec: 5 },
+                { id: 'auto10', name: '+10/s', baseCost: 1000, costMult: 1.05, owned: 0, perSec: 10 },
+                { id: 'auto50', name: '+50/s', baseCost: 5000, costMult: 1.07, owned: 0, perSec: 50 },
+                { id: 'auto100', name: '+100/s', baseCost: 10000, costMult: 1.09, owned: 0, perSec: 100 },
+                { id: 'auto500', name: '+500/s', baseCost: 50000, costMult: 1.12, owned: 0, perSec: 500 },
+                { id: 'auto1K', name: '+1K/s', baseCost: 100000, costMult: 1.15, owned: 0, perSec: 1000 },
+                { id: 'auto10K', name: '+10K/s', baseCost: 1000000, costMult: 1.18, owned: 0, perSec: 10000 },
+                { id: 'premium', name: 'MEGA', cost: 1000000, owned: 0, perSec: 0, special: 'premium' },
+                { id: 'ps1', name: '+1PS/s', baseCost: 100, costMult: 1.2, owned: 0, psPerSec: 1, requirePremium: true, special: 'psbuyer' },
+                { id: 'ps10', name: '+10PS/s', baseCost: 1100, costMult: 1.21, owned: 0, psPerSec: 10, requirePremium: true, special: 'psbuyer' },
+                { id: 'ps100', name: '+100PS/s', baseCost: 11100, costMult: 1.22, owned: 0, psPerSec: 100, requirePremium: true, special: 'psbuyer' },
+                { id: 'mystical', name: 'MYSTICAL', cost: 50000000, owned: 0, perSec: 0, special: 'mystical' },
+                { id: 'myst1', name: '+1/s', baseCost: 100, costMult: 1.15, owned: 0, perSec: 1, requireMystical: true },
+                { id: 'myst5', name: '+5/s', baseCost: 500, costMult: 1.16, owned: 0, perSec: 5, requireMystical: true },
+                { id: 'myst10', name: '+10/s', baseCost: 2000, costMult: 1.18, owned: 0, perSec: 10, requireMystical: true },
+                { id: 'myst15', name: '+15/s', baseCost: 4000, costMult: 1.20, owned: 0, perSec: 15, requireMystical: true },
+                { id: 'myst20', name: '+20/s', baseCost: 5000, costMult: 1.23, owned: 0, perSec: 20, requireMystical: true },
+                { id: 'myst25', name: '+25/s', baseCost: 6000, costMult: 1.26, owned: 0, perSec: 25, requireMystical: true },
+                { id: 'myst50', name: '+50/s', baseCost: 12000, costMult: 1.29, owned: 0, perSec: 50, requireMystical: true },
+                { id: 'myst69', name: '+69/s', baseCost: 15000, costMult: 1.31, owned: 0, perSec: 69, requireMystical: true },
+                { id: 'myst125', name: '+125/s', baseCost: 12500, costMult: 1.40, owned: 0, perSec: 125, requireMystical: true },
+                { id: 'myst250', name: '+250/s', baseCost: 12500, costMult: 1.40, owned: 0, perSec: 250, requireMystical: true },
+                { id: 'myst1K', name: '+1K/s', baseCost: 100000, costMult: 1.22, owned: 0, perSec: 1000, requireMystical: true },
+                { id: 'myst10K', name: '+10K/s', baseCost: 1000000, costMult: 1.22, owned: 0, perSec: 10000, requireMystical: true },
+                { id: 'myst69K', name: '+69K/s', baseCost: 696969, costMult: 2, owned: 0, perSec: 69000, requireMystical: true },
+                { id: 'myst250K', name: '+250K/s', baseCost: 1000000, costMult: 1.25, owned: 0, perSec: 250000, requireMystical: true },
+                { id: 'credits', name: 'CREDITS', cost: 1000000, owned: 0, perSec: 0, requireMystical: true, special: 'credits' },
+                { id: 'myst1M', name: '+1M/s', baseCost: 10000000, costMult: 1.25, owned: 0, perSec: 1000000, requireMystical: true },
+                { id: 'myst10M', name: '+10M/s', baseCost: 100000000, costMult: 1.25, owned: 0, perSec: 10000000, requireMystical: true },
+                { id: 'myst100M', name: '+100M/s', baseCost: 1000000000, costMult: 1.25, owned: 0, perSec: 100000000, requireMystical: true }
+            ]
+        };
+
+        var gameState = {};
+
+        function loadGame() {
+            var saved = localStorage.getItem('clicker');
+            if (saved) {
+                var parsedSave = JSON.parse(saved);
+
+                if (parsedSave.gameID === GAME_ID) {
+                    gameState = parsedSave;
+                } else {
+                    gameState = JSON.parse(JSON.stringify(defaultGameState));
+                    gameState.clicks = parsedSave.clicks || 0;
+                    gameState.perSecond = parsedSave.perSecond || 0;
+                    gameState.psPerSecond = parsedSave.psPerSecond || 0;
+                    gameState.hasPremium = parsedSave.hasPremium || false;
+                    gameState.mysticalClicks = parsedSave.mysticalClicks || 0;
+                    gameState.mysticalPerSecond = parsedSave.mysticalPerSecond || 0;
+                    gameState.hasMystical = parsedSave.hasMystical || false;
+                    gameState.speedrunStartTime = parsedSave.speedrunStartTime || 0;
+                    gameState.speedrunFinished = parsedSave.speedrunFinished || false;
+                    gameState.timerActive = parsedSave.timerActive || false;
+                    gameState.gameID = GAME_ID;
+                }
+            } else {
+                gameState = JSON.parse(JSON.stringify(defaultGameState));
+            }
+
+            sanitizeGameState();
+        }
+
+        function sanitizeGameState() {
+            if (isNaN(gameState.clicks)) gameState.clicks = 0;
+            if (isNaN(gameState.perSecond)) gameState.perSecond = 0;
+            if (isNaN(gameState.psPerSecond)) gameState.psPerSecond = 0;
+            if (isNaN(gameState.mysticalClicks)) gameState.mysticalClicks = 0;
+            if (isNaN(gameState.mysticalPerSecond)) gameState.mysticalPerSecond = 0;
+            if (isNaN(gameState.speedrunStartTime)) gameState.speedrunStartTime = 0;
+
+            if (!gameState.items) {
+                gameState.items = JSON.parse(JSON.stringify(defaultGameState.items));
+            }
+
+            for (var i = 0; i < gameState.items.length; i++) {
+                if (isNaN(gameState.items[i].owned)) gameState.items[i].owned = 0;
+            }
+        }
+
+        function saveGame() {
+            localStorage.setItem('clicker', JSON.stringify(gameState));
+        }
+
+        function findItem(id) {
+            for (var i = 0; i < gameState.items.length; i++) {
+                if (gameState.items[i].id === id) {
+                    return gameState.items[i];
+                }
+            }
+            return null;
+        }
+
+        function getCurrentCost(item) {
+            if (item.baseCost) {
+                return Math.floor(item.baseCost * Math.pow(item.costMult, item.owned));
+            }
+            return item.cost;
+        }
+
+        function startTimer() {
+            if (!gameState.timerActive && !gameState.speedrunFinished) {
+                gameState.timerActive = true;
+                gameState.speedrunStartTime = Date.now();
+                saveGame();
+            }
+        }
+
+        function updateTimer() {
+            var timerEl = document.getElementById('timer');
+
+            if (!gameState.timerActive && !gameState.speedrunFinished) {
+                timerEl.setAttribute('class', 'timer');
+                timerEl.textContent = '--:--';
+                return;
+            }
+
+            if (gameState.speedrunFinished) {
+                timerEl.setAttribute('class', 'timer finished');
+                return;
+            }
+
+            var elapsed = Date.now() - gameState.speedrunStartTime;
+            var seconds = Math.floor(elapsed / 1000);
+            var minutes = Math.floor(seconds / 60);
+            var displaySecs = seconds % 60;
+
+            var displayStr = minutes + ':' + (displaySecs < 10 ? '0' : '') + displaySecs;
+            timerEl.setAttribute('class', 'timer active');
+            timerEl.textContent = displayStr;
+        }
+
+        function resetGame() {
+            if (confirm('Are you sure? This will reset all progress!')) {
+                gameState = JSON.parse(JSON.stringify(defaultGameState));
+                saveGame();
+                updateDisplay();
+                renderShop();
+                updateTimer();
+            }
+        }
+
+        function updateDisplay() {
+            if (gameState.currentTab === 'clicks') {
+                document.getElementById('clickCount').textContent = Math.floor(gameState.clicks);
+                document.getElementById('perSecond').textContent = Math.floor(gameState.perSecond);
+                document.getElementById('psPerSecond').textContent = Math.floor(gameState.psPerSecond);
+            } else {
+                document.getElementById('clickCount').textContent = Math.floor(gameState.mysticalClicks);
+                document.getElementById('perSecond').textContent = gameState.mysticalPerSecond;
+                document.getElementById('psPerSecond').textContent = '0';
+            }
+
+            document.getElementById('premiumBtn').setAttribute(
+                'style',
+                gameState.hasPremium ? 'display: block;' : 'display: none;'
+            );
+            document.getElementById('mysticalBtn').setAttribute(
+                'style',
+                gameState.hasMystical ? 'display: block;' : 'display: none;'
+            );
+
+            updateShopButtons();
+        }
+
+        function updateShopButtons() {
+            var buttons = document.querySelectorAll('.buy-button');
+            for (var i = 0; i < buttons.length; i++) {
+                var btn = buttons[i];
+                var itemId = btn.getAttribute('data-item-id');
+                var item = findItem(itemId);
+
+                if (!item) continue;
+
+                var cost = getCurrentCost(item);
+                var currency = gameState.currentTab === 'clicks'
+                    ? (item.psPerSec == undefined ? gameState.clicks : gameState.perSecond)
+                    : gameState.mysticalClicks;
+
+                btn.disabled = currency < cost;
+
+                // Update the cost display
+                var costEl = btn.parentElement.querySelector('.item-cost');
+                if (costEl) {
+                    costEl.textContent = '$' + cost + ' x' + item.owned;
+                }
+            }
+        }
+
+        function renderShop() {
+            var container = document.getElementById('shopContainer');
+            var scrollPos = container.scrollTop; // Save scroll position
+
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            var title = document.getElementById('shopTitle');
+            title.textContent = gameState.currentTab === 'clicks' ? 'SHOP' : 'MYSTICAL SHOP';
+
+            for (var i = 0; i < gameState.items.length; i++) {
+                var item = gameState.items[i];
+
+                var itemTab = item.requireMystical ? 'mystical' : 'clicks';
+                if (itemTab !== gameState.currentTab) continue;
+
+                if (item.requirePremium && !gameState.hasPremium) continue;
+                if (item.requireMystical && !gameState.hasMystical) continue;
+                if (item.special === 'premium' && gameState.hasPremium) continue;
+                if (item.special === 'mystical' && gameState.hasMystical) continue;
+
+                var div = document.createElement('div');
+                div.className = 'shop-item';
+
+                var info = document.createElement('div');
+                info.className = 'item-info';
+
+                var name = document.createElement('div');
+                name.className = 'item-name';
+                name.textContent = item.name;
+
+                var cost = document.createElement('div');
+                cost.className = 'item-cost';
+                var currentCost = getCurrentCost(item);
+                cost.textContent = '$' + currentCost + ' x' + item.owned;
+
+                info.appendChild(name);
+                info.appendChild(cost);
+
+                var btn = document.createElement('button');
+                btn.className = 'buy-button';
+                btn.textContent = 'BUY';
+                btn.setAttribute('data-item-id', item.id);
+
+                var currency = gameState.currentTab === 'clicks'
+                    ? (item.psPerSec == undefined ? gameState.clicks : gameState.perSecond)
+                    : gameState.mysticalClicks;
+                btn.disabled = currency < currentCost;
+
+                (function (itemRef) {
+                    btn.addEventListener('click', function () {
+                        var cost = getCurrentCost(itemRef);
+                        var currentCurr = gameState.currentTab === 'clicks'
+                            ? (itemRef.psPerSec == undefined ? gameState.clicks : gameState.perSecond)
+                            : gameState.mysticalClicks;
+
+                        if (currentCurr >= cost) {
+                            if (gameState.currentTab === 'clicks') {
+                                if (itemRef.psPerSec == undefined) {
+                                    gameState.clicks -= cost;
+                                } else {
+                                    gameState.perSecond -= cost;
+                                }
+                            } else {
+                                gameState.mysticalClicks -= cost;
+                            }
+
+                            itemRef.owned++;
+
+                            var shouldRenderShop = false;
+
+                            if (itemRef.special === 'premium') {
+                                gameState.hasPremium = true;
+                                shouldRenderShop = true;
+                            } else if (itemRef.special === 'mystical') {
+                                gameState.hasMystical = true;
+                                shouldRenderShop = true;
+                            } else if (itemRef.special === 'credits') {
+                                gameState.speedrunFinished = true;
+                                alert('SPEEDRUN COMPLETE! Time: ' +
+                                    document.getElementById('timer').textContent);
+                            } else if (itemRef.special === 'psbuyer') {
+                                gameState.psPerSecond += itemRef.psPerSec;
+                            } else {
+                                if (gameState.currentTab === 'clicks') {
+                                    gameState.perSecond += itemRef.perSec;
+                                } else {
+                                    gameState.mysticalPerSecond += itemRef.perSec;
+                                }
+                            }
+
+                            updateDisplay();
+
+                            if (shouldRenderShop) {
+                                var container = document.getElementById('shopContainer');
+                                var scrollPos = container.scrollTop;
+                                renderShop();
+                                container.scrollTop = scrollPos;
+                            } else {
+                                updateShopButtons();
+                            }
+
+                            updateTimer();
+                            saveGame();
+                        }
+                    });
+                })(item);
+
+                div.appendChild(info);
+                div.appendChild(btn);
+                container.appendChild(div);
+            }
+        }
+
+        function switchTab(tab) {
+            gameState.currentTab = tab;
+            saveGame();
+
+            document.getElementById('tab-clicks').setAttribute(
+                'class',
+                tab === 'clicks' ? 'tab-button active' : 'tab-button'
+            );
+            document.getElementById('tab-mystical').setAttribute(
+                'class',
+                tab === 'mystical' ? 'tab-button active' : 'tab-button'
+            );
+
+            document.getElementById('clickerClicks').setAttribute(
+                'class',
+                tab === 'clicks' ? 'clicker-area' : 'clicker-area hidden'
+            );
+            document.getElementById('clickerMystical').setAttribute(
+                'class',
+                tab === 'mystical' ? 'clicker-area' : 'clicker-area hidden'
+            );
+
+            updateDisplay();
+            renderShop();
+        }
+
+        function click(evt) {
+            if (gameState.speedrunFinished) return;
+
+            startTimer();
+
+            if (gameState.currentTab === 'clicks') {
+                gameState.clicks++;
+            } else {
+                gameState.mysticalClicks++;
+            }
+            updateDisplay();
+            saveGame();
+
+            var floaty = document.createElement('div');
+            floaty.className = 'floaty';
+            floaty.textContent = '+1';
+            floaty.style.left = (evt.clientX - 10) + 'px';
+            floaty.style.top = (evt.clientY - 10) + 'px';
+            floaty.style.color = gameState.currentTab === 'clicks' ? '#ffff99' : '#ff00ff';
+            document.body.appendChild(floaty);
+
+            var startY = evt.clientY;
+            var frames = 0;
+            var interval = setInterval(function () {
+                frames++;
+                floaty.style.top = (startY - frames * 2) + 'px';
+                floaty.style.opacity = 1 - (frames / 20);
+
+                if (frames >= 20) {
+                    clearInterval(interval);
+                    floaty.remove();
+                }
+            }, 30);
+        }
+
+        function premiumClick(evt) {
+            if (gameState.speedrunFinished) return;
+
+            startTimer();
+
+            gameState.perSecond += 1;
+            updateDisplay();
+            saveGame();
+
+            var floaty = document.createElement('div');
+            floaty.className = 'floaty';
+            floaty.textContent = '+1/s';
+            floaty.style.left = (evt.clientX - 10) + 'px';
+            floaty.style.top = (evt.clientY - 10) + 'px';
+            floaty.style.color = '#ffff00';
+            document.body.appendChild(floaty);
+
+            var startY = evt.clientY;
+            var frames = 0;
+            var interval = setInterval(function () {
+                frames++;
+                floaty.style.top = (startY - frames * 2) + 'px';
+                floaty.style.opacity = 1 - (frames / 20);
+
+                if (frames >= 20) {
+                    clearInterval(interval);
+                    floaty.remove();
+                }
+            }, 30);
+        }
+
+        function mysticalClick(evt) {
+            if (gameState.speedrunFinished) return;
+
+            startTimer();
+
+            gameState.mysticalPerSecond += 1;
+            updateDisplay();
+            saveGame();
+
+            var floaty = document.createElement('div');
+            floaty.className = 'floaty';
+            floaty.textContent = '+1/s';
+            floaty.style.left = (evt.clientX - 10) + 'px';
+            floaty.style.top = (evt.clientY - 10) + 'px';
+            floaty.style.color = '#ff00ff';
+            document.body.appendChild(floaty);
+
+            var startY = evt.clientY;
+            var frames = 0;
+            var interval = setInterval(function () {
+                frames++;
+                floaty.style.top = (startY - frames * 2) + 'px';
+                floaty.style.opacity = 1 - (frames / 20);
+
+                if (frames >= 20) {
+                    clearInterval(interval);
+                    floaty.remove();
+                }
+            }, 30);
+        }
+
+        function gameLoop() {
+            if (!gameState.speedrunFinished) {
+                if (gameState.perSecond > 0) {
+                    gameState.clicks += gameState.perSecond / 10;
+                }
+                if (gameState.psPerSecond > 0) {
+                    gameState.perSecond += gameState.psPerSecond / 10;
+                }
+                if (gameState.mysticalPerSecond > 0) {
+                    gameState.mysticalClicks += gameState.mysticalPerSecond / 10;
+                }
+                updateDisplay();
+                saveGame();
+            }
+            updateTimer();
+        }
+
+        loadGame();
+        updateDisplay();
+        renderShop();
+        updateTimer();
+
+        document.getElementById('clickBtn').addEventListener('click', click);
+        document.getElementById('premiumBtn').addEventListener('click', premiumClick);
+        document.getElementById('mysticalBtn').addEventListener('click', mysticalClick);
+        document.getElementById('tab-clicks').addEventListener('click', function () {
+            switchTab('clicks');
+        });
+        document.getElementById('tab-mystical').addEventListener('click', function () {
+            switchTab('mystical');
+        });
+        document.getElementById('resetBtn').addEventListener('click', resetGame);
+        setInterval(gameLoop, 100);
+    </script>
+</body>
+
+</html>

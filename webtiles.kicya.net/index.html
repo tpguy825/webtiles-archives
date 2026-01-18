@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>WebTiles</title>
+    <meta name="darkreader-lock">
+    <meta name="og:title" content="WebTiles">
+    <meta name="og:description" content="Create a tiny 250x250 website with neighbors around you.">
+    <meta name="og:image" content="https://webtiles.kicya.net/s/img/screenshot.png">
+    <meta name="turnstile-sitekey" content="0x4AAAAAACE1o6oOOd73Hdsp">
+    
+    <link rel="preload" href="https://webtiles.kicya.net/s/dist/game.js?t=1768568415148" as="script" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://webtiles.kicya.net/s/css/main.css?t=1768568415148">
+    <style>
+        .dashboard-modal {
+            display: none;
+            position: relative;
+            top: 26px;
+            width: 100%;
+            height: calc(100vh - 26px);
+            background: linear-gradient(to bottom, #e8e8e8 0%, #f5f5f5 100%);
+            z-index: 10;
+            overflow: hidden;
+        }
+        .dashboard-modal.active {
+            display: flex;
+        }
+        .dashboard-modal-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .dashboard-modal-header {
+            padding: 15px 20px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .dashboard-modal-header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .dashboard-modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .dashboard-modal-close:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .dashboard-modal-body {
+            flex: 1;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+            min-height: 0;
+        }
+        #dashboard-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Generic Modal System */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            animation: modalFadeIn 0.15s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-title {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .modal-body {
+            margin: 0 0 15px 0;
+            color: #555;
+            line-height: 1.5;
+        }
+        .modal-body:empty {
+            display: none;
+        }
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .dashboard-modal {
+                top: auto;
+                height: 100vh;
+            }
+            .dashboard-modal-header {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .dashboard-modal-header h2 {
+                font-size: 16px;
+            }
+            .dashboard-modal-header img {
+                height: 24px;
+            }
+            .dashboard-modal-close {
+                width: 36px;
+                height: 36px;
+                font-size: 24px;
+            }
+            .modal-content {
+                max-width: 95%;
+                padding: 20px;
+            }
+            .modal-actions {
+                flex-direction: column;
+            }
+            .modal-btn {
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-modal-header {
+                padding: 8px 10px;
+            }
+            .dashboard-modal-header > div {
+                gap: 10px;
+            }
+            .dashboard-modal-header h2 {
+                font-size: 14px;
+            }
+            .dashboard-modal-header img {
+                height: 20px;
+            }
+            .modal-content {
+                padding: 15px;
+            }
+            .modal-title {
+                font-size: 16px;
+            }
+            .modal-body {
+                font-size: 13px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="kicya-navbar">
+    <button class="kicya-menu-toggle" id="kicya-menu-toggle" aria-label="Toggle menu">☰</button>
+    <div class="kicya-links" id="kicya-links">
+        
+            <a href="https://nekoweb.org" class="">Nekoweb</a>
+        
+            <a href="https://atabook.org" class="">Atabook</a>
+        
+            <a href="index.html" class="active">WebTiles</a>
+        
+    </div>
+    <div class="kicya-account">
+        <div class="kicya-account-info">
+            
+                <a href="https://kicya.net/auth/login?redirect=https%3A%2F%2Fwebtiles.kicya.net" class="kicya-button">Login</a>
+                <a href="https://kicya.net/auth/register" class="kicya-button">Register</a>
+            
+        </div>
+        <div class="kicya-logo">
+            <a href="https://kicya.net/auth/register">
+                <img src="https://kicya.net/images/logos/kicya_logo.png" alt="Kicya" height="9" width="86">
+            </a>
+        </div>
+    </div>
+</div>
+    <div id="app" hidden>
+        <div id="ui">
+            <div id="coords">0, 0</div>
+            <div id="user-count">0 online</div>
+            <div id="zoom-slider">
+                <input type="range" min="0.25" max="1.5" value="1" step="0.25" list="zoom-ranges">
+                <datalist id="zoom-ranges">
+                    <option value="0.25">0.25</option>
+                    <option value="0.5">0.5</option>
+                    <option value="0.75">0.75</option>
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                  </datalist>
+            </div>
+        </div>
+        <div id="plot"></div>
+    </div>
+    <div id="loading">
+        <div>
+            <img src="s/img/logo.png" alt="WebTiles">
+            <p id="loading-text">Loading...</p>
+            <div id="turnstile-container"></div>
+        </div>
+    </div>
+    
+    <div id="captcha-modal" hidden>
+        <div id="captcha-modal-content">
+            <h3>Verification Required</h3>
+            <p>Please complete the captcha to continue.</p>
+            <div id="captcha-modal-turnstile"></div>
+        </div>
+    </div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad" async defer></script>
+
+    <div id="dashboard-modal" class="dashboard-modal">
+        <div class="dashboard-modal-content">
+            <div class="dashboard-modal-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="s/img/logo_black.png" alt="WebTiles" height="30">
+                    <h2 id="dashboard-modal-title">File Manager</h2>
+                </div>
+                <button class="dashboard-modal-close" id="dashboard-modal-close">&times;</button>
+            </div>
+            <div class="dashboard-modal-body" id="dashboard-modal-body">
+                <iframe id="dashboard-iframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-container">
+        <div id="chat-header">
+            <span id="chat-title">Chat</span>
+            <span id="chat-unread" hidden></span>
+            <button id="chat-toggle">-</button>
+        </div>
+        <div id="chat-body">
+            <div id="chat-messages"></div>
+            <div id="chat-input-container">
+                <textarea id="chat-input" placeholder="Type a message..." maxlength="500" rows="1"></textarea>
+                <button id="chat-send">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://webtiles.kicya.net/s/js/lib/interpreter.js?1"></script>
+    
+    <script type="module" src="https://webtiles.kicya.net/s/dist/game.js?t=1768568415148"></script>
+    
+</body>
+</html>

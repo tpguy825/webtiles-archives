@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <style>@font-face {
+  font-family: IBM Plex Sans Condensed;
+  src: url("IBMPlexSansCondensed-SemiBold.ttf");
+}
+
+html {
+  font-family: IBM Plex Sans Condensed;
+}
+
+.tile-body {
+  color: #111;
+  background-image: url("backroff2.png");
+}
+
+a {
+  color: red;
+  font-size: 25px;
+}
+</style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <p id="soldierfromhitgameteamfortresstwo"></p>
+      <a href="https://sumstuff.nekoweb.org" target="_blank">Enter Hell</a>
+      <script type="text/tilescript">function get_luck(numb) {
+    switch(numb) {
+        case 1:
+            return "Absulutely horible -Johannes Dingelfeld";
+            break;
+        case 2:
+            return "I Was Forced To Sell People Bootleg Fortune Cookies -Cookie Man";
+            break;
+        case 3:
+            return "No ads, very bad -Random busness guy";
+            break;
+        case 4:
+            return "Well i had fun -Sumstuff ... wait you cant just give your own site a review thats illegal";
+            break;
+        case 5:
+            return "Too woke theres colors everywhere 0 stars -Racist man";
+            break;
+    }
+
+}
+
+
+function click() {
+    var thepdoesnotstandforpenis = document.getElementById("soldierfromhitgameteamfortresstwo");
+    //thanks to these live savers over here:
+    //https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+    var luck = get_luck(Math.floor(Math.random() * 5) + 1);
+    thepdoesnotstandforpenis.textContent(luck);
+}
+
+click()
+
+
+//reusing scripts sure is convinvient
+</script>
+    </main>
+    <footer></footer>
+  </body>
+</html>

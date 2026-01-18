@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  overflow: auto;
+}
+
+a {
+  color: #d85252;
+}
+
+#container {
+  margin: 5px 10px 10px;
+}
+
+#header {
+  align-items: center;
+  gap: 15px;
+  display: flex;
+}
+
+#header h1 {
+  margin: 0;
+}
+
+ul {
+  margin-inline-start: -10px;
+}
+
+#content {
+  color: #555;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div>
+                <img src="logo_black.png" width="100">
+            </div>
+            <div>
+                <h1>HTML</h1>
+                <span>(click and scroll)</span>
+            </div>
+        </div>
+		<div id="content">
+            <p>Your HTML is <strong>sanitized</strong> for security. Some elements may be removed or modified.</p>
+                
+                <p><strong>Forbidden tags</strong> (will be removed):</p>
+                <ul>
+                    <li><code>&lt;iframe&gt;</code>, <code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code>, <code>&lt;frame&gt;</code>, <code>&lt;frameset&gt;</code>, <code>&lt;svg&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;base&gt;</code>, <code>&lt;applet&gt;</code>, <code>&lt;source&gt;</code></li>
+                </ul>
+                
+                <p><strong>Limits:</strong></p>
+                <ul>
+                    <li>Max <strong>500 elements</strong> per page</li>
+                    <li>Max <strong>3 stylesheets</strong> (<code>&lt;link rel="stylesheet"&gt;</code>)</li>
+                    <li>Max <strong>3 relative scripts</strong> (<code>&lt;script src="/..."&gt;</code>)</li>
+                </ul>
+                
+                <p><strong>Other restrictions:</strong></p>
+                <ul>
+                    <li>No external content. Everything must be uploaded to your files.</li>
+                    <li>No inline event handlers (<code>onclick</code>, <code>onload</code>, etc.)</li>
+                    <li>No <code>autoplay</code> on video/audio</li>
+                    <li>CSS <code>@import</code> is removed. <code>var(--...)</code> is not supported.</li>
+                    <li>Form actions can't target this domain</li>
+                </ul>
+            	<p><i>Did you know? It's possible to have multiple pages on your tile! Just use the <code>&lt;a href="/second.html"&gt;&lt;/a&gt;</code> tag.</i></p>
+        </div>
+        <div>
+            <a href="index.html">Back</a>
+        </div>
+    </div>
+</body>
+</html>

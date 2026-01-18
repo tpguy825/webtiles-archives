@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  -webkit-text-stroke: black .05em;
+  align-items: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  animation: 2s linear infinite bganim;
+  display: flex;
+}
+
+div {
+  text-align: center;
+  margin: 0 auto;
+}
+
+img {
+  width: 2em;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 1rem #000) drop-shadow(0 0 1rem #000);
+  padding-top: 15px;
+}
+
+@keyframes bganim {
+  0% {
+    background: repeating-radial-gradient(#0000 0 10px, #000 11px 20px), #ff4500;
+  }
+
+  25% {
+    background: repeating-radial-gradient(#000 0 5px, #0000 6px 15px, #000 16px 20px), #ff4500;
+  }
+
+  50% {
+    background: repeating-radial-gradient(#000 0 10px, #0000 11px 20px), #ff4500;
+  }
+
+  75% {
+    background: repeating-radial-gradient(#0000 0 5px, #000 6px 15px, #0000 16px 20px), #ff4500;
+  }
+
+  100% {
+    background: repeating-radial-gradient(#0000 0 10px, #000 11px 20px), #ff4500;
+  }
+}
+</style>
+</head>
+<body>
+    <div>
+        <img src="favicon.gif">
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

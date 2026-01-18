@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("bg2.gif");
+  background-attachment: cover;
+  font-family: sans-serif;
+  position: relative;
+}
+
+#ringtile, #title {
+  position: absolute;
+}
+
+#ringtile {
+  text-align: center;
+  width: 100%;
+  top: 15px;
+}
+
+a {
+  color: #7a0c63;
+  background-color: #fff;
+  text-decoration-line: none;
+}
+
+#ringtile img {
+  width: 180px;
+}
+</style>
+</head>
+<body>
+    <img id="title" src="title.webp">
+    <img src="bricks.webp">
+    <div id="ringtile"></div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var sites = [
+    ["Ringlink", "https://evehibi.nekoweb.org/ringlink/info", "rl/ringlink2.webp"],
+    ["Doodlering", "https://evehibi.nekoweb.org/doodlering/", "rl/doodlering.jpg"],
+    ["Website Buddy Webring", "https://darkosparko.nekoweb.org/webrings/websitebuddy-webring/websitebuddy-webring.html", "rl/websitebuddy.jpg"],
+    ["Apartment Webring", "https://darkosparko.nekoweb.org/webrings%2Fapartments-webring/apartment-webring-main.html", "rl/apartment.jpg"],
+    ["Tropical Rice Bowl", "https://astracelestine.nekoweb.org/webring/tropical-rice-bowl/", "rl/tropicalricebowl.jpg"],
+    ["Usagiring", "https://demgoze.nekoweb.org/kawaii/usagiring/home", "rl/usagiring.gif"],
+    ["Ranring", "https://pussydestroyer2000.nekoweb.org/ranring/", "rl/ranring.webp"],
+    ["Galactic Webring", "https://darkosparko.nekoweb.org/webrings/galactic-webring/index.html", "rl/galactic.webp"],
+    ["Wubring", "https://wubring.nekoweb.org", "rl/wubring.gif"],
+    ["Yumering", "https://electric-tenshi.nekoweb.org/yumering/home", "rl/yumering.jpg"],
+    ["CookieRun Webring", "https://evehibi.nekoweb.org/ckwr/", "rl/cookierun.jpg"],
+    ["Flash Webring", "https://thepersonever.net/webring/flash/", "rl/flash.jpg"],
+    ["From Country, With Love", "https://beaus-silly-folder.nekoweb.org/my-webrings/FCWL/FCWL-webring-about.html", "rl/fcwl.webp"],
+    ["Fallout New Vegas Webring", "https://spursthatjinglejangle.neocities.org/", "rl/newvegas.gif"],
+    ["Space Webring", "https://spacecore.nekoweb.org/webring.htm", "rl/space.jpg"],
+    ["FujoRing Out!", "https://fujoringout.nekoweb.org/", "rl/fujoringout.webp"],
+    ["Homestuckies", "https://blinkie-net.neocities.org/homestuckies", "rl/homestuckies.webp"],
+    ["Webmaster Webring", "https://webmasterwebring.netlify.app/", "rl/webmasters.jpg"],
+    ["OC Webring", "https://zoranadragon.neocities.org/more/oc-webring", "rl/ocverse.webp"],
+    ["Raymanring", "https://edgyrabbid.neocities.org/Raymanring.HTML", "rl/rayman.webp"],
+    ["God FUCKING damnit KRIS, where the FUCK are we?", "https://fabstarotcorner.neocities.org/webring/", "rl/gfdk.gif"],
+    ["OnlineWire", "https://www.milkyway.moe/onlinewire/", "rl/onlinewire.jpg"],
+    ["ASCIIRing", "https://rubybulbs.net/webring/index.html", "rl/asciiring.jpg"],
+    ["PersonaRing", "https://silly-beanz.neocities.org/personaring/home", "rl/personaring.gif"],
+    ["Nyan Cat / Tac Nyan Webring", "https://epiccity.nekoweb.org/ring/ring", "rl/nyanring.webp"],
+    ["Webring Webring", "https://skylerzap.com/webring-webring/", "rl/webringx2.png"],
+    ["Aperture Webring", "https://jack-dawlia.neocities.org/page/shrines/portal/aperturewebring", "rl/aperture.webp"],
+    ["SSGRing", "https://jbcarreon123.nekoweb.org/webrings/ssgring/", "rl/ssgring.jpg"],
+    ["We Are Psychics!", "https://saikikusuo.nekoweb.org/webring/wearepsychics.html", "rl/saikik.webp"],
+    ["Burger Ring", "https://darkosparko.nekoweb.org/webrings/burger-ring/", "rl/burger.jpg"],
+    ["The Cybertron Webring", "https://cybertronwebring.neocities.org/", "rl/cybertron.gif"],
+    ["Monitor Ring", "https://ddnikki.nekoweb.org/monitoring", "rl/monitor.webp"],
+    ["Francophonering", "https://francophonering.neocities.org/", "rl/francophone.webp"],
+    ["Little Planet Webring", "https://huroncelestial.neocities.org/littleplanet", "rl/littleplanet.jpg"],
+    ["Goth Music", "https://eggmothsoup.neocities.org/gothmusic.html", "rl/gothmusic.webp"],
+    ["VOCALOID Webring", "https://electric-tenshi.nekoweb.org/vocaring/home", "rl/vocaring.jpg"],
+    ["Yuri & Yaoi Webring", "https://www.virtuagirl.net/yuriwebring", "rl/yuriyaoi.webp"],
+    ["The Fandom Ring", "https://fandomr.ing/", "rl/fandomring.webp"],
+	["Neo-Nihongo Webring", "https://cerealandchoccymilk.neocities.org/webrings/neo-nihongo", "rl/neonihongo.webp"],
+	["Monster Prom Webring", "https://miracleos.neocities.org/mpwr/mpwr", "rl/monsterprom.webp"],
+	["TokuRing", "https://onthequiet.nekoweb.org/tokuring/", "rl/tokuring.webp"],
+	["Glitter Webring", "http://neptunex3.neocities.org/webring", "rl/glitter.webp"],
+	["TFort Ring", "https://tfortring.neocities.org/", "rl/tfortring.gif"],
+	["Kemono Ring", "https://cynderthekitsune.nekoweb.org/kemono%20webring/", "rl/kemono.png"],
+	["Fan Editors Webring", "https://fan-editor-junction.neocities.org/webring/members", "rl/faneditors.jpg"],
+	["Aliens Online", "https://aliensonline.neocities.org/", "rl/aliensonline.gif"],
+	["Star Trek Fans Webring", "https://serenitysrest.neocities.org/webring/star-trek-fans-webring/members", "rl/startrek.jpg"],
+	["Euroring", "https://euroring.neocities.org/", "rl/euroring.jpg"],
+	["AKIRA Club", "https://bokuwatetsuo.neocities.org/webring/akiraclub", "rl/akiraclub.webp"],
+	["Radioring", "https://willascool.neocities.org/radioring", "rl/radioring.webp"],
+	["Roring", "https://roring.neocities.org/", "rl/roring.webp"],
+	["Monster Hunter Webring", "https://tesseractcube.neocities.org/rehaul/webring/webring", "rl/monsterhunter.webp"],
+	["Green Dayring", "https://twentyphanday.nekoweb.org/webrings/gdring", "rl/greenday.webp"],
+	["The Soweli Webring", "https://thedressedmolerat.github.io/webring", "rl/soweli.jpg"],
+	["Persona Ring", "https://flonkie.nekoweb.org/other/persona", "rl/persona.webp"],
+	["//web", "https://yoyle.city/webring", "rl/slashweb.webp"],
+	["Dragonverse", "https://dragonversering.nekoweb.org/index", "rl/dragon.jpg"],
+	["we_bring", "https://brooklynights.nekoweb.org/we_bring", "rl/windows.webp"],
+	["OtakuRing", "https://bishoujopalace.neocities.org/WebRing/", "rl/otakuring.gif"],
+	["Gamer Ring", "https://gamerring.howsoonisnow.org/", "rl/gamerring.gif"],
+	["Virtupets Bazaar", "https://dumbiee.neocities.org/webring/neopets/", "rl/virtupets.jpg"],
+	["Visual Novel Webring", "https://hananezumi.neocities.org/vnwebring", "rl/vnovel.jpg"],
+	["STAY☆ring", "https://gnab.nekoweb.org/STAYring/", "rl/stayring.webp"],
+	["Rhythm Games Webring", "https://julieyess.neocities.org/rhythmwebring/rhythmgamewebring", "rl/rhythm.webp"],
+	["CODEC RING", "https://arillscorner.nekoweb.org/codec-ring/about.html", "rl/codec.webp"],
+	["SapphicRing", "https://sunnishinez.neocities.org/webring/sapphicring", "rl/sapphic.webp"],
+	["CDRing", "https://cdring.neocities.org/", "rl/cdring.webp"],
+	["WebTown", "https://theworldwidewebcity.neocities.org/", "rl/webtown.jpg"],
+	["Glass Beach Webring", "https://jugproductions.neocities.org/glass-beach-webring", "rl/glassbeach.webp"],
+	["Project Sekai Webring", "https://dazaisfunpalace.nekoweb.org/webring", "rl/pjsk.jpg"],
+	["DeftRing", "https://jugproductions.neocities.org/deftring/deftring", "rl/deftones.webp"],
+	["The Frutiger Aero Webring", "https://maniksharma.xyz/webring", "rl/frutiger.jpg"],
+	["TMAFE Ring", "https://tmafering.nekoweb.org/", "rl/msagent.webp"],
+	["TV Time Webring", "https://thegreenroom.neocities.org/webrings/tvtimewebring", "rl/tvtime.webp"],
+	["Musicians Webring", "https://lydels.neocities.org/musicianswebring/webring", "rl/musicians.webp"],
+	["Foodring", "https://kierio.nekoweb.org/Webring", "rl/foodring.webp"],
+	["Glagglering", "https://purplyworld.nekoweb.org/awesomering/glagglering", "rl/glaggle.webp"],
+	["omoring", "https://omoring.aviatorlaw.eu/", "rl/omoring.jpg"],
+	["DUMB Webring", "https://dumb.trestrestr.es/", "rl/dumb.gif"],
+	["Tyler Webring", "https://mossyscorner.neocities.org/webring", "rl/tyler.webp"],
+	["MANXRING", "https://torquuato.github.io/manxring/", "rl/manxring.jpg"],
+	["The Indiering", "https://xpace.nekoweb.org/webringpage.html", "rl/indiering.jpg"],
+	["P * U * N * K", "https://p-u-n-k.nekoweb.org/", "rl/punk.jpg"],
+	["The DatYoyoMichael Webring", "https://datyoyomiguel.neocities.org/webring/", "rl/dym.webp"],
+	["Rimring", "https://kerchunkleknoughts.github.io/mainblog/rimring", "rl/rimring.jpg"],
+]
+var i = Math.floor(sites.length * Math.random());
+
+var link = document.createElement("a")
+link.href = sites[i][1]
+link.target = "_blank"
+var tile = document.createElement("img")
+tile.src = sites[i][2]
+link.appendChild(tile)
+var rl1 = document.createElement("a")
+rl1.href = "https://evehibi.nekoweb.org/ringlink/info"
+rl1.target = "_blank"
+rl1.innerText = "ringtile is a part of ringlink!"
+var br = document.createElement("br")
+var br2 = document.createElement("br")
+document.getElementById("ringtile").appendChild(link)
+document.getElementById("ringtile").appendChild(br)
+document.getElementById("ringtile").appendChild(rl1)
+document.getElementById("ringtile").appendChild(br2)
+document.getElementById("title").style.display = "none"</script>
+    <script type="text/tilescript">
+    	var rl2 = document.createElement("a")
+    	rl2.href = "/1.html"
+    	rl2.innerText = " click here to change the ad"
+        document.getElementById("ringtile").appendChild(rl2)
+    </script>
+</body>
+</html>

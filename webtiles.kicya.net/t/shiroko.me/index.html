@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Inconsolata;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("Inconsolata-Regular.ttf") format("truetype");
+}
+
+.tile-body {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #c078aa;
+  padding: 1px;
+  font-family: Inconsolata;
+}
+
+h4 {
+  text-align: center;
+}
+
+h4, p {
+  border-radius: 10px;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.center {
+  text-align: center;
+}
+
+.queue-list {
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 4px;
+  display: flex;
+}
+
+.queue-item {
+  background-color: #ffd2bb;
+  border-radius: 2px;
+  flex-direction: row;
+  gap: 2px;
+  padding: 2px;
+  display: flex;
+}
+
+.queue-item img {
+  aspect-ratio: 1;
+  width: 16px;
+  height: 16px;
+}
+
+footer {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+footer img {
+  width: 40%;
+  height: 40%;
+  margin: -10px;
+}
+</style>
+</head>
+<body>
+    <p class="center">Sorry, this website is currently unavailable due to the complications in the power grid.</p>
+    <div class="queue-list">
+        <div class="queue-item">
+            <img src="poweroff.png">
+            0:00 - 10:30
+        </div>
+       	<div class="queue-item">
+            <img src="poweroff.png">
+            10:30 - 18:00
+        </div>
+        <div class="queue-item">
+            <img src="poweroff.png">
+            18:00 - 00:00
+        </div>
+    </div>
+	<footer>
+        <p class="center">
+        	Brought to you by yours truly,
+		</p>
+		<img src="cunts.png"><img>
+        <br>
+        <p class="center">
+            "Fixing" the power grid since 2001
+        </p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  box-sizing: border-box;
+  background-color: #000;
+  border: 4px ridge gray;
+  font-family: teletext;
+}
+
+html {
+  background-color: #000;
+}
+
+p {
+  font-family: teletext;
+}
+
+a {
+  color: #add8e6;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: teletext;
+  src: url("Teletext50.otf");
+}
+</style>
+</head>
+<body>
+    <div style="display:flex;gap:30px;justify-content:center">
+        <span>X-9 Y-6</span> 
+        <span>
+            <span style="color:#ff0000">TILE</span><span style="color:yellow">txt</span>
+        </span>
+        <span></span>
+        <span>CH17</span> 
+    </div>
+    
+    <div>
+        <img src="784studios.png" alt="784 Studios" style="width:240px;"><br>
+        <div style="text-align:center">
+            "THE WORLD'S FINEST <br>MEDIA COMPANY*"<br>
+        </div><br>
+        <a href="https://784studios.net/" target="_blank">MAIN SITE</a> ............. <span style="color:yellow">P100</span>
+        <a href="wire.html">THE WIRE NEWS</a> ......... <span style="color:yellow">P300</span>
+        <a href="https://784studios.net/en#vidnet#vidnet" target="_blank">VIDEO NETWORK</a> .........  <span style="color:yellow">P601</span>
+        <a href="https://airtxt.784studios.net" target="_blank">AIRTXT ACCESS</a> .... <span id="online" style="color:red">[OFF-AIR]</span>
+        <br><br><br><br><br>
+        *said nobody
+    </div>
+    <script type="text/tilescript">/* i dont even know if this script even works */
+  const hash = window.location.hash;
+  fetch('https://airtxt.784studios.net/stillalive.txt')
+  .catch(() => {
+    return;
+  })
+    .then(response => response.text())
+    .then(text => {
+      if (text && text.includes("thisWasATriumph")) {
+          document.getElementById("online").innerHTML="[ON-AIR]";
+          document.getElementById("online").style="color:green";
+      }
+  }</script>
+</body>
+</html>

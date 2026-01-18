@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <style>.tile-body {
+  margin: 0;
+  padding: 0;
+}
+
+.pet {
+  z-index: 2;
+  pointer-events: none;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 75px;
+  left: 65px;
+}
+
+.default_fish {
+  width: 125px;
+  height: 125px;
+  position: absolute;
+  left: 0;
+}
+
+.skin1_fish {
+  width: 175px;
+  height: auto;
+  position: absolute;
+  left: -30px;
+}
+
+.skin2_fish {
+  width: 170px;
+  height: auto;
+  position: absolute;
+  top: -5px;
+  left: -30px;
+}
+
+.skin3_fish {
+  width: 80px;
+  height: auto;
+  position: absolute;
+  left: 30px;
+}
+
+.skin4_fish {
+  width: 175px;
+  height: auto;
+  position: absolute;
+  left: -30px;
+}
+
+.skin5_fish {
+  width: 80px;
+  height: auto;
+  position: absolute;
+  top: 20px;
+  left: 28px;
+}
+
+.skin6_fish {
+  width: 200px;
+  height: auto;
+  position: absolute;
+  top: 15px;
+  left: -35px;
+}
+
+.skin7_fish {
+  width: 125px;
+  height: auto;
+  position: absolute;
+  top: 30px;
+}
+
+.skin8_fish {
+  width: 125px;
+  height: auto;
+  position: absolute;
+  top: 0;
+}
+
+.skin9_fish {
+  width: 230px;
+  height: auto;
+  position: absolute;
+  top: -10px;
+  left: -55px;
+}
+
+.skin10_fish {
+  width: 130px;
+  height: auto;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.skin0_fish {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.skin11_fish {
+  width: 360px;
+  height: auto;
+  position: absolute;
+  top: -20px;
+  left: -30px;
+}
+
+.eye {
+  z-index: 2;
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.pupil {
+  background: #000;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.mouth {
+  z-index: 2;
+  width: auto;
+  height: 13px;
+  position: absolute;
+  top: 75px;
+  left: 30px;
+}
+
+.bowl {
+  z-index: 3;
+  pointer-events: none;
+  width: 175px;
+  height: 175px;
+  position: absolute;
+  top: 25%;
+  left: 15%;
+}
+
+.aquarium {
+  z-index: 1;
+  pointer-events: none;
+  width: 230px;
+  height: 125px;
+  position: absolute;
+  top: 25%;
+  left: 10px;
+}
+
+#icons {
+  pointer-events: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  position: fixed;
+  top: 10px;
+  left: 0;
+}
+
+#sponge {
+  z-index: 7;
+  height: 50px;
+  position: absolute;
+  top: 190px;
+  left: 0;
+}
+
+#food {
+  z-index: 7;
+  height: 50px;
+  position: absolute;
+  top: 190px;
+  left: 200px;
+}
+
+.icons {
+  pointer-events: none;
+  width: 35px;
+  height: 35px;
+  margin: 0 6px;
+}
+
+.icon-box {
+  pointer-events: none;
+  background: #0f0;
+  border-radius: 6px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  margin: 0 15px;
+  display: flex;
+}
+
+.overlay {
+  color: #fff;
+  z-index: 10;
+  text-align: center;
+  background: #000000e6;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.overlay button {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12x;
+  background: #00f;
+  border: none;
+  margin-top: 0;
+  padding: 5px;
+}
+</style>
+    </head>
+    <body>
+        <div id="help_screen" class="overlay" style="visibility:hidden">
+            <h2>Menal's Fish</h2>
+            <p>
+                The goal is simple: keep the Fish's stats green.<br>
+                Feed the Fish, Clean the Bowl, Pet the Fish.<br>
+                You can pick up objects by clicking on them and move them over the Fish to use them.<br>
+                Your progress is saved locally every 5 secs or by clicking the help menu.<br>
+                You can selects skins using the "&lt;&lt;" and "&gt;&gt;" buttons.<br>
+                Time still passes while you're gone!<br>
+                Have fun!
+            </p>
+            <button id="hide_help_button">Back to the Fish</button>
+        </div>
+        <div style="position:absolute; top:230px; left:65px;">
+            <button style="height:15px; font-size:9px;" id="prev_skin_button">
+                &lt;&lt;
+            </button>
+            <button style="height:15px; font-size:9px;" id="show_help_button">
+                Help Menu
+            </button>
+            <button style="height:15px; font-size:9px;" id="next_skin_button">
+                &gt;&gt;
+            </button>
+        </div>
+        <audio src="sounds/food.mp3" id="food_sound" preload="metadata"></audio>
+        <audio src="sounds/sponge.mp3" id="sponge_sound" preload="metadata"></audio>
+        <audio src="sounds/bubble.mp3" id="bubbles_sound" preload="metadata"></audio>
+        <audio src="sounds/dink.mp3" id="dink_sound" preload="metadata"></audio>
+        <img src="images/empty.png" id="special_button" style="position:absolute; width:20px; height:20px;">
+        <img src="images/sponge.png" id="sponge">
+        <img src="images/fish_food.png" id="food">
+        <img src="images/bowl.png" class="bowl" id="bowl">
+        <img src="images/bowl_dirty.png" class="bowl" id="bowl_dirty" style="visibility: hidden;">
+        <img src="images/aquarium.png" class="aquarium" id="aquarium" style="visibility: hidden;">
+        <img src="images/dirt.png" class="aquarium" id="aquarium_dirty" style="visibility: hidden;  z-index:5;">
+        <img src="images/piinro.png" id="border">
+        <img src="images/empty.png" id="empty">
+        
+        <div id="icons">
+            <div class="icon-box" data-value="100" id="food_icon" style="pointer-events: none;">
+                <img src="images/food.png" class="icons">
+                <span id="food_text">?:??:??</span>
+            </div>
+            <div class="icon-box" data-value="100" id="clean_icon">
+                <img src="images/clean.png" class="icons">
+                <span id="clean_text">?:??:??</span>
+            </div>
+            <div class="icon-box" data-value="100" id="heart_icon">
+                <img src="images/heart.png" class="icons">
+                <span id="heart_text">?:??:??</span>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_default">
+            <img src="images/fish/default.png" class="default_fish" id="default_normal">
+            <img src="images/fish/default_sad.png" class="default_fish" id="default_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_default_1" style="left:20px; top:50px;">
+                <div class="pupil"></div>
+            </div>
+
+            <div class="eye" id="eye_default_2" style="left:45px; top:50px;">
+                <div class="pupil"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin1" style="visibility:hidden;">
+            <img src="images/fish/skin1.png" class="skin1_fish" id="skin1_normal">
+            <img src="images/fish/skin1_sad.png" class="skin1_fish" id="skin1_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin1_1" style="left:90px; top:30px;">
+                <div class="pupil"></div>
+            </div>
+
+            <div class="eye" id="eye_skin1_2" style="left:110px; top:30px;">
+                <div class="pupil"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin2" style="visibility:hidden;">
+            <img src="images/fish/skin2.png" class="skin2_fish" id="skin2_normal">
+            <img src="images/fish/skin2_sad.png" class="skin2_fish" id="skin2_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin2_1" style="left:-20px; top:30px;">
+                <div class="pupil"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin3" style="visibility:hidden;">
+            <img src="images/fish/skin3.png" class="skin3_fish" id="skin3_normal">
+            <img src="images/fish/skin3_sad.png" class="skin3_fish" id="skin3_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin3_1" style="left:68px; top:25px; width:8px; height:8px;">
+                <div class="pupil" style="width:4px; height:4px;"></div>
+            </div>
+
+            <div class="eye" id="eye_skin3_2" style="left:80px; top:30px; width:8px; height:8px;">
+                <div class="pupil" style="width:4px; height:4px;"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin4" style="visibility:hidden;">
+            <img src="images/fish/skin4.png" class="skin4_fish" id="skin4_normal">
+            <img src="images/fish/skin4_sad.png" class="skin4_fish" id="skin4_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin4_1" style="left:-15px; top:65px;width:12px; height:12px;">
+                <div class="pupil" style="width:6px; height:6px;"></div>
+            </div>
+
+            <div class="eye" id="eye_skin4_2" style="left:0px; top:65px; width:12px; height:12px;">
+                <div class="pupil" style="width:6px; height:6px;"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin5" style="visibility:hidden;">
+            <img src="images/fish/skin5.png" class="skin5_fish" id="skin5_normal">
+            <img src="images/fish/skin5.png" class="skin5_fish" id="skin5_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin5_1" style="left:45px; top:36px; width:25px; height:25px;">
+                <div class="pupil" style="width:10px; height:10px;"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin6" style="visibility:hidden;">
+            <img src="images/fish/skin6.png" class="skin6_fish" id="skin6_normal">
+            <img src="images/fish/skin6_sad.png" class="skin6_fish" id="skin6_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin6_1" style="left:-15px; top:45px;">
+                <div class="pupil"></div>
+            </div>
+        </div>
+
+        <div class="pet" id="pet_skin7" style="visibility:hidden;">
+            <img src="images/fish/skin7.png" class="skin7_fish" id="skin7_normal">
+            <img src="images/fish/skin7_sad.png" class="skin7_fish" id="skin7_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin7_1" style="left:30px; top:53px;">
+                <div class="pupil"></div>
+            </div>
+        </div>
+        
+        <div class="pet" id="pet_skin8" style="visibility:hidden;">
+            <img src="images/fish/skin8.png" class="skin8_fish" id="skin8_normal">
+            <img src="images/fish/skin8_sad.png" class="skin8_fish" id="skin8_sad" style="visibility: hidden;">
+        </div>
+        
+        <div class="pet" id="pet_skin9" style="visibility:hidden;">
+            <img src="images/fish/skin9.png" class="skin9_fish" id="skin9_normal">
+            <img src="images/fish/skin9.png" class="skin9_fish" id="skin9_sad" style="visibility: hidden;">
+        </div>
+        
+        <div class="pet" id="pet_skin0" style="visibility:hidden;">
+            <img src="images/fish/skin0.png" class="skin0_fish" id="skin0_normal">
+            <img src="images/fish/skin0_sad.png" class="skin0_fish" id="skin0_sad" style="visibility: hidden;">
+            
+            <div class="eye" id="eye_skin0_1" style="left:43px; top:70px;">
+                <div class="pupil"></div>
+            </div>
+
+            <div class="eye" id="eye_skin0_2" style="left:75px; top:65px;">
+                <div class="pupil"></div>
+            </div>
+        </div>
+        
+        <div class="pet" id="pet_skin11" style="visibility:hidden;">
+            <img src="images/fish/skin11.png" class="skin11_fish" id="skin11_normal">
+            <img src="images/fish/skin11_sad.png" class="skin11_fish" id="skin11_sad" style="visibility: hidden;">
+
+            <div class="eye" id="eye_skin11_1" style="left:30px; top:10px; width:30px; height:30px;">
+                <div class="pupil" style="width:14px; height:14px;"></div>
+            </div>
+        </div>
+
+        <script type="text/tilescript">// I have no idead what im doing here, this is like my first js "project"
+
+var infoBar = {
+    me: document.getElementsByClassName("icon-box"),
+    food: {
+        icon: document.getElementById("food_icon"),
+        timer: document.getElementById("food_text")
+    },
+    clean: {
+        icon: document.getElementById("clean_icon"),
+        timer: document.getElementById("clean_text")
+    },
+    heart: {
+        icon: document.getElementById("heart_icon"),
+        timer: document.getElementById("heart_text")
+    }
+};
+
+var bowl = {
+    normal: document.getElementById("bowl"),
+    dirty: document.getElementById("bowl_dirty"),
+    bounds: {
+        top: 40,
+        bottom: 180,
+        right: 180,
+        left: 20
+    },
+    is_special: false
+};
+
+var aquarium = {
+    normal: document.getElementById("aquarium"),
+    dirty: document.getElementById("aquarium_dirty"),
+    bounds: {
+        top: 30,
+        bottom: 160,
+        right: 220,
+        left: -5
+    },
+    is_special: true
+};
+
+var noContainer = {
+    normal: document.getElementById("empty"),
+    dirty: document.getElementById("empty"),
+    bounds: {
+        top: 40,
+        bottom: 180,
+        right: 180,
+        left: 20
+    },
+    is_special: false
+};
+
+var petSelector = [
+    {
+        me: document.getElementById("pet_default"),
+        normal: document.getElementById("default_normal"),
+        sad: document.getElementById("default_sad"),
+        eyes: [document.getElementById("eye_default_1"), document.getElementById("eye_default_2")],
+        container: bowl,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 90,
+            minY: 75
+        },
+        headHitbox: {
+            maxX: 80,
+            minX: 20,
+            maxY: 50,
+            minY: 20
+        }
+    },
+    {
+        me: document.getElementById("pet_skin1"),
+        normal: document.getElementById("skin1_normal"),
+        sad: document.getElementById("skin1_sad"),
+        eyes: [document.getElementById("eye_skin1_1"), document.getElementById("eye_skin1_2")],
+        container: aquarium,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 85,
+            minY: 70
+        },
+        headHitbox: {
+            maxX: 140,
+            minX: 50,
+            maxY: 40,
+            minY: 20
+        }
+    },
+    {
+        me: document.getElementById("pet_skin2"),
+        normal: document.getElementById("skin2_normal"),
+        sad: document.getElementById("skin2_sad"),
+        eyes: [document.getElementById("eye_skin2_1")],
+        container: aquarium,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 80,
+            minY: 65
+        },
+        headHitbox: {
+            maxX: 105,
+            minX: -30,
+            maxY: 40,
+            minY: -5
+        }
+    },
+    {
+        me: document.getElementById("pet_skin3"),
+        normal: document.getElementById("skin3_normal"),
+        sad: document.getElementById("skin3_sad"),
+        eyes: [document.getElementById("eye_skin3_1"), document.getElementById("eye_skin3_2")],
+        container: bowl,
+        pupilRad: 2,
+        moveSpace: {
+            maxY: 90,
+            minY: 75
+        },
+        headHitbox: {
+            maxX: 110,
+            minX: 35,
+            maxY: 50,
+            minY: 0
+        }
+    },
+    {
+        me: document.getElementById("pet_skin4"),
+        normal: document.getElementById("skin4_normal"),
+        sad: document.getElementById("skin4_sad"),
+        eyes: [document.getElementById("eye_skin4_1"), document.getElementById("eye_skin4_2")],
+        container: aquarium,
+        pupilRad: 3,
+        moveSpace: {
+            maxY: 80,
+            minY: 60
+        },
+        headHitbox: {
+            maxX: 140,
+            minX: -13,
+            maxY: 60,
+            minY: 0
+        }
+    },
+    {
+        me: document.getElementById("pet_skin5"),
+        normal: document.getElementById("skin5_normal"),
+        sad: document.getElementById("skin5_sad"),
+        eyes: [document.getElementById("eye_skin5_1")],
+        container: bowl,
+        pupilRad: 5,
+        moveSpace: {
+            maxY: 80,
+            minY: 60
+        },
+        headHitbox: {
+            maxX: 90,
+            minX: 30,
+            maxY: 80,
+            minY: 30
+        }
+    },
+    {
+        me: document.getElementById("pet_skin6"),
+        normal: document.getElementById("skin6_normal"),
+        sad: document.getElementById("skin6_sad"),
+        eyes: [document.getElementById("eye_skin6_1")],
+        container: aquarium,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 90,
+            minY: 70
+        },
+        headHitbox: {
+            maxX: 10,
+            minX: -20,
+            maxY: 50,
+            minY: 10
+        }
+    },
+    {
+        me: document.getElementById("pet_skin7"),
+        normal: document.getElementById("skin7_normal"),
+        sad: document.getElementById("skin7_sad"),
+        eyes: [document.getElementById("eye_skin7_1")],
+        container: bowl,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 90,
+            minY: 60
+        },
+        headHitbox: {
+            maxX: 100,
+            minX: 20,
+            maxY: 75,
+            minY: 35
+        }
+    },
+    {
+        me: document.getElementById("pet_skin0"),
+        normal: document.getElementById("skin0_normal"),
+        sad: document.getElementById("skin0_sad"),
+        eyes: [document.getElementById("eye_skin0_1"), document.getElementById("eye_skin0_2")],
+        container: bowl,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 90,
+            minY: 60
+        },
+        headHitbox: {
+            maxX: 100,
+            minX: 20,
+            maxY: 60,
+            minY: 40
+        }
+    },
+    // specials
+    {
+        me: document.getElementById("pet_skin8"),
+        normal: document.getElementById("skin8_normal"),
+        sad: document.getElementById("skin8_sad"),
+        eyes: [],
+        container: noContainer,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 90,
+            minY: 90
+        },
+        headHitbox: {
+            maxX: 90,
+            minX: 0,
+            maxY: 45,
+            minY: 20
+        }
+    },
+    {
+        me: document.getElementById("pet_skin9"),
+        normal: document.getElementById("skin9_normal"),
+        sad: document.getElementById("skin9_sad"),
+        eyes: [],
+        container: noContainer,
+        pupilRad: 4,
+        moveSpace: {
+            maxY: 80,
+            minY: 80
+        },
+        headHitbox: {
+            maxX: 170,
+            minX: -50,
+            maxY: 60,
+            minY: -10
+        }
+    },/*
+    {
+        me: document.getElementById("pet_skin10"),
+        normal: document.getElementById("skin10_normal"),
+        sad: document.getElementById("skin10_sad"),
+        eyes: [document.getElementById("eye_skin10_1"), document.getElementById("eye_skin10_2")],
+        container: noContainer,
+        pupilRad: 3,
+        moveSpace: {
+            maxY: 90,
+            minY: 90
+        },
+        headHitbox: {
+            maxX: 70,
+            minX: 20,
+            maxY: 45,
+            minY: 15
+        }
+    },*/
+    {
+        me: document.getElementById("pet_skin11"),
+        normal: document.getElementById("skin11_normal"),
+        sad: document.getElementById("skin11_sad"),
+        eyes: [document.getElementById("eye_skin11_1")],
+        container: noContainer,
+        pupilRad: 7,
+        moveSpace: {
+            maxY: 70,
+            minY: 70
+        },
+        headHitbox: {
+            maxX: 180,
+            minX: -7,
+            maxY: 50,
+            minY: -20
+        }
+    }
+];
+
+var actions = {
+    offsetY: 0,
+    offsetX: 0,
+    food: {
+        img: document.getElementById("food"),
+        sound: document.getElementById("food_sound"),
+        isDragging: false
+    },
+    clean: {
+        img: document.getElementById("sponge"),
+        sound: document.getElementById("sponge_sound"),
+        isDragging: false
+    },
+    pet: {
+        img: null,
+        sound: document.getElementById("bubbles_sound"),
+        isDragging: null
+    }
+};
+
+var helpScreen = {
+    me: document.getElementById("help_screen"),
+    showButton: document.getElementById("show_help_button"),
+    hideButton: document.getElementById("hide_help_button")
+};
+
+var savedData = {
+    lastFeedTime: 0,
+    lastCleanTime: 0,
+    lastPetTime: 0,
+    petSelected: 0,
+    isDurka: 0
+};
+
+var secretCode = {
+    border: document.getElementById("special_button"),
+    sound: document.getElementById("dink_sound")
+};
+
+var eyes = document.getElementsByClassName("eye");
+var nextButton = document.getElementById("next_skin_button");
+var prevButton = document.getElementById("prev_skin_button");
+
+var moveVect = 2;
+var pos = 0;
+var moveInterval = null;
+var nrSkins = 9;
+
+// ###############################
+// #            UTILS            #
+// ###############################
+
+function loadSaved() {
+    var saved = localStorage.getItem("lastFeedTime");
+    savedData.lastFeedTime = saved === null ? 0 : parseInt(saved, 10);
+    saved = localStorage.getItem("lastCleanTime");
+    savedData.lastCleanTime = saved === null ? 0 : parseInt(saved, 10);
+    saved = localStorage.getItem("lastPetTime");
+    savedData.lastPetTime = saved === null ? 0 : parseInt(saved, 10);
+    saved = localStorage.getItem("petSelected");
+    savedData.petSelected = saved === null ? 0 : parseInt(saved, 10);
+    petSelector[savedData.petSelected].me.style.visibility = "visible";
+    petSelector[savedData.petSelected].normal.style.visibility = "visible";
+    petSelector[savedData.petSelected].container.normal.style.visibility = "visible";
+    saved = localStorage.getItem("isDurka");
+    savedData.isDurka = saved === null ? 0 : parseInt(saved, 10);
+    if (savedData.isDurka) nrSkins = 12;
+}
+
+function saveData() {
+    localStorage.setItem("lastFeedTime", savedData.lastFeedTime.toString());
+    localStorage.setItem("lastPetTime", savedData.lastPetTime.toString());
+    localStorage.setItem("lastCleanTime", savedData.lastCleanTime.toString());
+    localStorage.setItem("petSelected", savedData.petSelected.toString());
+    localStorage.setItem("isDurka", savedData.isDurka.toString());
+}
+
+function timeToValue(now, past, maxMs) {
+    var diff = now - past;
+
+    if (diff <= 0) return 100;
+    if (diff >= maxMs) return 0;
+
+    var value = 100 * (1 - diff / maxMs);
+    return Math.round(value);
+}
+
+function formatTimeHHMMSS(ms) {
+    var totalSeconds = Math.floor(ms / 1000);
+
+    var hours = Math.floor(totalSeconds / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    if (minutes < 10) minutes = "0" + minutes;
+    if (seconds < 10) seconds = "0" + seconds;
+
+    return hours + ":" + minutes + ":" + seconds;
+}
+
+function updateColors() {
+    var one = timeToValue(Date.now(), savedData.lastFeedTime, 21600000);
+    var two = timeToValue(Date.now(), savedData.lastCleanTime, 21600000);
+    var three = timeToValue(Date.now(), savedData.lastPetTime, 21600000);
+    var pet = petSelector[savedData.petSelected];
+
+    infoBar.food.icon.setAttribute("data-value", one);
+    infoBar.clean.icon.setAttribute("data-value", two);
+    infoBar.heart.icon.setAttribute("data-value", three);
+
+    if (one < 30) {
+        if (moveInterval != null){
+            clearInterval(moveInterval);
+            moveInterval = null;
+        }
+    } else {
+        if (moveInterval == null && pet.moveSpace.minY != pet.moveSpace.maxY){
+            moveInterval = setInterval(function (){
+                pos += moveVect;
+                if (pos <= pet.moveSpace.minY || pos >= pet.moveSpace.maxY) moveVect *= -1;
+                pet.me.style.top = pos + "px";
+            }, 80);
+
+        }
+    }
+
+    if (two < 30) {
+        if (pet.container.is_special){
+            pet.container.normal.style.visibility = "visible";
+            pet.container.dirty.style.visibility = "visible";
+        } else {
+            pet.container.normal.style.visibility = "hidden";
+            pet.container.dirty.style.visibility = "visible";
+        }
+    } else {
+        if (pet.container.is_special){
+            pet.container.normal.style.visibility = "visible";
+            pet.container.dirty.style.visibility = "hidden";
+        } else {
+            pet.container.normal.style.visibility = "visible";
+            pet.container.dirty.style.visibility = "hidden";
+        }
+    }
+
+    if (one < 30 || two < 30 || three < 30) {
+        pet.normal.style.visibility = "hidden";
+        pet.sad.style.visibility = "visible";
+    } else {
+        pet.normal.style.visibility = "visible";
+        pet.sad.style.visibility = "hidden";
+    }
+
+    infoBar.food.timer.textContent = formatTimeHHMMSS(Math.max(21600000 - (Date.now() - savedData.lastFeedTime), 0));
+    infoBar.clean.timer.textContent = formatTimeHHMMSS(Math.max(21600000 - (Date.now() - savedData.lastCleanTime),0));
+    infoBar.heart.timer.textContent = formatTimeHHMMSS(Math.max(21600000 - (Date.now() - savedData.lastPetTime), 0));
+
+    for (var i = 0; i < infoBar.me.length; i++) {
+        var value = parseInt(infoBar.me[i].getAttribute("data-value"), 10);
+
+        if (value > 100) value = 100;
+        if (value < 0) value = 0;
+        // skip ugly brown
+        if (value < 50 && value >= 43) value = 50;
+        if (value < 43 && value > 35) value = 35;
+
+        var t = value / 100;
+
+        var r = Math.round(255 * (1 - t));
+        var g = Math.round(255 * t);
+        var b = 0;
+
+        infoBar.me[i].style.backgroundColor =
+            "rgb(" + r + "," + g + "," + b + ")";
+    }
+}
+
+// ################################
+// #        MOUSE HANDLING        #
+// ################################
+
+function getElementScale(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.width / el.offsetWidth;
+}
+
+
+function getMouseRelativeTo(el, e) {
+    var rect = el.getBoundingClientRect();
+    var scale = getElementScale(el);
+
+    return {
+        x: (e.clientX - rect.left) / scale,
+        y: (e.clientY - rect.top) / scale,
+        scale: scale
+    };
+}
+
+document.body.addEventListener("mousemove", function (e) {
+    var pet = petSelector[savedData.petSelected];
+    var mouse = getMouseRelativeTo(helpScreen.me, e);
+    var scale = mouse.scale;
+
+    for (var i = 0; i < pet.eyes.length; i++) {
+        var eye = pet.eyes[i];
+        var pupil = eye.getElementsByClassName("pupil")[0];
+
+        var rect = eye.getBoundingClientRect();
+        var helpRect = helpScreen.me.getBoundingClientRect();
+
+        var eyeRadius = (rect.width / scale) / 2;
+        var maxDistance = eyeRadius - pet.pupilRad - 3;
+
+        var centerX = (rect.left - helpRect.left) / scale + eyeRadius;
+        var centerY = (rect.top  - helpRect.top)  / scale + eyeRadius;
+
+        var dx = mouse.x - centerX;
+        var dy = mouse.y - centerY;
+
+        var distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > maxDistance) {
+            var angle = Math.atan2(dy, dx);
+            dx = Math.cos(angle) * maxDistance;
+            dy = Math.sin(angle) * maxDistance;
+        }
+
+        pupil.style.left = (eyeRadius + dx - pet.pupilRad - 1) + "px";
+        pupil.style.top  = (eyeRadius + dy - pet.pupilRad - 1) + "px";
+    }
+    var petRect = pet.me.getBoundingClientRect();
+
+    if (actions.clean.isDragging) {
+
+        var x = mouse.x - actions.offsetX;
+        var y = mouse.y - actions.offsetY;
+
+        actions.clean.img.style.left = x + "px";
+        actions.clean.img.style.top  = y + "px";
+
+        if (x > pet.container.bounds.left && x < pet.container.bounds.right && 
+            y > pet.container.bounds.top && y < pet.container.bounds.bottom &&  
+            actions.clean.sound.paused) {
+            actions.clean.sound.play();
+            savedData.lastCleanTime = Date.now();
+        }
+    }
+
+    if (actions.food.isDragging) {
+        var x = mouse.x - actions.offsetX;
+        var y = mouse.y - actions.offsetY;
+
+        actions.food.img.style.left = x + "px";
+        actions.food.img.style.top  = y + "px";
+
+        if (x > pet.container.bounds.left && x < pet.container.bounds.right && 
+            y > pet.container.bounds.top && y < pet.container.bounds.bottom && 
+            actions.food.sound.paused) {
+            actions.food.sound.play();
+            savedData.lastFeedTime = Date.now();
+        }
+    }
+
+    if (!actions.food.isDragging && !actions.clean.isDragging) {
+        var px = (e.clientX - petRect.left) / scale;
+        var py = (e.clientY - petRect.top)  / scale;
+
+        if (px > pet.headHitbox.minX && px < pet.headHitbox.maxX && 
+            py > pet.headHitbox.minY && py < pet.headHitbox.maxY && 
+            actions.pet.sound.paused) {
+            actions.pet.sound.play();
+            savedData.lastPetTime = Date.now();
+        }
+    }
+});
+
+actions.clean.img.addEventListener("mousedown", function (e) {
+    if (actions.food.isDragging) return;
+    if (actions.clean.isDragging){
+        actions.clean.img.style.left = "0px";
+        actions.clean.img.style.top = "190px";
+        actions.clean.sound.pause();
+    } else {
+        var mouse = getMouseRelativeTo(helpScreen.me, e);
+        actions.offsetX = mouse.x - actions.clean.img.offsetLeft;
+        actions.offsetY = mouse.y - actions.clean.img.offsetTop;
+    }
+    actions.clean.isDragging = !actions.clean.isDragging;
+
+});
+
+actions.food.img.addEventListener("mousedown", function (e) {
+    if (actions.clean.isDragging) return;
+    if (actions.food.isDragging){
+        actions.food.img.style.transform = "scaleY(1)";
+        actions.food.img.style.left = "200px";
+        actions.food.img.style.top = "190px";
+        actions.food.sound.pause();
+    } else {
+        var mouse = getMouseRelativeTo(helpScreen.me, e);
+        actions.offsetX = mouse.x - actions.food.img.offsetLeft;
+        actions.offsetY = mouse.y - actions.food.img.offsetTop;
+        actions.food.img.style.transform = "scaleY(-1)";
+    }
+    actions.food.isDragging = !actions.food.isDragging;
+
+});
+
+// ##############################
+// #            SKINS           #
+// ##############################
+
+nextButton.addEventListener("click", function () {
+    petSelector[savedData.petSelected].container.normal.style.visibility = "hidden";
+    petSelector[savedData.petSelected].container.dirty.style.visibility = "hidden";
+    petSelector[savedData.petSelected].me.style.visibility = "hidden";
+    petSelector[savedData.petSelected].normal.style.visibility = "hidden";
+    petSelector[savedData.petSelected].sad.style.visibility = "hidden";
+    savedData.petSelected = (savedData.petSelected + 1) % nrSkins;
+    petSelector[savedData.petSelected].container.normal.style.visibility = "visible";
+    petSelector[savedData.petSelected].me.style.visibility = "visible";
+    clearInterval(moveInterval);
+    moveInterval = null;
+    pos = Math.floor((petSelector[savedData.petSelected].moveSpace.maxY + petSelector[savedData.petSelected].moveSpace.minY) / 2);
+    moveVector = 2;
+});
+
+prevButton.addEventListener("click", function () {
+    petSelector[savedData.petSelected].container.normal.style.visibility = "hidden";
+    petSelector[savedData.petSelected].container.dirty.style.visibility = "hidden";
+    petSelector[savedData.petSelected].me.style.visibility = "hidden";
+    petSelector[savedData.petSelected].normal.style.visibility = "hidden";
+    petSelector[savedData.petSelected].sad.style.visibility = "hidden";
+    savedData.petSelected = (savedData.petSelected - 1 < 0 ? nrSkins : savedData.petSelected) - 1;
+    petSelector[savedData.petSelected].container.normal.style.visibility = "visible";
+    petSelector[savedData.petSelected].me.style.visibility = "visible";
+    clearInterval(moveInterval);
+    moveInterval = null;
+    pos = Math.floor((petSelector[savedData.petSelected].moveSpace.maxY + petSelector[savedData.petSelected].moveSpace.minY) / 2);
+    moveVector = 2;
+});
+
+secretCode.border.addEventListener("click", function() {
+    savedData.isDurka = 1;
+    nrSkins = 12;
+    secretCode.sound.play();
+});
+
+// ##############################
+// #          HELP MENU         #
+// ##############################
+
+helpScreen.showButton.addEventListener("click", function() {
+    saveData();
+    helpScreen.me.style.visibility = "visible";
+});
+
+helpScreen.hideButton.addEventListener("click", function() {
+    helpScreen.me.style.visibility = "hidden";
+});
+
+petSelector[0].me.style.visibility = "hidden";
+petSelector[0].normal.style.visibility = "hidden";
+petSelector[0].sad.style.visibility = "hidden";
+petSelector[0].container.normal.style.visibility = "hidden";
+petSelector[0].container.dirty.style.visibility = "hidden";
+
+loadSaved();
+
+pos = Math.floor((petSelector[savedData.petSelected].moveSpace.maxY + petSelector[savedData.petSelected].moveSpace.minY) / 2);
+
+setInterval(updateColors, 1000);
+setInterval(saveData, 5000);</script>
+    </body>
+</html>
