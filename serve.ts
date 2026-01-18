@@ -1,7 +1,6 @@
 import { existsSync } from "fs";
 import path from "path";
 
-if (!process.argv[2] || !existsSync(process.argv[2])) throw new Error("must provide date directory");
 
 const { port } = Bun.serve({
 	port: 5050,
@@ -9,11 +8,15 @@ const { port } = Bun.serve({
 		const url = new URL(req.url),
 			staticpath = path.join(
 				import.meta.dir,
-				process.argv[2]!,
 				"webtiles.kicya.net",
 				url.pathname,
 				url.pathname.endsWith("/") ? "index.html" : "",
 			);
+		// edited html to disable turnstile
+		if (url.pathname == "/")
+			return new Response(Bun.file("./webtiles.kicya.net/index.copy.html"), {
+				headers: { "Content-Type": "text/html" },
+			});
 		if (!staticpath.startsWith(import.meta.dir + "/2026-")) return new Response("", { status: 404 });
 		if (existsSync(staticpath)) {
 			const f = Bun.file(staticpath);
