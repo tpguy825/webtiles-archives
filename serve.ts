@@ -9,18 +9,18 @@ const { port } = Bun.serve({
 			staticpath = path.join(
 				import.meta.dir,
 				"webtiles.kicya.net",
-				url.pathname,
+				decodeURIComponent(url.pathname),
 				url.pathname.endsWith("/") ? "index.html" : "",
 			);
 		// edited html to disable turnstile
+		console.log(url.pathname);
 		if (url.pathname == "/")
 			return new Response(Bun.file("./webtiles.kicya.net/index.copy.html"), {
 				headers: { "Content-Type": "text/html" },
 			});
-		if (!staticpath.startsWith(import.meta.dir + "/2026-")) return new Response("", { status: 404 });
+		if (!staticpath.startsWith(import.meta.dir + "/webtiles.kicya.net/")) return new Response("", { status: 404 });
 		if (existsSync(staticpath)) {
 			const f = Bun.file(staticpath);
-			console.log("file:", url.pathname);
 			if (url.pathname.endsWith(".html") && url.pathname.startsWith("/t/")) {
 				const text = await f.text();
 				return new Response(replacement(text, path.dirname(url.pathname)), {
