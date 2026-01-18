@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # fetch latest one regardless of current repo state
+if [ -f "stats.txt" ]; then
+    rm stats.txt
+fi
 wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/index.ts | bun -
 
 . stats.txt

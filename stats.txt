@@ -4,3 +4,7 @@ exampletiles=50
 wormedtiles=27
 backeduptiles=1127
 notfoundtiles=26
+exampletiles=50
+wormedtiles=27
+backeduptiles=1135
+notfoundtiles=18
