@@ -23,34 +23,60 @@ img {
   display: block;
 }
 
-span {
-  font-size: .925rem;
-  font-weight: 600;
+h1 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.25em;
 }
 
 .tile-body {
   color: #fff;
-  background-color: #960000;
   font-family: Space Grotesk;
-  font-size: 16px;
   line-height: 1.5;
 }
 
-main {
+.overlay {
   text-align: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: .5rem;
-  min-block-size: 100%;
-  padding: 1.5rem .875rem;
-  display: flex;
+  background: linear-gradient(#000000bf, #0000);
+  inline-size: 100%;
+  padding-block-start: 1rem;
+  position: fixed;
+  inset: 0;
+}
+
+.overlay h1 {
+  margin-block-end: .25em;
+}
+
+p {
+  text-shadow: 1px 1px #000000bf;
+  font-size: .625rem;
+  position: fixed;
+  inset-block-end: .25rem;
+  inset-inline-end: .25rem;
+}
+
+a {
+  color: #fff;
+}
+
+a:hover, a:focus, a:focus-visible {
+  color: #c8c8c8;
 }
 </style>
 </head>
 <body>
-    <main>
-        <img src="autism.gif" alt="I HAVE AUTISM">
-        <span>AND I'M NOT AFRAID TO USE IT...</span>
-    </main>
+    
+    <div class="overlay">
+        <h1>
+            wobbly brian
+        </h1>
+        
+        <a href="https://wobblybrian.xyz" target="_blank">visit my website</a>
+        
+    </div>
+    
+    <img src="autism-3dgifartist.gif" alt="Autism">
+    <p>GIF by <a href="https://bsky.app/profile/3dgifartist.bsky.social" target="_blank">Dave Sutton</a></p>
 </body>
 </html>

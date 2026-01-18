@@ -86,7 +86,7 @@ input:focus {
     <p id="overlayText"><u>3D raycasting engine!!!!</u><br>You have to press once more to enable input.<br>Use WASD and arrows to move and look around.
         <br><span style="color:yellow;">click on this to remove the text</span></p>
     
-
+	<img src="preview.png" id="preview">
     <canvas id="canvas1" width="250" height="250"></canvas>
     <canvas id="canvas2" width="250" height="250"></canvas>
     <input id="textfield" autocomplete="off"><br>
@@ -104,7 +104,7 @@ input:focus {
 // =====================
 var frames = 0;
 var fps = 0;
-var maxRays = 24;
+var maxRays = 16;
 var lastFpsTime = Date.now();
 
 var W = 250;
@@ -141,7 +141,7 @@ function precomputeTrig() {
 }
 
 // =====================
-// canvases + contexts (double buffer)
+// canvases + contexts 
 // =====================
 var canvas = document.getElementById('canvas1');
 var ctx = canvas.getContext('2d');
@@ -149,42 +149,35 @@ var ctx = canvas.getContext('2d');
 canvas.width = W;
 canvas.height = H;
 
-// offscreen back buffer (NOT in DOM)
 var back = document.createElement('canvas');
 back.width = W;
 back.height = H;
 var bctx = back.getContext('2d');
 
+var preview = document.getElementById('preview');
+preview.style.display = 'none';
+
 // =====================
-// sky pattern (wait for load)
+// sky pattern 
 // =====================
 var skyPattern = null;
 var skyImg = document.getElementById("skytexture");
-if (skyImg) {
-  if (skyImg.complete && skyImg.naturalWidth) {
-    skyPattern = backCtx.createPattern(skyImg, "repeat");
-  } else {
-    skyImg.onload = function() {
-      // create pattern on BOTH contexts so it works regardless of which is back buffer
-      skyPattern = ctx.createPattern(skyImg, "repeat");
-    };
-  }
-}
+skyPattern = ctx.createPattern(skyImg, "repeat");
 
 // =====================
 // simple procedural wall texture
 // =====================
-function makeBrickTexture(w, h) {
+function makeBrickTexture(w, h, color1, color2) {
   var c = document.createElement('canvas');
   c.width = w; c.height = h;
   var g = c.getContext('2d');
 
   var brickW = 16, brickH = 8, mortar = 1;
 
-  g.fillStyle = 'darkred';
+  g.fillStyle = color1;
   g.fillRect(0, 0, w, h);
 
-  g.fillStyle = 'rgb(25, 0, 0)';
+  g.fillStyle = color2;
   for (var y = 0; y < h; y += brickH) {
     var offset = (((y / brickH) | 0) & 1) ? (brickW >> 1) : 0;
     for (var x = -offset; x < w; x += brickW) {
@@ -194,7 +187,12 @@ function makeBrickTexture(w, h) {
   return c;
 }
 
-var wallImg = makeBrickTexture(16, 24);
+var redBrick = makeBrickTexture(16, 24, "darkred", "rgb(25, 0, 0)");
+var greenBrick = makeBrickTexture(16, 24, "darkgreen", "rgb(0, 25, 0)");
+var blueBrick = makeBrickTexture(16, 24, "darkblue", "rgb(0, 0, 25)");
+var yellowBrick = makeBrickTexture(16, 24, "darkyellow", "rgb(25, 25, 0)");
+var purpleBrick = makeBrickTexture(16, 24, "darkpurple", "rgb(0, 25, 25)");
+var whiteBrick = makeBrickTexture(16, 24, "gray", "rgb(25, 25, 25)");
 
 // =====================
 // overlay
@@ -214,7 +212,6 @@ function World(width, height, map) {
   this.height = height;
   this.map = map;
 
-  // tiles in pixels
   this.tileX = W / width;
   this.tileY = H / height;
 }
@@ -223,7 +220,7 @@ function Player(x, y, angle, speed, size, world) {
   this.x = x;
   this.y = y;
 
-  this.angle = normAng(angle); // int degrees 0..359
+  this.angle = normAng(angle);
 
   this.speed = speed;
   this.size = size;
@@ -231,19 +228,16 @@ function Player(x, y, angle, speed, size, world) {
   this.sinA = 0;
   this.cosA = 1;
 
-  this.FOV = 30; // degrees
+  this.FOV = 45;
   this.world = world;
 }
 
 Player.prototype.update = function() {
-  // keep angle int + normalized
   this.angle = normAng(this.angle);
 
-  // cache forward vector from LUT
   this.sinA = sinLUT[this.angle];
   this.cosA = cosLUT[this.angle]
 
-  // movement
   if (keys[0]) { // W
     this.x += this.speed * this.cosA;
     this.y += this.speed * this.sinA;
@@ -252,32 +246,28 @@ Player.prototype.update = function() {
     this.x -= this.speed * this.cosA;
     this.y -= this.speed * this.sinA;
   }
-  if (keys[1]) { // A (strafe left)
+  if (keys[1]) { // A 
     this.x += this.speed * this.sinA;
     this.y -= this.speed * this.cosA;
   }
-  if (keys[3]) { // D (strafe right)
+  if (keys[3]) { // D
     this.x -= this.speed * this.sinA;
     this.y += this.speed * this.cosA;
   }
 
-  // rotation
   if (keys[4]) this.angle = normAng(this.angle - 10);
   if (keys[5]) this.angle = normAng(this.angle + 10);
 };
 
-// DDA raycast using LUT (still returns object; we can optimize later)
 Player.prototype.castRay = function(aDeg) {
   aDeg = normAng(aDeg);
 
   var sin = sinLUT[aDeg];
   var cos = cosLUT[aDeg];
 
-  // use precomputed reciprocals (avoid divisions)
   var invCos = invCosLUT[aDeg];
   var invSin = invSinLUT[aDeg];
 
-  // player position in tile units
   var px = this.x / this.world.tileX;
   var py = this.y / this.world.tileY;
 
@@ -296,30 +286,32 @@ Player.prototype.castRay = function(aDeg) {
   var side = 0;
   var tile = emptyTile;
 
-  // cap steps (render distance could be used here too)
   var steps = 0;
   var maxSteps = this.world.width * this.world.height + 64;
+
+  var maxDistTiles = 15;
 
   while (steps++ < maxSteps) {
     if (rx < ry) { rx += dx; mx += sx; side = 0; }
     else         { ry += dy; my += sy; side = 1; }
-
-    if (my < 0 || my >= this.world.height || mx < 0 || mx >= this.world.width) {
-      return { dist: 1e6, texX: 0, side: side, tile: false };
+    var traveled = (side === 0) ? (rx - dx) : (ry - dy);
+    if (traveled > maxDistTiles) {
+      return { dist: 200, texX: 10, side: side, tile: 'x' };
     }
-
+    if (mx < 0 || my < 0 || mx >= this.world.width || my >= this.world.height) {
+      tile = emptyTile;
+      continue;
+    }
     tile = this.world.map[my][mx];
     if (tile !== emptyTile) break;
   }
-
-  // distance in tile units (use reciprocal already)
+    
   var distTiles = (side === 0)
     ? (mx - px + (1 - sx) / 2) * invCos
     : (my - py + (1 - sy) / 2) * invSin;
 
   var dist = distTiles * this.world.tileX;
 
-  // texture coordinate along wall (0..1)
   var hit = (side === 0) ? (py + distTiles * sin) : (px + distTiles * cos);
   hit -= Math.floor(hit);
 
@@ -367,12 +359,12 @@ if (textfield) {
 var map1 = [
   '##########',
   '#........#',
-  '#.#r..g#.#',
+  '#.pr..gp.#',
   '#.b....r.#',
-  '#........#',
-  '#........#',
+  '..........',
+  '..........',
   '#.r....y.#',
-  '#.gg..rg.#',
+  '#.gp..rg.#',
   '#........#',
   '##########'
 ];
@@ -387,78 +379,138 @@ precomputeTrig();
 // =====================
 // rendering
 // =====================
+
+function drawFarGroundFog(ctx) {
+  var HALF_H = (H >> 1);
+  var fogR = 170, fogG = 190, fogB = 210;
+  var g = ctx.createLinearGradient(0, H, 0, HALF_H);
+
+  g.addColorStop(0.00, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.00)");
+  g.addColorStop(0.35, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.06)");
+  g.addColorStop(0.70, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.20)");
+  g.addColorStop(1.00, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.55)");
+
+  ctx.fillStyle = g;
+  ctx.fillRect(0, HALF_H, W, HALF_H);
+}
+
+function clamp01(x){ return x < 0 ? 0 : (x > 1 ? 1 : x); }
+function smooth01(t){ return t * t * (3 - 2 * t); }
+
+ctx.globalAlpha = 1;
+ctx.globalCompositeOperation = 'source-over';
+
 function drawFrame(player, ctx) {
   var HALF_H = (H >> 1);
 
-  // sky
   if (skyPattern) {
     var shift = (player.angle / 360) * W * 2;
     ctx.save();
     ctx.translate(-shift, 0);
     ctx.fillStyle = skyPattern;
-    ctx.fillRect(0, 0, W * 3, HALF_H);
+    ctx.fillRect(0, 0, W * 3, H);
     ctx.restore();
   } else {
     ctx.fillStyle = "#333";
-    ctx.fillRect(0, 0, W, HALF_H);
+    ctx.fillRect(0, 0, W, H);
   }
+    
+  var HALF_H = (H >> 1);
+  ctx.fillStyle = "rgba(10, 40, 10, 0.18)";
+  ctx.fillRect(0, HALF_H, W, HALF_H);
+    
+  drawFarGroundFog(ctx);
 
-  // floor
-  ctx.fillStyle = "rgb(0, 25, 0)";
+  var g = ctx.createLinearGradient(0, HALF_H, 0, H);
+  g.addColorStop(0.0, "rgba(0,0,0,0.15)");
+  g.addColorStop(0.6, "rgba(0,0,0,0.35)");
+  g.addColorStop(1.0, "rgba(0,0,0,0.50)");
+  ctx.fillStyle = g;
   ctx.fillRect(0, HALF_H, W, HALF_H);
 
   var RAYS = maxRays;
-  var FOV = player.FOV;   // degrees
+  var FOV = player.FOV;     // degrees
   var WALL_H = 30;
 
   var step = FOV / RAYS;
-
-  // IMPORTANT: turn base into an INT ONCE
-  // (rounding is fine; you're on a 360-entry LUT anyway)
-  var a = normAng((player.angle - (FOV * 0.5) + (step * 0.5)) | 0);
-
-  var imgW = wallImg.width;
-  var imgH = wallImg.height;
+  var base = player.angle - (FOV * 0.5) + (step * 0.5);
+    
+  var fogStart = 2 * player.world.tileX;                  // start fog after 2 tiles
+  var fogEnd   = 15* player.world.tileX;  // fully fog at render distance
+  var fogR = 120, fogG = 140, fogB = 160;                 // fog color (match sky vibe)
 
   for (var i = 0; i < RAYS; i++) {
-    // cast using INT degrees (no float rayAng)
-    var r = player.castRay(a);
-    if (r && r.tile && r.dist < 1e6) {
+    var rayAng = base + i * step;
+    var r = player.castRay(rayAng);
 
-      // fish-eye correction: cos(a - player.angle) with NO normAng() / % inside loop
-      var delta = a - player.angle;
-      if (delta < 0) delta += 360; // now delta is 0..359
+    if (!r || !r.tile || r.dist >= 1e6) continue;
+      
+	var img = null;
+      
+   	if (r.tile == "r") img = redBrick;
+    if (r.tile == "g") img = greenBrick;
+    if (r.tile == "b") img = blueBrick;
+    if (r.tile == "y") img = yellowBrick;
+    if (r.tile == "p") img = purpleBrick;
+    if (r.tile == "#") img = whiteBrick;
+      
+    var fogR = 170, fogG = 190, fogB = 210;   // strong bright fog (tweak)
+    var fogAlpha = 0.85;                      // strong
 
-      var d = r.dist * cosLUT[delta];
-      if (d < 0.0001) d = 0.0001;
-
-      var h = (WALL_H * H / d) | 0;
-
+    if (r.tile === 'x') {
       var x0 = (i * W / RAYS) | 0;
       var x1 = ((i + 1) * W / RAYS) | 0;
-      var w = (x1 - x0) | 0;
+      var w  = (x1 - x0) | 0;
 
-      var u = r.texX;
-      if (u < 0) u = 0;
-      else if (u > 0.9999) u = 0.9999;
+      // ONLY sky area fog (no ground)
+      // strongest near horizon, slightly weaker at very top
+      var g = ctx.createLinearGradient(0, 0, 0, HALF_H);
+      g.addColorStop(0.00, "rgba(" + fogR + "," + fogG + "," + fogB + "," + (fogAlpha * 0.55) + ")");
+      g.addColorStop(1.00, "rgba(" + fogR + "," + fogG + "," + fogB + "," + fogAlpha + ")");
+      ctx.fillStyle = g;
+      ctx.fillRect(x0, 0, w, HALF_H);
 
-      var texX = (u * imgW) | 0;
-      var y0 = (HALF_H - (h >> 1)) | 0;
-
-      ctx.drawImage(wallImg, texX, 0, 1, imgH, x0, y0, w, h);
-
-      if (r.side === 1) {
-        ctx.fillStyle = "rgba(0,0,0,0.28)";
-        ctx.fillRect(x0, y0, w, h);
-      }
+      continue;
     }
+      
+    var imgW = img.width;
+    var imgH = img.height;
 
-    // HERE is the “no %360” wrap:
-    a++;
-    if (a === 360) a = 0;
+    var corrAng = normAng((rayAng | 0) - player.angle);
+    var d = r.dist * cosLUT[corrAng];
+    if (d < 0.0001) d = 0.0001;
+
+    var h = (WALL_H * H / d) | 0;
+
+    var x0 = (i * W / RAYS) | 0;
+    var x1 = ((i + 1) * W / RAYS) | 0;
+    var w = (x1 - x0) | 0;
+
+    var u = r.texX;
+    if (u < 0) u = 0;
+    else if (u > 0.9999) u = 0.9999;
+
+    var texX = (u * imgW) | 0;
+    var y0 = (HALF_H - (h >> 1)) | 0;
+
+    ctx.drawImage(
+      img,
+      texX, 0, 1, imgH,
+      x0, y0, w, h
+    );
+
+    var t = clamp01((r.dist - fogStart) / (fogEnd - fogStart));
+    t = smooth01(t);
+
+    ctx.fillStyle = "rgba(" + fogR + "," + fogG + "," + fogB + "," + t + ")";
+    ctx.fillRect(x0, y0, w, h);
+
+    if (r.side === 1) {
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.fillRect(x0, y0, w, h);
+    }
   }
 }
-
 
 // =====================
 // main loop
@@ -474,18 +526,13 @@ function loop() {
     if (efps) efps.innerText = "FPS: " + fps;
   }
 
-  // draw into BACK buffer
   drawFrame(player, bctx);
     
   ctx.drawImage(back, 0, 0)
 
-  // update player
   player.update();
 
-//   // present back buffer
-//   swapBuffers();
-
-  setTimeout(loop, 25);
+  setTimeout(loop, 50);
 }
 
 loop();</script>
