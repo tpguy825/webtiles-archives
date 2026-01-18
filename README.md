@@ -1,16 +1,26 @@
-# webtiles_mirrors
+# webtiles archive
 
-To install dependencies:
+Nightly (midnight utc) mirrors of [webtiles](https://webtiles.kicya.net).
 
-```bash
-bun install
-```
+## how to see archive
 
-To run:
+Open the [commit history](https://github.com/tpguy825/webtiles-archives/commits/main/) and pick the commit for the backup you want to view, then:
 
 ```bash
-bun run index.ts
+wget -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/fetch-specific.sh | bash -s - <commit id>
 ```
 
-This project was created using `bun init` in bun v1.3.3. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+To view an already cloned archive:
 
+```bash
+bash serve.sh
+```
+
+## scripts
+
+- backup.sh
+	- refetches all tiles, generates stats and then commits to repo
+- fetch-specific.sh
+	- clones repo at a specific commit and then hosts it locally
+- serve.sh
+	- hosts archive locally

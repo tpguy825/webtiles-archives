@@ -37,6 +37,8 @@ for (let i = -25; i <= 25; i++) {
 // 		date.getMinutes(),
 // 	] as const;
 
+await Bun.write("stats.txt", "totaltiles=2601\nclaimedtiles=" + tofetch.filter((t) => t[2].domain !== "<empty>").length + "\n")
+
 await Bun.write(
 	"t.urls.txt",
 	[
