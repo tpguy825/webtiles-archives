@@ -45,10 +45,16 @@ await Bun.write(
 			"https://webtiles.kicya.net/api/tiles",
 			"https://webtiles.kicya.net/api/locks",
 			"https://webtiles.kicya.net/s/dist/buildtime.txt",
+			// cat images first because they could change while fetching and break the display
+			// as far as im aware there aren't any other dynamic displays
 			"https://webtiles.kicya.net/t/corner-tl.tpguy825.uk/index.html",
+			"https://webtiles.kicya.net/t/corner-tl.tpguy825.uk/tl.jpg",
 			"https://webtiles.kicya.net/t/corner-tr.tpguy825.uk/index.html",
-			"https://webtiles.kicya.net/t/corner-br.tpguy825.uk/index.html",
+			"https://webtiles.kicya.net/t/corner-tr.tpguy825.uk/tr.jpg",
 			"https://webtiles.kicya.net/t/corner-bl.tpguy825.uk/index.html",
+			"https://webtiles.kicya.net/t/corner-bl.tpguy825.uk/bl.jpg",
+			"https://webtiles.kicya.net/t/corner-br.tpguy825.uk/index.html",
+			"https://webtiles.kicya.net/t/corner-br.tpguy825.uk/br.jpg",
 			...tofetch
 				.filter((t) => t[2].domain !== "<empty>")
 				.map((t) => `https://webtiles.kicya.net/t/${t[2].domain}/index.html`),
