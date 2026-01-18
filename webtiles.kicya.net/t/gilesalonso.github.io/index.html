@@ -8,7 +8,7 @@
 }
 
 .tile-body {
-  background: #0a0e27;
+  background: #000;
   width: 100vw;
   height: 100vh;
   font-family: Courier New, monospace;
@@ -18,7 +18,7 @@
 
 #heroLayer {
   z-index: 20;
-  background: #0a0e27;
+  background: #000;
   width: 100%;
   height: 100%;
   transition: opacity .5s ease-out;
@@ -32,34 +32,14 @@
   pointer-events: none;
 }
 
-#heroAnimationWrapper {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-
 #heroAnimationCanvas {
   display: block;
-}
-
-.orbiting-tag {
-  color: #00ff88e6;
-  text-shadow: 0 0 8px #0f8c;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 21;
-  font-size: 11px;
-  font-weight: bold;
-  position: absolute;
 }
 
 #clickOverlay {
   cursor: pointer;
   z-index: 25;
-  background: linear-gradient(to top, #0a0e27cc, #0000 30%);
+  background: linear-gradient(to top, #000c, #0000 30%);
   justify-content: center;
   align-items: flex-end;
   width: 100%;
@@ -240,9 +220,7 @@
 <body>
     
     <div id="heroLayer">
-        <div id="heroAnimationWrapper">
-            <canvas id="heroAnimationCanvas"></canvas>
-        </div>
+        <canvas id="heroAnimationCanvas"></canvas>
         
         <div id="clickOverlay">
             <div class="click-hint">Click to Start</div>
@@ -279,297 +257,144 @@
     
     <script type="text/tilescript">(function () {
     // --- STATE MANAGEMENT ---
-    // false = Hero Animation running (Initial state)
+    // false = Hero Animation running
     // true = Content/Typewriter running
     var isActive = false; 
     var heroTimer = null; 
 
     /* -----------------------------------------------
-       1. HERO ANIMATION LOGIC
+       1. HERO ANIMATION LOGIC (BASIC Style)
        ----------------------------------------------- */
     function initHeroAnimation() {
         var canvas = document.getElementById('heroAnimationCanvas');
-        var wrapper = document.getElementById('heroAnimationWrapper');
-
-        if (!canvas || !wrapper || !canvas.getContext) return;
+        if (!canvas || !canvas.getContext) return;
 
         var ctx = canvas.getContext('2d');
-        var lastTimestamp = 0;
-
-        // Variables for Dynamic Resizing
+        
+        // Canvas dimensions
         var w = 0;
         var h = 0;
+        var scale = 0;
 
-        var availableModes = ['flow', 'spiral', 'pulse', 'morph', 'greenSpectrum', 'pixelSwarm'];
-        var currentModeIndex = 0;
-        var currentModeName = availableModes[currentModeIndex];
-        var previousModeName = currentModeName;
-        var modeSwitchTimestamp = 0;
-        var MODE_DURATION_MS = 9000; 
-        var TRANSITION_DURATION_MS_HALF = 750;
-        var transitionState = 'none';
-        var transitionProgress = 0;
-        
-        // RESTORED HIGH COMPLEXITY
-        var baseComplexity = 140; 
-        var params = {
-            speed: 0.5,
-            complexity: baseComplexity,
-            scale: 100, // Will be updated dynamically
-            colorIntensity: 1.0,
-            time: 0,
-            phase: Math.random() * 2 * Math.PI
-        };
+        // Pattern Variables
         var pi = 4 * Math.atan(1);
-        var r_const = 2 * pi / 235;
-        var t_math = 4 * Math.random();
-        var x_val = 0, u_val = 0, v_val = 0;
-        var orange_dot_x_state = Math.random() * 4;
-        var orange_dot_u_state = 0;
-        var orange_dot_v_state = 0;
-        var ORANGE_DOT_SIZE = 2.5;
-        var ORANGE_DOT_COLOR = '#fd7e14';
+        var r = 2 * pi / 235;
+        var t = 4 * Math.random();
+        var x = 0, u = 0, v = 0;
         
-        // Setup Tags
-        var tagsData = [
-            { text: "AI", angle: Math.random() * 2 * pi, radiusFactor: 1.08, speed: 0.0008, el: null },
-            { text: "Automation", angle: Math.random() * 2 * pi, radiusFactor: 1.12, speed: -0.0007, el: null },
-            { text: "Scripts", angle: Math.random() * 2 * pi, radiusFactor: 1.06, speed: 0.0009, el: null },
-            { text: "Data", angle: Math.random() * 2 * pi, radiusFactor: 1.14, speed: -0.0006, el: null },
-            { text: "Solve", angle: Math.random() * 2 * pi, radiusFactor: 1.09, speed: 0.00075, el: null }
-        ];
+        // Loop State
+        var i = 0;
+        var j = 0;
+        var stepsPerFrame = 400; // How many dots to draw per tick
 
-        for (var t = 0; t < tagsData.length; t++) {
-            var tagEl = document.createElement('div');
-            tagEl.className = 'orbiting-tag';
-            tagEl.textContent = tagsData[t].text;
-            wrapper.appendChild(tagEl);
-            tagsData[t].el = tagEl;
+        function resetPattern() {
+            // Clear screen
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, w, h);
+            
+            // Randomize t for new shape
+            t = 4 * Math.random();
+            
+            // Reset counters
+            i = 0; 
+            j = 0;
+            
+            // Reset math vars
+            x = 0; u = 0; v = 0;
         }
 
-        // Color Helper
-        function hsvToRgb(h, s, v) {
-            h /= 60;
-            var c = v * s;
-            var x_color = c * (1 - Math.abs((h % 2) - 1));
-            var m = v - c;
-            var r_rgb = 0, g_rgb = 0, b_rgb = 0;
-            if (h < 1) { r_rgb = c; g_rgb = x_color; b_rgb = 0; }
-            else if (h < 2) { r_rgb = x_color; g_rgb = c; b_rgb = 0; }
-            else if (h < 3) { r_rgb = 0; g_rgb = c; b_rgb = x_color; }
-            else if (h < 4) { r_rgb = 0; g_rgb = x_color; b_rgb = c; }
-            else if (h < 5) { r_rgb = x_color; g_rgb = 0; b_rgb = c; }
-            else { r_rgb = c; g_rgb = 0; b_rgb = x_color; }
-            return {
-                r: Math.floor((r_rgb + m) * 255),
-                g: Math.floor((g_rgb + m) * 255),
-                b: Math.floor((b_rgb + m) * 255)
-            };
-        }
-
-        function updateTagsPosition(deltaTime) {
-            var centerX = w / 2;
-            var centerY = h / 2;
-            var baseRadius = w / 2;
-            for (var t = 0; t < tagsData.length; t++) {
-                var tag = tagsData[t];
-                tag.angle += tag.speed * deltaTime;
-                var currentRadius = baseRadius * tag.radiusFactor;
-                var x = centerX + currentRadius * Math.cos(tag.angle);
-                var y = centerY + currentRadius * Math.sin(tag.angle);
-                tag.el.style.left = x + 'px';
-                tag.el.style.top = y + 'px';
-            }
-        }
-
-        function animateHero() {
-            // STOP CONDITION: If clicked (isActive), stop drawing
+        function animateStep() {
             if (isActive) return;
 
-            // --- DYNAMIC RESIZING FIX ---
-            // We check the wrapper size every frame. If it changes, we update canvas.
-            // This fixes the "stands still" issue when loading in a collapsed iframe.
-            var rect = wrapper.getBoundingClientRect();
-            var newW = Math.floor(rect.width);
-            var newH = Math.floor(rect.height);
+            // --- Dynamic Sizing ---
+            // Check size of container (parent of canvas)
+            var parent = canvas.parentElement;
+            if (parent) {
+                var rect = parent.getBoundingClientRect();
+                var newW = Math.floor(rect.width);
+                var newH = Math.floor(rect.height);
 
-            // Sanity check: if tile is super small/hidden, don't draw
-            if (newW > 0 && newH > 0) {
-                if (newW !== w || newH !== h) {
+                if (newW > 0 && newH > 0 && (newW !== w || newH !== h)) {
                     w = newW;
                     h = newH;
                     canvas.width = w;
                     canvas.height = h;
-                    params.scale = w / 4.2; // Update scale based on new width
+                    // Calculate scale to fit pattern on screen
+                    // Original was ~108 multiplier for 640x480. 
+                    // 108 is roughly 1/6th of width or 1/4th of height.
+                    scale = Math.min(w, h) / 5; 
+                    resetPattern();
                 }
-            } else {
-                // Keep looping until size appears
-                heroTimer = setTimeout(animateHero, 50);
+            }
+            // ---------------------
+
+            if (w === 0 || h === 0) {
+                heroTimer = setTimeout(animateStep, 100);
                 return;
             }
-            // -----------------------------
 
-            var timestamp = new Date().getTime();
-            if (!lastTimestamp) lastTimestamp = timestamp;
-            var deltaTime = timestamp - lastTimestamp;
-            lastTimestamp = timestamp;
+            // Draw a chunk of pixels
+            for (var k = 0; k < stepsPerFrame; k++) {
+                // Break if finished
+                if (i >= 250) break;
 
-            if (!modeSwitchTimestamp) modeSwitchTimestamp = timestamp;
+                // BASIC Math
+                u = Math.sin(i + v) + Math.sin(r * i + x);
+                v = Math.cos(i + v) + Math.cos(r * i + x);
+                x = u + t;
 
-            // Mode switching logic
-            if (transitionState === 'none' && timestamp - modeSwitchTimestamp > MODE_DURATION_MS) {
-                previousModeName = currentModeName;
-                transitionState = 'fadingOut';
-                transitionProgress = 0;
-                modeSwitchTimestamp = timestamp;
-            }
+                // Center coordinates
+                var px = Math.floor((w / 2) + scale * u);
+                var py = Math.floor((h / 2) + scale * v);
 
-            params.time += (0.016 * params.speed) * (deltaTime / 16.66);
+                // Draw if inside bounds
+                if (px >= 0 && px < w && py >= 0 && py < h) {
+                    var rr = Math.floor((i * 3) % 256);
+                    var gg = Math.floor((j * 3) % 256);
+                    var bb = Math.floor((255 - (i + j) / 2) % 256);
 
-            ctx.clearRect(0, 0, w, h);
+                    // Enhance colors
+                    rr = Math.max(0, Math.min(255, rr + Math.sin(i * 0.1) * 50));
+                    gg = Math.max(0, Math.min(255, gg + Math.cos(j * 0.1) * 50));
+                    bb = Math.max(0, Math.min(255, bb + Math.sin((i + j) * 0.05) * 50));
 
-            var activeMode = currentModeName;
-            var currentGlobalAlpha = 1;
+                    ctx.fillStyle = 'rgb(' + Math.floor(rr) + ',' + Math.floor(gg) + ',' + Math.floor(bb) + ')';
+                    ctx.fillRect(px, py, 1, 1);
 
-            if (transitionState === 'fadingOut') {
-                transitionProgress += deltaTime / TRANSITION_DURATION_MS_HALF;
-                currentGlobalAlpha = 1 - Math.min(1, transitionProgress);
-                activeMode = previousModeName;
-                if (transitionProgress >= 1) {
-                    currentModeIndex = (currentModeIndex + 1) % availableModes.length;
-                    currentModeName = availableModes[currentModeIndex];
-                    t_math = 4 * Math.random();
-                    params.phase = Math.random() * 2 * Math.PI;
-                    // RESTORED COMPLEXITY FOR SWARM
-                    params.complexity = (currentModeName === 'pixelSwarm') ? 250 : baseComplexity;
-                    orange_dot_x_state = Math.random() * 4;
-                    orange_dot_u_state = 0;
-                    orange_dot_v_state = 0;
-                    transitionState = 'fadingIn';
-                    transitionProgress = 0;
+                    // Random glow/sparkle (preserved from reference)
+                    if (Math.random() > 0.995) {
+                        ctx.globalAlpha = 0.5;
+                        ctx.fillStyle = '#fff';
+                        ctx.fillRect(px - 1, py - 1, 3, 3);
+                        ctx.globalAlpha = 1.0;
+                    }
                 }
-            } else if (transitionState === 'fadingIn') {
-                activeMode = currentModeName;
-                transitionProgress += deltaTime / TRANSITION_DURATION_MS_HALF;
-                currentGlobalAlpha = Math.min(1, transitionProgress);
-                if (transitionProgress >= 1) {
-                    transitionState = 'none';
-                    currentGlobalAlpha = 1;
+
+                // Increment J, then I
+                j++;
+                if (j >= 250) {
+                    j = 0;
+                    i++;
                 }
             }
 
-            var iterations = Math.floor(params.complexity / 5);
-            x_val = t_math * (1 + Math.sin(params.time * 0.1) * 0.1);
-            ctx.globalAlpha = currentGlobalAlpha;
-            var particleSize = (activeMode === 'pixelSwarm') ? 1.5 : 2;
-
-            // DRAWING PATTERNS
-            for (var i = 0; i < iterations; i++) {
-                for (var j = 0; j < iterations; j++) {
-                    var animatedI = i, animatedJ = j, timeOffset = 0;
-                    
-                    if (activeMode === 'flow') timeOffset = params.time;
-                    else if (activeMode === 'spiral') {
-                        timeOffset = Math.atan2(j - iterations/2, i - iterations/2) + params.time;
-                        particleSize = (Math.sin(params.time + (i+j)*0.1) + 1.5);
-                    }
-                    else if (activeMode === 'pulse') {
-                         var dist = Math.sqrt(Math.pow(i - iterations/2, 2) + Math.pow(j - iterations/2, 2));
-                         timeOffset = Math.sin(params.time * 1.5 + dist * 0.05) * 0.5;
-                         particleSize = 1 + Math.abs(Math.sin(params.time * 2 + dist * 0.1)) * 2;
-                    }
-                    else if (activeMode === 'morph') {
-                        animatedI = i + Math.sin(params.time + j * 0.1) * 8;
-                        animatedJ = j + Math.cos(params.time + i * 0.1) * 8;
-                    }
-                    else if (activeMode === 'greenSpectrum') timeOffset = params.time * 1.5;
-                    else if (activeMode === 'pixelSwarm') {
-                        timeOffset = params.time * 0.3 + Math.sin(i * 0.1 + params.time) * 0.2;
-                        particleSize = 1 + Math.random();
-                    }
-
-                    u_val = Math.sin(animatedI + v_val + timeOffset + params.phase) + Math.sin(r_const * animatedI + x_val);
-                    v_val = Math.cos(animatedI + v_val + timeOffset + params.phase) + Math.cos(r_const * animatedI + x_val);
-                    x_val = u_val + t_math;
-
-                    var px = Math.floor(w / 2 + params.scale * u_val);
-                    var py = Math.floor(h / 2 + params.scale * v_val);
-
-                    if (px >= 0 && px < w && py >= 0 && py < h) {
-                        var R, G, B;
-                        var iFactor = animatedI / iterations, jFactor = animatedJ / iterations;
-
-                        if (activeMode === 'greenSpectrum') {
-                            var hue = 90 + ((iFactor * 50) + (jFactor * 20) + (params.time * 15)) % 100;
-                            var sat = 0.6 + Math.sin(params.time * 0.8 + animatedI * 0.05) * 0.4;
-                            var val = 0.5 + Math.cos(params.time * 0.6 + animatedJ * 0.08) * 0.5;
-                            var hsv = hsvToRgb(hue, sat, val);
-                            R = hsv.r; G = hsv.g; B = hsv.b;
-                        } else if (activeMode === 'pixelSwarm') {
-                            var intensity = (Math.sin(params.time * 0.5 + (i * 0.05 + j * 0.03)) + 1) / 2;
-                            intensity = 0.4 + intensity * 0.6;
-                            R = Math.floor(intensity * (180 + Math.random() * 50));
-                            G = Math.floor(intensity * (230 + Math.random() * 25));
-                            B = Math.floor(intensity * (200 + Math.random() * 50));
-                        } else {
-                             var rRaw = (animatedI * 1.2 * params.colorIntensity + timeOffset * 15);
-                             var gRaw = (animatedJ * 2.0 * params.colorIntensity + timeOffset * 25 + iFactor * 60);
-                             var bRaw = (220 - (animatedI + animatedJ) * 0.7 * params.colorIntensity + timeOffset * 20 + jFactor * 40);
-                             R = Math.floor(rRaw % 80 + 30);
-                             G = Math.floor(gRaw % 135 + 120);
-                             B = Math.floor(bRaw % 100 + 60);
-                             G = Math.max(G, (R + B) * 0.7);
-                             R = Math.min(R, G * 0.8, 150);
-                             B = Math.min(B, G * 0.9, 180);
-                        }
-                        
-                        // GLOW EFFECTS
-                        ctx.shadowBlur = 0;
-                        if (activeMode === 'pulse' || activeMode === 'spiral') {
-                            var boost = Math.max(0, Math.sin(params.time + (i + j) * 0.05)) * 30;
-                            R = Math.min(255, R + boost);
-                            G = Math.min(255, G + boost);
-                            B = Math.min(255, B + boost);
-                            ctx.shadowColor = 'rgba(' + Math.floor(R) + ',' + Math.floor(G) + ',' + Math.floor(B) + ', 0.7)';
-                            ctx.shadowBlur = Math.random() * 3 + 1;
-                        }
-
-                        ctx.fillStyle = 'rgb(' + Math.floor(R) + ', ' + Math.floor(G) + ', ' + Math.floor(B) + ')';
-                        ctx.fillRect(px, py, particleSize, particleSize);
-                    }
-                }
+            if (i >= 250) {
+                // Pattern Finished. Wait, then restart.
+                heroTimer = setTimeout(resetPattern, 2000); 
+                // We need to call animateStep again after the delay, 
+                // but resetPattern doesn't call animateStep.
+                // So we wrap it:
+                setTimeout(function(){
+                   if(!isActive) animateStep(); 
+                }, 2000);
+            } else {
+                // Continue drawing next frame
+                heroTimer = setTimeout(animateStep, 16);
             }
-
-            // Orange Dot Logic
-            var pseudo_i_orange = iterations * 0.42;
-            orange_dot_u_state = Math.sin(params.time * 0.35 + orange_dot_v_state + params.phase * 0.5) +
-                Math.sin(r_const * pseudo_i_orange + orange_dot_x_state);
-            orange_dot_v_state = Math.cos(params.time * 0.35 + orange_dot_v_state + params.phase * 0.5) +
-                Math.cos(r_const * pseudo_i_orange + orange_dot_x_state);
-            orange_dot_x_state = orange_dot_u_state + t_math * 0.25;
-
-            var od_px = Math.floor(w / 2 + params.scale * orange_dot_u_state);
-            var od_py = Math.floor(h / 2 + params.scale * orange_dot_v_state);
-
-            if (od_px >= 0 && od_px < w && od_py >= 0 && od_py < h) {
-                ctx.fillStyle = ORANGE_DOT_COLOR;
-                ctx.shadowColor = 'rgba(253, 126, 20, 0.7)';
-                ctx.shadowBlur = 6;
-                ctx.beginPath();
-                ctx.arc(od_px, od_py, ORANGE_DOT_SIZE, 0, 2 * Math.PI);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            }
-
-            ctx.globalAlpha = 1;
-            updateTagsPosition(deltaTime);
-
-            // Loop roughly 50-60FPS
-            heroTimer = setTimeout(animateHero, 16);
         }
 
-        // START HERO LOOP
-        animateHero();
+        // Start
+        animateStep();
     }
 
     /* -----------------------------------------------
@@ -628,10 +453,10 @@
     }
 
     /* -----------------------------------------------
-       3. EVENTS
+       3. EVENTS & INIT
        ----------------------------------------------- */
     
-    // Attempt to start animation immediately
+    // Start Hero Loop
     initHeroAnimation();
 
     var clickOverlay = document.getElementById('clickOverlay');
@@ -641,14 +466,16 @@
     if (clickOverlay) {
         clickOverlay.addEventListener('click', function() {
             if (!isActive) {
-                // ONE CLICK TRANSITION
+                // SWITCH STATE
                 isActive = true;
                 
                 // Kill Hero Timer
                 if (heroTimer) clearTimeout(heroTimer);
                 
-                // Visual Switch
+                // Fade out hero
                 heroLayer.className += " fade-out";
+                
+                // Show content
                 contentLayer.className = contentLayer.className.replace("hidden", "");
                 
                 // Start Content Logic

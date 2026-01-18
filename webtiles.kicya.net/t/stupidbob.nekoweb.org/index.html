@@ -38,7 +38,8 @@ input:focus {
   background: #0009;
   padding: 6px 10px;
   font-size: 9px;
-  position: fixed;
+  position: absolute;
+  top: 180px;
 }
 
 #overlayText.collapsed {
@@ -59,24 +60,30 @@ input:focus {
 
 #inputr {
   z-index: 9;
-  color: red;
+  color: #c83232;
   pointer-events: none;
-  background: #0009;
-  padding: 6px 10px;
-  font-size: 9px;
+  font-size: 12px;
   position: absolute;
-  top: 200px;
+  top: -5px;
+  left: 120px;
 }
 
-#fps {
+#lsd {
   z-index: 9;
-  color: #add8e6;
-  background: #0009;
-  padding: 6px 10px;
-  font-size: 9px;
+  pointer-events: none;
+  font-size: 12px;
   position: absolute;
-  top: 200px;
-  left: 200px;
+  top: 10px;
+  left: 140px;
+}
+
+#info {
+  z-index: 9;
+  color: #ff0;
+  margin-left: 5px;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
 }
 </style>
     <img src="sky.jpg" style="display:none" id="skytexture">
@@ -96,8 +103,14 @@ input:focus {
         not receiving input
     </p>
     
-	<p id="fps">
-        FPS: 0
+	<p id="lsd" style="display:none" class="rainbow-text">
+		LSD MODE ENABLED
+    </p>
+    
+	<p id="info">
+        FPS: 0<br>
+        x: 125, y: 125<br>
+        ang: 90
     </p>
     <script type="text/tilescript">// =====================
 // globals
@@ -139,6 +152,23 @@ function precomputeTrig() {
     invCosLUT[i] = abs(c) < 1e-6 ? (c < 0 ? -1e6 : 1e6) : 1 / c;
   }
 }
+
+(function () {
+  var el = document.getElementById('lsd');
+  if (!el) return;
+
+  var colors = ['#ff0000','#ff7f00','#ffff00','#00ff00','#00ffff','#0000ff','#8b00ff'];
+  var text = el.innerText || el.textContent || '';
+
+  el.innerText = '';
+
+  for (var i = 0; i < text.length; i++) {
+    var span = document.createElement('span');
+    span.appendChild(document.createTextNode(text.charAt(i)));
+    span.style.color = colors[i % colors.length];
+    el.appendChild(span);
+  }
+})();
 
 // =====================
 // canvases + contexts 
@@ -232,6 +262,10 @@ function Player(x, y, angle, speed, size, world) {
   this.world = world;
 }
 
+var lsdmode = false;
+var textshown = false;
+var lsd = document.getElementById('lsd');
+
 Player.prototype.update = function() {
   this.angle = normAng(this.angle);
 
@@ -257,6 +291,19 @@ Player.prototype.update = function() {
 
   if (keys[4]) this.angle = normAng(this.angle - 10);
   if (keys[5]) this.angle = normAng(this.angle + 10);
+    
+  if (keys[6] && !lsdmode) lsdmode = true;
+  else if (keys[6]) lsdmode = false;
+    
+  if (lsdmode) {
+      lsd.style.display = 'block'
+  }
+  else {
+      lsd.style.display = 'none';
+  }
+    
+  this.x = Math.round(this.x * 10) / 10;
+  this.y = Math.round(this.y * 10) / 10;
 };
 
 Player.prototype.castRay = function(aDeg) {
@@ -330,22 +377,24 @@ canvas.onclick = focusInput;
 if (textfield && inputr) {
   textfield.addEventListener('focus', function() {
     inputr.innerText = 'receiving input';
-    inputr.style.color = 'green';
+    inputr.style.color = 'rgb(200, 255, 200)';
+    inputr.style.left = '150px';
   });
   textfield.addEventListener('blur', function() {
     inputr.innerText = 'not receiving input';
-    inputr.style.color = 'red';
+    inputr.style.color = 'rgb(200, 50, 50)';
+    inputr.style.left = '120px';
   });
 }
 
-var keys = [false, false, false, false, false, false];
-var controls = ['w', 'a', 's', 'd', 'ArrowLeft', 'ArrowRight'];
+var keys = [false, false, false, false, false, false, false];
+var controls = ['w', 'a', 's', 'd', 'ArrowLeft', 'ArrowRight', 'f'];
 
 function onKeyDown(e) {
-  for (var i = 0; i < 6; i++) if (e.key === controls[i]) keys[i] = true;
+  for (var i = 0; i < keys.length; i++) if (e.key === controls[i]) keys[i] = true;
 }
 function onKeyUp(e) {
-  for (var i = 0; i < 6; i++) if (e.key === controls[i]) keys[i] = false;
+  for (var i = 0; i < keys.length; i++) if (e.key === controls[i]) keys[i] = false;
 }
 
 if (textfield) {
@@ -372,7 +421,7 @@ var map1 = [
 var world = new World(10, 10, map1);
 var player = new Player(125, 125, 90, 5, 10, world);
 
-var efps = document.getElementById('fps');
+var info = document.getElementById('info');
 
 precomputeTrig();
 
@@ -380,17 +429,28 @@ precomputeTrig();
 // rendering
 // =====================
 
-function drawFarGroundFog(ctx) {
+var groundGrad = ctx.createLinearGradient(0, H>>1, 0, H);
+groundGrad.addColorStop(0.0, "rgba(0,0,0,0.25)");
+groundGrad.addColorStop(0.6, "rgba(0,0,0,0.55)");
+groundGrad.addColorStop(1.0, "rgba(0,0,0,0.70)");
+
+var skyFogGrad = ctx.createLinearGradient(0, 0, 0, H>>1);
+skyFogGrad.addColorStop(0.00, "rgba(175,190,205,0.20)");
+skyFogGrad.addColorStop(1.00, "rgba(175,190,205,0.75)");
+
+var groundFogGrad = ctx.createLinearGradient(0, H, 0, H>>1);
+groundFogGrad.addColorStop(0.00, "rgba(175,190,205,0.10)");
+groundFogGrad.addColorStop(0.55, "rgba(175,190,205,0.25)");
+groundFogGrad.addColorStop(1.00, "rgba(175,190,205,0.85)");
+
+function drawHorizonFog(ctx) {
   var HALF_H = (H >> 1);
-  var fogR = 170, fogG = 190, fogB = 210;
-  var g = ctx.createLinearGradient(0, H, 0, HALF_H);
+  var fogR = 175, fogG = 190, fogB = 205;
 
-  g.addColorStop(0.00, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.00)");
-  g.addColorStop(0.35, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.06)");
-  g.addColorStop(0.70, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.20)");
-  g.addColorStop(1.00, "rgba(" + fogR + "," + fogG + "," + fogB + ",0.55)");
+  ctx.fillStyle = skyFogGrad;
+  ctx.fillRect(0, 0, W, HALF_H);
 
-  ctx.fillStyle = g;
+  ctx.fillStyle = groundFogGrad;
   ctx.fillRect(0, HALF_H, W, HALF_H);
 }
 
@@ -402,42 +462,36 @@ ctx.globalCompositeOperation = 'source-over';
 
 function drawFrame(player, ctx) {
   var HALF_H = (H >> 1);
+	
+   if (!lsdmode) {
+      if (skyPattern) {
+        var shift = (player.angle / 360) * W * 2;
+        ctx.save();
+        ctx.translate(-shift, 0);
+        ctx.fillStyle = skyPattern;
+        ctx.fillRect(0, 0, W * 3, H);
+        ctx.restore();
+      } else {
+        ctx.fillStyle = "#333";
+        ctx.fillRect(0, 0, W, H);
+      }
 
-  if (skyPattern) {
-    var shift = (player.angle / 360) * W * 2;
-    ctx.save();
-    ctx.translate(-shift, 0);
-    ctx.fillStyle = skyPattern;
-    ctx.fillRect(0, 0, W * 3, H);
-    ctx.restore();
-  } else {
-    ctx.fillStyle = "#333";
-    ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = groundGrad;
+      ctx.fillRect(0, HALF_H, W, HALF_H);
   }
     
-  var HALF_H = (H >> 1);
-  ctx.fillStyle = "rgba(10, 40, 10, 0.18)";
-  ctx.fillRect(0, HALF_H, W, HALF_H);
-    
-  drawFarGroundFog(ctx);
-
-  var g = ctx.createLinearGradient(0, HALF_H, 0, H);
-  g.addColorStop(0.0, "rgba(0,0,0,0.15)");
-  g.addColorStop(0.6, "rgba(0,0,0,0.35)");
-  g.addColorStop(1.0, "rgba(0,0,0,0.50)");
-  ctx.fillStyle = g;
-  ctx.fillRect(0, HALF_H, W, HALF_H);
+  drawHorizonFog(ctx);
 
   var RAYS = maxRays;
-  var FOV = player.FOV;     // degrees
+  var FOV = player.FOV;
   var WALL_H = 30;
 
   var step = FOV / RAYS;
   var base = player.angle - (FOV * 0.5) + (step * 0.5);
     
-  var fogStart = 2 * player.world.tileX;                  // start fog after 2 tiles
-  var fogEnd   = 15* player.world.tileX;  // fully fog at render distance
-  var fogR = 120, fogG = 140, fogB = 160;                 // fog color (match sky vibe)
+  var fogStart = 2 * player.world.tileX; 
+  var fogEnd   = 15* player.world.tileX;
+  var fogR = 120, fogG = 140, fogB = 160;   
 
   for (var i = 0; i < RAYS; i++) {
     var rayAng = base + i * step;
@@ -446,6 +500,7 @@ function drawFrame(player, ctx) {
     if (!r || !r.tile || r.dist >= 1e6) continue;
       
 	var img = null;
+    var fogMult = 2.3;
       
    	if (r.tile == "r") img = redBrick;
     if (r.tile == "g") img = greenBrick;
@@ -453,25 +508,7 @@ function drawFrame(player, ctx) {
     if (r.tile == "y") img = yellowBrick;
     if (r.tile == "p") img = purpleBrick;
     if (r.tile == "#") img = whiteBrick;
-      
-    var fogR = 170, fogG = 190, fogB = 210;   // strong bright fog (tweak)
-    var fogAlpha = 0.85;                      // strong
-
-    if (r.tile === 'x') {
-      var x0 = (i * W / RAYS) | 0;
-      var x1 = ((i + 1) * W / RAYS) | 0;
-      var w  = (x1 - x0) | 0;
-
-      // ONLY sky area fog (no ground)
-      // strongest near horizon, slightly weaker at very top
-      var g = ctx.createLinearGradient(0, 0, 0, HALF_H);
-      g.addColorStop(0.00, "rgba(" + fogR + "," + fogG + "," + fogB + "," + (fogAlpha * 0.55) + ")");
-      g.addColorStop(1.00, "rgba(" + fogR + "," + fogG + "," + fogB + "," + fogAlpha + ")");
-      ctx.fillStyle = g;
-      ctx.fillRect(x0, 0, w, HALF_H);
-
-      continue;
-    }
+    if (r.tile == "x") continue;
       
     var imgW = img.width;
     var imgH = img.height;
@@ -500,15 +537,14 @@ function drawFrame(player, ctx) {
     );
 
     var t = clamp01((r.dist - fogStart) / (fogEnd - fogStart));
-    t = smooth01(t);
-
-    ctx.fillStyle = "rgba(" + fogR + "," + fogG + "," + fogB + "," + t + ")";
-    ctx.fillRect(x0, y0, w, h);
-
+      
     if (r.side === 1) {
       ctx.fillStyle = "rgba(0,0,0,0.5)";
       ctx.fillRect(x0, y0, w, h);
     }
+
+    ctx.fillStyle = "rgba(" + fogR + "," + fogG + "," + fogB + "," + t*fogMult + ")";
+    ctx.fillRect(x0, y0, w, h);
   }
 }
 
@@ -523,15 +559,15 @@ function loop() {
     fps = frames;
     frames = 0;
     lastFpsTime = now;
-    if (efps) efps.innerText = "FPS: " + fps;
+    if (info) {
+        info.innerText = "FPS: " + fps + '\nx: ' + player.x + ', y: ' + player.y + '\nang: ' + player.angle;
+    }
   }
 
   drawFrame(player, bctx);
     
   ctx.drawImage(back, 0, 0)
-
   player.update();
-
   setTimeout(loop, 50);
 }
 

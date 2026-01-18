@@ -52,13 +52,17 @@
 #screensaver {
   backdrop-filter: blur(8px);
   opacity: 0;
-  background: url("img.jpg");
-  width: 100%;
-  height: 100%;
+  color: #fff;
+  background: #000;
+  width: 250px;
+  max-width: 250px;
+  height: 250px;
+  max-height: 250px;
   transition: all 2s;
   position: absolute;
   top: 0;
   right: 0;
+  overflow: hidden auto;
 }
 
 #screensaver:hover {
@@ -83,25 +87,84 @@
   left: 1px;
   box-shadow: 0 0 10px 2px green !important;
 }
+
+input {
+  all: unset;
+}
+
+#screen {
+  display: block;
+}
 </style>
 </head>
-<body>
+<body id="body">
+    
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
-    
+console.log("Hello world!");
+
+function interpreter(command){
+    	var screen = document.getElementById('screen');
+    	var div = document.createElement('div');
+
+        var left = document.createElement('span');
+        left.style.color = 'lime';
+        left.innerText = 'tile@-1,10.tiles';
+
+        var colon = document.createElement('span');
+        colon.innerText = ':';
+
+        var tilde = document.createElement('span');
+        tilde.style.color = 'blue';
+        tilde.innerText = '~';
+
+        var dollar = document.createElement('span');
+        dollar.innerText = '$ ' + command; // input variable from your code
+
+        div.appendChild(left);
+    	div.appendChild(colon);
+        div.appendChild(tilde);
+        div.appendChild(dollar);
+    	screen.appendChild(div);
+    	
+        var div = document.createElement("div");
+    	//var [command, argument] = input.split(" ")
+    	if(command == "clear"){
+            screen.innerText ="";
+        }
+        else if(command == "help"){
+            div.innerText = "Avaible commands: clear, help, screenfetch";
+        }
+    	else if(command == "screenfetch"){
+            div.innerText = "Resolution:	250x250";
+        }
+        else{
+            div.innerText = "Try: help";
+        }
+    screen.appendChild(div);
+    console.log("interpreted")
+}
+
+var input = document.getElementById("commandline");
+input.addEventListener('keyup', function(event) {
+    console.log(event.key)
+    if (event.key === 'Enter') {
+        console.log('Return key was pressed!');
+        interpreter(input.value)
+		input.value = "";
+    }
+});</script>
     <div id="green">
     </div>
     <div id="bang">
     </div>
     <div id="screensaver">
-        <h3>
-            This website is currently unsupported
-        </h3>
-        <p>
-            Please visit the tile bellow ⬊
-           	Any content ofr this tile or slide idea is welcome!
-        </p>
+            <output id="screen">
+            </output>
+        	<nobr><span style="color: lime;">tile@-1,10.tiles</span>:<span style="color: blue;">~</span>$ <input type="text" id="commandline" autocomplete="off"></nobr>
+        <h6 style="position:absolute; bottom:-20px;">
+            The neocity website is currently unsupported
+        </h6>
     </div>
 </body>
 </html>

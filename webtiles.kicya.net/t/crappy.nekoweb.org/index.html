@@ -24,18 +24,6 @@
     right: -90px;
   }
 
-  & #cyat {
-    transition: transform .5s ease-out;
-    position: relative;
-    top: -15px;
-    transform: perspective(1px)translateZ(0);
-
-    & #cyat:hover {
-      display: block;
-      transform: scale(1.4);
-    }
-  }
-
   & #linktree {
     transition: transform .5s ease-out;
     position: relative;
@@ -47,6 +35,18 @@
   & #linktree:hover {
     display: block;
     transform: scale(1.4);
+  }
+
+  & #cyat {
+    transition: transform .2s ease-out;
+    position: relative;
+    bottom: 15px;
+    right: 20px;
+  }
+
+  & #cyat:hover {
+    display: block;
+    transform: translate(0, 5px);
   }
 
   & #titlestuff span {
@@ -110,7 +110,7 @@
 }
 </style>
 </head>
-<body>
+
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
@@ -127,15 +127,15 @@ console.log("Hello world!");</script>
          <br> very SOON
         <br> - crappykatio i think 
     </p>
-        <div id= "cyat">
-        <img title="⋆ who in the fooly" src="catgrad.webp" width="100" height="100">
+     
+        <img id="cyat" title="⋆ who in the fooly" src="catgrad.webp" width="100" height="100">
             </div>
         
-        <a href="https://linktr.ee/crappyk" target="_blank">
+        
         <img id="linktree" title="⋆ my links" src="linktree.webp" width="50" height="50">
             
-          </a></div>
+          
          
    
-</body>
+
 </html>
