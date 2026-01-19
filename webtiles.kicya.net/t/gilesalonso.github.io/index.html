@@ -8,192 +8,199 @@
 }
 
 .tile-body {
+  user-select: none;
+  color: #fff;
   background: #000;
-  width: 100vw;
-  height: 100vh;
+  width: 250px;
+  height: 250px;
   font-family: Courier New, monospace;
   position: relative;
   overflow: hidden;
 }
 
-#heroLayer {
-  z-index: 20;
+canvas {
   background: #000;
-  width: 100%;
-  height: 100%;
-  transition: opacity .5s ease-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#heroLayer.fade-out {
-  opacity: 0;
-  pointer-events: none;
-}
-
-#heroAnimationCanvas {
+  outline: none;
+  width: 250px;
+  height: 250px;
   display: block;
 }
 
-#clickOverlay {
+#startZone {
+  z-index: 999;
   cursor: pointer;
-  z-index: 25;
-  background: linear-gradient(to top, #000c, #0000 30%);
+  pointer-events: auto;
+  background: none;
   justify-content: center;
-  align-items: flex-end;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 10px;
+  align-items: center;
+  width: 250px;
+  height: 250px;
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.click-hint {
-  color: #fff9;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 4px 8px;
-  font-size: 10px;
-  animation: 2s infinite blink;
+#startZone.hidden {
+  display: none;
 }
 
-#contentLayer {
-  z-index: 10;
-  opacity: 1;
-  width: 100%;
-  height: 100%;
-  transition: opacity .5s ease-in;
+.blink-wrapper {
+  pointer-events: none;
+  background: #0009;
+  border: 1px solid #0f0;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 0 10px #0f03;
+}
+
+.blink-text {
+  color: #0f0;
+  text-shadow: 0 0 4px #0f0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.4;
+  animation: .8s step-end infinite blink;
+  display: block;
+}
+
+#heroLayer {
+  z-index: 50;
+  pointer-events: none;
+  width: 250px;
+  height: 250px;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-#contentLayer.hidden {
-  opacity: 0;
-  pointer-events: none;
+#heroLayer.hidden {
+  display: none;
 }
 
-.content {
-  text-align: center;
+#gameLayer {
+  z-index: 100;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#gameLayer.hidden {
+  display: none;
+}
+
+#gameUI {
+  pointer-events: none;
+  text-shadow: 1px 1px #000;
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+#touchControls {
+  opacity: .6;
+  pointer-events: auto;
+  justify-content: space-between;
   width: 100%;
-  max-width: 280px;
-  padding: 10px;
+  padding: 0 5px;
+  display: flex;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+}
+
+#touchControls:hover {
+  opacity: 1;
+}
+
+.touch-btn {
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  background: #ffffff26;
+  border: 1px solid #fff6;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 0 2px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 35px;
+}
+
+.touch-btn:active {
+  color: #000;
+  background: #fff;
+}
+
+.fire-btn {
+  color: #f55;
+  border-color: #f55;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+
+#gameOverScreen {
+  text-align: center;
+  z-index: 200;
+  background: #000000f2;
+  border: 2px solid #fff;
+  width: 200px;
+  padding: 15px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #fff3;
 }
 
-.brand {
-  margin-bottom: 10px;
-}
-
-.icon {
-  margin-bottom: 5px;
-  font-size: 32px;
-  animation: 2s ease-in-out infinite pulse;
-}
-
-.name {
-  color: #fff;
-  letter-spacing: 1px;
-  font-size: 26px;
-  font-weight: bold;
-}
-
-.accent {
-  color: #0f8;
-  text-shadow: 0 0 15px #0f89;
-  animation: 2s ease-in-out infinite glow;
-}
-
-.promise {
-  color: #aaa;
-  min-height: 20px;
-  margin: 10px 0 15px;
-  font-size: 13px;
-  line-height: 1.4;
-  position: relative;
-}
-
-.promise:after {
-  content: "|";
-  color: #0f8;
-  animation: 1s step-end infinite blink;
-}
-
-.promise.typing-done:after {
-  content: none;
+#gameOverScreen.hidden {
   display: none;
 }
 
-.services-grid {
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin: 15px 0;
-  display: grid;
-}
-
-.service-tag {
-  color: #0f8;
-  opacity: 0;
-  background: #00ff8814;
-  border: 1px solid #00ff884d;
-  border-radius: 4px;
-  padding: 6px 8px;
-  font-size: 10px;
-  transition: all .3s;
-}
-
-.service-tag.visible {
-  opacity: 1;
-}
-
-.cta-btn {
-  color: #0a0e27;
-  cursor: pointer;
-  background: #0f8;
-  border-radius: 5px;
-  margin: 15px 0 10px;
-  padding: 10px 24px;
-  font-size: 12px;
+.go-title {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 18px;
   font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 0 25px #0f86;
 }
 
-.status {
-  color: #6c9cff;
+.nav-row {
   justify-content: center;
-  align-items: center;
-  gap: 6px;
+  gap: 10px;
   margin-top: 10px;
-  font-size: 9px;
   display: flex;
 }
 
-.status-dot {
-  background: #0f8;
+.nav-btn {
+  color: #fff;
+  cursor: pointer;
+  background: #333;
+  border: 1px solid #fff;
   border-radius: 50%;
-  width: 6px;
-  height: 6px;
-  animation: 2s ease-in-out infinite blink;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.nav-btn:hover {
+  color: #000;
+  background: #fff;
+}
 
-  50% {
-    opacity: .8;
-    transform: scale(1.1);
-  }
+.accent-btn {
+  color: #0f0;
+  border-color: #0f0;
 }
 
 @keyframes blink {
@@ -202,287 +209,374 @@
   }
 
   50% {
-    opacity: .3;
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    text-shadow: 0 0 15px #0f89;
-  }
-
-  50% {
-    text-shadow: 0 0 25px #0f8c;
+    opacity: 0;
   }
 }
 </style>
 </head>
 <body>
     
-    <div id="heroLayer">
-        <canvas id="heroAnimationCanvas"></canvas>
-        
-        <div id="clickOverlay">
-            <div class="click-hint">Click to Start</div>
+    <div id="startZone">
+        <div class="blink-wrapper">
+            <span class="blink-text">INSERT COIN<br>CLICK TO START</span>
         </div>
+    </div>
+
+    
+    <div id="heroLayer">
+        <canvas id="attractCanvas" width="250" height="250"></canvas>
     </div>
    
     
-    <div id="contentLayer" class="hidden">
-        <div class="content">
-            <div class="brand">
-                <div class="icon">⚡</div>
-                <div class="name">SOLVE<span class="accent">THIS</span></div>
+    <div id="gameLayer" class="hidden">
+        <canvas id="gameCanvas" width="250" height="250" tabindex="0"></canvas>
+        
+        
+        <div id="gameUI">SCORE: <span id="scoreVal">0</span></div>
+
+        
+        <div id="touchControls">
+            <div class="d-pad">
+                <button id="btnLeft" class="touch-btn">←</button>
+                <button id="btnThrust" class="touch-btn">↑</button>
+                <button id="btnRight" class="touch-btn">→</button>
             </div>
-           
-            <div class="promise" id="promise"></div>
-           
-            <div class="services-grid">
-                <div class="service-tag">Custom Scripts</div>
-                <div class="service-tag">Data Pipelines</div>
-                <div class="service-tag">Workflow Automation</div>
-                <div class="service-tag">Quick Solutions</div>
-            </div>
-           
-            <a href="https://solvethis.qzz.io/?lang=pt" class="cta-btn" id="ctaBtn" target="_blank">
-                HIRE ME →
-            </a>
-           
-            <div class="status">
-                <span class="status-dot"></span>
-                Available for projects
+            <button id="btnFire" class="touch-btn fire-btn">●</button>
+        </div>
+
+        
+        <div id="gameOverScreen" class="hidden">
+            <div class="go-title">GAME OVER</div>
+            <div class="go-score">SCORE: <span id="finalScore">0</span></div>
+            <div class="nav-row">
+                
+                <button id="btnRestart" class="nav-btn" title="Back to Menu">&#x21bb;</button>
+                <a href="https://giles.vercel.app/" target="_blank" class="nav-btn accent-btn" title="Portfolio">&#x279c;</a>
             </div>
         </div>
     </div>
     
     <script type="text/tilescript">(function () {
-    // --- STATE MANAGEMENT ---
-    // false = Hero Animation running
-    // true = Content/Typewriter running
-    var isActive = false; 
-    var heroTimer = null; 
-
-    /* -----------------------------------------------
-       1. HERO ANIMATION LOGIC (BASIC Style)
-       ----------------------------------------------- */
-    function initHeroAnimation() {
-        var canvas = document.getElementById('heroAnimationCanvas');
-        if (!canvas || !canvas.getContext) return;
-
-        var ctx = canvas.getContext('2d');
-        
-        // Canvas dimensions
-        var w = 0;
-        var h = 0;
-        var scale = 0;
-
-        // Pattern Variables
-        var pi = 4 * Math.atan(1);
-        var r = 2 * pi / 235;
-        var t = 4 * Math.random();
-        var x = 0, u = 0, v = 0;
-        
-        // Loop State
-        var i = 0;
-        var j = 0;
-        var stepsPerFrame = 400; // How many dots to draw per tick
-
-        function resetPattern() {
-            // Clear screen
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, w, h);
-            
-            // Randomize t for new shape
-            t = 4 * Math.random();
-            
-            // Reset counters
-            i = 0; 
-            j = 0;
-            
-            // Reset math vars
-            x = 0; u = 0; v = 0;
-        }
-
-        function animateStep() {
-            if (isActive) return;
-
-            // --- Dynamic Sizing ---
-            // Check size of container (parent of canvas)
-            var parent = canvas.parentElement;
-            if (parent) {
-                var rect = parent.getBoundingClientRect();
-                var newW = Math.floor(rect.width);
-                var newH = Math.floor(rect.height);
-
-                if (newW > 0 && newH > 0 && (newW !== w || newH !== h)) {
-                    w = newW;
-                    h = newH;
-                    canvas.width = w;
-                    canvas.height = h;
-                    // Calculate scale to fit pattern on screen
-                    // Original was ~108 multiplier for 640x480. 
-                    // 108 is roughly 1/6th of width or 1/4th of height.
-                    scale = Math.min(w, h) / 5; 
-                    resetPattern();
-                }
-            }
-            // ---------------------
-
-            if (w === 0 || h === 0) {
-                heroTimer = setTimeout(animateStep, 100);
-                return;
-            }
-
-            // Draw a chunk of pixels
-            for (var k = 0; k < stepsPerFrame; k++) {
-                // Break if finished
-                if (i >= 250) break;
-
-                // BASIC Math
-                u = Math.sin(i + v) + Math.sin(r * i + x);
-                v = Math.cos(i + v) + Math.cos(r * i + x);
-                x = u + t;
-
-                // Center coordinates
-                var px = Math.floor((w / 2) + scale * u);
-                var py = Math.floor((h / 2) + scale * v);
-
-                // Draw if inside bounds
-                if (px >= 0 && px < w && py >= 0 && py < h) {
-                    var rr = Math.floor((i * 3) % 256);
-                    var gg = Math.floor((j * 3) % 256);
-                    var bb = Math.floor((255 - (i + j) / 2) % 256);
-
-                    // Enhance colors
-                    rr = Math.max(0, Math.min(255, rr + Math.sin(i * 0.1) * 50));
-                    gg = Math.max(0, Math.min(255, gg + Math.cos(j * 0.1) * 50));
-                    bb = Math.max(0, Math.min(255, bb + Math.sin((i + j) * 0.05) * 50));
-
-                    ctx.fillStyle = 'rgb(' + Math.floor(rr) + ',' + Math.floor(gg) + ',' + Math.floor(bb) + ')';
-                    ctx.fillRect(px, py, 1, 1);
-
-                    // Random glow/sparkle (preserved from reference)
-                    if (Math.random() > 0.995) {
-                        ctx.globalAlpha = 0.5;
-                        ctx.fillStyle = '#fff';
-                        ctx.fillRect(px - 1, py - 1, 3, 3);
-                        ctx.globalAlpha = 1.0;
-                    }
-                }
-
-                // Increment J, then I
-                j++;
-                if (j >= 250) {
-                    j = 0;
-                    i++;
-                }
-            }
-
-            if (i >= 250) {
-                // Pattern Finished. Wait, then restart.
-                heroTimer = setTimeout(resetPattern, 2000); 
-                // We need to call animateStep again after the delay, 
-                // but resetPattern doesn't call animateStep.
-                // So we wrap it:
-                setTimeout(function(){
-                   if(!isActive) animateStep(); 
-                }, 2000);
-            } else {
-                // Continue drawing next frame
-                heroTimer = setTimeout(animateStep, 16);
-            }
-        }
-
-        // Start
-        animateStep();
-    }
-
-    /* -----------------------------------------------
-       2. TYPEWRITER / CONTENT LOGIC
-       ----------------------------------------------- */
-    function initContentLogic() {
-        var promiseElem = document.getElementById('promise');
-        var promiseText = "I automate the boring stuff";
-        var typeIndex = 0;
-        var restartDelay = 4000;
-
-        function resetAnimation() {
-            if (!isActive) return; 
-            
-            promiseElem.textContent = "";
-            typeIndex = 0;
-            promiseElem.className = promiseElem.className.replace(" typing-done", "");
-
-            var serviceTags = document.querySelectorAll('.service-tag');
-            for (var i = 0; i < serviceTags.length; i++) {
-                serviceTags[i].className = serviceTags[i].className.replace(" visible", "");
-            }
-
-            typeWriter();
-        }
-
-        function typeWriter() {
-            if (typeIndex < promiseText.length) {
-                promiseElem.textContent += promiseText.charAt(typeIndex);
-                typeIndex++;
-                setTimeout(typeWriter, 50);
-            } else {
-                if (promiseElem.className.indexOf("typing-done") === -1) {
-                    promiseElem.className += " typing-done";
-                }
-                fadeServicesIn();
-                setTimeout(resetAnimation, restartDelay);
-            }
-        }
-
-        function fadeServicesIn() {
-            var serviceTags = document.querySelectorAll('.service-tag');
-            for (var j = 0; j < serviceTags.length; j++) {
-                (function(k) {
-                    setTimeout(function() {
-                        var tag = serviceTags[k];
-                        if (tag.className.indexOf("visible") === -1) {
-                            tag.className += " visible";
-                        }
-                    }, 200 + k * 200);
-                })(j);
-            }
-        }
-
-        resetAnimation();
-    }
-
-    /* -----------------------------------------------
-       3. EVENTS & INIT
-       ----------------------------------------------- */
+    // --- VARIABLES ---
+    var currentState = 0; // 0=Attract, 1=Game, 2=Over
+    var loopTimer = null;
     
-    // Start Hero Loop
-    initHeroAnimation();
-
-    var clickOverlay = document.getElementById('clickOverlay');
+    // Elements
+    var startZone = document.getElementById('startZone');
     var heroLayer = document.getElementById('heroLayer');
-    var contentLayer = document.getElementById('contentLayer');
+    var gameLayer = document.getElementById('gameLayer');
+    var gameOverScreen = document.getElementById('gameOverScreen');
+    var btnRestart = document.getElementById('btnRestart');
+    var scoreEl = document.getElementById('scoreVal');
+    var gameCanvas = document.getElementById('gameCanvas');
+    var attractCanvas = document.getElementById('attractCanvas');
+
+    // Canvas Contexts
+    var actx = (attractCanvas && attractCanvas.getContext) ? attractCanvas.getContext('2d') : null;
+    var ctx = (gameCanvas && gameCanvas.getContext) ? gameCanvas.getContext('2d') : null;
+
+    // Constants
+    var W = 250;
+    var H = 250;
+
+    // Game Inputs
+    var keys = { left:false, right:false, up:false, fire:false };
+
+    // --- 1. SETUP EVENT LISTENERS (LOCAL ONLY) ---
     
-    if (clickOverlay) {
-        clickOverlay.addEventListener('click', function() {
-            if (!isActive) {
-                // SWITCH STATE
-                isActive = true;
-                
-                // Kill Hero Timer
-                if (heroTimer) clearTimeout(heroTimer);
-                
-                // Fade out hero
-                heroLayer.className += " fade-out";
-                
-                // Show content
-                contentLayer.className = contentLayer.className.replace("hidden", "");
-                
-                // Start Content Logic
-                setTimeout(initContentLogic, 200);
-            }
+    // Helper to safely add listener to specific element
+    function safeAdd(el, evt, fn) {
+        if (el && el.addEventListener) {
+            el.addEventListener(evt, fn);
+        }
+    }
+
+    // A. Start Game Click
+    safeAdd(startZone, 'click', function() {
+        if (currentState !== 0) return;
+        currentState = 1;
+        
+        // Switch UI
+        startZone.className = "hidden";
+        heroLayer.className = "hidden";
+        gameLayer.className = "";
+        
+        // Stop Attract Loop
+        if (loopTimer) clearTimeout(loopTimer);
+        
+        // Start Game
+        setTimeout(startGame, 50);
+    });
+
+    // B. Restart Click
+    safeAdd(btnRestart, 'click', function() {
+        if (gameOverScreen) gameOverScreen.className = "hidden";
+        currentState = 1;
+        startGame();
+    });
+
+    // C. Keyboard Controls (Attached to CANVAS, NOT document)
+    // The canvas must be focused for this to work
+    if (gameCanvas) {
+        gameCanvas.addEventListener('keydown', function(e) {
+            if (currentState !== 1) return;
+            var c = e.keyCode;
+            if(c===37||c===65) keys.left=true;
+            if(c===39||c===68) keys.right=true;
+            if(c===38||c===87) keys.up=true;
+            if(c===32) keys.fire=true;
+        });
+
+        gameCanvas.addEventListener('keyup', function(e) {
+            if (currentState !== 1) return;
+            var c = e.keyCode;
+            if(c===37||c===65) keys.left=false;
+            if(c===39||c===68) keys.right=false;
+            if(c===38||c===87) keys.up=false;
+            if(c===32) keys.fire=false;
         });
     }
+
+    // D. Touch Controls
+    function bindTouch(id, k) {
+        var el = document.getElementById(id);
+        if(el) {
+            safeAdd(el, 'mousedown', function(e){ e.preventDefault(); keys[k]=true; });
+            safeAdd(el, 'mouseup', function(e){ e.preventDefault(); keys[k]=false; });
+            safeAdd(el, 'touchstart', function(e){ e.preventDefault(); keys[k]=true; });
+            safeAdd(el, 'touchend', function(e){ e.preventDefault(); keys[k]=false; });
+        }
+    }
+    bindTouch('btnLeft','left');
+    bindTouch('btnRight','right');
+    bindTouch('btnThrust','up');
+    bindTouch('btnFire','fire');
+
+    // --- 2. ATTRACT MODE (Simple Pattern) ---
+    
+    var t_math = Math.random() * 4;
+    var pat_i = 0, pat_j = 0;
+    
+    function loopAttract() {
+        if (currentState !== 0) return;
+        if (!actx) return;
+
+        // Draw Batch
+        var scale = 40; 
+        var r = (2 * Math.PI) / 235;
+        
+        for (var k = 0; k < 400; k++) {
+            if (pat_i >= 250) break;
+            
+            var u = Math.sin(pat_i + Math.cos(pat_j * 0.1)) + Math.sin(r * pat_i + t_math);
+            var v = Math.cos(pat_i + Math.sin(pat_j * 0.1)) + Math.cos(r * pat_i + t_math);
+            
+            var px = Math.floor((W/2) + scale * u);
+            var py = Math.floor((H/2) + scale * v);
+
+            if (px >= 0 && px < W && py >= 0 && py < H) {
+                var rr = Math.floor((pat_i * 3) % 255);
+                var gg = Math.floor((pat_j * 2) % 255);
+                actx.fillStyle = 'rgb(' + (rr+50) + ',' + (gg+50) + ',255)';
+                actx.fillRect(px, py, 1, 1);
+            }
+            
+            pat_j++;
+            if (pat_j >= 250) { pat_j = 0; pat_i++; }
+        }
+        
+        if (pat_i >= 250) {
+            loopTimer = setTimeout(function() {
+                if(actx) { actx.fillStyle = '#000'; actx.fillRect(0,0,W,H); }
+                t_math = Math.random() * 4;
+                pat_i = 0; pat_j = 0;
+                if(currentState===0) loopAttract();
+            }, 2000);
+        } else {
+            loopTimer = setTimeout(loopAttract, 20);
+        }
+    }
+
+    // --- 3. GAME MODE (Asteroids) ---
+    
+    var ship = {}, bullets = [], asteroids = [], particles = [];
+    var score = 0;
+    var lastShot = 0;
+
+    function startGame() {
+        if (!ctx) return;
+        
+        // CRITICAL: Focus the canvas so it receives keydown events
+        if (gameCanvas.focus) {
+            gameCanvas.focus();
+        }
+        
+        score = 0;
+        if(scoreEl) scoreEl.textContent = "0";
+        
+        ship = { x: W/2, y: H/2, a: -1.57, vx: 0, vy: 0, dead: false, invuln: 100 };
+        bullets = []; asteroids = []; particles = [];
+        keys.left=false; keys.right=false; keys.up=false; keys.fire=false;
+        
+        // Initial spawn
+        spawnAsteroid(true); spawnAsteroid(true); spawnAsteroid(true);
+        
+        gameLoop();
+    }
+
+    function spawnAsteroid(isBig, x, y) {
+        var a = {
+            x: (x!==undefined) ? x : Math.random()*W,
+            y: (y!==undefined) ? y : Math.random()*H,
+            vx: (Math.random()-0.5) * (isBig?1.0:1.5),
+            vy: (Math.random()-0.5) * (isBig?1.0:1.5),
+            size: isBig ? 18 : 10,
+            pts: [],
+            big: isBig
+        };
+        // Safe spawn logic
+        if(x===undefined) {
+            var d = Math.sqrt((a.x-W/2)*(a.x-W/2) + (a.y-H/2)*(a.y-H/2));
+            if(d < 60) a.x += 80;
+        }
+        // Vertices
+        var vCount = 6 + Math.floor(Math.random()*4);
+        for(var j=0; j<vCount; j++) {
+            var ang = (j/vCount)*Math.PI*2;
+            var rad = a.size * (0.8 + Math.random()*0.4);
+            a.pts.push({ x: Math.cos(ang)*rad, y: Math.sin(ang)*rad });
+        }
+        asteroids.push(a);
+    }
+
+    function gameLoop() {
+        if (currentState !== 1) return;
+
+        // Clear
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, W, H);
+
+        // SHIP
+        if (!ship.dead) {
+            if (keys.left) ship.a -= 0.12;
+            if (keys.right) ship.a += 0.12;
+            if (keys.up) {
+                ship.vx += Math.cos(ship.a)*0.15;
+                ship.vy += Math.sin(ship.a)*0.15;
+                particles.push({x:ship.x-Math.cos(ship.a)*8, y:ship.y-Math.sin(ship.a)*8, vx:0, vy:0, life:5, c:'#f90'});
+            }
+            ship.vx *= 0.95; ship.vy *= 0.95;
+            ship.x += ship.vx; ship.y += ship.vy;
+            
+            if(ship.x<0) ship.x=W; if(ship.x>W) ship.x=0;
+            if(ship.y<0) ship.y=H; if(ship.y>H) ship.y=0;
+            if(ship.invuln > 0) ship.invuln--;
+
+            if (keys.fire && (new Date().getTime() - lastShot > 300)) {
+                bullets.push({
+                   x: ship.x+Math.cos(ship.a)*12, y: ship.y+Math.sin(ship.a)*12,
+                   vx: ship.vx+Math.cos(ship.a)*4, vy: ship.vy+Math.sin(ship.a)*4, life: 40
+                });
+                lastShot = new Date().getTime();
+            }
+        }
+
+        // BULLETS
+        ctx.fillStyle = '#ff0';
+        for(var b=bullets.length-1; b>=0; b--) {
+            var bu = bullets[b];
+            bu.x += bu.vx; bu.y += bu.vy; bu.life--;
+            if(bu.x<0) bu.x=W; if(bu.x>W) bu.x=0;
+            if(bu.y<0) bu.y=H; if(bu.y>H) bu.y=0;
+            if(bu.life<=0) { bullets.splice(b,1); continue; }
+            ctx.fillRect(bu.x-1, bu.y-1, 2, 2);
+        }
+
+        // ASTEROIDS
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        for(var i=asteroids.length-1; i>=0; i--) {
+            var ast = asteroids[i];
+            ast.x += ast.vx; ast.y += ast.vy;
+            if(ast.x<0) ast.x=W; if(ast.x>W) ast.x=0;
+            if(ast.y<0) ast.y=H; if(ast.y>H) ast.y=0;
+
+            ctx.beginPath();
+            ctx.moveTo(ast.x+ast.pts[0].x, ast.y+ast.pts[0].y);
+            for(var p=1; p<ast.pts.length; p++) ctx.lineTo(ast.x+ast.pts[p].x, ast.y+ast.pts[p].y);
+            ctx.closePath();
+            ctx.stroke();
+
+            // Collision Bullet
+            var hit = false;
+            for(var b=bullets.length-1; b>=0; b--) {
+                var dx = ast.x - bullets[b].x;
+                var dy = ast.y - bullets[b].y;
+                if (Math.sqrt(dx*dx+dy*dy) < ast.size) {
+                    bullets.splice(b,1);
+                    asteroids.splice(i,1);
+                    hit = true;
+                    score += ast.big ? 100 : 200;
+                    if(scoreEl) scoreEl.textContent = score;
+                    
+                    for(var k=0; k<6; k++) particles.push({x:ast.x, y:ast.y, vx:(Math.random()-0.5)*3, vy:(Math.random()-0.5)*3, life:15, c:'#aaa'});
+                    
+                    if(ast.big) {
+                        spawnAsteroid(false, ast.x, ast.y);
+                        spawnAsteroid(false, ast.x, ast.y);
+                    }
+                    if(asteroids.length===0) setTimeout(function(){ for(var n=0;n<3;n++) spawnAsteroid(true); }, 1000);
+                    break;
+                }
+            }
+            if(hit) continue;
+
+            // Collision Ship
+            if(!ship.dead && ship.invuln <= 0) {
+                 var sdx = ast.x - ship.x;
+                 var sdy = ast.y - ship.y;
+                 if (Math.sqrt(sdx*sdx+sdy*sdy) < ast.size + 6) {
+                     ship.dead = true;
+                     currentState = 2; // Game Over
+                     if(gameOverScreen) {
+                         var fs = document.getElementById('finalScore');
+                         if(fs) fs.textContent = score;
+                         gameOverScreen.className = "";
+                     }
+                 }
+            }
+        }
+
+        // PARTICLES
+        for(var p=particles.length-1; p>=0; p--) {
+            var pt = particles[p];
+            pt.x += pt.vx; pt.y += pt.vy; pt.life--;
+            if(pt.life<=0) { particles.splice(p,1); continue; }
+            ctx.fillStyle = pt.c;
+            ctx.fillRect(pt.x, pt.y, 2, 2);
+        }
+
+        // DRAW SHIP
+        if(!ship.dead) {
+            if(Math.floor(ship.invuln/5)%2===0) {
+                ctx.strokeStyle = '#0f0';
+                ctx.save();
+                ctx.translate(ship.x, ship.y);
+                ctx.rotate(ship.a);
+                ctx.beginPath();
+                ctx.moveTo(10,0); ctx.lineTo(-7,6); ctx.lineTo(-7,-6); ctx.closePath();
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        loopTimer = setTimeout(gameLoop, 20);
+    }
+
+    // --- INIT ---
+    // Start Attract Loop
+    t_math = Math.random() * 4;
+    loopAttract();
 
 })();</script>
 </body>

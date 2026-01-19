@@ -3,7 +3,7 @@
 <head>
     <style>@font-face {
   font-family: EarlyGameBoy;
-  src: url("EarlyGameBoy.ttf") format("truetype");
+  src: url("/t/gooseonoob.nekoweb.org/EarlyGameBoy.ttf") format("truetype");
 }
 
 * {
@@ -41,7 +41,7 @@ ul li {
 
 ul li.check:before {
   content: "";
-  background-image: url("bullet_tick.png");
+  background-image: url("/t/gooseonoob.nekoweb.org/bullet_tick.png");
   background-repeat: no-repeat;
   background-size: contain;
   width: 16px;
@@ -50,6 +50,19 @@ ul li.check:before {
   position: absolute;
   top: -4px;
   left: -16px;
+}
+
+.tray {
+  background: linear-gradient(#0c59b9 1%, #139ee9 6%, #18b5f2 10%, #139beb 14%, #1290e8 19%, #0d8dea 63%, #0d9ff1 81%, #0f9eed 88%, #119be9 91%, #1392e2 94%, #137ed7 97%, #095bc9 100%);
+  border-radius: 0 8px 8px 0;
+  width: 16px;
+  height: 30px;
+  max-height: 30px;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateY(-100%);
 }
 
 .custom-container {
@@ -62,7 +75,7 @@ ul li.check:before {
 
 .counter-border {
   border: 1px solid #0000;
-  border-image-source: url("border-counter.png");
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-counter.png");
   border-image-slice: 1;
   border-image-repeat: stretch;
   width: fit-content;
@@ -70,7 +83,7 @@ ul li.check:before {
 }
 
 .digit {
-  background-image: url("digits.png");
+  background-image: url("/t/gooseonoob.nekoweb.org/digits.png");
   background-position: 0 0;
   background-repeat: no-repeat;
   width: 13px;
@@ -133,11 +146,11 @@ ul li.check:before {
 }
 
 .btn-face:hover:active {
-  background: url("btn-face-pressed.png");
+  background: url("/t/gooseonoob.nekoweb.org/btn-face-pressed.png");
 }
 
 .btn-face {
-  background: url("btn-face.png");
+  background: url("/t/gooseonoob.nekoweb.org/btn-face.png");
   border: none;
   width: 24px;
   height: 24px;
@@ -146,7 +159,7 @@ ul li.check:before {
 
 .btn-border {
   border: 1px solid #0000;
-  border-image-source: url("btn-border.png");
+  border-image-source: url("/t/gooseonoob.nekoweb.org/btn-border.png");
   border-image-slice: 1;
   border-image-repeat: stretch;
   width: fit-content;
@@ -155,7 +168,7 @@ ul li.check:before {
 
 .outer-border {
   border: 8px solid #0000;
-  border-image-source: url("border-outer.png");
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-outer.png");
   border-image-slice: 4 fill;
   border-image-repeat: stretch;
   height: 100%;
@@ -168,7 +181,7 @@ p {
 
 .inner-border {
   border: 2px solid #0000;
-  border-image-source: url("border-inner.png");
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-inner.png");
   border-image-slice: 2 fill;
   border-image-repeat: stretch;
   padding: 3px 5px;
@@ -177,7 +190,7 @@ p {
 .game-border {
   box-sizing: border-box;
   border: 3px solid #0000;
-  border-image-source: url("border-game.png");
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-game.png");
   border-image-slice: 3 fill;
   border-image-repeat: stretch;
   margin-top: 6px;
@@ -205,42 +218,43 @@ input[type="number"] {
 </style>
     
 </head>
-<body>
-    <div class="outer-border" style="display: flex; flex-direction: column;">
-        <div class="inner-border" style="overflow-y: scroll;">
-            <a href="index.html">Go back</a>
-            <h4>Minesweeper info</h4>
-            <p>
-                You need to be focused on the webtile for script to work !
-            </p>
-            <h4>
-                Controls
-            </h4>
-            <p>
-                <ul>
-                    <li>Left click to open tile</li>
-                    <li>Shift + Left click to open tile</li>
-                </ul>
-            </p>
-            <h4>
-                In the future maybe
-            </h4>
-            <p>
-                Will be adding more features later when I have time!
-                <br>
-                Including:
-                <ul>
-                    <li class="check"><s>Difficulty presets</s></li>
-                    <li class="check"><s>Custom board sizes</s></li>
-                    <li>Highscores</li>
-                    <li class="check"><s>More polish</s></li>
-                    <li>Who knows</li>
-                </ul>
-            </p>
-            <p>
-                You can contact me through <a href="https://gooseonoob.atabook.org/" target="_blank">my guestbook</a>!
-            </p>
-    	</div>
-	</div>
-</body>
+    <body>
+        <div class="outer-border" style="display: flex; flex-direction: column;">
+            <div class="inner-border" style="overflow-y: scroll;">
+                <a href="/t/gooseonoob.nekoweb.org/index.html">Go back</a>
+                <h4>Minesweeper info</h4>
+                <p>
+                    You need to be focused on the webtile for script to work !
+                </p>
+                <h4>
+                    Controls
+                </h4>
+                <p>
+                    <ul>
+                        <li>Left click to open tile</li>
+                        <li>Shift + Left click to open tile</li>
+                    </ul>
+                </p>
+                <h4>
+                    In the future maybe
+                </h4>
+                <p>
+                    Will be adding more features later when I have time!
+                    <br>
+                    Including:
+                    <ul>
+                        <li class="check"><s>Difficulty presets</s></li>
+                        <li class="check"><s>Custom board sizes</s></li>
+                        <li>Highscores</li>
+                        <li class="check"><s>More polish</s></li>
+                        <li>Who knows</li>
+                    </ul>
+                </p>
+                <p>
+                    You can contact me through <a href="https://gooseonoob.atabook.org/" target="_blank">my guestbook</a>!
+                </p>
+            </div>
+        </div>
+		<div class="tray"></div>
+    </body>
 </html>
