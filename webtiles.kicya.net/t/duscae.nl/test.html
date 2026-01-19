@@ -6,8 +6,18 @@
   margin: 0;
   font-family: MS UI Gothic, NEC;
 
-  & a, & a:active, & a:hover {
+  & a {
     color: #111;
+    text-decoration: none;
+  }
+
+  & a:active {
+    color: #121;
+    text-decoration: none;
+  }
+
+  & a:hover {
+    color: #222;
     text-decoration: none;
   }
 
@@ -28,7 +38,7 @@
 
   background: linear-gradient(-45deg, #f75928, #e73c3c, #0dbfff, #05f5e5) 0 0 / 400% 400%;
   height: 100vh;
-  animation: 35s infinite gradient;
+  animation: 30s infinite gradient;
 }
 
 @keyframes gradient {
@@ -52,7 +62,7 @@
     </div>
     
     <div id="test2">
-        <button><a href="index.html"><b> ◄ </b></a></button><button><a href="test.html"><b>►</b></a></button>
+        <button><a href="index.html"><b> ◄ </b></a></button><button><a href="test2.html"><b>►</b></a></button>
     </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.

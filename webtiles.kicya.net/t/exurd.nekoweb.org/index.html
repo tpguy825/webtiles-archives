@@ -6,8 +6,51 @@
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000;
+  user-select: none;
+  background-color: gray;
   margin: 0;
+}
+
+div.background {
+  filter: blur(2px);
+  background-image: url("background_a.png");
+  background-repeat: repeat;
+  background-size: 1.5em;
+}
+
+div.stick {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+a {
+  z-index: 460;
+  color: #fff;
+  text-align: center;
+  -webkit-text-stroke: .05em black;
+  text-shadow: 0 0 .05em gold;
+  width: 100%;
+  font-size: 1.5em;
+  text-decoration: none;
+  position: fixed;
+  top: 35%;
+}
+
+a:hover {
+  color: #000;
+  -webkit-text-stroke: .05em gold;
+  text-shadow: 0 0 1em gold;
+  transition: color 50ms, -webkit-text-stroke .1s, text-shadow 10s;
+}
+
+img {
+  float: right;
+  opacity: .2;
+  height: 200%;
+  position: relative;
+  bottom: 10%;
+  left: 60%;
 }
 
 div.m_rainbow {
@@ -22,12 +65,18 @@ div.audio audio {
   top: 50%;
 }
 
-marquee {
-  user-select: none;
+marquee.lyrics {
+  color: #fff;
+  -webkit-text-stroke: .05em black;
+  text-shadow: 0 0 .1em #000;
+  margin-top: 195px;
+  font-family: Courier New, monospace;
+  font-size: 32px;
 }
 
 marquee span {
   background-color: #d3d3d3;
+  box-shadow: 0 1px 2px #3c40434d, 0 1px 3px 1px #3c404326;
 }
 
 marquee.r {
@@ -88,27 +137,31 @@ marquee.v span {
 </style>
 </head>
 <body>
+    <div class="stick background"></div>
+    <div class="stick"><img src="yukinooh.svg"></div>
     <div class="m_rainbow">
-        <marquee class="r"><span>exurd&nbsp;:)</span></marquee>
-        <marquee class="o"><span>exurd&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="y"><span>exurd&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="g"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="b"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="i"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="v"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="r"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="o"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="y"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="g"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="b"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
-        <marquee class="i"><span>exurd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="r"><span>&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="o"><span>&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="y"><span>&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="g"><span>&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="b"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="i"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="v"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="r"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="o"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="y"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="g"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="b"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
+        <marquee scrollamount="4" class="i"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></marquee>
     </div>
+    <a href="https://exurd.neocities.org/" target="_blank"><b><i>exurd.neocities.org</i></b></a>
     <div class="audio">
         
         
         
         <audio controls src="soundcloud_com_exurd_torture.mp3" preload="metadata"></audio>
     </div>
+    <marquee class="lyrics"><b>///\\\ i’m trying to send a message here / but i don’t know what to say / (all my thoughts just decay) ///\\\ i bring you all my hate / you take that all away / give me love and that’s okay, but- ///\\\ why do i like your torture / if you can know it’s torture / why do i need your torture / when you know that it’s tortu- / (uh oh!) ///\\\ you like me all around / while my bitter peel sounds / pitter patter on the ground / no more silence, just a crowd ///\\\ don’t wanna see your face / i just wanna live away / though i might just decay / without your guidance in my way, i- ///\\\ why do i like your torture / if you can know it’s torture / why do i need your torture / when you know that it’s torture ///\\\</b></marquee>
     
     
     <script type="text/tilescript">// Only executes while your tile is active

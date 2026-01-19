@@ -27,10 +27,15 @@
 .Logo {
   object-fit: cover;
   z-index: 4;
-  pointer-events: none;
+  width: 150px;
   position: fixed;
-  top: -7px;
+  top: -1px;
   left: 53px;
+}
+
+.Logo:hover {
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  transform: scale(1.1)rotate(10deg);
 }
 
 #ATile .Idle {
@@ -54,7 +59,9 @@
      <img class="GooeyBorder" src="Border.png">
     </div>
     <div class="Active">
-     <img class="Logo" src="Logo_2.gif">
+     <a href="https://puddingpudd.com" target="_blank">
+      <img class="Logo" src="Logo_3.gif">
+     </a>
      <img class="Pudd" src="Pudd_Wave_Final.gif">
      <img class="GooeyBorder" src="Border_2.png">
     </div>

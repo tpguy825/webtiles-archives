@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<style>.tile-body {
+  <head>
+    <style>.tile-body {
+  user-select: none;
   background: url("https://webtiles.kicya.net/t/reigen.moe/https:/webtiles.kicya.net/t/reigen.moe/webtiles.gif");
   width: 100%;
   height: 100%;
 }
+
+a {
+  width: 100%;
+  display: block;
+}
+
+img {
+  pointer-events: none;
+  width: 100%;
+}
 </style>
-</head>
-<body>
-    <a href="https://reigen.moe" target="_blank"><img style="width:100%;" src="webtiles.gif"></a>
-</body>
+  </head>
+  <body>
+    <a href="https://reigen.moe" target="_blank">
+      <img alt="reigen.moe" src="webtiles.gif">
+    </a>
+  </body>
 </html>

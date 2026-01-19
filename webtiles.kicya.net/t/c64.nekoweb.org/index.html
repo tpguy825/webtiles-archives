@@ -19,6 +19,30 @@ a {
   display: block;
 }
 
+span {
+  color: #0000;
+}
+
+@font-face {
+  font-family: C64 Pro;
+  src: url("c64.woff2");
+}
+
+marquee {
+  font-variant: small-caps;
+  color: #fff9;
+  font-family: C64 Pro;
+  font-size: 120px;
+  text-decoration: none;
+  animation: 2s forwards fadeout;
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes cycleBackground {
   0% {
     background-image: url("tn.svg");
@@ -90,5 +114,9 @@ a {
 }
 </style>
 </head>
-    <body><a href="https://c64.nekoweb.org" target="_blank"></a></body>
+  <body>
+    <a href="https://c64.nekoweb.org" target="_blank">
+      <marquee behavior="alternate" scrolldelay="60" scrollamount="12"><span>a</span>Arcade<br>Classics</marquee>
+    </a>
+  </body>
 </html>

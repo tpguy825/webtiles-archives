@@ -14,6 +14,7 @@
 
 .bg, section, section * {
   opacity: 0;
+  visibility: collapse;
 }
 
 .bg {
@@ -42,10 +43,12 @@
 
 .tile-body:hover section, .tile-body:hover section * {
   opacity: 1;
+  visibility: visible;
 }
 
 .tile-body:hover .bg {
   opacity: .7;
+  visibility: visible;
 }
 
 .tile-body:hover img.logo {

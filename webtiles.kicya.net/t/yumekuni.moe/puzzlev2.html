@@ -2,14 +2,82 @@
 <html lang="en">
 <head>
     <style>@font-face {
-  font-family: PixelifySans;
-  src: url("fonts/PixelifySans.ttf") format("truetype");
+  font-family: Lexis;
+  src: url("fonts/lexis.woff2") format("woff2");
+}
+
+.crt:before {
+  content: " ";
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(#12101000 20%, #00000040 20%) 0 0 / 100% 2px, linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f) 0 0 / 3px 100%;
+  display: block;
+  position: fixed;
+  inset: 0;
+}
+
+.crt:after {
+  content: " ";
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: #1210101a;
+  animation: .15s infinite flicker;
+  display: block;
+  position: fixed;
+  inset: 0;
+}
+
+.crt-image {
+  filter: contrast(1.1) brightness(.95) saturate(1.2);
+  z-index: 1;
+  border-radius: 12px;
+  height: auto;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transform: scale(1.02);
+  -webkit-mask-image: radial-gradient(circle, #000 50%, #0000 100%);
+  mask-image: radial-gradient(circle, #000 50%, #0000 100%);
+}
+
+.screen-overlay {
+  z-index: 2;
+  background: linear-gradient(#e1ffff80, #e1ffff00);
+}
+
+.loading-box {
+  background-image: url("loading_bar.png");
+  width: 162px;
+  height: 8px;
+  position: absolute;
+  top: 96px;
+  overflow: hidden;
+}
+
+.loader {
+  background-image: url("loading_bar_fill.png");
+  width: 100%;
+  height: 100%;
+  animation: 3s linear infinite load;
+  position: absolute;
+  left: -100%;
+}
+
+@keyframes load {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 .tile-body {
   color: #fff;
   background-color: #fff;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 #puzzle {
@@ -30,7 +98,7 @@
 }
 
 .puzzle-block {
-  background-image: url("puzzle260118.png");
+  background-image: url("tako.png");
   width: 53px;
   height: 50px;
 }
@@ -100,11 +168,18 @@
 }
 
 .pixel {
-  font-family: PixelifySans, MS Ghotic, Arial;
+  font-family: Lexis, MS Ghotic, Arial;
 }
 
 .main-window {
   background-image: url("bg_collab.gif");
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.main-window2 {
+  background-image: url("lcd.png");
   width: 250px;
   height: 250px;
   display: flex;
@@ -151,7 +226,7 @@
   min-width: 96px;
   min-height: 16px;
   padding: 7px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .nineslice:hover {
@@ -189,12 +264,12 @@
                     <a href="index.html" style="min-width: 23px; max-height: 12px; background-color: transparent; position: absolute; top: 227px; right: 138px; border: 0px; font-size: 10px; text-align: center; cursor: pointer;">
      	&nbsp;
                     </a>
-            <p id="countdown" style=" position: absolute; top: 10%; left: 45%; transform: translate(-50% -50%); color:yellow; font-size:64px; width:100%; height: 100%;">
+            <p id="countdown" style=" position: absolute; top: 10%; left: 40%; transform: translate(-50% -50%); color:white; font-size:64px; width:64px; height: 64px; text-align:center; background-color: black; background-blend-mode: difference; padding: 4px; mix-blend-mode: difference;">
                 
                 
             </p>
             
-			<div class="container" style="align-items: center; justify-items: center; background-color: black; font-size: 12px;">
+			<div class="container" style="align-items: center; justify-items: center; background-color: black; font-size: 10px;">
 				
                 <div id="instructions" style="display:flex; align-items: center; justify-items: center; flex-direction:column;">
                     
@@ -205,7 +280,7 @@
                     Play
                 </button>
                 <p> Instructions </p>
-                1. Try to memorize the images, you have 3 seconds for it!<br>
+                1. Try to memorize the images, you have 3 seconds for it!<br><br>
                 2. Click on one block then click on another to swap places<br><br>
                 Future plans for this game:<br> * Add global highscore <br> *Add timeattack
 
@@ -256,7 +331,8 @@ var win = false;
 
 var puzzleContainer = document.getElementById("puzzle");
 puzzleContainer.style.display = "none";
-
+var countdown = document.getElementById("countdown");
+countdown.style.display = "none";
 
 var gameButton = document.getElementById("gameButton");
 gameButton.addEventListener("click", function (e) {
@@ -363,6 +439,7 @@ function startGame() {
     
     var downloadTimer = setInterval(function(){
     var p = document.getElementById("countdown");
+    p.style.display = "block";
     if(timeleft <= 0){
         clearInterval(downloadTimer);
         initialRandomizer();

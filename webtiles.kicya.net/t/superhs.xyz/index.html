@@ -19,47 +19,58 @@
 .tile-body {
   color: #111;
   background-color: #f0f0f0;
-  margin: 10px;
+  background-image: url("bg.png");
   font-family: chicagoFont, Chicago, Impact, sans-serif;
 }
 
-p {
-  font-size: 8px;
+@keyframes logohover {
+  from {
+    top: 3px;
+  }
+
+  to {
+    top: 7px;
+  }
+}
+
+.logo {
+  animation-name: logohover;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 button {
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
-  background-color: #000;
+  background: url("ast/images/button.png") center / 100% 100% no-repeat;
   border: none;
-  border-radius: 20px;
-  padding: 5px 35px;
+  width: 150px;
+  margin-bottom: 5px;
+  padding: 7px 4px;
   font-family: chicagoFont, Chicago, Impact, sans-serif;
   font-size: 16px;
-  text-decoration: none;
-  transition: all .2s;
-  display: inline-block;
+  font-style: italic;
 }
 
 button:hover {
-  background-color: gray;
-  padding: 5px 40px;
-  transition: all .2s;
+  cursor: pointer;
+  color: #262425;
+  background-image: url("ast/images/button-hover.png");
+  border-radius: 25px;
+  box-shadow: 0 0 10px 2px #ffffca;
 }
 </style>
 </head>
 <body>
-    <img id="logo" src="ast/images/logo.png" style="width:225px;margin:auto;">
-    <div style="width:210px;margin:auto;">
-		<p style="font-size:12px;">
-			My tile is currently under construction. <em>In the meantime, you can check out my Nekoweb site!</em>
-    	</p>
-        <button style="font-size:14px;">GO >></button>
-        <p style="font-size:10px;">
-            if you're reading this go listen to<br>
-            "スーパーモデル 15th Anniversary Edition" trust
-        </p>
+    <img class="logo" src="ast/images/logo.png" style="width:225px;margin:auto;position:absolute;top:4px;left:4px;">
+    
+    <div style="position:absolute;top:165px;left:10px;">
+        <a href="https://superhs.xyz/" target="_blank"><button>
+            website
+        </button></a>
+        <br>
+        <a href="https://superhs.xyz/" target="_blank"><button>
+            2nd button
+        </button></a>
     </div>
     
     <script type="text/tilescript">// Only executes while your tile is active

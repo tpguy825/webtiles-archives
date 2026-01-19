@@ -11,6 +11,7 @@
 marquee {
   color: #000;
   font-weight: bold;
+  animation: 2s linear forwards fadeout;
   position: fixed;
   bottom: 3px;
 }
@@ -26,8 +27,10 @@ a {
   display: block;
 }
 
-a:hover > marquee {
-  opacity: 0;
+@keyframes fadeout {
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes cycleBackground {

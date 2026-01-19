@@ -23,6 +23,18 @@
   width: 50px;
   height: auto;
 }
+
+.quacksound {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 150px;
+  position: absolute;
+  bottom: 15px;
+  left: 40px;
+}
 </style>
 </head>
 <body>
@@ -30,9 +42,25 @@
 <div class="stack">
   <img class="bg" src="13404604_80679.gif" width="250" alt>
   <a class="fg" href="https://quack.nekoweb.org" target="_blank" rel="noopener">
-    <img src="button.png" width="50" alt="Click me">
+    <img src="button.png" width="50" alt="website button">
   </a>
+  
+  <button id="quack-button" class="quacksound" type="button"></button>
+ <audio id="quack-audio" src="quack-terraria.mp3" preload="metadata"></audio>
+
 </div>
+    
+<script type="text/tilescript">
+// <button id="quack-button" class="quacksound" type="button">Click Me</button>
+// <audio id="quack-audio" src="/t/quack.nekoweb.org/quack-terraria.mp3" preload="metadata"></audio>
+var quackButton = document.getElementById('quack-button')
+var quackAudio = document.getElementById('quack-audio')
+function playQuack() {
+  quackAudio.currentTime = 0
+  quackAudio.play()
+}
+quackButton.addEventListener('click', playQuack)
+</script>
 
 </body>
 </html>

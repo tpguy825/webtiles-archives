@@ -11,6 +11,11 @@
   background: #000;
 }
 
+.bgContainer {
+  transform-origin: 50px 50px 50px;
+  transform: matrix3d(1.27778, -.805556, 0, -.003056, -.666667, 1.41667, 0, -.001667, 0, 0, 1, 0, 150, 150, 0, 1)translateX(-230px)translateY(-220px);
+}
+
 .container {
   color: #f1f3f5;
   background: url("room/wall.png");
@@ -237,6 +242,16 @@ div:where(.dev, .socials) {
             <img src="btns/lucastheguy.nekoweb.org.gif">
             <img src="btns/luxfero.nekoweb.org.gif">
                 <img src="btns/mattware.jpg"></div>
+            <div style="left: 264px"><img src="btns/commpol.jpg">
+            <img src="btns/cufustis-cool-kitchen.jpg">
+            <img src="btns/dabric.jpg">
+            <img src="btns/deadon.rip.gif">
+            <img src="btns/demgoze.jpg">
+            <img src="btns/denpagirl.nekoweb.org.gif">
+            <img src="btns/drfred.jpg">
+            <img src="btns/duducat.svg">
+            <img src="btns/eyeorb.net.gif">
+            <img src="btns/glassy-website.jpg"></div>
         </div>
     </div>
 	<div class="container">
@@ -427,7 +442,7 @@ setInterval(function (e) {
     bg.style.setProperty('top', x + 'px')
     bg.style.setProperty('left', y + 'px')
     
-    if (chunk > 7 && (y * -1) > (latBtnY - (130 + (ap * 25))) && buttons.length < 7) {
+    if ((y * -1) > (latBtnY - (130 + (ap * 25))) && buttons.length < 7) {
         var cot = document.createElement('div')
         cot.className = 'btnColContainer'
         latBtnX = (3 * (ap * 2))

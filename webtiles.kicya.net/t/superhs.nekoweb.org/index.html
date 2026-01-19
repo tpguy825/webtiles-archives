@@ -3,18 +3,24 @@
 <head>
     <style>.tile-body {
   color: #111;
-  background-image: url("dance.gif");
-  background-size: 100% 100%;
+  background-image: url("bg.png");
 }
 
-.text-shadow {
-  color: #d3d3d3;
-  text-shadow: -1px -1px #000, 1px -1px #000, -1px 1px #000, 1px 1px #000;
+a {
+  color: #fff;
+  font-family: MS UI Gothic;
+}
+
+a:hover {
+  font-weight: bold;
 }
 </style>
 </head>
 <body>
-    <p class="text-shadow"><strong><--- this is my main tile i will use this one for other medias later</strong></p>
+	<div style="position:absolute;right:10px;bottom:10px;">
+    	<a href="https://x.com/cabbitzip" target="_blank">artwork by cabbitzip :3</a>
+    </div>
+    
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>

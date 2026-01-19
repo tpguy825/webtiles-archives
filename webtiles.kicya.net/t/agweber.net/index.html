@@ -5,6 +5,7 @@
   color: #eee;
   text-shadow: 2px 5px #332112;
   background-color: #004844;
+  background-image: url("webtile-blend4.gif");
   margin: 0;
   font-family: Roboto, sans-serif;
   font-size: 22px;
@@ -33,15 +34,15 @@
 #agweber-progress {
   opacity: .2;
   position: absolute;
-  top: 225px;
-  left: 5px;
+  top: 207px;
+  left: 20px;
 }
 
 #agweber-meow {
   opacity: .2;
   position: absolute;
-  top: 3px;
-  left: 12px;
+  top: 20px;
+  left: 20px;
   transform: rotate(-180deg);
 }
 
@@ -60,6 +61,30 @@
 
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes roll {
+  from {
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(-45deg);
   }
 }
 </style>
@@ -124,31 +149,31 @@ var songs = [
     [ // George Thorogood and the Destroyers - Bad to the Bone
         ['plain', '\n\n\nOn the day\nI was born'],
         ['plain', '\n\n\nthe nurses\nall gathered round'],
-        ['bpm60', '\n\n\nto gaze\nin wide wonder'],
+        ['bpm100', '\n\n\nto gaze\nin wide wonder'],
         ['plain', '\n\n\nat the joy\nthey had found.'],
         ['plain', '\n\n\nThe head nurse\nspoke up'],
-        ['plain', '\n\n\nsaid,\n"Leave this one alone."'],
+        ['bpm100', '\n\n\nsaid,\n"Leave this one alone."'],
         ['plain', '\n\n\nShe could tell\nright away'],
         ['plain', '\n\n\nI was\nBad to the Bone'],
     ],
     [ // Katy Perry - Last Friday Night
-        ['bpm126', '\n\n\nLast Friday night'],
+        ['randColor', '\n\n\nLast Friday night'],
         ['bpm126', '\n\n\nYeah\nWe dance on tabletops'],
         ['bpm126', '\n\n\nAnd we took\ntoo many shots'],
         ['bpm126', '\n\n\nThink we kissed,\nbut I forgot'],
-        ['bpm126', '\n\n\nLast Friday night'],
+        ['randColor', '\n\n\nLast Friday night'],
         ['bpm126', '\n\n\nYeah\nWe maxed our\ncredit cards'],
         ['bpm126', '\n\n\nAnd got kicked out\nof the bar'],
         ['bpm126', '\n\n\nSo we hit the boulevard'],
-        ['bpm126', '\n\n\nLast Friday night'],
+        ['randColor', '\n\n\nLast Friday night'],
         ['bpm126', '\n\n\nWe went streaking\nin the park'],
         ['bpm126', '\n\n\nSkinny dipping\nin the dark'],
         ['bpm126', '\n\n\nThen had a\nménage à trois'],
-        ['bpm126', '\n\n\nLast Friday night'],
+        ['randColor', '\n\n\nLast Friday night'],
     ],
     [ // Smash Mouth - All Star
         ['plain', '\n\n\nSomebody once\ntold me'],
-        ['plain', '\n\n\nThe world is\ngonna roll me'],
+        ['roll', '\n\n\nThe world is\ngonna roll me'],
         ['plain', '\n\n\nI aint the\nsharpest tool\nin the shed'],
         ['plain', '\n\n\nShe was looking\nkind of dumb'],
         ['plain', '\n\n\nWith her finger\nand her thumb'],
@@ -181,14 +206,14 @@ var songs = [
         ['bpm119', '\n\n\n\n\nLove love love'],
         ['bpm119', '\n\n\nI want your love'],
     ],
-    [
+    [ // Flobots - No Handlebars
         ['plain', '\n\nI can ride my bike\nwith no handlebars'],
         ['rotateLegible', '\n\n\n\n\nNo handlebars'],
         ['rotateLegible', '\n\n\n\nNo handlebars'],
         ['plain', '\n\nI can ride my bike\nwith no handlebars'],
         ['rotateLegible', '\n\n\n\n\nNo handlebars'],
         ['rotateLegible', '\n\n\n\nNo handlebars'],
-        ['plain', '\n\n\nLook at me\nLook at me'],
+        ['bpm60', '\n\n\nLook at me\nLook at me'],
         ['plain', '\n\n\nHands in the air\nLike it\'s good to be\nAlive'],
     ],
 //     [
@@ -201,7 +226,7 @@ var songs = [
 //         ['plain', '\n\n\nString me up\nfrom atop these roofs'],
 //         ['plain', '\n\n\nKnot it tight\nso I won\'t get loose'],
 //     ],
-    [
+    [ // Guns n Roses - Welcome to the Jungle
         ['plain', '\n\n\nWelcome to the jungle'],
         ['plain', '\n\n\nWe got fun and games'],
         ['plain', '\n\n\nWe got everything\nyou want'],
@@ -213,19 +238,19 @@ var songs = [
         ['plain', '\n\n\nIn the jungle'],
         ['plain', '\n\n\nWelcome to the jungle'],
     ],
-    [
+    [ // Pokemon theme song
         ['plain', '\n\n\nI wanna be\nthe very best'],
-        ['plain', '\n\n\nLike no one ever was'],
+        ['dark', '\n\n\nLike no one ever was'],
         ['plain', '\n\n\nTo catch them\nis my real test'],
-        ['plain', '\n\n\nTo train them\nis my cause'],
+        ['dark', '\n\n\nTo train them\nis my cause'],
         ['plain', '\n\n\nI will travel\nacross the land'],
-        ['plain', '\n\n\nSearching\nfar and wide'],
+        ['dark', '\n\n\nSearching\nfar and wide'],
         ['plain', '\n\n\nEach Pokémon\nto understand'],
-        ['plain', '\n\n\nThe power\nthat\'s inside'],
+        ['randColor', '\n\n\nThe power\nthat\'s inside'],
     ],
-    [
+    [ // Fresh Prince of Bel-Air theme song
         ['plain', '\n\n\nNow this is a story\nall about how'],
-        ['plain', '\n\n\nMy life got flipped,\nturned upside down'],
+        ['rotateLegible', '\n\n\nMy life got flipped,\nturned upside down'],
         ['plain', '\n\n\nAnd I\'d like to take a minute'],
         ['plain', '\n\n\nJust sit right there'],
         ['plain', '\n\n\nI\'ll tell you how\nI became the prince\nof a town called Bel-Air'],
@@ -268,7 +293,9 @@ var styles = {
     'bpm126': {'color': "#eee", 'animation': 'pulse 0.48s infinite'},
     'rotateLegible': {'color': randcolor, 'transform': randrotateLegible},
     'randColor': {'color': randcolor},
-    'songchange': {'color': randcolor, 'font-size': '270%', 'font-weight': 'bolder', 'transform': randrotate}
+    'roll': {'color': randcolor, 'animation': 'roll 3s infinite linear'},
+    'songchange2': {'color': randcolor, 'font-size': '270%', 'font-weight': 'bolder', 'transform': randrotate},
+    'songchange': {'color': randcolor, 'font-size': '270%', 'font-weight': 'bolder', 'animation': 'spin 1.5s infinite linear'},
 }
 
 var totalSongs = songs.length

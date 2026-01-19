@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Jellee-Roman;
+  src: url("https://webtiles.kicya.net/t/fonts/Jellee-Roman.eot");
+  src: url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.eot?#iefix#iefix") format("embedded-opentype"), url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.woff2") format("woff2"), url("fonts/Jellee-Roman.otf") format("truetype"), url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.svg#svgFontName#svgFontName") format("svg");
+}
+
+.tile-body {
+  background-image: url("img/sunset1.webp");
+  background-position: 0 0;
+  background-size: 500px;
+}
+
+.textbox {
+  z-index: 0;
+  background-color: #fae7c3;
+  border-radius: 20px;
+  width: auto;
+  margin: 8px;
+  padding: 1rem 2rem;
+  font-family: Jellee-Roman, sans-serif;
+  font-size: 1em;
+  transition: all .35s ease-out;
+  display: block;
+  box-shadow: 0 7.5px #d6995c;
+}
+
+.textbox a {
+  text-shadow: 1px 2.5px 1px #a75720;
+  cursor: pointer;
+  color: #ffd84f;
+  background-color: #c66f2a;
+  border-style: solid;
+  border-color: #c66f2a;
+  border-radius: 25px;
+  margin: 5px;
+  padding: 10px;
+  transform: translateX(0);
+  box-shadow: 0 5px #a75720;
+}
+
+.mermaid img {
+  z-index: 1;
+  width: 210px;
+  height: auto;
+  transform: translateX(-10px)translateY(100px);
+}
+
+.logo img {
+  z-index: 2;
+  width: 125px;
+  height: auto;
+  transform: translateX(125px)translateY(-160px);
+}
+
+.buttons {
+  width: 88px;
+  font-family: Jellee-Roman, sans-serif;
+}
+
+.buttons img {
+  filter: drop-shadow(0 2px 5px #a75720);
+  z-index: 3;
+  width: auto;
+  height: auto;
+  transform: translateX(160px)translateY(-110px);
+}
+</style>
+</head>
+<body>
+    
+    <div class="textbox">
+        <div class="sitelink">
+            <a href="https://captdedeyes.com/" target="_blank"> Visit my Undersea Blog!</a>
+        </div>
+	</div>
+    
+	<div class="mermaid">
+    	<img src="img/Capt%20Merm%20on%20Computer%20icon.webp">
+    </div>
+    
+    <div class="logo">
+    	<img src="img/cde_logo_smol.webp">
+    </div>
+    
+    <div class="buttons">
+    	<img src="img/contains-javascript.png">
+        <img src="img/anybrowser2.gif">
+    </div>
+    
+    <div class="marquee" data-pause="true">
+      <div class="marquee-items">
+
+              <img src="img/contains-javascript.png">
+
+              <img src="img/contains-javascript.png">
+
+              <img src="img/contains-javascript.png">
+
+      </div>
+    </div>
+    
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+
+    
+</body>
+</html>

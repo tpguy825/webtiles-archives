@@ -94,6 +94,7 @@
 
 input {
   all: unset;
+  width: 132px;
 }
 
 #screen {
@@ -107,7 +108,7 @@ input {
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");
 
-function interpreter(command){
+function interpreter(input){
     	var screen = document.getElementById('screen');
     	var div = document.createElement('div');
 
@@ -123,7 +124,7 @@ function interpreter(command){
         tilde.innerText = '~';
 
         var dollar = document.createElement('span');
-        dollar.innerText = '$ ' + command; // input variable from your code
+        dollar.innerText = '$ ' + input; // input variable from your code
 
         div.appendChild(left);
     	div.appendChild(colon);
@@ -132,15 +133,36 @@ function interpreter(command){
     	screen.appendChild(div);
     	
         var div = document.createElement("div");
-    	//var [command, argument] = input.split(" ")
+		
+    	var parts = (input || "").split(" ")
+        var command = parts[0] || "";
+var args = parts[1] || "";
     	if(command == "clear"){
             screen.innerText ="";
         }
         else if(command == "help"){
-            div.innerText = "Avaible commands: clear, help, screen";
+            div.innerText = "Avaible commands: clear, print [word], help, sysinfo, hostname";
         }
     	else if(command == "screen"){
             div.innerText = "Resolution:	250x250";
+        }
+    	else if(command == "print" || command == "echo"){
+            div.innerText = args;
+        }
+    	else if(command == "hostname"){
+            if(args == ""){
+                div.innerText = "-1,10.tiles";
+            }
+            else{
+            }
+            
+        }
+    	else if(command == "sysinfo"){
+            div.innerText = "Resolution:	250x250";
+            screen.appendChild(div);
+            div = document.createElement("div");
+            div.innerText = "Disk: 1.13 MB / 25 MB (4.52%)";
+            screen.appendChild(div);
         }
         else{
             div.innerText = "Try: help";
@@ -150,6 +172,7 @@ function interpreter(command){
 }
 
 var input = document.getElementById("commandline");
+input.focus();
 input.addEventListener('keyup', function(event) {
     console.log(event.key)
     if (event.key === 'Enter') {

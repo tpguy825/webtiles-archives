@@ -2,14 +2,42 @@
 <html lang="en">
 <head>
 	<style>@font-face {
-  font-family: PixelifySans;
-  src: url("fonts/PixelifySans.ttf") format("truetype");
+  font-family: Lexis;
+  src: url("fonts/lexis.woff2") format("woff2");
+}
+
+.loading-box {
+  background-image: url("loading_bar.png");
+  width: 162px;
+  height: 8px;
+  position: absolute;
+  top: 96px;
+  overflow: hidden;
+}
+
+.loader {
+  background-image: url("loading_bar_fill.png");
+  width: 100%;
+  height: 100%;
+  animation: 3s linear infinite load;
+  position: absolute;
+  left: -100%;
+}
+
+@keyframes load {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 .tile-body {
   color: #fff;
   background-color: #fff;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 #puzzle {
@@ -30,7 +58,7 @@
 }
 
 .puzzle-block {
-  background-image: url("puzzle260118.png");
+  background-image: url("tako.png");
   width: 53px;
   height: 50px;
 }
@@ -100,11 +128,18 @@
 }
 
 .pixel {
-  font-family: PixelifySans, MS Ghotic, Arial;
+  font-family: Lexis, MS Ghotic, Arial;
 }
 
 .main-window {
   background-image: url("bg_collab.gif");
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.main-window2 {
+  background-image: url("lcd.png");
   width: 250px;
   height: 250px;
   display: flex;
@@ -151,7 +186,7 @@
   min-width: 96px;
   min-height: 16px;
   padding: 7px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .nineslice:hover {
@@ -184,13 +219,18 @@
 </style>
 </head>
     <body>
+        
+        
         <div class="main-window pixel deepFried"> 
 			<div class="container" style="align-items: center; justify-items: center;">
+                <p style="position: absolute; top: 2px; color: lightblue; text-align: center; z-index: 1; font-size: 12px;" class="pixel">
+                    
+                </p>
 				<a href="https://yumekuni.moe" target="_blank" style="color: white; text-decoration: none;">
                     <span style="display: flex; flex-direction: row; gap: 4px; align-items:center; justify-items: center; ">
                         <img style="width: 43px; height: 43px; margin-top: 8px;" src="moon.gif">
 
-                        <p style="font-size: 16px;">
+                        <p style="font-size: 12px;">
                             YUMEKUNI POCKET
                         </p>
                     </span>
@@ -218,8 +258,6 @@
          
             </div>
         </div>
-        <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+       
     </body>
 </html>
