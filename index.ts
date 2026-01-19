@@ -1,3 +1,6 @@
+import { writeFileSync } from "fs";
+import path from "path";
+
 const { tiles } = await fetch("https://webtiles.kicya.net/api/tiles", {
 	credentials: "include",
 	headers: {
@@ -37,7 +40,12 @@ for (let i = -25; i <= 25; i++) {
 // 		date.getMinutes(),
 // 	] as const;
 
-await Bun.write("stats.txt", "totaltiles=2601\nclaimedtiles=" + tofetch.filter((t) => t[2].domain !== "<empty>").length + "\n")
+console.log("stats.txt", path.join(import.meta.dir, "stats.txt"))
+
+writeFileSync(
+	path.join(import.meta.dir, "stats.txt"),
+	"totaltiles=2601\nclaimedtiles=" + tofetch.filter((t) => t[2].domain !== "<empty>").length + "\n",
+);
 
 await Bun.write(
 	"t.urls.txt",
