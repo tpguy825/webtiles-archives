@@ -65,9 +65,7 @@ canvas {
   display: block;
 }
 
-#heroLayer {
-  z-index: 50;
-  pointer-events: none;
+#heroLayer, #gameLayer {
   width: 250px;
   height: 250px;
   position: absolute;
@@ -75,20 +73,16 @@ canvas {
   left: 0;
 }
 
-#heroLayer.hidden {
-  display: none;
+#heroLayer {
+  z-index: 50;
+  pointer-events: none;
 }
 
 #gameLayer {
   z-index: 100;
-  width: 250px;
-  height: 250px;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
-#gameLayer.hidden {
+#heroLayer.hidden, #gameLayer.hidden {
   display: none;
 }
 
@@ -215,26 +209,17 @@ canvas {
 </style>
 </head>
 <body>
-    
     <div id="startZone">
         <div class="blink-wrapper">
             <span class="blink-text">INSERT COIN<br>CLICK TO START</span>
         </div>
     </div>
-
-    
     <div id="heroLayer">
         <canvas id="attractCanvas" width="250" height="250"></canvas>
     </div>
-   
-    
     <div id="gameLayer" class="hidden">
         <canvas id="gameCanvas" width="250" height="250" tabindex="0"></canvas>
-        
-        
         <div id="gameUI">SCORE: <span id="scoreVal">0</span></div>
-
-        
         <div id="touchControls">
             <div class="d-pad">
                 <button id="btnLeft" class="touch-btn">←</button>
@@ -243,8 +228,6 @@ canvas {
             </div>
             <button id="btnFire" class="touch-btn fire-btn">●</button>
         </div>
-
-        
         <div id="gameOverScreen" class="hidden">
             <div class="go-title">GAME OVER</div>
             <div class="go-score">SCORE: <span id="finalScore">0</span></div>
@@ -255,7 +238,6 @@ canvas {
             </div>
         </div>
     </div>
-    
     <script type="text/tilescript">(function () {
     // --- VARIABLES ---
     var currentState = 0; // 0=Attract, 1=Game, 2=Over
@@ -268,10 +250,11 @@ canvas {
     var gameOverScreen = document.getElementById('gameOverScreen');
     var btnRestart = document.getElementById('btnRestart');
     var scoreEl = document.getElementById('scoreVal');
-    var gameCanvas = document.getElementById('gameCanvas');
+    
     var attractCanvas = document.getElementById('attractCanvas');
+    var gameCanvas = document.getElementById('gameCanvas');
 
-    // Canvas Contexts
+    // Contexts
     var actx = (attractCanvas && attractCanvas.getContext) ? attractCanvas.getContext('2d') : null;
     var ctx = (gameCanvas && gameCanvas.getContext) ? gameCanvas.getContext('2d') : null;
 
@@ -279,44 +262,60 @@ canvas {
     var W = 250;
     var H = 250;
 
-    // Game Inputs
-    var keys = { left:false, right:false, up:false, fire:false };
-
-    // --- 1. SETUP EVENT LISTENERS (LOCAL ONLY) ---
+    // --- 1. EVENT LISTENERS ---
     
-    // Helper to safely add listener to specific element
     function safeAdd(el, evt, fn) {
-        if (el && el.addEventListener) {
-            el.addEventListener(evt, fn);
-        }
+        if (el && el.addEventListener) el.addEventListener(evt, fn);
     }
 
-    // A. Start Game Click
+    // A. Start Game
     safeAdd(startZone, 'click', function() {
         if (currentState !== 0) return;
         currentState = 1;
         
-        // Switch UI
+        // Hide Attract, Show Game
         startZone.className = "hidden";
         heroLayer.className = "hidden";
         gameLayer.className = "";
         
-        // Stop Attract Loop
         if (loopTimer) clearTimeout(loopTimer);
-        
-        // Start Game
         setTimeout(startGame, 50);
     });
 
-    // B. Restart Click
+    // B. Back to Menu (Restart Animation)
     safeAdd(btnRestart, 'click', function() {
-        if (gameOverScreen) gameOverScreen.className = "hidden";
-        currentState = 1;
-        startGame();
+        resetToMenu();
     });
 
-    // C. Keyboard Controls (Attached to CANVAS, NOT document)
-    // The canvas must be focused for this to work
+    function resetToMenu() {
+        currentState = 0;
+        
+        // Reset UI
+        if(gameOverScreen) gameOverScreen.className = "hidden";
+        if(gameLayer) gameLayer.className = "hidden";
+        if(heroLayer) heroLayer.className = "";
+        if(startZone) startZone.className = "";
+
+        // Stop Game Loop
+        if(loopTimer) clearTimeout(loopTimer);
+
+        // Reset & Restart Attract Pattern
+        t_math = Math.random() * 4;
+        pat_i = 0; 
+        pat_j = 0;
+        
+        if(actx) {
+            actx.fillStyle = '#000';
+            actx.fillRect(0, 0, W, H);
+        }
+        
+        loopAttract();
+    }
+
+    // Controls
+    var keys = { left:false, right:false, up:false, fire:false };
+
+    // Keyboard (Attached to CANVAS to avoid document errors)
     if (gameCanvas) {
         gameCanvas.addEventListener('keydown', function(e) {
             if (currentState !== 1) return;
@@ -337,7 +336,7 @@ canvas {
         });
     }
 
-    // D. Touch Controls
+    // Touch
     function bindTouch(id, k) {
         var el = document.getElementById(id);
         if(el) {
@@ -352,7 +351,7 @@ canvas {
     bindTouch('btnThrust','up');
     bindTouch('btnFire','fire');
 
-    // --- 2. ATTRACT MODE (Simple Pattern) ---
+    // --- 2. ATTRACT MODE (BASIC Pattern) ---
     
     var t_math = Math.random() * 4;
     var pat_i = 0, pat_j = 0;
@@ -361,13 +360,14 @@ canvas {
         if (currentState !== 0) return;
         if (!actx) return;
 
-        // Draw Batch
-        var scale = 40; 
+        // FIXED: Scale increased to 58 (was 40)
+        var scale = 58; 
         var r = (2 * Math.PI) / 235;
         
         for (var k = 0; k < 400; k++) {
             if (pat_i >= 250) break;
             
+            // Math from your working version
             var u = Math.sin(pat_i + Math.cos(pat_j * 0.1)) + Math.sin(r * pat_i + t_math);
             var v = Math.cos(pat_i + Math.sin(pat_j * 0.1)) + Math.cos(r * pat_i + t_math);
             
@@ -386,11 +386,13 @@ canvas {
         }
         
         if (pat_i >= 250) {
+            // Wait 2 seconds then restart pattern
             loopTimer = setTimeout(function() {
+                if (currentState !== 0) return;
                 if(actx) { actx.fillStyle = '#000'; actx.fillRect(0,0,W,H); }
                 t_math = Math.random() * 4;
                 pat_i = 0; pat_j = 0;
-                if(currentState===0) loopAttract();
+                loopAttract();
             }, 2000);
         } else {
             loopTimer = setTimeout(loopAttract, 20);
@@ -405,11 +407,7 @@ canvas {
 
     function startGame() {
         if (!ctx) return;
-        
-        // CRITICAL: Focus the canvas so it receives keydown events
-        if (gameCanvas.focus) {
-            gameCanvas.focus();
-        }
+        if (gameCanvas.focus) gameCanvas.focus();
         
         score = 0;
         if(scoreEl) scoreEl.textContent = "0";
@@ -418,7 +416,6 @@ canvas {
         bullets = []; asteroids = []; particles = [];
         keys.left=false; keys.right=false; keys.up=false; keys.fire=false;
         
-        // Initial spawn
         spawnAsteroid(true); spawnAsteroid(true); spawnAsteroid(true);
         
         gameLoop();
@@ -434,12 +431,10 @@ canvas {
             pts: [],
             big: isBig
         };
-        // Safe spawn logic
         if(x===undefined) {
             var d = Math.sqrt((a.x-W/2)*(a.x-W/2) + (a.y-H/2)*(a.y-H/2));
             if(d < 60) a.x += 80;
         }
-        // Vertices
         var vCount = 6 + Math.floor(Math.random()*4);
         for(var j=0; j<vCount; j++) {
             var ang = (j/vCount)*Math.PI*2;
@@ -452,11 +447,9 @@ canvas {
     function gameLoop() {
         if (currentState !== 1) return;
 
-        // Clear
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, W, H);
 
-        // SHIP
         if (!ship.dead) {
             if (keys.left) ship.a -= 0.12;
             if (keys.right) ship.a += 0.12;
@@ -481,7 +474,6 @@ canvas {
             }
         }
 
-        // BULLETS
         ctx.fillStyle = '#ff0';
         for(var b=bullets.length-1; b>=0; b--) {
             var bu = bullets[b];
@@ -492,7 +484,6 @@ canvas {
             ctx.fillRect(bu.x-1, bu.y-1, 2, 2);
         }
 
-        // ASTEROIDS
         ctx.strokeStyle = '#fff';
         ctx.lineWidth = 1.5;
         for(var i=asteroids.length-1; i>=0; i--) {
@@ -507,7 +498,6 @@ canvas {
             ctx.closePath();
             ctx.stroke();
 
-            // Collision Bullet
             var hit = false;
             for(var b=bullets.length-1; b>=0; b--) {
                 var dx = ast.x - bullets[b].x;
@@ -518,9 +508,7 @@ canvas {
                     hit = true;
                     score += ast.big ? 100 : 200;
                     if(scoreEl) scoreEl.textContent = score;
-                    
                     for(var k=0; k<6; k++) particles.push({x:ast.x, y:ast.y, vx:(Math.random()-0.5)*3, vy:(Math.random()-0.5)*3, life:15, c:'#aaa'});
-                    
                     if(ast.big) {
                         spawnAsteroid(false, ast.x, ast.y);
                         spawnAsteroid(false, ast.x, ast.y);
@@ -531,7 +519,6 @@ canvas {
             }
             if(hit) continue;
 
-            // Collision Ship
             if(!ship.dead && ship.invuln <= 0) {
                  var sdx = ast.x - ship.x;
                  var sdy = ast.y - ship.y;
@@ -547,7 +534,6 @@ canvas {
             }
         }
 
-        // PARTICLES
         for(var p=particles.length-1; p>=0; p--) {
             var pt = particles[p];
             pt.x += pt.vx; pt.y += pt.vy; pt.life--;
@@ -556,7 +542,6 @@ canvas {
             ctx.fillRect(pt.x, pt.y, 2, 2);
         }
 
-        // DRAW SHIP
         if(!ship.dead) {
             if(Math.floor(ship.invuln/5)%2===0) {
                 ctx.strokeStyle = '#0f0';

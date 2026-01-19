@@ -1,43 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>* {
+  
+  
+  
+  <style>* {
   box-sizing: border-box;
   font-family: Libre Franklin, Arial, Helvetica, sans-serif;
 }
 
 .tile-body {
-  background-image: linear-gradient(#0000, #00000017), url("/t/squirrelz.xyz/img/bg2.jpg");
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+}
+
+.tile {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.scale-wrap {
+  transform-origin: 0 0;
+  transform: scale(.32);
+}
+
+.frame {
+  border: 30px solid #0000;
+  border-image: url("/t/squirrelz.xyz/img/border/frame.jpg") 30 round;
+  width: 40em;
+}
+
+.frame-inner {
+  background-image: url("/t/squirrelz.xyz/img/header/bg.jpg");
+  background-position: center;
+  padding: 20px;
+}
+
+.header-row {
+  margin: -20px -20px 20px;
   display: flex;
 }
 
-a {
+.header {
   color: #fff;
-  text-decoration: underline;
+  text-shadow: 2px 2px 4px #000;
+  background-image: linear-gradient(#0000, #00000017), url("/t/squirrelz.xyz/img/header/bg2.jpg");
+  flex: 1;
+  align-items: flex-end;
+  height: 120px;
+  padding: 10px 15px;
+  display: flex;
 }
 
-a:hover {
-  font-style: italic;
-}
-
-h1 {
-  color: #fff;
-  -webkit-text-stroke: .5px black;
-  filter: drop-shadow(2px 2px 4px #000);
-  will-change: filter, transform;
-  backface-visibility: hidden;
-  text-align: center;
+.header h1 {
   margin: 0;
   font-style: italic;
-  transform: translate3d(0, 0, 0);
+}
+
+.content-container {
+  margin: -20px;
+  display: flex;
+}
+
+.content-box {
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
+  background-color: #0000001e;
+  border: 1px solid #ffffff15;
+  padding: 20px;
+}
+
+.content-box.left {
+  border-right: none;
+  flex: 2;
+}
+
+.content-box.right {
+  flex: 1;
+}
+
+.divider {
+  background-color: #00000016;
+  margin: -20px -20px 15px;
+  padding: 8px 12px;
+}
+
+.divider h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
 }
 </style>
 </head>
 <body>
-    <h1>soon.</h1>
+  <div class="tile">
+    <div class="scale-wrap">
+      <div class="frame">
+        <div class="frame-inner">
+          <div class="header-row">
+            <header class="header">
+              <h1>squirrelz.xyz</h1>
+            </header>
+          </div>
+          <div class="content-container">
+            <div class="content-box left">
+              <div class="divider">
+                <h3>Introduction</h3>
+              </div>
+              <p>just testing this out..</p>
+            </div>
+            <div class="content-box right">
+              <div class="divider">
+                <h3>something here</h3>
+              </div>
+              <p>idk</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    i quit webtiles is tweaking out and saying my image doesn't exist when it does😭😭
 </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <style>.tile-body {
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  font-family: Courier New, monospace;
+}
+
+.tile {
+  background: #000 url("/t/brew.rocks/chatbg2.gif") 0 0 / 304px 234px;
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+a {
+  color: #fff;
+}
+</style>
+</head>
+<body>
+  <div class="tile">
+        <br><br><br><img src="/t/brew.rocks/brew.png"><br><br>
+        <span id="quote" style="cursor: pointer;">hello fellow squares</span><br><br>
+        <a href="https://brew.rocks" style="text-decoration: none;font-size:20px" target="_blank">🌐</a><span>    </span>
+        <a href="https://fedi.computernewb.com/@brew" style="text-decoration: none;font-size:20px" target="_blank">🐘</a><br><br>
+        <a href="https://noided.icu" target="_blank"><small>also check out noided.icu!</small></a>
+    </div>
+</body>
+<script type="text/tilescript">
+
+function randomq() {
+  var qs = [
+    "all of you look very square rn",
+    '"be there or be square" me:',
+    "hello fellow squares",
+    "the plague is everywhere",
+    "city boy!!11",
+    "someone's keeping watch"
+  ];
+
+  var q = qs[Math.floor(Math.random() * qs.length)];
+  document.getElementById("quote").innerText = q;
+  // typeWriter(q);
+}
+
+document.getElementById("quote").onclick = function() {randomq()};
+    
+randomq();
+</script>
+</html>
