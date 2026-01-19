@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. ~/.bashrc
 . stats.txt
 
 echo "Stats for this archive:"
@@ -10,4 +11,4 @@ echo "  Unedited tiles ('This is an example tile.'): $exampletiles"
 echo "  Wormed tiles: $wormedtiles"
 echo ""
 
-wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/serve.ts | bun -
+wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/serve.ts | ~/.bun/bin/bun -

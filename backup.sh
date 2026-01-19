@@ -4,7 +4,10 @@
 if [ -f "stats.txt" ]; then
     rm stats.txt
 fi
-wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/index.ts | bun -
+
+. ~/.bashrc
+
+wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/index.ts | ~/.bun/bin/bun -
 
 . stats.txt
 
@@ -13,7 +16,8 @@ echo "Archiving $claimedtiles tiles..."
 # will take ~3 hours with ratelimiting
 
 # -e robots=off because cloudflare ai protection breaks fedora wget
-# wget -mpEk -D webtiles.kicya.net --referer https://webtiles.kicya.net/ -i t.urls.txt -w 3 --user-agent "WebTiles-Archiver/1.0 Wget/2.2.1 (+https://github.com/tpguy825/webtiles-archives)" -e robots=off
+echo started wget at `date --date='TZ="UTC" now' -Iseconds`
+wget -mpEk -D webtiles.kicya.net --referer https://webtiles.kicya.net/ -i t.urls.txt -w 3 --user-agent "WebTiles-Archiver/1.0 Wget/2.2.1 (+https://github.com/tpguy825/webtiles-archives)" -e robots=off
 echo finished wget at `date --date='TZ="UTC" now' -Iseconds`
 date --date='TZ="UTC" now' -Iseconds > webtiles.kicya.net/_archivetime.txt
 

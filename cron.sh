@@ -1,5 +1,8 @@
 #!/bin/bash
 
+. ~/.bashrc
+
+
 bash backup.sh
 git add webtiles.kicya.net stats.txt
 # unverified commit but idc
