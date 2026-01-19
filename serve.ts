@@ -1,9 +1,8 @@
 import { existsSync } from "fs";
 import path from "path";
 
-
 const { port } = Bun.serve({
-	port: 5050,
+	port: 22222,
 	async fetch(req) {
 		const url = new URL(req.url),
 			staticpath = path.join(
