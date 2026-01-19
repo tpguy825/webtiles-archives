@@ -52,6 +52,7 @@ await Bun.write(
 	[
 		...new Set([
 			"https://webtiles.kicya.net/",
+			"https://webtiles.kicya.net/favicon.ico",
 			"https://webtiles.kicya.net/api/tiles",
 			"https://webtiles.kicya.net/api/locks",
 			"https://webtiles.kicya.net/s/dist/buildtime.txt",
