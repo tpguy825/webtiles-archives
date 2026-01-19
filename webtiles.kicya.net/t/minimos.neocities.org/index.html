@@ -54,10 +54,11 @@
   opacity: 0;
   color: #fff;
   background: #000;
-  width: 250px;
-  max-width: 250px;
+  width: 245px;
+  max-width: 245px;
   height: 250px;
   max-height: 250px;
+  padding: 2px 2px 2px 3px;
   transition: all 2s;
   position: absolute;
   top: 0;
@@ -94,7 +95,8 @@
 
 input {
   all: unset;
-  width: 132px;
+  width: 130px;
+  margin-bottom: 4px;
 }
 
 #screen {
@@ -141,10 +143,17 @@ var args = parts[1] || "";
             screen.innerText ="";
         }
         else if(command == "help"){
-            div.innerText = "Avaible commands: clear, print [word], help, sysinfo, hostname";
+            div.innerText = "Avaible commands: clear, print [word], whoami, sysinfo, hostname [arg], date, pwd, help";
         }
     	else if(command == "screen"){
             div.innerText = "Resolution:	250x250";
+        }
+    	else if(command == "whoami"){
+            div.innerText = "tile";
+        }
+    
+    	else if(command == "pwd"){
+            div.innerText = "/home/tile/";
         }
     	else if(command == "print" || command == "echo"){
             div.innerText = args;
@@ -153,22 +162,39 @@ var args = parts[1] || "";
             if(args == ""){
                 div.innerText = "-1,10.tiles";
             }
+			else if(args === "-i"){
+                div.innerText = "127.0.1.1";
+            }
+            else if(args === "-I"){
+                div.innerText = "0.0.0.0";
+            }
             else{
+                div.innerText = "hostname: Invalid argument";
             }
             
         }
     	else if(command == "sysinfo"){
+            div.innerText = 'tile@-1,10.tiles';
+            div.style.color = 'lime';
+            screen.appendChild(div);
+            div = document.createElement("div");
             div.innerText = "Resolution:	250x250";
             screen.appendChild(div);
             div = document.createElement("div");
             div.innerText = "Disk: 1.13 MB / 25 MB (4.52%)";
             screen.appendChild(div);
         }
+    	else if(command == "date"){
+            div.innerText = new Date().toDateString();
+        }
         else{
             div.innerText = "Try: help";
         }
     screen.appendChild(div);
     console.log("interpreted")
+    var body = document.getElementById("screensaver");
+    body.scrollTo(0, body.scrollHeight);
+    sessionStorage.setItem("history", input);
 }
 
 var input = document.getElementById("commandline");
@@ -180,6 +206,10 @@ input.addEventListener('keyup', function(event) {
         interpreter(input.value)
 		input.value = "";
     }
+    if (event.key === 'ArrowUp') {
+        console.log('ArrowUp key was pressed!');
+        input.value = sessionStorage.getItem("history");
+    }
 });</script>
     <div id="green">
     </div>
@@ -189,7 +219,7 @@ input.addEventListener('keyup', function(event) {
             <output id="screen">
             </output>
         	<nobr><span style="color: lime;">tile@-1,10.tiles</span>:<span style="color: blue;">~</span>$ <input type="text" id="commandline" autocomplete="off"></nobr>
-        <h6 style="position:absolute; bottom:-20px;">
+        <h6 style="position:absolute; bottom:-10px;">
             The neocity website is currently unsupported
         </h6>
     </div>

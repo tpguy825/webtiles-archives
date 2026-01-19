@@ -3,14 +3,13 @@
 <head>
     <style>@font-face {
   font-family: Jellee-Roman;
-  src: url("https://webtiles.kicya.net/t/fonts/Jellee-Roman.eot");
+  src: url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.eot");
   src: url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.eot?#iefix#iefix") format("embedded-opentype"), url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.woff2") format("woff2"), url("fonts/Jellee-Roman.otf") format("truetype"), url("https://webtiles.kicya.net/t/captdedeyes.com/fonts/Jellee-Roman.svg#svgFontName#svgFontName") format("svg");
 }
 
 .tile-body {
   background-image: url("img/sunset1.webp");
-  background-position: 0 0;
-  background-size: 500px;
+  background-size: 400px;
 }
 
 .textbox {
@@ -18,63 +17,72 @@
   background-color: #fae7c3;
   border-radius: 20px;
   width: auto;
+  height: 7em;
   margin: 8px;
-  padding: 1rem 2rem;
-  font-family: Jellee-Roman, sans-serif;
-  font-size: 1em;
+  padding: .5rem;
   transition: all .35s ease-out;
   display: block;
   box-shadow: 0 7.5px #d6995c;
 }
 
-.textbox a {
-  text-shadow: 1px 2.5px 1px #a75720;
+.textbox button {
   cursor: pointer;
+  text-shadow: 1px 2.5px 1px #a75720;
   color: #ffd84f;
   background-color: #c66f2a;
-  border-style: solid;
-  border-color: #c66f2a;
+  border-style: none;
   border-radius: 25px;
-  margin: 5px;
+  margin: 5px 130px 5px 5px;
   padding: 10px;
+  font-family: Jellee-Roman, sans-serif;
+  font-size: 1.2em;
+  text-decoration: none;
+  transition: all .35s ease-in-out;
   transform: translateX(0);
   box-shadow: 0 5px #a75720;
 }
 
+.textbox button:hover {
+  color: #d46d11;
+  text-shadow: 1px 2.5px 1px #ffd84f;
+  background-color: #ffd84f;
+  box-shadow: 0 5px #d46d11;
+}
+
 .mermaid img {
   z-index: 1;
+  filter: drop-shadow(0 5px 5px #a75720);
   width: 210px;
   height: auto;
-  transform: translateX(-10px)translateY(100px);
+  transform: translateX(-10px)translateY(-35px);
 }
 
 .logo img {
   z-index: 2;
-  width: 125px;
+  filter: drop-shadow(0 3px 3px #d6995c);
+  width: 100px;
   height: auto;
-  transform: translateX(125px)translateY(-160px);
+  transform: translateX(130px)translateY(-280px);
 }
 
 .buttons {
   width: 88px;
-  font-family: Jellee-Roman, sans-serif;
 }
 
 .buttons img {
-  filter: drop-shadow(0 2px 5px #a75720);
   z-index: 3;
   width: auto;
   height: auto;
-  transform: translateX(160px)translateY(-110px);
+  transform: translateX(160px)translateY(-245px);
 }
 </style>
 </head>
 <body>
     
     <div class="textbox">
-        <div class="sitelink">
-            <a href="https://captdedeyes.com/" target="_blank"> Visit my Undersea Blog!</a>
-        </div>
+        <a href="https://captdedeyes.com/" target="_blank"><button>
+             Visit my Undersea Blog!
+        </button></a>
 	</div>
     
 	<div class="mermaid">
@@ -88,22 +96,10 @@
     <div class="buttons">
     	<img src="img/contains-javascript.png">
         <img src="img/anybrowser2.gif">
+        <img src="img/CaptDedEyes_btn2.gif">
     </div>
     
-    <div class="marquee" data-pause="true">
-      <div class="marquee-items">
-
-              <img src="img/contains-javascript.png">
-
-              <img src="img/contains-javascript.png">
-
-              <img src="img/contains-javascript.png">
-
-      </div>
-    </div>
-    
-    
-    <script type="text/tilescript">// Only executes while your tile is active
+<script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
 
