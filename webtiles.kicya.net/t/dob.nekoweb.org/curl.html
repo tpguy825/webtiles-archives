@@ -93,8 +93,13 @@ img.big {
   mix-blend-mode: normal;
   filter: brightness(70%);
 }
+
+ul {
+  margin: 0;
+  padding-left: 1rem;
+}
 </style><main><p><a href="index.html">戻る</a> <strong>curlを使ってtilesのサイトを更新する方法</strong>
-ブラウザの管理者ツールでcookieのtokenを確認してから<pre><code>SITE='your.domain.name'
+ブラウザの管理者ツールでcookieのtokenを確認してから実行。<a href="https://paste.sr.ht/~dobunezumi/753ca740951c04b7896172f8c7575a742a04b235" target="_blank">sourcehut</a><pre><code>SITE='your.domain.name'
 WEBTILES_TOKEN='....'
 UPLOAD_FILE='index.html'
 curl --fail-with-body -sS \

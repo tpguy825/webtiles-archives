@@ -79,6 +79,10 @@
   box-shadow: 0 0 10px 2px #000 !important;
 }
 
+#screensaver:hover ~ #bang {
+  display: none;
+}
+
 #green {
   z-index: 2;
   height: 100%;
@@ -133,9 +137,9 @@ function interpreter(command){
             screen.innerText ="";
         }
         else if(command == "help"){
-            div.innerText = "Avaible commands: clear, help, screenfetch";
+            div.innerText = "Avaible commands: clear, help, screen";
         }
-    	else if(command == "screenfetch"){
+    	else if(command == "screen"){
             div.innerText = "Resolution:	250x250";
         }
         else{

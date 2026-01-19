@@ -86,7 +86,7 @@ console.log("Loading Earworms");
 // - knights tour
 
 var songs = [
-    [
+    [ // My Chemical Romance - Welcome to the Black Parade
         ['plain', '\n\nWhen I was\n\na young boy\n\nmy father'],
         ['plain', '\n\ntook me\ninto the city\n\nto see\na marching band'],
         ['plain', '\nHe said,\n\n"Son, when\n\nyou grow up\n\nwould you be'],
@@ -96,7 +96,7 @@ var songs = [
         ['plain', "\nBecause\n\nOne day\n\nI'll leave you\n\na phantom"],
         ['plain', '\n\nTo lead you\nin the summer\n\nto join the\nblack parade..."'],
     ],
-    [
+    [ // Rick Astley - Never Gonna Give You Up
         ['plain', '\nNever gonna give you up'],
         ['plain', '\n\n\n\n\n\nNever gonna let you down'],
         ['plain', '\n\n\nNever gonna run around\nand desert you'],
@@ -104,7 +104,7 @@ var songs = [
         ['plain', '\n\n\nNever gonna say goodbye'],
         ['plain', '\n\n\n\n\nNever gonna tell a lie\nand hurt you'],
     ],
-    [
+    [ // Semisonic- Closing Time
         ['dark', 'Closing time'],
         ['plain', '\nOpen all the doors and let you out into the world'],
         ['darker', '\nClosing time'],
@@ -114,24 +114,24 @@ var songs = [
         ['darkester', '\n\n\nClosing time'],
         ['plain', "\n\n\n\nYou don't have to go home, but you\ncan't stay here"],
     ],
-    [
+    [ // Nine Days - Absolutely (Story of a Girl)
         ['plain', 'This is the story of a girl'],
         ['plain', '\nWho cried a river and drowned the whole world'],
         ['plain', '\n\nAnd while she looks so sad in photographs'],
         ['plain', '\n\n\nI absolutely love her'],
         ['plain', '\n\n\n\nWhen she smiles'],
     ],
-    [
+    [ // George Thorogood and the Destroyers - Bad to the Bone
         ['plain', '\n\n\nOn the day\nI was born'],
         ['plain', '\n\n\nthe nurses\nall gathered round'],
-        ['plain', '\n\n\nto gaze\nin wide wonder'],
+        ['bpm60', '\n\n\nto gaze\nin wide wonder'],
         ['plain', '\n\n\nat the joy\nthey had found.'],
         ['plain', '\n\n\nThe head nurse\nspoke up'],
         ['plain', '\n\n\nsaid,\n"Leave this one alone."'],
         ['plain', '\n\n\nShe could tell\nright away'],
         ['plain', '\n\n\nI was\nBad to the Bone'],
     ],
-    [
+    [ // Katy Perry - Last Friday Night
         ['bpm126', '\n\n\nLast Friday night'],
         ['bpm126', '\n\n\nYeah\nWe dance on tabletops'],
         ['bpm126', '\n\n\nAnd we took\ntoo many shots'],
@@ -146,7 +146,7 @@ var songs = [
         ['bpm126', '\n\n\nThen had a\nménage à trois'],
         ['bpm126', '\n\n\nLast Friday night'],
     ],
-    [
+    [ // Smash Mouth - All Star
         ['plain', '\n\n\nSomebody once\ntold me'],
         ['plain', '\n\n\nThe world is\ngonna roll me'],
         ['plain', '\n\n\nI aint the\nsharpest tool\nin the shed'],
@@ -154,7 +154,7 @@ var songs = [
         ['plain', '\n\n\nWith her finger\nand her thumb'],
         ['plain', '\n\n\nIn the shape\nof an L\non her forehead'],
     ],
-    [
+    [ // Eagles - Take It Easy
         ['plain', '\n\n\nWell I\'m a running down the road'],
         ['plain', '\n\n\nTrying to loosen my load'],
         ['plain', '\n\n\nI\'ve got seven women on my mind.'],
@@ -162,7 +162,7 @@ var songs = [
         ['plain', '\n\n\nTwo that want to stone me,'],
         ['plain', '\n\n\nOne says she\'s a friend of mine.'],
     ],
-    [
+    [ // Eurythmics - Sweet Dreams
         ['bpm125', '\n\n\nSweet dreams\nare made of this'],
         ['bpm125', '\n\n\nWho am I to disagree'],
         ['bpm125', '\n\n\nI travel the world\nand the seven seas'],
@@ -172,7 +172,7 @@ var songs = [
         ['bpm125', '\n\n\nSome of them\nwant to abuse you'],
         ['bpm125', '\n\n\nSome of them\nwant to be abused'],
     ],
-    [
+    [ // Lady Gaga - Bad Romance
         ['bpm119', '\n\n\nI want your ugly'],
         ['bpm119', '\n\n\nI want your disease'],
         ['bpm119', '\n\n\nI want your everything'],
@@ -261,6 +261,7 @@ var styles = {
     'darkester': {'color': "#666"},
     'darkestest': {'color': "#444"},
     'darker': {'color': "#bbb"},
+    'bpm60': {'color': "#eee", 'animation': 'pulse 1s infinite'},
     'bpm100': {'color': "#eee", 'animation': 'pulse 0.60s infinite'},
     'bpm119': {'color': "#eee", 'animation': 'pulse 0.51s infinite'},
     'bpm125': {'color': randcolor, 'animation': 'pulse 0.48s infinite'},
