@@ -3,6 +3,7 @@
 . ~/.bashrc
 . stats.txt
 
+echo "Archive taken: `date -f webtiles.kicya.net/_archivetime.txt -R`"
 echo "Stats for this archive:"
 echo "  Total claimed tiles: $claimedtiles/$totaltiles (`echo "$claimedtiles/$totaltiles*100" | bc -l | head -c 4`%)"
 echo "  Tiles in this archive: $backeduptiles"
