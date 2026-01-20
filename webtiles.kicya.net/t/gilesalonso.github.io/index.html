@@ -342,9 +342,8 @@ canvas {
     bindTouch('btnThrust','up');
     bindTouch('btnFire','fire');
 
-    // --- 2. ATTRACT MODE (ORIGINAL RECURSIVE FORMULA) ---
+    // --- 2. ATTRACT MODE (BASIC Pattern) ---
     
-    // State variables must persist between frames for the shape to connect
     var t_math = 0;
     var pat_i = 0, pat_j = 0;
     var x_val = 0, u_val = 0, v_val = 0;
@@ -357,7 +356,6 @@ canvas {
         u_val = 0; 
         v_val = 0;
         
-        // Clear screen
         if(actx) {
             actx.fillStyle = '#000';
             actx.fillRect(0, 0, W, H);
@@ -368,21 +366,16 @@ canvas {
         if (currentState !== 0) return;
         if (!actx) return;
 
-        // SCALE: 42 fills the 250px box nicely with this specific math
-        var scale = 42; 
+        var scale = 60; 
         var r = (2 * Math.PI) / 235;
         
-        // Draw 400 dots per frame
-        for (var k = 0; k < 400; k++) {
+        for (var k = 0; k < 1000; k++) {
             if (pat_i >= 250) break;
             
-            // --- THE ORIGINAL FORMULA ---
-            // Relying on previous state of x_val, u_val, v_val
             var new_u = Math.sin(pat_i + v_val) + Math.sin(r * pat_i + x_val);
             var new_v = Math.cos(pat_i + v_val) + Math.cos(r * pat_i + x_val);
             var new_x = new_u + t_math;
             
-            // Update state
             u_val = new_u;
             v_val = new_v;
             x_val = new_x;
@@ -395,7 +388,6 @@ canvas {
                 var gg = Math.floor((pat_j * 2) % 255);
                 var bb = Math.floor((255 - (pat_i + pat_j) / 2) % 255);
                 
-                // Color boost
                 rr = Math.min(255, rr + 50);
                 gg = Math.min(255, gg + 50);
                 bb = Math.min(255, bb + 20);
@@ -412,12 +404,11 @@ canvas {
         }
         
         if (pat_i >= 250) {
-            // Pause 3 seconds, then restart with new shape
             loopTimer = setTimeout(function() {
                 if (currentState !== 0) return;
                 initAttractVariables();
                 loopAttract();
-            }, 3000);
+            }, 2000);
         } else {
             loopTimer = setTimeout(loopAttract, 20);
         }
@@ -428,6 +419,7 @@ canvas {
     var ship = {}, bullets = [], asteroids = [], particles = [];
     var score = 0;
     var lastShot = 0;
+    var levelCount = 3; // Start with 3 asteroids
 
     function startGame() {
         if (!ctx) return;
@@ -436,11 +428,17 @@ canvas {
         score = 0;
         if(scoreEl) scoreEl.textContent = "0";
         
+        // Reset level difficulty
+        levelCount = 3;
+        
         ship = { x: W/2, y: H/2, a: -1.57, vx: 0, vy: 0, dead: false, invuln: 100 };
         bullets = []; asteroids = []; particles = [];
         keys.left=false; keys.right=false; keys.up=false; keys.fire=false;
         
-        spawnAsteroid(true); spawnAsteroid(true); spawnAsteroid(true);
+        // Spawn initial wave
+        for(var i=0; i<levelCount; i++) {
+            spawnAsteroid(true);
+        }
         
         gameLoop();
     }
@@ -533,11 +531,26 @@ canvas {
                     score += ast.big ? 100 : 200;
                     if(scoreEl) scoreEl.textContent = score;
                     for(var k=0; k<6; k++) particles.push({x:ast.x, y:ast.y, vx:(Math.random()-0.5)*3, vy:(Math.random()-0.5)*3, life:15, c:'#aaa'});
+                    
                     if(ast.big) {
                         spawnAsteroid(false, ast.x, ast.y);
                         spawnAsteroid(false, ast.x, ast.y);
                     }
-                    if(asteroids.length===0) setTimeout(function(){ for(var n=0;n<3;n++) spawnAsteroid(true); }, 1000);
+                    
+                    // --- DIFFICULTY INCREASE ---
+                    // If all asteroids are gone:
+                    if(asteroids.length === 0) {
+                        setTimeout(function(){ 
+                            // Double the number of asteroids
+                            levelCount *= 2;
+                            // Cap at 48 to prevent crashes
+                            if (levelCount > 48) levelCount = 48;
+                            
+                            for(var n=0; n<levelCount; n++) {
+                                spawnAsteroid(true); 
+                            }
+                        }, 1000);
+                    }
                     break;
                 }
             }
