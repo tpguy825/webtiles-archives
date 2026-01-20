@@ -7,6 +7,10 @@ fi
 
 . ~/.bashrc
 
+if [ -f "webtiles.kicya.net/api/tiles" ]; then
+	cp webtiles.kicya.net/api/tiles ./_tiles_old
+fi
+
 wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/index.ts | ~/.bun/bin/bun -
 
 . stats.txt
@@ -31,3 +35,9 @@ backeduptiles="`ls webtiles.kicya.net/t/ | wc -l`"
 notfoundtiles=$(echo "$claimedtiles-$backeduptiles" | bc)
 echo "backeduptiles=$backeduptiles" >> stats.txt
 echo "notfoundtiles=$notfoundtiles" >> stats.txt
+
+if [ -f "./_tiles_old" ]; then
+	echo "Exploded (removed) since last archive:"
+	wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/list_exploded.ts | ~/.bun/bin/bun -
+	rm ./_tiles_old
+fi

@@ -1,6 +1,8 @@
 # webtiles archive
 
-Nightly (midnight utc) mirrors of [webtiles](https://webtiles.kicya.net).
+Twice daily mirrors of [webtiles](https://webtiles.kicya.net).
+
+Cron job at 00:00 and 12:00 UTC
 
 ## how to see archive
 
