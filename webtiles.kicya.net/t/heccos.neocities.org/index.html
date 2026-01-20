@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>html {
-  image-rendering: pixelated;
-}
-
-@keyframes background-scroll {
+    <style>@keyframes background-scroll {
   from {
     
   }
@@ -16,6 +12,7 @@
 }
 
 .tile-body {
+  image-rendering: pixelated;
   background-image: url("/t/heccos.neocities.org/woodenCheckerboard.webp");
   animation-name: background-scroll;
   animation-duration: 64s;
@@ -24,21 +21,22 @@
 }
 
 #taskbar {
-  background-color: red;
+  background-image: url("/t/heccos.neocities.org/taskbar.webp");
   width: 250px;
   height: 28px;
   position: absolute;
   bottom: 0;
 }
+
+#home {
+  width: 120px;
+  height: 28px;
+}
 </style>
 </head>
 <body>
-    <p>This is an example tile.</p>
 	<div id="taskbar">
-        test
+        <a href="https://heccos.neocities.org" target="_blank"><div id="home"></div></a>
     </div>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
 </body>
 </html>
