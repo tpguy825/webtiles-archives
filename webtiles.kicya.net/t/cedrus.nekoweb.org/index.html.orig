@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/cedrus.nekoweb.org/./webtilebg2.png");
+  background-size: cover;
+  flex-flow: column;
+  align-items: center;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.title {
+  color: #347827;
+  padding-top: 60px;
+  font-size: 40px;
+}
+
+.emojis {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+  padding-top: 40px;
+  font-size: 60px;
+  display: flex;
+}
+</style>
+</head>
+<body>
+    <a rel="external" href="https://cedrus.nekoweb.org" class="title" target="_blank">Cedrus's Site</a>
+    <div class="emojis">
+        🐄 🛸
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

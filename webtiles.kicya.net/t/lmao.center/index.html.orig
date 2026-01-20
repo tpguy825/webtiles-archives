@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Figtree;
+  font-style: normal;
+  font-weight: normal;
+  src: url("/t/lmao.center/figtree.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Figtree;
+  font-style: italic;
+  font-weight: normal;
+  src: url("/t/lmao.center/figtree_italic.woff2") format("woff2");
+}
+
+.tile-body {
+  color: #212123;
+  height: 100%;
+  image-rendering: pixelated;
+  background: #a2dcc7 radial-gradient(#567b79 1px, #0000 1px) 0 0 / 4px 4px;
+  margin: 0;
+}
+
+::selection {
+  background-color: #a2dcc7;
+}
+
+a {
+  color: #3a3858;
+  border: 2px solid #0000;
+}
+
+a:visited {
+  color: #6a5e6e;
+}
+
+a:hover {
+  border: 2px solid #000;
+}
+
+.container {
+  box-sizing: border-box;
+  background: #f2f0e5;
+  border-radius: 8px;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 10px 10px 30px;
+  padding: 20px;
+  display: flex;
+  box-shadow: 10px 10px #567b7988;
+}
+
+.content {
+  letter-spacing: .05rem;
+  text-align: left;
+  font-family: Figtree, sans-serif;
+  font-size: 8pt;
+  line-height: 1.5rem;
+}
+
+img {
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  box-shadow: 5px 5px #21212388;
+}
+
+.design-box {
+  border-left: 8px solid #0000;
+  border-right: 8px solid #0000;
+  margin-bottom: 16px;
+}
+
+.design-box:hover {
+  border-left: 8px solid #8ab060;
+  border-right: 8px solid #8ab060;
+}
+
+.design-img {
+  width: 640px;
+}
+
+.nude, .nude:hover {
+  border: none;
+  text-decoration: none;
+}
+
+figcaption {
+  text-align: center;
+  color: #b8b5b9;
+  padding-top: 10px;
+  font-style: italic;
+}
+
+tr {
+  text-align: left;
+}
+
+.inter-box {
+  border-left: 8px solid #0000;
+  border-right: 8px solid #0000;
+  flex-direction: row;
+  margin: auto auto 16px;
+  padding: 8px;
+  display: flex;
+}
+
+.inter-box:nth-child(odd) {
+  background-color: #b8b5b988;
+}
+
+.inter-box:hover {
+  border-left: 8px solid #4b80ca;
+  border-right: 8px solid #4b80ca;
+}
+
+.blog-box, .software-box {
+  border-left: 8px solid #0000;
+  border-right: 8px solid #0000;
+  flex-direction: row;
+  margin: auto auto 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  display: flex;
+}
+
+.blog-box:nth-child(odd), .software-box:nth-child(odd) {
+  background-color: #b8b5b988;
+}
+
+.blog-box:hover {
+  border-left: 8px solid #cf8acb;
+  border-right: 8px solid #cf8acb;
+}
+
+.software-box:hover {
+  border-left: 8px solid #b45252;
+  border-right: 8px solid #b45252;
+}
+
+.blog-box-new {
+  border-left: 8px solid #0000;
+  border-right: 8px solid #0000;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 16px;
+  margin: auto auto 16px;
+  padding-left: 8px;
+  display: grid;
+}
+
+.blog-box-new:nth-child(odd) {
+  background-color: #b8b5b988;
+}
+
+.blog-box-new:hover {
+  border-left: 8px solid #cf8acb;
+  border-right: 8px solid #cf8acb;
+}
+
+.blog-emoji {
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  display: flex;
+}
+
+.blog-content {
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  display: flex;
+}
+
+.blog-date {
+  color: #868188;
+  text-align: center;
+  padding: 22px;
+  font-size: smaller;
+}
+
+.blog-box-new.popup .dymo {
+  transform: none;
+}
+
+.blog-box-new.popup:hover .dymo {
+  filter: drop-shadow(5px 5px #21212388);
+  transform: none;
+}
+
+.icon-img {
+  aspect-ratio: 1;
+  width: 128px;
+  height: 128px;
+}
+
+.table-sep {
+  text-align: center;
+  width: 20pt;
+}
+
+.date-inline {
+  color: #868188;
+  text-align: center;
+  padding: 22px;
+  font-size: smaller;
+}
+
+code {
+  background: #b8b5b9;
+}
+
+.hush {
+  color: inherit;
+}
+
+.readable {
+  letter-spacing: .02rem;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #f2f0e5;
+  letter-spacing: .12rem;
+  background: #212123;
+  margin: 0;
+  padding: 10px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.6rem;
+}
+
+.dymo {
+  color: #f2f0e5;
+  letter-spacing: .12rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: #212123;
+  margin-top: 8px;
+  padding: 8px;
+  font-weight: 500;
+  transition: all .2s;
+}
+
+.new-stack-context {
+  position: relative;
+}
+
+.popup .dymo {
+  transform: translate(-50%, -50%);
+}
+
+.popup:hover .dymo {
+  filter: drop-shadow(5px 5px #21212388);
+  transform: translate(-50%, -50%)scale(1.1);
+}
+
+.dpopup .dymo {
+  transform: none;
+}
+
+.dpopup:hover .dymo {
+  filter: drop-shadow(5px 5px #21212388);
+  transform: scale(1.1);
+}
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -.4em;
+}
+
+sub {
+  top: .4em;
+}
+
+.shrink-l {
+  text-align: left;
+  flex: 1 1 0;
+}
+
+.shrink-c {
+  text-align: center;
+  flex: 3 1 0;
+}
+
+.shrink-r {
+  text-align: right;
+  flex: 1 1 0;
+}
+
+.shrinkbar {
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  display: flex;
+}
+
+figure img {
+  min-width: 500px;
+  max-width: 500px;
+}
+
+figure a, figure a:hover {
+  border: none;
+  text-decoration: none;
+}
+
+figure a:hover img {
+  box-shadow: 10px 10px #86818888;
+}
+
+@media screen and (width <= 640px) {
+  .shrinkbar {
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  .dymo {
+    padding: 3px 6px;
+  }
+
+  .inter-sub {
+    font-size: smaller;
+  }
+
+  .design-img {
+    width: 100%;
+  }
+
+  figure img {
+    width: 100%;
+    min-width: 0;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .icon-img {
+    aspect-ratio: 1;
+    width: 64px;
+    height: 64px;
+  }
+
+  .blog-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .blog-date {
+    text-align: left;
+    padding: 0;
+  }
+
+  .blog-box-new {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+  }
+
+  .content {
+    font-size: 14px;
+  }
+
+  h1 h2 h3 h4 h5 h6 {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+    
+<body>
+    <div class="container">
+        <div class="content">
+        	<a href="https://lmao.center" class="nude" target="_blank">
+                <div class="dpopup">
+                    <div class="dymo" style="font-size: 16pt">
+                    	<marquee>ᕕ(ᐛ)ᕗ lmaocenter</marquee>
+                    </div>
+                </div>
+            </a>
+            <p>
+                I'm lem and I make software etc.
+            </p>
+            <a class="nude" href="https://lmao.center/funnies" target="_blank">
+            	<div class="dpopup">
+                    <div class="dymo" style="border-left: 5px solid #4b80ca;">
+                    read comics...
+                	</div>
+            	</div>
+            </a>
+            <a class="nude" href="https://lmao.center/byline" target="_blank">
+            	<div class="dpopup">
+                	<div class="dymo" style="border-left: 5px solid #b45252;">
+                    make a website...
+                	</div>
+            	</div>
+            </a>
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>

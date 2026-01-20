@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: linear-gradient(#122900 25%, #4d6600 55%, #c0df00 100%);
+  font-family: Tahoma, sans-serif;
+}
+
+a:link {
+  color: #c0df00;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #8fa800;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#itsabox {
+  background-color: #000c;
+  border: 2px solid #c0df00;
+  border-radius: 0 10px 10px;
+  padding: 2px;
+}
+
+#itsaboxtag {
+  color: #000;
+  background-color: #c0df00;
+  border-radius: 4px 4px 0 0;
+  width: fit-content;
+  margin-top: 6px;
+  margin-left: 0;
+  padding: 2px;
+  font-family: FutureFlash, sans-serif;
+  font-size: 12px;
+}
+
+#headerlink {
+  font-size: 8pt;
+}
+
+#headerlink.hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@font-face {
+  font-family: FutureFlash;
+  font-style: normal;
+  font-weight: 400;
+  src: local(FutureFlash), url("/t/konqd.nekoweb.org/fonts/FUTUFRG_.TTF") format("truetype");
+}
+</style>
+</head>
+<body>
+    <div id="itsaboxtag">/// web tile</div>
+	<div id="itsabox">
+        <center>
+	        <a href="https://konqd.nekoweb.org/" target="_blank"><img src="/t/konqd.nekoweb.org/logo.webp" width="96" height="96"></a>
+		    <br> web-o-fiction (eventually) and more!
+            <br> <a href="https://konqd.nekoweb.org/" target="_blank">konqd.nekoweb.org</a>
+            <br>
+            <a href="https://konqd.nekoweb.org/?z=/museum/" id="headerlink" target="_blank">Virtual Museum</a> |
+            <a href="https://konqd.nekoweb.org/?z=/pages/arts.html" id="headerlink" target="_blank">Artwork</a> |
+            <a href="https://konqd.nekoweb.org/?z=/pages/about.html" id="headerlink" target="_blank">About</a>
+    	</center>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

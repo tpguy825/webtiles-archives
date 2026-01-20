@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/mostsilliest.nekoweb.org/bg.gif");
+}
+
+.contain {
+  text-align: center;
+  background: linear-gradient(145deg, #a6d2ca, #8cb0aa);
+  border-radius: 40px;
+  box-shadow: 5px 5px 4px #87aba4, -5px -5px 4px #afddd6;
+}
+
+.containtwo {
+  text-align: center;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 5px 5px 4px #d1d5d2, -5px -5px 4px #fff;
+}
+
+sub {
+  color: gray;
+  text-align: center;
+  align-content: center;
+}
+</style>
+</head>
+<body>
+    <div class="contain">
+     <h1>
+         ITS KELPING TIME
+        </h1>   
+    </div>
+    <div class="containtwo">
+        <img src="/t/mostsilliest.nekoweb.org/mii.webp" height="90"><br>
+        <marquee>i have nothing but my sorrows, and i want nothing more, they have been, they still are, faithful to me</marquee><br><br>
+    </div>
+    <sub>‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ IS THAT THE BLACK SILENCE???</sub>
+    <audio id="angelsgone" src="/t/mostsilliest.nekoweb.org/GA.mp3" preload="metadata"></audio>
+    <audio id="cotc" src="/t/mostsilliest.nekoweb.org/children.mp3" preload="metadata"></audio>
+    <script type="text/tilescript">var audio = document.getElementById("angelsgone")
+audio.play();
+</script>
+</body>
+</html>

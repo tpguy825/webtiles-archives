@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #eee;
+  text-shadow: 2px 5px #332112;
+  background-color: #004844;
+  background-image: url("/t/agweber.net/webtile-blend4.gif");
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  font-size: 22px;
+}
+
+#agweber-container {
+  text-align: center;
+  width: 250px;
+  height: 250px;
+  vertical-align: center;
+  cursor: pointer;
+  opacity: 1;
+  padding: 2px;
+  -webkit-transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  transition: opacity .25s ease-in-out;
+}
+
+#agweber-wip {
+  opacity: 0;
+  position: absolute;
+  top: 225px;
+  left: 210px;
+}
+
+#agweber-progress {
+  opacity: .2;
+  position: absolute;
+  top: 207px;
+  left: 20px;
+}
+
+#agweber-meow {
+  opacity: .2;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  transform: rotate(-180deg);
+}
+
+#agweber-container.songchange {
+  color: #848;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes roll {
+  from {
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(-45deg);
+  }
+}
+</style>
+</head>
+<body>
+    <div id="agweber-wip">
+        WIP
+    </div>
+    <div id="agweber-meow">
+        meow
+    </div>
+    <div id="agweber-progress"></div>
+    <div id="agweber-container" class="empty">
+        <br><br><br><br>
+        𝅘𝅥𝅮 It's free real estate 𝅘𝅥𝅮
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Loading Earworms");
+
+// Ideas
+// Silent songs - Random ear worm songs, presented by lyrics you click through one line at a time
+// Simple games or instruments not already present elsewhere
+// - knights tour
+
+var songs = [
+    [ // My Chemical Romance - Welcome to the Black Parade
+        ['plain', '\n\nWhen I was\n\na young boy\n\nmy father'],
+        ['plain', '\n\ntook me\ninto the city\n\nto see\na marching band'],
+        ['plain', '\nHe said,\n\n"Son, when\n\nyou grow up\n\nwould you be'],
+        ['plain', '\n\nThe savior\nof the broken,\n\nthe beaten,\nand the damned?"'],
+        ['plain', '\nHe said,\n\n "Will you\n\ndefeat them?\n\nYour demons'],
+        ['plain', '\n\nAnd all the\nnon-believers,\n\nthe plans that\nthey have made?'],
+        ['plain', "\nBecause\n\nOne day\n\nI'll leave you\n\na phantom"],
+        ['plain', '\n\nTo lead you\nin the summer\n\nto join the\nblack parade..."'],
+    ],
+    [ // Rick Astley - Never Gonna Give You Up
+        ['plain', '\nNever gonna give you up'],
+        ['plain', '\n\n\n\n\n\nNever gonna let you down'],
+        ['plain', '\n\n\nNever gonna run around\nand desert you'],
+        ['plain', '\n\n\n\n\n\nNever gonna make you cry'],
+        ['plain', '\n\n\nNever gonna say goodbye'],
+        ['plain', '\n\n\n\n\nNever gonna tell a lie\nand hurt you'],
+    ],
+    [ // Semisonic- Closing Time
+        ['dark', 'Closing time'],
+        ['plain', '\nOpen all the doors and let you out into the world'],
+        ['darker', '\nClosing time'],
+        ['plain', '\n\nTurn all of the lights on\nover every boy\nand every girl'],
+        ['darkest', '\n\nClosing time'],
+        ['plain', '\n\n\nOne last call for alcohol,\nso finish your\nwhiskey or beer'],
+        ['darkester', '\n\n\nClosing time'],
+        ['plain', "\n\n\n\nYou don't have to go home, but you\ncan't stay here"],
+    ],
+    [ // Nine Days - Absolutely (Story of a Girl)
+        ['plain', 'This is the story of a girl'],
+        ['plain', '\nWho cried a river and drowned the whole world'],
+        ['plain', '\n\nAnd while she looks so sad in photographs'],
+        ['plain', '\n\n\nI absolutely love her'],
+        ['plain', '\n\n\n\nWhen she smiles'],
+    ],
+    [ // George Thorogood and the Destroyers - Bad to the Bone
+        ['plain', '\n\n\nOn the day\nI was born'],
+        ['plain', '\n\n\nthe nurses\nall gathered round'],
+        ['bpm100', '\n\n\nto gaze\nin wide wonder'],
+        ['plain', '\n\n\nat the joy\nthey had found.'],
+        ['plain', '\n\n\nThe head nurse\nspoke up'],
+        ['bpm100', '\n\n\nsaid,\n"Leave this one alone."'],
+        ['plain', '\n\n\nShe could tell\nright away'],
+        ['plain', '\n\n\nI was\nBad to the Bone'],
+    ],
+    [ // Katy Perry - Last Friday Night
+        ['randColor', '\n\n\nLast Friday night'],
+        ['bpm126', '\n\n\nYeah\nWe dance on tabletops'],
+        ['bpm126', '\n\n\nAnd we took\ntoo many shots'],
+        ['bpm126', '\n\n\nThink we kissed,\nbut I forgot'],
+        ['randColor', '\n\n\nLast Friday night'],
+        ['bpm126', '\n\n\nYeah\nWe maxed our\ncredit cards'],
+        ['bpm126', '\n\n\nAnd got kicked out\nof the bar'],
+        ['bpm126', '\n\n\nSo we hit the boulevard'],
+        ['randColor', '\n\n\nLast Friday night'],
+        ['bpm126', '\n\n\nWe went streaking\nin the park'],
+        ['bpm126', '\n\n\nSkinny dipping\nin the dark'],
+        ['bpm126', '\n\n\nThen had a\nménage à trois'],
+        ['randColor', '\n\n\nLast Friday night'],
+    ],
+    [ // Smash Mouth - All Star
+        ['plain', '\n\n\nSomebody once\ntold me'],
+        ['roll', '\n\n\nThe world is\ngonna roll me'],
+        ['plain', '\n\n\nI aint the\nsharpest tool\nin the shed'],
+        ['plain', '\n\n\nShe was looking\nkind of dumb'],
+        ['plain', '\n\n\nWith her finger\nand her thumb'],
+        ['plain', '\n\n\nIn the shape\nof an L\non her forehead'],
+    ],
+    [ // Eagles - Take It Easy
+        ['plain', '\n\n\nWell I\'m a running down the road'],
+        ['plain', '\n\n\nTrying to loosen my load'],
+        ['plain', '\n\n\nI\'ve got seven women on my mind.'],
+        ['plain', '\n\n\nFour that want to own me,'],
+        ['plain', '\n\n\nTwo that want to stone me,'],
+        ['plain', '\n\n\nOne says she\'s a friend of mine.'],
+    ],
+    [ // Eurythmics - Sweet Dreams
+        ['bpm125', '\n\n\nSweet dreams\nare made of this'],
+        ['bpm125', '\n\n\nWho am I to disagree'],
+        ['bpm125', '\n\n\nI travel the world\nand the seven seas'],
+        ['bpm125', '\n\n\nEverybody\'s looking\nfor something'],
+        ['bpm125', '\n\n\nSome of them\nwant to use you'],
+        ['bpm125', '\n\n\nSome of them\nwant to get used by you'],
+        ['bpm125', '\n\n\nSome of them\nwant to abuse you'],
+        ['bpm125', '\n\n\nSome of them\nwant to be abused'],
+    ],
+    [ // Lady Gaga - Bad Romance
+        ['bpm119', '\n\n\nI want your ugly'],
+        ['bpm119', '\n\n\nI want your disease'],
+        ['bpm119', '\n\n\nI want your everything'],
+        ['bpm119', '\n\n\n\nAs long as it\'s free'],
+        ['bpm119', '\n\n\nI want your love'],
+        ['bpm119', '\n\n\n\n\nLove love love'],
+        ['bpm119', '\n\n\nI want your love'],
+    ],
+    [ // Flobots - No Handlebars
+        ['plain', '\n\nI can ride my bike\nwith no handlebars'],
+        ['rotateLegible', '\n\n\n\n\nNo handlebars'],
+        ['rotateLegible', '\n\n\n\nNo handlebars'],
+        ['plain', '\n\nI can ride my bike\nwith no handlebars'],
+        ['rotateLegible', '\n\n\n\n\nNo handlebars'],
+        ['rotateLegible', '\n\n\n\nNo handlebars'],
+        ['bpm60', '\n\n\nLook at me\nLook at me'],
+        ['plain', '\n\n\nHands in the air\nLike it\'s good to be\nAlive'],
+    ],
+//     [
+//         ['plain', '\n\nYeah\nHere we go\nFor the hundredth time'],
+//         ['plain', '\n\n\nHand grenade pins\nin every line'],
+//         ['plain', '\n\nThrow\' em up\nand let something shine'],
+//         ['plain', '\n\n\n\nGoing out of\nmy fucking mind'],
+//         ['plain', '\n\n\nFilthy mouth\nNo excuse'],
+//         ['plain', '\n\n\nFind a new place\nto hang this noose'],
+//         ['plain', '\n\n\nString me up\nfrom atop these roofs'],
+//         ['plain', '\n\n\nKnot it tight\nso I won\'t get loose'],
+//     ],
+    [ // Guns n Roses - Welcome to the Jungle
+        ['plain', '\n\n\nWelcome to the jungle'],
+        ['plain', '\n\n\nWe got fun and games'],
+        ['plain', '\n\n\nWe got everything\nyou want'],
+        ['plain', '\n\n\nHoney,\nwe know the names'],
+        ['plain', '\n\n\nWe are the people\nthat can find'],
+        ['plain', '\n\n\nWhatever\nyou may need'],
+        ['plain', '\n\n\nIf you\'ve got the money honey'],
+        ['plain', '\n\n\nWe got your disease'],
+        ['plain', '\n\n\nIn the jungle'],
+        ['plain', '\n\n\nWelcome to the jungle'],
+    ],
+    [ // Pokemon theme song
+        ['plain', '\n\n\nI wanna be\nthe very best'],
+        ['dark', '\n\n\nLike no one ever was'],
+        ['plain', '\n\n\nTo catch them\nis my real test'],
+        ['dark', '\n\n\nTo train them\nis my cause'],
+        ['plain', '\n\n\nI will travel\nacross the land'],
+        ['dark', '\n\n\nSearching\nfar and wide'],
+        ['plain', '\n\n\nEach Pokémon\nto understand'],
+        ['randColor', '\n\n\nThe power\nthat\'s inside'],
+    ],
+    [ // Fresh Prince of Bel-Air theme song
+        ['plain', '\n\n\nNow this is a story\nall about how'],
+        ['rotateLegible', '\n\n\nMy life got flipped,\nturned upside down'],
+        ['plain', '\n\n\nAnd I\'d like to take a minute'],
+        ['plain', '\n\n\nJust sit right there'],
+        ['plain', '\n\n\nI\'ll tell you how\nI became the prince\nof a town called Bel-Air'],
+        ['plain', '\n\n\nIn West Philadelphia\nborn and raised'],
+        ['plain', '\n\n\nOn the playground\nis where I spent\nmost of my days'],
+//         ['plain', '\n\n\nChillin\' out,\nmaxin\', relaxin\' all cool'],
+//         ['plain', '\n\n\nWhen a couple of guys\nwho were up to no good'],
+//         ['plain', '\n\n\nStarted makin\' trouble in my neighborhood'],
+    ],
+    // Dance Magic Dance
+    // Uptown Funk
+    // Iconic Disney songs
+    // In The Air Tonight
+    // Gotye - Somebody That I Used To Know
+    // Just the two of us // eh too repetitive
+]
+
+//     color: #eee;
+//     margin: 0px;
+//     font-size: 22px;
+//     font-family: "Roboto", sans-serif;
+//     text-shadow: #332112 2px 5px;
+// things that work
+//   color, font-size, font-weight, transform
+// things that don't
+//   outline
+var styles = {
+    'empty': {},
+    'plain': {'color': "#eee"},
+    'dark': {'color': "#ccc"},
+    'darker': {'color': "#aaa"},
+    'darkest': {'color': "#888"},
+    'darkester': {'color': "#666"},
+    'darkestest': {'color': "#444"},
+    'darker': {'color': "#bbb"},
+    'bpm60': {'color': "#eee", 'animation': 'pulse 1s infinite'},
+    'bpm100': {'color': "#eee", 'animation': 'pulse 0.60s infinite'},
+    'bpm119': {'color': "#eee", 'animation': 'pulse 0.51s infinite'},
+    'bpm125': {'color': randcolor, 'animation': 'pulse 0.48s infinite'},
+    'bpm126': {'color': "#eee", 'animation': 'pulse 0.48s infinite'},
+    'rotateLegible': {'color': randcolor, 'transform': randrotateLegible},
+    'randColor': {'color': randcolor},
+    'roll': {'color': randcolor, 'animation': 'roll 3s infinite linear'},
+    'songchange2': {'color': randcolor, 'font-size': '270%', 'font-weight': 'bolder', 'transform': randrotate},
+    'songchange': {'color': randcolor, 'font-size': '270%', 'font-weight': 'bolder', 'animation': 'spin 1.5s infinite linear'},
+}
+
+var totalSongs = songs.length
+var currentSong = Math.floor(Math.random() * totalSongs)
+var currentLine = -1
+var previousLineStyle = 'empty'
+songs.sort(rsort)
+var songsProgress = 0
+
+// Add the trio of music notes at the end of each song
+for (var i = 0; i < totalSongs; i++) {
+    songs[i].push(['songchange', '\n𝅘𝅥𝅮 𝅘𝅥𝅮 𝅘𝅥𝅮'])
+    songs[i].push(['songchange', '\n𝅘𝅥𝅮 𝅘𝅥𝅮'])
+    songs[i].push(['songchange', '\n𝅘𝅥𝅮'])
+}
+
+var main = document.getElementById('agweber-container')
+
+main.innerText = '\nIN YOUR BRAIN!\n\nHow many of these\nwill now be stuck\nin your head?\n\n(keep on clickin\')'
+
+main.addEventListener('pointerdown', clickityclack)
+
+document.getElementById('agweber-meow').innerText = ''
+
+var animating = false
+function clickityclack(e) {
+    if (animating) return
+    
+    animating = true // prevents mid-animation clicks
+    main.style.opacity = 0
+    setTimeout(setText, 200)
+    
+    currentLine += 1
+    if (currentLine >= songs[currentSong].length) {
+        currentSong += 1
+        currentLine = 0
+        songsProgress += 1
+    }
+    if (currentSong >= songs.length) {
+        currentSong = 0
+    }
+}
+function setText() {
+    // Change the text and make it visible again (and thus triggering the fade in)
+    main.innerText = songs[currentSong][currentLine][1]
+    main.style.opacity = 1
+    
+    // Swap the styles
+    // classes are not supported, guess people used it to escape the sandbox =[
+    //     if (main.classList.contains(previousLineStyle)) {
+    //         main.classList.remove(previousLineStyle)
+    //         previousLineStyle = songs[currentSong][currentLine][0]
+    //         main.classList.add(previousLineStyle)
+    //     } else {
+    //         console.log(main)
+    //     }
+    // So we do it this weird way where we put our css in our js
+	// Remove previous styles
+    var styleKeys = Object.keys(styles[previousLineStyle])
+    for (var i = 0; i < styleKeys.length; i++) {
+        console.log('Removing ' + styleKeys[i])
+        //main.style[styleKeys[i]] = ''
+        main.style.removeProperty(styleKeys[i])
+    }
+    // Add current line styles
+    previousLineStyle = songs[currentSong][currentLine][0]
+    var styleKeys = Object.keys(styles[previousLineStyle])
+    for (var i = 0; i < styleKeys.length; i++) {
+        if (typeof styles[previousLineStyle][styleKeys[i]] === 'function') {
+          var output = styles[previousLineStyle][styleKeys[i]]()
+          main.style.setProperty([styleKeys[i]], output)
+          console.log('Adding ' + styleKeys[i] + ': ' + output)
+        } else {
+          main.style.setProperty([styleKeys[i]], styles[previousLineStyle][styleKeys[i]])
+          console.log('Adding ' + styleKeys[i] + ': ' + styles[previousLineStyle][styleKeys[i]])
+        }
+    }
+    
+    // Figure out our progress. Yeah I know this is weird, but it works to have two sigfigs. Some various Number functions don't seem to work
+    var partial = Math.round(currentLine/songs[currentSong].length * 100)    
+    document.getElementById('agweber-progress').innerText = "" + songsProgress + "." + (partial < 10 ? "0" + partial : partial) + "/" + totalSongs
+    
+    animating = false // finished the swap, allow clicks again (even if not finished fading in)
+}
+function randrotate() {
+    var num = Math.floor(Math.random() * 360) - 180
+    return 'rotate(' + num + 'deg)'
+}
+function randrotateLegible() {
+    var num = Math.floor(Math.random() * 90) - 45
+    return 'rotate(' + num + 'deg)'
+}
+function randcolor() {
+    var range = ['a', 'b', 'c', 'd', 'e', 'f']
+    return "#" + range[Math.floor(Math.random() * range.length)] + range[Math.floor(Math.random() * range.length)] + range[Math.floor(Math.random() * range.length)]
+}
+function rsort(a, b) {
+    return Math.random() - 0.5
+}</script>
+</body>
+</html>

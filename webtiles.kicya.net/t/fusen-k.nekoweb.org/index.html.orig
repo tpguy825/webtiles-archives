@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+<style>.tile-body {
+  background: url("/t/fusen-k.nekoweb.org/250x250.jpg") no-repeat;
+}
+
+#🎈 {
+  white-space: nowrap;
+  font-size: 15px;
+  display: flex;
+}
+
+a {
+  padding: 185px 175px;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div id="🎈"><a href="https://fusen-k.nekoweb.org/" target="_blank">ふう🎀<br>せん🐰</a></div>
+</body>
+</html>

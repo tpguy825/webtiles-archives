@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+    <style>@font-face {
+  font-family: TheGoodMonolith;
+  src: url("/t/vergissmichnicht.nekoweb.org/TheGoodMonolith.woff");
+}
+
+.tile-body {
+  text-align: right;
+  color: #ff51e277;
+  text-shadow: 1px 1px 4px #ff51e2;
+  background-image: url("/t/vergissmichnicht.nekoweb.org/ralle1986.webp");
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+  padding-top: 148px;
+  font-size: 9px;
+}
+
+a {
+  color: #ff51e23b;
+  padding-right: 10px;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #ff9bfac2;
+  text-decoration: underline;
+}
+</style>
+</head>
+    
+<body>
+    
+
+    
+    
+    <b>
+        <a href="https://www.last.fm/user/froehlichkeit" target="_blank">last.fm</a>
+    </b> <br>
+    
+    
+    <b>
+        <a href="https://www.youtube.com/@synesthimata" target="_blank">archive yt</a>
+    </b> <br>
+        
+        
+    <b>
+        <a href="https://vergissmichnicht.nekoweb.org.wahkonda-archives" target="_blank">archive fansite (wip)</a>
+    </b> <br>
+        
+    
+    <b>
+        <a href="https://vergissmichnicht.nekoweb.org" target="_blank">homepage</a>
+    </b> <br>
+        
+    
+    <b>
+        <a href="https://vergissmichnicht.nekoweb.org/musics" target="_blank">le wahkonda "mixtapes"</a>
+    </b> <br>
+        
+    
+    <b>
+        <a href="https://youtu.be/iS6TmIPkOnY?si=EhCtJc76JhjDE789" target="_blank">rock 'n' roller / hilflos - wahkonda (1986)</a>
+    </b> <br>
+        
+    
+    <b>
+        <a href="https://youtu.be/0OX0TaJuFDg?si=b4M9MK-hSIq8Tjbz" target="_blank">millionen emotionen - wahkonda (1989)</a>
+    </b>
+    
+    <script type="text/tilescript">
+        var USERNAME = "froehlichkeit"; // Put your LastFM username here
+var BASE_URL = "https://lastfm-last-played.biancarosa.com.br/" + USERNAME + "/latest-song";
+
+function getTrack() {
+    fetch(BASE_URL, function(json) {
+        var isPlaying = (json.track['@attr'] && json.track['@attr'].nowplaying) || false;
+
+        if (!isPlaying) {
+            // Trigger if a song isn't playing
+            return;
+        } else {
+            // Trigger if a song is playing
+        }
+
+        // Values:
+        // COVER IMAGE: json.track.image[1]['#text']
+        // TITLE: json.track.name
+        // ARTIST: json.track.artist['#text']
+
+        document.getElementById("listening").innerText = json.track.name + " by " + json.track.artist['#text'];
+    });
+};
+
+function fetch(url, callback) {
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            callback(json)
+        }
+    };
+    
+    xhr.send(null);
+}
+
+getTrack();
+setInterval(function() { getTrack(); }, 10000);
+    </script>
+
+</body>
+    
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/bluechinchompa.com/bluechinchompa.jpg");
+}
+
+.text {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</style>
+</head>
+<body>
+    <img src="/t/bluechinchompa.com/HAPPY_GOOD_DAY.gif" width="250">
+
+    <p style="text-align: center;">
+        <a href="/t/bluechinchompa.com/happy-good-day/join.html">Join</a> | <a href="/t/bluechinchompa.com/happy-good-day/list.html">Members list</a> | <a href="/t/bluechinchompa.com/index.html">Back to Index</a>
+    </p>
+    
+    <p>
+        HAPPY GOOD DAY is a term like any other that you may use. It can be used a greeting, kind message, or adjective or really whatever you want it to be. We here at the HAPPY GOOD DAY tile society believe you should incorporate it into your vocabulary.
+    </p>
+    
+    <p style="font-size: 0.5em;">
+    	Questions or comments may go to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3beb693b1bfa6b6b0bbbabdb0bbbcbea3b2fdb0bcbe">[email&#160;protected]</a> or @bluechinchompa on Discord.
+    </p>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

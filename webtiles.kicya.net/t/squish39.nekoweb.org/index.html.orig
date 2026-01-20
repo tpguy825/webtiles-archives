@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: repeating-conic-gradient(#bce0f4 0 25.0%, #fff 0 50.0%);
+  color: #000;
+  background-color: #77beff;
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 80px 80px;
+  height: 100vh;
+  margin: 0;
+  animation: 3s linear infinite scrollbg;
+}
+
+@keyframes scrollbg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 80px 80px;
+  }
+}
+
+.banner {
+  color: #fff;
+  background: linear-gradient(#4d63b5d9, #6c83d8d9);
+  height: 25px;
+  margin: 0;
+  top: 0;
+}
+
+.navlist {
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  display: flex;
+  position: absolute;
+  inset: 130px 0 0;
+}
+
+.navlist a {
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(#5bb1ff, #8ec9fd);
+  border-radius: 20px;
+  outline: 4px solid #40a4ff;
+  padding: 12px 50px;
+  text-decoration: none;
+  transition: all .15s ease-in-out;
+  display: inline-block;
+  transform: scale(1);
+}
+
+.page-link:hover {
+  background: linear-gradient(#5bc4ff, #8ee6fd);
+  outline: 4px solid #57aeff;
+  transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+    <div class="banner">
+		<marquee behavior="scroll" direction="left" scrollamount="5" style="font-size: 12px; text-align: center; margin: 0; vertical-align: middle; line-height: 25px;">
+			Hello WebTiler! Please note that the webpage you are about to visit is due a makeover. The current Web Page will be revamped in the near future. See the link posted on the notice in the main page for more information!
+		</marquee>
+    </div>
+
+    
+    <div style="position:relative; height: 100px; top: 5px;">
+        
+		<div style="height: 100%;">
+		<img src="/t/squish39.nekoweb.org/logo.png" style="width: 100%; margin-top: -50px;">
+		</div>
+        
+		<div class="navlist">
+			<a href="https://squish39.nekoweb.org" class="page-link" target="_blank">Enter</a>
+		</div>
+        
+    </div>
+
+
+    
+    
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  text-align: right;
+  background-color: #05050d;
+  font-weight: bold;
+}
+
+.overlay {
+  opacity: 0;
+  z-index: 1000;
+  background: #00000080;
+  border: 2px double #fff;
+  width: 70px;
+  height: 175px;
+  margin: 15px;
+  padding: 5px;
+  transition: all 1s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.overlay:hover {
+  opacity: 1;
+  transition: all 1s linear;
+}
+
+p {
+  line-height: 9px;
+}
+
+.w-med {
+  letter-spacing: .2em;
+}
+
+.w-wide {
+  letter-spacing: .3em;
+}
+
+.w-wider {
+  letter-spacing: .35em;
+}
+
+.w-narrow {
+  letter-spacing: -.05em;
+}
+</style>
+</head>
+<body>
+    <a href="https://www.taylorsterling.net/music/deca-dance" target="_blank"><img src="/t/deca-dance.yefreitor.com/lainxdeca1.gif" width="250" id="deca"></a>
+    <audio id="audio" src="/t/deca-dance.yefreitor.com/humannequin.ogg" type="audio/ogg" preload="metadata"></audio>
+        <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var yourAudioElement = document.getElementById("audio");
+
+var musicInt = setInterval(musicCheat, 1000);
+
+function musicCheat() {
+    
+    if (yourAudioElement.paused == true){
+
+        yourAudioElement.play()
+    }
+} </script>
+    
+    <div class='overlay'>
+        <img src="/t/deca-dance.yefreitor.com/barcode.png" width="70">
+        <p class='w-med'>today</p>
+        <p class='w-wider'>is</p>
+        <p class='w-wide'>the</p>
+        <p class='w-wide'>day</p>
+        <p class='w-wider'>of</p>
+        <p class='w-narrow'>decadence</p>
+
+        </div>
+    
+</body>
+</html>

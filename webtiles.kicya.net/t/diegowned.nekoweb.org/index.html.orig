@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>@font-face {
+  font-family: MSGothics;
+  src: url("/t/diegowned.nekoweb.org/MSGOTHIC.TTF") format("truetype");
+}
+
+.tile-body {
+  width: 256px;
+  height: 256px;
+  image-rendering: pixelated;
+  background-color: #120828;
+  background-image: url("/t/diegowned.nekoweb.org/grid.jpg");
+  margin: 0;
+  padding: 0;
+  font-family: MSGothics, sans-serif;
+  overflow: hidden;
+}
+
+.tile-wrapper {
+  box-sizing: border-box;
+  border: 2px solid #ed64f5;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.mini-bar {
+  color: #fff;
+  background: linear-gradient(90deg, #092469, #a5c8ee);
+  border-bottom: 2px outset #ccc;
+  align-items: center;
+  height: 20px;
+  padding-left: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+}
+
+.top-image-container {
+  background: #00000080;
+  border: 4px double #c5e4e6;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin: 8px;
+  display: flex;
+  overflow: hidden;
+}
+
+.top-image-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  animation: 4s ease-in-out infinite logoOscillate;
+}
+
+.promo-text {
+  color: #6dd19c;
+  text-align: center;
+  text-shadow: 1px 1px #000;
+  margin: 0;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.bottom-right-gif {
+  filter: drop-shadow(2px 2px #3d0617);
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  right: -20px;
+}
+
+@keyframes logoOscillate {
+  0%, 100% {
+    transform: scaleX(1.05)scaleY(.96);
+  }
+
+  50% {
+    transform: scaleX(.96)scaleY(1.05);
+  }
+}
+
+a {
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<a href="https://diegowned.nekoweb.org/index.html" target="_blank">
+    <div class="tile-wrapper">
+        <div class="mini-bar">MARELAND_AD.EXE</div>
+
+        <div class="top-image-container">
+            <img src="/t/diegowned.nekoweb.org/MarelandLogo.gif" alt="Promo">
+        </div>
+
+        <img src="/t/diegowned.nekoweb.org/PonyDance.gif" class="bottom-right-gif" alt="look at the silly horse!!!">
+    </div>
+</a>
+
+</body>
+</html>

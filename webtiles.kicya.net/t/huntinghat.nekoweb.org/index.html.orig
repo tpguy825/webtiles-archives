@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>.tile-body {
+  background-image: url("/t/huntinghat.nekoweb.org/newone.jpg");
+  background-repeat: repeat;
+}
+
+html, .tile-body {
+  margin: 0;
+  padding: 0;
+}
+
+.ray {
+  pointer-events: none;
+  max-width: 100%;
+  height: auto;
+  max-height: 140px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text {
+  cursor: pointer;
+  max-width: 190px;
+  height: auto;
+  transition: transform .25s;
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text:hover {
+  transform: translateX(-50%)scale(1.2);
+}
+</style>
+</head>
+<body>
+    
+  <img src="/t/huntinghat.nekoweb.org/loookyyyy.png" class="ray">
+
+  <a href="https://huntinghat.nekoweb.org/wcs/" target="_blank">
+    <img src="/t/huntinghat.nekoweb.org/redwcs.png" class="text">
+  </a>
+</body>
+</html>

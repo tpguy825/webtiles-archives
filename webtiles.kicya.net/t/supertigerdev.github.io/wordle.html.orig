@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>.tile-body {
+  color: #f1fff6;
+  background: #111412;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: monospace;
+  display: flex;
+}
+
+#like_btn {
+  user-select: none;
+  transition: all .2s;
+}
+
+#like_btn:hover {
+  opacity: .6;
+}
+</style>
+
+    <style>a.back {
+  color: #97c2ff;
+  z-index: 111111;
+  padding: 2px;
+  text-decoration: none;
+  transition: all .2s;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+a.back:hover {
+  background: #97c2ff29;
+  border-radius: 4px;
+}
+
+#grid {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.row {
+  gap: 4px;
+  display: flex;
+}
+
+.item {
+  border: 1px solid #fff6;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  display: flex;
+}
+
+#input {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.gray {
+  background: gray;
+}
+
+.green {
+  background: #31a157;
+}
+
+.orange {
+  background: #a99042;
+}
+
+#overlay {
+  background: #000;
+  border: 1px solid #fff9;
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: none;
+  position: absolute;
+  top: 10px;
+}
+</style>
+  </head>
+  <body>
+      <a class="back" href="/t/supertigerdev.github.io/./index.html">Back</a>
+    <h2 style="color: rgb(73, 255, 134); margin-top: 0;margin-bottom: 8px;">Wordle</h2>
+      <input id="input" maxlength="5" autocomplete="off">
+      <div id="overlay"></div>
+    <div id="grid">
+    
+        <div class="row" id="row-1">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <div class="row" id="row-2">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <div class="row" id="row-3">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <div class="row" id="row-4">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <div class="row" id="row-5">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+
+   <script type="text/tilescript">
+       var words = ["tiles", "mouse", "house", "ghost", "loose", "heels", "brave", "water", "bunny", "watch"]
+       var guesses = [];
+       
+       var currentWordIndex = Math.round(Math.random() * (words.length - 1))
+    
+       function includes(arr, str) {
+           for (var i = 0; i < arr.length; i++) {
+               if (arr[i] == str) return true;
+           }
+       }
+        function checkHasWon() {
+            var oldChars = guesses[guesses.length - 1] || "";
+            return oldChars ? (oldChars.toLowerCase() === words[currentWordIndex]) : false;
+        }
+       
+       function reset() {
+           guesses = [];
+           currentWordIndex = Math.round(Math.random() * (words.length - 1))
+           setRows(document.getElementById("row-1"), [])
+           setRows(document.getElementById("row-2"), [])
+           setRows(document.getElementById("row-3"), [])
+           setRows(document.getElementById("row-4"), [])
+           setRows(document.getElementById("row-5"), [])
+           document.getElementById("overlay").style.display ="none";
+       }
+      
+       function setRows(rowEl, chars, check) {
+           var currentWord = words[currentWordIndex].split("");
+        
+        	var letterCounts = {};
+            for (var i =0; i < currentWord.length; i++) {
+                var letter = currentWord[i];
+                letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+            }
+        
+        	var statuses = ["gray", "gray", "gray", "gray", "gray"];
+        
+
+            for (var i = 0; i < 5; i++) {
+                if (chars[i] === currentWord[i]) {
+                    statuses[i] = "green";
+                    letterCounts[chars[i]]--;
+                }
+            }
+            for (var i = 0; i < 5; i++) {
+                if (statuses[i] !== "green" && includes(currentWord, chars[i])) {
+                    if (letterCounts[chars[i]] > 0) {
+                        statuses[i] = "orange";
+                        letterCounts[chars[i]]--;
+                    }
+                }
+            }
+        
+        
+        
+            for (var i =0; i < rowEl.children.length; i++) {
+                if ( chars[i]) {
+                    rowEl.children[i].innerText = chars[i].toUpperCase()
+                    if (check) {
+                        rowEl.children[i].className = "item "+ statuses[i]
+                    } else {
+                        rowEl.children[i].className = "item";
+                    }
+                } else {
+                    rowEl.children[i].innerText = ""
+                    rowEl.children[i].className = "item";
+                }
+            }
+       }
+       document.getElementById("input").addEventListener("input", function(e) {
+           var hasWon = checkHasWon();
+           if (guesses.length === 5 || hasWon) {
+               reset();
+           }
+           var currentRow = guesses.length + 1;
+           var rowEl = document.getElementById("row-"+currentRow);
+
+           e.target.value = e.target.value.trim().toLowerCase();
+           var chars = e.target.value.split("")
+           setRows(rowEl, chars)
+       })
+       
+       
+       document.getElementById("input").addEventListener("keypress", function(e) {
+           if (e.keyCode === 13) {
+               if (guesses.length === 5 || checkHasWon()) {
+                   reset();
+                   return;
+               }
+               var currentRow = guesses.length + 1;
+               var rowEl = document.getElementById("row-"+currentRow);
+               var chars = e.target.value.split("")
+
+
+
+               if (chars.length < 5) return;
+               setRows(rowEl, chars, true)
+               e.target.value = "";
+               guesses.push(chars.join(""))
+               var hasWon = chars.join("").toLowerCase() === words[currentWordIndex];
+
+               if (hasWon) {
+                   document.getElementById("overlay").style.display = "flex";
+                   document.getElementById("overlay").innerText = "You Win!"
+                   return;
+               }
+               if (guesses.length === 5) {
+                   document.getElementById("overlay").style.display = "flex";
+                   document.getElementById("overlay").innerText = "The word was " + words[currentWordIndex]
+               }
+
+           }
+
+       })
+       
+   </script>
+  </body>
+</html>

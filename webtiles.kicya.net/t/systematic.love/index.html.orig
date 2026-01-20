@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("/t/systematic.love/img/cover_irregularnation11.jpg") 0 no-repeat;
+  max-width: 250px;
+  max-height: 250px;
+  font: 12px sans-serif;
+}
+
+a {
+  color: #eb6ab8;
+}
+
+h1 {
+  color: #eb6ab8;
+  text-align: center;
+  margin: 0;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.album {
+  width: 100%;
+  height: 100%;
+}
+
+.hoveronly {
+  visibility: hidden;
+  opacity: 0;
+  background: #fffc;
+  border-radius: 10px;
+  margin: .5em;
+  padding: .5em;
+  transition: visibility, opacity .5s;
+  overflow: auto;
+}
+
+.album:hover .hoveronly {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+    <div class="album">
+            <div class="hoveronly">
+                <h1>IRREGULAR NATION 11</h1>
+                <p style="text-align: center;">Presented by HARDCORE TANO*C</p>
+                <p>One of my favourite compilation albums as of late. Features a lovely variety of "irregular" songs from everyone involved as usual, with USAO and Massive New Krew's being some of my favs.</p>
+                <p>
+                    Favourite song: <a href="https://www.youtube.com/watch?v=zXiYwmunjR0" target="_blank">USAO & Shandy Kubota - Lost Frequency</a>
+                </p>
+                <p>
+                    <a href="https://www.youtube.com/watch?v=iq6pcRSbhro" target="_blank">Album demo</a> / 
+                    <a href="https://www.tano-c.net/release/tcplus-0060/" target="_blank">Release page</a>
+                </p>
+                <p style="font-size: 8px; text-align: right;">
+                    My main site: <a href="https://fear.garden" target="_blank">fear.garden</a>
+                </p>
+            </div>
+        </div>
+</body>
+</html>

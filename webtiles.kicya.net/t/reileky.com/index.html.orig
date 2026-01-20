@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #302a34;
+  background-color: #d9d8d9;
+  justify-content: center;
+  display: flex;
+}
+
+#ashling {
+  z-index: 11;
+  background-image: url("/t/reileky.com/webtiles_ashling_a.webp");
+  background-size: 100%;
+  width: 65%;
+  height: 75%;
+  position: absolute;
+  transform: translate(28%, 34%);
+}
+
+#ashling:hover {
+  background-image: url("/t/reileky.com/webtiles_ashling_b.webp");
+  position: absolute;
+}
+
+#reileky {
+  z-index: 10;
+  background-image: url("/t/reileky.com/reileky_button.png");
+  background-repeat: no-repeat;
+  background-size: 45%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 7%;
+  left: 49%;
+  transform: rotate(5deg);
+}
+
+#reileky:hover {
+  top: 3%;
+  left: 57%;
+  transform: rotate(355deg);
+}
+
+#collab_left {
+  z-index: 9;
+  background-image: url("/t/reileky.com/rightdrawn.png");
+  background-repeat: no-repeat;
+  background-size: 65%;
+  width: 110px;
+  height: 131px;
+  position: absolute;
+  top: 38%;
+  right: 57%;
+}
+
+#border_chaotic {
+  z-index: 7;
+  background-image: url("/t/reileky.com/border_chaotic_3.webp");
+  background-size: 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#waftiles {
+  z-index: 6;
+  background-image: url("/t/reileky.com/waftiles_2.webp");
+  background-repeat: no-repeat;
+  background-size: 65%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 21%;
+  left: 5%;
+  transform: rotate(2deg);
+}
+
+#border {
+  z-index: 2;
+  background-image: url("/t/reileky.com/border2.png");
+  background-size: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+#boo {
+  z-index: 1;
+  background-image: url("/t/reileky.com/web_embed.gif");
+  background-repeat: no-repeat;
+  background-size: 102%;
+  width: 160%;
+  height: 130%;
+  position: absolute;
+  top: 7%;
+  right: -10%;
+  transform: rotate(355deg);
+}
+</style>
+    
+</head>
+<body>
+	<div id="ashling"></div>
+    <div><a id="reileky" href="https://reileky.com/" target="_blank"></a></div>
+    
+    <div id="collab_left"></div>
+    <div id="waftiles"></div>
+    <div id="border_chaotic"></div>
+    <div id="border"></div>
+	<div id="boo"></div>
+    
+  	<audio id="music" src="/t/reileky.com/wind_streets_qutabire.mp3" loop type="audio/mpeg" preload="metadata"></audio>    
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+// I pretty much heavily referenced the script from shy.rocks tile (https://webtiles.kicya.net/#875,-125), archi.moe's tile (https://webtiles.kicya.net/#-875,125) so full credits to them.
+
+var musicfile = [
+    'wind_streets_qutabire'
+];
+
+var music = document.getElementById('music');
+
+function player() {
+    music.src = 'wind_streets_qutabire.mp3';
+    music.volume = 0.2;
+    music.play()
+}
+
+player();
+</script>
+</body>
+</html>

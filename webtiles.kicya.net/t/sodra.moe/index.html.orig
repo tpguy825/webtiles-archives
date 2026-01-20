@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+  <head>
+    
+    
+    <style>html, .tile-body {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#stage {
+  font-family: Comic Sans MS, Trebuchet MS, system-ui, sans-serif;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+#bg {
+  z-index: 0;
+  filter: saturate(1.25) contrast(1.05);
+  background-image: url("/t/sodra.moe/anime-happy.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  inset: 0;
+}
+
+#bg:before {
+  content: "";
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 20%, #ffffff59, #0000 35%), radial-gradient(circle at 70% 30%, #ffb4f059, #0000 40%), radial-gradient(circle at 40% 70%, #78f0ff47, #0000 45%), radial-gradient(circle at 85% 80%, #ffff8c38, #0000 45%);
+  animation: 9s linear infinite floaty;
+  position: absolute;
+  inset: -20%;
+}
+
+#stage:after {
+  content: "";
+  pointer-events: none;
+  z-index: 9;
+  opacity: .15;
+  background: repeating-linear-gradient(#0000 0 3px, #00000059 4px);
+  position: absolute;
+  inset: 0;
+}
+
+#title {
+  z-index: 5;
+  letter-spacing: 1px;
+  color: #ffb7e1;
+  text-shadow: 2px 2px #80ea80f2, -2px -2px #ff806df2, 0 0 14px #ff80808c;
+  font-size: 32px;
+  animation: 1.8s steps(2, end) infinite jitter;
+  position: absolute;
+  top: 14px;
+  left: 16px;
+}
+
+#enter {
+  z-index: 6;
+  color: #7b2cff;
+  background: #ffffffc7;
+  border: 3px solid #ffa0dce6;
+  border-radius: 18px;
+  padding: 4px 48px;
+  font-size: 24px;
+  text-decoration: none;
+  animation: 1.1s ease-in-out infinite bounce;
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translate(-50%, -50%)rotate(-3deg);
+  box-shadow: 0 10px 30px #00000059, 0 0 18px #ffb4f099;
+}
+
+#enter:hover {
+  transform: translate(-50%, -50%)rotate(2deg)scale(1.04);
+}
+
+#hello_i_am_15_minutes_old {
+  z-index: 6;
+  color: #ff964af2;
+  text-shadow: 0 0 10px #0000008c;
+  font-size: 12px;
+  position: absolute;
+  top: 56px;
+  left: 12px;
+}
+
+.sticker {
+  z-index: 7;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 14px #00000059);
+  width: 170px;
+  height: auto;
+  animation: 3.8s ease-in-out infinite wiggle;
+  position: absolute;
+}
+
+.sticker.s1 {
+  top: 70px;
+  right: 18px;
+  transform: rotate(6deg);
+}
+
+.sticker.s2 {
+  opacity: .95;
+  width: 140px;
+  top: 240px;
+  right: 140px;
+  transform: rotate(-7deg);
+}
+
+#hud {
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  background: #e6e6e6d9;
+  border-top: 2px solid #ffa0dccc;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#evilBtn {
+  cursor: pointer;
+  background: #ffffffe6;
+  border: 2px solid #00000059;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+#evilCount {
+  color: #000000d9;
+  font-size: 12px;
+}
+
+.shake {
+  animation: .25s linear shake;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, -50%)rotate(-3deg)scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -56%)rotate(-3deg)scale(1.03);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: translateY(0)rotate(6deg);
+  }
+
+  50% {
+    transform: translateY(-8px)rotate(2deg);
+  }
+}
+
+@keyframes floaty {
+  0% {
+    transform: translate(0);
+  }
+
+  50% {
+    transform: translate(60px, -40px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes jitter {
+  0%, 100% {
+    transform: translate(0);
+  }
+
+  50% {
+    transform: translate(1px, -1px);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translate(3px, -2px);
+  }
+
+  50% {
+    transform: translate(-2px, 2px);
+  }
+
+  75% {
+    transform: translate(2px, 1px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+</style>
+  </head>
+
+  <body>
+    <div id="stage" aria-label="anime-happy">
+      <div id="bg"></div>
+
+      <div id="title">soda's site :D</div>
+
+      <a id="enter" href="https://sodra.moe" target="_blank">enter</a>
+
+      
+      <img class="sticker s1" src="/t/sodra.moe/sticker1.png" alt>
+      <img class="sticker s2" src="/t/sodra.moe/sticker2.png" alt>
+
+      <div id="hello_i_am_15_minutes_old">Hello!!!!! im soda and i think webtiles are cool</div>
+
+    </div>
+
+    <script type="text/tilescript">(function () {
+  var stage = document.getElementById("stage");
+  var btn = document.getElementById("evilBtn");
+  var countEl = document.getElementById("count");
+
+  // Persist the evil count
+  var count = 21;
+  try {
+    var saved = window.localStorage.getItem("evilCount");
+    if (saved !== null) count = parseInt(saved, 10);
+  } catch (e) {}
+
+  function render() {
+    countEl.textContent = String(count);
+  }
+
+  function addShake() {
+    stage.className = "shake";
+    window.setTimeout(function () {
+      stage.className = "";
+    }, 260);
+  }
+
+  btn.onclick = function () {
+    count += 1;
+    try { window.localStorage.setItem("evilCount", String(count)); } catch (e) {}
+    render();
+    addShake();
+  };
+
+  render();
+
+  // Subtle sticker drift (optional)
+  var stickers = document.getElementsByClassName("sticker");
+  var t = 0;
+
+  function tick() {
+    t += 0.016;
+    for (var i = 0; i < stickers.length; i++) {
+      var s = stickers[i];
+      var dy = Math.sin(t * 1.2 + i) * 6;
+      var dx = Math.cos(t * 0.9 + i) * 3;
+      s.style.marginTop = dy + "px";
+      s.style.marginLeft = dx + "px";
+    }
+    if (window.requestAnimationFrame) window.requestAnimationFrame(tick);
+    else window.setTimeout(tick, 16);
+  }
+
+  tick();
+})();
+</script>
+  </body>
+</html>

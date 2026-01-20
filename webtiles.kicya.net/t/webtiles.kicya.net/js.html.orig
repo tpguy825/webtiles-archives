@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  overflow: auto;
+}
+
+a {
+  color: #d85252;
+}
+
+#container {
+  margin: 5px 10px 10px;
+}
+
+#header {
+  align-items: center;
+  gap: 15px;
+  display: flex;
+}
+
+#header h1 {
+  margin: 0;
+}
+
+ul {
+  margin-inline-start: -10px;
+}
+
+#content {
+  color: #555;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div>
+                <img src="/t/webtiles.kicya.net/logo_black.png" width="100">
+            </div>
+            <div>
+                <h1>JS</h1>
+                <span>(click and scroll)</span>
+            </div>
+        </div>
+		<div id="content">
+            <p>Your JavaScript runs in a <strong>sandboxed interpreter</strong> with limited APIs. Only ES5 is available.</p>
+                <p>The following features are <strong>not supported</strong>:</p>
+                <ul>
+                    <li><code>let</code> / <code>const</code> (use <code>var</code>)</li>
+                    <li>Arrow functions <code>=&gt;</code></li>
+                    <li>Template literals <code>\`...\`</code></li>
+                    <li>Classes, destructuring, spread operator</li>
+                    <li><code>async</code> / <code>await</code>, Promises</li>
+                    <li>Modules (<code>import</code> / <code>export</code>)</li>
+                </ul>
+                <p><strong>Available APIs:</strong></p>
+                <ul>
+                    <li><strong>DOM</strong> — no <code>innerHTML</code> setter, element count limits, sandboxed to your tile</li>
+                    <li><strong>Canvas 2D</strong> — full drawing support with size limits</li>
+                    <li><strong>XMLHttpRequest</strong> — external URLs only (no same-origin or relative requests)</li>
+                    <li><strong>Events</strong> — <code>addEventListener</code>, click, keyboard, mouse, touch and other events.</li>
+                    <li><strong>Timers</strong> — <code>setTimeout</code>, <code>setInterval</code></li>
+                    <li><strong>localStorage</strong> — limited storage size</li>
+                    <li>location, DOMParser, atob/btoa, console, alert/prompt/confirm</li>
+                </ul>
+        </div>
+		<div>
+            <a href="/t/webtiles.kicya.net/index.html">Back</a>
+        </div>
+    </div>
+</body>
+</html>

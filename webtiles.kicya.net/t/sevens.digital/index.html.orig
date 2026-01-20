@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Tan-Patty;
+  src: url("/t/sevens.digital/Tan-Patty.ttf.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tile-body {
+  color: #fff;
+  background-image: url("/t/sevens.digital/lake.jpg");
+  margin: 0;
+  padding: 0;
+}
+
+#box {
+  z-index: 10;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+}
+
+.text {
+  text-align: center;
+  letter-spacing: 1px;
+  z-index: 10;
+  margin: 0;
+  font-family: Tan-Patty;
+  font-size: 20px;
+  -webkit-animation: 1s ease-in-out infinite alternate glow;
+  -moz-animation: 1s ease-in-out infinite alternate glow;
+  animation: 1s ease-in-out infinite alternate glow;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 3px #03a, 0 0 5px #0ad;
+  }
+
+  to {
+    text-shadow: 0 0 5px #0ad, 0 0 10px #0ad;
+  }
+}
+
+#border1 {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+}
+
+#border2 {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+}
+
+#clanbg {
+  object-fit: cover;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-mask-image: url("/t/sevens.digital/fishmask.png");
+  mask-image: url("/t/sevens.digital/fishmask.png");
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+}
+
+#fishbg {
+  z-index: 0;
+  width: 150%;
+  height: 150%;
+  margin: 0;
+  position: absolute;
+  top: -25%;
+  left: -25%;
+}
+</style>
+</head>
+<body>
+    <img id="fishbg" src="/t/sevens.digital/the-spinning-fish.gif">
+    <div id="box"><p class="text">NEVER NEED A FISH I'M WHAT A FISH NEED</p><audio id="audio" style="width:100%;z-index:10;padding-top:10px;" controls src="/t/sevens.digital/neverneedafish.ogg" preload="metadata"></audio></div>
+    <img id="clanbg" src="/t/sevens.digital/clanbg.gif">
+</body>
+</html>

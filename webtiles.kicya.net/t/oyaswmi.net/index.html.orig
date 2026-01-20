@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-image: url("/t/oyaswmi.net/https:/webtiles.kicya.net/t/oyaswmi.net/bg.gif");
+  margin: 0;
+  padding: 0;
+}
+
+#select {
+  z-index: 300;
+  cursor: pointer;
+  width: 450%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+#clickMe {
+  color: #fff;
+  z-index: 500;
+  position: fixed;
+  bottom: 2px;
+  left: 70px;
+}
+
+#rightFriend {
+  color: #fff;
+  text-align: right;
+  writing-mode: vertical-lr;
+  margin: 0;
+  font-size: 10px;
+  position: fixed;
+  top: 20%;
+  right: 5px;
+}
+
+#folderHolder {
+  width: 100%;
+  image-rendering: pixelated;
+  flex-wrap: wrap;
+  margin: 100px 10px 10px 5px;
+  display: flex;
+}
+
+.folder {
+  color: #fff;
+  text-align: center;
+  flex-direction: column;
+  width: 60px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  font-size: .75em;
+  display: flex;
+}
+
+.folder p {
+  text-shadow: 2px 2px 1px #000;
+  margin: 0;
+}
+
+.folder img {
+  width: 32px;
+  margin: auto;
+}
+
+#topFriend {
+  color: #fff;
+  text-align: right;
+  margin: 0;
+  font-size: 10px;
+  position: fixed;
+  top: 5px;
+  right: 20%;
+}
+
+#barTop {
+  width: 125%;
+  position: fixed;
+  left: 0;
+}
+
+#bg {
+  z-index: -1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#welcome {
+  text-align: right;
+  color: #fff;
+  z-index: 1000;
+  font-size: 11.5px;
+  position: fixed;
+  bottom: 5%;
+  right: 25px;
+}
+
+a {
+  color: #fff;
+}
+</style>
+  <style>#popupIm {
+  z-index: -1;
+  pointer-events: none;
+  width: 250px;
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: -5px;
+  left: -10px;
+}
+
+#popup {
+  opacity: 0;
+  color: #7d799b;
+  z-index: 2;
+  text-shadow: 2px 0 #17101f, 1.75517px .958851px #17101f, 1.0806px 1.68294px #17101f, .141474px 1.99499px #17101f, -.832294px 1.81859px #17101f, -1.60229px 1.19694px #17101f, -1.97999px .28224px #17101f, -1.87291px -.701566px #17101f, -1.30729px -1.51361px #17101f, -.421592px -1.95506px #17101f, .567324px -1.91785px #17101f, 1.41734px -1.41108px #17101f, 1.92034px -.558831px #17101f;
+  background-image: url("/t/oyaswmi.net/https:/webtiles.kicya.net/t/oyaswmi.net/popup.png");
+  width: 50%;
+  height: 256px;
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 5px;
+  transition: all .5s;
+  position: fixed;
+  top: 250px;
+}
+
+#popup p {
+  margin-top: 5px;
+}
+
+#usersCluster {
+  flex-wrap: wrap;
+  width: 100px;
+  font-size: 10px;
+  transition: all .5s;
+  display: flex;
+  position: absolute;
+  top: 7px;
+  left: 145px;
+}
+
+#userTitle {
+  color: #fff;
+  position: absolute;
+  top: 87px;
+  left: 28px;
+}
+
+.user {
+  text-shadow: ;
+  color: #fff;
+  text-align: center;
+  word-wrap: break-word;
+  word-break: break-all;
+  flex-flow: column wrap;
+  width: 32px;
+  margin: 6px 4px;
+  font-size: 8.25px;
+  transition: all .25s;
+  display: flex;
+}
+
+.user:hover {
+  scale: 1.25;
+}
+
+.user img {
+  image-rendering: pixelated;
+  width: 32px;
+}
+</style>
+</head>
+<body>
+	
+    <p id="topFriend">
+		RATWEDDING.EXE ([1] New Rat)
+    </p>
+    
+    <p id="rightFriend">
+		remblanc.mp3 [0.13/3.47]
+    </p>
+       
+    <p id="welcome">
+        
+       {Current User} <br> {[<a href="https://advelos.moe/" target="_blank">advelos.moe</a>]}
+    
+   
+    </p>
+    
+    <div id="folderHolder">
+        <div class="folder">
+            <a href="/t/oyaswmi.net/stitches.html">
+            <img src="https://webtiles.kicya.net/t/oyaswmi.net/folder.png">
+          	<p>
+               Stitches
+            </p>
+            </a>
+        </div>
+    </div>
+    
+        
+    <marquee behavior="scroll"  id="clickMe" direction="left">&lt;= You Have [1] Notification</marquee>
+
+    
+    <div id="popup">
+        <img id="popupIm" src="https://webtiles.kicya.net/t/oyaswmi.net/popup.png">
+        
+        <div id="usersCluster">
+            <p id="userTitle">
+                Users
+            </p>
+            <div class="user">
+                <a href="https://advelos.moe/" target="_blank">
+                <img src="https://webtiles.kicya.net/t/oyaswmi.net/purinUser.png">
+  
+                </a>
+            </div>
+            
+            
+            <div class="user">
+                <a href="https://oyaswmi.net/" target="_blank">
+                <img src="https://webtiles.kicya.net/t/oyaswmi.net/oyaUser.png">
+   
+                </a>
+            </div>
+            
+                     <div class="user">
+           <a href="https://sank.nekoweb.org/" target="_blank">
+                <img src="https://webtiles.kicya.net/t/oyaswmi.net/otomoUser.png">
+       
+                </a>
+            </div>
+            
+            
+            <div class="user">
+                <a href="https://nicrinu.moe/" target="_blank">
+                <img src="https://webtiles.kicya.net/t/oyaswmi.net/nicUser.png">
+       
+                </a>
+            </div>
+        </div>
+        <p>
+            Welcome, User.
+            
+        	<hr> 
+        
+        	<a href="/t/oyaswmi.net/about.html">[About]</a> <hr>
+            
+            This is a work in progress. <hr>
+            
+            For now, please visit me at <a href="https://oyaswmi.net/" target="_blank">oyaswmi.net</a>
+        </p>
+    </div>
+    
+    <a href="/t/oyaswmi.net/index.html">
+
+   	<img id="select" src="https://webtiles.kicya.net/t/oyaswmi.net/deskBlink.gif">
+    </a>
+    
+	<img id="bg" src="https://webtiles.kicya.net/t/oyaswmi.net/bg.gif">
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var mouseOverPopup = false
+var mouseOverTaskbar = false
+
+function checkHover(){
+    
+    if (mouseOverTaskbar == true){
+        document.getElementById("select").src = "https://webtiles.kicya.net/t/oyaswmi.net/desktop_select.png"
+    }else{
+        document.getElementById("select").src = "https://webtiles.kicya.net/t/oyaswmi.net/desktop.png"
+    }
+    
+    if (mouseOverPopup == true || mouseOverTaskbar == true) {
+          
+    	document.getElementById("popup").style.opacity = "1";
+        
+        if (window.location.href != "/t/oyaswmi.net/stitches.html") {
+            document.getElementById("clickMe").innerText = "Welcome To The Wired"
+        }
+    	
+        document.getElementById("popup").style.top = "0px";
+    }else {
+   
+    	document.getElementById("popup").style.opacity = "0";    
+        document.getElementById("popup").style.top = "250px";
+
+    }
+}
+
+document.getElementById("popup").onmouseover = function(){
+	mouseOverPopup = true
+    checkHover()
+};
+
+document.getElementById("popup").onmouseout = function(){
+	mouseOverPopup = false
+    checkHover()
+};
+
+
+
+document.getElementById("select").onmouseover = function(){
+	mouseOverTaskbar = true
+    checkHover()
+};
+
+document.getElementById("select").onmouseout = function(){
+	mouseOverTaskbar = false
+    checkHover()
+};
+
+</script>
+</body> 
+</html>      

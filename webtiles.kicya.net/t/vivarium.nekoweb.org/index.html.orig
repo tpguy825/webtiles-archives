@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  background-image: url("/t/vivarium.nekoweb.org/bunnies.jpeg");
+  background-size: cover;
+  margin: 10px;
+}
+
+p {
+  background-color: #fff;
+  font-size: 10px;
+}
+</style>
+    <style>
+</style>
+</head>
+<body>
+    <p>Hi! This tile will have content #soon (trust) (totally wont procrastinate on things i actually wanna do)</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<style>@font-face {
+  font-family: S;
+  src: url("/t/marioroyale.com/s.woff2");
+  font-display: swap;
+}
+
+@keyframes g {
+  to {
+    text-shadow: 0 0 10px #ffffff80;
+  }
+}
+
+@keyframes b {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.tile-body {
+  image-rendering: pixelated;
+  color: #fff;
+  background: #9290ff url("/t/marioroyale.com/bg.webp") center / cover repeat-x fixed;
+  font-family: S;
+  animation: 150s linear infinite b;
+}
+
+h3 {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#l:hover {
+  text-shadow: 0 0 10px #ffffffb3;
+  animation: none;
+}
+
+#l {
+  cursor: pointer;
+  color: #fff;
+  background: none;
+  border: none;
+  font-family: S;
+  font-size: 32px;
+  animation: 1s infinite alternate g;
+}
+
+a, a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 5px;
+}
+
+#b {
+  z-index: 0;
+  opacity: .1;
+  background: url("/t/marioroyale.com/b.gif");
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+</style><div id='b'></div><h3 id="l"><a href="http://marioroyale.com" target="_blank">Mario Royale</a></h3><p style="position:relative;z-index:2">Revived by<br>the community!</p><p style="color:#000;position:fixed;top:2px;left:2px">Revived by<br>the community!</p>

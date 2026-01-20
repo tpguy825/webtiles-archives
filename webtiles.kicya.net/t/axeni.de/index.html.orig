@@ -1,0 +1,883 @@
+<style>@font-face {
+  font-family: w95font;
+  src: url("/t/axeni.de/./assets/w95font.woff2") format("woff2"), url("/t/axeni.de/./assets/w95font.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: w95font;
+  src: url("/t/axeni.de/./assets/w95font-bold.woff2") format("woff2"), url("/t/axeni.de/./assets/w95font-bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.tile-body {
+  background: #1b1d1d;
+  margin: 0;
+  font-family: w95font, sans-serif;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+.desktop {
+  background-color: teal;
+  border: 1px solid #000;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.window {
+  z-index: 10;
+  box-sizing: border-box;
+  background: silver;
+  border: 2px solid gray;
+  border-color: #fff gray gray #fff;
+  flex-direction: column;
+  padding: 2px;
+  display: flex;
+  position: absolute;
+  box-shadow: 1px 1px #000;
+}
+
+.title-bar {
+  color: silver;
+  cursor: default;
+  user-select: none;
+  background: gray;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 3px;
+  display: flex;
+}
+
+.window.active .title-bar {
+  color: #fff;
+  background: navy;
+}
+
+.title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  min-width: 0;
+  margin-right: 4px;
+  font-size: 9px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.controls {
+  flex-shrink: 0;
+  gap: 0;
+  display: flex;
+}
+
+.controls button {
+  cursor: pointer;
+  z-index: 200;
+  background: silver;
+  border: 1px solid gray;
+  border-color: #fff gray gray #fff;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  font-family: w95font, sans-serif;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  position: relative;
+  box-shadow: 1px 1px #000;
+}
+
+.controls button.min-btn {
+  align-items: flex-end;
+  margin-right: 1px;
+  padding-bottom: 3px;
+  font-size: 12px;
+  line-height: .6;
+}
+
+.controls button.max-btn {
+  padding: 0;
+}
+
+.max-icon {
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-top-width: 2px;
+  width: 8px;
+  height: 8px;
+}
+
+.controls button.close-btn {
+  margin-left: 2px;
+  font-size: 10px;
+}
+
+.controls button:active {
+  box-shadow: none;
+  border-color: gray #fff #fff gray;
+  padding-top: 1px;
+  padding-left: 1px;
+}
+
+.window-body {
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+  padding: 2px;
+  display: flex;
+  overflow: hidden;
+}
+
+.window-body a {
+  width: 100%;
+  display: block;
+}
+
+.content-img, .content-gif {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.content-img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.content-gif {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.resizer {
+  z-index: 100;
+  position: absolute;
+}
+
+.resizer.n {
+  cursor: n-resize;
+  width: 100%;
+  height: 5px;
+  top: -5px;
+  left: 0;
+}
+
+.resizer.s {
+  cursor: s-resize;
+  width: 100%;
+  height: 5px;
+  bottom: -5px;
+  left: 0;
+}
+
+.resizer.e {
+  cursor: e-resize;
+  width: 5px;
+  height: 100%;
+  top: 0;
+  right: -5px;
+}
+
+.resizer.w {
+  cursor: w-resize;
+  width: 5px;
+  height: 100%;
+  top: 0;
+  left: -5px;
+}
+
+.resizer.ne {
+  cursor: ne-resize;
+  width: 8px;
+  height: 8px;
+  top: -5px;
+  right: -5px;
+}
+
+.resizer.nw {
+  cursor: nw-resize;
+  width: 8px;
+  height: 8px;
+  top: -5px;
+  left: -5px;
+}
+
+.resizer.se {
+  cursor: se-resize;
+  width: 8px;
+  height: 8px;
+  bottom: -5px;
+  right: -5px;
+}
+
+.resizer.sw {
+  cursor: sw-resize;
+  width: 8px;
+  height: 8px;
+  bottom: -5px;
+  left: -5px;
+}
+
+.desktop-icon {
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+  display: flex;
+  position: absolute;
+}
+
+.desktop-icon img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 2px;
+}
+
+.desktop-icon span {
+  text-shadow: 1px 1px 1px #000;
+  padding: 1px 2px;
+  font-size: 9px;
+}
+
+.desktop-icon:active span, .desktop-icon.selected span {
+  background: navy;
+  border: 1px dotted #fff;
+}
+
+.start-menu {
+  z-index: 1000;
+  background: silver;
+  border: 2px solid gray;
+  border-color: #fff gray gray #fff;
+  width: 120px;
+  display: flex;
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  box-shadow: 2px 2px 5px #00000080;
+}
+
+.menu-sidebar {
+  writing-mode: vertical-rl;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to top, navy, #1084d0);
+  align-items: center;
+  width: 18px;
+  padding: 5px 2px;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  transform: rotate(180deg);
+}
+
+.menu-items {
+  background: silver;
+  flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+}
+
+.menu-item {
+  color: #000;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  font-size: 9px;
+  text-decoration: none;
+  display: flex;
+}
+
+.menu-item img {
+  width: 14px;
+  height: 14px;
+  image-rendering: pixelated;
+}
+
+.menu-item:hover {
+  color: #fff;
+  background: navy;
+}
+
+.taskbar {
+  box-sizing: border-box;
+  z-index: 900;
+  background: silver;
+  border-top: 2px solid #fff;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 22px;
+  padding: 2px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+
+.taskbar-clock {
+  background: silver;
+  border: 1px solid #fff;
+  border-color: gray #fff #fff gray;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 16px;
+  margin-left: 4px;
+  padding: 0 4px;
+  font-size: 9px;
+  display: flex;
+}
+
+.start-btn {
+  cursor: pointer;
+  background: silver;
+  border: 2px solid gray;
+  border-color: #fff gray gray #fff;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+  padding: 0 4px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+}
+
+.start-btn:active, .start-btn.active {
+  border-color: gray #fff #fff gray;
+}
+
+.start-icon {
+  width: 12px;
+  height: 12px;
+  image-rendering: pixelated;
+}
+
+.task-items {
+  flex-grow: 1;
+  gap: 2px;
+  margin-left: 4px;
+  display: flex;
+  overflow: hidden;
+}
+
+.task-item {
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: left;
+  text-overflow: ellipsis;
+  background: silver;
+  border: 2px solid gray;
+  border-color: #fff gray gray #fff;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: auto;
+  min-width: 0;
+  max-width: 50%;
+  height: 16px;
+  padding: 0 4px;
+  font-family: inherit;
+  font-size: 9px;
+  overflow: hidden;
+}
+
+.task-item.active {
+  background: #e0e0e0;
+  border-color: gray #fff #fff gray;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: dosfont;
+  src: url("/t/axeni.de/assets/MorePerfectDOSVGA.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink-cursor {
+  vertical-align: text-bottom;
+  background: #fff;
+  width: 6px;
+  height: 10px;
+  animation: 1s step-end infinite blink;
+  display: inline-block;
+}
+
+.hidden {
+  display: none !important;
+}
+</style>
+<div class="desktop">
+  <div class="start-menu hidden" id="start-menu">
+    <div class="menu-sidebar"><b>@Axenide</b></div>
+    <div class="menu-items">
+      <a href="https://axeni.de" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/website.png">Website</a>
+      <a href="https://axeni.de/youtube" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/youtube.png">YouTube</a>
+      <a href="https://axeni.de/twitch" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/twitch.png">Twitch</a>
+      <a href="https://axeni.de/x" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/x.png">X</a>
+      <a href="https://axeni.de/instagram" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/instagram.png">Instagram</a>
+      <a href="https://axeni.de/github" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/github.png">GitHub</a>
+      <a href="https://axeni.de/discord" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/discord.png">Discord</a>
+      <a href="https://axeni.de/kofi" class="menu-item" target="_blank"><img src="/t/axeni.de/./assets/icons/ko-fi.png">Ko-Fi</a>
+    </div>
+  </div>
+
+  
+  <div class="window" id="win-smoking" style="top: 10px; left: 80px; z-index: 2; width: 100px" data-title="smoking.png">
+    <div class="title-bar">
+      <span class="title">smoking.png</span>
+      <div class="controls">
+        <button class="min-btn">_</button>
+        <button class="max-btn"><div class="max-icon"></div></button>
+        <button class="close-btn">X</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <img src="/t/axeni.de/./assets/smoking.png" class="content-img">
+    </div>
+  </div>
+
+  
+  <div class="window" id="win-gif" style="top: 100px; left: 130px; z-index: 3; width: 100px" data-title="axenide.gif">
+    <div class="title-bar">
+      <span class="title">axenide.gif</span>
+      <div class="controls">
+        <button class="min-btn">_</button>
+        <button class="max-btn"><div class="max-icon"></div></button>
+        <button class="close-btn">X</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <a href="https://axeni.de" target="_blank">
+        <img src="/t/axeni.de/./assets/88x31.gif" class="content-gif">
+      </a>
+    </div>
+  </div>
+
+  
+  <div class="window hidden" id="win-tux" style="top: 50px; left: 50px; z-index: 1; width: 100px" data-title="tux.png">
+    <div class="title-bar">
+      <span class="title">tux.png</span>
+      <div class="controls">
+        <button class="min-btn">_</button>
+        <button class="max-btn"><div class="max-icon"></div></button>
+        <button class="close-btn">X</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <img src="/t/axeni.de/./assets/tux.png" class="content-img">
+    </div>
+  </div>
+
+  
+  <div class="window hidden" id="win-note" style="top: 75px; left: 35px; z-index: 1; width: 180px; height: 100px" data-title="note.txt">
+    <div class="title-bar">
+      <span class="title">note.txt</span>
+      <div class="controls">
+        <button class="min-btn">_</button>
+        <button class="max-btn"><div class="max-icon"></div></button>
+        <button class="close-btn">X</button>
+      </div>
+    </div>
+    <div class="window-body note-body">
+      My name is <b><u>Adriano</u></b>, also known as <b><u>Axenide</u></b>. I'm a dev, artist, Linux user and... Well,
+      <a href="https://axeni.de" target="_blank" class="note-link">you can visit my website to know more.</a>
+      :)
+    </div>
+  </div>
+
+  
+  <div class="window hidden" id="win-fetch" style="top: 75px; left: 25px; z-index: 1; width: 200px; height: 100px" data-title="fetch.exe">
+    <div class="title-bar">
+      <span class="title">fetch.exe</span>
+      <div class="controls">
+        <button class="min-btn">_</button>
+        <button class="max-btn"><div class="max-icon"></div></button>
+        <button class="close-btn">X</button>
+      </div>
+    </div>
+    <div class="window-body fetch-body">
+      <pre class="fetch-pre">
+  ／l、      axenide@world
+（ﾟ､ ｡ ７     NERD-DEV 3.14 
+ l  ~ ヽ     2378 (energy drinks)
+ じしf_,)ノ  Determination</pre>
+      <div class="fetch-cursor-line">
+        ~> <span class="blink-cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="desktop-icon" id="icon-bin" style="top: 10px; left: 10px" data-win="win-tux">
+    <img src="/t/axeni.de/./assets/Bin_Full95.svg" alt="Recycle Bin">
+    <span>Recycle Bin</span>
+  </div>
+
+  <div class="desktop-icon" id="icon-smoking" style="top: 85px; left: 10px" data-win="win-smoking">
+    <img src="/t/axeni.de/./assets/img.png" alt="smoking.png">
+    <span>smoking.png</span>
+  </div>
+
+  <div class="desktop-icon" id="icon-gif" style="top: 160px; left: 10px" data-win="win-gif">
+    <img src="/t/axeni.de/./assets/img.png" alt="axenide.gif">
+    <span>axenide.gif</span>
+  </div>
+
+  <div class="desktop-icon" id="icon-note" style="top: 10px; right: 10px" data-win="win-note">
+    <img src="/t/axeni.de/./assets/txt.png" alt="note.txt">
+    <span>note.txt</span>
+  </div>
+
+  <div class="desktop-icon" id="icon-fetch" style="top: 160px; right: 10px" data-win="win-fetch">
+    <img src="/t/axeni.de/./assets/exe.png" alt="fetch.exe">
+    <span>fetch.exe</span>
+  </div>
+
+  <div class="taskbar">
+    <button class="start-btn" id="start-btn">
+      <img src="/t/axeni.de/./assets/tux-icon.png" class="start-icon">
+      Start
+    </button>
+    <div class="task-items">
+      
+    </div>
+    <div class="taskbar-clock">
+      <span id="clock">12:00 PM</span>
+    </div>
+  </div>
+</div>
+<script type="text/tilescript">
+// Helper functions
+function hasClass(el, className) {
+    if (!el) return false;
+    return (' ' + el.className + ' ').indexOf(' ' + className + ' ') > -1;
+}
+
+function addClass(el, className) {
+    if (!el) return;
+    if (!hasClass(el, className)) {
+        el.className = (el.className + ' ' + className).trim();
+    }
+}
+
+function removeClass(el, className) {
+    if (!el) return;
+    var newClass = (' ' + el.className + ' ').replace(' ' + className + ' ', ' ');
+    el.className = newClass.trim();
+}
+
+function toggleClass(el, className) {
+    if (hasClass(el, className)) {
+        removeClass(el, className);
+    } else {
+        addClass(el, className);
+    }
+}
+
+// Main initialization
+function initApp() {
+    var startBtn = document.getElementById('start-btn');
+    var startMenu = document.getElementById('start-menu');
+    var taskItemsContainer = document.querySelector('.task-items');
+    var clockEl = document.getElementById('clock');
+    var desktop = document.querySelector('.desktop');
+
+    // State
+    var draggedWindow = null;
+    var resizingWindow = null;
+    var resizeDir = '';
+    var offset = { x: 0, y: 0 };
+    var initialRect = { w: 0, h: 0, x: 0, y: 0 };
+
+    // Clock
+    function updateClock() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes().toString();
+        if (minutes.length < 2) minutes = '0' + minutes;
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        if (clockEl) clockEl.textContent = hours + ':' + minutes + ' ' + ampm;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Start Menu Interaction
+    if (startBtn) {
+        startBtn.addEventListener('click', function(e) {
+            toggleClass(startMenu, 'hidden');
+            toggleClass(startBtn, 'active');
+        });
+    }
+
+    // Taskbar Management
+    function updateTaskbarState(activeWinId) {
+        var items = document.querySelectorAll('.task-item');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].getAttribute('data-win') === activeWinId) {
+                addClass(items[i], 'active');
+            } else {
+                removeClass(items[i], 'active');
+            }
+        }
+        
+        var wins = document.querySelectorAll('.window');
+        for (var i = 0; i < wins.length; i++) {
+            if (wins[i].id === activeWinId) {
+                addClass(wins[i], 'active');
+                wins[i].style.zIndex = 100;
+            } else {
+                removeClass(wins[i], 'active');
+                wins[i].style.zIndex = 10;
+            }
+        }
+    }
+
+    function addTaskbarItem(winId, title) {
+        if (document.querySelector('.task-item[data-win="' + winId + '"]')) return;
+
+        var btn = document.createElement('button');
+        btn.className = 'task-item';
+        btn.setAttribute('data-win', winId);
+        btn.textContent = title; // Use textContent for plain text
+        
+        btn.addEventListener('click', function(e) {
+            var win = document.getElementById(winId);
+            if (!win) return;
+
+            if (hasClass(win, 'hidden')) {
+                removeClass(win, 'hidden');
+                updateTaskbarState(winId);
+            } else if (!hasClass(win, 'active')) {
+                updateTaskbarState(winId);
+            } else {
+                addClass(win, 'hidden');
+                removeClass(btn, 'active');
+                removeClass(win, 'active');
+            }
+        });
+
+        if (taskItemsContainer) taskItemsContainer.appendChild(btn);
+    }
+
+    function removeTaskbarItem(winId) {
+        var btn = document.querySelector('.task-item[data-win="' + winId + '"]');
+        if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+    }
+
+    // Window Management
+    function setupWindow(win) {
+        // Taskbar item
+        if (!hasClass(win, 'hidden')) {
+            addTaskbarItem(win.id, win.getAttribute('data-title'));
+        }
+
+        // Activation on click
+        win.addEventListener('mousedown', function(e) {
+            // No stopPropagation here to allow resizing/dragging checks
+            updateTaskbarState(win.id);
+        });
+
+        // Close button
+        var closeBtn = win.querySelector('.close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                addClass(win, 'hidden');
+                removeTaskbarItem(win.id);
+            });
+        }
+
+        // Minimize button
+        var minBtn = win.querySelector('.min-btn');
+        if (minBtn) {
+            minBtn.addEventListener('click', function(e) {
+                addClass(win, 'hidden');
+                var btn = document.querySelector('.task-item[data-win="' + win.id + '"]');
+                if (btn) removeClass(btn, 'active');
+            });
+        }
+
+        // Maximize button
+        var maxBtn = win.querySelector('.max-btn');
+        if (maxBtn) {
+            maxBtn.addEventListener('click', function(e) {
+                toggleMaximize(win);
+            });
+        }
+
+        // Title Bar Dragging
+        var titleBar = win.querySelector('.title-bar');
+        if (titleBar) {
+            titleBar.addEventListener('mousedown', function(e) {
+                // Ignore buttons - ES5 compatible check
+                var target = e.target;
+                while (target && target !== titleBar) {
+                    if (target.tagName === 'BUTTON') return;
+                    target = target.parentNode;
+                }
+                
+                if (win.getAttribute('data-maximized') !== 'true') {
+                    e.preventDefault(); // Prevent selection
+                    draggedWindow = win;
+                    offset.x = e.clientX - win.offsetLeft;
+                    offset.y = e.clientY - win.offsetTop;
+                    updateTaskbarState(win.id);
+                }
+            });
+        }
+
+        // Resizers
+        var dirs = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
+        for (var i = 0; i < dirs.length; i++) {
+            (function(dir) {
+                var r = document.createElement('div');
+                r.className = 'resizer ' + dir;
+                r.addEventListener('mousedown', function(e) {
+                    e.preventDefault();
+                    resizingWindow = win;
+                    resizeDir = dir;
+                    initialRect = {
+                        w: win.offsetWidth,
+                        h: win.offsetHeight,
+                        x: win.offsetLeft,
+                        y: win.offsetTop,
+                        mouseX: e.clientX,
+                        mouseY: e.clientY
+                    };
+                    updateTaskbarState(win.id);
+                });
+                win.appendChild(r);
+            })(dirs[i]);
+        }
+    }
+
+    function toggleMaximize(win) {
+        var isMax = win.getAttribute('data-maximized') === 'true';
+        if (isMax) {
+            win.style.top = win.getAttribute('data-prev-top');
+            win.style.left = win.getAttribute('data-prev-left');
+            win.style.width = win.getAttribute('data-prev-width');
+            win.style.height = win.getAttribute('data-prev-height');
+            win.removeAttribute('data-maximized');
+        } else {
+            win.setAttribute('data-prev-top', win.style.top);
+            win.setAttribute('data-prev-left', win.style.left);
+            win.setAttribute('data-prev-width', win.style.width);
+            win.setAttribute('data-prev-height', win.style.height);
+            
+            win.style.top = '0';
+            win.style.left = '0';
+            win.style.width = '250px';
+            win.style.height = '222px';
+            win.setAttribute('data-maximized', 'true');
+        }
+    }
+
+    // Initialize all windows
+    var windows = document.querySelectorAll('.window');
+    for (var i = 0; i < windows.length; i++) {
+        setupWindow(windows[i]);
+    }
+
+    // Desktop Icons - using single click to open (dblclick may not work in sandbox)
+    var icons = document.querySelectorAll('.desktop-icon');
+    for (var i = 0; i < icons.length; i++) {
+        (function(icon) {
+            icon.addEventListener('click', function(e) {
+                // Select icon
+                for (var j = 0; j < icons.length; j++) removeClass(icons[j], 'selected');
+                addClass(icon, 'selected');
+                
+                // Open associated window
+                var winId = icon.getAttribute('data-win');
+                var win = document.getElementById(winId);
+                if (win) {
+                    removeClass(win, 'hidden');
+                    if (!document.querySelector('.task-item[data-win="' + winId + '"]')) {
+                        addTaskbarItem(winId, win.getAttribute('data-title'));
+                    }
+                    updateTaskbarState(winId);
+                }
+            });
+        })(icons[i]);
+    }
+
+    // Global Interaction Handlers
+    document.addEventListener('mousemove', function(e) {
+        if (draggedWindow) {
+            e.preventDefault();
+            draggedWindow.style.left = (e.clientX - offset.x) + 'px';
+            draggedWindow.style.top = (e.clientY - offset.y) + 'px';
+        } else if (resizingWindow) {
+            e.preventDefault();
+            var deltaX = e.clientX - initialRect.mouseX;
+            var deltaY = e.clientY - initialRect.mouseY;
+            
+            // Simple resizing (South-East oriented for simplicity, can be expanded)
+            if (resizeDir.indexOf('e') !== -1) {
+                resizingWindow.style.width = Math.max(100, initialRect.w + deltaX) + 'px';
+            }
+            if (resizeDir.indexOf('s') !== -1) {
+                resizingWindow.style.height = Math.max(50, initialRect.h + deltaY) + 'px';
+            }
+            // For full implementation we would handle N/W/NE/SW etc here
+        }
+    });
+
+    document.addEventListener('mouseup', function() {
+        draggedWindow = null;
+        resizingWindow = null;
+    });
+
+    // Background Click
+    if (desktop) {
+        desktop.addEventListener('click', function(e) {
+            if (e.target === desktop) {
+                if (!hasClass(startMenu, 'hidden')) addClass(startMenu, 'hidden');
+                if (hasClass(startBtn, 'active')) removeClass(startBtn, 'active');
+                
+                for (var i = 0; i < icons.length; i++) removeClass(icons[i], 'selected');
+                for (var i = 0; i < windows.length; i++) removeClass(windows[i], 'active');
+            }
+        });
+    }
+}
+
+// Ensure execution
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+</script>

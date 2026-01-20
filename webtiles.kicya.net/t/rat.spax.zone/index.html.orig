@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  image-rendering: pixelated;
+  background: #3e4245;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+#rat {
+  margin: auto;
+}
+</style>
+</head>
+<body>
+    <img src="/t/rat.spax.zone/ratspin.gif">
+</body>
+</html>

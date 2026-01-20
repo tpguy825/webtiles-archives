@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>.tile-body {
+  background-color: #000;
+  background-image: url("/t/bv.ddnikki.moe/cardiac.webp");
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+}
+
+#crap {
+  color: #0000;
+  background-color: #0000;
+  width: 250px;
+  height: 250px;
+  font-family: times new roman;
+  font-size: 12px;
+  transition: color .2s, background-color .6s, backdrop-filter .6s;
+}
+
+#crap:hover {
+  color: #fff;
+  backdrop-filter: blur(1px);
+  background-color: #000b;
+}
+
+#crap a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.foley:hover {
+  color: gold !important;
+}
+
+.yixi:hover {
+  color: #fff00d !important;
+}
+
+.hayden:hover {
+  color: orange !important;
+}
+
+.eleanor:hover {
+  color: #b0c4de !important;
+}
+
+.fengyi:hover {
+  color: #48d1cc !important;
+}
+
+.gumi:hover {
+  color: #8fbc8f !important;
+}
+
+.rei:hover {
+  color: #ff4500 !important;
+}
+
+.mai:hover {
+  color: #ee596e !important;
+}
+
+.chifuyu:hover {
+  color: #afeeee !important;
+}
+
+.kevin:hover {
+  color: #90ee90 !important;
+}
+</style>
+</head>
+<body>
+    <div id=crap>
+        <center style="padding:6px;margin-bottom:-4px">
+		<a href="https://flavorfoley.com/CC" class="foley" target="_blank">an eclectic banquet of love songs for every palate</a></center>
+		<ol>
+        <li><a href="https://flavorfoley.com/butchervanity" class="yixi" target="_blank">BUTCHER VANITY 🫀 Yi Xi</a></li>
+		<li><a href="https://flavorfoley.com/rawdog" class="hayden" target="_blank">rawdog 🐾 Hayden</a></li>
+		<li><a href="https://flavorfoley.com/weathergirl" class="eleanor" target="_blank">weathergirl 🌧 Eleanor Forte</a></li>
+		<li><a href="https://flavorfoley.com/weiwardromance" class="fengyi" target="_blank">炜WARD ROMANCE 🏮 Feng Yi</a></li>
+		<li><a href="https://flavorfoley.com/watertheroses" class="gumi" target="_blank">Water the Roses 🥀 GUMI</a></li>
+		<li style="margin-bottom:6px"><a href="https://flavorfoley.com/queenofvenus" class="rei" target="_blank">Queen of Venus 🪐 Adachi Rei</a></li>
+		<b>ROUNDTABLE REPRISES</b>
+		<li><a target="_blank" href="https://flavorfoley.com/pmp" class="mai">Paparazzi Murder Party 📸 Mai</a></li>
+		<li><a target="_blank" href="https://flavorfoley.com/snowflake" class="chifuyu">snowflake ❄ Hanakuma Chifuyu</a></li>
+        <li><a target="_blank" href="https://flavorfoley.com/whenspringcomes" class="kevin">When Spring Comes 🍃 Kevin</a></li>
+		</ol>
+		<center style="margin-top:10px">
+		🥢
+		<a href="https://flavorfoley.com/about" class="foley" target="_blank">the fine folks</a>
+		🍴
+		<br>
+		JamieP | Vane Lily | ricedeity 
+		</center>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+    <h6>
+    actual websites kinda nonexistent atm srry
+    </h6>
+    <p>this game sucks<br>vv play the demo here !! vv</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+<form action="https://scratch.mit.edu/projects/1155430312" target="_blank">
+	<input type="image" src="/t/zep-excpoint.nekoweb.org/achive1.png" id="image" autocomplete="off">
+</form>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: "8bitOperator JVE";
+  src: url("/t/links.dax009.ink/8bitoperator-JVE.woff2");
+}
+
+.tile-body {
+  image-rendering: pixelated;
+  color: #000;
+  background-image: url("/t/links.dax009.ink/tilelt.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  font-family: "8bitOperator JVE";
+}
+
+#quoteHolder {
+  width: 100%;
+  height: 100%;
+}
+
+#quote {
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 4px;
+  paint-order: stroke fill;
+  word-wrap: break-word;
+  text-align: center;
+  margin: 0;
+  padding: 8px;
+  font-size: 20px;
+}
+
+#warning {
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 4px;
+  paint-order: stroke fill;
+  word-wrap: break-word;
+  text-align: left;
+  margin: 0;
+  padding: 8px;
+  font-size: 16px;
+}
+
+#quoteHolder a {
+  color: #ff6a00;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px;
+  paint-order: stroke fill;
+  padding: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  position: absolute;
+  bottom: 0;
+}
+</style>
+</head>
+<body>
+    <p id="warning">click for a random blurb/quote from my website. unsure</p>
+    <div id="quoteHolder"><p id="quote"></p>
+    <p>
+        <a href="https://github.com/axdaxis/axdaxis.github.io/blob/master/assets/js/embeds.js#L5-L56" target="_blank">&lt;sources/context&gt;</a>
+        </p></div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var quoteList = [
+    "You know it's cold outside, when you go outside and it's cold...", // https://axdaxis.dev/files/daxBotMedia/IMG_8426.PNG
+    "*curls into a ball, bounces down the court, flies up & swishes thrus the hoop*", // https://twitter.com/tobyfox/status/298489896425897984
+    "+Yeah!", // Miiverse
+    "'I keep on running like a chicken with its head cut off!'", // BIRDBRAIN https://www.youtube.com/watch?v=0iVlSNpq8i8
+    "don't ever buy no gas station from the gas station", // https://www.youtube.com/watch?v=EAfPbSKDVRk
+    "A water?", // https://www.youtube.com/watch?v=U-nYdR9lMqM
+    "You know rectangles? They're like messed-up squares?", // https://hushbugger.github.io/deltarune/text/#en:1:obj_dummyenemy_slash_Step_0_gml_408_0
+    "Rouxls Kaard Homeless Society", // Idk
+    "RAISE UP YOUR BAT FOR THE BURNING FIGHT!", // https://hushbugger.github.io/deltarune/text/#en:3:scr_rhythmgame_notechart_slash_scr_rhythmgame_notechart_gml_1529_0
+    "We're ALL a little GLOOBY sometimes!!", // https://hushbugger.github.io/deltarune/text/#en:3:obj_tenna_enemy_slash_Step_0_gml_152_0
+    "* COWABUNGA-DERO! THAT'S THE SMOOTH TASTE OF TV TIME!", // https://hushbugger.github.io/deltarune/text/#en:3:obj_tenna_enemy_slash_Step_0_gml_231_0
+    "I'm the balls man", // - Dax
+    "it's ok to do a little crime sometimes.", // https://tumblr.dax009.ink/post/744548951086268416/they-were-so-real-for-this
+    "wait, i'm goated?", // Just. a saying.
+    "127.0.0.1:3000", // Default VSCode Live Preview port. Lol
+    "When I'm bored I dip my son in Red 40", // - Dax
+    "roblox tragedy", // https://www.youtube.com/watch?v=WjUvRs4pBuI
+    "aprons wash hands gloves!", // I heard this at school once LOL
+    "reminder to self: add “no diving” sign to bathroom", // - Dax
+    "I'm so Battat core!", // https://twitter.com/shokolandish/status/1959697801736225155
+    "Activity Level B", // https://www.reddit.com/r/Undertale/comments/1icuzcv/comment/m9tsfsj/
+    "when i was 14 i thought that king dice from cuphead was hot", // - Dax
+    "#DARKWOKE", // Why does this have a Wikipedia article https://en.wikipedia.org/wiki/Dark_Woke
+    "persona!", // Persona!
+    "No one looks at these so I can confidently say I had a crush on Papyrus at the age of 14", // I still kinda do. - Dax
+    "Don't look through the source too much.", // Please.
+    "'cause i think you're so good, and i'm nothing like you'", // Love Like You - Steven Universe. I think
+    "Does anyone want to break the US Digital Millennium Copyright Act, together..?", // >_<
+    "The edge of the shadow, where reality and dream meet.", // https://twitter.com/tobyfox/status/89485880615641088
+    "Now it's time to turn the internal screaming external!", // - Dax
+    "It's TV Time!", // - Tenna
+    "Coded with love and a bit of prescription medication", // It's true. - Dax
+    "hype moments and aura", // type shit
+    "mweh heh heh!", // Idk
+    "Halloween - Just the Facts", // How do I even begin to explain this
+    ":P",
+    "I LIVE IN A HOAL", // https://hushbugger.github.io/deltarune/text/#en:4:obj_npc_jackenstein_slash_Other_10_gml_27_0
+    "You know when you're driving and you see that water puddle ahead of you and then it goes away, you know about that, right? Yeah. You know what that is, right? Yeah. What is it? No.",
+    "gnawing at the bars of my cage",
+    "Shoutout to Napstablook",
+    "* Dr. Gaster. * What an act to follow!", // https://hushbugger.github.io/dialogue/#Gaster%20Follower%201:1,
+    "THAT GREEN DICE WILL PAY",
+    "#SCIFELLSWEEP",
+    "Happy new year 1997!", // https://hushbugger.github.io/deltarune/text/#en:2:obj_virovirokun_enemy_slash_Step_0_gml_26_0
+    "* Chips Ahoyeth, Landlubbers!", // https://hushbugger.github.io/deltarune/text/#en:2:obj_ch2_scene21_loop_slash_Step_0_gml_511_0
+    "couldnt think of anything funny for this one",
+    "'sv_cheats 1' - Sun Tzu, The Art of War",
+    "Tell Edge he's HOT." // https://loverofpiggies.tumblr.com/post/147144113435/a-day-early-whaaaat-wanna-support-me-check-out
+]
+
+document.getElementById('quoteHolder').addEventListener('click', function() {
+    document.getElementById('quote').innerText = quoteList[Math.floor(Math.random() * quoteList.length)];
+});</script>
+</body>
+</html>

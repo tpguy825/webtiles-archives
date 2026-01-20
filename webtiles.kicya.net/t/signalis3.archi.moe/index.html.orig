@@ -1,0 +1,33 @@
+<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("/t/signalis3.archi.moe/3.png") center / cover no-repeat fixed;
+}
+</style>
+</head>
+<body>
+    <button id="play">
+        play
+    </button>
+    <audio id="audio" preload="metadata"></audio>
+    <script type="text/tilescript">var audio = document.getElementById('audio');
+var play = document.getElementById('play');
+var playing = false;
+
+audio.src = 'https://sexfm.gottrolled.com/api/icecast.mp3';
+
+play.addEventListener('click', function() {
+    if (!playing) {
+        audio.play();
+        play.textContent = 'stop';
+        playing = true;
+    } else {
+        audio.pause();
+        audio.currentTime = 0;
+        play.textContent = 'play';
+        playing = false;
+    }
+});</script>
+</body>
+</html>

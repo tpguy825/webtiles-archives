@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  font-family: monospace;
+}
+
+div {
+  display: inline-block;
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+audio {
+  width: 90%;
+  margin: 0;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>
+</head>
+<body>
+    <audio id="audio" src="/t/anjos.nekoweb.org/thefishsong.mp3" preload="metadata"></audio>
+    <img src="/t/anjos.nekoweb.org/fishmonger.jpg">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var yourAudioElement = document.getElementById("audio");
+
+var musicInt = setInterval(musicCheat, 1000);
+
+function musicCheat() {
+    
+    if (yourAudioElement.paused == true){
+
+        yourAudioElement.play()
+    }
+} </script>
+
+</body>
+</html>

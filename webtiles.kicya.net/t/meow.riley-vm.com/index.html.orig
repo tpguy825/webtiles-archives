@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div class="tile-body" style="width: 100% !important; height: 100% !important; position: absolute !important; top: 0px !important; left: 0px !important;">
+
+
+
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0 !important;
+}
+
+img {
+  width: 100%;
+}
+</style>
+
+
+    <img src="/t/meow.riley-vm.com/cat.jpeg">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+
+</div>
+
+
+</head>
+</html>

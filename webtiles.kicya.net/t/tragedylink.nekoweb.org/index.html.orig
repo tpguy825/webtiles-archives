@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/tragedylink.nekoweb.org/meright.png");
+  background-repeat: repeat;
+  background-size: 100%;
+  margin: 0;
+}
+
+@font-face {
+  font-family: pix;
+  src: url("/t/tragedylink.nekoweb.org/infernalda.ttf");
+}
+
+.bobbing {
+  animation: 2s ease-in-out infinite alternate bobbing;
+}
+
+@keyframes bobbing {
+  0% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+</style>
+</head>
+<body>
+    <a href="https://www.twitch.tv/tragedylink" target="_blank">
+    <img src="/t/tragedylink.nekoweb.org/naidog.png" style="height: 55%; position: relative; top: 110px; left: 125px;">
+    </a>
+    
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

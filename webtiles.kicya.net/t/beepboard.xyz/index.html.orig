@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: B612;
+  src: url("/t/beepboard.xyz/B612.woff");
+}
+
+.tile-body {
+  color: #fff;
+  background: url("/t/beepboard.xyz/background.png");
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+  font-family: B612;
+  display: flex;
+}
+
+.leftb {
+  background: #fff;
+  width: 10px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+main {
+  background: #222;
+  box-shadow: 0 0 10px #000;
+}
+
+h2 {
+  margin-left: 20px;
+}
+</style>
+</head>
+<body>
+    <div class="leftb"></div>
+    <main>
+    	<h2>beepboard</h2>
+        <p>dsfa</p>
+    </main>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

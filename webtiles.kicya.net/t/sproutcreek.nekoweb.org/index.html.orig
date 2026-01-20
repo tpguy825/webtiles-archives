@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  margin: 0;
+}
+
+div {
+  place-content: center;
+  width: 100%;
+  display: flex;
+}
+
+.tile-body {
+  background: url("/t/sproutcreek.nekoweb.org/PokemonVillageLeft.png");
+}
+</style>
+</head>
+<body>
+    
+    <div>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: proggy;
+  src: url("/t/zikbakguri.nekoweb.org/proggy_tiny_sz.ttf");
+}
+
+@keyframes scroller {
+  0% {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    transform: translateX(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+* {
+  font-family: proggy, serif;
+  font-weight: 1px;
+  font-size: 24pt;
+}
+
+.tile-body {
+  color: #111;
+  background-color: #fd0;
+  background-image: url("/t/zikbakguri.nekoweb.org/zik_illegal_256.png");
+  margin: 0;
+  padding: 0;
+}
+
+.box-bottom {
+  background-color: #111;
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+}
+
+.box-bottom > div {
+  height: 40px;
+  margin: 0;
+  padding: 0 8px;
+  display: flex;
+}
+
+.mcnt {
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+marquee {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.m2 {
+  position: relative;
+  top: 0;
+  left: -100%;
+}
+
+.m3 {
+  position: relative;
+  top: 0;
+  left: -200%;
+}
+
+marquee > p {
+  color: #fd0;
+  margin: 0;
+  padding: 0;
+  line-height: 40px;
+}
+
+.m2 > p {
+  transform: translateX(-172.667px);
+}
+
+.m3 > p {
+  transform: translateX(172.667px);
+}
+
+.box-bottom > div > a {
+  color: #111;
+  background-color: #fd0;
+  width: auto;
+  height: 40px;
+  padding: 0 4px;
+  line-height: 40px;
+  display: inline-block;
+}
+
+.box-bottom > div > p > a:hover {
+  color: #f5f5f5;
+  background-color: #e03c00;
+}
+</style>
+</head>
+<body>
+    <div class="box-bottom">
+        <div>
+            <a href="https://zik.haus" target="_blank">ZIK</a>
+			
+            <div class="mcnt">
+                <marquee class="m1" scrollamount="8">
+                    <p>WAS HERE ~ !!</p>
+                </marquee>
+            	<marquee class="m2" scrollamount="8">
+                    <p>WAS HERE ~ !!</p>
+                </marquee>
+                <marquee class="m3" scrollamount="8">
+                    <p>WAS HERE ~ !!</p>
+                </marquee>
+            </div>
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

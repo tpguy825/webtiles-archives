@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  font-family: sans-serif;
+  position: relative;
+}
+
+div {
+  text-align: center;
+  color: #fc5d8d;
+  text-shadow: 0 0 4px #1118;
+  font-size: 30px;
+  position: fixed;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+}
+</style>
+</head>
+<body>
+    <img src="/t/ktnt.neocities.org/kotonoha.png" height="250" width="250">
+    <div lang="ja">琴葉姉妹</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+<style>.tile-body {
+  user-select: none;
+  background: #000 url("/t/cake.nekoweb.org/portaltiny.gif") center / cover;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  overflow: hidden;
+}
+</style>
+
+
+</body>
+</html>

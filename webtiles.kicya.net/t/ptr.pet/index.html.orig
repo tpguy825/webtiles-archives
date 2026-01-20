@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #333;
+  padding: 1em;
+  font-family: monospace;
+}
+
+a {
+  color: #19f;
+}
+
+img.brownie {
+  opacity: .6;
+  width: 128px;
+  height: 128px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+</style>
+</head>
+<body>
+    <p>under construction!<br><br>see <a href="https://gaze.systems" target="_blank">gaze.systems</a></p>
+    <img class="brownie" src="/t/ptr.pet/brownie.png">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

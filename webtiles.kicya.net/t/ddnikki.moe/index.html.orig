@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html><head>
+
+
+<style>@font-face {
+  font-family: Jest;
+  src: url("/t/ddnikki.moe/Jest.otf");
+}
+
+.tile-body {
+  color: #f8ccff;
+  image-rendering: crisp-edges;
+  background-color: #15005a;
+  background-image: url("/t/ddnikki.moe/images/star.png");
+  font-family: Jest;
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+a:link {
+  color: #d895f1;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #b457e1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:active {
+  color: #912fd8;
+  text-decoration: none;
+}
+
+::selection {
+  color: #fff;
+  background: #912fd8;
+}
+</style>
+<style>.tile-body {
+  background-image: url("/t/ddnikki.moe/webgarden.gif");
+}
+</style>
+
+</head>
+ <a href="/t/ddnikki.moe/14.html" style="float:right;margin-right:16px;margin-top:15px;color:#912fd8">14</a>
+<div style="margin-left:6px;margin-top:108px">
+
+<a href="https://ddnikki.moe/index" target="_blank">
+<font color=f8ccff>★</font>
+site/cw
+</a><br>
+
+<a href="https://ddnikki.moe/other/chara" target="_blank">
+<font color=f8ccff>⋆</font>
+chara
+</a><br>
+
+<a href="https://ddnikki.moe/other/shimeji" target="_blank">
+<font color=f8ccff>★</font>
+shimeji
+</a><br>
+
+<a href="https://ddnikki.moe/quiz/chara" target="_blank">
+<font color=f8ccff>⋆</font>
+quiz
+</a><br>
+
+<a href="https://ddnikki.moe/other" target="_blank">
+<font color=f8ccff>★</font>
+other...
+</a><br>
+
+</div>
+</html>

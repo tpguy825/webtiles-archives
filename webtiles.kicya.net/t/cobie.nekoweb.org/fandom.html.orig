@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style>::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #211f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #454545;
+  border: 1px outset #000;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #fff;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px dotted;
+  margin: 3px 0;
+}
+
+@font-face {
+  font-family: LastRite;
+  src: url("/t/cobie.nekoweb.org/stuff/LastRite.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ;
+  src: url("/t/cobie.nekoweb.org/stuff/FoglihtenPCS-068.otf") format("opentype");
+  font-display: swap;
+}
+
+.tile-body {
+  background: url("/t/cobie.nekoweb.org/stuff/purplespace-grayscaled-bg.png");
+  font-family: Times New Roman, Times, serif;
+  font-size: 13px;
+}
+
+a {
+  color: #9f9f9f;
+  z-index: 999;
+  background: linear-gradient(to right, #0000 -10%, #252348, #0000 110%);
+  text-decoration: underline 1px dotted;
+}
+
+a:hover {
+  filter: brightness(.8);
+}
+
+a:active {
+  filter: brightness(.6);
+}
+
+.titular-instance {
+  text-shadow: 1px 1px 5px #fff, 0 0 2px #000;
+  color: #151515;
+  z-index: 99;
+  text-align: center;
+  background: linear-gradient(to right, #0000 -10%, #00000080, #0000 110%);
+  margin: -45px -15px -5px 0;
+  font-family: LastRite;
+  font-size: 55px;
+  font-weight: 100;
+  text-decoration: none;
+  display: block;
+}
+
+.main {
+  color: #999;
+  background: linear-gradient(#6a666a9c, #0000);
+  flex-direction: column;
+  width: 210px;
+  height: 215px;
+  margin: 40px auto 15px;
+  padding: 5px;
+  display: flex;
+}
+
+.box {
+  background: #000;
+  flex-grow: 1;
+  margin-top: -10px;
+  padding: 3px;
+}
+
+.row {
+  gap: 3px;
+  display: flex;
+}
+
+.LS {
+  min-width: 60px;
+}
+
+.LSNav-EX {
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  display: flex;
+}
+
+.LSNav-EX a {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px inset #000;
+  margin: 0;
+  padding: 1px;
+  font-family: Fog, Times New Roman, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.LSNav {
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  display: flex;
+}
+
+.LSNav a {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px inset #000;
+  margin: 0 0 0 -15px;
+  padding: 1px;
+  font-family: Fog, Times New Roman, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.LSNav a:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#68677794, #00000014);
+  border-radius: 0 0 200px 200px;
+  width: 100%;
+  height: 38%;
+  padding: 2px;
+  transition: background .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.LSNav a:hover {
+  text-shadow: 0 0 11px #fff;
+  margin: 0 0 0 -10px;
+  padding-right: 10px;
+}
+
+.LSNav a:active {
+  text-shadow: 0 0 11px #000;
+  margin: 0 0 0 3px;
+  padding-right: 5px;
+}
+
+.LSNav-EX a {
+  margin: 0;
+}
+
+.LSNav-EX a::hover {
+  margin: 4px 2px;
+}
+
+.LSNav-EX a::active {
+  margin: 5px 3px;
+  padding-right: 0;
+}
+
+.introbar {
+  text-transform: lowercase;
+  background: linear-gradient(to right, #6a666a, #0000);
+  padding: 4px;
+}
+
+.introbar span {
+  text-align: center;
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  z-index: 999;
+  background: linear-gradient(#121212, #4a4a4a38);
+  border: 1px dotted #6c6c6c;
+  padding: 2px 5px;
+  font-size: 11px;
+  font-style: italic;
+  text-decoration: none;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #000;
+}
+
+.introbar span:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#68677799, #00000014);
+  border-radius: 0 0 200px 200px;
+  width: 100%;
+  height: 38%;
+  padding: 2px;
+  transition: background .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sub-box {
+  background: #0006;
+  border: 1px inset #000;
+  width: 100%;
+  font-size: 11px;
+}
+
+.sub-box p {
+  background: #00000087;
+  margin: 2px 0;
+  padding: 2px;
+}
+
+.sub-box i {
+  background: linear-gradient(to right, #6a666a8c, #0000);
+  padding: 1px 3px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline 1px dotted;
+  display: block;
+}
+</style>
+</head>
+<style>.sub-box p {
+  background: linear-gradient(#0000, #6a666a40);
+  margin: 0;
+  padding: 3px;
+}
+
+.L-Image {
+  filter: grayscale();
+  background-image: url("/t/cobie.nekoweb.org/stuff/cobie_150x450_color.png");
+  background-position: top;
+  min-width: 50px;
+}
+
+b {
+  color: #bbb;
+  text-shadow: 1px 1px 3px #000, 0 0 11px #fff;
+  background: linear-gradient(to right, #0000 -10%, #252348, #0000 110%);
+  margin-bottom: 3px;
+  padding: 3px 7px;
+  font-style: italic;
+  text-decoration: none;
+  transition: all .2s;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 17px #000;
+}
+
+ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 17px;
+  list-style-position: outside;
+}
+
+li {
+  margin: 3px 0;
+}
+</style>
+<body>
+<div class="main">
+<a class="titular-instance" href="https://cobie.nekoweb.org/" target="_blank">cobiesitE</a>
+<div class="box">
+<div class="introbar"></div>
+<div class="LSNav-EX">
+<a href="/t/cobie.nekoweb.org/index.html">back</a>
+</div>
+
+<div style="max-height: 140px; overflow-y: auto; overflow-x: hidden">
+<div class="sub-box">
+<p>
+(everything is printed in its romaji japanese title for fun.. one day i'll be able to read japanese too, im just under n5 =^^=)
+</p>
+</div>
+<div class="row">
+<div class="sub-box">
+<p><b>Now Reading:</b></p>
+<ol>
+<li>Kyūjitsu no Warumono-san</li>
+<li>Clevatess: Majū no Ō to Akago to Shikabane no Yūsha</li>
+<li>Super Mario Adventures (soon)</li>
+</ol>
+</div>
+<div class="sub-box">
+<p><b>Now Watching:</b></p>
+<ol>
+<li>Kobayashi-san Chi no Maid Dragon: Valentine, Soshite Onsen! - Amari Kitai Shinaide Kudasai</li>
+<li>Cardcaptor Sakura</li>
+<li>Dandadan</li>
+</ol>
+</div>
+</div>
+<div class="sub-box">
+<div><b>Things I Recommend (Anime &amp; Manga mix)</b>
+<ol>
+<li>
+<div>
+<div>Clevatess: Majū no Ō to Akago to Shikabane no Yūsha
+<p>i don't want to spoil, so ill just say that big, immortal shadow monster shrunk to human size + vengeful girl under his forced servitude + teeny baby the shadow monster promised a dying human to protect to adulthood in order to judge all of humanity's worth is such a fun concept</p>
+<p>Some parts of it are the darkest I've seen something of the sort go, especially in like the second ep. of the anime/wherever that is in the manga... but at the same time it's necessary for Clevatess to get an accurate read on all the nuances of humanity. I wonder what he'll ultimately think after being Clen for so long.</p>
+<p>you can find it on webtoon in english, i believe, but i read a translated tankōbon version from japan =^^=</p>
+</div>
+<div> </div>
+</div>
+</li>
+<li>
+<div>
+<div>Monster
+<p>Kenzo Tenma is a doctor in a hospital who believes in the value of all life. He risks his career to save two young children with critical injuries, including a young boy with a gunshot wound to the head. In the future, after some shaky events at the hospital, one of Tenma's patients comes in, distressed. When Tenma tries to follow him after his escape, he begins to understand that the boy he saved all those years ago grew to become a real life, murderous and apathetic monster.<br>All in all, insane series. Always be the best you can be, since only you choose the morals you follow and you control the choices you make, even at your lowest.</p>
+<p>i have no idea how to find the official english dub lol sorry (the dub is actually very superior for a few reasons here, sorry sports fans), so yo ho ho or whatever they say i guess</p>
+<p>also don't ship johan and tenma, idk thats scary LOL</p>
+</div>
+<div> </div>
+</div>
+</li>
+<li>
+<div>
+<div>Nichijou
+<p>上々友情! 万事まじ快調!ななななななな<br>（はい　言っちゃいましょ! キミは　Best Best Friend!）</p>
+<p>Peak series in whatever way you consume it, I literally can't describe it other than My Ordinary Life. I won't go into detail, but I think of it every day and I have it as my favorite anime. Mio is so me though it's crazy.. but Nano is me too so it tracks.</p>
+<p>I also like it more than azumanga or lucky star but don't tell anyone</p>
+<p>My favorite moment was the gun lol.</p>
+</div>
+<div> </div>
+</div>
+</li>
+<li>
+<div>
+<div>Mahou Shoujo Madoka★Magica \ Puella Magi Madoka Magica
+<p>Average girl Madoka Kaname, who is constantly anxious about the future and her life, gets the chance of a lifetime when she and her friend, Sayaka Miki meet a magical creature Kyubey. Kyubey promises magical power to save the world and carve out a destiny in exchange for the knowledge of your most potent desire. Anything you want will come true, and when you make a pact with him, you will become a Magical Girl.</p>
+<p>What does one wish for when you can have anything you desire? And, moreover, what are you truly getting into?</p>
+<p>Madoka is lucky, she's being protected all this time by someone dressed in the image of an enemy. She just wants to have Madoka understand what it truly means to be a magical girl in this world.</p>
+<p>I think this series is what's wrong with me? (lol) I love Homura and she's so much like me at times that she makes me too sick to consider what that means for me. I would recommend it to anyone who likes dark things and those who hate the world... I could never hate the world, truly, even when it does such horrible things to others. I was happy, for once, to find media that reflected my view, that people overlook and neglect to foster the good things because they want to be doomers and only focus on the bad.</p>
+<p>all in all, 交わした約束忘れないよ、目を閉じ確かめる、押し寄せた闇　振り払って進むよ</p>
+</div>
+<div> </div>
+</div>
+</li>
+<li>
+<div>
+<div>GTO (Great Teacher Onizuka)
+<p>Okay I'm gonna level with you, this is definitely a hear me out sometimes but I promise there's like peak story in here...</p>
+<p>I won't make a huge review for this because it's very straightforward; Onizuka is a very, very, very interesting teacher with methods that I'm sure will take him to jail if he didn't have plot armor. He gains the respect of his students by being Him all the time and basically converts even the most troublesome of them to his side.</p>
+<p>The other half of the series is him wanting a girlfriend really... he wants the ideal, youthful wife so he can look like That Guy by being an adult with a beautiful girl... but then he (somewhat...?) grows out of it when his 'idol' goes to jail for messing with teenage girls. We get character growth that moves back and forth like he was running suicides in gym class. But it's actually really funny if you straight up just acknowledge he's an idiot who's riding the coattails of a societal stereotype of a kind of man and he's just straight up incapable of doing it.. Plus him and Fuyutsuki/whatever she's called elsewhere are cute together but she NEEDS to rein him in im crying</p>
+</div>
+<div> </div>
+</div>
+</li>
+<li>
+<div>
+<div>Kobayashi-san Chi no Maid Dragon
+<p>It's so cozy, really... the Kobayashi household is so much fun and the relationship between Kobayashi and Tohru is one of my favorites. It's really interesting how it took like... a handful of dragons in her house to change everything Kobayashi did before. Dragon yuri changes people for the better, and now it's like... dragon wife and dragon daughter who you give everything for and get to watch as they grow into the human world alongside you.</p>
+<p>I think certain communities ruined the proper perception of this anime (NOT the manga, that's justified to be seen how it is and is even not as popular as the anime in Japan itself). I think the only thing I don't like is Ilulu and Lucoa (and even then I love Lucoa on her own because she's genuinely funny in a really stupid way, but I hate literally everything about her outside of herself + the fact she is a real life important figure...) And poor Kanna, man.. although I do understand when the creator is a complete pervert lol. KyoAni did the series justice, gave them all a lot of character nuance they didn't have before... I love the Kobayashi household of the anime to death, and I'll always be the #1 defender of the anime.</p>
+<p>Overall, you can hate the series freely, I understand. I'm actually kind of interested in the fact that such a series got a KyoAni adaptation in the first place, but the series is so much fun when you actually watch it so I totally get it, too.</p>
+<p>Try the tail!!!!!</p>
+</div>
+<div> </div>
+</div>
+</li>
+</ol>
+</div>
+<div><b>Stats (Forever Incomplete)</b>
+<ol>
+<li>Clevatess: Majū no Ō to Akago to Shikabane no Yūsha
+<p>Ep 2/12 (i stopped watching to read the webmanga but only just found the version i was looking for)</p>
+</li>
+<li>Amagi Brilliant Park
+<p>Ep 3/13 (I might also switch to this manga, idk what it is about it)</p>
+</li>
+<li>Gachiakuta
+<p>Ep 5/?? (I watched it as it simulcast on my brother's crunchyroll but didn't get back into it when more released lol)</p>
+</li>
+<li>GTO (rewatch)
+<p>Ep 19/43 (I'm going to read this manga too, but it's been so long since i saw the anime lol)</p>
+</li>
+<li>Planned watch/read (maybe, i don't like to consume a lot of things randomly):
+<p><b>Honzuki no Gekokujou</b><b>Black Lagoon</b><b>BOFURI</b><b>Hellsing</b><b>Lazarus</b><b>Kino no Tabi: The Beautiful World</b><b>Paripi Koumei</b><b>Rokudenashi Majutsu Koushi to Akashic Records</b><b>Dumbbell Nan Kilo Moteru?</b><b>Aharen-san wa Hakarenai</b></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="
+position: absolute;
+bottom: 0;
+height: 8px;
+width: 100%;
+background-image: linear-gradient(90deg, #a777d6, #8aa6c8, #8aa6c8);
+"></div>
+</body>
+</html>

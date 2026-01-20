@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  color: #fff;
+  font-family: Tahoma;
+}
+
+.tile-body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-direction: column;
+  width: 248px;
+  height: 248px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.taskbar {
+  background: linear-gradient(#0997ff, #0053ee 8%, #0050ee 40%, #06f 88% 93%, #005bff 95%, #003dd7 96%, #003dd7);
+  height: 30px;
+  display: flex;
+}
+
+.start {
+  background: url("/t/prefetcher.net/start.png");
+  width: 97px;
+  height: 30px;
+}
+
+.start-clicked {
+  background: url("/t/prefetcher.net/clicked.png") !important;
+}
+
+.start:hover {
+  background: url("/t/prefetcher.net/hovered.png");
+}
+
+.desktop {
+  background: url("/t/prefetcher.net/bliss.png") 0 0 / cover;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 10px;
+  display: flex;
+  position: relative;
+}
+
+.gutter {
+  background-color: #1e52b7;
+  border-radius: 2px;
+  flex-grow: 1;
+  align-items: center;
+  margin: 4px;
+  padding: 3px;
+  display: flex;
+  box-shadow: inset 0 0 1px 1px #0003, inset 1px 0 1px #000000b3;
+}
+
+.gutter > img {
+  max-height: 15px;
+  margin-left: 3px;
+}
+
+.gutter-text {
+  color: #fff;
+  margin-left: 3px;
+  font-size: 11px;
+}
+
+.tray {
+  background: linear-gradient(#0c59b9 1%, #139ee9 6%, #18b5f2 10%, #139beb 14%, #1290e8 19%, #0d8dea 63%, #0d9ff1 81%, #0f9eed 88%, #119be9 91%, #1392e2 94%, #137ed7 97%, #095bc9 100%);
+  border-left: 1px solid #1042af;
+  align-items: center;
+  margin-left: 10px;
+  padding: 0 10px;
+  display: flex;
+  box-shadow: inset 1px 0 1px #18bbff;
+}
+
+.time {
+  color: #fff;
+  font-size: 12px;
+}
+
+.shortcut {
+  width: fit-content;
+  margin-bottom: 3px;
+  position: relative;
+}
+
+.shortcut:after {
+  content: " ";
+  background: url("/t/prefetcher.net/shortcut.png");
+  width: 11px;
+  height: 11px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+.icon {
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 74px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  display: flex;
+}
+
+.name {
+  text-shadow: 0 1px 1px #000;
+}
+
+.name:hover {
+  background-color: #0050ee;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+a {
+  display: contents;
+}
+
+.ata {
+  pointer-events: none;
+  background: url("/t/prefetcher.net/ata.png") 0 0 / contain;
+  width: 141px;
+  height: 234px;
+  position: fixed;
+  top: 10px;
+  left: 100px;
+}
+
+.ata-tray {
+  background: url("/t/prefetcher.net/ata_tray.png") 0 0 / cover;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.ata-tray:hover {
+  cursor: pointer;
+}
+
+.start-menu {
+  z-index: 100;
+  flex-direction: column;
+  width: 180px;
+  height: 200px;
+  margin-left: -10px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  box-shadow: 2px 4px 2px #00000080;
+}
+
+.hidden {
+  display: none;
+}
+
+.menu-top {
+  background: linear-gradient(#1868ce 0%, #0e60cb 12% 20%, #1164cf 32%, #1667cf 33%, #1b6cd3 47%, #1e70d9 54%, #2476dc 60%, #297ae0 65%, #3482e3 77%, #3786e5 79%, #428ee9 90%, #4791eb 100%);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  display: flex;
+}
+
+.menu-top:before {
+  content: "";
+  background: linear-gradient(to right, #0000 0, #ffffff4d 1%, #ffffff80 2% 95%, #ffffff4d 98%, #fff3 99%, #0000 100%);
+  width: 100%;
+  height: 3px;
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  box-shadow: inset 0 -1px 1px #0e60cb;
+}
+
+.menu-middle {
+  border-top: 1px solid #385de7;
+  flex: 1;
+  display: flex;
+  position: relative;
+  box-shadow: 0 1px #385de7;
+}
+
+.middle-left {
+  background-color: #fff;
+  flex: 1;
+}
+
+.middle-right {
+  background-color: #cbe3ff;
+  border-left: 1px solid #3a3aff5e;
+  flex: 1;
+}
+
+.menu-bottom {
+  background: linear-gradient(#4282d6 0%, #3b85e0 3%, #418ae3 5% 17%, #3c87e2 21%, #3786e4 26%, #3482e3 29%, #2e7ee1 39%, #2374df 49%, #2072db 57%, #196edb 62%, #176bd8 72%, #1468d5 75%, #1165d2 83%, #0f61cb 88%);
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  padding: 8px;
+  display: flex;
+}
+
+.menu-separator {
+  background: linear-gradient(to right, #0000 0%, #da884a 50%, #0000 100%);
+  border: 0;
+  height: 2px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.profile-picture {
+  background: url("/t/prefetcher.net/profilepicture.jpg") 0 0 / contain;
+  border: 2px solid #dededecc;
+  border-radius: 3px;
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.shutdown {
+  background: url("/t/prefetcher.net/shutdown.png") 0 0 / contain;
+  width: 22px;
+  height: 22px;
+}
+
+.shutdown-text {
+  margin-left: 8px;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+    <div class="desktop">
+        <a href="https://prefetcher.net" target="_blank">
+            <div class="icon">
+                <div class="shortcut"><img src="/t/prefetcher.net/flash.png"></div>
+                <div class="name">prefetcher.net</div>
+            </div>
+        </a>
+        <a href="https://bsky.app/profile/prefetcher.miku.place" target="_blank">
+            <div class="icon">
+                <div class="shortcut"><img src="/t/prefetcher.net/ata_icon.png"></div>
+                <div class="name">Bluesky</div>
+            </div>
+        </a>
+        <div class="hidden" id="start-menu">
+            <div class="menu-top">
+                <div class="profile-picture"></div>
+                <div class="username">WebTiles</div>
+            </div>
+            <div class="menu-middle">
+                <hr class="menu-separator" >
+                <div class="middle-left">
+                </div>
+                <div class="middle-right">
+                </div>
+            </div>
+            <div class="menu-bottom">
+                <img src="/t/prefetcher.net/shutdown.png">
+                <div class="shutdown-text">Turn Off</div>
+            </div>
+        </div>
+    </div>
+    <div class="taskbar">
+        <div class="start" id="start"></div>
+        <div class="gutter">
+            <img src="/t/prefetcher.net/info.png">
+            <div class="gutter-text">Mina makes an offer</div>
+        </div>
+    </div>
+    <div class="ata"></div>
+    <script type="text/tilescript">
+        var open = false;
+        function openMenu() {
+            var menu = document.getElementById("start-menu")
+            var start = document.getElementById("start")
+            open = !open;
+            if (open) {
+            	start.setAttribute("class", "start start-clicked")
+            	menu.setAttribute("class", "start-menu")
+            } else {
+            	start.setAttribute("class", "start")
+            	menu.setAttribute("class", "hidden")                
+            }
+        }
+        
+        document.getElementById("start").addEventListener("click", openMenu);
+    </script>
+</body>
+</html>

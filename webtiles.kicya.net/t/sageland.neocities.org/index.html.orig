@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+    <p>Work in progress, will add more stuff once they are ready! for now sageland.neocities.org</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <img src="/t/sageland.neocities.org/SonicRGuideT.png" width="130"> 
+</body>
+</html>

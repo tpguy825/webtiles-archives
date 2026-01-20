@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: EarlyGameBoy;
+  src: url("/t/gooseonoob.nekoweb.org/EarlyGameBoy.ttf") format("truetype");
+}
+
+* {
+  image-rendering: pixelated;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: EarlyGameBoy;
+  font-size: 8px;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.tile-body {
+  color: #111;
+  margin: 0;
+  font-family: EarlyGameBoy;
+  font-size: 8px;
+}
+
+canvas {
+  display: block;
+}
+
+ul li {
+  list-style: none;
+  position: relative;
+}
+
+ul li.check:before {
+  content: "";
+  background-image: url("/t/gooseonoob.nekoweb.org/bullet_tick.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  list-style: none;
+  position: absolute;
+  top: -4px;
+  left: -16px;
+}
+
+.tray {
+  background: linear-gradient(#0c59b9 1%, #139ee9 6%, #18b5f2 10%, #139beb 14%, #1290e8 19%, #0d8dea 63%, #0d9ff1 81%, #0f9eed 88%, #119be9 91%, #1392e2 94%, #137ed7 97%, #095bc9 100%);
+  border-radius: 0 8px 8px 0;
+  width: 16px;
+  height: 30px;
+  max-height: 30px;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateY(-100%);
+}
+
+.custom-container {
+  display: none;
+}
+
+.counter {
+  display: flex;
+}
+
+.counter-border {
+  border: 1px solid #0000;
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-counter.png");
+  border-image-slice: 1;
+  border-image-repeat: stretch;
+  width: fit-content;
+  height: fit-content;
+}
+
+.digit {
+  background-image: url("/t/gooseonoob.nekoweb.org/digits.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  width: 13px;
+  height: 23px;
+}
+
+.d0 {
+  background-position: 0 0;
+}
+
+.d1 {
+  background-position: -13px 0;
+}
+
+.d2 {
+  background-position: -26px 0;
+}
+
+.d3 {
+  background-position: -39px 0;
+}
+
+.d4 {
+  background-position: -52px 0;
+}
+
+.d5 {
+  background-position: -65px 0;
+}
+
+.d6 {
+  background-position: -78px 0;
+}
+
+.d7 {
+  background-position: -91px 0;
+}
+
+.d8 {
+  background-position: -104px 0;
+}
+
+.d9 {
+  background-position: -117px 0;
+}
+
+.dblank {
+  background-position: -130px 0;
+}
+
+.dminus {
+  background-position: -143px 0;
+}
+
+.header-container {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.btn-face:hover:active {
+  background: url("/t/gooseonoob.nekoweb.org/btn-face-pressed.png");
+}
+
+.btn-face {
+  background: url("/t/gooseonoob.nekoweb.org/btn-face.png");
+  border: none;
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.btn-border {
+  border: 1px solid #0000;
+  border-image-source: url("/t/gooseonoob.nekoweb.org/btn-border.png");
+  border-image-slice: 1;
+  border-image-repeat: stretch;
+  width: fit-content;
+  height: fit-content;
+}
+
+.outer-border {
+  border: 8px solid #0000;
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-outer.png");
+  border-image-slice: 4 fill;
+  border-image-repeat: stretch;
+  height: 100%;
+  padding: 9px 4px 4px 9px;
+}
+
+p {
+  margin: 3px;
+}
+
+.inner-border {
+  border: 2px solid #0000;
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-inner.png");
+  border-image-slice: 2 fill;
+  border-image-repeat: stretch;
+  padding: 3px 5px;
+}
+
+.game-border {
+  box-sizing: border-box;
+  border: 3px solid #0000;
+  border-image-source: url("/t/gooseonoob.nekoweb.org/border-game.png");
+  border-image-slice: 3 fill;
+  border-image-repeat: stretch;
+  margin-top: 6px;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.focus-text {
+  z-index: 1;
+  text-align: center;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+input[type="number"] {
+  width: 36px;
+}
+</style>
+    
+</head>
+    <body>
+        <div class="outer-border" style="display: flex; flex-direction: column;">
+            <div class="inner-border" style="overflow-y: scroll;">
+                <a href="/t/gooseonoob.nekoweb.org/index.html">Go back</a>
+                <h4>Minesweeper info</h4>
+                <p>
+                    You need to be focused on the webtile for script to work !
+                </p>
+                <h4>
+                    Controls
+                </h4>
+                <p>
+                    <ul>
+                        <li>Left click to open tile</li>
+                        <li>Shift + Left click to open tile</li>
+                    </ul>
+                </p>
+                <h4>
+                    In the future maybe
+                </h4>
+                <p>
+                    Will be adding more features later when I have time!
+                    <br>
+                    Including:
+                    <ul>
+                        <li class="check"><s>Difficulty presets</s></li>
+                        <li class="check"><s>Custom board sizes</s></li>
+                        <li>Highscores</li>
+                        <li class="check"><s>More polish</s></li>
+                        <li>Who knows</li>
+                    </ul>
+                </p>
+                <p>
+                    You can contact me through <a href="https://gooseonoob.atabook.org/" target="_blank">my guestbook</a>!
+                </p>
+            </div>
+        </div>
+		<div class="tray"></div>
+    </body>
+</html>

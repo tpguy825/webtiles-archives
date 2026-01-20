@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+<style>.tile-body {
+  background-color: #00f;
+}
+
+p {
+  color: #fff;
+}
+</style>
+</head>
+    
+<body>
+
+  <div class="tile">
+    <img width="100" src="/t/freshperf.fr/logo.png" alt="Logo" class="logo">
+  </div>
+    <p>
+        WIP! (will work on it in about 2 days, neighbor dm me on discord if you want to make something! :3)
+        discord: fy5
+    </p>
+
+</body>
+</html>

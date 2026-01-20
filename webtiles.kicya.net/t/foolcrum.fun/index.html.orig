@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-image: url("/t/foolcrum.fun/waterfall2.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@font-face {
+  font-family: shaglounge;
+  src: url("/t/foolcrum.fun/shaglounge.woff2");
+}
+
+#title {
+  color: #fff;
+  filter: drop-shadow(0 1px #000) drop-shadow(0 -1px #000) drop-shadow(1px 0 #000) drop-shadow(-1px 0 #000) drop-shadow(0 1px red) drop-shadow(0 -1px red) drop-shadow(1px 0 red) drop-shadow(-1px 0 red);
+  margin-top: 2px;
+  padding-left: 5px;
+  font-family: Courier;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#boty {
+  transition: transform .3s ease-in-out;
+  position: absolute;
+  top: 60px;
+  left: 100px;
+}
+
+#boty:hover {
+  outline: 3px solid #00f;
+  transform: scale(1.35);
+}
+
+#boty:hover #subtitle {
+  background-color: #00f;
+}
+
+#subtitle {
+  color: #fff;
+  transition: transform .3x ease-in-out;
+  background-color: #000;
+  font-family: Courier;
+  font-weight: bolder;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+</style>
+</head>
+<body>
+    <p id="title">foolcrum.fun</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <a href="https://foolcrum.fun/" target="_blank"><img id="boty" src="/t/foolcrum.fun/rbty.png" width="50"></a>
+    <p id="subtitle">
+        finally, i am at peace....
+    </p>
+</body>
+</html>

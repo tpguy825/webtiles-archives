@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  display: flex;
+}
+
+.home {
+  cursor: pointer;
+  background: url("/t/chunkofwax.com/pfpanim.gif") 0 0 / 125px 125px no-repeat;
+  border-radius: 100%;
+  transition-duration: .3s;
+}
+
+.home:hover {
+  box-shadow: inset -6px 6px 10px #0003;
+}
+</style>
+</head>
+<body>
+    <div class="home">
+    	<a href="https://chunkofwax.com" target="_blank"><img src="/t/chunkofwax.com/pfpanim.gif" width="125" height="125" style="opacity:0"></a>
+    </div>
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

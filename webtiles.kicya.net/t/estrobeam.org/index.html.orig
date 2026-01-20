@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #e4e6ea;
+}
+
+@font-face {
+  font-family: Red Hat Display;
+  src: url("/t/estrobeam.org/RedHatDisplay.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.stuff {
+  color: #000;
+  text-align: center;
+  background-color: #e4e6ea;
+  padding: 5px;
+  font-family: Red Hat Display, sans-serif;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <div class="stuff">
+    	<p>Tile of estrobeam.org</p>
+    	<p>i'll put something here eventually, like a mini version of the site</p>
+    	<p>when will i? maybe in a few <strong>decades</strong> </p>
+	</div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

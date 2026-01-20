@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<style>.tile-body {
+  color: #fff;
+  box-sizing: border-box;
+  background-color: #050505;
+  background-image: linear-gradient(to top, navy, #1084d0);
+  border: 1px solid #000;
+  border-color: #dfdfdf #000 #000 #dfdfdf;
+  margin: 0;
+  position: relative;
+  box-shadow: inset 1px 1px #fff, inset -1px -1px gray;
+}
+
+canvas {
+  box-sizing: border-box;
+  pointer-events: none;
+  border: 3px solid silver;
+  width: 100%;
+  height: 100%;
+}
+
+span {
+  pointer-events: none;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+img {
+  pointer-events: none;
+  width: 80%;
+  height: 80%;
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  transform: rotate(180deg);
+}
+</style>
+	</head>
+	<body>
+		<canvas id="buffer1"></canvas>
+		<canvas id="buffer2"></canvas>
+		<img src="/t/blog.twhlynch.me/cube.webp" id="img" tabindex="-1">
+		<span id="info">WASD to move<br>Left &amp; Right to look<br>Click to reset</span>
+		<script type="text/tilescript">// on entering tile, remove info and hide thumbnail
+var img = document.getElementById('img');
+img.style.opacity = '0';
+document.getElementById('info').style.display = 'none';
+
+// MARK: Canvas setup
+var canvas1 = document.getElementById('buffer1');
+var canvas2 = document.getElementById('buffer2');
+canvas1.width = canvas1.width * 2;
+canvas2.width = canvas2.width * 2;
+canvas1.height = canvas1.height * 2;
+canvas2.height = canvas2.height * 2;
+var w = canvas1.width;
+var h = canvas1.height;
+
+var ctx1 = canvas1.getContext('2d');
+var ctx2 = canvas2.getContext('2d');
+
+canvas1.style.display = 'block';
+canvas2.style.display = 'none';
+
+var canvas = canvas1;
+var ctx = ctx1;
+
+// MARK: 3D math helpers
+function Vec3(x, y, z) {
+	this.x = x;
+	this.y = y;
+	this.z = z;
+}
+
+function rotateY(v, angle) {
+	var cos = Math.cos(angle);
+	var sin = Math.sin(angle);
+	return new Vec3(v.x * cos - v.z * sin, v.y, v.x * sin + v.z * cos);
+}
+
+function rotateX(v, angle) {
+	var cos = Math.cos(angle);
+	var sin = Math.sin(angle);
+	return new Vec3(v.x, v.y * cos - v.z * sin, v.y * sin + v.z * cos);
+}
+
+function project(v) {
+	var scale = 200 / (v.z + 5);
+	return { x: w / 2 + v.x * scale, y: h / 2 - v.y * scale };
+}
+
+// MARK: cube
+// prettier-ignore
+var cubeVertices = [
+	new Vec3(-1, -1, -1),
+	new Vec3( 1, -1, -1),
+	new Vec3( 1,  1, -1),
+	new Vec3(-1,  1, -1),
+	new Vec3(-1, -1,  1),
+	new Vec3( 1, -1,  1),
+	new Vec3( 1,  1,  1),
+	new Vec3(-1,  1,  1),
+];
+
+var cubeFaces = [
+	[0, 1, 2, 3, '#fff'],
+	[4, 5, 6, 7, '#eee'],
+	[0, 1, 5, 4, '#ddd'],
+	[2, 3, 7, 6, '#ccc'],
+	[0, 3, 7, 4, '#bbb'],
+	[1, 2, 6, 5, '#aaa'],
+];
+
+// MARK: movement
+var cam = { x: 0, y: 0, z: -0.01, rotX: 0, rotY: 0 };
+
+var keys = {};
+var root = canvas1.parentElement;
+var textfield = document.getElementById('textfield');
+
+root.onclick = function () {
+	img.focus();
+	// reset
+	cam = { x: 0, y: 0, z: -0.01, rotX: 0, rotY: 0 };
+};
+function down(e) {
+	keys[e.keyCode] = true;
+}
+function up(e) {
+	keys[e.keyCode] = false;
+}
+img.addEventListener('keydown', down, true);
+img.addEventListener('keyup', up, true);
+
+function update_camera() {
+	var yaw = -cam.rotY;
+
+	var fx = Math.sin(yaw);
+	var fz = Math.cos(yaw);
+	var rx = Math.cos(yaw);
+	var rz = -Math.sin(yaw);
+
+	// W
+	if (keys[87]) {
+		cam.x += fx;
+		cam.z += fz;
+	}
+	// S
+	if (keys[83]) {
+		cam.x -= fx;
+		cam.z -= fz;
+	}
+	// D
+	if (keys[68]) {
+		cam.x += rx;
+		cam.z += rz;
+	}
+	// A
+	if (keys[65]) {
+		cam.x -= rx;
+		cam.z -= rz;
+	}
+
+	if (keys[37]) cam.rotY += 0.3; // Left
+	if (keys[39]) cam.rotY -= 0.3; // Right
+	// cant get these to work lol
+	// if (keys[38]) cam.rotX -= 0.3; // Up
+	// if (keys[40]) cam.rotX += 0.3; // Down
+}
+
+// MARK: buffer swap
+var canvas1_style = canvas1.style;
+var canvas2_style = canvas2.style;
+function swap() {
+	if (canvas === canvas1) {
+		canvas1_style.display = 'block';
+		canvas2_style.display = 'none';
+		canvas = canvas2;
+		ctx = ctx2;
+	} else {
+		canvas2_style.display = 'block';
+		canvas1_style.display = 'none';
+		canvas = canvas1;
+		ctx = ctx1;
+	}
+}
+
+function draw_face(face, verts) {
+	ctx.beginPath();
+
+	for (var i = 0; i < 4; i++) {
+		var v = verts[face[i]];
+
+		var vx = v.x - cam.x;
+		var vy = v.y - cam.y;
+		var vz = v.z - cam.z;
+
+		var cv = rotateY(rotateX(new Vec3(vx, vy, vz), -cam.rotX), -cam.rotY);
+		var p = project(cv);
+
+		if (i === 0) ctx.moveTo(p.x, p.y);
+		else ctx.lineTo(p.x, p.y);
+	}
+
+	ctx.closePath();
+	ctx.fillStyle = face[4];
+	ctx.fill();
+	ctx.strokeStyle = '#000';
+	ctx.stroke();
+}
+
+// MARK: update loop
+function update() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	update_camera();
+
+	// rotate
+	var angle = new Date().getTime() * 0.002;
+	var rotated_verts = [];
+	for (var i = 0; i < cubeVertices.length; i++) {
+		var v = cubeVertices[i];
+		var r = rotateX(rotateY(v, angle), angle * 0.5);
+		rotated_verts.push(r);
+	}
+
+	// depth sort
+	var depths = [];
+	for (var f = 0; f < cubeFaces.length; f++) {
+		var face = cubeFaces[f];
+		var avgZ = 0;
+
+		// only avg 2 opposite verts since its a square
+		for (var i = 0; i < 3; i += 2) {
+			var v = rotated_verts[face[i]];
+
+			var vx = v.x - cam.x;
+			var vy = v.y - cam.y;
+			var vz = v.z - cam.z;
+
+			var cv = rotateY(rotateX(new Vec3(vx, vy, vz), -cam.rotX), -cam.rotY);
+			avgZ += cv.z;
+		}
+
+		avgZ /= 2;
+		depths.push({ face: face, z: avgZ });
+	}
+
+	depths.sort(function (a, b) {
+		return b.z - a.z;
+	});
+
+	// draw
+	// only last 3 since you can only ever see the closest 3 at one time
+	for (var f = 2; f < 6; f++) {
+		var face = depths[f].face;
+		draw_face(face, rotated_verts);
+	}
+
+	swap();
+	setTimeout(update, 0);
+}
+
+update();
+</script>
+	</body>
+</html>

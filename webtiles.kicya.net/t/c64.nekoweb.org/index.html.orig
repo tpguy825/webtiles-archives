@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>html, .tile-body {
+  background-color: #958dff;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+a {
+  background-image: url("/t/c64.nekoweb.org/tn.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  animation: 48s linear infinite cycleBackground;
+  display: block;
+}
+
+span {
+  color: #0000;
+}
+
+@font-face {
+  font-family: C64 Pro;
+  src: url("/t/c64.nekoweb.org/c64.woff2");
+}
+
+marquee {
+  font-variant: small-caps;
+  color: #fff9;
+  font-family: C64 Pro;
+  font-size: 120px;
+  text-decoration: none;
+  animation: 2s forwards fadeout;
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes cycleBackground {
+  0% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg");
+  }
+
+  6.25% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i2");
+  }
+
+  12.5% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i3");
+  }
+
+  18.75% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i4");
+  }
+
+  25% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i5");
+  }
+
+  31.25% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i6");
+  }
+
+  37.5% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i7");
+  }
+
+  43.75% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i8");
+  }
+
+  50% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i9");
+  }
+
+  56.25% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i10");
+  }
+
+  62.5% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i11");
+  }
+
+  68.75% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i12");
+  }
+
+  75% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i13");
+  }
+
+  81.25% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i14");
+  }
+
+  87.5% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i15");
+  }
+
+  93.75% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg#i16");
+  }
+
+  100% {
+    background-image: url("/t/c64.nekoweb.org/tn.svg");
+  }
+}
+</style>
+</head>
+  <body>
+    <a href="https://c64.nekoweb.org" target="_blank">
+      <marquee behavior="alternate" scrolldelay="60" scrollamount="12"><span>a</span>Arcade<br>Classics</marquee>
+    </a>
+  </body>
+</html>

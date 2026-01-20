@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("/t/fear.garden/img/layout_dusk_overlay.png") 0 no-repeat, url("/t/fear.garden/img/layout_dusk_bg.png") 0 no-repeat, #f5e3fb;
+  font-family: MS Gothic, monospace;
+  font-size: 12px;
+}
+
+b {
+  color: #fbfb51;
+}
+
+p {
+  margin: 0;
+  padding: 5px;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: strong;
+  text-align: center;
+  vertical-align: middle;
+  background: url("/t/fear.garden/img/layout_header_dusk.png") no-repeat;
+  width: 191px;
+  height: 22px;
+  margin-left: 5px;
+  line-height: 22px;
+}
+
+.digivice {
+  box-sizing: border-box;
+  color: #fff;
+  height: 220px;
+  padding: 15px 0 27px;
+  overflow: hidden;
+}
+
+.grid {
+  grid-template-columns: 35% auto;
+  grid-template-areas: "left right";
+  align-items: center;
+  margin: 4px;
+  display: grid;
+}
+
+.grid-left {
+  grid-area: left;
+}
+
+.grid-right {
+  grid-area: right;
+}
+
+.box {
+  background: #30089ab3;
+  border: 2px solid #4941eb;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.bottom {
+  z-index: 25;
+  height: 30px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+
+.bottom img {
+  opacity: 0;
+  width: 58px;
+  height: 100%;
+}
+</style>
+</head>
+<body>
+    <div class="digivice">
+            <h1>Lucemon FM</h1>
+            <div class="grid">
+                <div class="grid-l">
+                    <img src="/t/fear.garden/img/luce_idle_dusk.gif" alt="Lucemon Falldown Mode">
+                </div>
+                <div class="grid-r">
+                    <div class="box">
+                        An ultimate demon lord Digimon which possesses both the "divine" and the "diabolic". It is a form of Lucemon, who was originally an angel, that fell down. Once it destroys this world, it intends to create a new world. 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <a href="https://fear.garden" target="_blank">
+                <img src="/t/fear.garden/img/yourenotsupposedtoseethislol.png" alt>
+            </a>
+            <a href="https://www.youtube.com/watch?v=yxYCZcWKHck" target="_blank">
+                <img src="/t/fear.garden/img/yourenotsupposedtoseethislol.png" alt>
+            </a>
+        </div>
+</body>
+</html>

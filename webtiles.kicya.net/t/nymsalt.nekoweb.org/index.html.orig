@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <style>.tile-body {
+  color: #fff;
+  background: linear-gradient(to right, #8cffa7, #0000 20px 230px, #2d263e 250px, #2d263e), url("/t/nymsalt.nekoweb.org/img/iotaimg.png");
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  font-family: MS UI Gothic, Unifont, Times New Roman, Times, serif;
+  display: flex;
+}
+
+#loading-area {
+  flex-direction: row;
+  gap: 5px;
+  display: flex;
+
+  & #loading {
+    border: thin solid #fff;
+    width: 100px;
+    height: 20px;
+
+    & #loading-bar {
+      background: #fff;
+      width: 100%;
+      height: 100%;
+      animation: 4s load;
+    }
+  }
+
+  & #enter {
+    text-align: center;
+    color: #000;
+    cursor: pointer;
+    background: #fff;
+    border: thin solid #fff;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    animation: 4s step-end arrow;
+  }
+}
+
+#splash {
+  font-size: smaller;
+}
+
+@keyframes load {
+  from {
+    width: 0;
+  }
+
+  25% {
+    width: 10%;
+  }
+
+  50% {
+    width: 40%;
+  }
+
+  55% {
+    width: 80%;
+  }
+
+  60% {
+    width: 98%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes arrow {
+  from {
+    cursor: not-allowed;
+    background: none;
+  }
+
+  to {
+    cursor: pointer;
+    background: #fff;
+  }
+}
+</style>
+    </head>
+    <body>
+        <div><b>iota</b><i>dot</i></div>
+        <div id="loading-area">
+            <div id="loading">
+                <div id="loading-bar"></div>
+            </div>
+            <a id="enter" href="/t/nymsalt.nekoweb.org/home/index.html">&vartriangleright;</a>
+        </div>
+        <div id="splash">thank you</div>
+    </body>
+</html>

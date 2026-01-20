@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.bg {
+  width: 100%;
+  margin: 0;
+}
+
+p, h1, ol, ul, h3, label {
+  color: #000;
+  margin: .3em auto .2em;
+  font-family: Trebuchet MS;
+  font-size: .75em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.white {
+  background-color: #ffffffe6;
+  border-radius: 15px;
+  margin: 3%;
+  padding: 1em;
+}
+</style>
+    <style>#fade:not(:hover) {
+  opacity: 0;
+  animation-name: fadeout;
+  animation-duration: 1s;
+}
+
+#fade:hover {
+  animation-name: fadein;
+  animation-duration: 1s;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.flexy {
+  display: flex;
+}
+</style>
+</head>
+<body>
+    <div style="position: absolute;style;" class="white" id="fade">
+        <div style="float:right;height:50px;width:120px;overflow-y: scroll;border: 2px solid;padding:0 0 0 .5em">
+            <p>
+                
+<a href="https://taptroupe.nekoweb.org/archives/egorigst" target="_blank"><strong>From the composer, Kota Hoshino</strong></a>
+                </p><p style="font-style:italic">
+                    
+  
+                Before the development of Evergrace (subsequently referred to as EG), I had a certain idea in my mind. I wanted to create a sound that was, in a lot of ways, something I could hold to myself, and I think I have achieved that by composing the music of EG which also had its own unique worldview.
+                    
+          </p> <p style="font-style:italic">
+I am also very grateful to the producer and everyone around me for allowing me to do what I wanted to do.
+          </p> <p style="font-style:italic">
+And with that, if people who listen to EG's soundtrack are able to feel the world of Evergrace, I would be very happy.
+            </p>
+        </div>
+        <div style="margin-top:.2em">
+            
+        <h1>
+            Wooow! Evergrace OST!
+        </h1>
+        <p>
+            Evergrace is a 2000 Action RPG launch title for the PS2 by Fromsoftware. It's an interesting game with an interesting OST. It's a little divisive. What do you think?
+        </p>
+        <div style="float:right;display:block;width:50%;margin-left:.1em">
+            <a href="https://taptroupe.nekoweb.org/" target="_blank"><img src="https://webtiles.kicya.net/t/alayna2d.com/taptroupe%20icon.webp" title="link back to me if you'd like! take the alt text too!" alt="pixel art icon for the taptroupe website, the background is of subtle black-white polka dots and a tall tapper from rhythm heaven's rectangular white smiling face, grey box helmet, and red bowtie. there is text beside it that says Taptroupe, and red bowtie on top.">
+			</a>
+            <p>
+                this PSA brought to you by alayna (2,-10), i like fromsoftware archival stuff!
+            </p>
+            
+            </div>
+        <p> You're listening to <strong>Shopping with Palmira</strong>. Enjoy!</p>
+        
+        <p><a href="https://en.wikipedia.org/wiki/EverGrace" target="_blank">
+            Learn more about the game!</a>        
+                <br><a href="https://archive.org/details/evergrace-original-soundtrack" target="_blank">
+            Listen to the OST!</a>
+                    </p>
+               <div style="position: absolute">
+        <audio style="margin-top:14px; margin-left:-21px; width: 250px; height: 25px" controls src="https://webtiles.kicya.net/t/alayna2d.com/06-Shopping-with-Palmira-Ore.mp3" preload="metadata"></audio>
+    </div>
+
+    
+            </div>
+    </div>
+
+    <img src="https://webtiles.kicya.net/t/alayna2d.com/egost.webp" class="bg">
+
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="container">
+  <img src="https://webtiles.kicya.net/t/ddlc.asia/ddlc.asia.png" alt="image">
+</div>
+
+<style>.container {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.container img {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+}
+</style>

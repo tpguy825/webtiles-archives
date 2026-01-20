@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/sledziuk.nekoweb.org/tilebg.jpg");
+  place-content: center;
+}
+
+p {
+  text-align: center;
+  color: #fff;
+  background: #000;
+  margin: 0;
+  font-size: 10px;
+}
+
+.box {
+  background: #000;
+  place-self: center;
+  width: 200px;
+  height: 200px;
+  font-size: 3px;
+}
+
+pre {
+  color: #fff;
+  text-align: center;
+  place-self: center;
+  font-size: 3px;
+}
+
+b {
+  color: #fff;
+  text-align: center;
+  background: #000;
+  margin-left: 50%;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+@keyframes rainbow {
+  10% {
+    color: red;
+  }
+
+  25% {
+    color: orange;
+  }
+
+  40% {
+    color: #ff0;
+  }
+
+  65% {
+    color: green;
+  }
+
+  70% {
+    color: #00bfff;
+  }
+
+  85% {
+    color: #00f;
+  }
+
+  100% {
+    color: purple;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="box">
+      <pre>
+                                                                                                        
+                                                 ..                                                 
+                                                ;O0:                                                
+                                               ;KMMX:                                               
+                                             .cXMMMMXo.                                             
+                                          .;o0WMMMMMMWXx:.                                          
+                         ......          ;kNMMMMMMMMMMMMNk;          ......                         
+                     ..'',,,,,,'...       .;dKWMMMMMMMXo'.       ..'',,,,,,''..                     
+                  ..',,,,,,,,,,,,,'..        .oXMMMMWk'        ..,,,,,,,,,,,,,,'..                  
+                .',,,,,,,,,,,,,,,,,,'.         cNMMWx.        .',,,,,,,,,,,,,,,,,'..                
+              ..,,,,'''''',,,,,,,,,,,,.        .OMMK,        .,,,,,,,,,,,,''''',,,,'.               
+             .''....      ........'',,,.       :XMMNl       .,,,''........      ....''.             
+            ...                     ...     .;xXMMMMNk:.     ...                     ...            
+                 ...       ;xddddddddddddddk0NWWWNNWNNN0xddddddddddddddx;       ...                 
+              .'','...     '0No,'''''''''''''''''''''''''''''''''''',lX0,     ..'','..              
+            .',,,'.         ;KO.                                    .kX:         .',,,'             
+       ..   ',,,,'.          oNd.                                  .dNd.         .',,,,.   .        
+       '.  .',,,,,'.         .OX;                       .',,'..    :X0'         .,,,,,,'.  ..       
+      .,.  .,,,,,,,'.         oWd.                 .,cxOKNWWWNKOx:,kWo         .,,,,,,,,.  .,.      
+     .',.  .,,,,'',,.  ...    :XK,'o:'.      .';lkOKWMMMMMMMMMMMMWNWX;    ..   ',''',,,'.  ','.     
+     .,,.  .,,,.. .''..',,.   'OWl;KMNK0OkkkOKNWMMMMMMMMMMMMMMMMMMMM0'   ',,'..,'. .',,'. .',,.     
+    .',,'.  ',,.   .,,,,,,,.   oWkcOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMx.  .,,,,,,'.   .,,.  .,,,'     
+    .,,,,.  .',.    ','.'','.  ;KXx0MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNc  .','..',.    ','.  .,,,'.    
+    .,,,,'   .,'.   ..   .',.  .xWNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO.  .,'.  ...   .,'.  .',,,,.    
+    .,,,,,.   .,'         .,'   ;KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMX:  .',.        .',.   ',,,,,.    
+    .,,..',.   .,.        .',.   oWMNXWMMMMMMMMMMMMMMMMMMMMMMWXNMNo   .,'        .',.  .','.','.    
+    .,,. .','.  .''.       .,'   .dNXdcoONWMMMMMMMMMMMMMMMWKxcdXXl.  .',.       .''.  .','...,'.    
+    .',.  .','.  .''.       .,.    ;0Nk;.':oxOKXNNWNNXKOxl;';kXO;    .,.       .'.   .',.. .',.     
+     .,'    .','.  ...       ''.    .oXW0o:......'''.....;oONXo.    .'.       ...  .','.   .',.     
+     .',.    ..,,..  ..       .'.     ,kNMWN0kdollllloxOXWMNk,     .'.      ...  .',,..    .,'.     
+      .,.      .',''.          ...      :0WMMMMMWNNWMMMMMW0c.     ...          .','..      ',.      
+      .''.       ..','..         ..      .oXMMMKl;;oKMMMXo.      ..         ..','..       .,'       
+       .,.     ..  ..',,'..               'OMXdcdOOo:dXM0'      .       ...','..   ..    .''.       
+        .,.    .''..  ...',,'...          .xNKllKWNO;:KNd.          ...',,'... ...'.    .',.        
+         ',.    .',,''..  ....',,'....      ;0Nkc;;:xN0:     .....',,'...  ...',,,.    .',.         
+         .','.   .',,,,,'..........',,,''... .dNXOOXNd....''',,''.........'',,,,,.    .',.          
+          .','.    .,,,,,,,,,,''....'',,,,,,. .kMMMMO' .,,,,,,''....'',,,,,,,,,'.    .',.           
+            .,'.    .',,,,,,,,,,,,,,,,,,,,,,. .xMMMMO. .,,,,,,,,,,,,,,,,,,,,,,'.   .','.            
+             .','.   ..,,,,,,,,,,,,,,,,,,,,,.  dMMMMO. .,,,,,,,,,,,,,,,,,,,,'.    .','.             
+              ..,'..   .',,,,,,,,,,,,,,,,,,'.  dMMMMO. .,,,,,,,,,,,,,,,,,,'..   ..,'.               
+                .','..   ..',,,,,,,,,,,,,,,'. .xMMMMO. .,,,,,,,,,,,,,,,,'..   ..',..                
+                  ..''..    ..',,,,,,,,,,,,'. .kMMMMO. .',,,,,,,,,,,''..    ..,'..                  
+                     .','..    ...',,,,,,,,.  '0MMMM0,  ',,,,,,,,'...    ..''..                     
+                       ..'''..     ...'','.  .xWMMMMWk.  .','....    ...''..                        
+                           ..'''..          ;OWMMMMMMW0c.        ...'''..                           
+                              ...'''..   .cONMMMMMMMMMMWKo,   ..'''...                              
+                                  ...   .:llllllllllllllllc.   ...                                  
+                                  .;cllllcclcccclccccccclccllll:'.                                  
+                                  ......                   .. ...                                   
+                                                                                                    
+</pre>
+        <p>
+            what laughs is what lives!
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #dee0dd;
+  background-image: url("/t/sol.nekoweb.org/cgbg.jpg");
+  background-position: center;
+  background-size: cover;
+  padding: .3em;
+  font-family: Apercu Mono, MS Gothic, sans-serif;
+}
+
+@font-face {
+  font-family: Apercu Mono;
+  src: url("/t/sol.nekoweb.org/ApercuMonoProRegular.ttf");
+}
+
+p {
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000, 0 0 3px #000, 0 0 3px #000;
+}
+
+a {
+  color: #508b70;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000, 0 0 3px #000, 0 0 3px #000;
+}
+
+.flex {
+  gap: .5em;
+  padding: .5em;
+  display: flex;
+}
+</style>
+</head>
+<body>
+    <h1 style="background-color:black; opacity:.4; margin:.2em">sol.nekoweb</h1>
+    <div class="flex">
+        <section id="desc">
+            <p>SWEETROT - normal shadowclan warrior. please trust him with your water supply.</p>
+
+            <a href="https://sol.nekoweb.org" target="_blank">check more out</a>
+        </section>
+        
+        <img src="/t/sol.nekoweb.org/sweetrot.png">
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

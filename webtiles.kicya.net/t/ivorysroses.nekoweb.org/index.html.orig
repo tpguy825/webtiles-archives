@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+    
+    <style>.tile-body {
+  color: #ff63a7;
+  font-family: ;
+  background-color: #fff;
+  background-image: url("/t/ivorysroses.nekoweb.org/https:/webtiles.kicya.net/t/ivorysroses.nekoweb.org/tumblr_inline_mt6keu21s41s1qbqj540.gif");
+  font-size: 14px;
+}
+
+#contaior {
+  text-align: center;
+  background-color: #fff;
+  width: 250px;
+  margin: auto 0;
+  padding: 5px;
+}
+
+#content {
+  background-color: #fff;
+  width: 250px;
+}
+
+::selection {
+  color: #fff;
+  background: #ff63a7;
+}
+
+#links {
+  float: left;
+}
+
+a {
+  color: #ff80b7;
+  background-color: #fff;
+  border-radius: 25px;
+  margin-inline: 10px;
+  padding: 4px;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+  background-color: #ff80b7;
+}
+</style>
+    
+</head>
+<body>
+ <div id="contaior">
+     
+    <div id="content">
+        <h2>
+            Ivorys Roses
+        </h2>
+        
+        <img src="https://webtiles.kicya.net/t/ivorysroses.nekoweb.org/ARY2MSHPOQQYJTNVQMSWLSPENLXF2CC7.gif" width="100" style="float:left;">
+        
+    <div id="links">
+    <a href="https://ivorysroses.nekoweb.org/home.html" target="_blank">website</a>
+        <br>
+          <br>
+        <a href="https://ivorysroses.atabook.org/" target="_blank">guestbook</a>
+        <br>
+          <br>
+         <br>
+        <img src="https://webtiles.kicya.net/t/ivorysroses.nekoweb.org/IUQDRK6IFEIXNXZUJH2IO25SLOKJNMHZ.gif">
+     </div>
+        
+     </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    </div>
+</body>
+</html>

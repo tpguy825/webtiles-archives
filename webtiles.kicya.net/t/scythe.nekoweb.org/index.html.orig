@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  font-family: times new roman;
+  overflow: hidden;
+}
+
+p {
+  margin: 0;
+  font-size: 14px;
+}
+
+#fade {
+  background: url("/t/scythe.nekoweb.org/bottomfade.png") 0 0 / 250px;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+}
+
+#lumen-top {
+  width: 250px;
+  height: 30px;
+  bottom: 0;
+  left: ;
+  background: url("/t/scythe.nekoweb.org/azuretrance-top.png") bottom / 250px;
+  position: absolute;
+}
+
+#container {
+  background: url("/t/scythe.nekoweb.org/azuretrance.png") 0 0 / cover;
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+#hovercont {
+  z-index: 3;
+  opacity: 0;
+  backdrop-filter: blur(6px);
+  background: #30386b6e;
+  width: 230px;
+  height: 230px;
+  padding: 10px;
+  transition: all .3s ease-in-out;
+  position: absolute;
+  top: 0;
+}
+
+#container:hover #hovercont {
+  opacity: 1;
+  top: 0;
+}
+
+a {
+  color: #fff;
+  filter: drop-shadow(0 1px #61b0ce) drop-shadow(0 -1px #61b0ce) drop-shadow(1px 0 #61b0ce) drop-shadow(-1px 0 #61b0ce);
+  text-decoration: underline wavy;
+}
+
+a:hover {
+  color: #61b0ce;
+  filter: drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff);
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline wavy;
+}
+
+h1 {
+  color: #61b0ce;
+  writing-mode: vertical-lr;
+  text-align: center;
+  z-index: 3;
+  background: #fff;
+  height: 230px;
+  margin: -10px 0;
+  padding: 10px;
+  font-size: 17px;
+}
+
+#joule {
+  width: 70px;
+  height: 100px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 2px #aae8ff);
+  pointer-events: none;
+  z-index: 3;
+  background: url("/t/scythe.nekoweb.org/joule-float.gif") 0 0 / 100%;
+  position: absolute;
+  top: 145px;
+  left: 36px;
+}
+
+#links {
+  text-align: center;
+  color: #61b0ce;
+  z-index: 3;
+  width: 190px;
+  position: absolute;
+  bottom: 10px;
+  left: 55px;
+}
+
+#links p {
+  color: #fff;
+  text-align: right;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+#blurb {
+  z-index: 3;
+  background: #fff;
+  width: 155px;
+  height: 90px;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  left: 66px;
+  overflow-y: scroll;
+}
+
+#cd {
+  z-index: 1;
+  opacity: .5;
+  background: url("/t/scythe.nekoweb.org/cd.png") 0 0 / cover;
+  width: 200px;
+  height: 200px;
+  animation: 3s linear infinite spin;
+  position: absolute;
+  top: 15px;
+  left: 70px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#tracklist {
+  z-index: 3;
+  background: #fff;
+  width: 175px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  position: absolute;
+  top: 126px;
+  left: 66px;
+}
+
+#tracklist marquee {
+  color: #61b0ce;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#cred {
+  color: #fff;
+  z-index: 3;
+  position: absolute;
+  top: 155px;
+  right: 10px;
+}
+
+#cred p {
+  font-size: 10px;
+  font-style: italic;
+}
+
+#cred a {
+  color: #61b0ce;
+  filter: none;
+  font-weight: bold;
+}
+
+#cred a:hover {
+  color: #fff;
+  filter: none;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    <div id="container">
+        <div id="fade"></div>
+        <div id="lumen-top"></div>
+        
+        <div id="hovercont">
+            <h1>電子の謡精は青の夢を見る。</h1>
+            <div id="joule"></div>
+            
+            <div id="links">
+                <p>-view more about this album-</p>
+                <a href="https://www.inti-direct.com/shopdetail/000000000048" target="_blank">Inti Direct</a> ʚїɞ <a href="https://azurestrikergunvolt.fandom.com/wiki/Azure_Trance_-Into_the_Blue-" target="_blank">Gunvolt Wiki</a>
+            </div>
+            
+            
+            <div id="blurb">
+                <p>
+                    <b>Azure Trance -into the blue-</b> is an official album by <b>LUMEN</b> released in 2016. It's a compilation of all of the full versions of Lumen's vocal tracks from <em>Azure Striker Gunvolt 2.</em>
+                    <br><br>
+                    Into the Blue has to be my favorite Lumen album, to tell the truth... it's not very hard to like any of her albums, at least for me anyways. But this one is easily one of my favorite releases from her.
+                    <br><br>
+                    I can't be so sure why... maybe its the fact that it's the vocal track pair to my favorite game, or maybe it's because it was more nostalgic for me. But I find myself gravitating to this album more than <em>AZURE PHOSPHORESCENSE</em> or <em>Akashic Record</em>.
+                    <br><br>
+                    My favorite track from this album has to be either <b>Parallel World,</b> <b>Stratopshere,</b> or <b>Multi-Universe</b>. It's a hard draw between the three, to be honest. Parallel World is an extra dose of nostalgia for me since it's the theme song of the <em>3DS Gunvolt Striker Pack,</em> where I first played the <em>Gunvolt</em> games in middle school. Stratosphere makes me feel a little bittersweet- most likely because of it's plot relevance in a <em>Luminous Avenger iX</em> drama CD. And Multi-Universe reminds me of biking home from school on a warm summer day, despite the fact I got obsessed over this song in late fall.
+                    <br><br>
+                    Lumen will always have my heart musically. She won it over with this album. Thank you, Joule. Thank you, Lumen. I can't express my gratitude for you and her enough.
+                </p>
+            </div>
+            
+            <div id="tracklist">
+                <marquee behavior="alternate" scrollamount="3">Indigo Destiny || Vast Circle || Multi-Universe || Parallel World || A Flash of Azure || Iolite || Reincarnation Alternative</marquee>
+            </div>
+            
+            <div id="cred"><p>album tile by <a href="https://oversurge.nekoweb.org" target="_blank">xiao/axel</a></p></div>
+            
+            <div id="cd"></div>
+        </div>
+    </div>
+    
+</body>
+</html>

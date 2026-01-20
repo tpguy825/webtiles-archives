@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: linear-gradient(265deg, #9c0e63 0%, #6418a3 100%, #248e96 100%);
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  padding: 2px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  display: flex;
+}
+
+.container {
+  width: 242px;
+  height: 250px;
+  overflow: scroll;
+}
+</style>
+</head>
+<body>
+   
+    <div class= "container">
+       
+    <a href="https://wowozella.nekoweb.org/" target="_blank"><img src="/t/wowozella.nekoweb.org/wowozellabutton2.gif"></a>
+        <img src="/t/wowozella.nekoweb.org/output-onlinegiftools(1).gif" style=" height: 60px; float: right;"><br>
+    
+    <center>
+    <p>← im with stupid<br>
+        please dont hurt me and my boyfriend we're only 3<br>
+  <br>
+        
+        <img src="/t/wowozella.nekoweb.org/pooltoy.gif" style="width: auto;"><br>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+        
+        <B>JOIN WEIRDFUR CLAN</B><br>
+        aa <br>
+        aa <br>
+        aa <br>
+        scroll placeholder <br>
+        
+        </p></center>
+        
+    </div>
+    
+</body>
+</html>

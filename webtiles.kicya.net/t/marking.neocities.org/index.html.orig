@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #0c0c0c;
+  grid-template-rows: 1fr 32fr 1fr;
+  place-items: center;
+  width: 250px;
+  display: grid;
+}
+
+#top, #bottom {
+  width: 250px;
+}
+
+#glyph > a > img {
+  width: 150px;
+  height: auto;
+}
+</style>
+</head>
+<body>
+    <img id="top" src="/t/marking.neocities.org/eyes.gif">
+    <div id="glyph">
+        <a href="https://marking.neocities.org" target="_blank"><img src="/t/marking.neocities.org/biorotate.gif"></a>
+    </div>
+    <img id="bottom" src="/t/marking.neocities.org/eyes.gif">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

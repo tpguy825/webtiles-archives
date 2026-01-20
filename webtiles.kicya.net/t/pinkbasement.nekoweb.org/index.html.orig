@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #000;
+  background-image: url("/t/pinkbasement.nekoweb.org/gin_smith.gif");
+  background-position: 65%;
+  background-size: cover;
+}
+
+.align {
+  place-items: center;
+  width: 100%;
+  display: grid;
+}
+</style>
+</head>
+<body>
+<div class="align">
+    
+</div>
+    
+</body>
+</html>

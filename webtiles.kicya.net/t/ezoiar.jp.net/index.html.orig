@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  font-weight: bold;
+}
+
+a {
+  color: #69e7fecc;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.link {
+  transition: color .2s, background-color .2s, letter-spacing .2s;
+}
+
+.link:hover {
+  color: #000746;
+  letter-spacing: 1px;
+  background-color: #fff;
+}
+</style>
+</head>
+    <audio id="playsound" src="https://webtiles.kicya.net/t/ezoiar.jp.net/menu.wav" preload="metadata">
+	Your browser does not support the audio element.
+</audio>
+    <audio id="clicksound" src="https://webtiles.kicya.net/t/ezoiar.jp.net/menuyes.wav" preload="metadata">
+	Your browser does not support the audio element.
+</audio>
+<body>
+    <img src="/t/ezoiar.jp.net/makotoyuki.gif" height="250" style="position: absolute; left:-10%;">
+    <div style="position: absolute; top: 45%; left:53%; font-size:13px;" id="clickmenutext">
+      <a href="https://ezoiar.jp.net" class="link" id="menutext" target="_blank">EZOIAR.JP.NET</a><br>
+      <a href="https://ezoiar.atabook.org" class="link" id="menutext2" target="_blank">ATABOOK</a><br>
+      <a href="https://nekoweb.org/follow/ezoiar.jp.net" class="link" id="menutext3" target="_blank">FOLLOW ME</a><br>
+      <a href="/t/ezoiar.jp.net/burnmydread.html" class="link" id="menutext4">BURN MY DREAD</a><br>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+var playBtn = document.getElementById('menutext'),
+    playBtn2 = document.getElementById('menutext2'),
+    playBtn3 = document.getElementById('menutext3'),
+    playBtn4 = document.getElementById('menutext4'),
+    clickBtn = document.getElementById('clickmenutext'),
+    menu = document.getElementById('playsound'),
+    clicksound = document.getElementById('clicksound'),
+	audios = document.querySelectorAll('audio');
+console.log(audios);
+
+
+playBtn.addEventListener('mouseover', function() {
+[].forEach.call(audios, function(audio) {
+  menu.currentTime = 0;
+  menu.play();
+});
+}, false);
+
+playBtn2.addEventListener('mouseover', function() {
+    menu.currentTime = 0;
+    menu.play();
+}, false);
+
+playBtn3.addEventListener('mouseover', function() {
+    menu.currentTime = 0;
+    menu.play();
+}, false);
+
+playBtn4.addEventListener('mouseover', function() {
+    menu.currentTime = 0;
+    menu.play();
+}, false);
+
+clickBtn.addEventListener('click', function() {
+    clicksound.currentTime = 0;
+    clicksound.play();
+}, false);</script>
+</body>
+</html>

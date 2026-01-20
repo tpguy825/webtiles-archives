@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: GrapeSoda;
+  src: url("/t/pencilchewing.nekoweb.org/GrapeSoda.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+</style>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: GrapeSoda;
+  overflow: visible;
+}
+
+.tile-body {
+  background-color: #0000;
+  background-image: linear-gradient(#000, #0000, #0000, #0000, #0000, #0000, #0000, #0000, #0000), linear-gradient(90deg, #cdc1ff, #0000, #0000, #0000, #0000, #0000, #0000, #0000, #0000), linear-gradient(360deg, #000, #0000, #0000, #0000, #0000, #0000, #0000, #0000, #0000), linear-gradient(270deg, #960000, #0000, #0000, #0000, #0000, #0000, #0000, #0000, #0000);
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: scroll;
+  background-origin: padding-box;
+  background-clip: border-box;
+}
+
+#speech {
+  filter: drop-shadow(-2px 2px 3px #0d0d22b3);
+  z-index: 30;
+  text-align: center;
+  background: #fff;
+  border-radius: 5em;
+  width: 35%;
+  height: 40%;
+  padding: 1.5em .5em 1em;
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 2%;
+}
+
+#speech:after {
+  content: "";
+  border: 10px solid #0000;
+  border-left-color: #fff;
+  border-right: 0;
+  width: 0;
+  height: 0;
+  margin-top: 0;
+  margin-right: -8px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+p {
+  color: #0000;
+  -webkit-text-stroke: .01em black;
+  background: linear-gradient(90deg, #36daff 0%, #ffadbb 32%, #fff 50%, #ffadbb 68%, #36daff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 25px;
+}
+
+#main {
+  filter: drop-shadow(-5px 5px 3px #0d0d22b3);
+  border: 4px double #fff;
+  background-color: #11111b;
+  background-image: url("/t/pencilchewing.nekoweb.org/border.webp");
+  border-image-outset: 3px;
+  width: 90%;
+  height: 90%;
+  margin-top: 5%;
+  margin-left: 5%;
+  padding: 1em;
+  position: relative;
+}
+
+#inner {
+  background-color: #5c47ff;
+  background-image: url("/t/pencilchewing.nekoweb.org/starsbg.webp");
+  background-size: 150px;
+  border: 2px dashed #5c47ff;
+  border-radius: 5px;
+  width: 100%;
+  height: 80%;
+  animation: 100s linear infinite scroll;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes scroll {
+  from {
+    background-position: 0;
+  }
+
+  to {
+    background-position: -4096px 4096px;
+  }
+}
+
+#king {
+  pointer-events: none;
+  pointer-events: none;
+  width: auto;
+  height: 125%;
+  position: absolute;
+  top: -1em;
+  left: 3em;
+  transform: rotate(-20deg);
+}
+
+#logo {
+  z-index: 99;
+  width: 115%;
+  height: auto;
+  transition: all 1s ease-in-out;
+  position: absolute;
+  bottom: -.5em;
+  left: -1.2em;
+}
+
+#logo:hover {
+  transform: translateY(-10px);
+}
+</style>
+</head>
+<body>
+
+    <div id="speech">
+                <p>
+                    trans rights!
+                </p>
+    </div>
+    <div id="main">
+        <div id="inner">
+            <img src="/t/pencilchewing.nekoweb.org/king.webp" id="king">
+        </div>
+       <a href="https://pencilchewing.nekoweb.org" target="_blank" rel="noopener noreferrer"><img src="/t/pencilchewing.nekoweb.org/logo.webp" id="logo"></a>
+    </div>
+</body>
+</html>

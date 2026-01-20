@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #aaa;
+  background-image: url("/t/pprmint.de/trade_offer_bg.webp");
+  background-position: bottom;
+}
+
+main {
+  height: 220px;
+  position: relative;
+}
+
+header {
+  filter: drop-shadow(0 0 10px #000);
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.logo {
+  margin-top: 14px;
+}
+
+.mina {
+  filter: drop-shadow(0 0 20px #0008);
+  height: 166px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mina:hover {
+  cursor: grab;
+}
+
+.mina:active {
+  cursor: grabbing;
+  transform: translateX(-50%)translateY(3px);
+}
+
+.taskbar {
+  z-index: 100;
+  background: linear-gradient(#0997ff, #0053ee 8%, #0050ee 40%, #06f 88% 93%, #005bff 95%, #003dd7 96%, #003dd7);
+  height: 30px;
+  display: flex;
+  position: relative;
+}
+
+.tray {
+  background: linear-gradient(#0c59b9 1%, #139ee9 6%, #18b5f2 10%, #139beb 14%, #1290e8 19%, #0d8dea 63%, #0d9ff1 81%, #0f9eed 88%, #119be9 91%, #1392e2 94%, #137ed7 97%, #095bc9 100%);
+  border-left: 1px solid #1042af;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  padding: 0 10px;
+  display: flex;
+  box-shadow: inset 1px 0 1px #18bbff;
+}
+
+.trayIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.time {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 11px;
+  line-height: 2px;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+a.salvation {
+  color: #fff;
+  text-align: center;
+  background: none;
+  padding: 2px 0;
+}
+
+a.salvation:hover {
+  color: #111;
+  background: #fff;
+  padding: 2px 4px;
+}
+</style>
+</head>
+<body>
+    <main>
+        <header>
+            <a href="https://pprmint.de" target="_blank" rel="noopener noreferrer">
+    			<img class="logo" src="/t/pprmint.de/logo.webp" alt="pprmint.">
+            </a>
+    		<h1>Pixel pusher and button presser.</h1>
+        </header>
+        <img src="/t/pprmint.de/trade_mina.webp" class="mina" alt="Mina, drawn by Layer / @108sketches.bsky.social" title="Mina, drawn by Layer / @108sketches.bsky.social">
+    </main>
+    <footer class="taskbar">
+    	<div class="tray">
+            <a class="trayIcon" href="https://ata.moe" title="ata.moe" target="_blank" rel="noopener noreferrer">
+                <img src="/t/pprmint.de/ata_tray.png" width="16" height="16">
+            </a>
+            <a class="trayIcon" href="https://pprmint.de/mina" title="more mina" target="_blank" rel="noopener noreferrer">
+                <img src="/t/pprmint.de/mina_tray.png" width="16" height="16">
+            </a>
+            <p class="time">
+                12:34
+            </p>
+        </div>
+    </footer>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+function updateTime() {
+    var now = new Date();
+	var hours = now.getHours();
+	var minutes = now.getMinutes();
+    
+	if (minutes < 10) {
+		minutes = "0" + minutes;
+	}
+
+	if (hours < 10) {
+		hours = "0" + hours;
+	}
+    
+	var tbTime = document.querySelector(".time");
+	if (tbTime) {
+    	tbTime.textContent = hours + ":" + minutes;
+    }
+}
+
+updateTime();
+setInterval(updateTime, 1000);</script>
+</body>
+</html>

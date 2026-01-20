@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #000;
+  background-image: url("/t/twitterstuck.com/right.png");
+  margin: 0;
+  padding: 1em 0 0 1em;
+}
+
+.main {
+  width: 85%;
+  padding: 0;
+  line-height: 1em;
+}
+</style>
+</head>
+<body>
+    <div class="main">
+  
+  <form action="https://postmail.invotes.com/send" method="post" id="email_form" target="_blank">
+
+    <input style="width:99.5%; font-family:'Arial'; margin-top:0.5em; margin-bottom:0.5em;" type="text" name="subject" placeholder="Subject" autocomplete="off"> <br>
+    <textarea style="width:100%; height:8em; font-family:'Arial'; margin-bottom:0.5em;" name="text" placeholder="Message" autocomplete="off"></textarea> <br>
+    <input type="hidden" name="access_token" value="7mlawgbly83kvl6xotdn8tdx" autocomplete="off">
+    <input type="hidden" name="success_url" value="https://miou2192.com/success" autocomplete="off">
+    <input type="hidden" name="error_url" value="https://miou2192.com/error" autocomplete="off">
+   
+    <input id="submit_form" type="submit" value="Send" autocomplete="off">
+</form>   
+        <p style="color:white;">
+            (There is a 25 per day message limit.)
+        </p>
+        
+    </div>
+</body>
+</html>

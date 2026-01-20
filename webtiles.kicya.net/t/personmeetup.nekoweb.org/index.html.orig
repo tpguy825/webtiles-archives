@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>img {
+  object-fit: contain;
+  max-width: 100%;
+  display: inline-block;
+}
+
+.tile-body {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  overflow: auto;
+}
+
+div {
+  width: 95%;
+}
+
+p {
+  letter-spacing: -1px;
+  -webkit-text-stroke: .5px;
+  text-align: center;
+  color: #333023;
+  margin-top: 0;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+
+a {
+  color: #34a6d3;
+}
+
+.rashons {
+  color: #fff;
+  background: #333023;
+  padding: 0 4px 0 2px;
+  text-decoration: none;
+}
+
+.rashons span {
+  -webkit-text-stroke: 2px;
+  word-spacing: -.5ch;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+    <div id="target"></div>
+    <div>
+        <img src="/t/personmeetup.nekoweb.org/./shorts/titlecard.webp">
+        <p>A comic by: <a class="rashons" href="https://covalria.com/credits/" target="_blank">the<span>rashons</span></a></p>
+        <p>Read more at <a href="https://covalria.com/" target="_blank">covalria.com</a></p>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var target = document.getElementById("target");
+// target.removeChild(target.lastChild);
+var short = Math.floor(Math.random() * 5) + 1
+
+for (i = 1; i < 5; i++) {
+    var image = document.createElement("img");
+    image.src = './shorts/0' + short + '_p' + i + '.webp';
+    target.appendChild(image)
+}
+
+
+// var image = document.createElement("img");
+// image.src = "./graffiti/threat.webp";
+// image.setAttribute("width", "128");
+// target.appendChild(image);</script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+</style>
+</head>
+<body>
+    
+    <image class="cover bg" src="/t/ceat.nekoweb.org/junko.gif" width="250" height="250"></image>
+    <div class="cover serrated"></div>
+    <image class="cover" id="jbc-bg-border" src="/t/ceat.nekoweb.org/jbc-border.webp" alt></image>
+    
+    <style>.tree-container {
+  padding-left: 12px;
+  list-style-type: none;
+}
+
+@keyframes color-gradient-bg {
+  0% {
+    background-color: #f56342;
+  }
+
+  50% {
+    background-color: #f5ad42;
+  }
+
+  100% {
+    background-color: #f56342;
+  }
+}
+
+@keyframes color-gradient-text {
+  0% {
+    color: #f56342;
+  }
+
+  50% {
+    color: #f5ad42;
+  }
+
+  100% {
+    color: #f56342;
+  }
+}
+
+.tree-container li {
+  height: 17px;
+  padding-left: 8px;
+
+  & button {
+    color: #fff;
+    text-shadow: 0 0 10px #000;
+    background: none;
+    border: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &:before {
+    content: "┣ ";
+    font-size: 18px;
+  }
+
+  &:first-of-type {
+    padding-left: 4px;
+
+    & button {
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #000;
+      padding: 0 4px;
+      animation: 2s linear infinite color-gradient-bg;
+
+      &:hover {
+        background-color: #fff;
+        animation: 2s linear infinite color-gradient-text;
+      }
+
+      &:active {
+        color: #fff;
+        animation: 2s linear infinite color-gradient-bg;
+      }
+    }
+
+    &&:before {
+      content: "";
+    }
+  }
+
+  &:last-of-type:before {
+    content: "┗ ";
+  }
+}
+</style>
+    
+    <main class="cover">
+        <ul class="tree-container">
+            <li>
+                <button>
+					CEATER'S WEBTILE!!!
+                </button>
+            </li>
+            <li>
+                <button>
+					HELP
+                </button>
+            </li>
+            <li>
+                <button id="die-btn">
+					CLICK TO DELETE THIS TILE!
+                </button>
+            </li>
+        </ul>
+        <marquee class="main-marquee" behavior="scroll" direction="left">
+        	<span>hi</span>
+        </marquee>
+        <marquee class="main-marquee" behavior="scroll" direction="right">
+        	<span>ceat / seat / ceater / seater / ceat_ceat / seat_seat / ceat ceat / seat seat</span>
+        </marquee>
+        <marquee class="main-marquee" behavior="scroll" direction="left">
+        	<span>why did junko just explode wtf</span>
+        </marquee>
+        <marquee class="main-marquee" behavior="scroll" direction="right">
+        	<span>can we roll that back</span>
+        </marquee>
+    </main>
+    
+    <div class="cover top" id="top-layer">
+        <div id="_1" style="grid-row:1;grid-column:1;"></div>
+        <div id="_2" style="grid-row:1;grid-column:2;"></div>
+        <div id="_3" style="grid-row:1;grid-column:3;"></div>
+        <div id="_4" style="grid-row:1;grid-column:4;"></div>
+        <div id="_5" style="grid-row:1;grid-column:5;"></div>
+        
+        <div id="_6" style="grid-row:2;grid-column:1;"></div>
+        <div id="_7" style="grid-row:2;grid-column:2;"></div>
+        <div id="_8" style="grid-row:2;grid-column:3;"></div>
+        <div id="_9" style="grid-row:2;grid-column:4;"></div>
+        <div id="_10" style="grid-row:2;grid-column:5;"></div>
+        
+        <div id="_11" style="grid-row:3;grid-column:1;"></div>
+        <div id="_12" style="grid-row:3;grid-column:2;"></div>
+        <div id="_13" style="grid-row:3;grid-column:3;"></div>
+        <div id="_14" style="grid-row:3;grid-column:4;"></div>
+        <div id="_15" style="grid-row:3;grid-column:5;"></div>
+        
+        <div id="_16" style="grid-row:4;grid-column:1;"></div>
+        <div id="_17" style="grid-row:4;grid-column:2;"></div>
+        <div id="_18" style="grid-row:4;grid-column:3;"></div>
+        <div id="_19" style="grid-row:4;grid-column:4;"></div>
+        <div id="_20" style="grid-row:4;grid-column:5;"></div>
+        
+        <div id="_21" style="grid-row:5;grid-column:1;"></div>
+        <div id="_22" style="grid-row:5;grid-column:2;"></div>
+        <div id="_23" style="grid-row:5;grid-column:3;"></div>
+        <div id="_24" style="grid-row:5;grid-column:4;"></div>
+        <div id="_25" style="grid-row:5;grid-column:5;"></div>
+        
+        <p class="gone-label r1" id="gone-label1">
+            TILE DELETED
+        </p>
+        <p class="gone-label r2" id="gone-label2">
+            congrats i guess
+        </p>
+        
+        <button class="revive-btn" id="revive-btn">
+            
+        </button>
+    </div>
+    
+
+    
+    <script defer type="text/tilescript">
+        // Only executes while your tile is active
+        // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+        //console.log("Hello world!");
+        //console.log("if you can see this, this is running updated code!")
+        
+        // all cod is by ceat!!!
+
+        var disappearPattern = [
+            1, 2, 5, 1, 2,
+            5, 3, 1, 5, 3,
+            2, 5, 2, 2, 4,
+            3, 1, 4, 2, 3,
+            4, 5, 3, 4, 1
+        ]
+
+        var dieButton = document.getElementById("die-btn")
+
+        var topLayer = document.getElementById("top-layer")
+        var goneLabel1 = topLayer.querySelector("#gone-label1")
+        var goneLabel2 = topLayer.querySelector("#gone-label2")
+        var reviveButton = topLayer.querySelector("#revive-btn")
+
+        var tiles = []
+
+        for (var i = 0; i < 25; i++) {
+            var div = topLayer.querySelector("#_" + (i + 1).toString())
+            tiles[i] = div
+        }
+
+        function show(step) {
+            for (var i = 0; i < 25; i++) {
+                var targetStep = disappearPattern[i]
+                if (targetStep != step) continue
+
+                var div = tiles[i]
+                div.style.opacity = "1"
+                div.style.transform = "none"
+                div.style.display = "block"
+            }
+        }
+
+        var dead = false
+
+        function die() {
+            if (dead) return
+            dead = true
+
+            topLayer.style.display = "grid"
+            show(1)
+            setTimeout(function() { show(2) }, 250)
+            setTimeout(function() { show(3) }, 500)
+            setTimeout(function() { show(4) }, 750)
+            setTimeout(function() { show(5) }, 1000)
+            setTimeout(function() {
+                goneLabel1.style.display = "block"
+
+        //         goneLabel2.style.display = "block"
+        //         reviveButton.style.display = "block"
+            }, 1500)
+            setTimeout(function() {
+                goneLabel2.style.display = "block"
+                reviveButton.style.display = "block"
+            }, 3000)
+        }
+
+        var shatterSound = document.createElement("audio")
+        shatterSound.src = "/glass-shatter.mp3"
+        
+        dieButton.appendChild(shatterSound)
+
+        function revive() {
+            reviveButton.style.display = "none"
+
+            var tileData = []
+            var animationTime = 4;
+            var gravAccel = 130; // px
+
+            for (var i = 0; i < 25; i++) {
+                var xVel = -100 + Math.random() * 200
+                var yVel = 10 + Math.random() * 230
+                var rotVel = -180 + Math.random() * 360
+                
+                // below was code to precalculate positions for css animations lol
+                // but i didnt know how to set up a dynamic animation and didnt want
+                // to check if i could use vars defined in style="" so i just went
+                // back to the physics sim
+                // also it was like 3 am lolololol
+
+                // d = Vi*t + 0.5*a*t^2
+
+                // Vf^2 = Vi^2 + 2ad
+                // Vf^2 - Vi^2 = 2ad
+                // (Vf^2 - Vi^2)/2a = d
+
+                // Vf = Vi + a*t
+                // Vf - Vi = a*t
+                // (Vf - Vi)/a = t
+
+                //var targetX = xVel * animationTime
+                //var targetRot = rotVel * animationTime
+
+                //var peakY = (-Math.pow(yVel, 2))/(2 * gravAccel)
+
+                tileData.push({
+                    div: tiles[i],
+                    x: 0, y: 0, rotation: 0,
+                    xVel: xVel, yVel: yVel, rotVel: rotVel
+                })
+            }
+
+            goneLabel1.style.display = "none"
+            goneLabel2.style.display = "none"
+            reviveButton.style.display = "none"
+
+            var deltaTime = 1/20
+            
+            shatterSound.play()
+
+            for (var i = 0; i <= 4; i += deltaTime) {
+                var step = i
+                setTimeout(function() {
+                    tileData.forEach(function(tile) {
+                        tile.x += tile.xVel * deltaTime
+                        tile.y += tile.yVel * deltaTime
+                        tile.rotation += tile.rotVel * deltaTime
+                        tile.yVel -= 180 * deltaTime // gravity
+
+                        tile.div.style.transform = "translate(" + tile.x + "px, " + (-tile.y) + "px) rotate(" + tile.rotation + "deg)"
+                    })
+                }, i * 1000)
+            }
+        //     tileData.forEach(function(tile) {
+        //         tile.div.style.display = "none"
+        //     })
+
+            setTimeout(function() {
+                topLayer.style.display = "none"
+                tileData.forEach(function(tile) {
+                    tile.div.style.display = "none"
+                })
+                dead = false
+            }, 4100)
+        }
+
+        dieButton.addEventListener("click", die)
+        reviveButton.addEventListener("click", revive)
+    </script>
+    
+    <style>.top {
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  display: none;
+}
+
+.top div {
+  background: #fff;
+  display: none;
+}
+
+.gone-label {
+  text-align: center;
+  grid-column: 1 / span 5;
+  display: none;
+}
+
+.r1 {
+  grid-row: 1;
+}
+
+.r2 {
+  grid-row: 2;
+}
+
+.revive-btn {
+  background: none;
+  border: none;
+  grid-area: 1 / 1 / span 5 / span 5;
+}
+</style>
+    
+    <style>.cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+bg {
+  pointer-events: none;
+  user-select: none;
+}
+
+.serrated {
+  box-sizing: border-box;
+  border: 6px dashed #fff;
+}
+
+main {
+  width: 100%;
+}
+
+@font-face {
+  font-family: ArcadeN;
+  src: url("/t/ceat.nekoweb.org/ARCADE_N.TTF") format("truetype");
+}
+
+.main-marquee {
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+  width: 100%;
+  margin-top: 24px;
+  font-family: ArcadeN;
+  font-size: 20px;
+}
+
+#jbc-bg-border {
+  z-index: 0;
+  opacity: .15;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+}
+</style>
+</body>
+</html>

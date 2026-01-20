@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  margin: 0;
+}
+
+* {
+  image-rendering: pixelated;
+}
+</style>
+</head>
+<body>
+    <img src="/t/egz.nekoweb.org/ignorance.png" height="250" width="250">
+    <a style="position: fixed; left: 7px; top: 10px" href="https://egz.nekoweb.org/" target="_blank">
+    <img src="/t/egz.nekoweb.org/egz button.png">
+</a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

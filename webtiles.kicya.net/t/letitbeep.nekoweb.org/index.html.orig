@@ -1,0 +1,37 @@
+<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script webtiles-data="AQUBAgYCAwUDCAcIgANkhYBvhQOFhYVjhQOFhYV1hQOFhYVthQOFhYVlhQOFhYVuhQOFhYV0hgEAhYaFgANihoBvhgOGhoZkhgOGhoZ5hwGFh4eGgAN0iYBviQOJiYlViQOJiYlwiQOJiYlwiQOJiYlliQOJiYlyiQOJiYlDiQOJiYlhiQOJiYlziQOJiYllgANziIBjiAOIiIhyiAOIiIhpiAOIiIhwiAOIiIh0gAKIgICJiYAAgANjioByigOKiopligOKiophigOKiop0igOKiopligOKiopFigOKiopsigOKiopligOKioptigOKiopligOKiopuigOKiop0gAKFgICKi4CJgANhjIBwjAOMjIxwjAOMjIxljAOMjIxujAOMjIxkjAOMjIxDjAOMjIxojAOMjIxpjAOMjIxsjAOMjIxkgAKHgICMgICLgANPjYBijQONjY1qjQONjY1ljQONjY1jjQONjY10gAEAjYCNgANEjoBPjgOOjo5NjgOOjo5QjgOOjo5hjgOOjo5yjgOOjo5zjgOOjo5ljgOOjo5ygAEAjoCOjgSOgANwj4BhjwOPj49yjwOPj49zjwOPj49ljwOPj49GjwOPj49yjwOPj49vjwOPj49tjwOPj49TjwOPj490jwOPj49yjwOPj49pjwOPj49ujwOPj49ngAN0kIBlkAOQkJB4kAOQkJB0kAOQkJAvkAOQkJBokAOQkJB0kAOQkJBtkAOQkJBsgAiOgICPgICIj4CQgAGPj4CGgANnkIBlkAOQkJB0kAOQkJBPkAOQkJB3kAOQkJBukAOQkJBQkAOQkJBykAOQkJBvkAOQkJBwkAOQkJBlkAOQkJBykAOQkJB0kAOQkJB5kAOQkJBEkAOQkJBlkAOQkJBzkAOQkJBjkAOQkJBykAOQkJBpkAOQkJBwkAOQkJB0kAOQkJBvkAOQkJBygANskYBhkQORkZFzkQORkZF0kQORkZFDkQORkZFokQORkZFpkQORkZFskQORkZFkgAiNgICQgICPj4CRgANnkIBlkAOQkJB0gAGPj4CQgANjkIBhkAOQkJBskAOQkJBsgAKPgICQj4CHgANzkIBlkAOQkJB0kAOQkJBBkAOQkJB0kAOQkJB0kAOQkJBykAOQkJBpkAOQkJBikAOQkJB1kAOQkJB0kAOQkJBlgANzkYBykQORkZFjgANokoB0kgOSkpJ0kgOSkpJwkgOSkpJzkgOSkpI6kgOSkpIvkgOSkpIvkgOSkpJ3kgOSkpJlkgOSkpJikgOSkpJ0kgOSkpJpkgOSkpJskgOSkpJlkgOSkpJzkgOSkpIukgOSkpJrkgOSkpJpkgOSkpJjkgOSkpJ5kgOSkpJhkgOSkpIukgOSkpJukgOSkpJlkgOSkpJ0kgOSkpIvkgOSkpJ0kgOSkpIvkgOSkpJtkgOSkpJvkgOSkpJukgOSkpJrkgOSkpJlkgOSkpJ5kgOSkpIukgOSkpJjkgOSkpJvkgOSkpJukgOSkpJzkgOSkpJ1kgOSkpJskgOSkpJ0kgOSkpJpkgOSkpJukgOSkpJnkgOSkpIvkgOSkpJtkgOSkpJlkgOSkpJ0kgOSkpJykgOSkpJpkgOSkpJjkgOSkpJzkgOSkpIukgOSkpJqkgOSkpJzgAiPgICQgICRgICS" type="text/tilescript">(function(a){try{var b=[a,function(a,b){return a[b]},function(a,b,c){return a[b](c)},function(a,b){return a+b},function(a){return new a},function(a){return function(b){return function(c){return a(b,c)}}},function(a){return function(b){return function(c){return function(d){return a(b,c,d)}}}},function(a){return function(b){return function(c){return function(d){return function(e){return a(b,c,d,e)}}}}},function(a,b,c,d){return a[b](c,d)}];a=atob(document.querySelector("script").getAttribute("webtiles-data"));for(var c=0;c<a.length;c+=3){var d=a.charCodeAt(c+2);b[a.charCodeAt(c)]=b[a.charCodeAt(c+1)](d<20||d>=128?b[d]:a[c+2])}}catch(_){}})(this)</script>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-image: url("/t/letitbeep.nekoweb.org/howtoleavetown.webp");
+  background-size: cover;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.link {
+  width: 100%;
+  height: 100%;
+}
+</style>
+</head>
+<body>
+    <a href="https://carseatheadrest.bandcamp.com/album/how-to-leave-town" style="width:100%; height:100%;" title="Now Playing: Beast Monster Thing (Love Isn't Love Enough) (Snippet)" target="_blank"> </a>
+    <audio id="audio" src="/t/letitbeep.nekoweb.org/beast.mp3" type="audio/mpeg" preload="metadata"></audio>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var yourAudioElement = document.getElementById("audio");
+
+var musicInt = setInterval(musicCheat, 1000);
+
+function musicCheat() {
+    
+    if (yourAudioElement.paused == true){
+
+        yourAudioElement.play()
+    }
+} </script>
+</body>
+</html>

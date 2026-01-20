@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.clearfix:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+button {
+  background-color: silver;
+}
+
+button:active {
+  background-color: #696969;
+}
+
+.tile-body {
+  background-image: url("/t/taptroupe.nekoweb.org/NEW TILE.png");
+  background-repeat: repeat;
+}
+
+p, h1, ol, ul, h3, label {
+  color: #000;
+  font-family: Trebuchet MS;
+}
+
+.white {
+  background-color: #ffffffe6;
+  border-radius: 15px;
+  margin: 5% 2% 5% 11%;
+  padding: 5px;
+}
+
+a {
+  color: #000;
+  word-break: break-all;
+  text-decoration: underline double #00f;
+}
+
+a:link, a:visited {
+  color: #000;
+  text-decoration: underline double #00f;
+}
+
+a:focus, a:hover, a:active {
+  color: gray;
+  text-decoration: underline double gray;
+}
+</style>
+    <style>
+</style>
+</head>
+<body>
+    <marquee direction="left" style="transform:rotate(90deg);transform-origin:10% 35%;position:fixed;"><h1 style="color:white">the marquee clans backstory.... i made a marquee for fun, then rae joined, then carrot, ocean, creta park, Blade0, and exurd. yea i know marquees are depreciated but still it's fun. Join our clans!!! </h1></marquee>    
+    <div class="white">
+       
+    <h1 style="font-size:1.5em">Welcome Alayna site</h1>
+        			<p style="margin:-1.9em -1em -1.2em auto;font-size:.6em"> 
+                         <span id="japan">what time is it for alayna rn? click to see!</span></p>
+                        
+<div style="display:inline-block;float:right;width:25%;">
+            <a href="https://web.archive.org/web/20030428170158/http://www.fromsoftware.co.jp/e/soft/eg/eg/" target="_blank"><img src="https://webtiles.kicya.net/t/taptroupe.nekoweb.org/eg209.png" style="float:right"></a>
+            <p style="margin-top:-1px;font-size:.75em;clear:right;float:right">
+                also, i love them...  ^^
+            </p>
+        </div>
+        <div style="position:fixed; bottom:-10px; right:-10px; z-index: 1">
+			<img src="https://webtiles.kicya.net/t/taptroupe.nekoweb.org/ezgif-234b4a0fcd1003c8.gif" width="140" height="140" id="alaynapic" style="display:inline;" alt="bust up drawing of alayna (black bunny ears and tail, black hair, glasses, smiling face with blush, beige jacket and blue undershirt, red bowtie collar).">
+		</div>
+        <p>
+            Do you like 2000s Fromsoftware archival tidbits? WLW Chinese meetcutes? Come enjoy!
+        </p>
+        <a href="https://taptroupe.nekoweb.org/" target="_blank">
+				<img src="https://webtiles.kicya.net/t/taptroupe.nekoweb.org/taptroupe%20icon.jpg" title="link back to me if you'd like! take the alt text too!" alt="pixel art icon for the taptroupe website, the background is of subtle black-white polka dots and a tall tapper from rhythm heaven's rectangular white smiling face, grey box helmet, and red bowtie. there is text beside it that says Taptroupe, and red bowtie on top.">
+			</a>
+            </div>
+<marquee direction="left"><h1 style="margin-top:-5px;color:white">Book scans, translations, sound effects, magazines, logs, databases, animation, art, etc...</h1></marquee>
+
+    
+<a href="https://taptroupe.atabook.org/" target="_blank"><p style="margin:-22px auto auto 2.5em ;font-size:.75em;color:white">
+                sign my guestbook if you want 
+            </p></a>
+    <script type="text/tilescript">
+    
+var datey = new Date
+			
+var now_japan = datey.toLocaleString("en-CA", { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true, timeZone: "Asia/Tokyo" });
+        
+document.getElementById("japan").innerText = "it's " + now_japan + " how about you!?"
+
+    
+    </script>
+</body>
+</html>

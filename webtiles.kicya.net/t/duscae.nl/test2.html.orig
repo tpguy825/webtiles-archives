@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  margin: 0;
+  font-family: MS UI Gothic, NEC;
+
+  & a {
+    color: #111;
+    text-decoration: none;
+  }
+
+  & a:active {
+    color: #121;
+    text-decoration: none;
+  }
+
+  & a:hover {
+    color: #222;
+    text-decoration: none;
+  }
+
+  & #test {
+    background: #00000080;
+    border-style: ridge;
+    margin-top: 150px;
+  }
+
+  & #test2 {
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    margin-top: 20px;
+    margin-left: 160px;
+    padding: 0;
+  }
+
+  background: linear-gradient(-45deg, #f75928, #e73c3c, #0dbfff, #05f5e5) 0 0 / 400% 400%;
+  height: 100vh;
+  animation: 30s infinite gradient;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0%;
+  }
+
+  50% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
+}
+</style>
+</head>
+<body>
+    <div id="test">
+        <p><b>Work in progress!</b></p>
+    </div>
+    
+    <div id="test2">
+        <button><a href="/t/duscae.nl/test.html"><b> ◄ </b></a></button><button><a href="/t/duscae.nl/index.html"><b>►</b></a></button>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

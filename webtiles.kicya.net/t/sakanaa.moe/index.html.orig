@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  image-rendering: pixelated;
+  box-sizing: border-box;
+  color: #c62b69;
+  padding: 28px 30px 30px 28px;
+}
+
+#bg-canvas {
+  background-image: url("/t/sakanaa.moe/dither.png");
+  background-position: 1px 1px;
+  background-repeat: repeat;
+  background-size: 8px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#shadow-wrapper {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+#fake-shadow {
+  z-index: 0;
+  background-color: #c62b69;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+#main {
+  background: #fff;
+  border: 2px solid #c62b69;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+h1 {
+  margin-top: 6px;
+  padding-left: 8px;
+  font-size: 20px;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+  background-color: #0000;
+  border: none;
+  text-decoration: underline;
+}
+
+#bottom-btns {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 4px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+
+#tape-container {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#tape {
+  background-image: url("/t/sakanaa.moe/tape.gif");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 16px 40px;
+  border: 2px solid #c62b69;
+  border-left: 0;
+  border-right: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+}
+
+#tape > p {
+  background-color: #fff;
+  border: 2px solid #c62b69;
+  padding: 1px;
+}
+</style>
+</head>
+<body>
+	<canvas id="bg-canvas" class="bg-layer"></canvas>
+    <div id="shadow-wrapper">
+        <div id="fake-shadow"></div>
+
+        <div id="main">
+            <h1>
+                > sakanaa!
+            </h1>
+            
+            <div id="bottom-btns">
+                <button id="color-btn">click me!</button>
+            </div>
+
+            <div id="tape-container">
+                <div id="tape">
+                    <p>under construction!</p>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+document.getElementById('color-btn').addEventListener('click', change_colors);
+change_colors();
+
+function change_colors() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://sakanaa.moe/api/v1/dither/random/4/2');
+    xhr.overrideMimeType('text/plain; charset=x-user-defined');
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+
+            var response = JSON.parse(xhr.responseText);
+
+            var dataUri = response.data_url;
+
+            var img = document.createElement('img');
+            img.onload = function() {
+                create_bg(img);
+                var tape = document.getElementById('tape-container');
+                if (tape) tape.remove();
+
+                update_colors(response.palette.primary, response.palette.secondary);
+            }
+            img.src = dataUri;
+        }
+    };
+
+    xhr.onerror = function() {
+        console.log('request failed!');
+    }
+
+    xhr.send();
+}
+
+
+
+
+function create_bg(img) {
+    var canvas = document.getElementById('bg-canvas');
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+	var ctx = canvas.getContext('2d');
+    
+    var originalW = img.width;
+    var originalH = img.height;
+    
+    var scaledW = originalW * 2;
+    var scaledH = originalH * 2;
+    
+    var tileCanvas = document.createElement('canvas');
+    tileCanvas.width = scaledW;
+    tileCanvas.height = scaledH;
+    
+    var tileCtx = tileCanvas.getContext('2d');
+    tileCtx.imageSmoothingEnabled = false;
+    tileCtx.mozImageSmoothingEnabled = false;
+    tileCtx.webkitImageSmoothingEnabled = false;
+    tileCtx.msImageSmoothingEnabled = false;
+    
+    tileCtx.drawImage(img, 0, 0, scaledW, scaledH);
+    
+    var pattern = ctx.createPattern(tileCanvas, 'repeat');
+    ctx.fillStyle = pattern;
+    
+    ctx.save();
+    ctx.translate(1, 1);
+    
+    ctx.fillRect(-1, -1, canvas.width + 1, canvas.height + 1);
+    
+    ctx.restore();
+}
+
+function update_colors(primary, secondary) {
+    var rules = [
+        { selector: '#main', prop: 'color', value: primary },
+        { selector: '#main', prop: 'backgroundColor', value: secondary },
+        { selector: '#fake-shadow', prop: 'backgroundColor', value: primary },
+        //{ selector: 'p', prop: 'backgroundColor', value: secondary },
+        
+    ];
+    
+    for (var i = 0; i < rules.length; i++) {
+        var rule = rules[i];
+        
+        var elements = document.querySelectorAll(rule.selector);
+        
+        for (var j = 0; j < elements.length; j++) {
+            elements[j].style[rule.prop] = rule.value;
+        }
+    }
+    
+    var border_rules = ['#main'];
+    var border_rule = '2px solid ' + primary;
+    
+    for (var i = 0; i < border_rules.length; i++) {
+        var rule = border_rules[i];
+        
+        var elements = document.querySelectorAll(rule);
+        
+        for (var j = 0; j < elements.length; j++) {
+            elements[j].style.border = border_rule;
+        }
+    }
+}</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #fff;
+  margin: 10px;
+  padding: .5em;
+}
+</style>
+</head>
+<body>
+    <p>maybe i was born to meet you.</p>
+    <a href="https://lucian.nekoweb.org" target="_blank"><img src="/t/lucian.nekoweb.org/button.png" alt="a picture of the words 'lucian's diary' in a small button."></a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

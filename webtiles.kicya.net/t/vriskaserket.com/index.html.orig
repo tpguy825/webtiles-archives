@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  pointer-events: none;
+  background-image: url("/t/vriskaserket.com/backg.gif");
+  background-repeat: round;
+  overflow: hidden;
+}
+
+.mainbox {
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: red;
+  border-radius: 0;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  display: flex;
+}
+
+#vris {
+  width: auto;
+  height: 80%;
+}
+
+#button {
+  z-index: 10000;
+  pointer-events: auto;
+  width: 200px;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h3 {
+  color: #0000;
+  background-clip: text;
+  margin-top: 10px;
+  margin-left: 90px;
+  font-family: Terminat;
+  font-size: 30px;
+  display: flex;
+  position: absolute;
+}
+
+@font-face {
+  font-family: Terminat;
+  src: url("/t/vriskaserket.com/TERMINAT.tff") format("truetype");
+}
+
+.tile-body:after {
+  content: "";
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("/t/vriskaserket.com/border3.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+</style>
+</head>
+<body>
+    <h3>
+        broken again, holdup
+    </h3>
+    <div class="mainbox">
+        <A HREF="https://vriskaserket.com/" rel="noopener noreferrer" target="_blank">
+            <img id="button" src="/t/vriskaserket.com/vriskabutton.png">
+            </A>
+        <img id="vris" src="/t/vriskaserket.com/vreeska.gif">
+    </div>
+</body>
+</html>

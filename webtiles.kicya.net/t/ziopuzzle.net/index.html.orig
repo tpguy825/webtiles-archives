@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #c0c0ff;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.bg-left {
+  background: linear-gradient(90deg, #000, #0000);
+  width: 30%;
+  height: 100%;
+  position: absolute;
+}
+
+.bg-right {
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  background: linear-gradient(to left, #88c746, #fff);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.fuuka {
+  background: url("/t/ziopuzzle.net/./fuuka.webp") 105% bottom / 60% no-repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.cloud-big {
+  background: url("/t/ziopuzzle.net/./cloud_top.webp") 0 0 / 100% no-repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.cloud-small {
+  background: url("/t/ziopuzzle.net/./cloud.webp") 0 0 / 100% no-repeat;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+}
+
+.cloud_1 {
+  top: 25%;
+  left: 28%;
+}
+
+.cloud_2 {
+  top: 15%;
+  left: 15%;
+}
+
+.cloud_3 {
+  top: 4%;
+  left: 24%;
+}
+</style>
+</head>
+<body>
+    <div class="bg-right"></div>
+    <div class="bg-left"></div>
+    <div class="bg-bottom"></div>
+    <div class="fuuka"></div>
+    <div class="fuuka"></div>
+    <div class="cloud-small cloud_1"></div>
+    <div class="cloud-small cloud_2"></div>
+    <div class="cloud-small cloud_3"></div>
+    <div class="cloud-big cloud_top"></div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+</script>
+</body>
+</html>

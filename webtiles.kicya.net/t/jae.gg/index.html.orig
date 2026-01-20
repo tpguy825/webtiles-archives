@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>html {
+  padding: 0;
+}
+
+.tile-body {
+  text-align: center;
+  color: #b876d6;
+  background-image: url("/t/jae.gg/wallpaper.webp");
+  background-size: 500px 500px;
+  margin: 0;
+}
+
+h1 {
+  text-shadow: 0 0 5px #111;
+}
+
+.big {
+  margin: 0;
+  font-size: 80px;
+}
+</style>
+</head>
+<body>
+    <h1>im with stupid</h1>
+    <h1 class="big">&larr;</h1>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

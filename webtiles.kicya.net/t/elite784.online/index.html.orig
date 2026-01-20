@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: linear-gradient(to bottom left, #00f7ff51 0%, #0008ff63 100%), linear-gradient(to top right, #ff204ad4 0%, #0000 50%), url("/t/elite784.online/background2.jpg");
+  font-family: main, serif;
+  font-size: 10px;
+}
+
+@font-face {
+  font-family: main;
+  src: url("/t/elite784.online/font.woff");
+}
+
+nav {
+  justify-content: center;
+  display: flex;
+}
+
+button {
+  font-family: main;
+}
+
+a {
+  color: teal;
+}
+
+a:hover {
+  color: #add8e6;
+  font-style: italic;
+}
+
+button {
+  font-size: 10px;
+}
+</style>
+</head>
+<body>
+    <div style="display:flex;justify-content:center;">
+    	<img src="/t/elite784.online/logo.png" alt="ELITE784[dot]Online">
+    </div>
+    <nav style="border-bottom:2px ridge white;padding-bottom:5px;margin:0 5px 5px; 5px">
+        <a href="/t/elite784.online/about.html">
+        	<button style="border: 2px outset purple;background-color:#000;color:white;">
+            	about
+        	</button>
+        </a>
+        <a href="/t/elite784.online/cat.html">
+        	<button style="border: 2px outset yellow;background-color:#000;color:white;">
+                cat
+            </button>
+        </a>
+        <a href="/t/elite784.online/googleballs.html">
+        	<button style="border: 2px outset blue;background-color:#000;color:white;">
+                balls
+            </button>
+        </a>
+    	
+    </nav>
+    <main>
+    	<div style="border:ridge 2px teal;margin:8px;padding:2px">
+            <img src="/t/elite784.online/tired_fucker.png" alt="protogen in a box titled void box" style="float:right;width:70px;margin-right:10px">
+            <p>
+                hello im elite, a person, protogen, and webmaster on the net!<br><br>
+                this here is my site condensed into a tiny box. my full site is located at <a href="https://elite784.online" target="_blank">elite784 dot online</a>, do come  and visit me sometime! (-w-)
+            </p>
+        </div>
+    </main>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

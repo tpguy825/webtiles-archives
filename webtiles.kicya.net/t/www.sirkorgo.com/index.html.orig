@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@keyframes scrollBackground {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100vw 100vh;
+  }
+}
+
+.main {
+  background: url("/t/www.sirkorgo.com/bg.png") 0 0 / 64px 64px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 250px;
+  height: 250px;
+  animation: 300s linear infinite scrollBackground;
+  display: flex;
+}
+</style>
+</head>
+    <main class="main">
+        <img src="/t/www.sirkorgo.com/trans.png" style="position: absolute;">
+        <a href="https://www.sirkorgo.com" target="_blank"><img src="/t/www.sirkorgo.com/korgotile.gif" width="250" height="250"></a>
+    </main>
+</html>

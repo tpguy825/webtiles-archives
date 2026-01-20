@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: ComicTale;
+  src: url("/t/soywig.space/ComicTale.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+.tile-body {
+  color: #fff;
+  background: url("/t/soywig.space/bg.webp") 0 0 / 250px;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: ComicTale, Comic Sans MS, sans-serif;
+  animation: 60s linear infinite space-infinite-scroll;
+  display: flex;
+  position: relative;
+}
+
+img#bg2 {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+img#chara {
+  image-rendering: pixelated;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  height: 112px;
+  animation: 6s ease-in-out infinite floating;
+}
+
+div {
+  text-align: center;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+
+span:first-of-type {
+  font-size: 16px;
+}
+
+span:nth-of-type(2) {
+  opacity: .5;
+  font-size: 12px;
+}
+
+a, a:visited {
+  color: inherit;
+}
+
+footer {
+  color: #ff0;
+  text-align: center;
+  box-sizing: border-box;
+  text-wrap: balance;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 62px;
+  min-height: 62px;
+  display: flex;
+}
+
+marquee {
+  width: 100%;
+  padding: 8px;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(5px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes space-infinite-scroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -250px 0;
+  }
+}
+</style>
+</head>
+<body>
+    <img id="chara" src="/t/soywig.space/hero_chara.webp">
+    <div>
+        <span>hi i'm <a href="https://twitter.com/soywig" target="_blank">soywig</a>! ·v·</span>
+        <span>and i like crepes with nutella and whipped cream yummy</span>
+    </div>
+    <img id="bg2" src="/t/soywig.space/bg2.webp">
+    <footer><marquee>WHY CAN'T I BE A NORMAL, FUNCTIONAL PERSON?????¿¿¿????¿¿??</marquee></footer>
+</body>
+</html>

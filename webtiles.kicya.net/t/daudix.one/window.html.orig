@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>@font-face {
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("/t/daudix.one/fonts/geist.woff2") format("woff2");
+  font-family: Geist;
+  font-display: swap;
+}
+
+@font-face {
+  font-style: italic;
+  font-weight: 100 900;
+  src: url("/t/daudix.one/fonts/geist-italic.woff2") format("woff2");
+  font-family: Geist;
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("/t/daudix.one/fonts/geist-mono.woff2") format("woff2");
+  font-family: Geist Mono;
+  font-display: swap;
+}
+
+@font-face {
+  font-style: italic;
+  font-weight: 100 900;
+  src: url("/t/daudix.one/fonts/geist-mono-italic.woff2") format("woff2");
+  font-family: Geist Mono;
+  font-display: swap;
+}
+
+.tile-body {
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  background-color: #131113;
+  background-image: linear-gradient(to left, #1d1f20, #0000 64px), linear-gradient(to right, #0000, #131113 64px), url("/t/daudix.one/images/yefreitor.png");
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  margin: 0;
+  font-family: Geist, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  animation: 8s linear infinite marquee;
+  display: flex;
+}
+
+@keyframes marquee {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, 0 0, 128px 64px;
+  }
+}
+
+.tile-body:hover #polaroid {
+  transform: none;
+  box-shadow: 0 0 0 1px #00000008, 0 1px 3px 1px #00000012, 0 2px 6px 2px #00000008 !important;
+}
+
+.tile-body:hover #polaroid:after {
+  transform: none;
+}
+
+.tile-body:hover #shine {
+  opacity: 0;
+  top: -80px;
+  transform: rotate(35deg);
+}
+
+.tile-body:before {
+  content: "";
+  z-index: 1;
+  background-image: url("/t/daudix.one/images/border.png");
+  position: absolute;
+  inset: 0;
+}
+
+nav {
+  z-index: 9999;
+  background-color: #00000080;
+  border-bottom-left-radius: 6px;
+  padding: 4px 6px;
+  font-size: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+nav ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  color: #fcfcfa;
+}
+
+nav strong {
+  font-weight: 600;
+}
+
+#polaroid {
+  transform-origin: 50% 16px;
+  box-sizing: border-box;
+  z-index: 2;
+  background-color: #fff;
+  border-radius: 8px;
+  width: 160px;
+  padding: 8px;
+  transition: all .35s cubic-bezier(.17, .89, .32, 1.28);
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transform: perspective(720px)rotate(5deg)rotateX(5deg);
+  box-shadow: 0 12px 24px -16px #0006 !important;
+}
+
+#polaroid:after {
+  z-index: 1;
+  filter: hue-rotate(290deg);
+  pointer-events: none;
+  content: "";
+  background-image: url("/t/daudix.one/images/thumbtack.png");
+  background-size: cover;
+  width: 25px;
+  height: 19px;
+  transition: transform .35s cubic-bezier(.17, .89, .32, 1.28);
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: calc(50% - 12px);
+  transform: perspective(720px)rotate(-5deg)rotateX(-5deg);
+}
+
+#shine {
+  opacity: .3;
+  z-index: 1;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  background-image: linear-gradient(#fff calc(100% - 8px), #0000);
+  width: 224px;
+  height: 128px;
+  transition: all .35s cubic-bezier(.17, .89, .32, 1.28);
+  position: absolute;
+  top: -32px;
+  left: 0;
+  transform: rotate(30deg);
+}
+
+#photo {
+  line-height: 0;
+  display: block;
+  position: relative;
+}
+
+#photo:after {
+  content: "";
+  background-image: linear-gradient(to right, #ff6188, #fc9867, #ffd866, #a9dc76, #78dce8, #ab9df2);
+  width: 48px;
+  height: 8px;
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+}
+
+#photo img {
+  width: 144px;
+  height: 144px;
+  margin: 0;
+}
+
+#title, #content {
+  color: #000c;
+  font-family: Geist Mono, ui-monospace, monospace;
+  line-height: 1;
+  display: block;
+}
+
+#title {
+  text-transform: uppercase;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+#content {
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+#window {
+  image-rendering: pixelated;
+  box-sizing: border-box;
+  z-index: 1;
+  border: 64px solid;
+  border-image: url("/t/daudix.one/images/border.gif") 32 repeat;
+  width: 180px;
+  height: 152px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  filter: drop-shadow(0 .08rem .1rem #00000059) drop-shadow(0 .4rem .7rem #0000002e) !important;
+}
+
+#window-contents {
+  background-color: #2d2a2e;
+  padding: 8px;
+  position: absolute;
+  inset: -32px -58px -54px;
+  overflow: auto;
+}
+
+#window-contents p {
+  color: #fcfcfa;
+  margin: 0 0 8px;
+  font-size: 10px;
+}
+
+#window-contents ul {
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+}
+
+#window-contents a {
+  line-height: 0;
+  display: block;
+}
+
+#window-contents img {
+  width: 32px;
+  height: 32px;
+  transition: transform .35s cubic-bezier(.17, .89, .32, 1.28);
+  filter: drop-shadow(0 .08rem .1rem #00000059) drop-shadow(0 .4rem .7rem #0000002e) !important;
+}
+
+#window-contents li:nth-child(odd):hover img {
+  transform: scale(1.25)rotate(10deg);
+}
+
+#window-contents li:nth-child(2n):hover img {
+  transform: scale(1.25)rotate(-10deg);
+}
+</style>
+</head>
+
+<body>
+    <nav>
+    	<ul>
+            <li>
+            	<a href="/t/daudix.one/index.html">Polaroid</a>
+            </li>
+            <li>
+                <strong>
+                    <a href="/t/daudix.one/window.html">Window</a>
+                </strong>
+            </li>
+        </ul>
+    </nav>
+    <div id="window">
+        <div id="window-contents">
+            <p>My main online presence:</p>
+            <ul>
+                <li>
+                    <a href="https://bsky.app/profile/daudix.one" target="_blank">
+                        <img src="/t/daudix.one/images/icons/bluesky.gif" alt="Pixel art Bluesky icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wetdry.world/@daudix" target="_blank">
+                        <img src="/t/daudix.one/images/icons/mastodon.gif" alt="Pixel art Mastodon icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://discord.com/users/650757995378114581" target="_blank">
+                        <img src="/t/daudix.one/images/icons/discord.gif" alt="Pixel art Discord icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://signal.me/#eu/b4KzM1OB3uW52mMywHUJa8h6yD4ATY_KXJJiuJtWUxOVAJP22PVO_qoNGFnf32W7" target="_blank">
+                        <img src="/t/daudix.one/images/icons/signal.gif" alt="Pixel art Signal icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://codeberg.org/daudix" target="_blank">
+                        <img src="/t/daudix.one/images/icons/codeberg.gif" alt="Pixel art Codeberg icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/daudix" target="_blank">
+                        <img src="/t/daudix.one/images/icons/github.gif" alt="Pixel art GitHub icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://spacehey.com/daudix" target="_blank">
+                        <img src="/t/daudix.one/images/icons/spacehey.gif" alt="Pixel art SpaceHey icon.">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/@ddaudix" target="_blank">
+                        <img src="/t/daudix.one/images/icons/youtube.gif" alt="Pixel art YouTube icon.">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>	
+</body>
+
+</html>

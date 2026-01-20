@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>.tile-body, html {
+  background-color: #050510;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+#gameCanvas {
+  background: radial-gradient(circle, #0a0a20 0%, #000 100%);
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ufo {
+  transform-origin: center;
+  image-rendering: pixelated;
+  animation: 4s ease-in-out infinite floatUpDown;
+  position: absolute;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0)scale(3);
+  }
+
+  50% {
+    transform: translateY(-40px)scale(3);
+  }
+
+  100% {
+    transform: translateY(0)scale(3);
+  }
+}
+</style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <img class="ufo" src="/t/faewulf.xyz/ufo.gif">
+    <script type="text/tilescript">var canvas = document.getElementById('gameCanvas');
+var ctx = canvas.getContext('2d');
+
+// State
+var stars = [];
+var shootingStars = [];
+var numStars = 50;
+
+// Initialize stars (static)
+function initStars() {
+    for (var i = 0; i < numStars; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1.5,
+            color: Math.random() > 0.8 ? '#ffdf00' : '#ffffff'
+        });
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw stars (no blinking)
+    for (var i = 0; i < stars.length; i++) {
+        var star = stars[i];
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = 1;
+        ctx.fillRect(star.x, star.y, star.size, star.size);
+    }
+
+    // Draw shooting star (static)
+    for (var i = 0; i < shootingStars.length; i++) {
+        var ss = shootingStars[i];
+        ctx.strokeStyle = 'rgba(255, 255, 255, ' + ss.opacity + ')';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(ss.x, ss.y);
+        ctx.lineTo(ss.x + ss.length, ss.y - ss.length);
+        ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+}
+
+// Start
+initStars();
+draw();</script>
+</body>
+</html>

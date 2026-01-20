@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: JFDotK12;
+  src: url("/t/yumeoi.skin/JFDotK12.woff");
+}
+
+@font-face {
+  font-family: rainyhearts;
+  src: url("/t/yumeoi.skin/rainyhearts.woff");
+}
+
+.tile-body {
+  background-color: #fff;
+  background-size: contain;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+
+h2 {
+  text-align: center;
+  font-family: JFDotK12;
+  font-size: .7em;
+}
+
+#hand {
+  height: 5em;
+}
+
+p {
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  width: 4em;
+  padding: 1.1em;
+  font-family: rainyhearts;
+  font-size: 1em;
+  box-shadow: 6px 6px #fff;
+}
+
+#handbox {
+  align-items: end;
+  gap: 0;
+  margin-left: 1em;
+  display: flex;
+}
+
+#handbox a {
+  color: #ffccd4;
+}
+</style>
+</head>
+<body>
+
+    <div id="maincont">
+
+	<h2><a href="https://yumeoi.skin" target="_blank">yumeoi.skin</a> promo</h2>
+
+    </div>
+
+    <div id="handbox">
+
+	<img id="hand" src="/t/yumeoi.skin/right.png">
+	<p>who tryna <a href="https://i.postimg.cc/dQGknTPQ/left.png" target="_blank">match</a></p>
+
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

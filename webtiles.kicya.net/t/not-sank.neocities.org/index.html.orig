@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/not-sank.neocities.org/psychoangel_sounds-of-future-breakbeat.jpg");
+  background-size: cover;
+}
+
+a {
+  color: #0000;
+  font-size: 100vh;
+}
+</style>
+</head>
+<body>
+    <a href="https://psychoangel.bandcamp.com/album/sounds-of-future-breakbeat" target="_blank">hello :)</a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

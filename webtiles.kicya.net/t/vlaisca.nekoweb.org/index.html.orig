@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: linear-gradient(90deg, #23a5ff 0%, #4a07f2 100%);
+  justify-content: center;
+  display: flex;
+}
+
+.box {
+  background-image: url("/t/vlaisca.nekoweb.org/sdcardwebtiles.png");
+  background-position: 50% 20px;
+  background-repeat: no-repeat;
+  background-size: 270px;
+  border: 3px solid #fff0;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 185px;
+  padding: 10px;
+  display: flex;
+  position: relative;
+}
+
+.box2 {
+  text-align: left;
+  z-index: 0;
+  border: 4px ridge #ffffff4d;
+  flex-direction: column;
+  width: 135px;
+  height: 280px;
+  padding: 5px;
+  display: flex;
+  position: absolute;
+  top: 97px;
+  left: 31px;
+}
+
+.titlebar {
+  color: #000;
+  background: linear-gradient(#cfcfcf 0%, #8a8a8a 100%);
+  border-bottom: 2px solid #616161;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.sixsevenmb {
+  color: #fc2803;
+  text-align: left;
+  padding-top: 15px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.vlaisca {
+  width: 160px;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.buttns {
+  color: #fff;
+  text-align: center;
+  z-index: 0;
+  height: 10px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute;
+  top: 57px;
+  left: 35px;
+}
+
+.buttns:hover {
+  color: #9e5b37;
+}
+
+.buttns:before {
+  content: "";
+  text-align: center;
+  opacity: 1;
+  z-index: -1;
+  background-image: linear-gradient(#bdbdbd 0%, #000 70%);
+  border: 2px solid #000;
+  border-radius: 8px;
+  width: 100%;
+  height: 25px;
+  transition: opacity .2s linear;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.buttns:hover:before {
+  opacity: 0;
+}
+
+.buttns:after {
+  content: "";
+  opacity: 0;
+  z-index: -1;
+  background-image: linear-gradient(#fff 0%, #ffe396 100%);
+  border: 2px solid #d67e4b;
+  border-radius: 8px;
+  width: 100%;
+  height: 25px;
+  transition: opacity .2s linear;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.buttns:hover:after {
+  opacity: 1;
+}
+
+section {
+  color: #000;
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: #fff;
+  border: 3px solid #616161;
+  border-radius: 5px 5px 5px 0;
+  width: 136px;
+  height: 65px;
+  padding: .4em;
+  font-size: 11.5px;
+  position: absolute;
+  top: calc(163px + 2.4em);
+  left: -5px;
+  overflow-y: scroll;
+  box-shadow: 3px 3px 3px #0000004d;
+}
+
+.catterspeak {
+  z-index: 2;
+  width: 160px;
+  height: auto;
+  position: absolute;
+  top: 154px;
+  left: 126px;
+}
+</style>
+</head>
+<body>
+    <div class="box">
+        <div class="vlaisca">
+        	<img src="/t/vlaisca.nekoweb.org/vlaiscaname.gif" style="width: 160px; height: 50px;"> </div>
+        <div class="catterspeak">
+        	<img src="/t/vlaisca.nekoweb.org/webcatspeak.png" style="width: 100px; height: 95px;"> </div>
+        <div>
+            <a href="https://vlaisca.nekoweb.org" class="buttns" target="_blank"> MY WEBSITE! </a>
+        </div>
+        <div class="box2">
+            <div class="titlebar">
+                <marquee behavior="scroll" direction="right" scrollamount="3"> MROW - meow - mowmow - moo? - mreow</marquee>
+            </div>
+            <div class="sixsevenmb"> 67<span style="font-size: 15px;">GB</span> <span style="font-size: 15px;">ㅤㅤねこ</span></div>
+            <img src="/t/vlaisca.nekoweb.org/cattime.png">
+            </div>
+
+        <section> Gotcha! i shall now observe the shenanigans.</section>
+
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

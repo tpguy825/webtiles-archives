@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: linear-gradient(#444, #222 180px, #888 180px, #444);
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  overflow: hidden;
+}
+
+#card {
+  background: url("/t/illavandula.nekoweb.org/panel.png") 0 0 / cover;
+  width: 225px;
+  height: 155px;
+  margin: 10px auto;
+}
+
+#card:hover {
+  background: url("/t/illavandula.nekoweb.org/card.png") 0 0 / cover;
+}
+
+#navi {
+  background: linear-gradient(#444, #222);
+  border-radius: 5px;
+  width: 200px;
+  height: 30px;
+  margin: auto;
+}
+
+#navi a {
+  color: #ddd;
+  text-shadow: 0 0 5px #ddd;
+  height: 100%;
+  text-decoration: none;
+}
+
+#navi a:hover {
+  color: #8dd;
+  text-shadow: 0 5px 5px #8dd;
+  text-decoration: none;
+}
+
+#navi p {
+  text-align: center;
+  height: 100%;
+}
+</style>
+
+    
+    
+</head>
+<body>
+    <div id="card"></div>
+
+    <hr>
+
+    <div id="navi">
+        <a href="https://illavandula.nekoweb.org/" target="_blank"><p>I L L A V A N D U L A</p></a>
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

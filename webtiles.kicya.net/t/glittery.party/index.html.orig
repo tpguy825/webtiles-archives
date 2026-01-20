@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-size: 500px;
+  background-attachment: scroll;
+  font-family: consolas;
+  background-color: #ffc2e1 !important;
+  background-image: url("/t/glittery.party/a/gl.webp") !important;
+}
+
+#card {
+  color: #cb4d81;
+  background-color: #ffffffb3;
+  border: 2px dashed #ff7ab9;
+  max-width: 150px;
+  padding: 10px;
+  font-family: Sour Gummy;
+  font-weight: 900;
+  position: absolute;
+  top: 150px;
+  left: 20px;
+  text-align: center !important;
+  border-radius: 1rem !important;
+}
+
+#logo {
+  z-index: 10;
+  position: absolute;
+  top: 15px;
+  left: 10px;
+}
+
+#tenna {
+  z-index: 20;
+  position: absolute;
+  top: 130px;
+  left: 160px;
+}
+</style>
+</head>
+<body>
+    <br>
+    <div>
+        <img id="logo" src="/t/glittery.party/a/glitters.gif" width="220">
+    </div>
+    <br>
+    <div id="card">
+        holy shit this is my tile it was made for meeee
+    </div> 
+    <div>
+        <img id="tenna" src="/t/glittery.party/a/tenne.gif" width="100">
+    </div> 
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

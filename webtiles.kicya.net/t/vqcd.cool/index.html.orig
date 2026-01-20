@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    
+    
+    
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-text {
+  text-align: center;
+  color: #fff;
+  text-shadow: -1px -1px #000, 1px -1px #000, -1px 1px #000, 1px 1px #000, -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000;
+  letter-spacing: 1px;
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <img src="/t/vqcd.cool/your-image.gif" alt="Julian">
+        <div class="overlay-text">JulianMyJulian 2026~</div>
+    </div>
+</body>
+</html>

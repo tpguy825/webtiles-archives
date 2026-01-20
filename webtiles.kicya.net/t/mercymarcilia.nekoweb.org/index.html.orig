@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+<div class="tile-body active" style="width: 100% !important; height: 100% !important; position: absolute !important; top: 0px !important; left: 0px !important;">
+
+    
+        <style>.tile-body {
+  background: url("/t/mercymarcilia.nekoweb.org/images/img.jpg") no-repeat;
+}
+</style>
+
+</div>
+
+</body>
+</html>

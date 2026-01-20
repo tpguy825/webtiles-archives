@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>.tile-body {
+  color: #f1fff6;
+  background: #111412;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: monospace;
+  display: flex;
+}
+
+#like_btn {
+  user-select: none;
+  transition: all .2s;
+}
+
+#like_btn:hover {
+  opacity: .6;
+}
+</style>
+
+    <style>a.back {
+  color: #97c2ff;
+  z-index: 111111;
+  padding: 2px;
+  text-decoration: none;
+  transition: all .2s;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+a.back:hover {
+  background: #97c2ff29;
+  border-radius: 4px;
+}
+
+#grid {
+  border: 1px solid #fff3;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+  position: relative;
+}
+
+.block {
+  background-color: red;
+  border: 1px solid #000;
+  position: absolute;
+}
+</style>
+  </head>
+  <body>
+      <a class="back" href="/t/supertigerdev.github.io/./index.html">Back</a>
+    <h2 style="color: rgb(73, 255, 134); margin-top: 0;margin-bottom: 2px;">Tetris</h2>
+    <div id="grid">
+    
+    </div>
+
+   <script type="text/tilescript">
+       var gridEl = document.getElementById("grid");
+       var BLOCK_SIZE = 10;
+       var BLOCKS = [
+           [
+               [0,1,0],
+               [1,1,1]
+           ]
+       ]
+       var currentBlock = BLOCKS[0];
+       gridEl.style.width = (BLOCK_SIZE * 10) + "px";
+       gridEl.style.height = (BLOCK_SIZE * 20) + "px";
+
+
+       function drawPiece(matrix, offsetX, offsetY) {
+           for (var r = 0; r < matrix.length; r++) {
+               for (var c = 0; c < matrix[r].length; c++) {
+                   if (!matrix[r][c]) {
+                       continue
+                   }
+                   var blockEl = document.createElement("div");
+                   blockEl.style.width = BLOCK_SIZE + "px";
+                   blockEl.style.height = BLOCK_SIZE + "px";
+
+                   blockEl.style.top = (r + offsetY) * BLOCK_SIZE + "px";
+                   blockEl.style.left = (c + offsetX) * BLOCK_SIZE + "px";
+
+
+                   blockEl.className = "block";
+                   gridEl.appendChild(blockEl);
+
+               }
+           }
+       }
+       
+       drawPiece(currentBlock, 3, 0);
+       
+       
+       
+       
+       
+   </script>
+  </body>
+</html>

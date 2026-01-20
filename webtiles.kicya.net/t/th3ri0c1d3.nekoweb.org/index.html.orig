@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.center-container-flex {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+</style>
+</head>
+<body>
+   <div class="center-container-flex">
+  <img src="/t/th3ri0c1d3.nekoweb.org/bg.gif" alt="dancing" width="250" height="250">
+</div>  
+    </body>
+</html>

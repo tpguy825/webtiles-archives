@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>.tile-body {
+  display: relative;
+  image-rendering: pixelated;
+  background-color: #3870b8;
+}
+
+#bramble {
+  background-image: url("/t/internetcheckpoint.spax.zone/bramble.png");
+  background-position: 57px 84px;
+}
+
+#clouds {
+  background-image: url("/t/internetcheckpoint.spax.zone/clouds.png");
+  background-position: 226px 118px;
+  animation: 17s linear infinite bgscroll;
+}
+
+#bramble, #clouds {
+  background-repeat: repeat;
+  background-size: 71.3%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#player {
+  opacity: 0;
+  width: 100%;
+  transition: opacity .2s linear;
+  position: absolute;
+  bottom: 0;
+}
+
+.tile-body:hover #player {
+  opacity: 1;
+}
+
+@keyframes bgscroll {
+  from {
+    background-position-x: 226px;
+  }
+
+  to {
+    background-position-x: 48px;
+  }
+}
+</style>
+</head>
+<body>
+    <div id="clouds"></div>
+    <div id="bramble"></div>
+    <audio id="player" controls src="/t/internetcheckpoint.spax.zone/stickerbrush-symphony.mp3" preload="metadata"></audio>
+    <script type="text/tilescript">var loopStart = 19.712;
+var loopEnd = (2*60) + 26.4869;
+var player = document.getElementById("player");
+
+//player.volume = 0.3;
+
+player.addEventListener("timeupdate", function() {
+    if (player.currentTime >= loopEnd) {
+        player.currentTime -= loopEnd - loopStart;
+    }
+}, { passive: true });
+
+player.addEventListener("ended", function() {
+    player.currentTime -= loopEnd - loopStart;
+    if (player.paused) {
+        player.play();
+    }
+}, { passive: true });
+
+//previous attempt
+/*
+setInterval(function() {
+    if (player.currentTime >= loopEnd) {
+        var ended = player.ended;
+        player.currentTime -= (loopEnd - loopStart);
+        if (ended) {
+            player.play();
+        }
+    }
+}, 1000);
+*/
+</script>
+    
+</body>
+</html>

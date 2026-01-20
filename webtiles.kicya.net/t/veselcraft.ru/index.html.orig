@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <style>.tile-body {
+  margin: 0;
+}
+
+tr {
+  margin: 0;
+  padding: 0;
+}
+
+a img:hover {
+  content: url("/t/veselcraft.ru/logo_sel_02.gif");
+}
+
+img {
+  display: block;
+}
+</style>   
+    </head>
+    <body>
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td colspan="2"><img src="/t/veselcraft.ru/logo_stil_01.gif"></td>
+            </tr>
+            <tr>
+                <td><a href="https://veselcraft.ru" target="_blank"><img src="/t/veselcraft.ru/logo_stil_02.gif"></a></td>
+                <td><img src="/t/veselcraft.ru/logo_stil_03.gif"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><img src="/t/veselcraft.ru/logo_stil_04.gif"></td>
+            </tr>
+        </table>
+    </body>
+</html>

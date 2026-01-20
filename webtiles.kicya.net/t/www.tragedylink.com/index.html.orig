@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>.tile-body {
+  background-image: url("/t/www.tragedylink.com/meleft.png");
+  background-repeat: repeat;
+  background-size: 100%;
+  margin: 0;
+}
+</style>
+   
+</head>
+<body>
+    	<a href="https://www.twitch.tv/tragedylink" target="_blank">
+	<img src="/t/www.tragedylink.com/vtuber.gif" style="position: relative; height: 57%; right: 18px; top: 155px;">
+    	</a>
+    
+    <p></p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

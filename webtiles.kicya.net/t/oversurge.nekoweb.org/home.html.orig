@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  font-family: times new roman;
+  overflow: hidden;
+}
+
+#container {
+  background: url("/t/oversurge.nekoweb.org/cec-bg.jpg") 0 0 / 100px;
+  width: 230px;
+  height: 230px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+p {
+  margin: 0;
+  font-size: 15px;
+}
+
+a {
+  color: #fff;
+  filter: drop-shadow(0 1px #72b5ff) drop-shadow(0 -1px #72b5ff) drop-shadow(1px 0 #72b5ff) drop-shadow(-1px 0 #72b5ff);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #72b5ff;
+  filter: drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff);
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#cont-1st {
+  filter: drop-shadow(0 0 4px #0000004f);
+  border-style: solid;
+  border-width: 12px;
+  border-image: url("/t/oversurge.nekoweb.org/fluff.png") 10 fill round;
+  margin-top: 5px;
+  position: relative;
+}
+
+.scroller {
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+#cont-1st .scroller {
+  height: 105px;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+#gv-1 {
+  filter: drop-shadow(0 0 4px #0000004f);
+  z-index: 2;
+  pointer-events: none;
+  background: url("/t/oversurge.nekoweb.org/gv-land.png") 0 0 / 100%;
+  width: 95px;
+  height: 82px;
+  position: absolute;
+  bottom: -50px;
+  left: -40px;
+}
+
+#sitebtn {
+  position: absolute;
+  bottom: -25px;
+  left: 120px;
+}
+
+#marqueecont {
+  z-index: 1;
+  width: 213px;
+  position: absolute;
+  bottom: -53px;
+  left: 0;
+}
+
+#navi {
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+#navi li {
+  text-align: center;
+  background: linear-gradient(#c5f0ff 10%, #0dc0ff 20%, #a8e8ff, #a0e4fc);
+  border: 1px solid #1b95c2;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 3px;
+}
+
+#navi a {
+  color: #fff;
+  filter: drop-shadow(0 1px #1b95c2) drop-shadow(0 -1px #1b95c2) drop-shadow(1px 0 #1b95c2) drop-shadow(-1px 0 #1b95c2);
+  font-weight: bold;
+  text-decoration: underline;
+  transition: letter-spacing .2s ease-in-out;
+}
+
+#navi a:hover {
+  color: #1b95c2;
+  filter: drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff);
+  letter-spacing: 2px;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+hr {
+  border: 2px dashed #0dc0ff;
+}
+
+#music {
+  margin-top: 5px;
+  position: relative;
+}
+
+#recordplayer {
+  z-index: 2;
+  background: url("/t/oversurge.nekoweb.org/recordplayer-front.png") 0 0 / 100%;
+  width: 110px;
+  height: 100px;
+  position: absolute;
+  top: 10px;
+  left: -20px;
+}
+
+#cd {
+  background: url("/t/oversurge.nekoweb.org/admiration-to-peace.png") 0 0 / 100%;
+  width: 70px;
+  height: 70px;
+  animation: 2s linear infinite spin;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+h2 {
+  color: #fff;
+  text-align: right;
+  background: #4bd5ff;
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 3px 10px 3px 3px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+#music p {
+  text-align: right;
+  float: right;
+  width: 180px;
+  margin-top: -10px;
+}
+
+#music span {
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#updates {
+  color: #fff;
+  background: #725f59;
+  border: 7px inset #acacac;
+  margin-top: 15px;
+  box-shadow: inset 0 0 10px 3px #494341d4, 0 0 5px 5px #00000069;
+}
+
+#updates .scroller {
+  height: 100px;
+}
+
+#updates li:first-child {
+  margin-left: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+  list-style: "!! ";
+}
+
+#updates li {
+  margin-left: 14px;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#updates p {
+  margin-bottom: 5px;
+}
+
+#footer {
+  text-align: center;
+  color: #90a1b6;
+  background: #fff;
+  margin: 20px -10px -10px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.prinzessin mark {
+  color: #fff;
+  filter: drop-shadow(0 1px #0dc0ff) drop-shadow(0 -1px #4bd5ff) drop-shadow(1px 0 #0dc0ff) drop-shadow(-1px 0 #0dc0ff);
+  background: none;
+  font-family: times new roman;
+  font-size: 33px;
+  font-style: italic;
+  font-weight: bold;
+  animation: 2s cubic-bezier(.25, .85, .4, 1) infinite princess;
+}
+
+.prinzessin mark:first-child {
+  animation-delay: 0s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(2) {
+  animation-delay: .2s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(3) {
+  animation-delay: .4s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(4) {
+  animation-delay: .6s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(5) {
+  animation-delay: .8s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(6) {
+  animation-delay: 1s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(7) {
+  animation-delay: 1.2s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(8) {
+  animation-delay: 1.4s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(9) {
+  animation-delay: 1.6s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(10) {
+  animation-delay: 1.8s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(11) {
+  animation-delay: 2s;
+  display: inline-block;
+}
+
+.prinzessin mark:nth-child(12) {
+  animation-delay: 2.2s;
+  display: inline-block;
+}
+
+@-webkit-keyframes princess {
+  from {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+
+  50% {
+    color: #fff;
+    transform: translate(0);
+  }
+
+  to {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+}
+
+@keyframes princess {
+  from {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+
+  50% {
+    color: #fff;
+    transform: translate(0);
+  }
+
+  to {
+    color: #0dc0ff;
+    transform: translate(0, 3px);
+  }
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    <div id="container">
+        <div class="prinzessin"><mark>O</mark><mark>V</mark><mark>E</mark><mark>R</mark><mark>S</mark><mark>U</mark><mark>R</mark><mark>G</mark><mark>E</mark><mark>!</mark></div>
+
+        
+        <div id="cont-1st">
+            <div class="scroller">
+                <p>I just realized I already wrote what I would've on the "landing" page. Oops.</p>
+                <br>
+                <p>ANYWAYS welcome to the home page guys. This is version <b>ONE</b> of this webtile... <u>"MOD Frag in the Full-Dive Game".</u> its a mouthful. thats the point</p>
+                <br>
+                <p>dont expect the versions to change that much... sorry...BUT THANKS FOR COMING BY ^^</p>
+            </div>
+            <div id="gv-1"></div>
+            <a href="https://oversurge.nekoweb.org" target="_blank" id="sitebtn"><img src="/t/oversurge.nekoweb.org/osvbtnanim.gif" style="width: 88px; height: 31px;" title="- Brilliant lightning flashes forth -"></a>
+            <div id="marqueecont">
+                <marquee scrollamount="11" behavior="alternate">許せないまま　打ち消せないままで / 逃げ出した私　追憶のペイン / 冷たく降りしきる雨に / 涙ごまかしてる / 嫌なの　弱い自分には / 今日でさよならして / 貴方の笑顔の裏側まで / 見抜けないくらいに / 分からなくなっていたいつかの日も / どれほどたくさん時間が過ぎ / 消え去っていったの / 苦い記憶　胸を刺す日々ならば / 繰り返さない / 反射するネオン 濡れて光るだけの / 紫むなしく点滅して / 許せないなら　打ち消せないのなら / 塗り替えるの今　追憶のペイン / 厳しく吹きすさぶ風に / 向かう勇気も無く / 泣いてた　弱い自分なら / 今はもういないわ / 貴方の言葉に今になって / 裏切られるのなら / 知りたくなどなかったこんな感情 / どれだけ愛した時間たちが / 色あせていったの / 甘い記憶　胸を締め付けるなら / 二度といらない / 走り去るランプ これで最後だって / 紫の傘もあざ笑って / 許せないから　打ち消せないだから / 何度でも壊す　追憶のペイン / 走り去るランプ これで最後だって / 紫の傘もあざ笑って / 許せないから　打ち消せないだから / 何度でも壊す　追憶のペイン / 呼ぶ声が遠く遠く…　（呼ぶ声が遠く遠く…） / 聞こえるの近く遠く…　（聞こえるの近く遠く…） / ひとりきり雨に打たれ…　（ひとりきり雨に打たれ…） / 聞こえるの… / 反射する街灯ネオン 濡れて光るだけの / 紫むなしく点滅して / 許せないなら　打ち消せないのなら / 塗り替えるの今　追憶のペイン / 走り去るランプ これで最後だって / 紫の傘もあざ笑って / 許せないから　打ち消せないだから / 何度でも壊す　追憶のペイン</marquee>
+            </div>
+        </div>
+                
+        <div id="navi">
+            <hr>
+            <li><a href="/t/oversurge.nekoweb.org/index.html">Landing</a></li>
+            <li><a href="/t/oversurge.nekoweb.org/webtiles.html">Other webtiles</a></li>
+            <li><a href="https://oversurge.nekoweb.org" target="_blank">Main website</a></li>
+        </div>
+        
+        <hr>
+        
+        <center>
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/cec-stamp.png" style="width: 32%">
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/azurestrikerfanstamp.gif" style="width: 32%">
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/mn9-stamp.png" style="width: 32%">
+            
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/sekken2.gif" style="width: 32%">
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/xandzerostamp.png" style="width: 32%">
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/celestia.gif" style="width: 32%">
+            
+            <img src="https://webtiles.kicya.net/t/oversurge.nekoweb.org/gv-userbar2.png" style="width: 100%">
+        </center>
+        
+        <div id="music">
+            <div id="recordplayer"></div>
+            <div id="cd"></div>
+            
+            <h2>Featured Song</h2>
+            <p>
+                <span>-Cyanotype-</span>
+                <br>
+                Joule (CV: Megu Sakuragawa)
+            </p>
+            <audio controls style="width: 226px; height: 40px; margin-top: 15px; margin-left: -5px; filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.31));" src="/t/oversurge.nekoweb.org/mus/cyanotype-compressed.mp3" preload="metadata"></audio>
+            <p>
+            </p>
+        </div>
+        
+        <div id="updates">
+            <div class="scroller">
+                <li>2026 1/11</li>
+                <p>new index</p>
+                
+                <li>2026 1/10</li>
+                <p>added a thing the tile above me had, added an actual MP3 to the audio player</p>
+                
+                <li>2026 1/9</li>
+                <p>Home/Landing page up woohoo! (Also other webtiles page)</p>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <p><b>OVERSURGE LITE Version 1:</b> <u>MOD Frag in the Full-Dive Game</u></p>
+            <p>thank you for coming!</p>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

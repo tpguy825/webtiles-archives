@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/bluechinchompa.com/bluechinchompa.jpg");
+}
+
+.text {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</style>
+</head>
+     
+<style>.main {
+  display: flex;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+}
+
+.right {
+  opacity: .6;
+  opacity: .8;
+  background-color: #000;
+  border: 1px solid #275577;
+  flex-direction: column;
+  flex: 2;
+  padding: 16px;
+  display: flex;
+}
+
+.tile-body {
+  background-color: #275577;
+}
+
+p {
+  color: #fff;
+  margin: 0;
+}
+
+a {
+  color: #0045ff;
+}
+
+a:hover {
+  color: #0ff;
+}
+</style>    
+
+<body>
+    <div class="main">
+        <div class="left">
+    		<img src="/t/bluechinchompa.com/bluechin.jpg" width="140" height="140">     
+        </div>
+
+        <div class="right">
+	        <p style="font-size: 1em;">tiny <a href="/t/bluechinchompa.com/blog/index.html" style="text-decoration: none;">blog</a></p>
+            <p style="font-size: 1em;">tiny <a href="/t/bluechinchompa.com/about.html" style="text-decoration: none;">about</a></p>
+            <p style="font-size: 1em;">tiny <a href="/t/bluechinchompa.com/nerdfetch/index.html" style="text-decoration: none;">setup</a></p>
+			<p>tiny <a href="/t/bluechinchompa.com/tiny-games/index.html" style="text-decoration: none;">games</a></p>
+            <p>tiny <a href="/t/bluechinchompa.com/osu/index.html" style="text-decoration: none;">osu</a></p>
+        </div>
+    </div>
+	<p style="font-size: 0.7em; text-align: center;">
+        VISIT THE BIG <a href="https://bluechinchompa.com" style="color: #ff3300;" target="_blank">Bluechinchompa.com</a> TODAY!
+    </p>
+    
+    <img src="/t/bluechinchompa.com/HAPPY_GOOD_DAY.gif" width="250">
+    
+    <p style="text-align: center;">     
+        <a href="/t/bluechinchompa.com/happy-good-day/index.html" style="color: #FF0000;">join the HAPPY GOOD DAY clan</a>
+    </p>
+    
+    <p>
+        <-- this guy STINKS
+    </p>
+        
+     
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

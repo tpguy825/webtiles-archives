@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: andersonItalic;
+  src: url("/t/unqbic.nekoweb.org/fonts/AndersonItalic.ttf");
+}
+
+@font-face {
+  font-family: anderson;
+  src: url("/t/unqbic.nekoweb.org/fonts/Anderson.ttf");
+}
+
+html {
+  background-color: #fff;
+  width: 248px;
+  max-width: 248px;
+  height: 248px;
+}
+
+.tile-body {
+  width: 100%;
+  height: inherit;
+  background-color: #000;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.title-button {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.song-list-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.song-list {
+  border: 1px solid #fff;
+  gap: .1em;
+  height: -webkit-fill-available;
+  margin: 1em;
+  padding: .5em;
+  display: grid;
+}
+
+.album-title {
+  color: #fff;
+  text-align: center;
+  user-select: none;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #fff;
+  font-family: MingLiU-ExtB, Times, serif;
+  font-size: .8em;
+  text-decoration: none;
+  display: block;
+}
+
+.author-title {
+  color: #afafaf;
+  text-align: center;
+  text-shadow: 0 0 7px #afafaf, 0 0 10px #afafaf, 0 0 21px #afafaf, 0 0 42px #afafaf;
+  user-select: none;
+  margin-bottom: .3em;
+  font-family: MingLiU-ExtB, Times, serif;
+  font-size: .6em;
+  display: block;
+}
+
+.song-title {
+  user-select: none;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #fff;
+  font-family: MingLiU-ExtB, Times, serif;
+  font-size: .5em;
+  display: block;
+}
+
+.me-title {
+  user-select: none;
+  text-align: center;
+  color: gray;
+  margin-top: .3em;
+  font-family: Consolas, sans-serif;
+  font-size: .54em;
+}
+
+.heads {
+  user-select: none;
+  z-index: 2;
+  flex-direction: row;
+  justify-content: center;
+  height: -webkit-fill-available;
+  display: flex;
+  overflow: hidden;
+}
+
+.heads img {
+  background-color: #000;
+}
+
+img.head {
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier();
+  z-index: 2;
+  display: block;
+}
+
+.title-button:hover img.head {
+  pointer-events: none;
+  transform: translateX(-75%);
+}
+
+.title-button:hover img.head.right {
+  pointer-events: none;
+  transform: translateX(75%);
+}
+
+.buttons {
+  z-index: 1;
+  flex-direction: column;
+  align-content: center;
+  gap: .5em;
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.buttons a {
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+  background: linear-gradient(#2e2e2e 5%, #000 100%);
+  border: 1px solid #3d3d3d;
+  border-radius: 2px;
+  margin-inline: 2.5em;
+  padding: .4em;
+  font-family: Consolas, sans-serif;
+  font-size: .9rem;
+  text-decoration: none;
+  display: block;
+}
+
+.buttons a:hover {
+  cursor: pointer;
+  background: linear-gradient(#000 100%, #2e2e2e 5%);
+}
+
+.crt-filter:before {
+  content: " ";
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(#12101000 50%, #00000040 50%) 0 0 / 100% 2px, linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f) 0 0 / 3px 100%;
+  display: block;
+  position: fixed;
+  inset: 0;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: .27861;
+  }
+
+  5% {
+    opacity: .34769;
+  }
+
+  10% {
+    opacity: .23604;
+  }
+
+  15% {
+    opacity: .10626;
+  }
+
+  20% {
+    opacity: .18128;
+  }
+
+  25% {
+    opacity: .10626;
+  }
+
+  30% {
+    opacity: .18128;
+  }
+
+  35% {
+    opacity: .23604;
+  }
+}
+
+.crt-filter:after {
+  content: " ";
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: #1210101a;
+  animation: .15s infinite flicker;
+  display: block;
+  position: fixed;
+  inset: 0;
+}
+</style>
+</head>
+<body>
+    <div class="crt-filter"></div>
+    <div class="title-button">
+        <div class="song-list-container">
+            <div class="song-list">
+                <a class="album-title" href="https://open.spotify.com/intl-es/album/4m2880jivSbbyEGAKfITCa" target="_blank">Random Access Memories</a>
+                <a class="author-title">by Daft Punk</a>
+                <a class="song-title">Give Life Back to Music</a>
+                <a class="song-title">The Game Of Love</a>
+                <a class="song-title">Giorgio by Moroder</a>
+                <a class="song-title">Within</a>
+                <a class="song-title">Instant Crush (feat. Julian Casablancas)</a>
+                <a class="song-title">Lose Yourself to Dance (feat. Pharrell Williams)</a>
+                <a class="song-title">Touch (feat. Paul Williams)</a>
+                <a class="song-title">Get Lucky (feat. Pharrell Williams and Nile Rodgers)</a>
+                <a class="song-title">Beyond</a>
+                <a class="song-title">Motherboard</a>
+                <a class="song-title">Fragments of Time (feat. Todd Edwards)</a>
+                <a class="song-title">Doin' it Right (feat. Panda Bear)</a>
+                <a class="song-title">Contact</a>
+                <a class="me-title" href="https://unqbic.nekoweb.org" target="_blank">webtile by unqbic</a>
+            </div>
+        </div>
+
+        <div class="heads">
+            <img class="head" src="/t/unqbic.nekoweb.org/heads/tb3.svg">
+            <img class="head right" src="/t/unqbic.nekoweb.org/heads/gm08.svg">
+        </div>
+    </div>
+    <audio id="preview-player" preload="metadata"></audio>
+    <script type="text/tilescript">var previews = [
+    'give_life_back_to_music',
+    'game_of_love',
+    'giorgio_by_moroder',
+    'lose_yourself_to_dance',
+    'touch',
+    'instant_crush',
+    'beyond',
+    'within',
+    'motherboard',
+    'get_lucky',
+    'fragments_of_time',
+    'doin_it_right',
+    'contact'
+];
+
+var audio = document.getElementById('preview-player');
+
+function get_preview() {
+    return previews[Math.floor(Math.random() * previews.length)];
+}
+
+function play_previews() {
+    var randomselect = get_preview();
+
+    audio.src = 'previews/' + randomselect + '.mp3';
+    
+    audio.volume = 0.4;
+    audio.currentTime = 0;
+    audio.play();
+}
+
+audio.addEventListener('ended', function () {
+    play_previews();
+});
+
+play_previews();</script>
+</body>
+</html>

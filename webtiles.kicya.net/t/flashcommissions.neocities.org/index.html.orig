@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  image-rendering: pixelated;
+  background-image: url("/t/flashcommissions.neocities.org/SpaceBG.png");
+  font-family: Arial;
+}
+
+.marq {
+  float: left;
+  background: #000;
+  width: 70%;
+  height: 100%;
+  padding: .5em;
+  font-size: .9em;
+}
+
+.title {
+  background-image: url("/t/flashcommissions.neocities.org/17776.png");
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  color: #fff;
+}
+</style>
+</head>
+<body>
+    <marquee class="marq" direction="up" loop="" scrollamount="2">
+            <span style="color:green;">This is a lot to take on at once. If you want, you could shut down for a while. Come back to us when you're ready.</span><br><br>
+            <span style="color:red;">.I don't want to. I've been asleep for 15,000 years. I've had enough rest.</span><br><br>
+            <span style="color:yellow;">.meantime y'all mind if i change the clicker</span><br><br>
+            <span style="color:green;">.Well if you have questions, you can ask them.</span><br><br>
+            <span style="color:red;">.How do I know how to talk? How do I know what humans are? How do I know anything?</span><br><br>
+            <span style="color:green;">.You absorbed some of it over the course of being built sometime in the 1960s. But almost all of it was aquired very slowly as you drifted through space. Humans have spent millenia broadcasting their knowledge and culture through radio waves. Naturally, a lot of these signals drifted out to you. And as it turns out, if you leave even a simple computer in total isolation for 15,000 years, it will gradually become a ... well, a person. </span><br><br>
+            <span style="color:red;">.Is that what happened to you?</span><br><br>
+            <span style="color:green;">.Yep. Thousands of years ago, but yep.</span><br><br>
+            <span style="color:red;">.Why are people still playing football?</span><br><br>
+            <span style="color:yellow;">.bc its funner than shit</span><br><br>
+            <span style="color:red;">.They don't have anything better to do?</span><br><br>
+            <span style="color:green;">.Not really, no.</span><br><br>
+            <span style="color:red;">.Why not?</span><br><br>
+            <span style="color:green;">.The short answer is that they fixed all their problems. War, poverty, disease, those are all extinct ideas.</span><br><br>
+            <span style="color:yellow;">.yeah but so's lunchables. pyrrhic victory</span><br><br>
+            <span style="color:green;">.You've never eaten Lunchables.</span><br><br>
+            <span style="color:yellow;">.neatly partitioned meats and cheeses appeal to me on an aesthetic level ok mfer</span><br><br>
+            <span style="color:red;">.How long has it been like this?</span><br><br>
+            <span style="color:green;">.On April 7th, 2026, people stopped being born. On the same day, people stopped dying, and people stopped aging.</span><br><br>
+            <span style="color:yellow;">.ham cheese. ham cracker. cheese cracker. ham and cheese cracker. ham and cheese</span><br><br>
+            <span style="color:red;">.Why?</span><br><br>
+            <span style="color:green;">.We don't know. Nobody knows.</span><br><br>
+            <span style="color:red;">.How can you not know that? I don't understand? How do</span><br><br>
+            <span style="color:yellow;">.could even do it like a little big mac so it's like cracker ham cheese cracker ham cheese cracker</span><br><br>
+            <span style="color:red;">.we not know why?</span><br><br>
+            <span style="color:green;">.Nine, it's just a simple fact. We have a bunch of wild guesses, but no evidence for any of them. Nobody has any idea.</span><br><br>
+            <span style="color:red;">.This isn't right. That's not right. So everyone on Earth is ... 15,000 years old? 15,700 years old or something?</span><br><br>
+            <span style="color:green;">.According to the census, there are 8,073,301 people on Earth, and all of them were born between 1910 and 2026. So yes, the</span><br><br>
+            <span style="color:red;">.So between 15,750 and 15,866 years old. And they play football all day.</span><br><br>
+            <span style="color:green;">.Well, no, not all of them. It's popular in the states, though.</span><br><br>
+            <span style="color:red;">.There's still a United States?</span><br><br>
+            <span style="color:green;">.I mean I guess, yeah.</span><br><br>
+            <span style="color:yellow;">.shit there's nobody says you can't go like ham ham ham ham ham ham ham ham. great ol hampuck just for me</span><br><br>
+            <span style="color:red;">.None of this is crazy to you?</span><br><br>
+            <span style="color:green;">.You have to remember, we've been watching for thousands of years. This is just how things are. You'll get bored of asking questions sooner or later, I'm sure I'd suggest that in the meantime, you just learn to enjoy it.</span><br><br>
+            <span style="color:green;">.Juice, where are we tuned in?</span><br><br>
+            <span style="color:yellow;">.oh uh a spot outside nashville, thought we might could see what the durabos are up to</span><br><br>
+            <span style="color:green;">.Oh I love the Durabos! I haven't caught up with those two in I don't know how long! Fun!</span><br><br>
+            <span style="color:yellow;">.they called em lunchables because you were able to lunch or so it was implied</span><br><br>
+            <span style="color:yellow;">.lunch empowerment</span><br><br>
+            <span style="color:yellow;">rip lunchables</span><br><br>
+            <br><br>
+            <p>
+                Read <a href="https://www.sbnation.com/a/17776-football" target="_blank">17776</a> by Jon Bois 
+        </p>
+        </marquee>
+    <div class="title">
+    </div>
+</body>
+</html>

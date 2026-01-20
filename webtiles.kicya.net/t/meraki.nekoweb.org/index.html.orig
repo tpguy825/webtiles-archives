@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+</style>
+</head>
+<body>
+   <style>.tile-body {
+  color: #000;
+  background-image: url("/t/meraki.nekoweb.org/SB024.jpg");
+}
+
+.container {
+  margin: 10px;
+}
+
+.text {
+  text-align: center;
+  background-color: #ffffff90;
+  border: 1px solid #000;
+  margin: 5px;
+}
+
+img {
+  max-width: 200px;
+  height: auto;
+  padding: 5px;
+}
+</style>
+    
+    <div class='container'><div class='text'>
+        <p>meow :3<br>owm byler real </p>
+        </div>
+    <div class='text'>
+    <img src='/t/meraki.nekoweb.org/map.jpg'>
+        </div>
+    
+    </div>
+  
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

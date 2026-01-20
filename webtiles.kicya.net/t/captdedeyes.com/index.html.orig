@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Jellee-Roman;
+  src: url("/t/captdedeyes.com/fonts/Jellee-Roman.eot");
+  src: url("/t/captdedeyes.com/fonts/Jellee-Roman.eot?#iefix") format("embedded-opentype"), url("/t/captdedeyes.com/fonts/Jellee-Roman.woff2") format("woff2"), url("/t/captdedeyes.com/fonts/Jellee-Roman.otf") format("truetype"), url("/t/captdedeyes.com/fonts/Jellee-Roman.svg#svgFontName") format("svg");
+}
+
+.tile-body {
+  background-image: url("/t/captdedeyes.com/img/sunset1.webp");
+  background-size: 500px;
+}
+
+.textbox {
+  z-index: 0;
+  background-color: #fae7c3;
+  border-radius: 20px;
+  width: auto;
+  height: 7em;
+  margin: 8px;
+  padding: .5rem;
+  transition: all .35s ease-out;
+  display: block;
+  box-shadow: 0 7.5px #d6995c;
+}
+
+.textbox button {
+  cursor: pointer;
+  text-shadow: 1px 2.5px 1px #a75720;
+  color: #ffd84f;
+  background-color: #c66f2a;
+  border-style: none;
+  border-radius: 25px;
+  margin: 5px 130px 5px 5px;
+  padding: 10px;
+  font-family: Jellee-Roman, sans-serif;
+  font-size: 1.2em;
+  text-decoration: none;
+  transition: all .35s ease-in-out;
+  transform: translateX(0);
+  box-shadow: 0 5px #a75720;
+}
+
+.textbox button:hover {
+  color: #d46d11;
+  text-shadow: 1px 2.5px 1px #ffd84f;
+  background-color: #ffd84f;
+  box-shadow: 0 5px #d46d11;
+}
+
+.mermaid img {
+  z-index: 1;
+  filter: drop-shadow(0 5px 5px #a75720);
+  width: 210px;
+  height: auto;
+  transform: translateX(-10px)translateY(-35px);
+}
+
+.logo img {
+  z-index: 2;
+  filter: drop-shadow(0 3px 3px #d6995c);
+  width: 100px;
+  height: auto;
+  transform: translateX(130px)translateY(-280px);
+}
+
+.buttons {
+  width: 88px;
+}
+
+.buttons img {
+  z-index: 3;
+  width: auto;
+  height: auto;
+  transform: translateX(160px)translateY(-245px);
+}
+</style>
+</head>
+<body>
+    
+    <div class="textbox">
+        <a href="https://captdedeyes.com/" target="_blank"><button>
+             Visit my Undersea Blog!
+        </button></a>
+	</div>
+    
+	<div class="mermaid">
+    	<img src="/t/captdedeyes.com/img/Capt Merm on Computer icon.webp">
+    </div>
+    
+    <div class="logo">
+    	<img src="/t/captdedeyes.com/img/cde_logo_smol.webp">
+    </div>
+    
+    <div class="buttons">
+    	<img src="/t/captdedeyes.com/img/contains-javascript.png">
+        <img src="/t/captdedeyes.com/img/anybrowser2.gif">
+        <img src="/t/captdedeyes.com/img/CaptDedEyes_btn2.gif">
+    </div>
+    
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+
+    
+</body>
+</html>

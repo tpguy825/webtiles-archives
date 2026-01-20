@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+    <img src="/t/taigabeetle.nekoweb.org/stardust.jpg" style="width: 250px; margin-left: -10px; margin-top: -10px;">
+</body>
+</html>

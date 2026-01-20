@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Syne;
+  src: local(Syne), url("/t/rvvnd.nekoweb.org/Syne-ExtraBold.ttf") format("truetype");
+}
+
+.tile-body {
+  background-image: url("/t/rvvnd.nekoweb.org/mars.webp");
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+a {
+  color: #fff;
+  mix-blend-mode: difference;
+  text-align: center;
+  font-family: Syne, sans-serif;
+  scale: 2.25;
+}
+
+a::selection {
+  color: #000;
+  background: #fff;
+}
+</style>
+</head>
+<body>
+    <a href="https://rvvnd.nekoweb.org" target="_blank">[rewind]</a>
+    <script type="text/tilescript"></script>
+</body>
+</html>

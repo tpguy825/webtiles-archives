@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.tile-body {
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #34303a;
+  border: 2px solid #77cdff;
+  border-left-width: 5px;
+  height: 100%;
+  padding: 10px;
+  font-family: MS UI Gothic, MS PGothic, sans-serif;
+  transition: border-color .5s;
+}
+
+.container {
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  height: 95%;
+  display: flex;
+  overflow-y: scroll;
+}
+
+.button-container {
+  gap: 5px;
+  display: flex;
+}
+
+.arrow {
+  opacity: .7;
+  height: 30px;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+}
+
+.links {
+  gap: 5px;
+  display: flex;
+}
+
+.button {
+  color: #fff;
+  cursor: pointer;
+  background: #34303a;
+  border: 1px solid #99c9ff;
+  padding: 5px;
+  text-decoration: none;
+  transition: all .5s;
+}
+
+footer {
+  bottom: 0;
+}
+
+.tile-body:hover {
+  border-color: #ffbaea;
+}
+
+.tile-body:hover .arrow {
+  opacity: 1;
+  content: url("/t/nomaakip.xyz/arrow-pink.png");
+}
+
+.tile-body:hover .button {
+  border: 1px solid #ffbaea;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <img src="/t/nomaakip.xyz/logo.png" height="70" class="logo">
+        <span>my personal site i guess</span>
+        <div class="button-container">
+            <a href="https://nomaakip.xyz" target="_blank"><img src="/t/nomaakip.xyz/button.png"></a>
+            <a href="https://nomaakip.xyz" target="_blank"><img src="/t/nomaakip.xyz/button2.png"></a>
+        </div>
+        <span>(these buttons redirect to my site!!!)</span>
+        <div class="links">
+            <a href="https://nomaakip.xyz/about" target="_blank"><button class="button">about</button></a>
+            <a href="https://nomaakip.xyz/sitemap" target="_blank"><button class="button">sitemap</button></a>
+            <a href="https://nomaakip.xyz/nekocard" target="_blank"><button class="button">nekocards</button></a>
+        </div>
+        <div class="status">
+            <span class="status-cont">focus to check my status!</span>
+        </div>
+    </div>
+    
+    <footer>2026 nomaakip.xyz - v2.2.2</footer>
+    <img src="/t/nomaakip.xyz/arrow-blue.png" class="arrow">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!  hihihi");
+
+
+function timeAgo(date) {
+    var now = new Date();
+    var diff = (now - new Date(date)) / 1000;
+    console.log('now: ' + diff)
+
+    var units = [
+        { name: "year", seconds: 31536000 },
+        { name: "month", seconds: 2592000 },
+        { name: "day", seconds: 86400 },
+        { name: "hour", seconds: 3600 },
+        { name: "min", seconds: 60 },
+        { name: "sec", seconds: 1 },
+    ];
+
+    for (var unit = 0; unit < units.length; unit++) {
+        var amount = Math.floor(diff / units[unit].seconds);
+        console.log('idk: ' + units[unit].seconds)
+        if (amount >= 1) {
+            return amount + ' ' + units[unit].name + (amount > 1 ? "s" : "") + ' ago';
+        }
+    }
+    return "just now";
+}
+
+var xhttp = new XMLHttpRequest();
+
+xhttp.onload = function () {
+    var data = JSON.parse(xhttp.responseText)[0];
+    console.log(data.content);
+    document.querySelector('.status-cont').textContent = data.content + ' - ' + timeAgo(data.timestamp);
+    console.log(new Date(data.timestamp))
+};
+
+
+xhttp.open("GET", "https://nomaakip.xyz/api/status", true);
+xhttp.send();</script>
+</body>
+</html>

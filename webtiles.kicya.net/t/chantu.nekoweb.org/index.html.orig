@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #15617b;
+}
+
+.flex {
+  background-color: #f85f35;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  margin-top: 16px;
+  margin-left: 16px;
+  padding: 10px;
+  display: flex;
+}
+</style>
+</head>
+<body>
+    <div class="flex">
+        <img src="/t/chantu.nekoweb.org/Chantu.png" width="190">
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

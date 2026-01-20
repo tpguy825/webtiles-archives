@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Fairfax;
+  src: url("/t/calibanscreations.neocities.org/FairfaxHD.woff2");
+}
+
+.tile-body {
+  color: #f0f8ff;
+  text-align: center;
+  background-color: #000;
+  font-family: Fairfax;
+  font-style: normal;
+  font-weight: normal;
+}
+
+h1 {
+  color: red;
+}
+</style>
+</head>
+
+    <p>I like making YouTube videos. :)</p>
+    <p>You can find me <a target="_blank" rel="noopener noreferrer nofollow" href="https://youtube.com/@CalibansCreations">here</a>. 🥰🥰🥰</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script></html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        
+        <style>.tile-body {
+  color: #fff;
+  height: 100vh;
+  font-family: Inter, sans-serif;
+  font-weight: medium;
+  background-color: #000;
+  flex-direction: column;
+  margin: 0;
+  display: flex;
+}
+
+a {
+  color: #fff;
+}
+
+.namenpfp {
+  justify-content: right;
+  align-items: center;
+  gap: 4px;
+  max-height: 40px;
+  font-weight: bold;
+  display: flex;
+}
+
+.profile {
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.title {
+  font-size: 1.1em;
+  display: block;
+}
+
+.box {
+  overflow-wrap: break-word;
+  border: 3px solid #fff;
+  border-radius: 15px;
+  max-width: 170px;
+  max-height: 170px;
+  margin: auto;
+  padding: 10px;
+}
+</style>
+    </head>
+    <body>
+        <div class="box">
+          <div class="namenpfp">
+            <img src="/t/patyk.lol/soulja.gif" class="profile" alt="profile picture">
+            <p class="title">PatRyk</p>
+          </div>
+            <p class="center">malware researcher, sysadmin, terrible programmer, everything in between</p>
+            <a class="big-hi center" href="https://patyk.lol/" target="_blank"><span>go to site</span></a>
+        </div>
+    </body>
+</html>

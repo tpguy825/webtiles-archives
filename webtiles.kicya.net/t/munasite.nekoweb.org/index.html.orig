@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-image: url("/t/munasite.nekoweb.org/blackblue.jpg");
+  background-repeat: repeat;
+  background-size: 50% 100%;
+  background-origin: border-box;
+}
+
+div {
+  justify-content: center;
+  display: flex;
+}
+
+p {
+  font-family: cRypt;
+}
+
+.center-img {
+  width: 100px;
+  max-width: 80%;
+  height: 100px;
+  max-height: 80%;
+}
+</style>
+</head>
+
+<body>
+<img src="/t/munasite.nekoweb.org/great.gif" class="center-img">
+<img src="/t/munasite.nekoweb.org/rain.png" class="center-img">
+</body>
+</html>

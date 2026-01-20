@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>frames {
+  position: relative;
+}
+
+img {
+  transition: transform .3s, box-shadow 10s;
+}
+
+img:hover {
+  filter: drop-shadow(0 0 1px #ff83c5) drop-shadow(0 0 1px #ff83c5) drop-shadow(0 0 1px #ff83c5) drop-shadow(0 0 1px #ff83c5) drop-shadow(0 0 1px #ff83c5) drop-shadow(1px 1px #0000004d);
+}
+
+.logo {
+  transition: all .5s;
+  position: absolute;
+  top: 4px;
+  right: 45px;
+}
+
+.frame1 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 70px;
+  right: 63px;
+}
+
+.frame2 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 45px;
+  left: 65px;
+}
+
+.frame3 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 55px;
+  right: 20px;
+}
+
+.frame4 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 86px;
+  left: 112px;
+}
+
+.frame5 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 43px;
+  right: 55px;
+}
+
+.frame6 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 103px;
+  right: 25px;
+}
+
+.frame7 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  bottom: 95px;
+  left: 18px;
+}
+
+.frame8 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  bottom: 96px;
+  right: 25px;
+}
+
+.frame9 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  top: 50px;
+  left: 23px;
+}
+
+.frame10 {
+  image-rendering: pixelated;
+  transition: all .5s;
+  position: absolute;
+  bottom: 100px;
+  left: 45px;
+}
+
+.tile-body {
+  image-rendering: pixelated;
+  background-image: url("/t/biofreak.world/brickroom.png");
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+</style>
+</head>
+<body>
+       <div class="frames">
+        <a href="https://biofreak.world" target="_blank"> <img class="logo" src="/t/biofreak.world/biofreaklogo.png"></a>
+       	<a href="https://biofreak.world/05gallery" target="_blank"><img class="frame1" src="/t/biofreak.world/BF1P.png"></a>
+       	<a href="https://softatrocity.atabook.org/" target="_blank"><img class="frame2" src="/t/biofreak.world/BF2P.png"></a>
+       	<img class="frame3" src="/t/biofreak.world/BF3P.png">
+        <a href="https://youtu.be/Yep6GVM0IYs?si=0_zjVB3_Ul4ARnnb" target="_blank"><img class="frame4" src="/t/biofreak.world/BF4P.png"></a>
+        <img class="frame5" src="/t/biofreak.world/BF5P.png">
+        <img class="frame6" src="/t/biofreak.world/BF6P.png">
+        <img class="frame7" src="/t/biofreak.world/BF7P.png">
+        <a href="https://youtu.be/GKlAHqsiG1w?si=cGqCOegwhSFvJKKv" target="_blank"><img class="frame8" src="/t/biofreak.world/BF8P.png"></a>
+        <a href="https://zine.nekoweb.org/zine/NEKOZINE_2025.pdf" target="_blank"><img class="frame9" src="/t/biofreak.world/BF9P.png"></a>
+        <a href="https://blacksquares.bandcamp.com/album/im-it" target="_blank"><img class="frame10" src="/t/biofreak.world/BF10P.png"></a>
+    </div>
+    </body>
+</html>

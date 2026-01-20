@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+<style>.tile-body {
+  background: url("/t/mogmog.vercel.app/mogmogleft.jpg") no-repeat;
+  justify-content: right;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  font-size: 48px;
+  display: flex;
+}
+
+a {
+  color: #111;
+  -webkit-text-stroke: 5px #eee;
+  text-stroke: 5px #eee;
+  paint-order: stroke;
+  padding: 101px 0 101px 101px;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<a href="https://mogmog.vercel.app/" target="_blank">
+(・〜・)
+</a>
+</body>
+</html>

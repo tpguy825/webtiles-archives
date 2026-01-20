@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Atkinson;
+  src: url("/t/kilometres.neocities.org/font/AtkinsonHyperlegible-Regular.ttf");
+}
+
+@font-face {
+  font-family: Atkinson;
+  src: url("/t/kilometres.neocities.org/font/AtkinsonHyperlegible-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Atkinson;
+  src: url("/t/kilometres.neocities.org/font/AtkinsonHyperlegible-Italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Atkinson;
+  src: url("/t/kilometres.neocities.org/font/AtkinsonHyperlegible-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+.tile-body {
+  color: #111;
+  background: linear-gradient(40deg, #a4bde3 0%, #649be3 49%, #3d7ac2 86%);
+  margin: 0;
+  font-family: Atkinson;
+}
+
+h3 {
+  margin-left: 100px;
+  font-size: x-large;
+  display: block;
+  position: relative;
+}
+
+.links {
+  flex-direction: column;
+  margin-top: 100px;
+  display: flex;
+  position: relative;
+  left: 130px;
+}
+
+.links div {
+  margin: 10px;
+}
+
+a {
+  color: #14181c;
+  font-size: large;
+  font-style: italic;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <img src="/t/kilometres.neocities.org/radiotrans.png" style="position: absolute; height: 100%;">
+    <h3>Kilometres</h3>
+    <div class="links">
+        <div><a href="https://kilometres.neocities.com" target="_blank">Website</a></div>
+        <div><a href="https://www.tumblr.com/blog/kilometresinatree" target="_blank">Tumblr</a></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  font-family: times new roman;
+  overflow: hidden;
+}
+
+p {
+  margin: 0;
+  font-size: 14px;
+}
+
+#weezerbar {
+  background: url("/t/axel.nekoweb.org/weezerbar.png") 0 0 / cover;
+  width: 250px;
+  height: 12px;
+  position: absolute;
+  bottom: 0;
+}
+
+#container {
+  background: url("/t/axel.nekoweb.org/sou.png") 0 0 / cover;
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+#hovercont {
+  z-index: 3;
+  opacity: 0;
+  backdrop-filter: blur(6px);
+  background: #30386b6e;
+  width: 230px;
+  height: 230px;
+  padding: 10px;
+  transition: all .3s ease-in-out;
+  position: absolute;
+  top: 0;
+}
+
+#container:hover #hovercont {
+  opacity: 1;
+  top: 0;
+}
+
+a {
+  color: #fff;
+  filter: drop-shadow(0 1px #61b0ce) drop-shadow(0 -1px #61b0ce) drop-shadow(1px 0 #61b0ce) drop-shadow(-1px 0 #61b0ce);
+  text-decoration: underline wavy;
+}
+
+a:hover {
+  color: #e42f3f;
+  filter: drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff);
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline wavy;
+}
+
+h1 {
+  -webkit-text-fill-color: transparent;
+  writing-mode: vertical-lr;
+  background: linear-gradient(#15c5ee, #15c5ee, #e42f3f, #e42f3f);
+  -webkit-background-clip: text;
+  height: 230px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+#title {
+  z-index: 3;
+  text-align: center;
+  background: #000;
+  width: 23px;
+  margin: -10px 0;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+}
+
+#gv-copen {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 2px #aae8ff);
+  z-index: 4;
+  background: url("/t/axel.nekoweb.org/g-c-gfront.png") 0 0 / 100%;
+  transition: all .3s;
+  position: absolute;
+  top: 125px;
+  right: 30px;
+}
+
+#gv-copen:hover {
+  image-rendering: pixelated;
+  background: url("/t/axel.nekoweb.org/g-c-cfront.png") 0 0 / 100%;
+}
+
+#links {
+  color: #61b0ce;
+  z-index: 5;
+  width: 190px;
+  position: absolute;
+  bottom: 10px;
+  right: 55px;
+}
+
+#links p {
+  color: #fff;
+  text-align: left;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+#blurb {
+  z-index: 3;
+  background: #fff;
+  width: 155px;
+  height: 120px;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 66px;
+  overflow-y: scroll;
+}
+
+#cd {
+  z-index: 1;
+  opacity: .5;
+  background: url("/t/axel.nekoweb.org/gv2-ost-d1.png") 0 0 / 100%;
+  width: 200px;
+  height: 200px;
+  transition: all .3s;
+  animation: 3s linear infinite spin;
+  position: absolute;
+  top: 15px;
+  right: 70px;
+}
+
+#cd:hover {
+  background: url("/t/axel.nekoweb.org/gv2-ost-d2.png") 100% / 100%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#cred {
+  color: #fff;
+  z-index: 3;
+  position: absolute;
+  top: 155px;
+  left: 10px;
+}
+
+#cred p {
+  font-size: 10px;
+  font-style: italic;
+}
+
+#cred a {
+  color: #61b0ce;
+  filter: none;
+  font-weight: bold;
+}
+
+#cred a:hover {
+  color: #e42f3f;
+  filter: none;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    <div id="container">
+        <div id="weezerbar"></div>
+        <div id="hovercont">
+            <div id="title"><h1>混迷の夜を裂いて、みちゆく希望。</h1></div>
+            <div id="gv-copen"></div>
+            
+            <div id="links">
+                <p>-view more about this album-</p>
+                <a href="https://www.inti-direct.com/shopdetail/000000000042/" target="_blank">Inti Direct</a> ⚡︎ <a href="https://azurestrikergunvolt.fandom.com/wiki/Armed_Blue_Gunvolt:_Sou_Soundtrack" target="_blank">Gunvolt Wiki</a>
+            </div>
+            
+            
+            <div id="blurb">
+                <p>
+                    The <b>Armed Blue Gunvolt: Sou Soundtrack</b> is, as the name suggests, the official soundtrack for the game <em>Azure Striker Gunvolt 2</em>. The two-disc compilation contains every song in the game, including vocal track game loops. Disc 1 has every song heard when playing as <b>Gunvolt,</b> while disc 2 has every song heard while playing <b>Copen.</b>
+                    <br><br>
+                    The soundtrack counterpart to my favorite <em>Gunvolt</em> game. I'll admit, it's not my top 1 favorite... but funnily enough it's my top <em>2</em> instead. This is the first time in the series where you could play as more than one character, and with the introduction of more than one playable characters came more than one sound style.
+                    <br><br>
+                    The soundtrack is just so colorful! Gunvolt and Copen's sound styles are just so distinct- both obviously having a tech-like, synth-y feel, but Copen is more heavy on the synths and feels more aggressive while Gunvolt is lighter. You can easily tell what kind of character each of them are just by their sound style- and I think it's amazing. When the soundtrack gets mellow and light, like with the base conversation music, or the ending themes... even Copen's base conversation song maintains his sound style's heavier personality while lightening up and relaxing for once.
+                    <br><br>
+                    My favorite tracks from this game are the true ending songs and the base conversation songs. Weirdly enough, I prefer <b>The Brother and Sister by the Window</b> over <b>A Warm Gaze,</b> Copen and Gunvolt's base conversation themes respectively. I don't even LIKE Copen. But his base conversation theme is just so... comforting. Like a brother-sister relationship should be.
+                    <br><br>
+                    I honestly owe it to this soundtrack. Music is a big part of why I like the <em>Azure Striker Gunvolt</em> games, and even franchise in general. Every game needs it's soundtrack, and this one serves its game more than well. Thank you, Inti...
+                </p>
+            </div>
+            
+            <div id="cred"><p>album tile by <a href="https://oversurge.nekoweb.org" target="_blank">xiao/axel</a></p></div>
+            
+            <div id="cd"></div>
+        </div>
+    </div>
+    
+</body>
+</html>

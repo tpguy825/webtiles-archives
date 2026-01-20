@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  background-image: url("/t/hanakostoiletroom.nekoweb.org/background.gif");
+}
+
+.center-image {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.text {
+  text-align: center;
+}
+
+.gradoutline {
+  -webkit-text-stroke: 4px transparent;
+  color: #000;
+  text-align: center;
+  background: -webkit-linear-gradient(pink, #ff69b4);
+  -webkit-background-clip: text;
+  font-family: arial;
+  font-size: 2em;
+}
+</style>
+
+</head>
+<body>
+ <img src="/t/hanakostoiletroom.nekoweb.org/Hanako_pixel.gif" class="center-image">
+<div class="gradoutline">
+Ｔｏｉｌｅｔ 
+   <br> ｈａｎａｋｏ Ｎ°３
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>.tile-body {
+  background-color: #3f3f3f;
+}
+
+#container {
+  perspective: 100px;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  overflow: hidden;
+}
+
+#world {
+  transform-style: preserve-3d;
+  width: 250px;
+  height: 250px;
+  transform: rotateX(45deg)rotateZ(45deg);
+}
+
+#grid {
+  width: 250px;
+  height: 250px;
+  transform-style: preserve-3d;
+  position: fixed;
+}
+
+.vline {
+  background-color: #5c5c5c;
+  width: 1px;
+  height: 1000px;
+  position: fixed;
+}
+
+.hline {
+  background-color: #5c5c5c;
+  width: 1000px;
+  height: 1px;
+  position: fixed;
+}
+
+.face {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+}
+
+#face1 {
+  background-color: #555;
+  top: 100px;
+  left: 125px;
+  transform: rotateY(90deg);
+}
+
+#face2 {
+  background-color: #666;
+  top: 100px;
+  left: 75px;
+  transform: rotateY(90deg);
+}
+
+#face3 {
+  background-color: #777;
+  top: 125px;
+  left: 100px;
+  transform: rotateX(90deg);
+}
+
+#face4 {
+  background-color: #888;
+  top: 75px;
+  left: 100px;
+  transform: rotateX(90deg);
+}
+
+#face5 {
+  background-color: #999;
+  top: 100px;
+  left: 100px;
+  transform: translateZ(-25px);
+}
+
+#face6 {
+  background-color: #aaa;
+  top: 100px;
+  left: 100px;
+  transform: translateZ(25px);
+}
+</style>
+    <style>#linkbar {
+  opacity: .8;
+  color: #d3d3d3;
+  background-color: #000;
+  border-radius: 0 10px 0 0;
+  padding: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#linkbar > a {
+  color: #d3d3d3;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+        <div id="world">
+            <div id="grid">
+                <div class="vline" style="background-color: #628828; left: 125px; top: -500px; z-index: 100;"></div>
+                <div class="hline" style="background-color: #933c4a; top: 125px; left: -500px; z-index: 100;"></div>
+            </div>
+            <div id="face1" class="face"></div>
+            <div id="face2" class="face"></div>
+            <div id="face3" class="face"></div>
+            <div id="face4" class="face"></div>
+            <div id="face5" class="face"></div>
+            <div id="face6" class="face"></div>
+        </div>
+    </div>
+    
+    <div id="linkbar">
+        <a href="/t/88x31.org/">home</a>
+        <span>blender cube</span>
+    </div>
+
+    <script type="text/tilescript">console.log('foo');
+var container = document.getElementById('container');
+var grid = document.getElementById('grid');
+var world = document.getElementById('world');
+
+var rx = 45;
+var rz = 45;
+
+for (var x = -5; x <= 5; x++) {
+    if (x == 0) continue;
+
+    var line = document.createElement('div');
+    line.className = 'vline';
+    line.style.left = String(x * 50 + 125) + 'px';
+    line.style.top = '-500px';
+
+    grid.appendChild(line);
+}
+for (var x = -5; x <= 5; x++) {
+    if (x == 0) continue;
+
+    var line = document.createElement('div');
+    line.className = 'hline';
+    line.style.top = String(x * 50 + 125) + 'px';
+    line.style.left = '-500px';
+
+    grid.appendChild(line);
+}
+
+container.addEventListener('mousemove', function (e) {
+    if (e.buttons == 1) {
+        rx += e.movementY;
+        rz += e.movementX;
+
+        world.style.transform = 'rotateX(' + String(rx) + 'deg) rotateZ(' + String(rz) + 'deg)';
+    }
+});</script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/floooofwchan.nekoweb.org/midbg.gif");
+}
+
+p {
+  color: navy;
+  width: 200px;
+  position: absolute;
+  top: 160px;
+  right: 40px;
+}
+
+h1 {
+  color: #87ceeb;
+  margin: 5px;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  left: 2px;
+}
+</style>
+</head>
+<body>
+    <img src="/t/floooofwchan.nekoweb.org/Webtile.gif" width="250">
+    <h1>NEW TILE DESIGN!!</h1>
+    <p>hi katio and minerva.. im waiting for your parts to complete...... - ferris</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Inspecting, I see?");</script>
+</body>
+</html>

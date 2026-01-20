@@ -1,0 +1,227 @@
+<!DOCTYPE html>                                                                                                                                                                        
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background: url("/t/minimos.neocities.org/brand.png");
+  animation: 60s infinite ScreenSaver;
+}
+
+@keyframes ScreenSaver {
+  0% {
+    background-image: url("/t/minimos.neocities.org/brand.png");
+  }
+
+  5% {
+    background-image: url("/t/minimos.neocities.org/brand.png");
+  }
+
+  10% {
+    background-image: url("/t/minimos.neocities.org/Bad-Apple.png");
+  }
+
+  20% {
+    background-image: url("/t/minimos.neocities.org/Bad-Apple.png");
+  }
+
+  25% {
+    background-image: url("/t/minimos.neocities.org/Mossy_surfaces.png");
+  }
+
+  35% {
+    background-image: url("/t/minimos.neocities.org/Mossy_surfaces.png");
+  }
+
+  40% {
+    background-image: url("/t/minimos.neocities.org/Fountains.png");
+  }
+
+  50% {
+    background-image: url("/t/minimos.neocities.org/Fountains.png");
+  }
+
+  55% {
+    background-image: url("/t/minimos.neocities.org/brand.png");
+  }
+
+  100% {
+    background-image: url("/t/minimos.neocities.org/brand.png");
+  }
+}
+
+#screensaver {
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  color: #fff;
+  background: #000;
+  width: 245px;
+  max-width: 245px;
+  height: 250px;
+  max-height: 250px;
+  padding: 2px 2px 2px 3px;
+  transition: all 2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden auto;
+}
+
+#screensaver:hover {
+  opacity: 1;
+  transition: all .2s;
+}
+
+#bang {
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  box-shadow: 0 0 10px 2px #000 !important;
+}
+
+#screensaver:hover ~ #bang {
+  display: none;
+}
+
+#green {
+  z-index: 2;
+  height: 100%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  box-shadow: 0 0 10px 2px green !important;
+}
+
+input {
+  all: unset;
+  width: 130px;
+  margin-bottom: 4px;
+}
+
+#screen {
+  display: block;
+}
+</style>
+</head>
+<body id="body">
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+function interpreter(input){
+    	var screen = document.getElementById('screen');
+    	var div = document.createElement('div');
+
+        var left = document.createElement('span');
+        left.style.color = 'lime';
+        left.innerText = 'tile@-1,10.tiles';
+
+        var colon = document.createElement('span');
+        colon.innerText = ':';
+
+        var tilde = document.createElement('span');
+        tilde.style.color = 'blue';
+        tilde.innerText = '~';
+
+        var dollar = document.createElement('span');
+        dollar.innerText = '$ ' + input; // input variable from your code
+
+        div.appendChild(left);
+    	div.appendChild(colon);
+        div.appendChild(tilde);
+        div.appendChild(dollar);
+    	screen.appendChild(div);
+    	
+        var div = document.createElement("div");
+		
+    	var parts = (input || "").split(" ")
+        var command = parts[0] || "";
+var args = parts[1] || "";
+    	if(command == "clear"){
+            screen.innerText ="";
+        }
+        else if(command == "help"){
+            div.innerText = "Avaible commands: clear, print [word], whoami, sysinfo, hostname [arg], date, pwd, help";
+        }
+    	else if(command == "screen"){
+            div.innerText = "Resolution:	250x250";
+        }
+    	else if(command == "whoami"){
+            div.innerText = "tile";
+        }
+    
+    	else if(command == "pwd"){
+            div.innerText = "/home/tile/";
+        }
+    	else if(command == "print" || command == "echo"){
+            div.innerText = args;
+        }
+    	else if(command == "hostname"){
+            if(args == ""){
+                div.innerText = "-1,10.tiles";
+            }
+			else if(args === "-i"){
+                div.innerText = "127.0.1.1";
+            }
+            else if(args === "-I"){
+                div.innerText = "0.0.0.0";
+            }
+            else{
+                div.innerText = "hostname: Invalid argument";
+            }
+            
+        }
+    	else if(command == "sysinfo"){
+            div.innerText = 'tile@-1,10.tiles';
+            div.style.color = 'lime';
+            screen.appendChild(div);
+            div = document.createElement("div");
+            div.innerText = "Resolution:	250x250";
+            screen.appendChild(div);
+            div = document.createElement("div");
+            div.innerText = "Disk: 1.13 MB / 25 MB (4.52%)";
+            screen.appendChild(div);
+        }
+    	else if(command == "date"){
+            div.innerText = new Date().toDateString();
+        }
+        else{
+            div.innerText = "Try: help";
+        }
+    screen.appendChild(div);
+    console.log("interpreted")
+    var body = document.getElementById("screensaver");
+    body.scrollTo(0, body.scrollHeight);
+    sessionStorage.setItem("history", input);
+}
+
+var input = document.getElementById("commandline");
+input.focus();
+input.addEventListener('keyup', function(event) {
+    console.log(event.key)
+    if (event.key === 'Enter') {
+        console.log('Return key was pressed!');
+        interpreter(input.value)
+		input.value = "";
+    }
+    if (event.key === 'ArrowUp') {
+        console.log('ArrowUp key was pressed!');
+        input.value = sessionStorage.getItem("history");
+    }
+});</script>
+    <div id="green">
+    </div>
+    <div id="bang">
+    </div>
+    <div id="screensaver">
+            <output id="screen">
+            </output>
+        	<nobr><span style="color: lime;">tile@-1,10.tiles</span>:<span style="color: blue;">~</span>$ <input type="text" id="commandline" autocomplete="off"></nobr>
+        <h6 style="position:absolute; bottom:-10px;">
+            The neocity website is currently unsupported
+        </h6>
+    </div>
+</body>
+</html>

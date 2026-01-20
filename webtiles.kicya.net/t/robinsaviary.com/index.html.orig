@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #ddd2d0;
+  background-color: #0f0f0f;
+}
+
+h1 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: #ff9191;
+}
+
+a:hover {
+  color: #ffd9d9;
+}
+
+a:active {
+  color: #c97575;
+}
+</style>
+</head>
+<body>
+    <center><h1>Robin's Aviary</h1></center>
+    <center><p><a href="https://robinsaviary.com/" title="Howdy, come on in!" target="_blank"><i>Mapping, Modding, Art, and More!</i></a></p></center>
+    <center><a href="https://robinsaviary.com/" target="_blank"><img src="/t/robinsaviary.com/robin-wave.gif" title="Howdy, come on in!"></a></center>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

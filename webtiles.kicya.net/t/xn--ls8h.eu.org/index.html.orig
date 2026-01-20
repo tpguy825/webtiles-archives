@@ -1,0 +1,71 @@
+<html>
+<head>
+<style>@font-face {
+  font-family: Lobster Two;
+  src: url("/t/xn--ls8h.eu.org/LobsterTwo-Regular.woff2") format("woff2"), url("/t/xn--ls8h.eu.org/LobsterTwo-Regular.woff") format("woff"), url("/t/xn--ls8h.eu.org/LobsterTwo-Regular.ttf") format("ttf");
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+#💻 {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+#💩 {
+  font-family: Noto Color Emoji, Android Emoji, Segoe UI Emoji, Apple Color Emoji, EmojiSymbols, Symbola;
+  font-size: 175px;
+  -webkit-animation-name: rotate;
+  animation-name: rotate;
+  -webkit-animation-duration: .15s;
+  animation-duration: .15s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+#🌍 {
+  color: #def;
+  font-family: Lobster Two, cursive, fantasy;
+  font-size: 11px;
+}
+
+.tile-body {
+  -webkit-text-size-adjust: none;
+  background-color: #000;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+  display: table;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div id="💻">
+<div id="💩">&#128169;</div>
+<div id="🌍">Tiles with only emoji give a down rated.<br>So I can go around.</div>
+</div>
+</body>
+</html>

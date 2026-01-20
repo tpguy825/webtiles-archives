@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/bluechinchompa.com/bluechinchompa.jpg");
+}
+
+.text {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</style>
+</head>
+<body>
+    <img src="/t/bluechinchompa.com/HAPPY_GOOD_DAY.gif" width="250">
+    
+        <p>nekoha.moe @ -13, 5</p>
+        <p>minnerva.neocities.org @ -11, 5</p>
+        <p>user3412.nekoweb.org @ -10,6</p>
+    	<p>leviathan.nekoweb.org @ -12, 5</p>
+    
+    <p>
+    	return to <a href="/t/bluechinchompa.com/index.html">index</a> or <a href="/t/bluechinchompa.com/happy-good-day/index.html">hgd</a>
+    </p>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+
+    <style>EndOfInput Error at 1:25</style>
+ 
+</head>
+  <body>
+      <div class="main1">
+      <img src="https://webtiles.kicya.net/t/bisq.neocities.org/images/banner2.jpg" id="header1" alt="banner">
+          <div class="nav2">
+        <div class="box">
+                <nav id="navbar1-2">
+                <a class="navbutton2" href="https://bisq.neocities.org/" target="_blank">Website Home</a>
+                <p></p>
+                <a class="navbutton2" href="https://bisq.neocities.org/webmaster" target="_blank">About</a>
+
+                <a class="navbutton2" href="https://bisq.neocities.org/medias" target="_blank">Medias</a>
+                <a class="navbutton2" href="https://bisq.neocities.org/art" target="_blank">Art</a>
+                
+            </nav></div></div>
+      </div>
+    </body>
+    
+</html>

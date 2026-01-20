@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #190e00;
+  background-color: #fff15a;
+  background-image: url("/t/puddingpudd.com/Full_Background_FINAL.png");
+}
+
+* {
+  cursor: none;
+}
+
+#ATile:hover .cursor {
+  pointer-events: none;
+  z-index: 999999;
+  background-image: url("/t/puddingpudd.com/maincursor.png");
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  position: fixed;
+}
+
+.Pudd {
+  z-index: 3;
+}
+
+.GooeyBorder {
+  z-index: 2;
+}
+
+.Pudd, .GooeyBorder {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.Logo {
+  object-fit: cover;
+  z-index: 4;
+  width: 150px;
+  position: fixed;
+  top: -1px;
+  left: 53px;
+}
+
+.Logo:hover {
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  transform: scale(1.1)rotate(10deg);
+}
+
+#ATile .Idle {
+  display: block;
+}
+
+#ATile .Active, .active #ATile .Idle {
+  display: none;
+}
+
+.active #ATile .Active {
+  display: block;
+}
+</style>
+</head>
+<body> 
+   <div id="ATile">
+    <div class="cursor"></div>
+    <div class="Idle">
+     <img class="Pudd" src="/t/puddingpudd.com/Pudd_Look_Down.png">
+     <img class="GooeyBorder" src="/t/puddingpudd.com/Border.png">
+    </div>
+    <div class="Active">
+     <a href="https://puddingpudd.com" target="_blank">
+      <img class="Logo" src="/t/puddingpudd.com/Logo_3.gif">
+     </a>
+     <img class="Pudd" src="/t/puddingpudd.com/Pudd_Wave_Final.gif">
+     <img class="GooeyBorder" src="/t/puddingpudd.com/Border_2.png">
+    </div>
+   </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+        var mainDiv = document.getElementById('ATile');
+
+        function enter() {
+            if (mainDiv.className.indexOf('focused') === -1) {
+                mainDiv.className += ' focused';
+                // You can add things here, for example, changing images !
+                // document.getElementById('coolimg').src = "/t/kuurp.nekoweb.org/img2.png";
+            }
+        }
+
+        function exit() {
+            mainDiv.className = mainDiv.className.replace(' focused', '');
+                // You can add things here, for example, changing images ! (Part 2 : resetting to first one)
+                // document.getElementById('coolimg').src = "/t/kuurp.nekoweb.org/img1.png";
+        }
+
+        mainDiv.onmouseenter = function() {
+            enter();  
+        };
+        mainDiv.onmouseleave = function() {
+            exit();
+        };
+
+        enter(); // Necessary because mouse is already in on load
+
+        var mainDiv = document.getElementById('ATile');
+        var cursor = document.querySelector('.cursor');
+
+       
+
+        function move(event) {
+             var rect = mainDiv.getBoundingClientRect();
+            var localX = event.clientX - rect.left;
+            var localY = event.clientY - rect.top;
+            cursor.style.left = localX + 'px';
+            cursor.style.top = localY + 'px';
+        }
+
+        mainDiv.onmousemove = function(event) {
+            move(event);
+        };
+</script>
+</body>
+</html>

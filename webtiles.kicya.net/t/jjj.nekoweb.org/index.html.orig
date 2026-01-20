@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+    <style>img {
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+}
+</style>
+    <body>
+        <img src="/t/jjj.nekoweb.org/cat.webp">
+    </body>
+</html>

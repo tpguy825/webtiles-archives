@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: url("/t/exentio.sexy/./wall.gif");
+}
+
+.planet {
+  margin: auto;
+}
+</style>
+</head>
+<body>
+    <a src="https://exentio.sexy" target="_blank"><img src="/t/exentio.sexy/./planet.gif"></a>
+</body>
+</html>

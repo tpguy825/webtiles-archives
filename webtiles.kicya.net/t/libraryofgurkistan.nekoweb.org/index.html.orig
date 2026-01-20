@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    
+    <style>a {
+  color: #10c8f0;
+  text-shadow: .5px .75px #406090, .5px .75px 1.5px #406090;
+  text-decoration-line: none;
+}
+
+.article-80, .article-60, .article-40 {
+  float: left;
+  text-align: center;
+  background: #003060;
+  border: 2px solid #001020;
+  flex-direction: column;
+  height: auto;
+  min-height: 20px;
+  margin: 5px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px #ffffff26;
+}
+
+.article-80 {
+  width: calc(80% - 14px);
+}
+
+.article-60 {
+  width: calc(60% - 14px);
+}
+
+.article-40 {
+  width: calc(40% - 14px);
+}
+
+.article-80-scr, .article-60-scr, .article-40-scr {
+  float: left;
+  text-align: center;
+  background: #003060;
+  border: 2px solid #001020;
+  flex-direction: column;
+  min-height: 1em;
+  margin: 5px;
+  display: flex;
+  position: relative;
+  overflow: scroll;
+  box-shadow: 2px 2px 2px #ffffff26;
+}
+
+.article-80-scr {
+  width: calc(80% - 14px);
+}
+
+.article-60-scr {
+  width: calc(60% - 14px);
+}
+
+.article-40-scr {
+  width: calc(40% - 14px);
+}
+
+.tile-body {
+  color: #dbdbdb;
+  background: linear-gradient(#102545, #000);
+  width: 100%;
+  font-family: helvetica;
+}
+
+.container {
+  z-index: 1;
+  flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+html, .tile-body {
+  min-height: 100%;
+}
+
+h1 {
+  color: #c0ffd8;
+  text-shadow: 1.5px -1.5px #688078, 3px -3px 1.25px #345878;
+  font-size: 20px;
+}
+
+h2 {
+  color: #b8f8d0;
+  text-shadow: 1.25px -1.25px #607870, 2.5px -2.5px 1px #305070;
+  font-size: 17px;
+}
+
+h3 {
+  color: #b0f0c8;
+  text-shadow: 1.1px -1.1px #587068, 2.2px -2.2px .875px #2b4868;
+  font-size: 15px;
+}
+
+h4 {
+  color: #abebc4;
+  text-shadow: 1px -1px #506860, 2px -2px .75px #284060;
+  font-size: 10px;
+}
+
+h1, h2, h3, h4 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+hr {
+  color: #6090b0;
+  background-color: #6090b0;
+  border: none;
+  width: 100%;
+  height: 2px;
+}
+
+.hrbold {
+  color: #6090b0;
+  background-color: #6090b0;
+  border: none;
+  width: 100%;
+  height: 2.5px;
+}
+
+.list {
+  margin-left: 1vw;
+  margin-right: 1vw;
+  line-height: 1.125;
+}
+
+p {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.vertical-line {
+  z-index: 1;
+  margin: 0 auto;
+  transform: rotate(180deg);
+}
+</style>
+    <style>a {
+  transition: all .33s;
+}
+
+a:hover {
+  color: #38f0ff;
+  text-shadow: .5px .75px 2.5px #406090;
+  font-weight: bold;
+}
+
+a > img {
+  transition: all .33s;
+}
+
+a > img:hover {
+  filter: brightness(115%);
+  z-index: 25;
+  position: relative;
+  bottom: -5px;
+  left: -2.5px;
+  transform: skew(2.5deg)rotate(5deg)translate(2.5%, -10%);
+}
+
+.reload:hover a {
+  color: #0ff;
+  text-shadow: 0 0 .75px #005050, 0 0 1px #006060, 0 0 2px #105050, 0 0 4px #204040;
+}
+
+.topnav img:hover {
+  filter: brightness(115%);
+  z-index: 51;
+  position: relative;
+  bottom: -5px;
+  left: -2.5px;
+  transform: skew(2.5deg)rotate(5deg)translate(2.5%, -10%);
+}
+
+@media only screen and (width <= 896px) {
+  .topnav img:hover {
+    filter: brightness(110%);
+    z-index: 51;
+    position: relative;
+    bottom: -3px;
+    left: -1.5px;
+    transform: skew(2.5deg)rotate(5deg)translate(2.5%, -10%);
+  }
+}
+</style>
+    <style>.hr-1 {
+  width: 86%;
+  margin-left: 11%;
+  position: relative;
+  top: 6px;
+}
+
+.hr-2 {
+  width: 72%;
+  margin-left: 2%;
+  position: relative;
+  top: 183px;
+}
+
+.hr-3 {
+  width: 83%;
+  margin-left: 3%;
+  position: relative;
+  top: -3px;
+}
+
+.hello-m {
+  color: #40ffff;
+  letter-spacing: -.033em;
+  text-shadow: -3px -2px .25px #28a0a8, -6px -4px .5px #187890, -9px -6px 1.25px #085878, -12px -8px 2px #044070, -15px -10px 3px #002860;
+  font-family: Times New Roman;
+}
+
+.h-mortal {
+  color: #40ffff;
+  letter-spacing: -.033em;
+  text-shadow: 3px -2px .25px #28a0a8, 6px -4px .5px #187890, 9px -6px 1.25px #085878, 12px -8px 2px #044070, 15px -10px 3px #002860;
+  font-family: Times New Roman;
+}
+
+.hello-m-H:hover, .hello-m-E:hover, .hello-m-L1:hover, .hello-m-L2:hover, .hello-m-O:hover {
+  filter: brightness(115%);
+  text-shadow: -3px -2px .25px #28a0a8, -6px -4px .5px #187890, -9px -6px 1.25px #085878, -12px -8px 2px #044070, -15px -10px 3px #002860, -18px -12px 4px #002050;
+  position: relative;
+  bottom: -5px;
+  left: 2.5px;
+}
+
+.h-mortal-M:hover, .h-mortal-O:hover, .h-mortal-R:hover, .h-mortal-T:hover, .h-mortal-A:hover, .h-mortal-L:hover {
+  filter: brightness(115%);
+  text-shadow: 3px -2px .25px #28a0a8, 6px -4px .5px #187890, 9px -6px 1.25px #085878, 12px -8px 2px #044070, 15px -10px 3px #002860, 18px -12px 4px #002050;
+  position: relative;
+  bottom: -5px;
+  left: -2.5px;
+}
+
+#hellomortal p {
+  letter-spacing: 2px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.article-80, .article-60, .article-40 {
+  & p {
+    text-align: left;
+  }
+
+  z-index: 4;
+}
+
+#top {
+  margin-top: 16.5px;
+  margin-left: -161px;
+}
+
+#main {
+  margin-left: 25px;
+}
+
+.vertical-line {
+  background-color: #70a0c0;
+  border: 1px solid #000;
+  width: 2px;
+}
+
+#vl-1 {
+  z-index: 1;
+  height: 180px;
+  position: absolute;
+  top: 51px;
+  left: 4%;
+}
+
+#vl-2 {
+  z-index: 1;
+  height: 130px;
+  position: absolute;
+  top: 34px;
+  left: 94%;
+}
+
+#vl-3 {
+  z-index: 1;
+  height: 186%;
+  position: absolute;
+  top: 12px;
+  left: 97%;
+}
+
+#hr-offset-1 {
+  position: relative;
+  top: 3.5px;
+}
+
+img {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+</style>
+  </head>
+  <body>
+      <img src="/t/libraryofgurkistan.nekoweb.org/layover.png">
+      <br>
+      <br>
+      <hr class="hr-1">
+      <hr class="hr-2">
+      <hr class="hr-3">
+      <hr class="vertical-line" id="vl-2">
+      <hr class="vertical-line" id="vl-3">
+      <div class="article-80" id="top">
+          <p>
+              <b>hi, i'm library! i do stuff</b>
+          </p>
+      </div>
+      <div class="article-80" id="main">
+          <p>
+              you should visit my site
+              <br>its goog!!
+              <br>lots of random pages!
+          </p>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>                                                                                                                                                                                                                               
+<html lang="en">
+    <head>
+        <style>.tile-body {
+  color: #111;
+  background-image: url("/t/yefreitor.com/1.png");
+  animation: 8s linear infinite marquee;
+}
+
+@keyframes marquee {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 128px 64px;
+  }
+}
+
+.moe {
+  z-index: 15;
+  max-height: 250px;
+  transition: all .3s ease-in-out;
+  position: absolute;
+  bottom: -80px;
+  right: -30px;
+}
+
+.tile-body:hover .moe {
+  transition: all .3s ease-in-out;
+  bottom: -135px;
+  right: -40px;
+}
+
+.border {
+  z-index: 10;
+  width: 100%;
+  transition: all .3s;
+  position: absolute;
+}
+
+.tile-body:hover .border {
+  opacity: .5;
+  transition: all .3s;
+}
+
+.parking {
+  z-index: 12;
+  background: #fff;
+  border: 5px double pink;
+  width: 70%;
+  height: 100px;
+  position: absolute;
+  top: 115px;
+  left: 15%;
+}
+
+.textbox {
+  color: #000;
+  text-align: center;
+  letter-spacing: .1px;
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  width: 70%;
+  font-weight: bolder;
+  position: absolute;
+  top: 25px;
+  left: 15%;
+}
+</style>
+    </head>
+	<body>
+	<img src="/t/yefreitor.com/cursor chan.png" class="moe">
+	<img src="/t/yefreitor.com/bg2.png" class="border">
+        <div class="parking">
+            
+        </div>
+    	
+        <div class="textbox">
+            <p>
+               cursor parking lot! leave your cursor here if you're away.
+            </p>
+        </div>
+        
+        
+    </body>
+</html>

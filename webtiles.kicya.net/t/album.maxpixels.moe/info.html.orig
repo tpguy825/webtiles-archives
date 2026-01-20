@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  text-align: center;
+  background-color: #fcf5e3;
+  background-image: url("/t/album.maxpixels.moe/background.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+  overflow: scroll;
+}
+</style>
+</head>
+<body>
+    <a href="/t/album.maxpixels.moe/">← back</a>
+    <h1>
+        info
+    </h1>
+    <p>
+        <b>how do i hop on the trend?</b> claim a tile connected to this corner, upload an image, then add the <code>img</code> to your index. Make sure you set your css to have no margin and 100% width on the imgs!
+    </p>
+    <p>
+        <b>i dont have an extra website/domain to join D:</b> check out <a href="https://my.liberaforms.org/albumheads" target="_blank">this form</a>
+    </p>
+    <p>
+        <b>are single covers allowed?</b> love is love -unicode.nekoweb.org (yes singles are allowed)
+    </p>
+    <p>
+        <b>can i shuffle my albums?</b> you can! i think it will be really neat!
+    </p>
+    <p>
+        <b>i have another question!</b> you can find me @maxpixels in the nekoweb discord server!
+    </p>
+    <br>
+    <br>
+    <br>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

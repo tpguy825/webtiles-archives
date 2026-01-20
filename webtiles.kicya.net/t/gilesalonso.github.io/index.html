@@ -273,7 +273,6 @@ canvas {
         if (currentState !== 0) return;
         currentState = 1;
         
-        // Hide Attract, Show Game
         startZone.className = "hidden";
         heroLayer.className = "hidden";
         gameLayer.className = "";
@@ -282,7 +281,7 @@ canvas {
         setTimeout(startGame, 50);
     });
 
-    // B. Back to Menu (Restart Animation)
+    // B. Back to Menu
     safeAdd(btnRestart, 'click', function() {
         resetToMenu();
     });
@@ -296,26 +295,18 @@ canvas {
         if(heroLayer) heroLayer.className = "";
         if(startZone) startZone.className = "";
 
-        // Stop Game Loop
+        // Stop Game
         if(loopTimer) clearTimeout(loopTimer);
 
-        // Reset & Restart Attract Pattern
-        t_math = Math.random() * 4;
-        pat_i = 0; 
-        pat_j = 0;
-        
-        if(actx) {
-            actx.fillStyle = '#000';
-            actx.fillRect(0, 0, W, H);
-        }
-        
+        // Reset Attract Variables
+        initAttractVariables();
         loopAttract();
     }
 
-    // Controls
+    // Inputs
     var keys = { left:false, right:false, up:false, fire:false };
 
-    // Keyboard (Attached to CANVAS to avoid document errors)
+    // Keyboard
     if (gameCanvas) {
         gameCanvas.addEventListener('keydown', function(e) {
             if (currentState !== 1) return;
@@ -351,49 +342,82 @@ canvas {
     bindTouch('btnThrust','up');
     bindTouch('btnFire','fire');
 
-    // --- 2. ATTRACT MODE (BASIC Pattern) ---
+    // --- 2. ATTRACT MODE (ORIGINAL RECURSIVE FORMULA) ---
     
-    var t_math = Math.random() * 4;
+    // State variables must persist between frames for the shape to connect
+    var t_math = 0;
     var pat_i = 0, pat_j = 0;
+    var x_val = 0, u_val = 0, v_val = 0;
+
+    function initAttractVariables() {
+        t_math = Math.random() * 4;
+        pat_i = 0; 
+        pat_j = 0;
+        x_val = 0; 
+        u_val = 0; 
+        v_val = 0;
+        
+        // Clear screen
+        if(actx) {
+            actx.fillStyle = '#000';
+            actx.fillRect(0, 0, W, H);
+        }
+    }
     
     function loopAttract() {
         if (currentState !== 0) return;
         if (!actx) return;
 
-        // FIXED: Scale increased to 58 (was 40)
-        var scale = 58; 
+        // SCALE: 42 fills the 250px box nicely with this specific math
+        var scale = 42; 
         var r = (2 * Math.PI) / 235;
         
+        // Draw 400 dots per frame
         for (var k = 0; k < 400; k++) {
             if (pat_i >= 250) break;
             
-            // Math from your working version
-            var u = Math.sin(pat_i + Math.cos(pat_j * 0.1)) + Math.sin(r * pat_i + t_math);
-            var v = Math.cos(pat_i + Math.sin(pat_j * 0.1)) + Math.cos(r * pat_i + t_math);
+            // --- THE ORIGINAL FORMULA ---
+            // Relying on previous state of x_val, u_val, v_val
+            var new_u = Math.sin(pat_i + v_val) + Math.sin(r * pat_i + x_val);
+            var new_v = Math.cos(pat_i + v_val) + Math.cos(r * pat_i + x_val);
+            var new_x = new_u + t_math;
             
-            var px = Math.floor((W/2) + scale * u);
-            var py = Math.floor((H/2) + scale * v);
+            // Update state
+            u_val = new_u;
+            v_val = new_v;
+            x_val = new_x;
+            
+            var px = Math.floor((W/2) + scale * u_val);
+            var py = Math.floor((H/2) + scale * v_val);
 
             if (px >= 0 && px < W && py >= 0 && py < H) {
                 var rr = Math.floor((pat_i * 3) % 255);
                 var gg = Math.floor((pat_j * 2) % 255);
-                actx.fillStyle = 'rgb(' + (rr+50) + ',' + (gg+50) + ',255)';
+                var bb = Math.floor((255 - (pat_i + pat_j) / 2) % 255);
+                
+                // Color boost
+                rr = Math.min(255, rr + 50);
+                gg = Math.min(255, gg + 50);
+                bb = Math.min(255, bb + 20);
+                
+                actx.fillStyle = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
                 actx.fillRect(px, py, 1, 1);
             }
             
             pat_j++;
-            if (pat_j >= 250) { pat_j = 0; pat_i++; }
+            if (pat_j >= 250) { 
+                pat_j = 0; 
+                pat_i++; 
+            }
         }
         
         if (pat_i >= 250) {
-            // Wait 2 seconds then restart pattern
+            // Pause 3 seconds, then restart with new shape
             loopTimer = setTimeout(function() {
                 if (currentState !== 0) return;
-                if(actx) { actx.fillStyle = '#000'; actx.fillRect(0,0,W,H); }
-                t_math = Math.random() * 4;
-                pat_i = 0; pat_j = 0;
+                initAttractVariables();
                 loopAttract();
-            }, 2000);
+            }, 3000);
         } else {
             loopTimer = setTimeout(loopAttract, 20);
         }
@@ -559,8 +583,7 @@ canvas {
     }
 
     // --- INIT ---
-    // Start Attract Loop
-    t_math = Math.random() * 4;
+    initAttractVariables();
     loopAttract();
 
 })();</script>

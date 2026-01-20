@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    
+    <style>@font-face {
+  font-family: Adwaita Sans;
+  src: local(Adwaita Sans Regular), url("/t/breakgim.me/AdwaitaSans-Regular-subset.ttf") format("truetype");
+  font-display: fallback;
+  unicode-range: U+20-7E;
+}
+
+.tile-body {
+  user-select: none;
+  margin: 0;
+  font-family: Adwaita Sans, system-ui, sans-serif;
+}
+
+main {
+  background-color: #303030;
+  flex-direction: column;
+  min-height: 250px;
+  display: flex;
+  overflow: hidden;
+}
+
+header-bar {
+  color: #fff;
+  background-color: #303030;
+  justify-content: center;
+  align-items: center;
+  min-height: 47px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+}
+
+window-content {
+  background-color: #383838;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+window-content img {
+  border-radius: 100%;
+  width: 10em;
+  height: 10em;
+  display: block;
+}
+
+header-bar img {
+  background-color: #38383b;
+  border-radius: 100%;
+  margin: 9px;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+}
+
+header-bar img:hover {
+  background-color: #4d4d51;
+}
+
+header-bar img:active {
+  background-color: #6c6c6f;
+}
+</style>
+</head>
+
+<body>
+    <main>
+        <header-bar>
+            <span>breakgimme</span>
+            <img src="/t/breakgim.me/window-close-symbolic.svg">
+        </header-bar>
+        <window-content>
+            <a href="https://breakgim.me" target="_blank"><img src="/t/breakgim.me/avatar.webp"></a>
+        </window-content>
+    </main>
+</body>
+
+</html>

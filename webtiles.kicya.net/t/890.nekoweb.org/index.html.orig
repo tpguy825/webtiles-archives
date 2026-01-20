@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  background-image: url("/t/890.nekoweb.org/img/namescroll.gif");
+  margin: auto;
+  font-family: ＭＳ Ｐゴシック, Osaka;
+}
+
+.footer {
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+  width: 100%;
+  font: x-small ＭＳ Ｐゴシック, Osaka;
+  text-decoration: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+a:link {
+  color: #87cefa;
+}
+
+a:visited {
+  color: red;
+}
+
+a {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+  <br>
+  <div align="center">
+
+    
+    <table width="230" border="0" cellspacing="0" cellpadding="5" bgcolor="black">
+      <tbody>
+        <tr>
+          <td valign="top">
+
+          
+          <table width="220" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+              <tr>
+                <td bgcolor="white">
+                  <marquee>
+                    <font color="black">
+                    WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS WHERE IT ALL BEGINS WHERE IT ALL ENDS
+                    </font>
+                  </marquee>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+
+         
+          
+          <table width="220" border="0" cellspacing="0" cellpadding="5" bgcolor="white">
+            <tbody>
+              <tr>
+                <td>
+                  <div align="center">
+                    <table width="210" border="0" cellspacing="0" cellpadding="5" bgcolor="black">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <img src="/t/890.nekoweb.org/img/890logo.png" height="40"> 
+                          </td>
+                          <td>
+                            WELCOME TO THE OFFICIAL 890 ARTS CORPORATION WEBTILE.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table> 
+          		  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div align="center">
+                    <table width="210" border="0" cellspacing="0" cellpadding="5" bgcolor="black">
+                      <tbody>
+                        <tr>
+                          <td>
+                              <div align="center">
+                                  WE ARE A VANITY ART CORPORATION RUN BY LAMEFOXTROT (<a href="https://lamefoxtrot.tumblr.com/" target="_blank">@lamefoxtrot</a>)
+                              </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table> 
+          		  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+    
+  
+    </div>
+</body>
+</html>

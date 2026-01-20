@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.container {
+  border: 1px solid #737373;
+  overflow: hidden;
+}
+
+.left {
+  border-right: none;
+}
+
+.right {
+  border-left: none;
+}
+
+.main {
+  width: 249px;
+  height: 249px;
+  margin-right: 4px;
+  position: relative;
+}
+
+.singular .main {
+  border-radius: 6px 6px 3px 3px;
+  width: 250px;
+  height: 250px;
+}
+
+.topbar {
+  cursor: move;
+  background: linear-gradient(#f3f3f2 0%, #e8e8e7 100%);
+  border-radius: 6px 6px 0 0;
+  height: 20px;
+  padding: 4px;
+  display: flex;
+}
+
+.right .topbar {
+  border-radius: 0 6px 0 0;
+  padding-left: .5px;
+}
+
+.left .topbar {
+  border-radius: 6px 0 0;
+  padding-right: .5px;
+}
+
+.top.left {
+  border-radius: 6px 0 0;
+}
+
+.top.right {
+  border-radius: 0 6px 0 0;
+}
+
+.bottom.container {
+  border-top: none;
+}
+
+.top.container {
+  border-bottom: none;
+}
+
+.bottom.left.container {
+  border-radius: 0 0 0 3px;
+}
+
+.bottom.right.container {
+  border-radius: 0 0 3px;
+}
+
+.topbar span.midtext {
+  color: #8b8e8f;
+  margin: auto;
+  padding-bottom: 1px;
+  font-family: sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+}
+
+.threebtns {
+  cursor: pointer;
+}
+
+.threebtns img {
+  image-rendering: pixelated;
+  border-radius: 25%;
+  margin: 3px 2px 0;
+  padding: 2px;
+}
+
+.threebtns img:hover {
+  background-color: #e4e4e4;
+}
+
+.content {
+  background-color: #fff;
+  border: 2px solid #e8e8e7;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  max-width: 247px;
+  height: 221px;
+  padding: 0 6px;
+  position: absolute;
+  top: 28px;
+}
+
+.top .content {
+  border-bottom: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.bottom .content {
+  height: 247px;
+}
+
+.top.left .content {
+  border-right: 0;
+}
+
+.top.right .content {
+  border-left: 0;
+}
+
+.bottom.left .content {
+  border-top: 0;
+  border-right: 0;
+  border-radius: 0 0 0 3px;
+  padding: 0;
+  top: 0;
+}
+
+.bottom.right .content {
+  border-top: 0;
+  border-left: 0;
+  border-radius: 0 0 3px;
+  padding: 0;
+  top: 0;
+}
+</style>
+    
+</head>
+<body style="margin:0">
+
+		<div style="width: 249px; height: 249px; margin-right:1px" class="container top right">
+			<div class="main">
+				<div class="topbar">
+					<span class="midtext" style="margin-left: 0">rner</span>
+					<div class="threebtns">
+						<img src="/t/corner-tr.tpguy825.uk/../tpguy825.uk/arrow.png" alt>
+						<img src="/t/corner-tr.tpguy825.uk/../tpguy825.uk/maximize.png" alt>
+						<img src="/t/corner-tr.tpguy825.uk/../tpguy825.uk/close.png" alt>
+					</div>
+				</div>
+				<div class="content">
+					<img src="/t/corner-tr.tpguy825.uk/tr.jpg" width="247" height="221" alt="cat top right">
+				</div>
+			</div>
+		</div>   
+</body>
+</html>

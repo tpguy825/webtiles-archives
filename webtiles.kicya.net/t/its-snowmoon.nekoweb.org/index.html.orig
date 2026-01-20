@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #e5d9f2;
+}
+
+.main {
+  border: 4px solid #cdc1ff;
+  max-height: 242px;
+  overflow: hidden;
+}
+
+.image-container img {
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+  margin-bottom: -20px;
+  padding-top: 10px;
+}
+
+.icon img {
+  width: 30%;
+  position: absolute;
+  top: 53px;
+  right: 33px;
+}
+
+.ave img {
+  width: 30%;
+  position: absolute;
+  bottom: 4px;
+  left: 85px;
+}
+
+.sou img {
+  width: 30%;
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+}
+
+.xil img {
+  width: 30%;
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+}
+</style>
+</head>
+<body>
+    <a href="https://its-snowmoon.nekoweb.org" target="_blank">
+    <div class="main">
+    <div class="image-container">
+        <img src="/t/its-snowmoon.nekoweb.org/images/text.gif">
+    </div>
+    <p><img src="/t/its-snowmoon.nekoweb.org/images/me.png"></p>
+    <div class="icon">
+        <img src="/t/its-snowmoon.nekoweb.org/images/icon.gif">
+    </div>
+    <div class="xil">
+        <img src="/t/its-snowmoon.nekoweb.org/images/xilonen.gif">
+    </div>
+    <div class="sou">
+        <img src="/t/its-snowmoon.nekoweb.org/images/soukaku.gif">
+    </div>
+    <div class="ave">
+        <img src="/t/its-snowmoon.nekoweb.org/images/aventurine.gif">
+    </div>
+    </div>
+    </a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

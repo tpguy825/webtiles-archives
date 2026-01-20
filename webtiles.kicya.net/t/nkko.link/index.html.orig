@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Space Grotesk;
+  src: url("/t/nkko.link/SpaceGrotesk.ttf");
+}
+
+.tile-body {
+  color: #e0def4;
+  text-align: center;
+  background-color: #191724;
+  margin: 0;
+  font-family: Space Grotesk, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+}
+
+.main {
+  background-color: #26233a;
+  border-radius: 15px;
+  flex-direction: column;
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+}
+
+h1 {
+  color: #191724;
+  background-color: #ebbcba;
+  border-radius: 10px 0 0 10px;
+  align-self: flex-end;
+  width: 90%;
+  margin-top: 10px;
+  margin-right: -5px;
+  padding: 5px;
+}
+
+a {
+  color: #ebbcba;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline wavy;
+}
+</style>
+</head>
+<body>
+    <div class="main">
+        <h1>
+            nkko
+        </h1>
+        <p>
+            building indie softwares for indie web developers
+        </p>
+        <a href="https://deploy.nekoweb.org" target="_blank">deploy2nekoweb</a>
+        <a href="https://cmt.nkko.link" target="_blank">nekomment/jcomment</a>
+        <a href="https://waf.moe/blog/nkko" target="_blank">wafmoe</a>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

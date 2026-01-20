@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0;
+
+  & .audio-player {
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+</style>
+</head>
+<body>
+<div class="image-container">
+    <img src="/t/dandrewd.nekoweb.org/images.png" style="height:250px">
+    <audio muted loop preload="metadata">
+        
+        Your browser does not support the audio element.
+    </audio>
+</div>
+</body>
+</html>

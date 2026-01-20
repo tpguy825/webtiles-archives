@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  font-family: basiic, sans-serif;
+  font-size: 13px;
+}
+
+@font-face {
+  font-family: planet;
+  src: url("/t/testtubesterone.nekoweb.org/blocked") format("truetype");
+}
+
+@font-face {
+  font-family: basiic;
+  src: url("/t/testtubesterone.nekoweb.org/blocked") format("truetype");
+}
+
+@keyframes floatCircular {
+  0% {
+    transform: translate(-50%, -50%)translateX(0)translateY(0)rotate(0);
+  }
+
+  25% {
+    transform: translate(-50%, -50%)translateX(5px)translateY(-5px)rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%)translateX(0)translateY(-10px)rotate(0);
+  }
+
+  75% {
+    transform: translate(-50%, -50%)translateX(-5px)translateY(-5px)rotate(-1deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%)translateX(0)translateY(0)rotate(0);
+  }
+}
+
+h1 {
+  color: #000;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.image-container {
+  width: 600px;
+  height: 400px;
+  position: relative;
+}
+
+.bkg {
+  filter: saturate(125%);
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dog {
+  z-index: 1;
+  width: 70%;
+  margin: auto;
+  padding-top: 3px;
+  animation: 6s ease-in-out infinite floatCircular;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.stars {
+  pointer-events: none;
+  z-index: 0;
+  background: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.star {
+  opacity: 0;
+  background: #fff;
+  border-radius: 50%;
+  width: 2px;
+  height: 2px;
+  animation: 2s ease-in-out infinite twinkle;
+  position: absolute;
+  box-shadow: 0 0 6px #fff;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+</style>
+</head>
+<body>
+    	<div class="stars"></div>
+		<img src="/t/testtubesterone.nekoweb.org/tg.png" class="dog">  
+    	<img src="/t/testtubesterone.nekoweb.org/space.png" class="bkg">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+
+function createStars() {
+  var starCount = 50; // number of stars
+  var starsContainer = document.querySelector('.stars');
+
+  for (var i = 0; i < starCount; i++) {
+    var star = document.createElement('div');
+    star.className = 'star';
+
+    star.style.top = Math.random() * 100 + '%';
+    star.style.left = Math.random() * 100 + '%';
+
+    var size = Math.random() * 1.5 + 0.5; // between 0.5px and 2px
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    star.style.animationDelay = Math.random() * 2 + 's';
+
+    starsContainer.appendChild(star);
+  }
+}
+
+// Run createStars after DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', createStars);
+} else {
+  createStars();
+}</script>
+</body>
+</html>

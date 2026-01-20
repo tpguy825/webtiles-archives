@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/fourhazzy.nekoweb.org/smoothradialrainbow.jpg");
+  background-position: 50%;
+}
+
+p {
+  color: #000;
+}
+
+h1 {
+  color: #fff;
+}
+</style>
+</head>
+<body>
+    <h1 style="text-shadow: 0px 0px 5px black;"><center>~----> hello &lt;----~</center></h1>
+    <p>idk what i'm gonna do with this but hello</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

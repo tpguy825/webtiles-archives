@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+iframe {
+  display: none;
+}
+
+.tile-body {
+  text-align: center;
+}
+
+#free {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+#free > p {
+  text-align: center;
+  color: #777;
+  user-select: none;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.tile-body > #hidden > h1 {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+</head>
+<body>
+    <div id="free"><p>Free tile -1, 0</p></div>
+    <div id="hidden" style="display: none;">
+        <img src="/t/daydun.com/1.gif" width="144" height="48">
+        <img src="/t/daydun.com/2.gif" width="60" height="70">
+        <img src="/t/daydun.com/3.gif" width="60" height="70">
+        <img src="/t/daydun.com/2.gif" width="60" height="70">
+        <img src="/t/daydun.com/2.gif" width="60" height="70">
+        <img src="/t/daydun.com/4.gif" width="60" height="70">
+        <img src="/t/daydun.com/3.gif" width="60" height="70">
+        <img src="/t/daydun.com/4.gif" width="60" height="70">
+        <h1>You just got TILED!!!</h1>
+    </div>
+    <script type="text/tilescript">
+        document.getElementById("free").style.display = "none";
+        document.getElementById("hidden").style.display = "";
+        
+        document.querySelector("h1").setAttribute("style", "text-shadow: 0 0 4px #fff, 0 0 4px #fff, 0 0 4px #fff !important; animation: 1s steps(2, start) 0s infinite normal none running blink !important");
+        
+        var audio = document.createElement("audio");
+        audio.src = "/hampster.mp3";
+        audio.autoplay = true;
+        document.body.appendChild(audio);
+    </script>
+</body>
+</html>

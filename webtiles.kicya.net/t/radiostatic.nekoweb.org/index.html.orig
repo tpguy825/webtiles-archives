@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("/t/radiostatic.nekoweb.org/trustceremony.jpg") 0 0 / 250px;
+}
+
+.album {
+  text-align: center;
+  display: none;
+}
+
+.album:hover {
+  text-align: center;
+  display: block;
+}
+</style>
+</head>
+<body>
+    <div id="album">
+        <video width="100" preload="metadata">
+            
+        </video>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

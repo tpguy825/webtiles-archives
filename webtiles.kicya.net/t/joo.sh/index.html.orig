@@ -1,0 +1,131 @@
+<!DOCTYPE html>                                                                                                                                                                 
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  image-rendering: pixelated;
+  background-image: url("/t/joo.sh/brick.png");
+  font-family: monospace;
+  font-size: 14px;
+  position: relative;
+}
+
+#plasma {
+  background-image: url("/t/joo.sh/bg.png");
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+main {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+header {
+  z-index: 9;
+  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(1px 1px #0000004d);
+  height: 33px;
+  position: absolute;
+  top: 0;
+}
+
+.akko {
+  z-index: 100;
+  background-image: url("/t/joo.sh/torowingings.gif");
+  height: 67px;
+  position: absolute;
+  bottom: 61px;
+  left: 55px;
+  transform: scaleX(-1);
+}
+
+#a {
+  position: absolute;
+  top: 98px;
+  left: 194px;
+}
+
+#b {
+  position: absolute;
+  top: 45px;
+  left: 84px;
+}
+
+#c {
+  position: absolute;
+  top: 48px;
+  left: 198px;
+}
+
+#d {
+  position: absolute;
+  top: 97px;
+  left: 151px;
+}
+
+#e {
+  position: absolute;
+  top: 90px;
+  left: 96px;
+}
+
+#f {
+  position: absolute;
+  top: 113px;
+  left: 38px;
+}
+
+#g {
+  position: absolute;
+  top: 47px;
+  left: 156px;
+}
+
+#h {
+  position: absolute;
+  top: 54px;
+  left: 24px;
+}
+
+a > img {
+  transition-duration: .2s;
+}
+
+.link-wrapper > .link > img:hover {
+  filter: drop-shadow(0 0 1px #222768) drop-shadow(0 0 1px #42467e) drop-shadow(0 0 1px #72759f) drop-shadow(0 0 1px #a1a3bf) drop-shadow(0 0 1px #d0d1df) drop-shadow(1px 1px #0000004d);
+}
+
+header > a > img:hover {
+  transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<main>
+    <div id="plasma">
+    <header><a class="link" href="https://joo.sh/" target="_blank"><img id src="/t/joo.sh/JOOSHLOGO.png"></a></header>
+    <div class="link-wrapper">
+        <a class="link" href="https://joo.sh/about" target="_blank"><img id="a" src="/t/joo.sh/1.png"></a>
+        <a class="link" href="https://joo.sh/gallery" target="_blank"><img id="b" src="/t/joo.sh/2.png"></a>
+        <a class="link" href="https://joo.sh/journal" target="_blank"><img id="c" src="/t/joo.sh/3.png"></a>
+        <a class="link" href="https://joo.sh/gallery" target="_blank"><img id="d" src="/t/joo.sh/4.png"></a>
+        <a class="link" href="https://joo.sh/" target="_blank"><img id="e" src="/t/joo.sh/6.png"></a>
+        <a class="link" href="https://joo.sh/" target="_blank"><img id="f" src="/t/joo.sh/8.png"></a>
+        <a class="link" href="https://joo.sh/gallery" target="_blank"><img id="g" src="/t/joo.sh/9.png"></a>
+        <a class="link" href="https://joo.sh/gallery" target="_blank"><img id="h" src="/t/joo.sh/10.png"></a>
+    </div>  
+        </div>
+    
+    <img class="akko" src="/t/joo.sh/akkobig.png">
+</main>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  margin: 0;
+}
+
+div {
+  place-content: center;
+  display: flex;
+}
+
+.tile-body {
+  background: url("/t/buglin.neocities.org/PokemonVillageplaceholder.png");
+}
+</style>
+</head>
+<body>
+    <div>
+        <img src="/t/buglin.neocities.org/HercBeetle.png">
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

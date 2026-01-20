@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #f0f0f0;
+}
+</style>
+</head>
+<body>
+   <img src="/t/junocastle.nekoweb.org/rick.gif" style="width:100%;height:100%;">
+    <h4>Get rickrolled in small 26</h4>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

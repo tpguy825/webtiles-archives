@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #000;
+  text-shadow: 1px 1px #fff;
+  background-color: #3fb0c0;
+  background-image: url("/t/oceanmew.com/water2.webp");
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  display: flex;
+}
+
+a {
+  color: #000;
+  text-shadow: 1px 1px #fff;
+  text-decoration: none;
+}
+
+.god {
+  justify-content: center;
+  margin: 0 auto;
+  display: flex;
+}
+
+.mew {
+  justify-content: center;
+  font-size: 117%;
+  display: flex;
+}
+
+.buttons {
+  background-image: url("/t/oceanmew.com/water.jpg");
+  border-style: inset;
+  border-color: #fff;
+  border-radius: 1px;
+  justify-content: center;
+  align-items: center;
+  width: 88px;
+  height: 31px;
+  margin-top: 2px;
+  font-size: 85%;
+  display: flex;
+}
+
+.buttons:hover {
+  border-style: outset;
+}
+</style>
+</head>
+<body>
+    <div class="god">
+    </div>
+    <div class="mew">
+    <p>my home by the sea</p>
+    </div>
+<div class="buttons">
+    <a href="https://oceanmew.com/" target="_blank">oceanmew.com</a>
+    </div><div class="buttons">
+    <a href="https://oceanmew.com/blog" target="_blank">blog</a>
+       </div> <div class="buttons">
+    <a href="https://oceanmew.com/photos" target="_blank">photos</a>
+           </div> <div class="buttons">
+    <a href="https://oceanmew.com/shrine" target="_blank">shrine</a>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

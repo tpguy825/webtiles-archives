@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Swirly;
+  src: url("/t/sunnypeach.neocities.org/fonts/Swirlycurly.otf");
+}
+
+.tile-body {
+  color: #111;
+  text-align: center;
+  background-image: url("/t/sunnypeach.neocities.org/images/bg.jpg");
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #060d36;
+  text-shadow: 0 0 6px #fff, 0 0 10px #faebd7, 0 0 20px #faebd7, 0 0 30px #faebd7;
+  font-family: Swirly;
+  animation: 5s linear infinite blinkglow;
+}
+
+@keyframes blinkglow {
+  0% {
+    text-shadow: 0 0 6px #fff, 0 0 10px #faebd7, 0 0 20px #faebd7, 0 0 30px #faebd7;
+  }
+
+  50% {
+    text-shadow: 0 0 6px #fff;
+  }
+
+  100% {
+    text-shadow: 0 0 6px #fff, 0 0 10px #faebd7, 0 0 20px #faebd7, 0 0 30px #faebd7;
+  }
+}
+
+#lantern-left {
+  position: absolute;
+  top: -1vw;
+  left: -1.2vw;
+}
+
+#lantern-right {
+  width: 5vw;
+  position: absolute;
+  top: -1vw;
+  left: 9vw;
+}
+</style>
+</head>
+<body>
+    <h1>
+        Sunny's Corner
+    </h1>
+    <img src="/t/sunnypeach.neocities.org/images/lanterns3-dither.png" id="lantern-left">
+    <img src="/t/sunnypeach.neocities.org/images/lanterns4-dither.png" id="lantern-right">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

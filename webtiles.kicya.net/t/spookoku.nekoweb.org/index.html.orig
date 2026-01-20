@@ -1,0 +1,21 @@
+<div id="info">
+    <p>
+        Hi. sweats
+    </p>
+</div>
+
+<style>.tile-body {
+  background-image: url("/t/spookoku.nekoweb.org/mmmm.jpg");
+  width: 250px;
+  height: 250px;
+}
+
+#info {
+  opacity: 0;
+  transition: all .2s;
+}
+
+#info:hover {
+  opacity: 1;
+}
+</style>

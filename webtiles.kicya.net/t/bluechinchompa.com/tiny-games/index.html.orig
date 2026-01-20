@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/bluechinchompa.com/bluechinchompa.jpg");
+}
+
+.text {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</style>
+</head>
+    <style>.tile-body {
+  background-color: #9acd32;
+}
+</style>
+<body>
+    <img src="/t/bluechinchompa.com/HAPPY_GOOD_DAY.gif" width="250">
+
+    <p style="font-size: 0.7em; text-align: center;">Silly little games (like this world) in hacked together J*vaScr*pt or just HTML/CSS :3</p>
+  
+	<ul>
+        <li><a href="/t/bluechinchompa.com/tiny-games/the-game.html">The Game</a></li>
+    </ul>
+    
+    <hr>
+    
+    <p style="text-align: center;">
+        return to <a href="/t/bluechinchompa.com/index.html">index</a>
+    </p>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

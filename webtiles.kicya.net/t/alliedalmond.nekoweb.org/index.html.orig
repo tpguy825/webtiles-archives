@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+
+    <style>.tile-body {
+  background: linear-gradient(90deg, #2098a1 0%, #6418a3 100%);
+}
+</style>
+<body>
+    
+
+<form method="post" action="https://poll.pollcode.com/32563623" target="_blank"><div style="background-color:#0d3b77;padding:2px;width:168px;font-family:Verdana;font-size:small;color:#FFFFFF;background-image: url('https://i.postimg.cc/t47CHnzb/blue_stars.gif');box-shadow: 0px 0px 5px #888;"><div style="padding:2px 0px 4px 2px;"><strong>plushies or pooltoys?</strong></div><input type="radio" name="answer" value="1" id="answer325636231" style="float:left;" autocomplete="off"><label for="answer325636231" style="float:left;width:143px;">plushies</label><div style="clear:both;height:2px;"></div><input type="radio" name="answer" value="2" id="answer325636232" style="float:left;" autocomplete="off"><label for="answer325636232" style="float:left;width:143px;">pooltoys</label><div style="clear:both;height:2px;"></div><div align="center" style="padding:3px;"><input type="submit" value=" Vote " autocomplete="off">&nbsp;<input type="submit" name="view" value=" View " autocomplete="off"></div><div align="right" style="font-size:10px">pollcode.com <a href="https://pollcode.com/" target="_blank">free polls</a></div></div></form>
+
+<img src="/t/alliedalmond.nekoweb.org/ezgif-657679664214a4.gif" width="250" align="left">
+    </body>
+
+
+
+
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Free Pixel;
+  src: url("/t/dreamvalley.nekoweb.org/FreePixel.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Byte;
+  src: url("/t/dreamvalley.nekoweb.org/byte.ttf") format("truetype");
+}
+
+.tile-body {
+  color: #111;
+  background-image: url("/t/dreamvalley.nekoweb.org/cloudsbg.gif");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+}
+
+.unicorn {
+  content: url("/t/dreamvalley.nekoweb.org/amalthea.png");
+  height: 48vh;
+  position: absolute;
+  top: 4vh;
+  left: 10vh;
+}
+
+.title {
+  text-shadow: -2px -2px #98b3ff, 2px -2px #99a5d3, -2px 2px #98b3ff, 2px 2px #99a5d3;
+  color: azure;
+  font-family: Byte;
+  font-size: 6vh;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+    <div class="title">
+        DreamValley
+    </div>
+    <div class="menuscrn">
+        <a href="/t/dreamvalley.nekoweb.org/#">home</a>
+    </div>
+    <div class="unicorn"></div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

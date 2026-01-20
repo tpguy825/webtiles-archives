@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #181a1b;
+  background-image: url("/t/nawic.nekoweb.org/bg.png");
+  margin: 0;
+  animation: 1s linear infinite scroll;
+}
+
+@keyframes scroll {
+  0% {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 16px 16px;
+  }
+}
+
+.bg {
+  opacity: .8;
+  z-index: 2;
+  background-color: #052645;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.div1 {
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  font-family: Milk;
+  font-size: 30px;
+}
+
+@font-face {
+  font-family: Milk;
+  src: url("/t/nawic.nekoweb.org/MilkCake.otf");
+}
+
+@font-face {
+  font-family: Arcade;
+  src: url("/t/nawic.nekoweb.org/ARCADECLASSIC.TTF");
+}
+
+.boks {
+  text-align: center;
+  color: #ffa9db;
+  z-index: 4;
+  border: 2px solid #00ffd9;
+  border-top: none;
+  height: auto;
+  margin: auto;
+  padding: 0;
+  line-height: 3px;
+  position: relative;
+}
+
+.topbar {
+  color: #ffa9db;
+  text-align: left;
+  text-align: left;
+  z-index: 5;
+  background-color: #00008b;
+  background-image: url("/t/nawic.nekoweb.org/none");
+  border: 2px solid #00ffd9;
+  border-bottom-width: 1px;
+  border-radius: 0;
+  margin: auto;
+  padding: 7px;
+  font-family: Arcade;
+  font-size: 20px;
+  position: relative;
+}
+
+.eyecandy {
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.eyecandy:hover {
+  animation-name: rotate;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+    <div class="div1" style="">
+    	
+		<div class="boks" style="position: absolute; height:166px; width: 247px;">
+            <img class="miku" src="/t/nawic.nekoweb.org/m21.png" style="position:absolute; top: 0px; left:-2px; width: 254px; height: auto;">
+        
+        </div>
+        <img src="/t/nawic.nekoweb.org/Junk.png" style="position:absolute; bottom: -8px; z-index:9999;">
+        <div class="bg"></div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

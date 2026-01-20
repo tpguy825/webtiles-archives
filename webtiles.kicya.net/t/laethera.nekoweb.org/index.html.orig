@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  background: #1a1a1a;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  font-family: Arial, sans-serif;
+  display: flex;
+}
+
+.tile {
+  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px #0000004d;
+}
+
+.bubble {
+  transform-origin: center;
+  z-index: 5;
+  background: linear-gradient(145deg, #f2d6b0 0%, #ebbfc4 100%);
+  border: 4px solid #9e887e;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  animation: ease-in-out infinite rise;
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+  box-shadow: 0 6px 20px #00000059, inset -10px -10px 20px #0000000d, inset 10px 10px 25px #fff9;
+}
+
+.bubble img {
+  object-fit: cover;
+  border: 2px solid #fff9;
+  border-radius: 50%;
+  width: 80%;
+  height: 80%;
+  box-shadow: 0 2px 8px #0000004d;
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0;
+    bottom: -100px;
+    transform: scale(.8, 1.2);
+  }
+
+  10% {
+    opacity: 1;
+    transform: scale(1.1, .9);
+  }
+
+  25% {
+    transform: scale(.95, 1.05);
+  }
+
+  35% {
+    transform: scale(1.05, .95);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  65% {
+    transform: scale(.98, 1.02);
+  }
+
+  80% {
+    transform: scale(1.02, .98);
+  }
+
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    bottom: 300px;
+    transform: scale(1.1, .9);
+  }
+}
+
+.site-background {
+  z-index: 0;
+  background-color: #8a542e;
+  background-image: repeating-radial-gradient(circle at 1.5em 1.5em, #0000, #0000 .1125em, #d19046 .1125em .3em, #0000 .3375em 1.6875em, #d19046 1.725em 3em);
+  background-position: 2.25em 2.25em;
+  background-size: 3em 3em;
+  width: 100%;
+  height: 100%;
+  animation: 10s linear infinite scrollDown;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes scrollDown {
+  0% {
+    background-position: 2.25em 2.25em;
+  }
+
+  100% {
+    background-position: 2.25em 5.25em;
+  }
+}
+
+#discord-avatar {
+  z-index: 2;
+  border: 2px solid #422b21;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: 6s ease-in-out infinite pfp-wobble;
+  position: absolute;
+  top: 8%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 .5em #0006;
+}
+
+@keyframes pfp-wobble {
+  0%, 100% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+button {
+  opacity: .9;
+  color: #422b21;
+  cursor: pointer;
+  transform-origin: center;
+  background-color: #ebbfc4;
+  border: 2px solid #f2d6b0;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-family: Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  animation: 3s ease-in-out infinite wobble;
+  position: relative;
+
+  & a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+button:hover {
+  animation: .5s ease-in-out infinite wobbleFast;
+}
+
+@keyframes wobble {
+  0%, 100% {
+    transform: scale(1)rotate(0);
+  }
+
+  25% {
+    transform: scale(1.05, .95)rotate(-1deg);
+  }
+
+  50% {
+    transform: scale(.95, 1.05)rotate(0);
+  }
+
+  75% {
+    transform: scale(1.05, .95)rotate(1deg);
+  }
+}
+
+@keyframes wobbleFast {
+  0%, 100% {
+    transform: scale(1)rotate(0);
+  }
+
+  25% {
+    transform: scale(1.1, .9)rotate(-2deg);
+  }
+
+  50% {
+    transform: scale(.9, 1.1)rotate(0);
+  }
+
+  75% {
+    transform: scale(1.1, .9)rotate(2deg);
+  }
+}
+
+.button-container {
+  z-index: 2;
+  justify-content: center;
+  gap: 10px;
+  width: 90%;
+  display: flex;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>
+</head>
+<body>
+    <div class="tile" id="bubbleContainer">
+        <div class="site-background"></div>
+        <img id="discord-avatar" src="/t/laethera.nekoweb.org/image.png" alt="Discord Avatar">
+        <div class="button-container">
+            <button><a href="https://laethera.nekoweb.org" target="_blank">go to my nekosite :3</a></button>
+            <button><a href="https://www.last.fm/user/tetwa/library/tracks?date_preset=ALL&page=1" target="_blank">my last.fm ^-^</a></button>
+        </div>
+        
+    </div>
+
+    <script type="text/tilescript">// Array of image/gif URLs - replace these with your own images or gifs
+var imageList = [
+    'https://c.tenor.com/_Y6uDg5EurwAAAAd/tenor.gif',
+    'https://c.tenor.com/O5H_LbUaoYoAAAAC/tenor.gif',
+    'https://c.tenor.com/gO4TtQOghZ8AAAAd/tenor.gif',
+    'https://c.tenor.com/k5wh7clEscAAAAAd/tenor.gif',
+    'https://c.tenor.com/zYnRQKDfQ_AAAAAd/tenor.gif',
+    'https://c.tenor.com/_NRJIzd6gN0AAAAC/tenor.gif',
+    'https://c.tenor.com/llfcKTU8O8EAAAAC/tenor.gif',
+];
+
+var container = document.getElementById('bubbleContainer');
+
+// Create bubbles with images and random properties
+imageList.forEach(function(imageSrc, index) {
+    var bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    
+    // Random size between 45px and 75px
+    var size = Math.floor(Math.random() * 31) + 45;
+    
+    // Random horizontal position between 10% and 85%
+    var leftPos = Math.floor(Math.random() * 76) + 10;
+    
+    // Random animation duration between 5s and 8.5s
+    var duration = (Math.random() * 3.5 + 5).toFixed(1);
+    
+    // Random animation delay between -6s and -1s
+    var delay = -(Math.random() * 5 + 1).toFixed(1);
+    
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = leftPos + '%';
+    bubble.style.animationDuration = duration + 's';
+    bubble.style.animationDelay = delay + 's';
+    
+    var img = document.createElement('img');
+    img.src = imageSrc;
+    img.alt = 'Bubble ' + (index + 1);
+    
+    bubble.appendChild(img);
+    container.appendChild(bubble);
+});</script>
+</body>
+</html>

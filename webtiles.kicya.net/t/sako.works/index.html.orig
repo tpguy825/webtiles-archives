@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Comic Sans Uploaded;
+  src: url("/t/sako.works/typefaces/comic.ttf");
+}
+
+@font-face {
+  font-family: Comic Sans Uploaded;
+  src: url("/t/sako.works/typefaces/comicbd.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Comic Sans Uploaded;
+  src: url("/t/sako.works/typefaces/comici.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Comic Sans Uploaded;
+  src: url("/t/sako.works/typefaces/comicz.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+:root {
+  --sakoYellow: #ffc85d;
+  --sakoRed: #e0366f;
+  --sakoPurple: #8917c2;
+  --sakoDarkBlue: #0036a3;
+}
+
+.tile-body {
+  text-align: center;
+  -webkit-text-size-adjust: 100%;
+  background-color: #ffc85d;
+  align-content: center;
+  width: 250px;
+  height: 250px;
+  font-family: Comic Sans MS, Comic Sans, Comic Sans Uploaded, sans-serif;
+}
+
+canvas {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+::selection {
+  color: #fff;
+  background: #e0366f;
+}
+
+a:link {
+  color: #0036a3;
+  text-decoration: none;
+  transform: translateY(-3px);
+}
+
+a:visited {
+  color: #8917c2;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: #e0366f;
+  text-decoration: underline;
+}
+
+img {
+  image-rendering: pixelated;
+}
+</style>
+</head>
+    
+<body>
+    <p style="background: var(--sakoYellow)">don't mind me, trying to learn javascript lol</p>
+    <canvas id="canvas" width="250" height="250"></canvas>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+//console.log("Hello world!");
+function draw() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+    
+    var sakoYellow = "#ffc85d";
+  	var sakoRed = "#e0366f";
+  	var sakoPurple = "#8917c2";
+  	var sakoDarkBlue = "#0036a3";
+	
+    var colours = ["black", sakoDarkBlue, sakoPurple, sakoRed, sakoYellow, "white"]
+	
+	var border = 10;
+	var w = (250 - 2*border)/colours.length;
+	var h = 250 - 2*border;
+	
+	/*for (var i=0; i<colours.length; i++) {
+    	ctx.fillStyle = colours[i];
+    	ctx.fillRect(border+i*w, border, w, h);
+    }*/
+    ctx.fillStyle = sakoRed;
+    ctx.fillRect(20, 20, 210, 210);
+}
+
+draw();</script>
+</body>
+</html>

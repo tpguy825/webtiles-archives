@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  display: flex;
+}
+</style>
+</head>
+<body>
+    <img src="/t/social.layercake.moe/sunningrocks.png">
+</body>
+</html>

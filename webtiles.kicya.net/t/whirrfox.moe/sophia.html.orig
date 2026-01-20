@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-color: #fffdf2;
+  background-image: url("/t/whirrfox.moe/background-animation.webp");
+  background-repeat: repeat;
+  background-size: 50%;
+  margin: 0;
+  font-family: Playpen, sans-serif;
+  font-weight: 500;
+}
+
+a {
+  color: #000;
+  text-decoration-style: dotted;
+}
+
+.cutebox {
+  text-align: justify;
+  border-image-source: url("/t/whirrfox.moe/cutebox-4.png");
+  border-image-slice: 46 fill;
+  border-image-width: 20px;
+  border-image-repeat: round;
+  margin: 8px;
+  padding: 20px;
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+p:has(img) {
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+p img {
+  width: 75px;
+}
+
+.back-button {
+  text-align: center;
+  display: block;
+}
+
+@font-face {
+  font-family: Playpen;
+  src: url("/t/whirrfox.moe/PlaypenSans.ttf");
+}
+</style>
+    <style>.tile-body {
+  overflow-y: auto;
+}
+</style>
+</head>
+<body>
+    <div class="cutebox">
+        <p>
+            <img src="/t/whirrfox.moe/sophia-staff.webp">
+            Sophia Fuchsia is a cute silly trans foxgirl who loves doing magic. She's the mascot of this site, and also the main protagonist of Stardust & Fox Ears.
+        </p>
+        <p>
+            Stardust & Fox Ears is a small little story I'm writing with Sophia as the main character! "A person, who got quite unlucky and feels trapped in a life she despises, gets visited by a magical creature, who invites her to become a witch. She turns into a foxgirl and starts visiting a magical academy, where she hopes she'll be able to start her life anew."
+        </p>
+        <p>
+            <a href="https://whirrfox.moe/sfe/" target="_blank">You can check it out here!</a>
+        </p>
+        <img src="/t/whirrfox.moe/sophia-portrait.webp" style="width: 100%;">
+        <a class="back-button" href="/t/whirrfox.moe/">back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  margin: 0;
+}
+
+a, a:visited, a:active, a:focus {
+  color: #fff;
+}
+
+a:hover {
+  color: #afa;
+}
+
+div.cover {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+div.cover img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+div.cover audio {
+  backdrop-filter: blur(5px);
+  width: 115px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+div.cover .track {
+  color: #fff;
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  pointer-events: none;
+  background: #14141480;
+  border-top-right-radius: 10px;
+  padding: 5px 15px;
+  transition: opacity .25s;
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+}
+
+div.cover .track[style*="opacity: 1;"] {
+  pointer-events: auto;
+}
+</style>
+    <script type="text/tilescript">var aud = document.querySelector('audio');
+var track = document.querySelector('div.track');
+
+aud.addEventListener('play', function () { track.style.opacity = '1'; });
+aud.addEventListener('pause', function () { track.style.opacity = '0'; });
+aud.addEventListener('ended', function () { track.style.opacity = '0'; });
+
+track.style.bottom = aud.offsetHeight + 'px';</script>
+</head>
+<body>
+    <div class='cover'>
+    	<img src="/t/lucas.nekoweb.org/creaturesofhabit.jpg">
+        <div class='track'>
+            <div>Now playing:</div>
+            <div>"<a href="https://kiltromusic.bandcamp.com/track/the-drunk" target="_blank"><b>The Drunk</b></a>"</div>
+        </div>
+    	<audio controls src="/t/lucas.nekoweb.org/coh-thedrunk.mp3" preload="metadata"></audio>
+    </div>
+</body>
+</html>

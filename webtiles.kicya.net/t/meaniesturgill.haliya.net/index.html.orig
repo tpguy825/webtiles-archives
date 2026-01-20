@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  text-align: center;
+  background-image: url("/t/meaniesturgill.haliya.net/MSWebsiteBG.webp");
+  background-position: center;
+  background-size: cover;
+  margin: 0%;
+  padding: 0%;
+}
+
+.MSLogoLong {
+  z-index: 1;
+  width: 100%;
+  margin: 0%;
+  padding: 5px;
+  position: relative;
+}
+
+.MeanieFumo {
+  z-index: 2;
+  width: 280px;
+  transition: transform .3s;
+  position: relative;
+  bottom: 30px;
+  left: -15px;
+  transform: translateY(0);
+}
+
+.MSWebLinks {
+  z-index: 3;
+  background-color: #000;
+  width: 100%;
+  margin: 0%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 0;
+}
+
+.MeanieFumo:hover {
+  transform: translateY(-50px);
+}
+
+.MSWebLinks a {
+  color: #fff;
+  text-decoration: none;
+  transition: transform .3s, color .3s, text-shadow .3s;
+}
+
+.MSWebLinks a:hover {
+  text-shadow: 0 0 8px #fff, 0 0 18px #fff;
+}
+
+#SecondBG {
+  background-color: #4900b366;
+  background-size: cover;
+  min-height: calc(100vh - 100%);
+}
+
+#ThirdBG {
+  min-height: calc(100vh - 100%);
+  -webkit-animation-name: movingbgT 8s infinite;
+  -ms-animation: movingbgT 8s infinite;
+  -moz-animation: 8s infinite movingbgT;
+  animation: 8s infinite movingbgT;
+  background-image: url("/t/meaniesturgill.haliya.net/MSWebsiteBGLayer.webp");
+  background-repeat: repeat;
+  background-size: 260px;
+  background-attachment: fixed;
+  -webkit-animation-timing-function: linear;
+  animation-direction: normal;
+  position: relative;
+}
+
+#ThirdBG:after {
+  content: "";
+  z-index: -10;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes movingbgT {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 260px 260px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+    <div id="SecondBG">
+        <div id="ThirdBG">
+            <div>
+                <img class="MSLogoLong" src="/t/meaniesturgill.haliya.net/MSLogoLong3D.png">
+            </div>
+            <div>
+                <img class="MeanieFumo" src="/t/meaniesturgill.haliya.net/Fumo_Meanie.png">
+            </div>
+            
+            <div class="MSWebLinks">
+                <a href="https://meaniesturgill.haliya.net" target="_blank">Main Website</a> | <a href="https://meaniesturgill.straw.page" target="_blank">Strawpage</a> | <a href="https://meaniesturgill.haliya.net/socials" target="_blank">Socials</a>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

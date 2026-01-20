@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: #000 url("/t/vuvien.nekoweb.org/bg.jpg") 0 0 / contain no-repeat fixed;
+  font-family: a;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -ms-animation: rotating 30s linear infinite;
+  z-index: -1;
+  filter: grayscale();
+  opacity: .075;
+  -webkit-animation: 30s linear infinite rotating;
+  -moz-animation: 30s linear infinite rotating;
+  -o-animation: 30s linear infinite rotating;
+  animation: 30s linear infinite rotating;
+  animation-play-state: unset !important;
+  -o-animation-play-state: unset !important;
+  -moz-animation-play-state: unset !important;
+  -webkit-animation-play-state: unset !important;
+}
+
+@font-face {
+  font-family: a;
+  src: url("/t/vuvien.nekoweb.org/font.ttf");
+}
+</style>
+</head>
+<body>
+    <a href="https://vuvien.nekoweb.org" target="_blank"><p style="font-size:350%;position: absolute;text-align:center;left:25px;bottom:120px;z-index:20;opacity:0.9;color:white">vuvien</p></a>
+    <a href="https://vuvien.nekoweb.org/" target="_blank"><img style="width:120%; height:auto; position: absolute;top:40px;left:40px;rotate:-30deg" src="/t/vuvien.nekoweb.org/logo.png"></a>
+    <img alt="trong dong dong son background" class="rotating" src="/t/vuvien.nekoweb.org/spin.png" style="pointer-events: none;opacity:0.1;width:375px">
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

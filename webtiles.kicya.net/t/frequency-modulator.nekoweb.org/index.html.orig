@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/frequency-modulator.nekoweb.org/bg1.jpg"), url("/t/frequency-modulator.nekoweb.org/bg2.jpg");
+  background-position: 0, 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 125px 250px, 125px 250px;
+}
+</style>
+</head>
+<body>
+    <p>This is an example tile.</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

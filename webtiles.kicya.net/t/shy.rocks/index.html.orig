@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>.tile-body {
+  background-color: #11111b;
+  background-image: url("/t/shy.rocks/bg.png");
+  background-size: 100% 100%;
+  margin: 0;
+}
+
+#shy {
+  opacity: .6;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  width: 153px;
+  height: 153px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#border-top:before {
+  content: "";
+  border-left: 4px;
+  border-image: url("/t/shy.rocks/durkaborder.png") 28 / 28px round;
+  width: 120%;
+  height: 14px;
+  position: absolute;
+  top: -4px;
+  left: -10px;
+}
+
+#border-bottom-right {
+  content: "";
+  z-index: 4;
+  border-left: 4px;
+  border-image: url("/t/shy.rocks/durkaborder.png") 28 / 28px round;
+  width: 14px;
+  height: 24px;
+  position: absolute;
+  bottom: -15px;
+  right: -4px;
+}
+</style>
+    </head>
+    <body>
+        <img src="/t/shy.rocks/spin.gif" id="shy" draggable="false">
+
+        <div id="border-top"></div>
+        <div id="border-bottom-right"></div>
+
+        <div id="audios" style="display: none;"></div>
+
+        <script type="text/tilescript">
+            var audios = document.getElementById('audios')
+            var ambienceLoopStarted = false;
+            var periodicLoopStarted = false;
+
+            var ambienceLoops = [ 'AMB_05_ENGINEROOM_LR', 'AMB_06_COMMUNICATION_LR', 'AMB_12_HYDROTHUNDER_LR' ]
+            var ambienceAudio = newAudio()
+
+            var periodicNoises = {
+                steam: {
+                    audio: newAudio(),
+                    period: 60,
+                    periodNoise: 20,
+                    volume: 0.25,
+                    sounds: [
+                        'AMB_EC_Steam1',
+                        'AMB_EC_Steam2',
+                        'AMB_EC_Steam3',
+                        'AMB_EC_Steam4',
+                        'AMB_EC_Steam5',
+                        'AMB_EC_Steam6',
+                        'AMB_EC_Steam7'
+                    ]
+                },
+                voices: {
+                    audio: newAudio(),
+                    period: 120,
+                    periodNoise: 30,
+                    volume: 0.25,
+                    sounds: [
+                        'AMB_EC_Voices1',
+                        'AMB_EC_Voices2',
+                        'AMB_EC_Voices3',
+                        'AMB_EC_Voices4',
+                        'AMB_EC_Voices5',
+                        'AMB_EC_Voices6',
+                        'AMB_EC_Voices7',
+                        'AMB_EC_Voices8',
+                        'AMB_EC_Voices9',
+                        'AMB_EC_Voices10',
+                        'AMB_EC_Voices11',
+                        'AMB_EC_Voices12'
+                    ]
+                },
+                comm: {
+                    audio: newAudio(),
+                    period: 45,
+                    periodNoise: 15,
+                    volume: 0.25,
+                    sounds: [
+                        'comm voice 1',
+                        'comm voice 2',
+                        'comm static 1',
+                        'comm voice 3',
+                        'comm voice 4',
+                        'comm static 2',
+                        'comm voice 5',
+                        'comm voice 6',
+                        'comm static 3',
+                        'comm voice 7',
+                        'comm voice 8',
+                        'comm static 4',
+                        'comm voice 9'
+                    ]
+                },
+                etc: {
+                    audio: newAudio(),
+                    period: 300,
+                    periodNoise: 60,
+                    volume: 0.3,
+                    sounds: [
+                        'AMB_EC_Pinger1',
+                        'Control Room Loop',
+                        'Control Room Loop ver2'
+                    ]
+                }
+            }
+
+            function enableBackgroundAudio() {
+                if (!ambienceLoopStarted) ambienceLoop()
+                if (!periodicLoopStarted) enablePeriodicNoises()
+            }
+
+            function ambienceLoop() {
+                var randomNumber = Math.floor(Math.random() * ambienceLoops.length)
+
+                console.log('starting ambience loop')
+                console.log('playing ambient track ' + ambienceLoops[randomNumber])
+
+                ambienceAudio.src = 'audio/' + ambienceLoops[randomNumber] + '.ogg'
+                ambienceAudio.volume = 0.5;
+                ambienceAudio.play()
+            }
+
+            function enablePeriodicNoises() {
+                periodicLoopStarted = true;
+
+                var periodicKeys = Object.keys(periodicNoises)
+
+                for (var i = 0; i < periodicKeys.length; i++) {
+                    var categoryName = periodicKeys[i]
+                    var category = periodicNoises[categoryName]
+                    console.log('starting periodic noise loop for ' + categoryName)
+                    periodicNoise(categoryName, true)
+                }
+            }
+
+            function periodicNoise(categoryName, firstRun) {
+                if (!periodicNoises[categoryName]) return;
+
+                var category = periodicNoises[categoryName]
+                var randomSound = Math.floor(Math.random() * category.sounds.length)
+                var sound = category.sounds[randomSound]
+                var nextRunMs = (category.period + Math.floor(Math.random() * category.periodNoise)) * 1000;
+
+                setTimeout(function () { periodicNoise(categoryName) }, nextRunMs)
+                if (firstRun) return;
+
+                console.log('playing periodic noise ' + sound + ', doing another ' + categoryName + ' in ' + nextRunMs + 'ms')
+
+                category.audio.volume = category.volume;
+                category.audio.src = 'audio/' + sound + '.ogg'
+                category.audio.play()
+            }
+
+            function newAudio() {
+                var el = document.createElement('audio')
+                el.autoplay = true;
+                audios.appendChild(el)
+
+                return el;
+            }
+
+            ambienceAudio.addEventListener('play', function() {
+                ambienceLoopStarted = true;
+                console.log('ambience loop started')
+            })
+
+            ambienceAudio.addEventListener('timeupdate', function () { //fade out
+                var buffer = .44;
+                if (ambienceAudio.currentTime > ambienceAudio.duration - buffer) {
+                    ambienceAudio.currentTime = 0;
+                    ambienceAudio.play()
+                }
+            })
+
+            enableBackgroundAudio()
+
+            var starter = setInterval(function() {
+                enableBackgroundAudio()
+                if (ambienceLoopStarted && periodicLoopStarted) {
+                    var a = newAudio()
+                    a.src = 'audio/Global A Button Select.ogg'
+                    a.volume = 0.12;
+                    a.play()
+                    clearInterval(starter)
+                }
+            }, 50)
+        </script>
+    </body>
+</html>

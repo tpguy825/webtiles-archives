@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #88c746;
+  background-image: url("/t/bonyou.nekoweb.org/shin.webp");
+  background-position: 90% 100%;
+  background-repeat: no-repeat;
+  background-size: 45%;
+  margin: 0;
+}
+
+a {
+  background-color: #fff;
+}
+</style>
+</head>
+<body>
+    <h3>
+        bonyou dot nekoweb dot org !!!
+    </h3>
+    <p>my cool asf tile will be coming 2 u very soon. just gotta get school out of the way first...</p>
+    <p>
+        <a href="https://bonyou.nekoweb.org/" target="_blank">click 4 sakamoto days</a>
+    </p>
+    <p>
+        <a href="https://bonyou.nekoweb.org/home?tab=/blog" target="_blank">u should totally read my totally cool blog btw</a>
+    </p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

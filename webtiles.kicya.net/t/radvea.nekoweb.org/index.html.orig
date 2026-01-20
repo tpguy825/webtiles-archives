@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Iosevka;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: local(Iosevka), url("/t/radvea.nekoweb.org/Iosevka-400.woff2") format("woff2");
+}
+
+.tile-body {
+  font-family: Iosevka, Courier New, Courier, Liberation Mono, monospace;
+}
+
+.tile-body:before {
+  content: "";
+  z-index: -500;
+  filter: sepia() hue-rotate(305deg) brightness(50%) saturate(420%);
+  background-image: url("/t/radvea.nekoweb.org/sky.webp");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.window {
+  color: #ad3c3c;
+  background-color: #27332e;
+  border-radius: 8px;
+  outline: .215rem solid #ad3c3c;
+  width: 80%;
+  height: 110%;
+  padding: 8px;
+  font-size: .88rem;
+  position: fixed;
+  top: 50px;
+  left: 37%;
+}
+
+img {
+  image-rendering: crisp-edges;
+  z-index: -5;
+  width: 45%;
+  height: 80%;
+  position: fixed;
+  top: 30px;
+  left: 4%;
+}
+</style>
+</head>
+<body>
+    <img src="/t/radvea.nekoweb.org/radvea-cling.webp">
+    <div class="window">
+    	<a href="https://radvea.nekoweb.org" target="_blank">radvea.nekoweb.org</a><br>
+		<br>
+        currently working<br>
+        on an overhaul of<br>
+        my whole website
+    </div>
+</body>
+</html>

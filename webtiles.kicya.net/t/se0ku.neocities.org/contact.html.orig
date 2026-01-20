@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html><head>
+  
+    <style>.tile-body {
+  font-family: Quicksand;
+  font-size: 22px;
+}
+
+img {
+  vertical-align: middle;
+}
+</style>
+    
+    
+    
+    <style>@font-face {
+  font-family: Quicksand;
+  src: url("/t/se0ku.neocities.org/Quicksand-Regular.woff2") format("woff2"), url("/t/se0ku.neocities.org/Quicksand-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.tile-body {
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 0 1px #fff;
+  background-color: #0f0f0f;
+  background-image: linear-gradient(90deg, #000000e6, #00000080, #00000080, #00000080, #000000e6), url("/t/se0ku.neocities.org/seokuneoopacity.png"), none;
+  background-position: top;
+  background-repeat: repeat, repeat, repeat;
+  background-size: auto, auto, auto;
+  background-attachment: scroll, scroll, scroll;
+  background-origin: padding-box, padding-box, padding-box;
+  background-clip: border-box, border-box, border-box;
+  font-size: 18px;
+}
+
+::selection {
+  text-shadow: none;
+  color: #000;
+  -webkit-text-stroke: .5pt;
+  background-color: #f0e442fa;
+}
+
+a:link {
+  color: #f0e442;
+  text-shadow: 0 0 1px #f0e442;
+  transition: all .15s;
+}
+
+a:visited {
+  color: #f0e442;
+  text-shadow: 0 0 1px #f0e442;
+}
+
+a:hover {
+  color: #0072b2;
+  text-shadow: 0 0 1px #0072b2;
+}
+
+a:active {
+  color: #f0e442;
+  text-shadow: 0 0 1px #f0e442;
+}
+
+.doubleborder {
+  background-color: #000;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+}
+
+.linkborder {
+  color: #f0e442;
+  cursor: pointer;
+  width: max-content;
+  text-shadow: none;
+  user-select: none;
+  -webkit-text-stroke: #0000;
+  background-color: #000;
+  border: 1.5px solid #f0e442;
+  margin: auto;
+  padding: 12.5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .15s;
+  display: flex;
+}
+
+.linkborder:hover {
+  color: #0072b2;
+  text-shadow: none;
+  border: 1.5px solid #0072b2;
+}
+
+.whiteline {
+  border-bottom: 3px solid #fff;
+  margin: 1em -35px;
+}
+
+#border {
+  z-index: 0;
+  pointer-events: none;
+  width: auto;
+  height: auto;
+  position: absolute;
+  bottom: 16px;
+}
+
+.parent {
+  text-wrap: balance;
+  z-index: 3;
+  background-color: #fff;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-radius: 0 0 10px 10px;
+  grid-template-rows: auto auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "a b"
+                       "c d";
+  place-self: center;
+  gap: 2px;
+  width: 11.55em;
+  margin-top: -1em;
+  display: grid;
+  position: relative;
+}
+
+.parent div {
+  background-color: #000;
+}
+
+.div1 {
+  text-align: right;
+  color: red;
+  text-shadow: 0 0 1px red;
+  padding-right: 5px;
+  font-size: 21px;
+}
+
+.div2 {
+  text-align: left;
+  color: #0072b2;
+  text-shadow: 0 0 1px #0072b2;
+  background: none;
+  padding-left: 5px;
+  font-size: 21px;
+}
+
+.div3 {
+  text-align: right;
+  border-bottom-left-radius: 7.5px;
+  grid-row-start: 2;
+  padding-top: 2px;
+  padding-right: 5px;
+  font-size: 15px;
+}
+
+.div4 {
+  text-align: left;
+  border-bottom-right-radius: 7.5px;
+  grid-row-start: 2;
+  padding-top: 2px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+
+.webtileborder {
+  background-color: #000;
+  border: 3px solid #fff;
+  border-bottom-width: 2px;
+  border-radius: 10px 10px 0 0;
+  max-width: 800px;
+  margin: auto;
+  padding: 10px 10px 1em;
+}
+</style>
+  </head>
+
+<body>
+<style>@font-face {
+  font-family: Quicksand;
+  src: url("/t/se0ku.neocities.org/Quicksand-Regular.woff2") format("woff2"), url("/t/se0ku.neocities.org/Quicksand-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.tile-body {
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 0 1px #fff;
+  background-color: #0f0f0f;
+  background-image: linear-gradient(90deg, #000000e6, #00000080, #00000080, #00000080, #000000e6), url("/t/se0ku.neocities.org/seokuneoopacity.png"), none;
+  background-position: top;
+  background-repeat: repeat, repeat, repeat;
+  background-size: auto, auto, auto;
+  background-attachment: scroll, scroll, scroll;
+  background-origin: padding-box, padding-box, padding-box;
+  background-clip: border-box, border-box, border-box;
+  font-size: 18px;
+}
+
+::selection {
+  text-shadow: none;
+  color: #000;
+  -webkit-text-stroke: .5pt;
+  background-color: #f0e442fa;
+}
+
+a:link {
+  color: #f0e442;
+  text-shadow: 0 0 1px #f0e442;
+  transition: all .15s;
+}
+
+a:visited {
+  color: #f0e442;
+  text-shadow: 0 0 1px #f0e442;
+}
+
+a:hover {
+  color: #0072b2;
+  text-shadow: 0 0 1px #0072b2;
+}
+
+a:active {
+  color: #f0e442;
+  text-shadow: 0 0 1px #f0e442;
+}
+
+.doubleborder {
+  background-color: #000;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+}
+
+.linkborder {
+  color: #f0e442;
+  cursor: pointer;
+  width: max-content;
+  text-shadow: none;
+  user-select: none;
+  -webkit-text-stroke: #0000;
+  background-color: #000;
+  border: 1.5px solid #f0e442;
+  margin: auto;
+  padding: 12.5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .15s;
+  display: flex;
+}
+
+.linkborder:hover {
+  color: #0072b2;
+  text-shadow: none;
+  border: 1.5px solid #0072b2;
+}
+
+.whiteline {
+  border-bottom: 3px solid #fff;
+  margin: 1em -35px;
+}
+
+#border {
+  z-index: 0;
+  pointer-events: none;
+  width: auto;
+  height: auto;
+  position: absolute;
+  bottom: 16px;
+}
+
+.parent {
+  text-wrap: balance;
+  z-index: 3;
+  background-color: #fff;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-radius: 0 0 10px 10px;
+  grid-template-rows: auto auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "a b"
+                       "c d";
+  place-self: center;
+  gap: 2px;
+  width: 11.55em;
+  margin-top: -1em;
+  display: grid;
+  position: relative;
+}
+
+.parent div {
+  background-color: #000;
+}
+
+.div1 {
+  text-align: right;
+  color: red;
+  text-shadow: 0 0 1px red;
+  padding-right: 5px;
+  font-size: 21px;
+}
+
+.div2 {
+  text-align: left;
+  color: #0072b2;
+  text-shadow: 0 0 1px #0072b2;
+  background: none;
+  padding-left: 5px;
+  font-size: 21px;
+}
+
+.div3 {
+  text-align: right;
+  border-bottom-left-radius: 7.5px;
+  grid-row-start: 2;
+  padding-top: 2px;
+  padding-right: 5px;
+  font-size: 15px;
+}
+
+.div4 {
+  text-align: left;
+  border-bottom-right-radius: 7.5px;
+  grid-row-start: 2;
+  padding-top: 2px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+
+.webtileborder {
+  background-color: #000;
+  border: 3px solid #fff;
+  border-bottom-width: 2px;
+  border-radius: 10px 10px 0 0;
+  max-width: 800px;
+  margin: auto;
+  padding: 10px 10px 1em;
+}
+</style>
+<div class="doubleborder" style="text-wrap-style: balance;margin:1em;position:relative;z-index:1;">
+<center>
+<div class="normaltext" style="line-height: 0.9em;">
+<div class="normaltext" style="line-height: 0.9em;">
+<p style="font-size: x-large;font-weight: bold;margin-top: 2px;margin-left: 0;margin-right: 0;margin-bottom: -5px;letter-spacing:2px;cursor:text;"><img src="/t/se0ku.neocities.org/seokutinyneo.png" style="width:1em;user-select:none;cursor:default;position: absolute;left: 10px;">Contact<img src="/t/se0ku.neocities.org/seokutinyneo.png" style="width:1em;user-select:none;cursor:default;position: absolute;right: 10px;"></p>
+</div>
+</div>
+
+<div class="whiteline" style="border-bottom: 2px solid white;width: 11.6em;"></div>
+
+<div style="display:inline-flex">
+    <a href="https://x.com/SE0KU" class="linkborder" style="border-width: 2px;border-radius: 5px;padding: 5px;font-size:small;" target="_blank">Twitter</a><div style="user-select:none;">&nbsp;</div><a href="https://bsky.app/profile/se0ku.neocities.org" class="linkborder" style="border-width: 2px;border-radius: 5px;padding: 5px;font-size:small;" target="_blank">BlueSky</a><div style="user-select:none;">&nbsp;</div><a href="https://www.tumblr.com/seokufr" class="linkborder" style="border-width: 2px;border-radius: 5px;padding: 5px;font-size:small;" target="_blank">Tumblr</a>
+</div>
+    <p style="text-wrap-style: balance;font-size:small;cursor:text;margin-top: 13px;margin-bottom: 10px;"><i>... But Gmail works too!</i><br>seokutraduction @ gmail.com</p>
+
+</center>     
+</div>
+
+<a href="/t/se0ku.neocities.org/index.html" class="linkborder" style="border-width: 2px;border-radius: 5px;padding: 10px;font-size:medium;position:absolute;justify-self:center;bottom:0.8em;" target="_blank">&lt;&lt; MAIN PAGE</a>
+
+<p style="display:none;">This is probably better than a second link to the Neocities page...</p>
+</body></html>

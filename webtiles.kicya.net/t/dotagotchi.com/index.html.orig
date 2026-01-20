@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>.tile-body {
+  background-image: url("/t/dotagotchi.com/dot.jpg");
+  background-position: center;
+  background-size: cover;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+span {
+  position: absolute;
+  inset: 0;
+}
+
+:before {
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  background-image: url("/t/dotagotchi.com/ass.gif");
+  background-position: center;
+  background-size: cover;
+  transition: opacity .15s;
+  position: absolute;
+  inset: 0;
+}
+
+:hover:before {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+ <a href="https://conejo.website/coalition/cvlc" target="_blank" rel="noopener noreferrer">
+    <span></span>
+    </a>
+</body>
+</html>

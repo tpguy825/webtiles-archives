@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #000;
+  background-color: #000;
+  margin: 0;
+
+  & .center {
+    width: 92%;
+    margin-left: 10px;
+    margin-right: 9px;
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+    <img src="/t/shop.psg1labs.com/PSGYELLOW.jpg" alt="PSG1LABS" class="center">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

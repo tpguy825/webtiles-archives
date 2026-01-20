@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    <style>.tile-body {
+  color: #1f1f1f;
+  -ms-overflow-style: none;
+  margin: 5px;
+  padding: 2px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.footer {
+  opacity: .5;
+  font-size: 13px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active, .nav:focus {
+  text-decoration: none;
+}
+
+.disp {
+  font-weight: 700;
+}
+
+.tile-body::-webkit-scrollbar {
+  display: none;
+}
+
+.back {
+  margin-top: 18px;
+  display: block;
+}
+
+@font-face {
+  font-family: SN Pro;
+  src: url("/t/r.w10.site/fonts/SNPro-Variable.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SN Pro;
+  src: url("/t/r.w10.site/fonts/SNPro-VariableItalic.woff2") format("woff2");
+  font-style: italic;
+}
+</style>
+    
+</head>
+<body>
+        raster was here and he claimed this tile and there is nothing you can do about it
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  text-align: center;
+  background-color: #fff;
+}
+
+p {
+  text-align: center;
+  width: 70%;
+  margin: 10px;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  left: 7px;
+}
+
+table {
+  width: 100%;
+}
+
+#joy {
+  pointer-events: none;
+  max-width: 75%;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+</style>
+</head>
+<body>
+    <p>
+        everything will work out somehow
+    </p>
+    <img id="joy" src="/t/moonflower.nekoweb.org/hachiware.webp">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

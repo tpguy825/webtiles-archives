@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@keyframes bg-scroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes grad {
+  50% {
+    background-position: 100%;
+  }
+}
+
+.tile-body {
+  color: #fff;
+  text-align: center;
+  background-color: #f0f0f0;
+  background-image: url("/t/ransomwave.games/bg.webp");
+  flex-wrap: wrap;
+  place-content: center;
+  animation: 30s linear infinite bg-scroll;
+  display: flex;
+}
+
+.logo {
+  text-align: center;
+  color: #0000;
+  filter: drop-shadow(2px 2px #000);
+  user-select: none;
+  background: linear-gradient(90deg, #b91c1c, #b91c1c, #fecaca) 0 0 / 180% 180%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin: 0;
+  padding: 0;
+  font-size: 89%;
+  font-weight: 800;
+  animation: 2s infinite grad;
+  display: inline-flex;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<img src="/t/ransomwave.games/top.webp" alt="Top Black Bar" style="position:fixed;top:0;left:0;width:100%;height:50px;user-select:none;pointer-events:none;object-fit:cover;">
+
+<img src="/t/ransomwave.games/bottom.webp" alt="Bottom Black Bar" style="position:fixed;bottom:0;left:0;width:100%;height:50px;user-select:none;pointer-events:none;object-fit:cover;">
+
+<pre class="logo">
+   ___  ___   _  __________  __  ___
+  / _ \/ _ | / |/ / __/ __ \/  |/  /
+ / , _/ __ |/    /\ \/ /_/ / /|_/ /
+/_/|_/_/ |_/_/|_/___/\____/_/  /_/
+</pre>    
+<pre class="logo">
+__      _____ _   ______
+| | /| / / _ | | / / __/
+| |/ |/ / __ | |/ / _/  
+|__/|__/_/ |_|___/___/  
+</pre>    
+    <a href="https://ransomwave.games/games" style="margin-top:10px; color:white; font-weight:bold;" target="_blank">Play my games!</a>
+</body>
+</html>

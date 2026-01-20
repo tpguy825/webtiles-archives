@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+        <style>.tile-body {
+  margin: 0;
+}
+</style>
+    </head>
+    <body>
+        <img src="/t/shrimpy.nekoweb.org/./rsrim.png" width="250" height="250">
+        
+
+        <script type="text/tilescript">
+            // Only executes while your tile is active
+            // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+			console.log("helo word");
+            var a = document.createElement("p");
+            a.innerText = "jinglenfsjdbnfhjshnb";
+            document.body.appendChild(a);
+            
+            function loop() {
+                a.innerText = Date.now().toString();
+            }
+            
+            setInterval(loop, 1027);
+        </script>
+    </body>
+</html>

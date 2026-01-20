@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: JUNEVILLE;
+  src: url("/t/planet-bluto.net/fonts/JUNEVILLE.ttf") format("truetype");
+}
+
+* {
+  pointer-events: none;
+  font-family: JUNEVILLE;
+}
+
+.tile-body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.tile-body > * {
+  position: absolute;
+}
+
+#whole-border {
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+}
+
+#gear-big {
+  z-index: 7;
+  width: 100px;
+  height: 100px;
+  bottom: -30px;
+  left: -30px;
+}
+
+#gear-small {
+  z-index: 7;
+  width: 45px;
+  height: 45px;
+  animation: .9s linear infinite reverse gear-spin;
+  bottom: 20px;
+  left: 70px;
+}
+
+.gear {
+  transform-origin: center;
+  animation: 1.8s linear infinite gear-spin;
+}
+
+@keyframes gear-spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#colored-lines {
+  z-index: 6;
+  width: 100%;
+  height: 100%;
+}
+
+#cloud-top, #cloud-bottom {
+  opacity: 0;
+}
+
+#transit-line {
+  z-index: 4;
+  transform-origin: center;
+  background: url("/t/planet-bluto.net/img/transit_line.png") 0 0 / 60px;
+  width: 60px;
+  height: 500px;
+  animation: .8s linear infinite transit-backdrop-scroll;
+  top: -200px;
+  right: 0;
+  transform: rotate(-35.58deg);
+}
+
+@keyframes transit-backdrop-scroll {
+  from {
+    background-position-y: 0;
+  }
+
+  to {
+    background-position-y: 69.3671px;
+  }
+}
+
+#center {
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+}
+
+#windows-container {
+  z-index: 3;
+  transform-origin: center;
+  justify-content: center;
+  place-self: anchor-center;
+  background: url("/t/planet-bluto.net/img/arrow_backdrop.png") 0 0 / 140px;
+  border: 8px solid #000;
+  width: 100%;
+  min-width: calc(100% + 200px);
+  height: 140px;
+  margin: 0;
+  animation: .8s linear infinite arrow-backdrop-scroll;
+  display: flex;
+  transform: rotate(-6.26deg);
+}
+
+@keyframes arrow-backdrop-scroll {
+  from {
+    background-position-x: 0;
+  }
+
+  to {
+    background-position-x: 140px;
+  }
+}
+
+#windows-container > a {
+  z-index: 20;
+  pointer-events: all;
+  color: #252525;
+  -webkit-text-stroke: #151515 15px;
+  paint-order: stroke fill;
+  align-content: center;
+  height: 100%;
+  margin-top: -6px;
+  font-size: 36px;
+  text-decoration: none;
+  animation: 2.8s ease-in-out infinite alternate text-hover;
+}
+
+@keyframes text-hover {
+  from {
+    transform: translateY(-6px);
+  }
+
+  to {
+    transform: translateY(6px);
+  }
+}
+
+#backdrop-details {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+#backdrop {
+  background: url("/t/planet-bluto.net/img/backdrop.png") 0 0 / 48px;
+  width: 100%;
+  height: 100%;
+  animation: .8s linear infinite reverse backdrop-scroll;
+}
+
+@keyframes backdrop-scroll {
+  from {
+    background-position-x: 0;
+  }
+
+  to {
+    background-position-x: 48px;
+  }
+}
+</style>
+</head>
+<body>
+    
+    <img id="whole-border" src="/t/planet-bluto.net/img/whole_border.png">
+    
+	<div id="center" >
+        <div id="windows-container" >
+            <a href="https://preview.planet-bluto.net/" title="Under Construction! (im tired)" target="_blank">>PLANET_BLUTO</a>
+        </div>
+    </div>
+    
+    <img id="gear-big" class="gear" src="/t/planet-bluto.net/img/gear.png">
+    <img id="gear-small" class="gear" src="/t/planet-bluto.net/img/gear.png">
+    
+    <img id="colored-lines" src="/t/planet-bluto.net/img/colored_lines.png">
+    
+    <div id="cloud-top" ></div>
+    <div id="cloud-bottom" ></div>
+    
+    <div id="transit-line" ></div>
+    
+    <img id="backdrop-details" src="/t/planet-bluto.net/img/backdrop_details.png">
+    
+    <div id="backdrop" ></div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+function renderImage(img, func) {
+    var mediaUrl = img.dataset.mediaUrl
+    var xhr = new XMLHttpRequest();
+    console.log('has image', img)
+    xhr.open('GET', 'https://waftiles.waf.moe/' + mediaUrl, true);
+    xhr.onload = function() {
+        try {
+            var obj = JSON.parse(xhr.responseText);
+            console.log("res obj: ", obj)
+            var width = obj.width;
+            var height = obj.height;
+            var dataUri = obj.dataUri;
+
+            img.width = width;
+            img.height = height;
+            img.src = dataUri;
+
+            img.setAttribute('data-loaded', 'true')
+
+            if (func) func()
+        } catch (e) {
+            img.alt = img.alt + ' (' + mediaUrl + ')'
+            console.error(e)
+            if (func) func()
+        }
+    };
+    xhr.send();
+}
+
+var imageEs = document.querySelectorAll('img[data-media-url]:not([data-loaded])')
+console.log("imageEs: ", imageEs)
+function renderAllImages(imgElms) {
+    var i = 0;
+    function next() {
+        if (i >= imgElms.length) return;
+        var image = imgElms[i];
+        i++;
+        renderImage(image, function() {
+            next();
+        });
+    }
+    next();
+}
+
+renderAllImages(imageEs)</script>
+</body>
+</html>

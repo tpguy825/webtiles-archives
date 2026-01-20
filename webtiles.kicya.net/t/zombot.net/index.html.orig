@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  background: #7000fe;
+  width: 250px;
+  height: 250px;
+  font-family: Courier New, monospace;
+  overflow: hidden;
+}
+
+.tile-container {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-gif {
+  object-fit: cover;
+  z-index: 0;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.back2-layer {
+  object-fit: cover;
+  z-index: 1;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.zombot-bg {
+  object-fit: cover;
+  z-index: 2;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.window-frame {
+  z-index: 3;
+  pointer-events: none;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.home-link {
+  z-index: 4;
+  width: 250px;
+  height: 250px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.home-overlay {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  transition: filter .3s;
+}
+
+.home-overlay:hover {
+  filter: invert();
+}
+</style>
+</head>
+<body>
+    <div class="tile-container">
+        <img src="/t/zombot.net/img/backg.gif" alt="background" class="bg-gif">
+        <img src="/t/zombot.net/img/back2.png" alt="back2" class="back2-layer">
+        <img src="/t/zombot.net/img/zombt.gif" alt="zombot" class="zombot-bg">
+        <img src="/t/zombot.net/img/windowframe.png" alt="frame" class="window-frame">
+        <a href="https://zombot.net" target="_blank" class="home-link">
+            <img src="/t/zombot.net/img/home.png" alt="zombot.net" class="home-overlay">
+        </a>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: linear-gradient(to bottom left, #00f7ff51 0%, #0008ff63 100%), linear-gradient(to top right, #ff204ad4 0%, #0000 50%), url("/t/elite784.online/background2.jpg");
+  font-family: main, serif;
+  font-size: 10px;
+}
+
+@font-face {
+  font-family: main;
+  src: url("/t/elite784.online/font.woff");
+}
+
+nav {
+  justify-content: center;
+  display: flex;
+}
+
+button {
+  font-family: main;
+}
+
+a {
+  color: teal;
+}
+
+a:hover {
+  color: #add8e6;
+  font-style: italic;
+}
+
+button {
+  font-size: 10px;
+}
+</style>
+</head>
+<body>
+    <p>hohoho</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

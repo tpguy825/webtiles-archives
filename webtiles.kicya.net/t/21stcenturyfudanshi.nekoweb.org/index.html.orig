@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>.tile-body {
+  color: #fff;
+  text-align: center;
+  background-color: #181818;
+  font-family: courier new;
+}
+
+.border {
+  border: 20px solid #000;
+  border-image: url("/t/21stcenturyfudanshi.nekoweb.org/bobers.png") 33% round;
+  width: 200px;
+  height: 200px;
+}
+
+.content {
+  background-color: #2c4e72;
+  border: 1px solid #000;
+  border-radius: 5px;
+  height: 200px;
+}
+</style>
+</head>
+
+<body>
+    <div class="border">
+        <div class="content">
+            <h1>
+                Hellooo wah!
+            </h1>
+            <p>
+                i dont have anything yet what am i doing here... i think its in an eternal wip... i like bl, what about you?
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

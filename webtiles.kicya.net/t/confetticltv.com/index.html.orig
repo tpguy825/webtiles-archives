@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/confetticltv.com/confetile2.png");
+}
+
+.topleft {
+  position: absolute;
+  top: 4px;
+  left: 8px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+
+p {
+  color: #fff;
+}
+</style>
+</head>
+<body>
+<p>
+    clan of doom add me to your clan,<br>I am heydoggy's evil twin ->
+    </p>
+    <marquee direction="down" width="250" height="250" behavior="alternate" class="outlined">
+  <marquee behavior="alternate"><a href="https://jame-co.bandcamp.com/" target="_blank"><img src="/t/confetticltv.com/confetti.gif"></a></marquee>
+</marquee>
+
+      <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

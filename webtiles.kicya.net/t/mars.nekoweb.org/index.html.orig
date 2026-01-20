@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #ca6787;
+  background-color: #ffa2bc;
+  margin: 0;
+}
+</style>
+    <style>.text {
+  text-align: center;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+</head>
+<body>
+    <img src="/t/mars.nekoweb.org/webtiles-neuro.gif">
+    <div class="text">
+        <div class="site-name">mars' site</div>
+        <div class="site-domain">mars.nekoweb.org</div>
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

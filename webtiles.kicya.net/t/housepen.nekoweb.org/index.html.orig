@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: KccSign;
+  src: url("/t/housepen.nekoweb.org/KCC-Ganpan_small.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+.tile-body {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  font-family: KccSign;
+}
+
+.wrapper1 {
+  background: repeating-linear-gradient(45deg, #bf9c4e, #bf9c4e 17px, #9d6e45 20px 37px, #bf9c4e 40px, #9d6e45 40px);
+  border-radius: 10px;
+  height: 200px;
+  margin: 10px;
+  padding: 13px;
+  box-shadow: inset 3px 3px 3px #ffffff4d, inset -3px -3px 3px #0000004d;
+}
+
+.wrapper2 {
+  box-sizing: border-box;
+  background: #f9f5e2;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 7px;
+  position: relative;
+  box-shadow: inset 0 0 4px #0009;
+}
+
+.wrapper2 h1 {
+  text-align: center;
+  color: #f1e4a9;
+  -webkit-text-stroke: #9a7756 .7px;
+  font-size: 17px;
+}
+</style>
+    <style>.selector-wrapper {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  position: relative;
+}
+
+#top {
+  z-index: 5;
+  background: url("/t/housepen.nekoweb.org/assets/clothes.png") 0 0 / auto 120px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: -10px;
+}
+
+#bot {
+  z-index: 2;
+  background-image: url("/t/housepen.nekoweb.org/assets/faces.png");
+  background-position: 0 0;
+  background-size: auto 120px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: -10px;
+}
+
+#acc {
+  z-index: 10;
+  background-image: url("/t/housepen.nekoweb.org/assets/acces.png");
+  background-position: 0 0;
+  background-size: auto 120px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: -10px;
+}
+
+#alien {
+  z-index: 0;
+  background-image: url("/t/housepen.nekoweb.org/assets/chii.png");
+  background-size: 100% 100%;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: -10px;
+}
+
+.button-line > button {
+  font-size: 10px;
+}
+
+.dressup-wrapper {
+  grid-template-columns: 120px 1fr;
+  gap: 7px;
+  display: grid;
+}
+</style>
+</head>
+<body>
+    
+    <div class="wrapper1">
+        <div class="wrapper2" style="text-align:center">
+            <h1>
+                !!!!
+            </h1>
+            <div class="dressup-wrapper">
+                <div class="selector-wrapper">
+                    <div id="alien">
+
+                    </div>
+                    <div id="top">
+
+                    </div>
+                    <div id="bot">
+
+                    </div>
+                    <div id="acc">
+
+                    </div>
+                    
+                </div>
+                <div class="button-line" style="display:flex; flex-flow:column;gap:4px">
+                    <button id="top-b">
+                        Change Clothing
+                    </button>
+                    <button id="bot-b">
+                        Change Expression
+                    </button>
+                    <button id="acc-b">
+                        Change Accessory
+                    </button>
+                </div>
+                
+            </div>
+            <a href="https://housepen.nekoweb.org" style="font-size:9px" target="_blank">housepen.nekoweb.org</a>
+        </div>
+    </div>
+    <script type="text/tilescript">    var t=document.getElementById("top-b");
+    var b=document.getElementById("bot-b");
+    var a=document.getElementById("acc-b");
+    var t_e=document.getElementById("top");
+    var b_e=document.getElementById("bot");
+    var a_e=document.getElementById("acc");
+    var topi=0;
+    var boti=0;
+    var acci=0;
+    console.log(t);
+    var na=["0px 0px","120px 0px","240px 0px","360px 0px","480px 0px","600px 0px","720px 0px","840px 0px"];
+
+    t.addEventListener("click",function(e){
+        topi=topi+1;
+        topi=topi%5;
+        t_e.setAttribute("style", "background-position:"+na[topi]);
+    });
+    b.addEventListener("click",function(e){
+        boti=boti+1;
+        boti=boti%6;
+        b_e.setAttribute("style", "background-position:"+na[boti]);
+    });
+    a.addEventListener("click",function(e){
+        acci=acci+1;
+        acci=acci%5;
+        a_e.setAttribute("style", "background-position:"+na[acci]);
+	});</script>
+    
+</body>
+</html>

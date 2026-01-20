@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <style>html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: JPN19, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.tile-body, .tile-body {
+  width: 100%;
+  height: 100%;
+  overflow: none;
+  background-color: #14176b;
+  margin: 0;
+  padding: 0;
+  font-family: "Web437 DOS/V re. JPN19", JPN19, sans-serif;
+}
+
+@font-face {
+  font-family: JPN19;
+  src: url("/t/themirrazz.nekoweb.org/web_dos-v_re_jpn19.woff");
+}
+
+.pane {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  color: #9396e6;
+}
+
+#main {
+  flex-direction: column;
+  display: flex;
+}
+
+#maintop {
+  text-align: center;
+  color: #9396e6;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 80%;
+  font-size: 33px;
+  text-decoration: none;
+  display: flex;
+}
+
+#mainlinks {
+  color: #9396e6;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 20%;
+  text-decoration: none;
+  display: flex;
+}
+
+#nekolink-image, #nekolink-anchor {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  display: block;
+}
+
+#mainlinks a {
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+</style>
+    </head>
+    <body>
+        <div class='app'>
+            <div class='pane' id='main'>
+                <a id="maintop" href="https://themirrazz.nekoweb.org/" target="_blank">
+                    <p>thmrzz</p>
+                </a>
+                <div id='mainlinks'>
+                    <a id='mlkad'>Ads</a>
+                    <a href="https://themirrazz.nekoweb.org/blog" target="_blank">Blog</a>
+                    <a id='mlklgn'>Sign Up</a>
+                    <a id='mlkmm'>More</a>
+                </div>
+            </div>
+            <div class="pane" id="nekolink" style="display: none">
+                <a id='nekolink-anchor'>
+                    <img id='nekolink-image' >
+                </a>
+            </div>
+            <div class="pane" id="signup" style="display: none">
+            </div>
+        </div>
+        <script type="text/tilescript">
+
+console.log('running');
+
+function parseAdList(text) {
+    var index = text.indexOf("var websites = [");
+    if(index === -1) {
+        index = text.indexOf("var sites = [");
+    }
+    var ads = [];
+    if(index > -1) {
+        var dat = text.slice(index);
+        dat = dat.substring(dat.indexOf("["), dat.indexOf(";"));
+        dat = dat.split('\n');
+        dat.pop();
+        dat.shift();
+        dat = dat.map(function (item) {
+            item = item.trim();
+            if(item.lastIndexOf(',') === item.length - 1) {
+                item = item.slice(0, item.length - 1);
+            }
+            return item;
+        });
+        ads = dat.map(function (d) {
+            try {
+                return JSON.parse(d);
+            } catch (error) {
+                return null;
+            }
+        }).filter(function(d) { return d !== null });
+        // dat = '[' + dat.join(',') + ']';
+        // ads = JSON.parse(dat);
+        ads = ads.filter(function (ad) {
+            if(typeof ad[0] === 'string' && typeof ad[1] === 'string') {
+                return true;
+            }
+            return false;
+        });
+        return ads;
+    }
+    return [];
+}
+
+function getAds(cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        cb(parseAdList(xhr.responseText));
+    };
+    xhr.open('GET', 'https://rubybulbs.net/neko.html');
+    xhr.send();
+}
+
+function startAds() {
+    getAds(function (ads) {
+        if(!ads) return alert("Couldn't load ads OwO");
+        document.getElementById('main').style.display = 'none';
+        document.getElementById('nekolink').style.display = '';
+        function refreshAd() {
+            var img = document.getElementById('nekolink-image');
+            var anchor = document.getElementById('nekolink-anchor');
+            var ad = ads[Math.floor(Math.random() * ads.length)];
+            anchor.href = ad[0];
+            setTimeout(refreshAd, 20000);
+            img.setAttribute("alt", ad[2] || 'Advertisement');
+            var uuu = ad[1];
+             img.setAttribute("style", "background-image:url("+uuu+")");
+                img.setAttribute("src", uuu);
+        };
+        refreshAd();
+    });
+}
+
+function vpasw(password) {var lowercase = false;var uppercase = false;var numbers = false;var symbols = false;for(var i = 0; i < password.length; i++) {if('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(password[i]) > -1)uppercase = true;else if('abcdefghijklmnopqrstuvwxyz'.indexOf(password[i]) > -1)lowercase = true;else if('1234567890'.indexOf(password[i]) > -1)numbers = true;else symbols = true;}if(password.length < 8) return "That password is too short!";if(password.length >= 100) return "Woah, can you even remember that password?!";if(((lowercase&&!uppercase)||(uppercase&&!lowercase))&&!(numbers||symbols)){if(password.length < 16) return "That password is too short!";}if(!(lowercase||uppercase||symbols) && numbers)return "Sorry, numeric-only passwords aren't allowed!";}
+
+(function () {
+    var vcode = "NEKO-" + Math.random().toString(36).substring(7);
+    function vnwurl(uname, cb) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            if(xhr.responseText.trim() == vcode) cb(true);
+            else cb(false);
+        };
+        xhr.open('GET','https://corsproxy.io/?url=https://'+uname+'.nekoweb.org/.verify-thmrzz');
+        xhr.send();
+    };
+    function crac(uname, psw, cb) {
+        if(vpasw(psw))return cb({error:vpasw(psw)});
+        vnwurl(uname, function (d) {
+            try {
+            if(!d) cb({
+                error: "Website ownership not verified!"
+            });
+            else {
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    try {
+                        var d = JSON.parse(xhr.responseText);
+                        if(d.error) cb({error:d.error.message});
+                        else cb({success:true});
+                    } catch (error) {
+                        cb({error:"Invalid response from server"})
+                    }
+                };
+                xhr.open('POST','https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCjKIA7CLNcHPQEN8fgtOYDyuv7fJIfw88');
+                xhr.send(JSON.stringify({
+                    clientType: 'CLIENT_TYPE_WEB',
+                    email: uname + '@nekoweb.org',
+                    password: psw,
+                    returnSecureToken: true
+                }));
+            }
+            } catch (error) {
+                cb({error:error})
+            }
+        });
+    };
+    document.getElementById('mlklgn').onclick = function (e) {
+        e.preventDefault();
+        var uuu = prompt('nekoweb username:');
+        var ppp = prompt('create a password:');
+        prompt('paste code on your .verify-thmrzz', vcode);
+        crac(uuu, ppp, function(z){if(z.error)alert(z.error);})
+    };
+})();
+
+document.getElementById('mlkad').onclick = function () { startAds(); }</script>
+    </body>
+</html>

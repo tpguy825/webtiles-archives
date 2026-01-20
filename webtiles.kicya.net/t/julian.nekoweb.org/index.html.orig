@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #000;
+}
+
+p {
+  color: #fff;
+  margin: 0;
+  font-size: 30px;
+}
+
+a {
+  color: #fff;
+}
+
+img {
+  border-style: dotted;
+  border-color: #9e93ff;
+}
+</style>
+</head>
+<body>
+   
+    <div class="text">
+       <a href="https://julian.nekoweb.org" target="_blank"> <img src="https://webtiles.kicya.net/t/julian.nekoweb.org/tile.png">
+      </a></div>
+    
+    <div class="icon">
+        <img src="https://webtiles.kicya.net/t/julian.nekoweb.org/tilesicon.png">
+      </div>
+    
+</body>
+</html>

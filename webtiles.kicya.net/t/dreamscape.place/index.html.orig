@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>.tile-body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.holder {
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+img {
+  width: 250px;
+  height: auto;
+  position: absolute;
+  top: 0;
+}
+
+h1 {
+  color: #fff;
+  -webkit-text-stroke: 1px black;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 5px;
+  font-size: 20px;
+  position: absolute;
+  box-shadow: 1px 1px #000;
+}
+</style>
+</head>
+<body>
+    <div class="holder">
+        <img src="/t/dreamscape.place/kaori.png">
+        <h1>
+            DREAMSCAPE.PLACE
+        </h1>
+        <h1 style="font-size: 15px; position: relative; top: 40px;">
+           	akihiko haters DNI!!
+        </h1>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

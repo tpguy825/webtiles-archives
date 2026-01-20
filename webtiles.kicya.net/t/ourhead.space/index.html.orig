@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+}
+
+a {
+  color: #959595;
+  text-decoration-line: none;
+}
+
+a:hover {
+  color: #fff;
+}
+</style>
+</head>
+<body>
+<div align="center">
+    <img src="/t/ourhead.space/stardance.png" style="width:255px">
+    <p>
+       <a href="https://ourhead.space/" target="_blank">Our website</a> (WIP) & <a href="https://ourheadspace.atabook.org/" target="_blank">Atabook</a>
+    </p>     
+</div>	
+</body>
+</html>

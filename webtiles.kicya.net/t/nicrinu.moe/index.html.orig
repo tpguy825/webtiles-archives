@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+}
+
+.image {
+  position: absolute;
+}
+
+.meow {
+  z-index: 4;
+  position: absolute;
+}
+
+.sank {
+  z-index: 2;
+  position: absolute;
+}
+
+.piinro {
+  z-index: 3;
+  position: absolute;
+}
+
+.pagetext {
+  color: #ff9781;
+  background-color: #f0eeef;
+  margin-top: 235px;
+  padding-left: 50px;
+  font-family: Space Grotesk, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <img class="piinro" src="/t/nicrinu.moe/piinro.png" alt="meow">
+        <img class="sank" src="/t/nicrinu.moe/sank.png" alt="meow">
+        <img class="meow" src="/t/nicrinu.moe/button.png" alt="meow">
+        <img class="image" src="/t/nicrinu.moe/cheeb.gif" alt="nicrinu.moe">
+
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

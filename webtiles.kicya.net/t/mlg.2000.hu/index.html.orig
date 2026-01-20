@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>@keyframes background {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 256vh;
+  }
+}
+
+.tile-body {
+  color: #000;
+  background: linear-gradient(#0041ff 0%, #aeb50a 40%, #00b309 70%, #0041ff 100%);
+  height: 100vh;
+  font-family: Comic Sans MS;
+  animation: 4000s linear infinite background;
+}
+
+#container {
+  background-color: #e9967a;
+  outline: solid #fff;
+}
+
+#tamamo, #oguri, #content {
+  display: inline-block;
+}
+
+h1 {
+  text-align: center;
+}
+
+a:visited {
+  color: #0000cd;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #b22222;
+}
+
+#tamamo {
+  float: right;
+}
+
+#tamamo, #oguri {
+  width: 20%;
+}
+
+#content {
+  width: 40%;
+  margin-left: 10%;
+  font-weight: bold;
+}
+</style>
+    <script defer type="text/tilescript">var oguriImage = document.getElementById("oguri");
+var tamamoImage = document.getElementById("tamamo");
+
+function Change() {
+    oguriImage.src = "images/OguriWave.gif";
+    
+}
+function ChangeT() {
+    tamamoImage.src = "images/TamamoWave.gif";
+    
+}
+
+function ChangeBack() {
+    oguriImage.src = "images/Oguri.gif";
+    
+}
+function ChangeBackT() {
+    tamamoImage.src = "images/Tamamo.gif";
+    
+}
+
+oguriImage.addEventListener("mouseover", Change);
+tamamoImage.addEventListener("mouseover", ChangeT);
+
+oguriImage.addEventListener("mouseleave",ChangeBack);
+tamamoImage.addEventListener("mouseleave", ChangeBackT);
+</script>
+    
+</head>
+<body>
+    <div id="container">
+        <h1>MLG2460</h1>
+        <div>
+        <img src="/t/mlg.2000.hu/images/Oguri.gif" alt="Oguri chibi dancing" id="oguri">
+        <div id="content">
+        <span>Check out <a href="https://mlg.2000.hu/" target="_blank">My Site</a>!!</span>
+        </div>
+        <img src="/t/mlg.2000.hu/images/Tamamo.gif" alt="Tamamo chibi dancing" id="tamamo">
+        </div>
+    </div>
+    
+</body>
+</html>

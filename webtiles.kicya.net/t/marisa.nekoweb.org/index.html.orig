@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body, html {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.root {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.overlay {
+  transition: all 1s;
+  position: absolute;
+}
+
+.fadeout {
+  opacity: 0;
+}
+
+#marisa_portrait.fadeout {
+  left: -100px;
+}
+
+#marisa_text.fadeout {
+  left: 100px;
+}
+
+#start_fx.fadeout, #load_screen.fadeout {
+  opacity: 0;
+}
+
+#follower {
+  pointer-events: none;
+  width: 40px;
+  height: 40px;
+  display: none;
+  position: absolute;
+}
+</style>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("toho prawjaect!");
+
+
+window.addEventListener("load", function() {
+    var triggered = false;
+
+    document.addEventListener("click", function() {
+        if (triggered) return;
+        triggered = true;
+
+        fadeOutStartScreen();
+    });
+});
+
+function fadeOutStartScreen() {
+    var ids = [
+        "load_screen",
+        "marisa_portrait",
+        "marisa_text",
+        "start_fx"
+    ];
+
+    for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (el) {
+            el.className += " fadeout";
+        }
+    }
+}
+</script>
+</head>
+<body>
+    <div id="root_background" class="root">
+
+        <img id="bg" src="/t/marisa.nekoweb.org/resources/bg_lowfps.webp">
+        
+        
+    </div>
+    
+	<div id="root_foreground" class="root">
+        
+        
+        <img id="marisa_portrait" class="overlay" src="/t/marisa.nekoweb.org/resources/marisa_portrait.webp">
+        <img id="marisa_text" class="overlay" src="/t/marisa.nekoweb.org/resources/marisa_text.webp">
+        
+
+    </div>
+    <div class="root">
+        <a href="https://ordinarymagician2000.tumblr.com/" style="position:absolute; top:0; left:0; width:250px; height:250px; z-index:99; display:block; " target="_blank"></a>
+    </div>
+</body>
+</html>

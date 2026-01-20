@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: red;
+  background: #000;
+  font-family: ms gothic;
+}
+
+.hovRscare {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  width: 250px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tile-body:hover .hovRscare {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<a href="https://vilespace.neocities.org/" target="_blank">
+<img src="/t/vilespace.neocities.org/rot.gif" width="250">
+    <p>(｀▽´)</p>
+        <img src="/t/vilespace.neocities.org/scary.png" class="hovRscare">
+    </a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

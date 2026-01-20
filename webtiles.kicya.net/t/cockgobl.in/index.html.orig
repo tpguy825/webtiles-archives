@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>html, .tile-body {
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: #ffe6f2;
+  width: 248px;
+  height: 248px;
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+#window {
+  width: 232px;
+  height: 216px;
+  position: absolute;
+  top: 24px;
+  left: 8px;
+}
+
+#tab {
+  z-index: 10;
+  color: #fff;
+  text-shadow: 1px 1px #ff66a3;
+  white-space: nowrap;
+  background-color: #ffbde1;
+  border: 1px solid #ff8da1;
+  border-color: #fff #ff8da1 #ff8da1 #fff;
+  border-radius: 4px 4px 0 0;
+  width: auto;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 24px;
+  font-weight: bold;
+  line-height: 18px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.close-box {
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  background-color: #ff66a3;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 11px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+
+.close-box:active {
+  background-color: #cc0052;
+}
+
+.close-box:after {
+  content: "x";
+  display: block;
+}
+
+.btn-base {
+  color: #ff66a3;
+  text-align: center;
+  cursor: pointer;
+  z-index: 50;
+  background: #fff;
+  border: 1px solid #ff66a3;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  line-height: 22px;
+  position: absolute;
+  top: -15px;
+  right: 1px;
+  box-shadow: 1px 1px 2px #ff69b433;
+}
+
+.btn-base:hover {
+  background: #ffe6f2;
+  border-color: #ff3385;
+  transform: scale(1.1);
+}
+
+.btn-base:active {
+  background: #ff66a3;
+}
+
+#btn-feed {
+  right: 1px;
+}
+
+#btn-wash {
+  right: 30px;
+}
+
+#btn-smack {
+  right: 60px;
+}
+
+.wincing .c-eye {
+  background: none;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-radius: 0;
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+}
+
+.crying #p-eye-l, .wincing #p-eye-l {
+  top: 14px;
+  left: 2px;
+  transform: rotate(45deg);
+}
+
+.crying #p-eye-r, .wincing #p-eye-r {
+  top: 14px;
+  right: 2px;
+  transform: rotate(-135deg);
+}
+
+#frame {
+  box-sizing: border-box;
+  background-color: #fff5f8;
+  border: 2px solid #ffbde1;
+  border-radius: 0 0 4px 4px;
+  width: 232px;
+  height: 198px;
+  position: absolute;
+  top: 18px;
+  left: 0;
+}
+
+#content {
+  background-color: #fff;
+  background-image: url("/t/cockgobl.in/doki3.gif");
+  background-size: 220px 220px;
+  border: 1px solid #ffbde1;
+  border-radius: 2px;
+  position: absolute;
+  inset: 4px;
+  overflow: hidden;
+}
+
+#stats {
+  z-index: 20;
+  color: #ff66a3;
+  pointer-events: none;
+  text-shadow: 1px 1px #fff;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+
+.stat-row {
+  height: 10px;
+  margin-bottom: 4px;
+  line-height: 10px;
+}
+
+.label {
+  width: 30px;
+  display: inline-block;
+}
+
+.bar-outer {
+  vertical-align: middle;
+  background: #fff;
+  border: 1px solid #f9c;
+  border-radius: 4px;
+  width: 50px;
+  height: 8px;
+  margin-left: 2px;
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+}
+
+.bar-inner {
+  border-radius: 2px;
+  width: 0%;
+  height: 100%;
+  transition: width .2s;
+}
+
+#bar-hunger {
+  background: #ff66a3;
+}
+
+#bar-happy {
+  background: #4db8ff;
+}
+
+.bar-outer.danger #bar-hunger {
+  background: purple;
+  box-shadow: 0 0 4px #f0f;
+}
+
+#air-counter {
+  color: #ff66a3;
+  background: #ffffffb3;
+  border-radius: 2px;
+  margin-top: 4px;
+  padding: 2px;
+}
+
+#btn-high-scores {
+  color: #ff66a3;
+  text-align: center;
+  cursor: pointer;
+  z-index: 30;
+  background: #fff;
+  border: 1px solid #ff66a3;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-weight: bold;
+  line-height: 18px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  box-shadow: 1px 1px 2px #ff69b433;
+}
+
+#btn-high-scores:hover {
+  background: #ffe6f2;
+}
+
+#food {
+  z-index: 5;
+  width: 20px;
+  height: 24px;
+  display: none;
+  position: absolute;
+}
+
+.f-inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.f-body {
+  background: repeating-linear-gradient(90deg, #fcd, #fcd 2px, #f9b 2px 4px);
+  border-radius: 0 0 4px 4px;
+  width: 16px;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  transform: perspective(10px)rotateX(5deg);
+}
+
+.f-stem {
+  background-color: #fff;
+  border-radius: 10px 10px 4px 4px;
+  width: 20px;
+  height: 12px;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  box-shadow: inset 0 2px #eee;
+}
+
+.f-stem:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  top: -2px;
+  left: 8px;
+}
+
+.f-shine {
+  background: #f0f;
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  box-shadow: 6px 2px #0ff, 3px -1px #ff0;
+}
+
+#creature {
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+
+#speech-bubble {
+  text-align: center;
+  color: #ff66a3;
+  z-index: 100;
+  background-color: #fff;
+  border: 1px solid #ff66a3;
+  border-radius: 6px;
+  width: 60px;
+  padding: 2px 4px;
+  font-size: 10px;
+  font-weight: bold;
+  display: none;
+  position: absolute;
+  top: -28px;
+  left: -18px;
+}
+
+#speech-bubble:after {
+  content: "";
+  border-top: 4px solid #ff66a3;
+  border-left: 4px solid #0000;
+  border-right: 4px solid #0000;
+  position: absolute;
+  bottom: -4px;
+  left: 28px;
+}
+
+.c-body {
+  z-index: 1;
+  background-color: #000;
+  border-radius: 50%;
+  width: 32px;
+  height: 26px;
+  position: absolute;
+  top: 6px;
+  left: 0;
+}
+
+.c-hair-top {
+  z-index: 2;
+  background-color: #f9c;
+  border-radius: 12px 12px 0 0;
+  width: 32px;
+  height: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.c-hair-side-l {
+  z-index: 1;
+  background-color: #f9c;
+  border-radius: 6px;
+  width: 10px;
+  height: 18px;
+  position: absolute;
+  top: 4px;
+  left: -4px;
+  transform: rotate(15deg);
+}
+
+.c-hair-side-r {
+  z-index: 1;
+  background-color: #f9c;
+  border-radius: 6px;
+  width: 10px;
+  height: 18px;
+  position: absolute;
+  top: 4px;
+  right: -4px;
+  transform: rotate(-15deg);
+}
+
+.c-hair-bang-l {
+  z-index: 3;
+  background-color: #f9c;
+  border-radius: 0 0 6px 6px;
+  width: 6px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+.c-hair-bang-r {
+  z-index: 3;
+  background-color: #f9c;
+  border-radius: 0 0 6px 6px;
+  width: 6px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
+.c-ribbon-l {
+  z-index: 4;
+  background-color: red;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  top: 4px;
+  left: -2px;
+}
+
+.c-ribbon-r {
+  z-index: 4;
+  background-color: red;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  top: 4px;
+  right: -2px;
+}
+
+.c-clip {
+  z-index: 5;
+  background-color: red;
+  width: 6px;
+  height: 4px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  transform: rotate(-10deg);
+}
+
+.c-eye {
+  z-index: 2;
+  background-color: #fff;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  top: 14px;
+}
+
+#p-eye-l {
+  left: 8px;
+}
+
+#p-eye-r {
+  right: 8px;
+}
+
+.blink .c-eye {
+  height: 1px;
+  top: 16px;
+}
+
+.c-mouth {
+  z-index: 2;
+  background-color: #fff;
+  width: 8px;
+  height: 2px;
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+}
+
+.happy .c-mouth {
+  background-color: #0000;
+  border-bottom: 2px solid #fff;
+  border-radius: 50%;
+  height: 4px;
+}
+
+.full .c-mouth {
+  background-color: #0000;
+  border-bottom: 4px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 8px;
+  bottom: 6px;
+  left: 8px;
+}
+
+.eating .c-mouth {
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 12px;
+  height: 10px;
+  bottom: 6px;
+  left: 10px;
+}
+
+.sad .c-mouth {
+  background-color: #0000;
+  border-top: 2px solid #fff;
+  border-bottom: none;
+  border-radius: 50% 50% 0 0;
+  width: 8px;
+  height: 4px;
+  bottom: 6px;
+}
+
+.crying .c-eye {
+  background: none;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-radius: 0;
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+}
+
+.crying .c-mouth {
+  background: none;
+  border-top: 2px solid #fff;
+  border-bottom: none;
+  border-radius: 50% 50% 0 0;
+  width: 10px;
+  height: 4px;
+  animation: .2s infinite tremble;
+  bottom: 5px;
+}
+
+@keyframes tremble {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translate(-1px);
+  }
+
+  50% {
+    transform: translate(1px);
+  }
+
+  75% {
+    transform: translate(0);
+  }
+}
+
+.tear {
+  z-index: 20;
+  pointer-events: none;
+  background-color: #0ff;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+}
+
+.water-puddle {
+  z-index: 0;
+  pointer-events: none;
+  background-color: #0ff6;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60%;
+  animation: 5s forwards fadeOut;
+  position: absolute;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: .8;
+    transform: scale(.8);
+  }
+
+  20% {
+    opacity: .6;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+#bathtub-back {
+  z-index: 5;
+  background: #fff;
+  border: 2px solid #fcd;
+  border-radius: 4px 4px 10px 10px;
+  width: 80px;
+  height: 40px;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#bathtub-water {
+  z-index: 6;
+  background: #64c8ff99;
+  border-radius: 4px;
+  width: 76px;
+  height: 34px;
+  display: none;
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#bathtub-front {
+  z-index: 20;
+  pointer-events: none;
+  background: linear-gradient(#0000 0% 10%, #fff 10%);
+  border: 2px solid #fcd;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  width: 84px;
+  height: 30px;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes splashing {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.splashing-anim {
+  animation: .2s infinite splashing;
+}
+
+.c-antenna, .c-antenna-tip {
+  display: none;
+}
+
+#hand {
+  z-index: 200;
+  pointer-events: none;
+  transform-origin: bottom;
+  filter: drop-shadow(2px 2px 2px #0003);
+  font-size: 32px;
+  display: none;
+  position: absolute;
+}
+
+@keyframes slap-animation {
+  0% {
+    opacity: 0;
+    transform: rotate(40deg)translate(30px, -20px)scale(.8);
+  }
+
+  20% {
+    opacity: 1;
+    transform: rotate(-20deg)translate(0)scale(1.2);
+  }
+
+  40% {
+    opacity: 1;
+    transform: rotate(-20deg)translate(0)scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(40deg)translate(30px, -20px)scale(.8);
+  }
+}
+
+.slapping {
+  animation: .4s ease-out forwards slap-animation;
+  display: block !important;
+}
+
+button {
+  cursor: pointer;
+  color: #ff66a3;
+  background: #fff;
+  border: 1px solid #ff66a3;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #ffe6f2;
+}
+
+button:active {
+  color: #fff;
+  background: #ff66a3;
+}
+
+#respawn-btn {
+  z-index: 50;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px #ff64a033;
+}
+
+.dialog-box {
+  z-index: 100;
+  text-align: center;
+  color: #ff66a3;
+  background: #fff;
+  border: 2px solid #ff66a3;
+  border-radius: 6px;
+  width: 180px;
+  padding: 8px;
+  font-size: 10px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #ff69b44d;
+}
+
+.dialog-box p {
+  margin: 4px 0 10px;
+}
+
+.dialog-box button {
+  min-width: 40px;
+  margin: 0 4px;
+}
+
+#input-name {
+  color: #ff66a3;
+  border: 1px solid #ff66a3;
+  border-radius: 4px;
+  width: 100px;
+  margin-bottom: 6px;
+  padding: 2px;
+}
+
+#score-list {
+  text-align: left;
+  border-top: 1px dotted #fcd;
+  max-height: 100px;
+  margin-bottom: 8px;
+  padding-top: 4px;
+  font-size: 9px;
+  overflow-y: auto;
+}
+
+.score-item {
+  border-bottom: 1px dotted #fcd;
+  padding: 2px 0;
+}
+
+.score-val {
+  float: right;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+    <div id="window">
+        <div id="tab">
+            Just Natsuki.
+            <div class="close-box" id="win-close"></div>
+        </div>
+        <div id="btn-wash" class="btn-base" title="Wash">🧼</div>
+        <div id="btn-smack" class="btn-base" title="Smack">💢</div>
+        <div id="btn-feed" class="btn-base" title="Feed">🧁</div>
+
+
+        <div id="frame">
+            <div id="content">
+
+                <div id="stats">
+                    <div class="stat-row">
+                        <span class="label">FED</span>
+                        <div id="cont-hunger" class="bar-outer">
+                            <div id="bar-hunger" class="bar-inner"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">HAP</span>
+                        <div class="bar-outer">
+                            <div id="bar-happy" class="bar-inner"></div>
+                        </div>
+                    </div>
+                    <div id="air-counter">Jumps: 0</div>
+                </div>
+
+                <div id="btn-high-scores" title="Leaderboard">🏆</div>
+
+                
+                <div id="confirm-dialog" class="dialog-box">
+                    <p>This will erase Natsuki. Are you sure?</p>
+                    <button id="btn-yes">Yes</button>
+                    <button id="btn-no">No</button>
+                </div>
+
+                
+                <div id="score-entry" class="dialog-box">
+                    <p style="font-weight:bold;">New Poem! (Score: <span id="entry-score-val">0</span>)</p>
+                    <input type="text" id="input-name" placeholder="Your Name" maxlength="12" autocomplete="off">
+                    <br>
+                    <button id="btn-submit-score">Save</button>
+                    <button id="btn-cancel-score">Skip</button>
+                </div>
+
+                
+                <div id="leaderboard" class="dialog-box">
+                    <p style="font-weight:bold;">Top Poems</p>
+                    <div id="score-list">Loading...</div>
+                    <button id="btn-close-board">Close</button>
+                </div>
+
+                
+                <div id="welcome-dialog" class="dialog-box">
+                    <p style="font-weight:bold;">Welcome to the Club!</p>
+                    <p style="font-size:12px;">Your progress is saved automatically.<br>
+                        Natsuki will remember you...</p>
+                    <button id="btn-close-welcome">Okay!</button>
+                </div>
+
+                <button id="respawn-btn">Reset Poem</button>
+
+                
+                <div id="food">
+                    <div class="f-inner">
+                        <div class="f-body"></div>
+                        <div class="f-stem"></div>
+                        <div class="f-shine"></div>
+                    </div>
+                </div>
+
+                <div id="hand">✋</div>
+
+                <div id="bathtub-back"></div>
+                <div id="bathtub-water"></div>
+
+                <div id="creature">
+                    <div id="speech-bubble">OH NO!</div>
+                    
+                    <div id="p-hair-t" class="c-hair-top"></div>
+                    <div id="p-hair-l" class="c-hair-side-l"></div>
+                    <div id="p-hair-r" class="c-hair-side-r"></div>
+                    <div id="p-hair-bl" class="c-hair-bang-l"></div>
+                    <div id="p-hair-br" class="c-hair-bang-r"></div>
+
+                    <div id="p-rib-l" class="c-ribbon-l"></div>
+                    <div id="p-rib-r" class="c-ribbon-r"></div>
+                    <div id="p-clip" class="c-clip"></div>
+
+                    <div id="p-body" class="c-body"></div>
+                    <div id="p-eye-l" class="c-eye"></div>
+                    <div id="p-eye-r" class="c-eye"></div>
+                    <div id="p-mouth" class="c-mouth"></div>
+                </div>
+
+                <div id="bathtub-front"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/tilescript">(function () {
+    var mainWindow = document.getElementById('window');
+    var screen = document.getElementById('content');
+    var creature = document.getElementById('creature');
+    var foodEl = document.getElementById('food');
+    var tabTitle = document.getElementById('tab');
+    var tabTitle = document.getElementById('tab');
+    var btnRespawn = document.getElementById('respawn-btn');
+    var btnFeed = document.getElementById('btn-feed');
+    var btnWash = document.getElementById('btn-wash');
+    var btnSmack = document.getElementById('btn-smack');
+
+    var barHunger = document.getElementById('bar-hunger');
+    var contHunger = document.getElementById('cont-hunger');
+    var barHappy = document.getElementById('bar-happy');
+    var airDisplay = document.getElementById('air-counter');
+    var hand = document.getElementById('hand');
+
+    // Bathtub Elements
+    var tubBack = document.getElementById('bathtub-back');
+    var tubWater = document.getElementById('bathtub-water');
+    var tubFront = document.getElementById('bathtub-front');
+
+    var winClose = document.getElementById('win-close');
+    var confirmDialog = document.getElementById('confirm-dialog');
+    var btnYes = document.getElementById('btn-yes');
+    var btnNo = document.getElementById('btn-no');
+    var speechBubble = document.getElementById('speech-bubble');
+
+    // Score Elements
+    var btnHighScores = document.getElementById('btn-high-scores');
+    var dialogEntry = document.getElementById('score-entry');
+    var dialogLeaderboard = document.getElementById('leaderboard');
+    var entryScoreVal = document.getElementById('entry-score-val');
+    var inputName = document.getElementById('input-name');
+    var btnSubmitScore = document.getElementById('btn-submit-score');
+    var btnCancelScore = document.getElementById('btn-cancel-score');
+    var btnCloseBoard = document.getElementById('btn-close-board');
+    var scoreList = document.getElementById('score-list');
+
+    // Welcome Dialog
+    var welcomeDialog = document.getElementById('welcome-dialog');
+    var btnCloseWelcome = document.getElementById('btn-close-welcome');
+
+    if (!localStorage.getItem('natsuki_welcome_seen')) {
+        welcomeDialog.style.display = 'block';
+        isPaused = true;
+    }
+
+    btnCloseWelcome.addEventListener('click', function (e) {
+        e.stopPropagation();
+        welcomeDialog.style.display = 'none';
+        localStorage.setItem('natsuki_welcome_seen', 'true');
+        isPaused = false;
+    });
+
+    // API Configuration
+    var API_URL = "https://cockgobl.in/webtiles/api/natsuki.php";
+
+    // --- Persistence Logic ---
+    var PetStorage = {
+        hash: null,
+        init: function (callback) {
+            var storedHash = localStorage.getItem('natsuki_pet_hash');
+            if (storedHash) {
+                this.hash = storedHash;
+                this.load(callback);
+            } else {
+                this.register(callback);
+            }
+        },
+        register: function (callback) {
+            var self = this;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", API_URL + "?action=register_pet", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    try {
+                        var res = JSON.parse(xhr.responseText);
+                        if (res.success) {
+                            self.hash = res.pet_hash;
+                            localStorage.setItem('natsuki_pet_hash', self.hash);
+                            if (callback) callback(null); // Fresh pet
+                        }
+                    } catch (e) { console.error("Reg Error", e); }
+                }
+            };
+            xhr.send();
+        },
+        load: function (callback) {
+            var self = this;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", API_URL + "?action=load_pet&pet_hash=" + this.hash, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            if (callback) callback(data);
+                        } catch (e) { console.error("Load Parse Error", e); }
+                    } else {
+                        // If 404 or error, maybe re-register?
+                        console.warn("Load failed, re-registering?");
+                        // For now, just callback null to use defaults
+                        if (callback) callback(null);
+                    }
+                }
+            };
+            xhr.send();
+        },
+        save: function (hunger, happiness, deaths) {
+            if (!this.hash) return;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", API_URL, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var params = "action=save_pet&pet_hash=" + this.hash +
+                "&hunger=" + hunger +
+                "&happiness=" + happiness +
+                "&deaths=" + deaths;
+            xhr.send(params);
+        },
+        sync: function (callback) {
+            if (!this.hash) return;
+            // Use load to fetch current state
+            this.load(function (data) {
+                if (data) {
+                    // Update global vars
+                    // We need to be careful not to overwrite local "newer" changes if we were editing?
+                    // But for simple sync, last write wins / server wins is okay.
+                    // Ideally we only update if the server time is significantly newer or values differ?
+                    // For now, let's just blindly sync to server state to ensure consistency.
+
+                    // However, to prevent "jitter" if we are feeding locally, maybe check last interaction time?
+                    // Actually, let's just update. 
+
+                    var newHunger = parseFloat(data.hunger);
+                    var newHappy = parseFloat(data.happiness);
+                    var newDeaths = parseInt(data.deaths);
+
+                    // Offline decay adjustment might need to happen here too if we want to be super accurate,
+                    // but usually sync is for "live" updates.
+
+                    hunger = newHunger;
+                    happiness = newHappy;
+                    deaths = newDeaths;
+
+                    if (hunger >= 200 && !isDead) {
+                        // Remote explosion
+                        explode();
+                    } else if (hunger < 200 && isDead) {
+                        // Remote respawn
+                        respawn();
+                    }
+
+                    if (callback) callback();
+                }
+            });
+        }
+    };
+
+
+    // Updated parts list to include hair for explosion
+    var parts = [
+        document.getElementById('p-body'),
+        document.getElementById('p-hair-t'),
+        document.getElementById('p-hair-l'),
+        document.getElementById('p-hair-r'),
+        document.getElementById('p-rib-l'),
+        document.getElementById('p-rib-r'),
+        document.getElementById('p-clip'),
+        document.getElementById('p-eye-l'),
+        document.getElementById('p-eye-r'),
+        document.getElementById('p-mouth')
+    ];
+
+    var boundsW = 218;
+    var boundsH = 184;
+    var cSize = 32;
+
+    var cx = boundsW / 2 - (cSize / 2);
+    var cy = boundsH / 2 - (cSize / 2);
+    var vx = 2;
+    var vy = 0;
+    var gravity = 0.5;
+    var bounce = -0.5;
+
+    var frameCount = 0;
+    // Defaults
+    var hunger = 20;
+    var happiness = 50;
+    var deaths = 0;
+
+    // Time-based decay constants (ms)
+    var ONE_HOUR = 3600 * 1000;
+    var HUNGER_FULL_TIME = 24 * ONE_HOUR; // 100 units in 24 hours
+    var HAPPY_FULL_TIME = 12 * ONE_HOUR;  // 100 units in 12 hours
+
+    // Rates per millisecond
+    var HUNGER_RATE = 100 / HUNGER_FULL_TIME;
+    var HAPPY_RATE = 100 / HAPPY_FULL_TIME;
+    var OVEREAT_DECAY_RATE = 100 / (60 * 1000); // Drop 100 units in 60 seconds
+
+    var isDead = false;
+    var debris = [];
+
+    var hasFood = false;
+    var foodX = 0;
+    var foodY = 0;
+    var foodVy = 0;
+    var isEating = false;
+    var eatTimer = 0;
+
+    var airJumps = 0;
+    var sadTimer = 0;
+    var tears = [];
+    var puddleTimer = 0;
+
+    var isPaused = false;
+    var pendingScore = 0;
+    var isWincing = false; // New state for smack reaction
+    var isWashing = false; // Washing State
+    var washTimer = 0;
+
+    var lastTime = Date.now();
+    var saveTimer = 0;
+    var SAVE_INTERVAL = 10000; // Save every 10s
+    var syncTimer = 0;
+    var SYNC_INTERVAL = 5000; // Poll every 5s
+    // Removed isReady flag to allow immediate start
+
+    // --- Initialization ---
+    PetStorage.init(function (data) {
+        if (data) {
+            hunger = parseFloat(data.hunger);
+            happiness = parseFloat(data.happiness);
+            deaths = parseInt(data.deaths);
+
+            // Offline Decay calculation
+            if (data.last_seen && data.server_time) {
+                var elapsed = (data.server_time - data.last_seen) * 1000; // to ms
+                if (elapsed > 0) {
+                    hunger += elapsed * HUNGER_RATE;
+                    happiness -= elapsed * HAPPY_RATE;
+
+                    // Clamp
+                    if (happiness < 0) happiness = 0;
+                    // Hunger caps at 200 (explosion)
+                }
+            }
+        }
+        // Check death state immediately
+        if (hunger >= 200) {
+            explode();
+        }
+    });
+
+
+    function loop() {
+        if (isPaused) return;
+
+        var now = Date.now();
+        var dt = now - lastTime;
+        lastTime = now;
+
+        if (!isDead) { // Don't decay if dead
+            // Happiness decay
+            if (happiness > 0) {
+                happiness -= HAPPY_RATE * dt;
+                if (happiness < 0) happiness = 0;
+            }
+
+            // Hunger accumulation or decay
+            if (hunger > 100) {
+                hunger -= OVEREAT_DECAY_RATE * dt;
+                if (hunger < 100) hunger = 100;
+            } else if (hunger < 200) {
+                hunger += HUNGER_RATE * dt;
+            }
+        }
+
+        // Auto-save logic
+        // Auto-save logic
+        saveTimer += dt;
+        if (saveTimer > SAVE_INTERVAL) {
+            saveTimer = 0;
+            if (!isDead) {
+                PetStorage.save(hunger, happiness, deaths);
+            }
+        }
+
+        // Auto-sync logic
+        syncTimer += dt;
+        if (syncTimer > SYNC_INTERVAL) {
+            syncTimer = 0;
+            PetStorage.sync();
+        }
+
+        if (isDead) {
+            updateDebris();
+            return;
+        }
+
+        updateTears();
+
+        barHappy.style.width = Math.max(0, Math.min(100, happiness)) + '%';
+        barHunger.style.width = hunger + '%'; // User wants it to overflow past 100%
+
+        // Chubbiness effect
+        if (hunger > 100) {
+            var scale = 1 + ((hunger - 100) / 300); // Subtle widening
+            creature.style.transform = 'scale(' + scale + ', 1)';
+        } else {
+            creature.style.transform = 'scale(1, 1)';
+        }
+
+        if (hunger >= 100) {
+            if (contHunger.className.indexOf('danger') === -1) {
+                contHunger.className += ' danger';
+            }
+        } else {
+            contHunger.className = 'bar-outer';
+        }
+
+        if (hunger >= 200) {
+            explode();
+            PetStorage.save(hunger, happiness, deaths); // Save death instantly
+            return;
+        }
+
+        if (sadTimer > 0) {
+            sadTimer--;
+        }
+
+        vy += gravity;
+
+        if (hasFood && !isEating) {
+            foodVy += gravity;
+            foodY += foodVy;
+
+            if (foodY > boundsH - 24) {
+                foodY = boundsH - 24;
+                foodVy = 0;
+            }
+
+            foodEl.style.top = Math.round(foodY) + 'px';
+
+            var dx = foodX - cx;
+            var distance = Math.abs(dx);
+
+            if (distance < 10 && Math.abs(foodY - cy) < 24) {
+                vx = 0;
+                if (foodVy === 0 || Math.abs(foodY - cy) < 10) {
+                    startEating();
+                }
+            } else {
+                if (cy >= boundsH - cSize - 2) {
+                    vy = -4;
+                    vx = (dx > 0) ? 3 : -3;
+                }
+            }
+        }
+
+        cx += vx;
+        cy += vy;
+
+        if (cy > boundsH - cSize) {
+            cy = boundsH - cSize;
+            vy *= bounce;
+            if (vx > 0) vx -= 0.1;
+            if (vx < 0) vx += 0.1;
+
+            if (airJumps > 0) {
+                // Check for High Score
+                if (airJumps > 10) {
+                    showScoreEntry(airJumps);
+                }
+
+                airJumps = 0;
+                airDisplay.innerText = "Jumps: " + airJumps;
+                sadTimer = 60;
+            }
+
+            if (Math.abs(vy) < 1.5) {
+                vy = 0;
+                if (!hasFood && !isEating && Math.random() > 0.98) {
+                    vy = -4;
+                    vx = (Math.random() * 4) - 2;
+                }
+            }
+        }
+
+        if (cx > boundsW - cSize) {
+            cx = boundsW - cSize;
+            vx *= -0.8;
+        }
+        if (cx < 0) {
+            cx = 0;
+            vx *= -0.8;
+        }
+
+        creature.style.left = Math.round(cx) + 'px';
+        creature.style.top = Math.round(cy) + 'px';
+
+        frameCount++;
+
+        if (isEating) {
+            eatTimer--;
+            if (eatTimer <= 0) {
+                finishEating();
+            }
+        }
+
+        var cls = '';
+        if (isWincing) {
+            cls += ' wincing';
+        } else if (isEating) {
+            cls += ' eating';
+        } else if (!isDead && happiness <= 0) {
+            cls += ' crying';
+            spawnTears();
+            spawnWaterTrail();
+        } else if (sadTimer > 0) {
+            cls += ' sad';
+        } else if (hunger >= 100) {
+            cls += ' full';
+        } else if (happiness > 10) {
+            cls += ' happy';
+        } else if (frameCount % 90 < 5) {
+            cls += ' blink';
+        }
+
+        // Apply splashing animation if washing
+        if (isWashing) {
+            cls += ' splashing-anim';
+            // Spawn water particles
+            if (frameCount % 5 === 0) spawnWaterTrail();
+        }
+
+        creature.className = cls;
+    }
+
+    function jump() {
+        if (isEating || isDead || isPaused || isWashing) return;
+        vy = -8;
+        vx = (Math.random() * 8) - 4;
+        happiness = 100;
+
+        airJumps++;
+        airDisplay.innerText = "Jumps: " + airJumps;
+    }
+
+    function spawnFood(x, y) {
+        if (hasFood || isEating || isDead || isPaused) return;
+
+        // If no coordinates provided (e.g. button click), randomize at top
+        if (x === undefined || y === undefined) {
+            x = 20 + Math.random() * (boundsW - 40);
+            y = -20; // Start above screen
+        }
+
+        foodX = x - 10;
+        foodY = y - 12;
+        foodVy = 0;
+
+        var padding = 12;
+        if (foodX < padding) foodX = padding;
+        if (foodX > boundsW - 20 - padding) foodX = boundsW - 20 - padding;
+
+        if (foodY > boundsH - 24) foodY = boundsH - 24;
+
+        hasFood = true;
+        foodEl.style.left = foodX + 'px';
+        foodEl.style.top = foodY + 'px';
+        foodEl.style.display = 'block';
+    }
+
+    function startEating() {
+        isEating = true;
+        eatTimer = 30;
+    }
+
+    function finishEating() {
+        isEating = false;
+        hasFood = false;
+        foodEl.style.display = 'none';
+        vy = -4;
+        happiness = 100;
+        hunger += 20;
+        PetStorage.save(hunger, happiness, deaths); // Save after eating
+    }
+
+    // --- Crying Logic ---
+    function spawnTears() {
+        if (Math.random() > 0.1) return;
+
+        var isLeft = Math.random() > 0.5;
+        var tx = cx + (isLeft ? 10 : 22);
+        var ty = cy + 18;
+
+        var t = document.createElement('div');
+        t.className = 'tear';
+        t.style.left = Math.round(tx) + 'px';
+        t.style.top = Math.round(ty) + 'px';
+        screen.appendChild(t);
+
+        tears.push({
+            el: t,
+            x: tx,
+            y: ty,
+            vy: 0
+        });
+    }
+
+    function wash() {
+        if (isDead || isPaused || isWashing) return;
+
+        isWashing = true;
+        isPaused = true; // Pause physics/inputs during wash
+
+        // Show tub
+        tubBack.style.display = 'block';
+        tubWater.style.display = 'block';
+        tubFront.style.display = 'block';
+
+        // Position creature in tub
+        // Tub bottom is at bottom:20px. 
+        // Creature needs to sit in it.
+        // Tub center X is boundsW/2.
+        // Tub height 40px, water 34px. 
+        // Let's place creature so bottom is around boundsH - 30?
+        cx = (boundsW / 2) - (cSize / 2);
+        cy = boundsH - 50; // Sit in tub
+        vx = 0;
+        vy = 0;
+
+        // Force update position immediately
+        creature.style.left = Math.round(cx) + 'px';
+        creature.style.top = Math.round(cy) + 'px';
+
+        // 5 second timer
+        setTimeout(function () {
+            finishWash();
+        }, 5000);
+    }
+
+    function finishWash() {
+        isWashing = false;
+        isPaused = false;
+
+        // Hide tub
+        tubBack.style.display = 'none';
+        tubWater.style.display = 'none';
+        tubFront.style.display = 'none';
+
+        // Apply stats
+        happiness = Math.min(100, happiness + 20); // More happiness for a good bath
+        PetStorage.save(hunger, happiness, deaths);
+
+        // Little jump out
+        vy = -6;
+    }
+
+    function smack() {
+        if (isDead || isPaused) return;
+        happiness = Math.max(0, happiness - 15);
+        PetStorage.save(hunger, happiness, deaths);
+
+        isWincing = true;
+
+        if (hand) {
+
+            hand.style.left = (Math.round(cx) + 24) + 'px';
+            hand.style.top = (Math.round(cy) - 12) + 'px';
+
+            hand.style.left = (Math.round(cx) + 24) + 'px';
+            hand.style.top = (Math.round(cy) - 12) + 'px';
+
+            hand.className = '';
+
+            setTimeout(function () {
+                if (hand) hand.className = 'slapping';
+            }, 20);
+
+            setTimeout(function () {
+                if (hand) hand.className = '';
+            }, 420);
+        }
+
+        setTimeout(function () {
+            isWincing = false;
+        }, 500);
+    }
+
+    function updateTears() {
+        for (var i = tears.length - 1; i >= 0; i--) {
+            var t = tears[i];
+            t.vy += 0.2; // Gravity
+            t.y += t.vy;
+            t.el.style.top = Math.round(t.y) + 'px';
+
+            if (t.y > boundsH) {
+                if (t.el.parentNode) t.el.parentNode.removeChild(t.el);
+                tears.splice(i, 1);
+            }
+        }
+    }
+
+    function spawnWaterTrail() {
+        if (puddleTimer > 0) {
+            puddleTimer--;
+            return;
+        }
+
+        // Only spawn if moving SIGNIFICANTLY
+        if (Math.abs(vx) < 0.2 && Math.abs(vy) < 0.2 && airJumps === 0) return;
+
+        puddleTimer = 20; // Cooldown frames
+
+        var p = document.createElement('div');
+        p.className = 'water-puddle';
+        var size = 12 + Math.random() * 8;
+        p.style.width = Math.round(size) + 'px';
+        p.style.height = Math.round(size / 2) + 'px';
+
+        // Center at feet
+        var px = cx + 16 - (size / 2);
+        var py = cy + 28 + (Math.random() * 4 - 2);
+
+        p.style.left = Math.round(px) + 'px';
+        p.style.top = Math.round(py) + 'px';
+
+        // Insert before creature to be behind it
+        screen.insertBefore(p, creature);
+
+        // Remove after 5 seconds (matched with CSS animation)
+        setTimeout(function () {
+            if (p.parentNode) p.parentNode.removeChild(p);
+        }, 5000);
+    }
+
+    function explode() {
+        if (!isDead) { // Only increment deaths once per explosion
+            deaths++;
+            PetStorage.save(hunger, happiness, deaths);
+        }
+        isDead = true;
+        tabTitle.innerText = "s t e v e . chr";
+
+        for (var i = 0; i < parts.length; i++) {
+            var p = parts[i];
+            var rect = p.getBoundingClientRect();
+            var screenRect = screen.getBoundingClientRect();
+
+            var startX = rect.left - screenRect.left;
+            var startY = rect.top - screenRect.top;
+
+            var clone = p.cloneNode(true);
+            clone.style.left = startX + 'px';
+            clone.style.top = startY + 'px';
+            clone.style.position = 'absolute';
+            clone.id = '';
+
+            screen.appendChild(clone);
+
+            debris.push({
+                el: clone,
+                x: startX,
+                y: startY,
+                vx: (Math.random() * 10) - 5,
+                vy: (Math.random() * 10) - 8,
+                rot: 0,
+                vRot: (Math.random() * 20) - 10
+            });
+        }
+
+        creature.style.display = 'none';
+        btnRespawn.style.display = 'block';
+    }
+
+    function respawn() {
+        isDead = false;
+        hunger = 20;
+        happiness = 50;
+        // keep stats? usually respawn resets stats but maybe keeps deaths. 
+        // User said "store hunger, happiness, amount of deaths". 
+        // If it explodes, it implies death. Respawning implies a new pet or reviving?
+        // For a "pet" game, usually respawn resets hunger/happiness but keeps deaths.
+
+        airJumps = 0;
+        airDisplay.innerText = "Jumps: 0";
+        tabTitle.innerText = "Just Natsuki.";
+        creature.style.display = 'block';
+        btnRespawn.style.display = 'none';
+
+        for (var i = 0; i < debris.length; i++) {
+            if (debris[i].el.parentNode) debris[i].el.parentNode.removeChild(debris[i].el);
+        }
+        debris = [];
+
+        cx = boundsW / 2 - (cSize / 2);
+        cy = boundsH / 2 - (cSize / 2);
+        vx = 2;
+        vy = 0;
+        contHunger.className = 'bar-outer';
+
+        PetStorage.save(hunger, happiness, deaths);
+    }
+
+    function updateDebris() {
+        for (var i = 0; i < debris.length; i++) {
+            var d = debris[i];
+            d.vy += gravity;
+            d.x += d.vx;
+            d.y += d.vy;
+            d.rot += d.vRot;
+
+            if (d.y > boundsH - 10) {
+                d.y = boundsH - 10;
+                d.vy *= -0.6;
+                d.vx *= 0.9;
+            }
+
+            if (d.x < 0 || d.x > boundsW) {
+                d.vx *= -1;
+            }
+
+            d.el.style.left = Math.round(d.x) + 'px';
+            d.el.style.top = Math.round(d.y) + 'px';
+            d.el.style.transform = 'rotate(' + Math.round(d.rot) + 'deg)';
+        }
+    }
+
+    function handleClick(e) {
+        // Check if target is a UI element first
+        var target = e.target;
+        var uiNode = target;
+        while (uiNode && uiNode !== screen) {
+            if (uiNode.id === 'btn-high-scores' || uiNode.tagName === 'BUTTON' || (uiNode.className && uiNode.className.indexOf('dialog-box') !== -1)) {
+                return;
+            }
+            uiNode = uiNode.parentNode;
+        }
+
+        if (isDead || isPaused) return;
+        e.preventDefault();
+        var clickedCreature = false;
+
+        // Check if we hit the creature
+        var temp = target;
+        while (temp && temp !== screen) {
+            if (temp === creature) {
+                clickedCreature = true;
+                break;
+            }
+            temp = temp.parentNode;
+        }
+
+        if (clickedCreature) {
+            jump();
+        } else {
+            var clientX = e.clientX;
+            var clientY = e.clientY;
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            }
+
+            var rect = screen.getBoundingClientRect();
+
+            var scaleX = rect.width / screen.offsetWidth;
+            var scaleY = rect.height / screen.offsetHeight;
+
+            var x = (clientX - rect.left) / scaleX;
+            var y = (clientY - rect.top) / scaleY;
+
+            var x = (clientX - rect.left) / scaleX;
+            var y = (clientY - rect.top) / scaleY;
+
+            // spawnFood(x, y); // Disabled click-to-feed as requested
+        }
+    }
+
+    // --- Score Logic ---
+
+    function showScoreEntry(score) {
+        isPaused = true;
+        pendingScore = score;
+        entryScoreVal.innerText = String(score);
+        dialogEntry.style.display = 'block';
+        inputName.value = '';
+        inputName.focus();
+    }
+
+    function closeEntry() {
+        dialogEntry.style.display = 'none';
+        isPaused = false;
+    }
+
+    function fetchScores() {
+        scoreList.innerText = "Loading...";
+
+        var xhr = new XMLHttpRequest();
+        // Start request - added action parameter
+        xhr.open("GET", API_URL + "?action=get_scores&game_id=natsuki_jump", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        renderScores(data);
+                    } catch (e) {
+                        scoreList.innerText = "Error parsing poems.";
+                    }
+                } else {
+                    scoreList.innerText = "Server error.";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function renderScores(data) {
+        // Clear existing content
+        scoreList.innerText = "";
+
+        if (!data || data.length === 0) {
+            scoreList.innerText = "No poems yet.";
+            return;
+        }
+
+        var limit = Math.min(data.length, 10);
+        for (var i = 0; i < limit; i++) {
+            var div = document.createElement('div');
+            div.className = 'score-item';
+
+            var nameText = document.createTextNode(data[i].name);
+            div.appendChild(nameText);
+
+            var span = document.createElement('span');
+            span.className = 'score-val';
+            span.innerText = String(data[i].score);
+            div.appendChild(span);
+
+            scoreList.appendChild(div);
+        }
+    }
+
+    function saveScore() {
+        var name = inputName.value.trim() || "Anon";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", API_URL, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                closeEntry();
+                // Optionally show leaderboard after save
+                btnHighScores.click();
+            }
+        };
+        xhr.send("action=submit_score&game_id=natsuki_jump&name=" + encodeURIComponent(name) + "&score=" + pendingScore);
+    }
+
+    btnHighScores.addEventListener('click', function (e) {
+        e.stopPropagation();
+        isPaused = true;
+        dialogLeaderboard.style.display = 'block';
+        fetchScores();
+    });
+
+    // Prevent food spawn (mousedown on screen) when clicking this button
+    btnHighScores.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+    btnHighScores.addEventListener('touchstart', function (e) { e.stopPropagation(); });
+
+    btnCloseBoard.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dialogLeaderboard.style.display = 'none';
+        isPaused = false;
+    });
+
+    btnSubmitScore.addEventListener('click', function (e) {
+        e.stopPropagation();
+        saveScore();
+    });
+
+    btnCancelScore.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeEntry();
+    });
+
+    // Dialog Logic
+    winClose.addEventListener('click', function (e) {
+        e.stopPropagation();
+        isPaused = true;
+        confirmDialog.style.display = 'block';
+    });
+
+    btnNo.addEventListener('click', function (e) {
+        e.stopPropagation();
+        isPaused = false;
+        confirmDialog.style.display = 'none';
+    });
+
+    btnYes.addEventListener('click', function (e) {
+        e.stopPropagation();
+        confirmDialog.style.display = 'none';
+
+        speechBubble.style.display = 'block';
+
+        setTimeout(function () {
+            mainWindow.style.display = 'none';
+        }, 1500);
+    });
+
+    btnRespawn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        respawn();
+    });
+
+    btnFeed.addEventListener('click', function (e) {
+        e.stopPropagation();
+        spawnFood(); // Random pos
+    });
+    // Prevent dragging the feed button
+    btnFeed.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+
+    btnWash.addEventListener('click', function (e) {
+        e.stopPropagation();
+        wash();
+    });
+    btnWash.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+
+    btnSmack.addEventListener('click', function (e) {
+        e.stopPropagation();
+        smack();
+    });
+    btnSmack.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+
+    screen.addEventListener('mousedown', handleClick);
+    screen.addEventListener('touchstart', handleClick, { passive: false });
+
+
+
+    // Initialize is now handled by PetStorage, which calls loop
+    setInterval(loop, 33);
+})();
+</script>
+</body>
+
+</html>

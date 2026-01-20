@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fafafa;
+  background: linear-gradient(20deg, #eddd53 0%, #57c785 50%, #2a7b9b 100%) 0 0 / cover fixed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.banner {
+  -webkit-backdrop-filter: blur(10px);
+  background: #fff3;
+  border: 1px solid #fff3;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+  padding: 8px 0;
+  display: flex;
+  box-shadow: 0 8px 32px #1f268740;
+}
+
+.banner #logo {
+  clip-path: circle();
+  height: auto;
+  max-height: 80px;
+  margin-right: 20px;
+  animation: 8s linear infinite rotation;
+}
+
+.banner-text {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.banner-text h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.content {
+  -webkit-backdrop-filter: blur(10px);
+  background: #fff3;
+  border: 1px solid #ffffff40;
+  border-radius: 16px;
+  height: 101px;
+  margin: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 32px #1f268733;
+}
+
+p {
+  margin-top: 0;
+}
+
+#yes {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.small-text {
+  color: #ffffffb3;
+  font-size: 14px;
+}
+
+.small-text a {
+  color: #ffffffe6;
+}
+
+a {
+  color: #fafafa;
+  text-decoration: none;
+}
+
+.crossgradient {
+  background: linear-gradient(90deg, #2d263e 0%, #0000 20px);
+  height: 100%;
+  padding-top: 8px;
+}
+
+#cow {
+  background-image: url("/t/gucio.nekoweb.org/cow.webp");
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+</style>
+    <style>@font-face {
+  font-family: "Font Awesome 7 Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("/t/gucio.nekoweb.org/fa-solid-900.woff2");
+}
+
+.fa-classic, .fa-solid, .fas {
+  font-family: "Font Awesome 7 Pro";
+  font-style: normal;
+  font-weight: 900;
+}
+
+.fa-left:before {
+  content: "";
+}
+</style>
+</head>
+<body>
+    <div id="cow">
+        
+    <div class="crossgradient">
+    	<div class="banner">
+                <img src="/t/gucio.nekoweb.org/gucio.webp" id="logo" title="Art by @son_of__satan on Twitter!">
+                <div class="banner-text">
+                    <a href="https://gucio.nekoweb.org" target="_blank"><h1>Gucio</h1></a>
+                </div>
+            </div>
+        <div class="content" style="text-align: center;">
+            <h3><i class="fa-solid fa-left"></i> Confirmed!</h3>
+            <p>You should check out my website too tho :3 (leave a message pls)</p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

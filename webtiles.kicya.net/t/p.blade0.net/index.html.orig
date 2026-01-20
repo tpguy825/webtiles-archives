@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: url("/t/p.blade0.net/tux.gif") 0 0 / contain;
+}
+
+h1 {
+  text-align: center;
+  text-shadow: -1px -1px #fff, 1px -1px #fff, -1px 1px #fff, 1px 1px #fff;
+  color: #c8a92e;
+  width: 100%;
+  font-size: 20px;
+  position: absolute;
+  top: -10px;
+}
+
+p {
+  text-align: center;
+  text-shadow: -1px -1px #fff, 1px -1px #fff, -1px 1px #fff, 1px 1px #fff;
+  color: #664b0f;
+  width: 100%;
+  font-size: 14px;
+  position: absolute;
+  bottom: -10px;
+}
+</style>
+</head>
+<body>
+    <h1>YOU HAVE FOUND THE TUXLET</h1>
+    <p>HE WILL NOT BE IN THE SAME PLACE TOMORROW, CHERISH HIM WHILE YOU CAN</p>
+</body>
+</html>

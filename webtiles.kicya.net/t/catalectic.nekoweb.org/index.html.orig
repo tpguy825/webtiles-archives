@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("/t/catalectic.nekoweb.org/elma.png");
+  width: 100%;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: .1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+#elma {
+  color: #0000;
+  word-wrap: break-word;
+  background: none;
+  max-width: 220px;
+  height: 200px;
+  padding: 20px 20px 200px;
+  font-family: georgia;
+  font-size: 12px;
+  overflow-y: scroll;
+}
+
+#elma:hover {
+  color: #000;
+  background: #ffffffb3;
+  transition: color 1s;
+}
+
+a {
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <div id="elma">
+        
+       
+01. Train Window
+        <br>
+02. Only Sorrow
+                <br>
+
+03. Evening Calm, Somewhere, Fireworks
+                <br>
+
+04. Rain with Cappuccino
+                <br>
+
+05. Lakeside Town
+                <br>
+
+06. Dance of You
+                <br>
+
+07. After the Rain
+                <br>
+
+08. Walk
+                <br>
+
+09. A Hole Opened Up in My Heart
+                <br>
+
+10. The Church in the Forest
+                <br>
+
+11. Voice
+                <br>
+
+12. Amy
+                <br>
+13. Seabed, Moonlight
+                <br>
+
+14. Nautilus
+<p>
+    ~
+        </p>
+        <div style="height:120px; width:190px; overflow: scroll; padding: 1%;">
+        <p> elma ♥ yorushika</p>
+        <p>this is not my favourite yorushika album LOL but elma is my favourite character in ycu (yorushika cinematic universe) TM</p>
+        <p>i think the story of the album, elma, is very profound. the album's titual character follows in the footsteps of amy, someone she admired and cared for greatly, literally. she visits the places he went before he died, dealing with the grief of his passing along the way. amy's companion album is titled "that's why i gave up on music". you can view the letters the characters sent to each other <a href="https://docs.google.com/document/d/1RV0pVn1bMPBrA6Bm-IfU7y-ZcksnsHjus7nnJ0gJ06g/edit?tab=t.0#heading=h.g3w5oyzcd9ld" target="_blank">here</a>. my favourite song in this album is ノーチラス (nautlius).</p>
+            
+            <p>
+                if you'd like to listen to english covers, i reccomend rachie! she only covers one elma song-- a hole opened up in my heart. it's in her yorushika cover album "summer blooms without you", but please listen to the other songs! they are so, so amazing!!!
+            </p>
+        </div>
+            <p>
+                ps, i didnt plan this, but my neighbour that a ways -> and i match so well?? lol
+            </p>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+</script>
+    
+</body>
+</html>

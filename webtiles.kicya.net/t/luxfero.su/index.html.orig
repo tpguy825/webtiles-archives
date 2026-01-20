@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #ebdbb2;
+  background-color: #282828;
+  margin: 0;
+}
+
+.logo {
+  fill: #ebdbb2;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  padding-top: 20%;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+#splash {
+  color: #8ec07c;
+  text-align: center;
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  animation: 2s infinite alternate subtitle;
+  position: relative;
+  bottom: 12px;
+  left: 35px;
+  rotate: -8deg;
+}
+
+@-webkit-keyframes subtitle {
+  0% {
+    transform: scale(.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
+</head>
+<body>
+    <a href="https://luxfero.su" target="_blank">
+        <img src="/t/luxfero.su/logo.svg" class="logo">
+        <p id="splash">Click here :)</p>
+    </a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+
+var splashes = [
+	"Now splashing!!",
+	"þe Orb",
+	"Nvidia, \#\&\%\! you",
+	"Hello from Russia",
+	"Waagh!!!",
+	"I like boats",
+	"Debian is nice",
+	"Is this a bird?..",
+	"¯\\\_(ツ)_/¯",
+    "Good day :)",
+];
+
+function updateSplash() {
+	document.getElementById('splash').innerHTML = document.getElementById('splash').innerText = splashes[Math.floor(Math.random() * splashes.length)];
+}
+
+updateSplash()</script>
+</body>
+</html>

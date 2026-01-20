@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+#album {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+#audio {
+  z-index: 10;
+  position: fixed;
+}
+
+#nowPlaying {
+  z-index: 20;
+  color: #fff;
+  text-shadow: 1px 0 #c31d24, .540302px .841471px #c31d24, -.416147px .909297px #c31d24, -.989993px .14112px #c31d24, -.653644px -.756803px #c31d24, .283662px -.958924px #c31d24, .96017px -.279416px #c31d24;
+  width: 100%;
+  font-size: 8px;
+  position: fixed;
+  bottom: -100px;
+}
+</style>
+</head>
+<body>
+      <marquee id="nowPlaying"></marquee>
+    <img id="album" src="https://webtiles.kicya.net/t/nina.oyaswmi.net/nina.jpg">
+     <audio id="audio" src="/t/nina.oyaswmi.net/info.mp3" preload="metadata">
+  
+    </audio> 
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var fckPuter = document.getElementById("audio");
+var nowPlaying = document.getElementById("nowPlaying");
+
+
+ 
+
+var musicInt = setInterval(musicCheat, 1000);
+
+function musicCheat() {
+	
+    if (fckPuter.paused == true){
+        nowPlaying.style.bottom = "-100px"
+        fckPuter.play()
+    }else if (fckPuter.paused == false){
+        nowPlaying.style.bottom = "1px"
+    }
+} 
+
+</script>
+</body>
+</html>

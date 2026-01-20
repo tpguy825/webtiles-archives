@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<style>.tile-body {
+  color: #111;
+  background-color: #f3cee2;
+}
+
+.content {
+  padding-left: 4px;
+}
+
+.jamie {
+  float: right;
+  vertical-align: bottom;
+  margin-top: 23px;
+}
+
+.jamietext {
+  margin-top: 120px;
+}
+</style>
+
+
+
+</head>
+
+<div class="content">
+
+<body style="background-color:pink;">
+
+<p>Haiii!! This is a little work in progress, plus, I'm pretty new to HTML. Bare with me!<br>
+Here's a link to my <a href="https://lumisite.nekoweb.org/index.html" target="_blank">main Nekoweb site :3</a></p>
+
+<div class="jamie">
+<img src="/t/lumisite.nekoweb.org/jamiebounce.png" height="115" style="align: bottom; horizontalalign: right;">
+</div>
+
+<div class="jamietext">
+<p>Jamie Paige :3 --></p>
+</div>
+
+</body>
+</div>
+</html>

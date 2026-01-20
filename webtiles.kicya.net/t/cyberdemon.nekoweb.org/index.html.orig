@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fefeff;
+  background: #008ee1;
+  font-family: Calibri, Helvetica, sans-serif;
+}
+
+#main {
+  margin: auto;
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+a {
+  color: #fff;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 3.5rem;
+  font-weight: 100;
+}
+
+h2 {
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+h3 {
+  font-size: .7rem;
+  font-weight: 100;
+}
+
+img {
+  float: left;
+  width: 60px;
+  margin-right: 10px;
+}
+</style>
+</head>
+<body>
+    <div id="main">
+        <h1>:(</h1>
+        <h2>CYBERDEMON is offline.<br>
+            version 5 soon.
+        </h2>
+        <h2>be back shortly!</h2>
+        <h3>
+            <img src="/t/cyberdemon.nekoweb.org/oops.gif">
+            site under construction <br>
+        </h3>
+        </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

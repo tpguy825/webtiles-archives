@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Overused Grotesk;
+  src: url("/t/maxpixels.moe/OverusedGrotesk-SemiBold.ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #a9b1d6;
+  background-color: #f0f0f0;
+  background-image: url("/t/maxpixels.moe/pattern.gif");
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+  font-family: MS UI Gothic, Ark Pixel;
+  display: flex;
+}
+
+h1, h2, h3, h4 {
+  font-family: Overused Grotesk, sans-serif;
+  font-weight: 500;
+}
+
+#webtiles {
+  opacity: .15;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.box {
+  background: #1c1c29;
+  border: 1px solid #24283b;
+  border-radius: 10px;
+  margin: 0 10px;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+    <img id="webtiles" src="/t/maxpixels.moe/webtiles.png">
+    <div class="box">
+        <h1>
+            max's tile
+        </h1>
+    </div>
+    <div class="box">
+        <p>honestly dont know what to put sob</p>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

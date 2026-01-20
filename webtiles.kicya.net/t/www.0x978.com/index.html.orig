@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>html, .tile-body {
+  color: #9e75f0;
+  background-color: #17101a;
+  height: 100%;
+  margin: 0;
+  font-family: ibm_vga, system-ui, -apple-system, sans-serif;
+}
+
+@font-face {
+  font-family: ibm_vga;
+  src: url("/t/www.0x978.com/Web437_IBM_VGA_8x14.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.center {
+  text-align: center;
+  place-items: center;
+  height: 100%;
+  display: grid;
+}
+
+a {
+  color: none !important;
+  text-decoration: none !important;
+}
+
+h1 {
+  color: #9e75f0;
+}
+</style>
+</head>
+<body>
+  <a href="https://www.0x978.com" class="page-link" target="_blank">
+    <div class="center">
+      <h1>0x978.com</h1>
+    </div>
+  </a>
+</body>
+</html>

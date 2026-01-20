@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+
+    
+    <style>.tile-body {
+  color: #ff72ad;
+  margin: none;
+  text-align: center;
+  background-color: #f0f0f0;
+  background-image: url("/t/waterlily.nekoweb.org/title.webp");
+  background-repeat: repeat;
+  background-size: 100px;
+  font-family: Bonbon, cursive;
+}
+
+.bonbon {
+  font-family: Bonbon, cursive;
+  font-style: normal;
+  font-weight: 400;
+}
+
+h1 {
+  z-index: 10;
+  font-size: 50px;
+  position: absolute;
+  top: 5px;
+  left: 37px;
+}
+
+h2 {
+  z-index: 10;
+  font-size: 26px;
+  position: absolute;
+  bottom: 3px;
+  left: 27px;
+}
+
+.top {
+  z-index: 100;
+  color: #ff0;
+  background-color: red;
+  height: 25px;
+  padding: 10px;
+  font-family: arial;
+  position: absolute;
+}
+
+.left {
+  z-index: 10;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.right {
+  z-index: 8;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.waterlily {
+  size: 250px 250px;
+  margin-top: 85px;
+  position: absolute;
+}
+
+.waterlily img:hover {
+  transition: all .3s;
+  transform: scale(1.15);
+}
+
+.blinkies {
+  z-index: 9;
+  position: absolute;
+  bottom: -7px;
+}
+</style>
+</head>
+<body>
+    <img src="/t/waterlily.nekoweb.org/ratwedding.png" class="left">
+    <img src="/t/waterlily.nekoweb.org/oversurge.png" class="right">
+    <div class="top">
+        <marquee>★‧₊ ✧˖°.˚☆˖✧˖°✩ what's meant to be, will be ✩.⋆｡°✩⋆✴︎˚｡⋆✧˖°.</marquee>
+   	</div>
+    <div class="waterlily">
+        <a href="https://waterlily.nekoweb.org/" target="_blank">
+        	<img src="/t/waterlily.nekoweb.org/waterlilies.webp" style="width:90%;">
+        </a>
+    </div>
+        <h1>
+        waterlily
+    </h1>
+    <br>
+    <h2>
+        The pond beckons...
+    </h2>
+    <div class="blinkies">
+            <span>
+              <marquee behavior="loop" direction="right">
+                <img src="/t/waterlily.nekoweb.org/adhd.gif" >
+                <img src="/t/waterlily.nekoweb.org/angel.gif" >
+                <img src="/t/waterlily.nekoweb.org/dream.gif" >
+                <img src="/t/waterlily.nekoweb.org/magic.gif" >
+                <img src="/t/waterlily.nekoweb.org/dreams.gif" >
+                <img src="/t/waterlily.nekoweb.org/purrcent.gif" >
+                <img src="/t/waterlily.nekoweb.org/paradise.gif" >
+                <img src="/t/waterlily.nekoweb.org/believe.gif" >
+                <img src="/t/waterlily.nekoweb.org/cat.gif" >
+                <img src="/t/waterlily.nekoweb.org/colours.gif" >
+                <img src="/t/waterlily.nekoweb.org/life.gif" >
+                <img src="/t/waterlily.nekoweb.org/love.gif" >
+                <img src="/t/waterlily.nekoweb.org/stars.gif" >
+                <img src="/t/waterlily.nekoweb.org/rainbow.gif" >
+                <img src="/t/waterlily.nekoweb.org/cats.gif" >
+                <img src="/t/waterlily.nekoweb.org/flyaway.webp" >
+                <img src="/t/waterlily.nekoweb.org/heart.gif" >
+                <img src="/t/waterlily.nekoweb.org/minecraft.webp" >
+                <img src="/t/waterlily.nekoweb.org/laugh.gif" >
+                <img src="/t/waterlily.nekoweb.org//baddesign.gif" >
+                 
+                <img src="/t/waterlily.nekoweb.org/adhd.gif" >
+                <img src="/t/waterlily.nekoweb.org/angel.gif" >
+                <img src="/t/waterlily.nekoweb.org/dream.gif" >
+                <img src="/t/waterlily.nekoweb.org/magic.gif" >
+                <img src="/t/waterlily.nekoweb.org/dreams.gif" >
+                <img src="/t/waterlily.nekoweb.org/purrcent.gif" >
+                <img src="/t/waterlily.nekoweb.org/paradise.gif" >
+                <img src="/t/waterlily.nekoweb.org/believe.gif" >
+                <img src="/t/waterlily.nekoweb.org/cat.gif" >
+                <img src="/t/waterlily.nekoweb.org/colours.gif" >
+                <img src="/t/waterlily.nekoweb.org/life.gif" >
+                <img src="/t/waterlily.nekoweb.org/love.gif" >
+                <img src="/t/waterlily.nekoweb.org/stars.gif" >
+                <img src="/t/waterlily.nekoweb.org/rainbow.gif" >
+                <img src="/t/waterlily.nekoweb.org/cats.gif" >
+                <img src="/t/waterlily.nekoweb.org/flyaway.webp" >
+                <img src="/t/waterlily.nekoweb.org/heart.gif" >
+                <img src="/t/waterlily.nekoweb.org/minecraft.webp" >
+                <img src="/t/waterlily.nekoweb.org/laugh.gif" >
+                <img src="/t/waterlily.nekoweb.org//baddesign.gif" >
+              </marquee>
+            </span>
+          </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

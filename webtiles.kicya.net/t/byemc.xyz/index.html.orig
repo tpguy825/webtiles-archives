@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>html {
+  margin: 0;
+}
+
+.tile-body {
+  color: #fff;
+  background-color: #1a1a1a;
+  font-family: "M PLUS 2", "M PLUS 1", Helvetica, Arial, sans-serif;
+}
+
+main {
+  margin: 16px 8px;
+}
+
+header {
+  background: #2f2f2f;
+  line-height: 1;
+}
+
+header > * {
+  vertical-align: bottom;
+}
+</style>
+</head>
+<body>
+    <header><a href="https://byemc.xyz/" target="_blank"><img src="/t/byemc.xyz/byespace-banner.png" width="100" alt="byespace"></a></header>
+	<main>
+		<p>hey there, i'm bye, welcome to my <small>(mini)</small> space </p>
+        <p>
+            this tile is a work in progress, so hang tight!
+        </p>
+    </main>
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: NextSunday;
+  src: url("/t/rayncoat.nekoweb.org/Next Sunday.ttf") format("truetype");
+  src: url("/t/rayncoat.nekoweb.org/Next Sunday.otf") format("opentype");
+}
+
+.tile-body {
+  color: #fceaff;
+  background-color: #08031a;
+  background-image: url("/t/rayncoat.nekoweb.org/YellowSweetBG.gif");
+  background-size: 120px;
+  margin: 0;
+  font-family: NextSunday, sans-serif;
+}
+
+p, a {
+  color: #29171b;
+}
+</style>
+</head>
+<body>
+    <p style="text-align: center; margin:0px;">Come to my wip website...</p>
+    <p>
+        <a href="/t/rayncoat.nekoweb.org/rayncoat.nekoweb.org">Come</a>
+    </p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

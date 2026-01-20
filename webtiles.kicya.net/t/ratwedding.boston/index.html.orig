@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <style>.tile-body {
+  z-index: -2;
+  background-color: #000;
+}
+
+h3 {
+  color: #d148ff;
+  text-align: center;
+}
+
+.grain {
+  opacity: 1;
+  z-index: -1;
+  background-color: #26211e;
+  background-image: url("/t/ratwedding.boston/Grain.if");
+  background-repeat: no-repeat;
+  background-size: 250px;
+  transform: translate(0, -20px);
+}
+
+.top {
+  z-index: 100;
+  color: #ff0;
+  background-color: red;
+  height: 25px;
+  padding: 10px;
+  font-family: arial;
+  position: absolute;
+}
+
+.rotategrad {
+  color: #0000;
+  background: linear-gradient(90deg, #d148ff 0% 45%, #ff0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+</style>
+    <style>@font-face {
+  font-family: Besta Baru;
+  src: url("/t/ratwedding.boston/Besta Baru.otf");
+}
+</style>
+    
+    
+</head>
+
+
+   <body>
+	<div>
+        
+       </div>
+       
+       <div>
+        
+
+
+       <h3 class="rotategrad" style="font-family:Besta Baru; font-size:30px;transform:translate(0px,-20px);z-index:1;">
+        RATWEDDING.BOSTON
+       
+    </h3>
+           
+            </div>
+           <div style="z-index:1;">
+    <a href="https://ratwedding.boston/" target="_blank"><img style="  transform:translate(0px,-37px)" src="/t/ratwedding.boston/Yourticket.png"></a>
+           
+
+	<h3 style="font-family:Besta Baru; font-size:30px;transform:translate(0px,-65px);z-index:1;">
+        GOODIES AND PROJECTS
+    </h3>
+
+
+            </div>
+  <div>
+    <img src="/t/ratwedding.boston/pianotest.png" style="position:fixed; bottom: 0;
+    left: 0;
+    height:75px; z-index:-1">
+       
+       </div>
+  <div>
+    <img src="/t/ratwedding.boston/waterlilies.png" style="position:fixed; bottom: 0;
+    right: 0;
+    height:100px; z-index:-1;transform:translate(60px,30px)">
+       
+       </div>
+  <div>
+    <img src="/t/ratwedding.boston/Banner.gif" style="position:fixed; top: 0;
+    right: 0;
+    height:45px;width:275px; z-index:-1;">
+       
+       </div>
+  <div>
+    <img src="/t/ratwedding.boston/star.gif" style="position:fixed; top: 0;
+    left: 0;
+    height:200px; z-index:-1;transform:scaleX(-1) translate(-25px,-148px);">
+       
+       </div>
+       
+  <div>
+    <img src="/t/ratwedding.boston/Bottom.png" style="position:fixed; bottom: 0;
+    left: 0;
+    width:250px; z-index:-1;transform:translate(0px,100px)">
+       
+       </div>
+       
+</body>
+</html>
+
+
+

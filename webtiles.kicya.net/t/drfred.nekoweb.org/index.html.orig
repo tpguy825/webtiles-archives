@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  background-image: url("/t/drfred.nekoweb.org/star-purple.gif");
+  background-size: 100%;
+  margin: 0;
+  font-family: Consolas;
+  font-size: 16px;
+}
+</style>
+</head>
+<body>
+    <a href="https://drfred.nekoweb.org" target="_blank"><img src="/t/drfred.nekoweb.org/wagroar.jpg" style="height:100px;float:left;margin-right:10px"></a>
+    <p style="font-size:25px"><strong>Dr. Fred's Evil Tile</strong></p>
+    <p style="margin: 10px 10px">
+        Hi! I am Dr. Fred, and I have nothing of note to say. For the time being...
+    </p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>.tile-body {
+  background-image: url("/t/catwraith.nekoweb.org/folder.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: grid;
+}
+
+.tile-body:hover .overlay {
+  opacity: 1;
+  transition: all .3s;
+}
+
+.overlay {
+  opacity: 0;
+  text-align: center;
+  color: #fff;
+  background: #0000004d;
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  padding: 10px;
+  transition: all .3s;
+}
+
+a {
+  color: #fff;
+  border-bottom: 1px solid red;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fffc;
+}
+
+a:active {
+  color: #fff9;
+}
+
+a:visited {
+  color: #fff;
+}
+
+.nav-left, .nav-right {
+  opacity: 0;
+  transition: all .3s;
+  display: none;
+}
+
+.tile-body:hover .nav-left {
+  opacity: 1;
+  width: fit-content;
+  height: fit-content;
+  font-size: smaller;
+  transition: all .3s;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.tile-body:hover .nav-right {
+  opacity: 1;
+  width: fit-content;
+  height: fit-content;
+  font-size: smaller;
+  transition: all .3s;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+</style>
+    </head>
+    <body>
+        <div class="overlay">
+            <p>
+                <b>Keep - Almost Static (2025)</b><br>
+                <small>{ heavy shoegaze }</small>
+            </p>
+            <p>
+                [ <a href="https://keepva.bandcamp.com/album/almost-static" title="View album on Bandcamp" target="_blank">▶︎</a> ]
+            </p>
+        </div>
+        <div class="nav-right">
+            <a href="/t/catwraith.nekoweb.org/source.html" title="view source">source</a>
+        </div>
+    </body>
+</html>

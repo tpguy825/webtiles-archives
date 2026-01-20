@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile {
+  width: 250px;
+  height: 250px;
+  font-family: Comic Sans MS, cursive;
+  position: relative;
+  overflow: hidden;
+}
+
+.tile img {
+  object-fit: cover;
+  filter: brightness(50%);
+  width: 100%;
+  height: 100%;
+}
+
+.tile p {
+  text-align: center;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+</style>
+</head>
+<body>
+  <div class="tile">
+    <img src="/t/swiftheart.nekoweb.org/house.jpg" alt>
+    <p><b>MAH WEBTILE COMING SOON</b></p>
+</div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

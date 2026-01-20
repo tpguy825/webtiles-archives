@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      >
+<head>
+    
+</head>
+<body>
+    <div style="background-image: url('https://webtiles.kicya.net/t/cufustis-cool-kitchen.nekoweb.org/images/320px-The_Aether_effect.gif');
+                background-size: cover; height:100%; width: 100%; padding:0.1px;
+                top: 0;
+		  		left: 0;
+		  		z-index: -1;">
+        
+        <div style="width: 80%; height: 80%; margin:10px auto;
+                color:#fff;
+                text-shadow:-2px 0 #030000,0 2px #030000,2px 0 #030000,0 -2px #030000;
+                background-color:rgba(73,88,178,0.8);
+                border-radius: 1px;
+                border:2px solid #101021;
+                padding: 10px;" align="center">
+
+            <p>oooooo you wanna click on this pylon so bad ooooooo</p>
+
+            <div id="ter-div-internal" style="color:#fff;
+                background-color:rgba(49,59,121,1);
+                border-radius: 5px;
+                height:auto; 
+                border:2px solid #05070c;
+                padding: auto;
+                width: 75px;
+                margin: 10px auto;
+                padding: 5px;">
+                <a href="https://cufustis-cool-kitchen.nekoweb.org" target="_blank">
+                    <img                         src="https://webtiles.kicya.net/t/cufustis-cool-kitchen.nekoweb.org/images/Universal_Pylon.png"
+                        title="pylon!"
+                    >
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

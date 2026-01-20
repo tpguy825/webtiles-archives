@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-image: url("/t/superhs.nekoweb.org/bg.png");
+}
+
+a {
+  color: #fff;
+  font-family: MS UI Gothic;
+}
+
+a:hover {
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<div style="position:absolute;right:10px;bottom:10px;">
+    	<a href="https://x.com/cabbitzip" target="_blank">artwork by cabbitzip :3</a>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

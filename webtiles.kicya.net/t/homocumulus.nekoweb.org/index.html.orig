@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>#content {
+  color: #fff;
+  text-align: center;
+  background-color: #000000e6;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+</style>
+</head>
+<body>
+     <div id="content">
+       this dog loves cats
+    </div>
+    <a href="https://homocumulus.nekoweb.org" target="_blank">
+    	<img src="/t/homocumulus.nekoweb.org/dog.jpg" alt="dog" width="250">
+	</a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
