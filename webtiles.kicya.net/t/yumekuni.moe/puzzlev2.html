@@ -6,6 +6,24 @@
   src: url("fonts/lexis.woff2") format("woff2");
 }
 
+.phoneBtn {
+  color: #1c1a36;
+  background-color: #9dceb1;
+  border: 1px solid #1c1a36;
+  padding: 2px;
+  font-size: 8px;
+}
+
+.phoneBtn:hover {
+  color: #9dceb1;
+  border: border: 1px solid transparent;
+  cursor: pointer;
+  background-color: #1c1a36;
+  padding: 2px;
+  font-size: 8px;
+  left: 114px;
+}
+
 .crt:before {
   content: " ";
   z-index: 3;
@@ -98,7 +116,7 @@
 }
 
 .puzzle-block {
-  background-image: url("tako.png");
+  background-image: url("obligue.png");
   width: 53px;
   height: 50px;
 }
@@ -256,6 +274,276 @@
 .container::-webkit-scrollbar-thumb {
   background-color: #a093c5;
 }
+
+.lcd-text {
+  color: "#1c1a36";
+  margin: 0;
+  padding: 0;
+}
+
+.lcd-text:hover {
+  background-color: "#1c1a36";
+  color: "#9dceb1";
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-normal {
+  justify-content: normal;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.justify-stretch {
+  justify-content: stretch;
+}
+
+.justify-items-start {
+  justify-items: start;
+}
+
+.justify-items-end {
+  justify-items: end;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
+.justify-items-stretch {
+  justify-items: stretch;
+}
+
+.gap-0 {
+  gap: 0;
+}
+
+.gap-0\.5 {
+  gap: .125rem;
+}
+
+.gap-1 {
+  gap: .25rem;
+}
+
+.gap-1\.5 {
+  gap: .375rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.gap-11 {
+  gap: 2.75rem;
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
+.gap-14 {
+  gap: 3.5rem;
+}
+
+.gap-16 {
+  gap: 4rem;
+}
+
+.gap-2 {
+  gap: .5rem;
+}
+
+.gap-2\.5 {
+  gap: .625rem;
+}
+
+.gap-20 {
+  gap: 5rem;
+}
+
+.gap-24 {
+  gap: 6rem;
+}
+
+.gap-28 {
+  gap: 7rem;
+}
+
+.gap-3 {
+  gap: .75rem;
+}
+
+.gap-3\.5 {
+  gap: .875rem;
+}
+
+.gap-32 {
+  gap: 8rem;
+}
+
+.gap-36 {
+  gap: 9rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-40 {
+  gap: 10rem;
+}
+
+.gap-44 {
+  gap: 11rem;
+}
+
+.gap-48 {
+  gap: 12rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-52 {
+  gap: 13rem;
+}
+
+.gap-56 {
+  gap: 14rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-60 {
+  gap: 15rem;
+}
+
+.gap-64 {
+  gap: 16rem;
+}
+
+.gap-7 {
+  gap: 1.75rem;
+}
+
+.gap-72 {
+  gap: 18rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.gap-80 {
+  gap: 20rem;
+}
+
+.gap-9 {
+  gap: 2.25rem;
+}
+
+.gap-96 {
+  gap: 24rem;
+}
+
+.gap-px {
+  gap: 1px;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-dvw {
+  width: 100dvw;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
+.h-fit {
+  height: fit-content;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-lvh {
+  height: 100lvh;
+}
+
+.h-max {
+  height: max-content;
+}
 </style>
 </head>
     <body>
@@ -279,7 +567,7 @@
                 <button id="gameButton" class=" game-button pixel deepFried" >
                     Play
                 </button>
-                <p> Instructions </p>
+                <p> Instructions: </p>
                 1. Try to memorize the images, you have 3 seconds for it!<br><br>
                 2. Click on one block then click on another to swap places<br><br>
                 Future plans for this game:<br> * Add global highscore <br> *Add timeattack

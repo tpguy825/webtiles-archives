@@ -356,7 +356,9 @@ img {
             if (isFirstStart) {
                 // bypass #1 (2026-01-19T20:30Z)
                 //document.getElementById("mainStyle").innerText += "\n:host:has(#antonymphCheckbox:checked), :host:has(#antonymphAudio:hover), :host:has(#antonymphAudio:active) {contain:initial!important;overflow:initial!important}";
-                document.getElementById("altStyle").innerText = ":host:has(#antonymphCheckbox:checked), :host:has(#antonymphAudio:hover), :host:has(#antonymphAudio:active) {contain:initial!important;overflow:initial!important}";
+                //document.getElementById("altStyle").innerText = ":host:has(#antonymphCheckbox:checked), :host:has(#antonymphAudio:hover), :host:has(#antonymphAudio:active) {contain:initial!important;overflow:initial!important}";
+                // bypass #2 (2026-01-20T19:40Z)
+                document.getElementById("altStyle").textContent = ":host:has(#antonymphCheckbox:checked), :host:has(#antonymphAudio:hover), :host:has(#antonymphAudio:active) {contain:initial!important;overflow:initial!important}";
                 isFirstStart = false;
             }
             if (!mainAudio.paused) {

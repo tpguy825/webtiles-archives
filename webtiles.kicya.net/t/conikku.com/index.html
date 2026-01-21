@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #fff;
+  background-color: #000;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.thumbnail {
+  object-fit: cover;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.scene {
+  perspective: 1000px;
+  width: 300px;
+  height: 300px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: 10s linear infinite rotateCube;
+  position: relative;
+}
+
+@keyframes rotateCube {
+  from {
+    transform: rotateX(0)rotateY(0);
+  }
+
+  to {
+    transform: rotateX(360deg)rotateY(360deg);
+  }
+}
+
+.cube-face {
+  border: 2px solid #333;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.cube-face img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.front {
+  transform: rotateY(0)translateZ(150px);
+}
+
+.back {
+  transform: rotateY(180deg)translateZ(150px);
+}
+
+.right {
+  transform: rotateY(90deg)translateZ(150px);
+}
+
+.left {
+  transform: rotateY(-90deg)translateZ(150px);
+}
+
+.top {
+  transform: rotateX(90deg)translateZ(150px);
+}
+
+.bottom {
+  transform: rotateX(-90deg)translateZ(150px);
+}
+
+.logo-link {
+  z-index: 10;
+  transition: transform .3s;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo-link:hover {
+  transform: translate(-50%, -50%)scale(1.1);
+}
+
+.logo {
+  filter: drop-shadow(0 0 8px #000) drop-shadow(0 0 8px #000) drop-shadow(0 0 8px #000);
+  max-width: 200px;
+  height: auto;
+  display: block;
+}
+</style>
+</head>
+<body>
+    <img src="thumbnail.png" alt="Thumbnail" class="thumbnail" id="thumbnail">
+    <div class="scene">
+        <div class="cube">
+            <div class="cube-face front">
+                <img src="conikku.jpg" alt="conikku">
+            </div>
+            <div class="cube-face back">
+                <img src="conikku.jpg" alt="conikku">
+            </div>
+            <div class="cube-face right">
+                <img src="conikku.jpg" alt="conikku">
+            </div>
+            <div class="cube-face left">
+                <img src="conikku.jpg" alt="conikku">
+            </div>
+            <div class="cube-face top">
+                <img src="conikku.jpg" alt="conikku">
+            </div>
+            <div class="cube-face bottom">
+                <img src="conikku.jpg" alt="conikku">
+            </div>
+        </div>
+    </div>
+    <a href="https://conikku.com" class="logo-link" target="_blank">
+        <img src="logo.png" alt="Conikku Logo" class="logo">
+    </a>
+    <audio style="display:none" id="kiss" src="music.mp3" loop preload="metadata"></audio>
+    <script type="text/tilescript">
+        // Hide thumbnail when tile becomes active
+        var thumbnail = document.getElementById("thumbnail");
+        if (thumbnail) {
+            thumbnail.style.display = "none";
+        }
+        
+        // Play audio
+        var audio = document.getElementById("kiss");
+        if (audio) {
+            audio.play();
+        }
+    </script>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("I hate sandboxxed instances! 3:< I have to do a one time thumbnail because css effects dont apply when window isnt focused :broken_heart:")
+var audio = document.getElementById("kiss");
+audio.play();</script>
+</body>
+</html>

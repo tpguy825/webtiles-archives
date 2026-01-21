@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <style>.tile-body {
+  cursor: url("cursor.png") 0 26, auto;
   background-color: #fffdf2;
   background-image: url("background-animation.webp");
   background-repeat: repeat;
@@ -13,6 +14,7 @@
 
 a {
   color: #000;
+  cursor: url("click.png") 0 26, auto;
   text-decoration-style: dotted;
 }
 
@@ -113,10 +115,14 @@ li a:hover {
 }
 
 .sophia-happy {
-  width: 80px;
+  width: 52%;
   position: absolute;
-  top: 63px;
-  left: 24px;
+  top: 41%;
+  left: 15%;
+}
+
+.cute-hand {
+  cursor: url("hand.png") 15 15, grab;
 }
 
 .note {
@@ -127,6 +133,7 @@ li a:hover {
   transform: rotate(-2deg);
 }
 </style>
+    <style>EndOfInput Error at 1:25</style>
 </head>
 <body>
     <div class="col">
@@ -143,13 +150,10 @@ li a:hover {
             <img class="sophia-happy" src="sophia-w.png" style="display: none;">
         </div>
         </div>
+        <div class="note">
+            (You can pat<br>her head :3)
+        </div>
     </div>
-    <div class="note">
-        (You can pat<br>her head :3)
-    </div>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
     <script type="text/tilescript">var prevScreenX = 0;
 var movement = 0;
 var patCounted = false;
@@ -166,8 +170,8 @@ function removeAnimations() {
   
 }
 
-console.log(sophia)
-console.log(sophiaContainer)
+//console.log(sophia)
+//console.log(sophiaContainer)
 
 function isHeadpatArea(x, y) {
   return x > 20 && x < 120 && y > 0 && y < 90;
@@ -210,15 +214,17 @@ function sign(num) {
 function headpats(x, y) {
   inHeadpadArea = isHeadpatArea(x, y);
   if (!inHeadpadArea) {
-    // sophiaContainer.classList.remove("cute-hand");
+    //sophiaContainer.classList.remove("cute-hand");
+    sophiaContainer.className = "sophia"
     return;
   }
-  // if (!sophiaContainer.classList.contains("cute-hand"))
-  //  sophiaContainer.classList.add("cute-hand");
+  //if (!sophiaContainer.classList.contains("cute-hand")) {
+   	//sophiaContainer.classList.add("cute-hand");   
+  //}
+  sophiaContainer.className = "sophia cute-hand"
 
   var movementX = x - prevScreenX;
   prevScreenX = x;
-	console.log(Math)
   // check patting direction
   if (sign(movementX) !== sign(movement)) {
     movement = movementX;
@@ -228,7 +234,7 @@ function headpats(x, y) {
   }
 
   // check if it was a pat
-    console.log("pat?")
+  //console.log("pat?")
   if (!patCounted && Math.abs(movementX) > 5) {
     patCounted = true;
     pats++;
@@ -236,7 +242,7 @@ function headpats(x, y) {
       return;
     }
     patTime = 2;
-      console.log(patTimer)
+    //console.log(patTimer)
     if (!patTimer) {
       //sophia.classList.add("animate-smol-jump");
       sophiaContainer.style.transform = "translateY(0px)";
@@ -247,7 +253,7 @@ function headpats(x, y) {
 }
 
 function headpatInterval() {
-    console.log("patTime", patTime)
+    //console.log("patTime", patTime)
     patTime--;
         if (patTime < 0) {
           clearInterval(patTimer);

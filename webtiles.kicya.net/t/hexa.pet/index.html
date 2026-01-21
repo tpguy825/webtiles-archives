@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>.tile-body {
+  cursor: none;
+  background-color: #000;
+  margin: 0%;
+}
+
+.background {
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+</style>
+    </head>
+    
+    <body>
+        <div class="background"></div>
+        <img src="res/no_signal_v1_smallest.webp" id="no-signal">
+    	<script type="text/tilescript">var SPEED = 16;
+var RATE = 1;
+
+var IMAGE_DIMENSIONS_SMALLEST = [84, 91];
+
+
+var currentImageDimensions = IMAGE_DIMENSIONS_SMALLEST;
+
+var currentDirection = [-1, 1];
+var currentPositionX = 0;
+var currentPositionY = 0;
+
+var noSignal = document.getElementById("no-signal");
+
+noSignal.style.position = "fixed";
+noSignal.style.imageRendering = "pixelated";
+noSignal.style.zIndex = Number.MAX_VALUE;
+noSignal.style.left = Math.floor(currentPositionX) + "px";
+noSignal.style.top = Math.floor(currentPositionY) + "px";
+
+function update() {
+	currentPositionX += (SPEED) * currentDirection[0];
+	currentPositionY += (SPEED) * currentDirection[1];
+	noSignal.style.left = Math.floor(currentPositionX) + "px";
+	noSignal.style.top = Math.floor(currentPositionY) + "px";
+
+	// x
+	if ((currentPositionX + currentImageDimensions[0] >= 250)) {
+		currentDirection[0] *= -1
+		currentPositionX = 250 - currentImageDimensions[0]
+		if (Math.random() <= 0.12) {
+			currentDirection[1] *= -1
+		}
+	}
+
+	if (currentPositionX <= 0) {
+		currentDirection[0] *= -1
+		currentPositionX = 0
+		if (Math.random() <= 0.12) {
+			currentDirection[1] *= -1
+		}
+	}
+
+	// y
+	if ((currentPositionY + currentImageDimensions[1] >= 250)) {
+		currentDirection[1] *= -1
+		currentPositionY = 250 - currentImageDimensions[1]
+		if (Math.random() <= 0.12) {
+			currentDirection[0] *= -1
+		}
+	}
+
+	if (currentPositionY <= 0) {
+		currentDirection[1] *= -1
+		currentPositionY = 0
+		if (Math.random() <= 0.12) {
+			currentDirection[0] *= -1
+		}
+	}
+}
+
+setInterval(update, RATE * 1000)
+
+currentDirection = [Math.random() < 0.5 ? 1 : -1, Math.random() < 0.5 ? 1 : -1];
+currentPositionX = Math.floor((Math.random() * (250 - currentImageDimensions[0])) / SPEED) * SPEED;
+currentPositionY = Math.floor((Math.random() * (250 - currentImageDimensions[1])) / SPEED) * SPEED;
+
+update()</script>
+    </body>
+</html>

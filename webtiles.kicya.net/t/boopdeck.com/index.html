@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e1e1e1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, sans-serif;
+  font-size: 3rem;
+  display: flex;
+  overflow: hidden;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  -webkit-tap-highlight-color: #0000;
+  background-color: #000000bf;
+  border-radius: 256vw;
+  position: relative;
+  box-shadow: -.15em -.15em .15em -.075em #05050540, .0375em .0375em .0675em #0505051a;
+}
+
+button:after {
+  content: "";
+  z-index: 0;
+  border-radius: inherit;
+  filter: blur(.0125em);
+  opacity: .25;
+  mix-blend-mode: multiply;
+  background: linear-gradient(-135deg, #05050580, #0000 20% 100%);
+  width: calc(100% + .3em);
+  height: calc(100% + .3em);
+  position: absolute;
+  top: -.15em;
+  left: -.15em;
+}
+
+button .button-outer {
+  z-index: 1;
+  border-radius: inherit;
+  will-change: box-shadow;
+  transition: box-shadow .3s;
+  position: relative;
+  box-shadow: 0 .05em .05em -.01em #050505, 0 .01em .01em -.01em #05050580, .15em .3em .1em -.01em #05050540;
+}
+
+button:hover .button-outer {
+  box-shadow: 0 0 #050505, 0 0 #05050580, 0 0 #05050540;
+}
+
+.button-inner {
+  --inset: .035em;
+  z-index: 1;
+  border-radius: inherit;
+  will-change: box-shadow, clip-path, background-image, transform;
+  clip-path: inset(0 round 256vw);
+  background-image: linear-gradient(135deg, #e6e6e6, #b4b4b4);
+  padding: 1em 1.5em;
+  transition: box-shadow .3s, clip-path .25s, background-image .25s, transform .25s;
+  position: relative;
+  overflow: clip;
+  box-shadow: inset 0 0 #0505051a, inset -.05em -.05em .05em #05050540, inset 0 0 #0505051a, inset 0 0 .05em .2em #ffffff40, inset .025em .05em .1em #fff, inset .12em .12em .12em #ffffff40, inset -.075em -.25em .25em .1em #05050540;
+}
+
+button:hover .button-inner {
+  clip-path: inset(clamp(1px, .0625em, 2px) round 256vw);
+  box-shadow: inset .1em .15em .05em #050505bf, inset -.025em -.03em .05em .025em #05050580, inset .25em .25em .2em #05050580, inset 0 0 .05em .5em #ffffff26, inset 0 0 #fff, inset .12em .12em .12em #ffffff40, inset -.075em -.12em .2em .1em #05050540;
+}
+
+button .button-inner span {
+  z-index: 4;
+  letter-spacing: -.05em;
+  color: #0000;
+  will-change: transform;
+  text-shadow: 0 0 .1em #0000001a;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: linear-gradient(135deg, #191919, #4b4b4b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  transition: transform .25s;
+  display: block;
+  position: relative;
+}
+
+button:hover .button-inner span, button:active .button-inner {
+  transform: scale(.975);
+}
+</style>
+</head>
+<body>
+
+				<button                     id="sound-btn"
+					type="button"
+					data-audio-url="fart.mp3"
+					style="">
+                      <div class="button-outer">
+    <div class="button-inner">
+					▶
+            </div>
+  </div>
+				</button>
+
+    <script type="text/tilescript">
+
+		var player = document.getElementById('sound-player');
+        
+		var btn = document.getElementById('sound-btn');
+		var url = btn.getAttribute('data-audio-url');
+        btn.addEventListener("click", function () { playsound(player, url); });
+
+        function playsound(player, url) {
+			player.src = url;
+			player.muted = false;
+			player.currentTime = 0;
+			player.play().catch(function (err) {
+				console.log('Playback error:', err);
+				// If it fails, clear the state
+				//clearPlayingButtonIf(btn);
+			});
+        }
+
+        
+</script>
+    	<audio id="sound-player" preload="metadata"></audio>
+    </body>
+</html>

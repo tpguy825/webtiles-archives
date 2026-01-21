@@ -4,20 +4,52 @@
     <style>.tile-body {
   color: #fff;
   background-color: #000;
-  background-image: url("star-purple.gif");
+  background-image: url("bg/star-purple.gif");
   background-size: 100%;
   margin: 0;
   font-family: Consolas;
   font-size: 16px;
 }
+
+.container {
+  height: 500px;
+  overflow: scroll;
+}
+
+a {
+  color: #0ff;
+}
+</style>
+    <style>#navbar {
+  text-align: center;
+  background-color: #000;
+  border-style: outset;
+  border-width: 3px;
+  width: 244px;
+}
+
+p {
+  margin: 10px 0;
+}
 </style>
 </head>
 <body>
-    <a href="https://drfred.nekoweb.org" target="_blank"><img src="wagroar.jpg" style="height:100px;float:left;margin-right:10px"></a>
-    <p style="font-size:25px"><strong>Dr. Fred's Evil Tile</strong></p>
-    <p style="margin: 10px 10px">
-        Hi! I am Dr. Fred, and I have nothing of note to say. For the time being...
-    </p>
+    <img src="wagroar.jpg" style="height:100px;float:left;margin-right:10px;margin-bottom:5px;">
+    <h2 style="font-size:25px"><strong>Dr. Fred's Evil Tile</strong></h2>
+    <nav id="navbar" style="margin-bottom:10px;">
+        <p>
+            <a href="https://drfred.nekoweb.org" target="_blank">Website</a> - 
+            <a href="https://tumblr.com/drfred-official" target="_blank">Tumblr</a> - 
+            <a href="https://drfredofficial.bsky.social" target="_blank">Bluesky</a>
+        </p>
+    </nav>
+    <nav id="navbar">
+    	<p>
+            <a href="about.html">About</a> - 
+            <a href="https://status.cafe/users/drfredofficial" target="_blank">Status</a> - 
+            <a href="legend.html">Legend</a>
+        </p>
+    </nav>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>

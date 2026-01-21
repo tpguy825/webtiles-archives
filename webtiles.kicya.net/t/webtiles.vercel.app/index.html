@@ -1,15 +1,23 @@
-<style>.tile-body {
+<style>@font-face {
+  font-family: OMORI;
+  src: url("font.woff2");
+}
+
+.tile-body {
   background-image: url("image.jpg");
   background-size: cover;
-  font-family: cursive;
+  font-family: OMORI;
+  font-size: 1.25rem;
 
-  & div {
+  & a {
     color: #fff;
     background: #000;
     border: 3px solid #fff;
     outline: 1px solid #000;
     margin: 1rem;
-    padding: 1rem;
+    padding: .75rem 1rem .925rem;
+    line-height: 100%;
+    text-decoration: none;
     transition: all .125s ease-in-out;
     position: absolute;
     bottom: 0;
@@ -18,7 +26,7 @@
 }
 </style>
 <script type="text/tilescript">document
-    .getElementsByTagName("div")[0]
+    .getElementsByTagName("a")[0]
     .style
     .transform = "scaleY(1)";</script>
-<div>Waiting for something to happen?</div>
+<a href="https://omori-game.com/en" target="_blank">Waiting for something to happen?</a>

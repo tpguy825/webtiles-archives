@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+    <p>research &amp; development labs</p>
+    <div>
+        <script type="text/tilescript"></script>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    
+    <script type="text/tilescript">
+    	console.log("executin")
+        global = this;
+
+        done = false;
+
+
+        function ELPSYKONGROO(e) {
+            test = e.currentTarget
+            script = test.firstElementChild
+
+            script.removeAttribute("type")
+            script.src = "./test.js"
+            
+            lol = test.cloneNode(true)
+
+            console.log(lol)
+
+            test.remove()
+            document.body.appendChild(lol)
+        }
+
+        
+        global.window.document.querySelector("div").addEventListener("click",ELPSYKONGROO);
+        global.window.document.querySelector("div").click()
+    </script>
+</body>
+</html>

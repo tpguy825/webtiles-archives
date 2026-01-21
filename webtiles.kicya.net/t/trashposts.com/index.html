@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+    <style>html, .tile-body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.tile-body {
+  background-color: #8b5e3c;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+h1 {
+  text-shadow: 2px 2px 4px #0000004d;
+}
+
+h1 a {
+  color: #f5e6d3;
+}
+
+a {
+  color: #00f;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
 <body>
-    <p><a href="https://trashposts.com/" target="_blank">廢文小天地</a>的小天地</p>
+    <h1><a href="https://trashposts.com/" target="_blank">廢文小天地</a></h1>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>

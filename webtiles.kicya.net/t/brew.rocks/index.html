@@ -18,6 +18,47 @@
   left: 0;
 }
 
+.top {
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+}
+
+.linksetc {
+  z-index: 3;
+  width: 100%;
+  margin: auto;
+  position: absolute;
+  top: 160px;
+}
+
+.linksetc a {
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.bottom {
+  z-index: 5;
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  bottom: 0;
+}
+
+.bottom img {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.bottom span {
+  width: 200px;
+  height: 30px;
+  position: absolute;
+  top: -20px;
+  left: 15px;
+}
+
 a {
   color: #fff;
 }
@@ -25,13 +66,17 @@ a {
 </head>
 <body>
   <div class="tile">
+        <div class="top">
         <br><br><br><img src="brew.png"><br><br>
-        <span id="quote" style="cursor: pointer;">hello fellow squares</span><br><br>
+        <span id="quote" style="cursor: pointer;">hello fellow tiles</span></div>
         <div class="linksetc">
-        <a href="https://brew.rocks" style="text-decoration: none;font-size:20px" target="_blank">🌐</a><span>    </span>
-        <a href="https://fedi.computernewb.com/@brew" style="text-decoration: none;font-size:20px" target="_blank">🐘</a><br><br>
-        <a href="https://noided.icu" target="_blank"><small>also check out noided.icu!</small></a>
+        <a href="https://brew.rocks" title="my actual website" target="_blank">🌐</a><span>    </span>
+        <a href="https://fedi.computernewb.com/@brew" title="mastodon" target="_blank">🐘</a><br><br>
         </div>
+        <div class="bottom">
+            <img src="arrowbottom.png">
+            <span>go check them out, they're cool too</span>
+      </div>
     </div>
 </body>
 <script type="text/tilescript">
@@ -43,7 +88,20 @@ function randomq() {
     "the plague is everywhere",
     "welcome to -7,11, we're out of diesel",
     "someone's keeping watch",
-    "real website still under construction"
+    "real website still under construction",
+    "i uhh do stuff when i feel like it",
+    "we make it look easy",
+    "you think you know me",
+    "conductor we have a problem",
+    "where do you want to go today",
+    "make sure to secure ur vnc servers",
+    "love u k <3",
+    "hey at least im not drinking",
+    "the REAL driving simulator",
+    "undefined",
+    "null",
+    "look mom im surrounded by PEOPLE",
+    "im out of quotes give me more"
   ];
 
   var q = qs[Math.floor(Math.random() * qs.length)];

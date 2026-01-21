@@ -27,7 +27,7 @@
 }
 
 .card:hover .card-front:before {
-  background-position: 0 0;
+  background-position: center;
 }
 
 .card-front, .card-back {
@@ -49,8 +49,9 @@
   content: "";
   pointer-events: none;
   background-image: linear-gradient(to bottom left, #fff9, #0000 33%, #ffffff4d 33%, #0000);
-  background-position: 250px -250px;
+  background-position: 125px -250px;
   background-repeat: no-repeat;
+  background-size: 200%;
   width: 250px;
   height: 250px;
   transition: background-position .3s ease-in-out;
@@ -59,9 +60,28 @@
   inset-inline-start: 0;
 }
 
-header {
+.quote {
+  text-align: center;
+  letter-spacing: -.025em;
+  font-size: 10pt;
+}
+
+.psst {
+  letter-spacing: -.025em;
+  margin: 0;
+  font-size: 8pt;
+}
+
+h1 {
   text-align: center;
   letter-spacing: -.05em;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+h2 {
+  letter-spacing: -.05em;
+  font-size: 10pt;
   font-weight: bold;
 }
 
@@ -92,6 +112,7 @@ ul li a {
 
 ol {
   letter-spacing: -.025em;
+  margin: 0;
   padding-inline-start: 12px;
   font-size: 9pt;
 }
@@ -103,6 +124,11 @@ ol li {
 ol li small {
   font-size: 5pt;
 }
+
+audio {
+  zoom: .75;
+  width: 100%;
+}
 </style>
 </head>
 
@@ -113,7 +139,7 @@ ol li small {
                 <img src="cover.png" alt="CUTIEMARKS album cover.">
             </div>
             <div class="card-back">
-                <header>Vylet Pony - CUTIEMARKS (And The Things That Bind Us)</header>
+                <h1>Vylet Pony - CUTIEMARKS (And The Things That Bind Us)</h1>
                 <ul>
                     <li>
                         <a href="https://www.vyletpony.com/cutiemarks" target="_blank"> Album Info </a>
@@ -129,11 +155,13 @@ ol li small {
                         </a>
                     </li>
                 </ul>
-                <audio controls preload="metadata">
-                    
-                    
-                    <p>ANTONYMPH</p>
-                </audio>
+                <p class="quote">
+					<q>It’s never too late to fall in love with the world.</q>
+                </p>
+                <h2>Demo (ANTONYMPH):</h2>
+                <audio src="antonymph.ogg" controls preload="metadata"></audio>
+                <p class="psst"><em>Psst, check out Lyra's ANTONYMPH tile over at (21, 25).</em></p>
+                <h2>Track List:</h2>
                 <ol>
                     <li>THE THINGS THAT BIND US <small>(ft. CalamariSpider)</small></li>
                     <li>CUTIEMARKS <small>(ft. Chi Chi)</small></li>
