@@ -109,6 +109,16 @@ var maps = [map1, map2, map3];
 var mapNames = ["courtyard", "snow field", "palace"];
 var mapRecords = [0, 0, 0];
 var mapRecordNames = ["", "", ""];
+var selectedUpgradeCost = -1;
+var selectedDamage = -1;
+var selectedRange = -1;
+var selectedSpeed = -1;
+var tempDamage = -1;
+var tempRange = -1;
+var tempSpeed = -1;
+
+var gamespeed = 50;
+var dotTimer = 0;
 
 var touchtext = "";
 
@@ -160,8 +170,8 @@ var sprites = {
 
 function restart() {
 	gamescreen = "game";
-	map = 0;
-	money = 100;
+	map = 2;
+	money = 25;
 	lives = 50;
 	round = 0;
 	towerNames = ["red regular", "blue bomber", "violet splasher", "amber tapper"];
@@ -171,68 +181,80 @@ function restart() {
 	towerSpeed = [20, 30, 40, 24];
 	towerTile = [[2, 4], [2, 6], [0, 8], [2, 8]];
 	upgradeNames = ["heart monitor", "slime bombs", "fire flower", "auto clicker"];
-	upgradeCost = [85, 100, 135, 260];
+	upgradeCost = [85, 100, 135, 250];
 	upgradeDamage = [3, 4, 5, 9];
 	upgradeRange = [6, 4, 3, 999];
 	upgradeSpeed = [18, 25, 30, 10];
 	
 	towerData = []; // type, x, y, upgrade level, sell value, direction, cooldown
+	
+	path = [ // x, y, next direction: 0 right 1 down 2 left 3 up 4 finish
+	[[1, 7, 0], [8, 7, 3], [8, 3, 0], [20, 3, 1], [20, 13, 2], [4, 13, 3], [4, 9, 0], [16, 9, 1], [16, 16, 4]],
+	[[1, 14, 0], [5, 14, 3], [5, 11, 0], [11, 11, 1], [11, 12, 0], [17, 12, 3], [17, 3, 2], [15, 3, 1], [15, 5, 0], [22, 5, 3], [22, 2, 0], [24, 2, 4]],
+	[[13, 0, 1], [13, 3, 2], [8, 3, 1], [8, 13, 0], [13, 13, 1], [13, 16, 4]],
+	[[13, 16, 3], [13, 13, 0], [18, 13, 3], [18, 3, 2], [13, 3, 3], [13, 0, 4]]
+	]; 
+	
 	canPlace = [ // sorry for the huge array
 	[[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
 	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]],
+	[true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true],
+	[false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true],
+	[true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, false, true, true, true],
+	[true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, false, true, true, true],
+	[true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, false, true, true, true],
+	[true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, false, true, true, true],
+	[true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true]],
+	
 	[[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, true, true, true, true, false, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, true, true, true, true, false, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true],
+	[true, true, true, false, false, false, false, false, false, false, true, true, true, true, true, false, true, true, true, true, true, true],
+	[true, true, true, false, true, true, true, true, true, false, false, false, false, false, false, false, true, true, true, true, true, true],
+	[true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+	[false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
 	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]],
-	[[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
-	[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]]
+	
+	[[true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true],
+	[true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true],
+	[true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true],
+	[true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true]]
 	];
 	hoveringTower = -1;
 	buyingTower = -1;
 	selectedTower = -1;
 	
-	dotData = []; // hp, x, y, base speed, current speed, distance traveled
+	dotData = []; // hp, x, y, current speed mult, distance traveled, direction, path, target
 	
 	effectData = []; // type, x, y, lifespan
 	
+	autoStart = false;
 	roundStarted = false;
+	roundEnded = true;
 	roundSpawns = [];
 	roundData = [ // dot hp, amount, delay
 	// standard: 1-10 hp
@@ -241,26 +263,176 @@ function restart() {
 	// bomb: 31-40 hp
 	// gold: 41-50 hp
 	// ruby: 51-100 hp
-	// emerald: 101+ hp
-	// 
-	
+	// emerald: 101-200 hp
+	// sapphire: 201-300 hp
+	// amethyst: 301-400 hp
+	// aquamarine: 401+ hp
+	[[1, 12, 16], [1, 8, 8]], // 1
+	[[1, 25, 4]], // 2
+	[[1, 5, 5], [2, 10, 10], [1, 5, 5]], // 3
+	[[3, 9, 6]], // 4
+	[[5, 5, 5], [4, 8, 8], [3, 12, 12], [2, 16, 6], [1, 20, 1]], // 5
+	[[1, 24, 4], [10, 1, 10]], // 6
+	[[4, 10, 5], [5, 7, 10], [6, 4, 15]], // 7
+	[[2, 25, 2], [3, 20, 3], [4, 15, 4]], // 8
+	[[5, 10, 15], [6, 10, 5]], // 9
+	[[20, 1, 20]] // 10
 	];
+	totalDots = 0;
 	//var grid = 
 }
 
 restart();
+var fram = 0;
+var last = 0;
 var drawing = false;
 var draw_x = 3;
 var draw_y = 2;
 
 // GAMEPLAY STUFF
-function judgeSprite(_tower) {
-	
+function startRound() {
+	dotTimer = 1;
+	roundSpawns = [];
+	if (roundData.length <= round) {
+		roundSpawns.push([[30, 10, 2]]);
+	}
+	else {
+		roundSpawns.push(roundData[round]);
+	}
+	roundStarted = true;
+	roundEnded = false;
+	totalDots = 0;
+	round++;
+}
+
+function towerSprite(_tower, _lvl, _d) {
+	switch (_tower) {
+		case 0:
+		return [_d, 4+(_lvl >= 2)];
+		break;
+		case 1:
+		return [_d, 6+(_lvl >= 2)];
+		break;
+		case 2:
+		return [0, 8+(_lvl >= 2)];
+		break;
+		case 3:
+		return [1+Math.floor(_d/2), 8+(_lvl >= 2)];
+		break;
+		default:
+		break;
+	}
+}
+
+function getTowerStats(_type, _lvl) {
+	if (_lvl >= 2) {
+		selectedDamage = upgradeDamage[_type];
+		selectedRange = upgradeRange[_type];
+		selectedSpeed = upgradeSpeed[_type];
+	}
+	else {
+		selectedDamage = towerDamage[_type] + ((_type == 3) + 1) * _lvl;
+		selectedRange = towerRange[_type] + _lvl;
+		selectedSpeed = towerSpeed[_type];
+	}
+}
+
+function getTowerStats2(_type, _lvl) {
+	if (_lvl >= 2) {
+		tempDamage = upgradeDamage[_type];
+		tempRange = upgradeRange[_type];
+		tempSpeed = upgradeSpeed[_type];
+	}
+	else {
+		tempDamage = towerDamage[_type] + ((_type == 3) + 1) * _lvl;
+		tempRange = towerRange[_type] + _lvl;
+		tempSpeed = towerSpeed[_type];
+	}
+}
+
+function dotSprite(_hp, _d) {
+	if (_hp >= 401) return [15, 8+_d];
+	else if (_hp >= 51) return [Math.ceil(_hp / 100 + 10), 8+_d];
+	else if (_hp >= 21) return [Math.ceil(_hp / 10 + 5), 8+_d];
+	else if (_hp >= 11) return [18, 4+_d];
+	else if (_hp > 0) return [Math.ceil(_hp + 7), 4+_d];
+	else return [18, 11];
 }
 
 function moveDots() {
-	
+	for (i = 0; i < dotData.length; i++) {
+		dotSpeed = (dotData[i][0] >= 21) ? 5 / dotData[i][0] : dotData[i][0] / 100 + 0.1;
+		dotData[i][4] += dotSpeed * dotData[i][3];
+		switch (dotData[i][5]) {
+			case 0: // right
+			dotData[i][1] += dotSpeed * dotData[i][3];
+			break;
+			case 1: // down
+			dotData[i][2] += dotSpeed * dotData[i][3];
+			break;
+			case 2: // left
+			dotData[i][1] -= dotSpeed * dotData[i][3];
+			break;
+			case 3: // up
+			dotData[i][2] -= dotSpeed * dotData[i][3];
+			break;
+		}
+		if (Math.abs(dotData[i][1] - path[dotData[i][6]][dotData[i][7]][0]) <= dotSpeed * 1.1 && Math.abs(dotData[i][2] - path[dotData[i][6]][dotData[i][7]][1]) <= dotSpeed * 1.1) {
+			dotData[i][1] = path[dotData[i][6]][dotData[i][7]][0];
+			dotData[i][2] = path[dotData[i][6]][dotData[i][7]][1];
+			dotData[i][7] += 1;
+			dotData[i][5] = path[dotData[i][6]][dotData[i][7]-1][2];
+		}
+		if (dotData[i][5] == 4) {
+				lives -= dotData[i][0];
+				dotData.splice(i, 1);
+		}
+		else if (dotData[i][0] <= 0) dotData.splice(i, 1);
+	}
 }
+
+function checkImmunities(_tower, _level, _hp) {
+	if (_hp >= 401) return (_tower != 1 && _tower != 2);
+	else if (_hp >= 41 && _hp <= 50) return (_tower != 0 && (_tower != 2 || _level >= 2));
+	else if (_hp >= 31 && _hp <= 40) return (_tower != 1);
+	else if (_hp >= 21 && _hp <= 30) return (_tower != 2);
+	else return true;
+}
+
+function damageDot(_id, _amount) {
+	if (dotData[_id][0] >= _amount) {
+		money += dotData[_id][0] / round;
+	}
+	else {
+		money += _amount / round;
+	}
+	dotData[_id][0] -= _amount;
+	
+	//if (dotData[_id][0] <= 0) {
+		//dotData.splice(_id, 1);
+	//}
+}
+
+function damageRadius(_x, _y, _amount, _range, _slime) {
+	for (j = 0; j < dotData.length; j++) {
+		if (distanceFrom(_x, _y, dotData[j][1], dotData[j][2]) <= _range) {
+			damageDot(j, _amount);
+			if (_slime) {
+				dotData[j][3] = 0.5;
+			}
+		}
+	}
+}
+
+function distanceFrom(_x, _y, _x2, _y2) {
+	return Math.sqrt(Math.pow(_x2 - _x, 2)+Math.pow(_y2 - _y, 2));
+}
+
+function pointTowards(_x, _y, _x2, _y2) {
+	return Math.atan2(_x2 - _x, _y2 - _y)*180/Math.PI;
+}
+
+// MOUSE DETECTION
 
 function canvas_move(_event) {
 	xmouse = get_mouse_pos(activecanvas, _event, true).x;
@@ -279,7 +451,7 @@ function canvas_move(_event) {
 				touchtext = towerNames[buyingTower];
 			}
 			else if (selectedTower >= 0) {
-				touchtext = towerData[selectedTower[0]];
+				touchtext = towerNames[towerData[selectedTower][0]];
 			}
 			hoveringTower = -1;
 			for (i = 0; i < 4; i++) {
@@ -309,13 +481,47 @@ function canvas_click(_event) {
 		
 		break;
 		case "game":
+		
+		// START ROUND
+		if (touching(22, 16, 23, 16)) {
+			if (!roundStarted && roundEnded) startRound(); else autoStart = !autoStart;
+		}
+		
+		if (buyingTower >= 0 && (xmouse >= 2 && xmouse <= 23 && ymouse >= 1 && ymouse <= 15) && canPlace[map][ymouse-1][xmouse-2] && money >= towerCost[buyingTower]) {
+			towerData.push([buyingTower, xmouse, ymouse, 0, Math.floor(towerCost[buyingTower] * 0.75), 2, 0]);
+			money -= towerCost[buyingTower];
+			canPlace[map][ymouse-1][xmouse-2] = false;
+			buyingTower = -1;
+		}
 		for (i = 0; i < 4; i++) {
 		  if (touching(0, i*3+4, 1, i*3+5) && money >= towerCost[i]) buyingTower = i;
 		}
 		if (touching(0, 15, 1, 15)) { 
 			buyingTower = -1;
 		}
-		selectedTower = -1;
+		if (ymouse <= 15) {
+			selectedTower = -1;
+		}
+		else if (selectedTower >= 0) {
+			if (touching(5, 16, 8, 17) && towerData[selectedTower][3] <= 1 && selectedUpgradeCost >= 0 && money >= selectedUpgradeCost) {
+				money -= selectedUpgradeCost;
+				towerData[selectedTower][4] += selectedUpgradeCost * 0.75;
+				towerData[selectedTower][3]++;
+			}
+			else if (touching(17, 17, 20, 17)) {
+				money += towerData[selectedTower][4];
+				canPlace[map][towerData[selectedTower][2]-1][towerData[selectedTower][1]-2] = true;
+				towerData.splice(selectedTower, 1);
+				selectedTower = -1;
+			}
+		}
+		if (touching(22, 17, 23, 17)) gamespeed = 70 - gamespeed;
+		for (i = 0; i < towerData.length; i++) {
+			if (touching(towerData[i][1], towerData[i][2], towerData[i][1], towerData[i][2]) && buyingTower == -1) {
+				selectedTower = i;
+				touchtext = touchtext = towerNames[towerData[selectedTower][0]];
+			}
+		}
 		break;
 	}
 }
@@ -408,12 +614,21 @@ function renderCanvas(_canvas, _ctx, _canvas2) {
 		
 		_ctx.drawImage(maps[map], 0, 0);
 		
+		// DRAW TOWERS
+		for (i = 0; i < towerData.length; i++) {
+			tile(towerSprite(towerData[i][0], towerData[i][3], towerData[i][5]), towerData[i][1], towerData[i][2]);
+		}
+		
+		// DRAW DOTS
+		for (i = 0; i < dotData.length; i++) {
+			tile(dotSprite(dotData[i][0], dotData[i][5]), dotData[i][1], dotData[i][2]);
+		}
 		
 		_ctx.drawImage(game_ui, 0, 0);
 		print(touchtext, 0, 0);
 		if (lives <= 0) {
 			lives = 0;
-			print("game over! ping me", 5, 16);
+			print("game over! ping me", 6, 16);
 			print("on discord your score", 4, 17);
 			tile([15, 3], 23, 15);
 			tile([16, 3], 24, 15);
@@ -432,11 +647,58 @@ function renderCanvas(_canvas, _ctx, _canvas2) {
 			}
 			
 		}
+		if (selectedTower >= 0) {
+			// UPGRADE MENU
+			getTowerStats(towerData[selectedTower][0], towerData[selectedTower][3]);
+			tile([5, 3], 0, 1);
+			tile([6, 3], 0, 2);
+			tile([selectedDamage + 7, 1], 1, 1);
+			tile((selectedRange >= 999) ? [7, 2] : [selectedRange + 7, 1], 1, 2);
+			_ctx.beginPath();
+			_ctx.arc((towerData[selectedTower][1] + 0.5) * sprite_size, (towerData[selectedTower][2] + 0.5) * sprite_size, selectedRange * sprite_size, 0, 2 * Math.PI);
+			_ctx.stroke();
+			switch (towerData[selectedTower][3]) {
+				case 0:
+				selectedUpgradeCost = Math.floor(towerCost[towerData[selectedTower][0]] / 1.78 + 12.5);
+				tile([14, 2], 6, 17);
+				print("base upgrade", 6, 16);
+				print(selectedUpgradeCost.toString(), 7, 17);
+				break;
+				case 1:
+				selectedUpgradeCost = upgradeCost[towerData[selectedTower][0]];
+				tile([towerData[selectedTower][0]+7, 3], 6, 17);
+				print(upgradeNames[towerData[selectedTower][0]], 6, 16);
+				print(selectedUpgradeCost.toString(), 7, 17);
+				break;
+				default:
+				selectedUpgradeCost = -1;
+				break;
+			}
+			tile([11, 3], 17, 17);
+			tile([12, 3], 18, 17);
+			print(Math.floor(towerData[selectedTower][4]).toString(), 19, 17);
+		}
 		if (hoveringTower >= 0) {
 			tile([5, 3], 0, 1);
 			tile([6, 3], 0, 2);
 			tile([towerDamage[hoveringTower] + 7, 1], 1, 1);
 			tile((hoveringTower == 3) ? [7, 2] : [towerRange[hoveringTower] + 7, 1], 1, 2);
+		}
+		if (lives > 0) {
+			tile([2 - (gamespeed <= 20) * 2, 11], 22, 17);
+			tile([3 - (gamespeed <= 20) * 2, 11], 23, 17);
+			if (autoStart) {
+				tile([8, 2], 22, 16);
+				tile([9, 2], 23, 16);
+			}
+			else if (!roundStarted && roundEnded) {
+				tile([12, 2], 22, 16);
+				tile([13, 2], 23, 16);
+			}
+			else {
+				tile([10, 2], 22, 16);
+				tile([11, 2], 23, 16);
+			}
 		}
 		break;
 	}
@@ -449,12 +711,109 @@ var doneRendering = false;
 
 function loop() {
 	//ctx.clearRect(18, 9, canvas.width - 27, canvas.height - 27);
+	
+	// GAMEPLAY LOOP
 	if (lives > 0) {
 		
+		// TOWER FUNCTIONALITY
+		if (!roundEnded) {
+			for (i = 0; i < towerData.length; i++) {
+				towerData[i][6]--;
+				if (towerData[i][6] <= 0) {
+					// SEARCH FOR TARGET AND ATTACK
+					getTowerStats2(towerData[i][0], towerData[i][3]);
+					towerAttacked = false;
+					towerCompare = -1;
+					towerTarget = -1;
+					if (towerData[i][0] == 2) { // VIOLET SPLASHER
+						for (j = 0; j < dotData.length; j++) {
+							if (distanceFrom(towerData[i][1], towerData[i][2], dotData[j][1], dotData[j][2]) <= tempRange) {
+								if (checkImmunities(2, towerData[i][3], dotData[j][0])) {
+									damageDot(j, tempDamage);
+								}
+							}
+						}
+					}
+					else {
+						for (j = 0; j < dotData.length; j++) {
+							if (dotData[j][4] >= towerCompare && distanceFrom(towerData[i][1], towerData[i][2], dotData[j][1], dotData[j][2]) <= tempRange) {
+								towerCompare = dotData[j][4];
+								towerTarget = j;
+							}
+						}
+						if (towerTarget >= 0 && !towerAttacked) {
+							if (checkImmunities(towerData[i][0], towerData[i][3], dotData[towerTarget][0])) {
+								if (dotData[towerTarget] != null) {
+									towerData[i][5] = Math.round(10 - (pointTowards(towerData[i][1], towerData[i][2], dotData[towerTarget][1], dotData[towerTarget][2])/45)) % 8;
+								}
+								if (towerData[i][0] == 1) { // BLUE BOMBER
+									damageRadius(dotData[towerTarget][1], dotData[towerTarget][2], tempDamage, 2, (towerData[i][3] >= 2));
+								}
+								else {
+									if (towerData[i][0] == 0 && towerData[i][3] >= 2) { // HEART MONITOR
+										money += 0.2;
+										lives += 0.1;
+									}
+									damageDot(towerTarget, tempDamage);
+								}
+							}
+						}
+					}
+					towerData[i][6] = (towerData[i][3] >= 2) ? upgradeSpeed[towerData[i][0]] : towerSpeed[towerData[i][0]];
+				}
+			}
+		}
+		
+		
+		// DOT SPAWNING
+		if (roundStarted && roundSpawns[0].length >= 1) {
+			if (dotTimer <= 0) {
+				totalDots++;
+				dotData.push([roundSpawns[0][0][0], path[map+(map == 2 && totalDots % 2 == 0)][0][0], path[map+(map == 2 && totalDots % 2 == 0)][0][1], 1, 0, path[map+(map == 2 && totalDots % 2 == 0)][0][2], map+(map == 2 && totalDots % 2 == 0), 1]);
+				dotTimer = roundSpawns[0][0][2];
+				roundSpawns[0][0][1]--;
+				if (roundSpawns[0][0][1] <= 0) {
+					roundSpawns[0].shift();
+					if (roundSpawns[0].length <= 0) roundStarted = false;
+				}
+			}
+			else {
+				dotTimer--;
+			}
+		}
+		else {
+			if (!roundStarted && !roundEnded && dotData.length <= 0) {
+				money += round;
+				if (autoStart) {
+					roundStarted = true;
+					roundEnded = false;
+					startRound(); 
+				}
+				else {
+					roundEnded = true;
+				}
+			}
+		}
+		moveDots();
 	}
-	renderCanvas(canvas, ctx, canvas2);
-	renderCanvas(canvas2, ctx2, canvas);
-	setTimeout(loop, 50);
+	
+	// FPS
+	var now = Date.now();
+	fram += 2;
+	  if (now - last >= 500) {
+		  //fps = 1000 / (now - last);
+		fps = fram;
+		fram = 0;
+		  last = now;
+		console.log(fps);
+	  }
+	
+	// RENDERING
+	if (fps >= 10) {
+		renderCanvas(canvas, ctx, canvas2);
+		renderCanvas(canvas2, ctx2, canvas);
+	}
+	setTimeout(loop, gamespeed);
 }
 
 loop();</script>

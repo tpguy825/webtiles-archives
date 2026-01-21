@@ -1,13 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>.tile-body {
+  background: repeating-conic-gradient(#fafafa 0 25.0%, white 0 50.0%) 50.0% / 40px 40px;
+  animation: 10s linear infinite b;
+}
+
+.eac {
+  max-width: 150px;
+}
+
+c {
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: left;
+  padding: .5rem;
+  display: flex;
+  position: absolute;
+}
+
+fl, fr {
+  background: linear-gradient(in oklab to top, black, #c43394);
+  width: 250px;
+  height: 250px;
+  margin-top: 52px;
+  display: block;
+  position: absolute;
+  mask-image: url("footerLeft.webp");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+fr {
+  transform: scaleY(-1)translateY(52px)translateX(30%);
+  mask-image: url("footerRight.webp");
+  mask-position: 100% 0;
+}
+
+t {
+  background: #fff;
+  max-width: 150px;
+  margin-left: .4rem;
+  font-size: .75rem;
+  transform: translateY(-6px);
+}
+
+@keyframes b {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+</style>
+    <script type="text/tilescript">
+        var splashText = document.getElementById("splash_text");
+        var SPLASH_TEXTS = [
+            "Click above to go to my website!",
+            "what's 9+10",
+            "6/7 tiles away from explosion",
+            "This is a really long text splash because I don't know how the CSS will behave",
+            "One day I might add a game here",
+            "Check out my art on my website",
+            "love you twin 💕💕💕"
+        ];
+        var TEXT_STYLE = "color: red;";
+        
+        splashText.textContent = SPLASH_TEXTS[Math.floor(Math.random()*SPLASH_TEXTS.length)];
+        console.log("love you twin 💕💕💕");
+        
+    </script>
 </head>
 <body>
-    <p>WIP!!!</p>
-    <br>
-    <a href="https://www.echolotl.lol" target="_blank">check out the real thing in the meantime</a>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+    <c>
+        <a href="https://www.echolotl.lol/" target="_blank"><img src="eac.png" class="eac"></a>
+        <t id="splash_text"></t>
+    </c>
+      <fl></fl>
+    <fr></fr>
+    
+    
 </body>
 </html>

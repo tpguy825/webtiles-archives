@@ -3,21 +3,30 @@
 <head>
     <style>.tile-body {
   color: #111;
-  vertical-align: center;
-  background-color: #245a94;
   justify-content: center;
+  align-items: center;
+}
+
+#container {
+  border-style: solid;
+  border-width: 20px;
+  border-image-source: url("images/bugborder.png");
+  border-image-slice: 109;
+  border-image-width: 33px;
+  border-image-repeat: round;
 }
 
 #main {
-  grid-template: ". . . teto-area" 62px
-                 ". joel-area joel-area teto-area" 63px
-                 ". joel-area joel-area teto-area" 63px
-                 "warning warning warning teto-area" 62px
-                 / 50px 75px 75px 50px;
+  background-color: #245a94;
+  grid-template: ". . . teto-area" 52px
+                 ". joel-area joel-area teto-area" 53px
+                 ". joel-area joel-area teto-area" 53px
+                 "warning warning warning teto-area" 52px
+                 / 40px 65px 65px 40px;
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 250px;
+  width: 210px;
+  height: 210px;
   display: grid;
 }
 
@@ -46,7 +55,7 @@
 
 .joel {
   filter: brightness(0) drop-shadow(1px 1px #fff) drop-shadow(1px -1px #fff) drop-shadow(-1px -1px #fff) drop-shadow(-1px 1px #fff);
-  width: 150px;
+  width: 130px;
   height: 80px;
 }
 
@@ -67,8 +76,8 @@
 }
 
 #teto {
-  width: 50px;
-  height: 62px;
+  width: 40px;
+  height: 49px;
 }
 
 #joel-shadow img:nth-child(2) {
@@ -100,6 +109,9 @@
 </style>
 </head>
 <body>
+    <div id="container">
+        
+
     <div id="main">
         
 		<div id="joel-area">
@@ -108,7 +120,7 @@
         </div>
         
 		<div id="teto-area">
-            <img id="teto" src="images/teto-fumo.gif">
+    		<img id="teto" src="images/teto-fumo.gif">
             <img id="teto" src="images/teto-fumo.gif">
             <img id="teto" src="images/teto-fumo.gif">
             <img id="teto" src="images/teto-fumo.gif">
@@ -129,5 +141,6 @@
 console.log("Hello world!");
 </script>
     </div>
+            </div>
 </body>
 </html>

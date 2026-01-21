@@ -10,13 +10,14 @@
 </head>
 <body>
     <p>research &amp; development labs</p>
-    <div>
-        <script type="text/tilescript"></script>
-    </div>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
     
+    <div></div>
+	<template id="tmp">
+    	<script type="text/tilescript">
+        	console.log('hi')
+        </script>
+    </template>       
+
     <script type="text/tilescript">
     	console.log("executin")
         global = this;
@@ -25,23 +26,21 @@ console.log("Hello world!");</script>
 
 
         function ELPSYKONGROO(e) {
-            test = e.currentTarget
-            script = test.firstElementChild
-
-            script.removeAttribute("type")
-            script.src = "./test.js"
+            t = e.currentTarget
+            b = {}.constructor
             
-            lol = test.cloneNode(true)
-
-            console.log(lol)
-
-            test.remove()
-            document.body.appendChild(lol)
+            console.log(b)
+            
+            b.defineProperty(document.body, "innerHTML", { value: 'hi' })
+            
+            console.log(document.body.replaceChildren)
         }
 
         
-        global.window.document.querySelector("div").addEventListener("click",ELPSYKONGROO);
-        global.window.document.querySelector("div").click()
+        global.window.document.querySelector("template").addEventListener("click",ELPSYKONGROO);
+        global.window.document.querySelector("template").click()
     </script>
+    
+    
 </body>
 </html>
