@@ -61,7 +61,7 @@ a:hover, move:hover {
 </style>
     </head>
    <body>
-       <audio loop src="butter.mp3" preload="metadata"></audio>
+       <audio loop src="water.mp3" preload="metadata"></audio>
         <img id="back" src="r%20(23).png">
            <a style="
     top: 82px;
@@ -88,9 +88,9 @@ a:hover, move:hover {
            function mbfn(el){
                var m = el.target.dataset.id;
 				if (m == 1)
-                   comment("it used to blind me. and it still should, but it chose to not.");
+                   comment(anystring(["it used to blind me. and it still should, but it chose to not.", "maybe it turned to moon? a pocket moon?", "...", "'high contrast-type cause'... 'either clear the event horizon or make autobalancing magnetic mirrors', even the words are made to chaosize."]));
                else if (m == 2)
-                   comment("hello... it's a bad idea to hide here. i didn't try but i just know.");
+                   comment(anystring(["hello... it's a bad idea to hide here. i didn't try but i just know.", "you are being lighted up.", "trapped there, trapped here. who will get out first?..", "for some reason i feel biggest regrets trapped in one alike."]));
                extd();
            }
        </script>
@@ -184,9 +184,13 @@ function hd2(){ //screw no arrow fns
            }*/
 function startrack(){
     document.querySelector('audio').play();
-    document.body.removeEventListener('mousemove', startrack);
+    //document.body.removeEventListener('mousemove', startrack);
 }
-document.body.addEventListener('click', clrcm);
-document.body.addEventListener('mousemove', startrack);</script>
+            function stoptrack(){
+    document.querySelector('audio').pause();
+}
+document.body.addEventListener('mouseover', startrack);
+            document.body.addEventListener('mouseout', stoptrack);
+document.body.addEventListener('click', clrcm);</script>
     </body>
 </html>

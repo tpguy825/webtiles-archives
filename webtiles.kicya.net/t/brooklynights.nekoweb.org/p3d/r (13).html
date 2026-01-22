@@ -88,9 +88,9 @@ a:hover, move:hover {
            function mbfn(el){
                var m = el.target.dataset.id;
 				if (m == 1)
-                   comment("you won't make me talk with these! ain't losing myself, ever!");
+                   comment(anystring(["you won't make me talk with these! ain't losing myself, ever!", "dammit eating plants is not talking to them, i have nothing to tell them and i'd choose to not consume it ever.", "this one will stay in peace.", "actually it feels friendly.", "i wonder... do you eat something? maybe it's only my nature... oh noooo not gettin into this again", "...moves."]));
                else if (m == 2)
-                   comment('at least it responds. every. time.');
+                   comment(anystring(["at least it responds. every. time.", "transparent. cannot hide anything.", "i see myself! not clearly but enough to rate conditions.", "i lose myself. se also tries to hide between ripples. good work"]));
                extd();
            }
        </script>
@@ -184,9 +184,13 @@ function hd2(){ //screw no arrow fns
            }*/
 function startrack(){
     document.querySelector('audio').play();
-    document.body.removeEventListener('mousemove', startrack);
+    //document.body.removeEventListener('mousemove', startrack);
 }
-document.body.addEventListener('click', clrcm);
-document.body.addEventListener('mousemove', startrack);</script>
+            function stoptrack(){
+    document.querySelector('audio').pause();
+}
+document.body.addEventListener('mouseover', startrack);
+            document.body.addEventListener('mouseout', stoptrack);
+document.body.addEventListener('click', clrcm);</script>
     </body>
 </html>

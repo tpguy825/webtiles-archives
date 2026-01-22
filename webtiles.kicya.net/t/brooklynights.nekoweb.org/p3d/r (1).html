@@ -91,7 +91,7 @@ a:hover, move:hover {
 				if (m == 1)
                    comment(anystring(["the feeling of laying on one alike is definitely not unity. but why should i know it??", "the child of unpleasant. not getting into one again. --i know you heard it, don't-", "reminds me of something."]));
                else if (m == 2)
-                   comment("i can't see anyone there. hides perfectly.");
+                   comment(anystring(["i can't see anyone there. hides perfectly.", "somethingsjustmovedthere--", "not breezing."]));
                extd();
            }
        </script>
@@ -185,9 +185,13 @@ function hd2(){ //screw no arrow fns
            }*/
 function startrack(){
     document.querySelector('audio').play();
-    document.body.removeEventListener('mousemove', startrack);
+    //document.body.removeEventListener('mousemove', startrack);
 }
-document.body.addEventListener('click', clrcm);
-document.body.addEventListener('mousemove', startrack);</script>
+            function stoptrack(){
+    document.querySelector('audio').pause();
+}
+document.body.addEventListener('mouseover', startrack);
+            document.body.addEventListener('mouseout', stoptrack);
+document.body.addEventListener('click', clrcm);</script>
     </body>
 </html>

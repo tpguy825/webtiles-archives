@@ -2,164 +2,34 @@
 <html lang="en">
 <head>
     <style>.tile-body {
-  color: #ccc;
+  color: #fff;
+  text-align: center;
   background-color: #0f0f0f;
   justify-content: center;
   align-items: center;
   margin: 0;
-  display: flex;
+  font-family: monospace;
+  overflow: hidden;
 }
 
-.header {
-  text-align: center;
-  font-family: monospace;
+.chiqn-tile {
+  color: #ccc;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
 }
 </style>
 </head>
 <body>
-    <p class="header">chiqn ／／ lessthan.moe</p>
-    <script type="text/tilescript">// define canvas vars
-var canvas;
-var ctx;
-var canvasWidth;
-var canvasHeight;
-
-// define grain-related vars
-var flakeWidth = 2;
-var flakeHeight = 2;
-var flakeColor = 'rgb(248,248,255)';
-var flakeMass = 2;
-var flakeGenSpeed = 70;
-
-//define physics vars
-var gravity = 4;
-
-// the array that holds the grain data
-var flakes = [];
-
-// start the party
-window.onload = function() {
-  init();
-}
-
-// set up vars/graphics and make spawner(s)
-function init() {
-  // init the canvas
-  canvas = document.getElementById('canvas');
-  ctx = canvas.getContext('2d');
-    $('#canvas').width(document.width);
-    $('#canvas').height(document.height);
-  canvasHeight = $('#canvas').height();
-  canvasWidth = $('#canvas').width();
-
-  // set the snow color
-  ctx.fillStyle = flakeColor;
-
-  // create a new spawner
-  new snow.spawner(0, 0, flakeGenSpeed, 800);
-  start();
-}
-
-// actually start the snow falling
-function start() {
-  // init the physics engine with updates taking place every so many seconds
-  physics.start(flakeGenSpeed);
-}
-
-function physics() {
-  for (i = 0; i < flakes.length; i++) {
-    ctx.clearRect(flakes[i].x, flakes[i].y, flakeWidth, flakeHeight);
-    if (flakes[i].x%2 !== 0) {
-      flakes[i].x++;
-    }
-    if (flakes[i].y%2 !== 0) {
-      flakes[i].y++;
-    }
-
-    // determine which way the flake should blow
-    var move = Math.floor(Math.random() * 3) + 1;
-    if (move == 1) {
-      flakes[i].x = flakes[i].x + 2;
-    } else if (move == 2) {
-      flakes[i].x = flakes[i].x - 2;
-    } else {
-      // remain on same path
-    }
-
-    // calculate the gravity
-    if (checkUnderFlake(flakes[i].x, flakes[i].y) == false) {
-      flakes[i].y = flakes[i].y + gravity;
-    }
-
-    // draw flake at new coords
-    ctx.fillRect(flakes[i].x, flakes[i].y, flakeWidth, flakeHeight);
-  }
-}
-
-// this function starts the physics loop
-physics.start = function(updateSpeed) {
-  setInterval(function () { 
-    physics();
-  }, updateSpeed)
-}
-
-/**
- * Snow
- * these are the actual flake objects. they currently include:
- *  - snow.flake (the actual flake object)
- *  - snow.spawner (the object that can create flakes)
- */
-function snow() {
-}
-
-// creates a new 'virtual' grain
-// the 'virtual' grains are drawn in the physics loop
-snow.flake = function(locX, locY) {
-  // add grain properties
-  var newFlake = {};
-  newFlake.x = Math.floor(Math.random() * canvasWidth) + 1;
-  newFlake.y = locY;
-  newFlake.mass = flakeMass;
-  newFlake.velocity = 0;
-  newFlake.age = 0;
-  flakes.push(newFlake);
-}
-
-// a spawner to actually call the instance function
-snow.spawner = function(locX, locY, speed, maxFlakes) {
-  var flakeCt = 0;
-  setInterval(function () {
-    if (flakeCt !== maxFlakes) {
-      new snow.flake(locX, locY);
-      flakeCt++;
-    }
-  }, speed)
-}
-
-
-/**
- * Checking Functions
- * these functions are used for checking properties such as snow flake 
- * locations relative to another flake
- */
-function checkUnderFlake(locX, locY) {
-  if (locX%2 !== 0) {
-    locX++;
-  }
-  var count = 0;
-  for(var i = 0; i < flakes.length; i++) {
-      if(flakes[i].x === locX && flakes[i].y == locY + 4) {
-        count++;
-      }
-  }
-
-  if (count > 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-</script>
+    <div class="chiqn-tile">
+        <div>
+            <p>chiqn</p>
+            <br>
+            <br>
+            <p>somewhere sentient</p>            
+        </div>     
+    </div>
+    <script type="text/tilescript"></script>
 </body>
 </html>

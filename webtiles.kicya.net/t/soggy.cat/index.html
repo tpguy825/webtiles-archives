@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	
+	
+
+	
+	
+
+	
+	
+
+	<style>html, .tile-body {
+  user-select: none;
+  overscroll-behavior: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tile-body {
+  background: radial-gradient(circle, #56c5c7 0%, #ffefb9 30%, #bc90c9 53%, #ff9a9a 78%, #ffcc5f 100%);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.imagecontainer {
+  width: auto;
+  max-width: 75%;
+  height: 100%;
+  max-height: 75%;
+  display: inline-block;
+  position: relative;
+}
+
+#soggycat {
+  object-fit: contain;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-shadow: 4px 4px 8px #29292940;
+}
+
+.boopzone {
+  z-index: 9999;
+  pointer-events: auto;
+  width: 50px;
+  height: 10%;
+  position: absolute;
+  bottom: 55%;
+  left: 35%;
+}
+</style>
+</head>
+<body>
+	<div class="imagecontainer">
+		<audio class="honk" src="honk.ogg" preload="metadata"></audio>
+		<img id="soggycat" src="soggycat.webp" draggable="false" alt="a picture of a wet cat inside a bathtub." loading="eager" decoding="async" data-tilt data-tilt-scale="1.05">
+		<div class="boopzone"></div>
+	</div>
+	<script type="text/tilescript">// vanillatilt.js but unminified and then squished again :p
+
+(function () {
+  'use strict';
+
+  if (typeof window !== 'undefined') {
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = function(callback) {
+        return setTimeout(callback, 16);
+      };
+    }
+    if (!window.cancelAnimationFrame) {
+      window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+      };
+    }
+  }
+
+  function isTrue(v) {
+    return v === '' || v === true || v === 1;
+  }
+
+  function VanillaTilt(el, opts) {
+    if (!(el instanceof Node)) throw Error('Not a Node');
+    this.element = el;
+    this.settings = this._extend(opts || {});
+    this.reverse = this.settings.reverse ? -1 : 1;
+    this.glare = isTrue(this.settings.glare);
+    this.glarePrerender = isTrue(this.settings['glare-prerender']);
+    this.fullPage = isTrue(this.settings['full-page-listening']);
+    this.gyroscope = isTrue(this.settings.gyroscope);
+    this.gyroscopeSamples = this.settings.gyroscopeSamples;
+    this.updateBind = this.update.bind(this);
+    this.resetBind = this.reset.bind(this);
+    this.elementListener = this._getListener();
+    this.width = this.height = this.left = this.top = null;
+    this.updateCall = null;
+    this.event = null;
+    if (this.glare) this._glare();
+    if (this.fullPage) this._updateClient();
+    this._addEvents();
+    this.reset();
+    this._initPos();
+  }
+
+  VanillaTilt.prototype._getListener = function () {
+    if (this.fullPage) return window.document;
+    var m = this.settings['mouse-event-element'];
+    if (typeof m === 'string') return document.querySelector(m) || this.element;
+    if (m instanceof Node) return m;
+    return this.element;
+  };
+
+  VanillaTilt.prototype._addEvents = function () {
+    this.onEnter = this._enter.bind(this);
+    this.onMove = this._move.bind(this);
+    this.onLeave = this._leave.bind(this);
+    this.onResize = this._resize.bind(this);
+    this.onGyro = this._gyro.bind(this);
+
+    var l = this.elementListener;
+    l.addEventListener('mouseenter', this.onEnter);
+    l.addEventListener('mouseleave', this.onLeave);
+    l.addEventListener('mousemove', this.onMove);
+
+    if (this.glare || this.fullPage) {
+      if (window.addEventListener) {
+        window.addEventListener('resize', this.onResize);
+      }
+    }
+    if (this.gyroscope) {
+      if (window.addEventListener) {
+        window.addEventListener('deviceorientation', this.onGyro);
+      }
+    }
+  };
+
+  VanillaTilt.prototype._rmEvents = function () {
+    var l = this.elementListener;
+    l.removeEventListener('mouseenter', this.onEnter);
+    l.removeEventListener('mouseleave', this.onLeave);
+    l.removeEventListener('mousemove', this.onMove);
+
+    if (this.gyroscope) {
+      if (window.removeEventListener) {
+        window.removeEventListener('deviceorientation', this.onGyro);
+      }
+    }
+    if (this.glare || this.fullPage) {
+      if (window.removeEventListener) {
+        window.removeEventListener('resize', this.onResize);
+      }
+    }
+  };
+
+  VanillaTilt.prototype.destroy = function () {
+    clearTimeout(this.transitionTimeout);
+    if (this.updateCall !== null) cancelAnimationFrame(this.updateCall);
+    this.reset();
+    this._rmEvents();
+    this.element.vanillaTilt = null;
+    delete this.element.vanillaTilt;
+    this.element = null;
+  };
+
+  VanillaTilt.prototype._gyro = function (e) {
+    if (e.gamma == null || e.beta == null) return;
+    this._updateRect();
+    if (this.gyroscopeSamples > 0) {
+      this.gammazero = this.gammazero == null ? e.gamma : (e.gamma + this.gammazero) / 2;
+      this.betazero = this.betazero == null ? e.beta : (e.beta + this.betazero) / 2;
+      this.gyroscopeSamples--;
+    }
+    var sx = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX,
+      sy = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY,
+      rx = sx / this.width,
+      ry = sy / this.height,
+      x = (e.gamma - (this.settings.gyroscopeMinAngleX + this.gammazero)) / rx,
+      y = (e.beta - (this.settings.gyroscopeMinAngleY + this.betazero)) / ry;
+    if (this.updateCall !== null) cancelAnimationFrame(this.updateCall);
+    this.event = { clientX: x + this.left, clientY: y + this.top };
+    this.updateCall = requestAnimationFrame(this.updateBind);
+  };
+
+  VanillaTilt.prototype._enter = function () {
+    this._updateRect();
+    this.element.style.willChange = 'transform';
+    this._trans();
+  };
+
+  VanillaTilt.prototype._move = function (e) {
+    if (this.updateCall !== null) cancelAnimationFrame(this.updateCall);
+    this.event = e;
+    this.updateCall = requestAnimationFrame(this.updateBind);
+  };
+
+  VanillaTilt.prototype._leave = function () {
+    this._trans();
+    if (this.settings.reset) requestAnimationFrame(this.resetBind);
+  };
+
+  VanillaTilt.prototype.reset = function () {
+    this.event = {
+      clientX: this.left + this.width / 2,
+      clientY: this.top + this.height / 2
+    };
+    if (this.element && this.element.style)
+      this.element.style.transform =
+        'perspective(' + this.settings.perspective + 'px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+    if (this.glare && this.glareElement) {
+      this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';
+      this.glareElement.style.opacity = '0';
+    }
+  };
+
+  VanillaTilt.prototype._initPos = function () {
+    var s = this.settings;
+    if (s.startX === 0 && s.startY === 0) return;
+    this._enter();
+    if (this.fullPage)
+      this.event = {
+        clientX: (s.startX + s.max) / (2 * s.max) * this.clientWidth,
+        clientY: (s.startY + s.max) / (2 * s.max) * this.clientHeight
+      };
+    else
+      this.event = {
+        clientX: this.left + (s.startX + s.max) / (2 * s.max) * this.width,
+        clientY: this.top + (s.startY + s.max) / (2 * s.max) * this.height
+      };
+    var sc = s.scale;
+    s.scale = 1;
+    this.update();
+    s.scale = sc;
+    if (this.glare && this.glareElement) {
+      this.glareElement.style.opacity = '0';
+    }
+  };
+
+  VanillaTilt.prototype._getVals = function () {
+    var x, y, e = this.event;
+    if (this.fullPage) {
+      x = e.clientX / this.clientWidth;
+      y = e.clientY / this.clientHeight;
+    } else {
+      x = (e.clientX - this.left) / this.width;
+      y = (e.clientY - this.top) / this.height;
+    }
+    x = Math.min(Math.max(x, 0), 1);
+    y = Math.min(Math.max(y, 0), 1);
+    return {
+      tiltX: (this.reverse * (this.settings.max - x * this.settings.max * 2)).toFixed(2),
+      tiltY: (this.reverse * (y * this.settings.max * 2 - this.settings.max)).toFixed(2),
+      percentageX: 100 * x,
+      percentageY: 100 * y,
+      angle: Math.atan2(
+        e.clientX - (this.left + this.width / 2),
+        -(e.clientY - (this.top + this.height / 2))
+      ) * (180 / Math.PI)
+    };
+  };
+
+  VanillaTilt.prototype._updateRect = function () {
+    var r = this.element.getBoundingClientRect();
+    this.width = this.element.offsetWidth;
+    this.height = this.element.offsetHeight;
+    this.left = r.left;
+    this.top = r.top;
+  };
+
+  VanillaTilt.prototype.update = function () {
+    var v = this._getVals(),
+      s = this.settings,
+      x = s.axis === 'x' ? 0 : v.tiltY,
+      y = s.axis === 'y' ? 0 : v.tiltX;
+    this.element.style.transform =
+      'perspective(' + s.perspective + 'px) rotateX(' + x + 'deg) rotateY(' + y + 'deg) scale3d(' + s.scale + ',' + s.scale + ',' + s.scale + ')';
+    if (this.glare && this.glareElement) {
+      this.glareElement.style.transform = 'rotate(' + v.angle + 'deg) translate(-50%, -50%)';
+      this.glareElement.style.opacity = (v.percentageY * s['max-glare'] / 100).toString();
+    }
+    if (typeof CustomEvent !== 'undefined') this.element.dispatchEvent(new CustomEvent('tiltChange', { detail: v }));
+    this.updateCall = null;
+  };
+
+  VanillaTilt.prototype._glare = function () {
+    if (!this.glarePrerender) {
+      var w = document.createElement('div'), i = document.createElement('div');
+      w.className = 'js-tilt-glare';
+      i.className = 'js-tilt-glare-inner';
+      w.appendChild(i);
+      this.element.appendChild(w);
+    }
+    this.glareElementWrapper = this.element.querySelector('.js-tilt-glare');
+    this.glareElement = this.element.querySelector('.js-tilt-glare-inner');
+    if (!this.glarePrerender) {
+      var gw = this.glareElementWrapper, gi = this.glareElement;
+      gw.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none;';
+      gi.style.cssText = 'position:absolute;top:50%;left:50%;pointer-events:none;background:linear-gradient(0deg,rgba(255,255,255,0)0%,rgba(255,255,255,1)100%);transform:rotate(180deg) translate(-50%,-50%);transform-origin:0% 0%;opacity:0;';
+      this._resizeGlare();
+    }
+  };
+
+  VanillaTilt.prototype._resizeGlare = function () {
+    if (this.glare) {
+      var sz = 2 * Math.max(this.element.offsetWidth, this.element.offsetHeight);
+      this.glareElement.style.width = sz + 'px';
+      this.glareElement.style.height = sz + 'px';
+    }
+  };
+
+  VanillaTilt.prototype._updateClient = function () {
+    this.clientWidth = window.innerWidth || document.documentElement.clientWidth;
+    this.clientHeight = window.innerHeight || document.documentElement.clientHeight;
+  };
+
+  VanillaTilt.prototype._resize = function () {
+    this._resizeGlare();
+    this._updateClient();
+  };
+
+  VanillaTilt.prototype._trans = function () {
+    clearTimeout(this.transitionTimeout);
+    var s = this.settings, e = this.element, g = this.glareElement;
+    e.style.transition = s.speed + 'ms ' + s.easing;
+    if (this.glare && g) g.style.transition = 'opacity ' + s.speed + 'ms ' + s.easing;
+    var self = this;
+    this.transitionTimeout = setTimeout(function () {
+      e.style.transition = '';
+      if (self.glare && g) g.style.transition = '';
+    }, s.speed);
+  };
+
+  VanillaTilt.prototype._extend = function (o) {
+    var d = {
+      reverse: false, max: 15, startX: 0, startY: 0, perspective: 1000,
+      easing: 'cubic-bezier(.03,.98,.52,.99)', scale: 1, speed: 300,
+      axis: null, glare: false, 'max-glare': 1, 'glare-prerender': false,
+      'full-page-listening': false, 'mouse-event-element': null, reset: true,
+      gyroscope: true, gyroscopeMinAngleX: -45, gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45, gyroscopeMaxAngleY: 45, gyroscopeSamples: 10
+    }, s = {}, k;
+    for (k in d) {
+      if (o && k in o) s[k] = o[k];
+      else if (this.element.hasAttribute('data-tilt-' + k)) {
+        var v = this.element.getAttribute('data-tilt-' + k);
+        try { s[k] = JSON.parse(v); } catch (e) { s[k] = v; }
+      }
+      else s[k] = d[k];
+    }
+    return s;
+  };
+
+  VanillaTilt.init = function (elements, opts) {
+    if (elements instanceof Node) {
+      elements = [elements];
+    } else if (elements && typeof elements.length === 'number' && !(elements instanceof Array)) {
+      elements = Array.prototype.slice.call(elements);
+    }
+    if (elements instanceof Array) {
+      for (var i = 0; i < elements.length; i++) {
+        if (!('vanillaTilt' in elements[i])) {
+          elements[i].vanillaTilt = new VanillaTilt(elements[i], opts);
+        }
+      }
+    }
+  };
+
+  if (typeof document !== 'undefined') {
+    window.VanillaTilt = VanillaTilt;
+    var init = function () {
+      VanillaTilt.init(document.querySelectorAll('[data-tilt]'));
+    };
+    if (document.readyState === 'loading')
+      document.addEventListener('DOMContentLoaded', init);
+    else init();
+  }
+})();
+</script>
+	<script type="text/tilescript">
+		(function() {
+			var boopzone = document.querySelector(".boopzone");
+			var nosehonk = document.querySelector(".honk");
+			if (boopzone && nosehonk) {
+				boopzone.onclick = function() {
+					try {
+						var nose = nosehonk.cloneNode();
+						nose.src = nosehonk.src;
+						nose.currentTime = 0;
+						document.body.appendChild(nose);
+						nose.play();
+						nose.onended = function() {
+							if (nose.parentNode) {
+								nose.parentNode.removeChild(nose);
+							}
+						};
+					} catch (err) {console.error("FUCK")}
+				};
+			}
+		})();
+	</script>
+</body>
+</html>

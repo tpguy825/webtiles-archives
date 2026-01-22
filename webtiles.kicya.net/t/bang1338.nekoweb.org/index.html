@@ -41,7 +41,7 @@
 
 .face {
   background: none;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   position: absolute;
 }
 
@@ -54,10 +54,25 @@
     transform: rotateX(360deg)rotateY(360deg)rotateZ(360deg);
   }
 }
+
+@keyframes scroll {
+  0% {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 16px 16px;
+  }
+}
+
+.tile-body {
+  background: #000 url("bg5.png");
+  animation: 1s linear infinite scroll;
+}
 </style>
 </head>
 <body id="main">
-  <div id="splash">Bang1338 said: Click me for rotating cube! (no GIF used)<br>THANKS piggie.party AND scenetalia</div>
+  <div id="splash">Bang1338 said: Click me for rotating cube! (no GIF used)</div>
   <div id="scene">
     <div id="camera">
       <div id="cube"></div>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>.tile-body {
+  background-color: #000;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#intro-layer {
+  z-index: 10;
+  cursor: pointer;
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cover-media {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.click-hint {
+  color: #fff;
+  pointer-events: none;
+  background: #00000080;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  position: absolute;
+  bottom: 20px;
+}
+
+.messange {
+  color: #fff;
+  writing-mode: vertical-lr;
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#canvas {
+  z-index: 1;
+  cursor: pointer;
+  display: none;
+}
+</style>
+</head>
+<body>
+    <div id="intro-layer">
+        <img src="owo_hue_video.gif" class="cover-media">
+        
+        <div class="click-hint">Click Start</div>
+		<div class="messange">嗨皮皮，很開心可以和你做鄰居！</div>
+    </div>
+
+    <canvas id="canvas" width="250" height="250"></canvas>
+    
+    <script type="text/tilescript">// 取得外部控制元素
+var introLayer = document.getElementById('intro-layer');
+
+function startGame() {
+    // 1. 介面切換：隱藏封面，顯示 Canvas
+    introLayer.style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
+
+    // ==========================================
+    // 以下是您的原始代碼 (完全未修改，僅縮排)
+    // ==========================================
+    
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // 變數設定
+    var particles = [];
+    var mouseX = 125;
+    var mouseY = 125;
+    var hue = 0;
+    var isMouseDown = false; // 新增：追蹤滑鼠是否按下
+
+    // 粒子物件
+    function Particle() {
+        this.reset();
+    }
+
+    Particle.prototype.reset = function() {
+        this.x = Math.random() * 250;
+        this.y = Math.random() * 250;
+        // 預設漂浮速度
+        this.vx = (Math.random() - 0.5) * 1; 
+        this.vy = (Math.random() - 0.5) * 1;
+        this.radius = Math.random() * 2 + 1;
+        this.life = Math.random() * 0.5 + 0.5;
+        // 紀錄原始速度，方便恢復
+        this.baseVx = this.vx;
+        this.baseVy = this.vy;
+    };
+
+    Particle.prototype.update = function() {
+        // === 互動邏輯 ===
+        var dx = mouseX - this.x;
+        var dy = mouseY - this.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (isMouseDown) {
+            // [點擊互動]：強力吸引
+            // 當滑鼠按下，粒子會加速飛向滑鼠
+            var force = 0.05; // 吸引力強度
+            this.vx += dx * force;
+            this.vy += dy * force;
+            
+            // 增加一點阻尼，避免粒子失控亂飛
+            this.vx *= 0.9;
+            this.vy *= 0.9;
+        } else {
+            // [平常狀態]：滑鼠靠近時稍微逃開
+            if (dist < 50) {
+                var force = (50 - dist) / 50;
+                this.vx -= (dx / dist) * force * 0.5;
+                this.vy -= (dy / dist) * force * 0.5;
+            }
+            
+            // 恢復到原本的飄浮速度 (讓被吸引後的粒子慢慢慢下來)
+            this.vx += (this.baseVx - this.vx) * 0.05;
+            this.vy += (this.baseVy - this.vy) * 0.05;
+        }
+
+        // 更新位置
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // 邊界檢查：超出範圍就重置到另一邊
+        if (this.x < 0) this.x = 250;
+        if (this.x > 250) this.x = 0;
+        if (this.y < 0) this.y = 250;
+        if (this.y > 250) this.y = 0;
+    };
+
+    Particle.prototype.draw = function() {
+        // 按下時粒子變亮一點
+        ctx.globalAlpha = isMouseDown ? 0.8 : (this.life * 0.5);
+        ctx.fillStyle = 'hsl(' + hue + ', 70%, 60%)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+    };
+
+    function initParticles() {
+        for (var i = 0; i < 40; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function drawText() {
+        ctx.save();
+        
+        // 視差效果
+        var textX = 256 + (mouseX - 256);
+        var textY = 256 + (mouseY - 256);
+
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // 文字發光效果
+        // 如果按下，發光範圍變大 (25)，平常是 (15)
+        ctx.shadowBlur = isMouseDown ? 30 : 15; 
+        ctx.shadowColor = 'hsl(' + hue + ', 80%, 60%)';
+        
+        ctx.fillStyle = '#FFFFFF';
+        
+        // [點擊互動]：字體變大
+        // 如果按下，字體變為 75px，平常是 70px
+        var fontSize = isMouseDown ? 100 : 70;
+        ctx.font = 'bold ' + fontSize + 'px Arial';
+        
+        ctx.fillText('OwO', textX, textY);
+        
+        ctx.restore();
+    }
+
+    // === 事件監聽 ===
+    canvas.addEventListener('mousemove', function(e) {
+        var rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    // 新增：按下滑鼠
+    canvas.addEventListener('mousedown', function() {
+        isMouseDown = true;
+    });
+
+    // 新增：放開滑鼠
+    canvas.addEventListener('mouseup', function() {
+        isMouseDown = false;
+    });
+
+    // 手機版觸控
+    canvas.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        var rect = canvas.getBoundingClientRect();
+        var touch = e.touches[0];
+        mouseX = touch.clientX - rect.left;
+        mouseY = touch.clientY - rect.top;
+    });
+    canvas.addEventListener('touchstart', function(e) {
+        isMouseDown = true;
+        var rect = canvas.getBoundingClientRect();
+        var touch = e.touches[0];
+        mouseX = touch.clientX - rect.left;
+        mouseY = touch.clientY - rect.top;
+    });
+    canvas.addEventListener('touchend', function() {
+        isMouseDown = false;
+    });
+
+
+    function animate() {
+        // === 關鍵修改：解決閃爍 ===
+        // 改用全黑 (alpha = 1.0) 清除畫面
+        // 雖然犧牲了粒子的長長拖尾，但保證文字絕對穩固不閃爍
+        ctx.fillStyle = 'rgba(0, 0, 0, 1.0)';
+        
+        // 顏色循環 (慢一點比較舒服)
+        hue = (hue + 1) % 360;
+        
+        // 繪製粒子
+        for (var i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        
+        // 繪製文字
+        drawText();
+        
+        setTimeout(animate, 33);
+    }
+
+    // 初始化與啟動
+    initParticles();
+    animate();
+    
+    // ==========================================
+    // 您的原始代碼結束
+    // ==========================================
+}
+
+// 綁定點擊事件：點擊封面後執行上述 startGame
+introLayer.addEventListener('click', startGame);</script>
+</body>
+</html>

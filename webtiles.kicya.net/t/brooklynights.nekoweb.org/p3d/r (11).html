@@ -61,7 +61,7 @@ a:hover, move:hover {
 </style>
     </head>
    <body>
-       <audio loop src="terra.mp3" preload="metadata"></audio>
+       <audio loop src="water.mp3" preload="metadata"></audio>
         <img id="back" src="r%20(11).png">
            <a style="
     top: 47px;
@@ -87,7 +87,7 @@ a:hover, move:hover {
            function mbfn(el){
                var m = el.target.dataset.id;
 				if (m == 1)
-                   comment("");
+                   comment(anystring(["sometimes i think. why i'm still able to think?", "though i may be spotted quickly, and the place is bad for immediate escaping...", "i can see most events available from here", "boxes are hard."]));
                extd();
            }
        </script>
@@ -181,9 +181,13 @@ function hd2(){ //screw no arrow fns
            }*/
 function startrack(){
     document.querySelector('audio').play();
-    document.body.removeEventListener('mousemove', startrack);
+    //document.body.removeEventListener('mousemove', startrack);
 }
-document.body.addEventListener('click', clrcm);
-document.body.addEventListener('mousemove', startrack);</script>
+            function stoptrack(){
+    document.querySelector('audio').pause();
+}
+document.body.addEventListener('mouseover', startrack);
+            document.body.addEventListener('mouseout', stoptrack);
+document.body.addEventListener('click', clrcm);</script>
     </body>
 </html>

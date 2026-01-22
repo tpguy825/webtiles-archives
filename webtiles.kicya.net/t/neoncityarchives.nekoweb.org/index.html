@@ -178,6 +178,28 @@
   font-family: Righteous, sans-serif;
 }
 
+.graphics {
+  filter: drop-shadow(0 1px 2px #0000004d);
+}
+
+.graphics:hover {
+  transition-timing-function: ease-out;
+  transform: scale(1.1);
+}
+
+.graphic-titles {
+  text-align: center;
+  filter: drop-shadow(0 1px 2px #0000004d);
+  background-color: #ffe74c;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #d1b74a;
+  border-radius: 3px;
+  width: 80px;
+  margin-top: 3px;
+  padding: 3px 5px;
+  line-height: 1.2;
+}
+
 @font-face {
   font-family: Greenhorne Serif;
   src: url("fonts/greenhorne_serif.woff2");
@@ -205,13 +227,12 @@
         Apt. <span style="letter-spacing: 1.5px;">2,-7</span>
     </div>
     <div style=" margin-top: 0px; position: relative;">
-        <p class="wip">WIP!!</p>
         <img src="images/window.webp" alt="a window featuring a blue mii waving" class="window" loading="lazy" draggable="false">
         <marquee class="banner" scrollamount="4">← say hi to zorrpu <b>or else</b></marquee>
     </div>
     <section class="nav" style="padding: 15px 0px;">
         <a href="about.html" class="button">About</a>
-        <a href="index.html" class="button" style="cursor: not-allowed; filter: none;"><del>For You</del></a>
+        <a href="for-you.html" class="button">For You</a>
         <a href="https://neoncityarchives.nekoweb.org" target="_blank" class="button">Website↗︎</a>
         <a href="credits.html" class="button">Credits</a>
     </section>

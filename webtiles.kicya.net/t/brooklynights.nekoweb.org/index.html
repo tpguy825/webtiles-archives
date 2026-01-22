@@ -44,25 +44,157 @@
     transform: translateY(0);
   }
 }
+
+@keyframes side {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-1px);
+  }
+}
+
+@keyframes sgl {
+  from {
+    filter: brightness(1.5) saturate(1.5);
+  }
+
+  to {
+    filter: brightness(2.5) saturate(7.5);
+  }
+}
+
+.locked {
+  pointer-events: none;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.invert:hover {
+  filter: invert();
+}
+
+.mainb:hover {
+  filter: sepia() saturate(40);
+}
 </style>
     </head>
-    <body style="margin: 0; width: 100vw; height: 100vh; overflow: hidden; image-rendering: pixelated; background: url('sky-tile.png')">
-        <center>
-    	ay we r uh making things wait pls<br>
-        <img style="margin-bottom: -213px; pointer-events: none; animation: 2s steps(4, jump-none) infinite alternate softup;" src="windowsload.gif"><br>
-            <span style="position: relative; z-index: 2; font-size: 12px;">yo there it is brook or null or anything pls join windows webring // tryin 2 code in this limited space, no innerhtml/onclick beloved +url('...') is broken pls fix <span style="background: url('sky-tile.png')">test bg</span> <span style="color: red">u can just select text actually 2 see our ramblings</span> <span id="ena" style="background: url('sky-tile.png')">cool personified windows webproject ost</span> <a href="https://brooklynights.nekoweb.org/CHITW/feed.html" target="_blank">hereeee</a> complicated scriptin here is quite a pain, a real ton of interpreters strikin also pls do not attack<br><a href="p3d/r%20(19).html">wip</a></span>
-        <img style="position: fixed; top: 0; left: 0;  width: 100vw; height: 100vh; z-index: -1; pointer-events: none" src="multidot_paper.BMP">
-            <audio id="wht" loop src="waltz%20of%20snow%20citadel.mp3" preload="metadata"></audio>
-            </center>
+    <body style="margin: 0; width: 250px; height: 250px; overflow: hidden; image-rendering: pixelated;">
+        <img class="locked" style="animation: 5s steps(8, jump-none) infinite alternate sgl;" src="sgl.gif">
+        <img class="locked" src="fbg.gif">
+        <img class="locked" src="fg.gif">
+        <img id="b0" class="mainb" style="position: fixed;top: 4px;left: 5px;" src="b00.gif">
+        <img id="b1" class="mainb" style="position: fixed;top: 200px;left: 9px;" src="b10.gif">
+        
+        <div id="frame">
+        <img class="locked" src="frame.gif">
+        <div id="first">
+            <img style="    position: fixed;
+    top: 35px;
+    left: 27px;
+    pointer-events: none;" src="warn.png">
+            <img id="never" class="invert" style="    position: fixed;
+    top: 178px;
+    left: 35px;" src="never.png">
+        </div>
+            <img class="locked" id="holder" src="trans.png">
+        <img id="back" class="invert" style="position: fixed;
+    top: 209px;
+    left: 99px; display: none" src="back.gif">
+        <img id="hideok" class="invert" style="position: fixed;
+    top: 208px;
+    left: 165px;" src="ok.gif">
+            <a id="linkok" class="invert" href="p3d/r%20(19).html" style="position: fixed;
+    top: 208px;
+    left: 165px; display: none"><img src="ok.gif"></a>
+            </div>
+        
+        <audio loop src="waltz%20of%20snow%20citadel.mp3" preload="metadata"></audio>
         <script type="text/tilescript"> //do not forget inline functions also do no work
-            var wtst = false;
-        document.getElementById('ena').addEventListener('mousedown', wtplay);
-            function wtplay(){
-                if (wtst)
-                    document.getElementById('wht').pause();
-                    else document.getElementById('wht').play();
-                wtst = !wtst;
+            var pubev;
+            function ichg(a, t){
+                pubev.target.src = "b" + a + ".gif";
+                pubev.target.style.animation = t ? "0.33s steps(2, jump-none) infinite alternate side" : "none";
             }
+            function i01(ev){
+                pubev = ev;
+                ichg('01', true);
+            }
+            function i11(ev){
+                pubev = ev;
+                ichg('11', true);
+            }
+            function i00(ev){
+                pubev = ev;
+                ichg('00', false);
+            }
+            function i10(ev){
+                pubev = ev;
+                ichg('10', false);
+            }
+            
+            document.getElementById('b0').addEventListener('mouseover', i01);
+            document.getElementById('b1').addEventListener('mouseover', i11);
+            document.getElementById('b0').addEventListener('mouseout', i00);
+            document.getElementById('b1').addEventListener('mouseout', i10);
+            
+            function startrack(){
+    document.querySelector('audio').play();}
+    //document.body.removeEventListener('mousemove', startrack);
+            function stoptrack(){
+    document.querySelector('audio').pause();}
+            document.body.addEventListener('mouseout', stoptrack);
+            
+            var okid = false;
+            var frame = document.getElementById('frame');
+            function neverask()
+            {
+                localStorage.setItem('neva', 'true');
+                hidefr();
+                document.body.addEventListener('mouseover', startrack);
+            }
+            if (localStorage.getItem('neva')){
+                hidefr();
+                document.getElementById('first').remove();
+                okid = true;
+                document.body.addEventListener('mouseover', startrack);
+            }
+            else{
+                document.getElementById('never').addEventListener('click', neverask);
+            }
+            function hidefr(){
+                frame.style.display = "none";
+                if (!okid){
+                document.getElementById('never').removeEventListener('click', neverask);
+                document.body.addEventListener('mouseover', startrack);
+                document.getElementById('first').remove();
+                okid = true;}
+            }
+            function openb0()
+            {
+                frame.style.display = "block";
+                document.getElementById('hideok').style.display = "inline";
+                document.getElementById('linkok').style.display = "none";
+                document.getElementById('back').style.display = "none";
+                document.getElementById('holder').src = "info.gif";
+            }
+            function openb1()
+            {
+                frame.style.display = "block";
+                document.getElementById('hideok').style.display = "none";
+                document.getElementById('linkok').style.display = "inline";
+                document.getElementById('back').style.display = "inline";
+                document.getElementById('holder').src = "pseudo.gif";
+            }
+            document.getElementById('hideok').addEventListener('click', hidefr);
+            document.getElementById('back').addEventListener('click', hidefr);
+            document.getElementById('b0').addEventListener('click', openb0);
+            document.getElementById('b1').addEventListener('click', openb1);
+            
         </script>
     </body>
 </html>

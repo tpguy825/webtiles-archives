@@ -10,14 +10,11 @@
 #container {
   border-style: solid;
   border-width: 20px;
-  border-image-source: url("images/bugborder.png");
-  border-image-slice: 109;
-  border-image-width: 33px;
-  border-image-repeat: round;
 }
 
 #main {
   background-color: #245a94;
+  border-image: url("images/bugborder.png") 109 / 32px / 20px round;
   grid-template: ". . . teto-area" 52px
                  ". joel-area joel-area teto-area" 53px
                  ". joel-area joel-area teto-area" 53px
@@ -31,8 +28,12 @@
 }
 
 #teto-area {
-  background-color: #d25f71;
+  flex-wrap: wrap;
   grid-area: teto-area;
+  place-items: center;
+  width: 40px;
+  height: 210px;
+  display: flex;
 }
 
 #joel-area {
@@ -44,7 +45,7 @@
   text-wrap: wrap;
   grid-area: warning;
   align-items: flex-end;
-  width: 175px;
+  width: 150px;
   height: 62px;
   margin-left: 5px;
   font-family: MS Mincho;
@@ -76,8 +77,9 @@
 }
 
 #teto {
-  width: 40px;
-  height: 49px;
+  width: 35px;
+  height: 44px;
+  position: relative;
 }
 
 #joel-shadow img:nth-child(2) {
@@ -120,10 +122,12 @@
         </div>
         
 		<div id="teto-area">
-    		<img id="teto" src="images/teto-fumo.gif">
+
+
             <img id="teto" src="images/teto-fumo.gif">
             <img id="teto" src="images/teto-fumo.gif">
             <img id="teto" src="images/teto-fumo.gif">
+
         </div>
         
         <div id="warning">
