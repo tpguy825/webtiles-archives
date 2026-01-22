@@ -10,6 +10,14 @@
   background-image: url("../../img/iotadot.png");
   margin: 0;
   font-family: MS UI Gothic, Unifont, Times New Roman, Times, serif;
+
+  &.background-none {
+    background-image: none;
+  }
+
+  &.background-corporate {
+    background-image: url("../../img/iotacorporate.png");
+  }
 }
 
 .icon {
@@ -90,16 +98,35 @@
   }
 
   &#files {
-    & #files-controls {
-      border-bottom: thick solid #191511;
+    & [hidden] {
+      display: none;
+    }
+
+    & .files-controls {
       flex-direction: row;
       justify-content: space-between;
+      padding-left: .5em;
+      padding-right: .5em;
       display: flex;
+
+      &[top] {
+        border-bottom: thick solid #191511;
+      }
+
+      &[bottom] {
+        border-top: thick solid #191511;
+      }
 
       & div {
         flex-direction: row;
         justify-content: space-between;
         display: flex;
+      }
+
+      & #previous-page, & #next-page {
+        cursor: pointer;
+        user-select: none;
+        padding: 0 1em;
       }
     }
 
@@ -117,6 +144,82 @@
 
         &:last-child {
           border-bottom: none;
+        }
+      }
+    }
+
+    & #files-edit {
+      width: 100%;
+      height: 250px;
+    }
+  }
+
+  &#settings {
+    & #settings-controls {
+      border-bottom: thick solid #191511;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: .5em;
+      padding-right: .5em;
+      display: flex;
+
+      & div {
+        flex-direction: row;
+        justify-content: space-between;
+        display: flex;
+      }
+
+      & a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    & #settings-options {
+      flex-direction: column;
+      display: flex;
+
+      & .line {
+        border-bottom: thin solid #191511;
+        height: 23px;
+        padding-left: .5em;
+
+        &:hover {
+          cursor: pointer;
+          filter: brightness(110%);
+          background: #ffd2b2;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    & #wallpaper-choices {
+      flex-direction: row;
+      justify-content: space-evenly;
+      display: flex;
+
+      & .wallpaper-choice {
+        cursor: pointer;
+        flex-direction: column;
+        display: flex;
+
+        & input {
+          display: none;
+        }
+
+        &:has( > input:checked) {
+          & img {
+            border: thick solid #191511;
+          }
+        }
+
+        & img {
+          background: #ff6a00;
+          width: 80px;
+          height: 80px;
         }
       }
     }
@@ -146,11 +249,10 @@ button {
             </div>
         </div>
         <ul id="list">
-            <li><a href="../../index.html#" id="draw-link">draw</a></li>
-            <li><a href="../../index.html#" id="compose-link">compose</a></li>
+            
             <li><a href="../files/index.html" id="fs-link">files</a></li>
             <li><a href="index.html" id="term-link">term</a></li>
-            <li><a href="../../index.html#" id="settings-link">settings</a></li>
+            <li><a href="../settings/index.html" id="settings-link">settings</a></li>
         </ul>
         <div>
             
@@ -185,6 +287,7 @@ var ninthLine = document.getElementById("ninth-line");
 var tenthLine = document.getElementById("tenth-line");
 
 var lines = ["(enter ? for help)", "// iotadot terminal //"];
+var prefix = "";
 
 function rerender() {
   firstLine.textContent = lines[0];
@@ -206,17 +309,20 @@ function cmd_help(n) {
     lines.unshift("?3 (key-value)");
   } else if (n == "1") {
     lines.unshift("clear: clears the terminal");
+    lines.unshift("prefix str: prefix file names with str");
   } else if (n == "2") {
     // ARROW BRACKETS IN STRINGS BREAK JSINTERPRETER????
     lines.unshift("fs0_out: outputs raw string");
+    lines.unshift("fs0_wipe: deletes all files");
     lines.unshift("ls: outputs all files");
     lines.unshift("write file content");
+    lines.unshift("touch file");
     lines.unshift("read file");
     lines.unshift("delete file");
     lines.unshift("(content HATES spaces)");
   } else if (n == "3") {
     lines.unshift("kv_set file key value");
-    lines.unshift("kv_get file key value");
+    lines.unshift("kv_get file key");
     lines.unshift("kv_clear file key");
     lines.unshift("(value HATES spaces)");
   }
@@ -224,6 +330,16 @@ function cmd_help(n) {
 
 function cmd_clear() {
   lines = [];
+}
+
+function cmd_prefix(pre) {
+  if (pre == undefined) {
+    prefix = "";
+    lines.unshift("cleared prefix");
+  } else {
+    prefix = pre;
+    lines.unshift("prefixing with " + pre + "...");
+  }
 }
 
 function cmd_ls() {
@@ -237,6 +353,10 @@ function cmd_ls() {
 }
 
 function cmd_write(name, value) {
+  if (name == undefined) {
+    return;
+  }
+
   var obj = fs0_parse();
   fs0_write(obj, name, value);
   fs0_push(obj);
@@ -251,6 +371,41 @@ function cmd_delete(name) {
 function cmd_read(name) {
   var obj = fs0_parse();
   lines.unshift(obj[name]);
+}
+
+function cmd_fs0_out() {
+  lines.unshift(localStorage.getItem("fs0"));
+}
+
+function cmd_fs0_wipe() {
+  fs0_push({});
+}
+
+function cmd_kv_set(name, key, value) {
+  var buf = fs0_parse();
+  var content = buf[name];
+  var kv = kv_fromstring(content);
+  kv[key] = value;
+  var str = kv_tostring(kv);
+  buf[name] = str;
+  fs0_push(buf);
+}
+
+function cmd_kv_get(name, key) {
+  var buf = fs0_parse();
+  var content = buf[name];
+  var kv = kv_fromstring(content);
+  lines.unshift(kv[key]);
+}
+
+function cmd_kv_delete(name, key) {
+  var buf = fs0_parse();
+  var content = buf[name];
+  var kv = kv_fromstring(content);
+  kv[key] = undefined;
+  var str = kv_tostring(kv);
+  buf[name] = str;
+  fs0_push(buf);
 }
 
 function runCommand(str) {
@@ -278,47 +433,44 @@ function runCommand(str) {
     case "clear":
       cmd_clear();
       break;
+    case "prefix":
+      cmd_prefix(parsed[1]);
+      break;
+    case "pre":
+      cmd_prefix(parsed[1]);
+      break;
+    case "p":
+      cmd_prefix(parsed[1]);
+      break;
     case "ls":
       cmd_ls();
       break;
     case "write":
-      cmd_write(parsed[1], parsed[2]);
+      cmd_write(prefix + parsed[1], parsed[2]);
       break;
     case "delete":
-      cmd_delete(parsed[1]);
+      cmd_delete(prefix + parsed[1]);
       break;
     case "read":
-      cmd_read(parsed[1]);
+      cmd_read(prefix + parsed[1]);
       break;
     case "touch":
-      cmd_write(parsed[1], "");
+      cmd_write(prefix + parsed[1], "");
       break;
     case "fs0_out":
-      lines.unshift(localStorage.getItem("fs0"));
+      cmd_fs0_out();
+      break;
+    case "fs0_wipe":
+      cmd_fs0_wipe();
       break;
     case "kv_get":
-      var buf = fs0_parse();
-      var content = buf[parsed[1]];
-      var kv = kv_fromstring(content);
-      lines.unshift(kv[parsed[2]]);
+      cmd_kv_get(prefix + parsed[1], parsed[2]);
       break;
     case "kv_set":
-      var buf = fs0_parse();
-      var content = buf[parsed[1]];
-      var kv = kv_fromstring(content);
-      kv[parsed[2]] = parsed[3];
-      var str = kv_tostring(kv);
-      buf[parsed[1]] = str;
-      fs0_push(buf);
+      cmd_kv_set(prefix + parsed[1], parsed[2], parsed[3]);
       break;
     case "kv_delete":
-      var buf = fs0_parse();
-      var content = buf[parsed[1]];
-      var kv = kv_fromstring(content);
-      kv[parsed[2]] = undefined;
-      var str = kv_tostring(kv);
-      buf[parsed[1]] = str;
-      fs0_push(buf);
+      cmd_kv_delete(prefix + parsed, str);
       break;
     default:
       lines.unshift("cmdlet not found");
@@ -426,6 +578,20 @@ function kv_fromstring(str) {
   return obj;
 }
 
+// wallpaper
+var buf = fs0_parse();
+var wallpapercfgcontent = buf["config/wallpaper"];
+if (wallpapercfgcontent) {
+  var kv = kv_fromstring(wallpapercfgcontent);
+  switch (kv.preset) {
+    case "none":
+      // document.body.setAttribute("preset", "none");
+      break;
+    case "corporate":
+      // document.body.setAttribute("preset", "corporate");
+  }
+}
+
 // jolly stuff
 
 var soundClick = document.getElementById("sound-click");
@@ -437,13 +603,14 @@ function playClick() {
 }
 
 function hookClick(id) {
-  document.getElementById(id).addEventListener("click", playClick);
+  var element = document.getElementById(id);
+  if (element) {
+    element.addEventListener("click", playClick);
+  }
 }
 
 hookClick("home-button");
 hookClick("apps-toggle");
-hookClick("draw-link");
-hookClick("compose-link");
 hookClick("fs-link");
 hookClick("term-link");
 hookClick("settings-link");

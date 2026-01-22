@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<style>@keyframes float {
+  from {
+    scale: 100%;
+  }
+
+  to {
+    scale: 110%;
+  }
+}
+
+@keyframes scroll {
+  to {
+    background-position: 255px 255px;
+  }
+}
+
+.tile-body {
+  background-image: url("background-tile.jpg");
+  animation: 20s linear infinite scroll;
+}
+
+.logo {
+  width: 80%;
+  margin: auto;
+  transition: scale .5s;
+  animation: 2s infinite alternate float;
+  display: block;
+}
+
+.logo:hover {
+  scale: 120%;
+}
+
+td {
+  color: #fff;
+  padding: 5px;
+  font-family: courier;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+a {
+  color: #ff0;
+}
+
+a:hover {
+  color: red;
+}
+</style>
+<body>
+    <a href="https://discord.gg/drUwJjRcxA" target="_blank"><img src="logo_small_mix.png" class="logo"></a>
+    <table>
+        <td>
+        <p>
+            An online convention for fans of Homestuck and other related properties!
+        </p>
+        </td>
+        <td>
+            <p><a href="https://pesterfest.nekoweb.org/" target="_blank">Learn More On Our Website</a></p>
+        </td>
+    </table>
+</body>
+</html>

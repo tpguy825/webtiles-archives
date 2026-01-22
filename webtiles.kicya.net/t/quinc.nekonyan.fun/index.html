@@ -1,17 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <style>.tile-body {
+	<head>
+		
+		
+		<style>.tile-body {
   color: #111;
   background-color: #f0f0f0;
   margin: 10px;
 }
+
+img {
+  object-fit: none;
+  height: 60px;
+}
+
+img:hover {
+  cursor: grab;
+}
+
+img:active {
+  cursor: grabbing;
+  transform-origin: bottom;
+  transform: scaleY(.8);
+}
+
+#emilia {
+  object-position: 0 0;
+  width: 42px;
+}
+
+#subaru {
+  object-position: -48px 0;
+  width: 38px;
+}
+
+#rem {
+  object-position: -94px 0;
+  width: 40px;
+}
+
+#ram {
+  object-position: -140px 0;
+  width: 40px;
+}
 </style>
-</head>
-<body>
-    <p>This is an example tile.</p>
-    <script type="text/tilescript">// Only executes while your tile is active
+		
+	</head>
+	<body>
+		<img src="images/sprite.png" alt="meow" id="emilia">
+		<img src="images/sprite.png" alt="meow" id="subaru">
+		<img src="images/sprite.png" alt="meow" id="rem">
+		<img src="images/sprite.png" alt="meow" id="ram">
+		<script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
-</body>
+console.log("Hello world!");
+
+// Get all image elements
+var images = Array.prototype.slice.call(document.body.querySelectorAll("img"));
+
+var areaWidth = 250;
+var areaHeight = 250;
+var imgWidth = 42;
+var imgHeight = 60;
+
+// Store position and velocity for each image
+var sprites = images.map(function (img) {
+	// Random position within bounds
+	var x = Math.random() * (areaWidth - imgWidth);
+	var y = Math.random() * (areaHeight - imgHeight);
+	// Random velocity (-2 to 2, but not 0)
+	var vx = (Math.random() - 0.5) * 4;
+	var vy = (Math.random() - 0.5) * 4;
+	if (vx === 0) vx = 1;
+	if (vy === 0) vy = 1;
+	// Set initial position
+	img.style.position = "absolute";
+	img.style.left = x + "px";
+	img.style.top = y + "px";
+	return { img: img, x: x, y: y, vx: vx, vy: vy };
+});
+
+function animate() {
+	sprites.forEach(function (sprite) {
+		sprite.x += sprite.vx;
+		sprite.y += sprite.vy;
+
+		// Bounce off walls
+		if (sprite.x <= 0) {
+			sprite.x = 0;
+			sprite.vx *= -1;
+		} else if (sprite.x >= areaWidth - imgWidth) {
+			sprite.x = areaWidth - imgWidth;
+			sprite.vx *= -1;
+		}
+		if (sprite.y <= 0) {
+			sprite.y = 0;
+			sprite.vy *= -1;
+		} else if (sprite.y >= areaHeight - imgHeight) {
+			sprite.y = areaHeight - imgHeight;
+			sprite.vy *= -1;
+		}
+
+		sprite.img.style.left = sprite.x + "px";
+		sprite.img.style.top = sprite.y + "px";
+	});
+}
+
+setInterval(animate, 1000 / 60);
+</script>
+	</body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Cherry Bomb One;
+  font-style: normal;
+  font-weight: 400;
+  src: url("CherryBombOne-Regular.ttf") format("opentype");
+  unicode-range: U+??;
+}
+
+.tile-body {
+  color: #fff;
+  text-align: center;
+  background-color: #0000;
+  background-image: url("bg.png"), linear-gradient(135deg, #505 0%, #7f1f55 80%);
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: auto, auto;
+  background-attachment: scroll, scroll;
+  background-origin: padding-box, padding-box;
+  background-clip: border-box, border-box;
+  padding: 0;
+  font-family: Cherry Bomb One, sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+.button {
+  color: #505;
+  background-color: #e880b8;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.wip {
+  font-size: 8px;
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+}
+</style>
+</head>
+<body>
+    <h1>Sylfare ✨</h1>
+    <a class="button" href="https://sylfa.re" target="_blank">🇫🇷 in French</a>
+    <a class="button" href="https://en.sylfa.re" target="_blank">🇦🇺 in English</a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <div class="wip">
+        tile in progress
+    </div>
+</body>
+</html>

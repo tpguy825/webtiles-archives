@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: gold;
+  background-color: #8b008b;
+  background-image: url("nebula_background.png");
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  max-width: 250px;
+  max-height: 250px;
+  display: flex;
+}
+
+a:link, a:visited {
+  color: #f0f;
+  background-color: #0000;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: #f0f;
+  background-color: #0000;
+  text-decoration: underline;
+}
+
+.tile-body {
+  font-family: verdana;
+}
+</style>
+</head>
+<body>
+    <main style="border:1px solid gold">
+        <p style="text-align:center;color:yellow;background-color:indigo">
+        Nova is a Cosmic Spacecat who lives at the center of the Crab Nebula.<br>
+        Their aesthetics range from spacecore to frutiger aero and y2k futurism.<br>
+        They like old tech and old software, alongside collecting physical media like CDs, DVDs and cassettes.<br>
+        Their favourite video games are Minecraft, Terraria and Roblox.<br>
+            <a href="index.html" style="background-color:indigo;border:1px solid gold">Go Back</a>
+        </p>
+    </main>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

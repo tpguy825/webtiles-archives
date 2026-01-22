@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <style>a, move {
+  z-index: 5;
+  background: none;
+  border: none;
+  display: block;
+  position: fixed;
+}
+
+.uneven {
+  background: none;
+}
+
+a:hover, move:hover {
+  cursor: none;
+  border: 1px dotted #fff;
+}
+
+.uneven:hover {
+  cursor: crosshair;
+  border: none;
+}
+
+#comment {
+  color: #fff;
+  background: #000;
+  padding: 2px 4px;
+  font-family: MS Gothic;
+}
+
+.tile-body {
+  width: 100vw;
+  height: 100vh;
+  image-rendering: pixelated;
+  cursor: crosshair;
+  margin: 0;
+  overflow: hidden;
+}
+
+#back {
+  z-index: -1;
+  pointer-events: none;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.subc {
+  text-align: center;
+  pointer-events: none;
+  z-index: 6;
+  width: 250px;
+  position: fixed;
+  bottom: 0;
+}
+</style>
+    </head>
+   <body>
+       <audio loop src="butter.mp3" preload="metadata"></audio>
+        <img id="back" src="r%20(19).png">
+           <a style="
+    top: 71px;
+    left: 98px;
+    height: 93px;
+    width: 40px;
+" href="r%20(20).html"></a>
+       <a style="top: 202px;left: 0px;height: 48px;width: 34px;" href="r%20(10).html"></a>
+           <move class="uneven" data-id="1" style="
+    top: 109px;
+    left: 152px;
+    height: 60px;
+    width: 37px;
+    "></move>
+       <a style="top: 198px;left: 40px;height: 52px;width: 82px;" href="r%20(16).html"></a>
+       <move class="uneven" data-id="2" style="top: 112px;left: 0px;height: 70px;width: 76px;"></move>
+       
+       <div class="subc"><span id="comment" style="display: none"></span></div>
+       <script type="text/tilescript">
+           function mbfn(el){
+               var m = el.target.dataset.id;
+				if (m == 1)
+                   comment('...');
+               else if (m == 2)
+                   comment('i will not. open this. despite all my curiousity. do you hear me??');
+               extd();
+           }
+       </script>
+       <script type="text/tilescript">var mbank = document.querySelectorAll('move');
+//var collb = mbank.join(document.querySelectorAll('a'));
+           var cm = document.getElementById('comment');
+           var ex = false;
+//var elmnt = document.querySelector('#cur');
+var rotpos = false;
+           var workfr = Array();
+           var l1 = document.querySelectorAll('.l1');
+           var l2 = document.querySelectorAll('.l2');
+           var wfc = -1;
+           function io(a, b){
+               for(var i = 0; i < l1.length; i++){
+                   if (a){
+                       l1[i].style.display = "block";
+                       l1[i].style.pointerEvents = "auto";
+                   }
+                   else{
+                       l1[i].style.display = "none";
+                       l1[i].style.pointerEvents = "none";
+                   }
+               }
+               for(var i = 0; i < l2.length; i++){
+                   if (b){
+                       l2[i].style.display = "block";
+                       l2[i].style.pointerEvents = "auto";
+                   }
+                   else{
+                       l2[i].style.display = "none";
+                       l2[i].style.pointerEvents = "none";
+                   }
+               }
+           }
+           function rotator(){//yeaaa should have this copied 2 endpoint
+               workfr = rotfr.concat(new Array());
+               rotfr.reverse();
+               workfr.shift();
+               io(false, false);
+               rotpos = !rotpos;
+               wfc = 0;
+               rotqu();
+           }
+           function rotqu(){
+               document.getElementById('back').src = "p3d/r (" + workfr[wfc] + ").png";
+               if (wfc < workfr.length - 1){
+                   wfc++;
+                   setTimeout(rotqu, 500);
+               }
+               else{
+                   io(!rotpos, rotpos);
+               }
+           }
+           for(var i = 0; i < mbank.length; i++){
+               mbank[i].addEventListener('click', mbfn);
+           }
+/*for(var i = 0; i < collb.length; i++){
+    collb[i].addEventListener('mouseout', hd2);
+    collb[i].addEventListener('mouseover', hd);
+}*/
+           function clrcm(){
+               if (!ex){
+                   cm.style.display = "none";
+                   }
+           }
+           function comment(txt){ //btw. use a href 'stead of move if applicable
+               cm.style.display = "inline";
+               cm.innerText = txt;
+           }
+           function extd(){ //call this in ur mbfn
+               ex = true;
+               setTimeout(extr, 300);
+           }
+           function extr(){ //do not call this there lol, 2 not mess w/props
+               ex = false;
+           }
+
+function anystring(a){ //one line random responses
+    return a[Math.round(Math.random() * (a.length - 1))];
+}
+/*function hd(){ //screw no arrow fns
+    elmnt.style.display = 'none';
+}
+function hd2(){ //screw no arrow fns
+    elmnt.style.display = 'block';
+}
+        function dragel(e){
+                elmnt.style.top = e.offsetY + "px";
+    			elmnt.style.left = e.offsetX + "px";
+           }*/
+function startrack(){
+    document.querySelector('audio').play();
+    document.body.removeEventListener('mousemove', startrack);
+}
+document.body.addEventListener('click', clrcm);
+document.body.addEventListener('mousemove', startrack);</script>
+    </body>
+</html>

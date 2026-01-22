@@ -136,9 +136,9 @@ function interpreter(input){
     	
         var div = document.createElement("div");
 		
-    	var parts = (input || "").split(" ")
-        var command = parts[0] || "";
-var args = parts[1] || "";
+    	var parts = (input || "").split(" ");
+		var command = parts[0] || "";
+		var args = parts.slice(1).join(" ");
     	if(command == "clear"){
             screen.innerText ="";
         }

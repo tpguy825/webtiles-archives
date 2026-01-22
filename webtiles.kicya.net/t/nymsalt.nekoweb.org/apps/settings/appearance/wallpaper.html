@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <style>.tile-body {
+  color: #191511;
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  background-color: #ff6a00;
+  background-image: url("../../../img/iotadot.png");
+  margin: 0;
+  font-family: MS UI Gothic, Unifont, Times New Roman, Times, serif;
+
+  &.background-none {
+    background-image: none;
+  }
+
+  &.background-corporate {
+    background-image: url("../../../img/iotacorporate.png");
+  }
+}
+
+.icon {
+  background-image: url("../../../img/icons.png");
+  width: 20px;
+  height: 20px;
+
+  &.icon-apps {
+    background-position-x: -20px;
+  }
+}
+
+#nav {
+  background: #ffd2b2;
+  border-bottom: thick solid #191511;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 20px;
+  padding: 5px;
+  display: flex;
+
+  & #apps-toggle {
+    cursor: pointer;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+  }
+
+  & label[for="apps-toggle"] {
+    display: none;
+  }
+}
+
+#list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: none;
+
+  & li {
+    background: #ffd2b2;
+    border-bottom: thin solid #191511;
+    padding-left: 1em;
+
+    &:last-child {
+      border-bottom: thick solid #191511;
+    }
+  }
+}
+
+.appview {
+  background: #ffd2b2;
+  border-bottom: thin solid #ffd2b2;
+  width: 250px;
+  height: 215px;
+
+  &#terminal {
+    color: #fff;
+    background: #000;
+    border-bottom: thin solid #000;
+    flex-direction: column;
+    display: flex;
+
+    & span.line {
+      height: 20px;
+      margin-left: .5em;
+    }
+
+    & input[type="text"] {
+      color: #fff;
+      background: #000;
+      border: thin solid #fff;
+      width: 98%;
+      height: 15px;
+      font-family: MS UI Gothic, Unifont, Times New Roman, Times, serif;
+    }
+  }
+
+  &#files {
+    & [hidden] {
+      display: none;
+    }
+
+    & .files-controls {
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: .5em;
+      padding-right: .5em;
+      display: flex;
+
+      &[top] {
+        border-bottom: thick solid #191511;
+      }
+
+      &[bottom] {
+        border-top: thick solid #191511;
+      }
+
+      & div {
+        flex-direction: row;
+        justify-content: space-between;
+        display: flex;
+      }
+
+      & #previous-page, & #next-page {
+        cursor: pointer;
+        user-select: none;
+        padding: 0 1em;
+      }
+    }
+
+    & #files-list {
+      & div.line {
+        border-bottom: thin solid #191511;
+        height: 23px;
+        padding-left: .5em;
+
+        &:hover {
+          cursor: pointer;
+          filter: brightness(110%);
+          background: #ffd2b2;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    & #files-edit {
+      width: 100%;
+      height: 250px;
+    }
+  }
+
+  &#settings {
+    & #settings-controls {
+      border-bottom: thick solid #191511;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: .5em;
+      padding-right: .5em;
+      display: flex;
+
+      & div {
+        flex-direction: row;
+        justify-content: space-between;
+        display: flex;
+      }
+
+      & a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    & #settings-options {
+      flex-direction: column;
+      display: flex;
+
+      & .line {
+        border-bottom: thin solid #191511;
+        height: 23px;
+        padding-left: .5em;
+
+        &:hover {
+          cursor: pointer;
+          filter: brightness(110%);
+          background: #ffd2b2;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    & #wallpaper-choices {
+      flex-direction: row;
+      justify-content: space-evenly;
+      display: flex;
+
+      & .wallpaper-choice {
+        cursor: pointer;
+        flex-direction: column;
+        display: flex;
+
+        & input {
+          display: none;
+        }
+
+        &:has( > input:checked) {
+          & img {
+            border: thick solid #191511;
+          }
+        }
+
+        & img {
+          background: #ff6a00;
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+.tile-body {
+  &:has(#apps-toggle:checked) {
+    & #list {
+      display: inline;
+    }
+  }
+}
+</style>
+    </head>
+    <body>
+        <audio src="../../../sfx/click2.wav" id="sound-click" preload="metadata"></audio>
+        <div id="nav">
+            <div><a href="../../../home/index.html" id="home-button">IOTA</a></div>
+            <div class="icon icon-apps">
+                <input type="checkbox" id="apps-toggle" autocomplete="off">
+                <label for="apps-toggle">apps</label>
+            </div>
+        </div>
+        <ul id="list">
+            
+            <li><a href="../../files/index.html" id="fs-link">files</a></li>
+            <li><a href="../../term/index.html" id="term-link">term</a></li>
+            <li><a href="../index.html" id="settings-link">settings</a></li>
+        </ul>
+        <div>
+            
+<div class="appview" id="settings">
+    <div id="settings-controls">
+        <div>
+            <a href="index.html">&vartriangleleft; back</a>
+        </div>
+        <div>wallpaper</div>
+    </div>
+    <div id="wallpaper-choices">
+        <label class="wallpaper-choice" id="first-wallpaper-choice">
+            <input type="radio" name="wallpaper" value="default" autocomplete="off">
+            <img src="../../../img/iotadot.png">
+        </label>
+        <label class="wallpaper-choice" id="second-wallpaper-choice">
+            <input type="radio" name="wallpaper" value="none" autocomplete="off">
+            <img>
+        </label>
+        <label class="wallpaper-choice" id="third-wallpaper-choice">
+            <input type="radio" name="wallpaper" value="corporate" autocomplete="off">
+            <img src="../../../img/iotacorporate.png">
+        </label>
+    </div>
+</div>
+<script defer type="text/tilescript">var firstWallpaperChoice = document.getElementById("first-wallpaper-choice");
+var secondWallpaperChoice = document.getElementById("second-wallpaper-choice");
+var thirdWallpaperChoice = document.getElementById("third-wallpaper-choice");
+
+hookClick("first-wallpaper-choice");
+hookClick("second-wallpaper-choice");
+hookClick("third-wallpaper-choice");
+
+function clickSetsTo(preset) {
+  return function () {
+    var obj = fs0_parse();
+    var content = obj["config/wallpaper"] || "";
+    var cfg = kv_fromstring(content);
+    cfg.preset = preset;
+    obj["config/wallpaper"] = kv_tostring(cfg);
+    fs0_push(obj);
+  };
+}
+
+var obj = fs0_parse();
+var content = obj["config/wallpaper"] || "";
+var cfg = kv_fromstring(content);
+console.log(cfg.preset);
+switch (cfg.preset) {
+  case "none":
+    secondWallpaperChoice.getElementsByTagName("input")[0].checked = true;
+    break;
+  case "corporate":
+    thirdWallpaperChoice.getElementsByTagName("input")[0].checked = true;
+    break;
+  default:
+    firstWallpaperChoice.getElementsByTagName("input")[0].checked = true;
+    break;
+}
+
+firstWallpaperChoice.addEventListener("click", clickSetsTo("default"));
+secondWallpaperChoice.addEventListener("click", clickSetsTo("none"));
+thirdWallpaperChoice.addEventListener("click", clickSetsTo("corporate"));
+</script>
+
+        </div>
+        <script type="text/tilescript">// EVIL AND INTIMIDATING FILE SYSTEM!!! (0)
+// syntax:
+//  KEY␂VALUE␃...
+// (␃ delimits files from each other, ␂ delimits name and content)
+// pretty flat and uses the control pictures
+
+/**
+ * Returns a map of the file system.
+ * Should also be the input for any changes.
+ */
+function fs0_parse() {
+  var fs = localStorage.getItem("fs0");
+  if (!fs) {
+    fs = "";
+  }
+
+  var arr = fs.split("␃").map(function (value) {
+    return value.split("␂");
+  });
+  var obj = {};
+  arr.forEach(function (value) {
+    obj[value[0]] = value[1];
+  });
+  return obj;
+}
+
+function fs0_push(obj) {
+  var str = "";
+  for (var key in obj) {
+    if (key !== "") {
+      str += key + "␂" + obj[key] + "␃";
+    }
+  }
+
+  localStorage.setItem("fs0", str);
+}
+
+function fs0_valid(str) {
+  if (str == null || str == undefined) {
+    return false;
+  }
+  return (
+    str.indexOf("␂") == -1 && str.indexOf("␃") == -1 && str.indexOf("\\") == -1
+  );
+}
+
+function fs0_write(obj, name, content) {
+  if (!(fs0_valid(name) && fs0_valid(content))) {
+    return;
+  }
+  obj[name] = content;
+}
+
+function fs0_delete(obj, name) {
+  if (fs0_valid(name)) {
+    delete obj[name];
+  }
+}
+
+// kv edit
+
+function kv_tostring(obj) {
+  var str = "";
+  for (var key in obj) {
+    if (key == "" || obj[key] == undefined) {
+      continue;
+    }
+    str += key + "=" + obj[key] + "\n";
+  }
+  return str;
+}
+
+function kv_fromstring(str) {
+  var obj = {};
+  var split = str.split("\n").map(function (v) {
+    return v.split("=", 2);
+  }); // string[][]
+  split.forEach(function (v) {
+    obj[v[0]] = v[1];
+  });
+  return obj;
+}
+
+// wallpaper
+var buf = fs0_parse();
+var wallpapercfgcontent = buf["config/wallpaper"];
+if (wallpapercfgcontent) {
+  var kv = kv_fromstring(wallpapercfgcontent);
+  switch (kv.preset) {
+    case "none":
+      // document.body.setAttribute("preset", "none");
+      break;
+    case "corporate":
+      // document.body.setAttribute("preset", "corporate");
+  }
+}
+
+// jolly stuff
+
+var soundClick = document.getElementById("sound-click");
+
+function playClick() {
+  soundClick.pause();
+  soundClick.currentTime = 0;
+  soundClick.play();
+}
+
+function hookClick(id) {
+  var element = document.getElementById(id);
+  if (element) {
+    element.addEventListener("click", playClick);
+  }
+}
+
+hookClick("home-button");
+hookClick("apps-toggle");
+hookClick("fs-link");
+hookClick("term-link");
+hookClick("settings-link");
+</script>
+    </body>
+</html>

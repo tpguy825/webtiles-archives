@@ -55,7 +55,32 @@
   left: 0%;
 }
 </style>
-    <style>#tube {
+    <style>#bell {
+  width: 30px;
+  image-rendering: pixelated;
+  opacity: .5;
+  transition: opacity .25s;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+#bell:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+#canvas {
+  z-index: 99999;
+  pointer-events: none;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#tube {
   width: 30px;
   transition: width .5s, transform .5s;
   position: absolute;
@@ -95,15 +120,71 @@
 </style>
 </head>
 <body>
+    <canvas id="canvas" width="250" height="250"></canvas>
     <div id="vignette"></div>
     <img src="durkaborder.png" id="border">
     <img src="grain.gif" id="grain">
+    <img src="bottom.png" id="bstar">
     <img src="stars.gif" id="stars">
+    <img src="spr_bellblossom.gif" id="bell">
     <div id="main">
     	<a target="_blank" href="https://andreixyz.nekoweb.org"><img src="logo.png" id="logo"></a>
         <div id="welcome"><b>hi (welcome)</b></div>
     </div>
-    <a href="webtube.html"><img src="yt.png" id="tube"></a>
-    <img src="bottom.png" id="bstar">
+    <a href="WebTube/index.html"><img src="yt.png" id="tube"></a>
+    <script type="text/tilescript">sign = function (n) {
+    return n < 0 ? -1 : n > 0 ? 1 : 0;
+}
+
+canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
+var s = document.createElement("img");
+s.setAttribute("src", "sog.png");
+var sogs = new Object();
+var count = 0;
+function spawn() {
+    count++;
+    sogs[count.toString()] = [Math.round(Math.random()*218), 0, 0, 0];
+}
+setInterval(function () {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.filter = "drop-shadow(0px 0px 8px black)";
+    for (i = 1; i <= Object.keys(sogs).length; i++) {
+        var y = sogs[i][1];
+        var yV = sogs[i][2];
+        var onGround = sogs[i][3];
+        ctx.drawImage(s, sogs[i][0], y);
+        if (!onGround) {
+            y += yV;
+            yV += 1;
+            if (y >= canvas.height - 44) {
+                if (Math.abs(yV) <= 2) {
+                    yV = 0;
+                    onGround = 1;
+                }
+                yV *= -1;
+                yV -= sign(yV) * 4;
+            }
+        } else if (y != canvas.height - 44) onGround = 0;
+        y = Math.max(0, Math.min(canvas.height - 44, Math.round(y)));
+        sogs[i][1] = y;
+        sogs[i][2] = yV;
+        sogs[i][3] = onGround;
+    };
+}, 1000/30);
+
+bell = document.getElementById("bell");
+bell.addEventListener("click", function () {
+    ding = document.getElementById("ding");
+    ding.play();
+    bell.src = bell.getAttribute("src");
+    meow1 = document.getElementById("meow1");
+    meow2 = document.getElementById("meow2");
+    Math.round(Math.random()) == 1 ? meow1.play() : meow2.play();
+    spawn();
+});</script>
+    <audio src="snd_bell.wav" id="ding" preload="metadata"></audio>
+    <audio src="sog1.mp3" id="meow1" preload="metadata"></audio>
+    <audio src="sog2.mp3" id="meow2" preload="metadata"></audio>
 </body>
 </html>

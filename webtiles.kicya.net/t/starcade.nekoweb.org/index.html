@@ -260,7 +260,7 @@ function restart() {
 	// standard: 1-10 hp
 	// spider: 11-20 hp
 	// flower: 21-30 hp
-	// bomb: 31-40 hp
+	// shell: 31-40 hp
 	// gold: 41-50 hp
 	// ruby: 51-100 hp
 	// emerald: 101-200 hp
@@ -276,7 +276,67 @@ function restart() {
 	[[4, 10, 5], [5, 7, 10], [6, 4, 15]], // 7
 	[[2, 25, 2], [3, 20, 3], [4, 15, 4]], // 8
 	[[5, 10, 15], [6, 10, 5]], // 9
-	[[20, 1, 20]] // 10
+	[[20, 1, 20]], // 10
+	[[7, 5, 10], [4, 20, 9], [5, 15, 8], [6, 10, 7]], // 11
+	[[4, 18, 10], [6, 15, 11], [8, 12, 12]], // 12
+	[[20, 1, 20], [9, 18, 9], [20, 1, 20]], // 13
+	[[9, 15, 15], [6, 25, 2.5]], // 14
+	[[20, 3, 18], [30, 1, 22]], // 15
+	[[4, 24, 4], [30, 2, 20], [4, 24, 4]], // 16
+	[[7, 45, 3], [20, 5, 17]], // 17
+	[[10, 16, 7], [9, 16, 6], [8, 16, 5]], // 18
+	[[5, 20, 5], [10, 15, 7.5], [20, 10, 10]], // 19
+	[[40, 1, 40], [10, 9, 9]], // 20
+	[[9, 27, 9], [30, 3, 15]], // 21
+	[[10, 25, 2.5]], // 22
+	[[30, 3, 10], [40, 4, 10]], // 23
+	[[50, 1, 20], [5, 8, 2], [50, 1, 20]], // 24
+	[[3, 28, 4], [5, 14, 5], [7, 13, 6], [9, 12, 7], [20, 11, 8]], // 25
+	[[10, 9, 4], [40, 2, 20], [20, 9, 4]], // 26
+	[[1, 75, 1], [4, 15, 2], [10, 10, 3], [40, 5, 4]], // 27
+	[[50, 3, 7]], // 28
+	[[30, 5, 6], [40, 5, 4]], // 29
+	[[5, 11, 5], [20, 8, 5], [50, 5, 5]], // 30
+	[[20, 5, 6], [30, 7, 6], [40, 7, 8]], // 31
+	[[50, 1, 6], [40, 6, 5], [20, 8, 4]], // 32
+	[[30, 20, 5]], // 33
+	[[10, 45, 1], [40, 5, 2]], // 34
+	[[30, 5, 6], [20, 20, 4], [10, 35, 2]], // 35
+	[[9, 49, 3], [8, 51, 2]], // 36
+	[[10, 9, 6], [20, 8, 6], [30, 8, 4], [40, 9, 4]], // 37
+	[[5, 37, 1], [7, 35, 1], [50, 12, 8], [9, 17, 2]], // 38
+	[[20, 12, 4], [10, 11, 4], [50, 6, 4], [40, 11, 8], [30, 12, 8]], // 39
+	[[50, 13, 5], [100, 2, 50]], // 40
+	[[40, 16, 5], [30, 16, 5]], // 41
+	[[30, 30, 3], [50, 20, 5]], // 42
+	[[100, 1, 25], [40, 20, 5], [20, 20, 5], [100, 2, 25]], // 43
+	[[10, 25, 1], [100, 1, 10], [20, 24, 2]], // 44
+	[[200, 4, 80]], // 45
+	[[5, 10, 15], [6, 10, 5]], // 46
+	[[5, 10, 15], [6, 10, 5]], // 47
+	[[5, 10, 15], [6, 10, 5]], // 48
+	[[5, 10, 15], [6, 10, 5]], // 49
+	[[200, 1, 50]], // 50
+	[[5, 10, 15], [6, 10, 5]], // 51
+	[[5, 10, 15], [6, 10, 5]], // 52
+	[[5, 10, 15], [6, 10, 5]], // 53
+	[[5, 10, 15], [6, 10, 5]], // 54
+	[[5, 10, 15], [300, 1, 50]], // 55
+	[[5, 10, 15], [6, 10, 5]], // 56
+	[[5, 10, 15], [6, 10, 5]], // 57
+	[[5, 10, 15], [6, 10, 5]], // 58
+	[[5, 10, 15], [6, 10, 5]], // 59
+	[[400, 5, 10]], // 60
+	[[5, 10, 15], [6, 10, 5]], // 61
+	[[5, 10, 15], [6, 10, 5]], // 62
+	[[100, 16, 4], [50, 32, 0], [100, 16, 4], [50, 32, 0], [100, 16, 4], [50, 32, 0]], // 63
+	[[5, 10, 15], [6, 10, 5]], // 64
+	[[5, 10, 15], [6, 10, 5]], // 65
+	[[5, 10, 15], [6, 10, 5]], // 66
+	[[5, 10, 15], [6, 10, 5]], // 67
+	[[5, 10, 15], [6, 10, 5]], // 68
+	[[5, 10, 15], [6, 10, 5]], // 69
+	[[10000, 1, 100]], // 70
 	];
 	totalDots = 0;
 	//var grid = 
@@ -351,12 +411,12 @@ function getTowerStats2(_type, _lvl) {
 }
 
 function dotSprite(_hp, _d) {
-	if (_hp >= 401) return [15, 8+_d];
-	else if (_hp >= 51) return [Math.ceil(_hp / 100 + 10), 8+_d];
-	else if (_hp >= 21) return [Math.ceil(_hp / 10 + 5), 8+_d];
-	else if (_hp >= 11) return [18, 4+_d];
-	else if (_hp > 0) return [Math.ceil(_hp + 7), 4+_d];
-	else return [18, 11];
+	if (_hp > 400) return [15, 8+_d]; // AQUAMARINE
+	else if (_hp > 50) return [Math.ceil(_hp / 100 + 10), 8+_d]; // RUBY, EMERALD, SAPPHIRE, AMETHYST
+	else if (_hp > 20) return [Math.ceil(_hp / 10 + 5), 8+_d]; // FLOWER, SHELL, GOLD
+	else if (_hp > 10) return [18, 4+_d]; // SPIDER
+	else if (_hp > 0) return [Math.ceil(_hp + 7), 4+_d]; // STANDARD
+	else return [18, 11]; // NONE
 }
 
 function moveDots() {
@@ -383,6 +443,8 @@ function moveDots() {
 			dotData[i][7] += 1;
 			dotData[i][5] = path[dotData[i][6]][dotData[i][7]-1][2];
 		}
+		if (dotData[i][0] >= 51 && dotData[i][0] <= 99) dotData[i][0] += 0.1; // RUBY
+		else if (dotData[i][0] >= 101 && dotData[i][0] <= 200) dotData[i][0] += 0.1; // EMERALD
 		if (dotData[i][5] == 4) {
 				lives -= dotData[i][0];
 				dotData.splice(i, 1);
@@ -392,19 +454,19 @@ function moveDots() {
 }
 
 function checkImmunities(_tower, _level, _hp) {
-	if (_hp >= 401) return (_tower != 1 && _tower != 2);
-	else if (_hp >= 41 && _hp <= 50) return (_tower != 0 && (_tower != 2 || _level >= 2));
-	else if (_hp >= 31 && _hp <= 40) return (_tower != 1);
-	else if (_hp >= 21 && _hp <= 30) return (_tower != 2);
+	if (_hp > 400) return (_tower != 1 && _tower != 2); // AQUAMARINE
+	else if (_hp > 40 && _hp <= 50) return (_tower != 0 && (_tower != 2 || _level >= 2)); // GOLD
+	else if (_hp > 30 && _hp <= 40) return (_tower != 1); // SHELL
+	else if (_hp > 20 && _hp <= 30) return (_tower != 2); // FLOWER
 	else return true;
 }
 
 function damageDot(_id, _amount) {
 	if (dotData[_id][0] >= _amount) {
-		money += dotData[_id][0] / round;
+		money += dotData[_id][0] / Math.pow(round, 1.5);
 	}
 	else {
-		money += _amount / round;
+		money += _amount / Math.pow(round, 1.5);
 	}
 	dotData[_id][0] -= _amount;
 	
@@ -415,7 +477,7 @@ function damageDot(_id, _amount) {
 
 function damageRadius(_x, _y, _amount, _range, _slime) {
 	for (j = 0; j < dotData.length; j++) {
-		if (distanceFrom(_x, _y, dotData[j][1], dotData[j][2]) <= _range) {
+		if (distanceFrom(_x, _y, dotData[j][1], dotData[j][2]) <= _range && (checkImmunities(1, 0, dotData[j][0]))) {
 			damageDot(j, _amount);
 			if (_slime) {
 				dotData[j][3] = 0.5;
@@ -751,8 +813,8 @@ function loop() {
 								}
 								else {
 									if (towerData[i][0] == 0 && towerData[i][3] >= 2) { // HEART MONITOR
-										money += 0.2;
-										lives += 0.1;
+										money += 0.5;
+										lives += 0.5;
 									}
 									damageDot(towerTarget, tempDamage);
 								}
