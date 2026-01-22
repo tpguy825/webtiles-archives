@@ -29,4 +29,4 @@ for (const d of readdirSync("./webtiles.kicya.net/t/")) {
 }
 
 if (process.argv[2] != "--rm") console.log("use --rm to delete these");
-else todelete.forEach(t => rmdirSync(path.join("./webtiles.kicya.net/t/", t)), { recursive: true });
+else todelete.forEach(t => rmdirSync(path.join("./webtiles.kicya.net/t/", t), { recursive: true }));
