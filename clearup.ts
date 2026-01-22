@@ -13,6 +13,7 @@ function to_domains(tiles: TilesRecord) {
 }
 
 import { readFileSync, readdirSync, rmdirSync } from "fs";
+import path from "path";
 
 const tiles = JSON.parse(
         readFileSync("./webtiles.kicya.net/api/tiles", "utf8"),
