@@ -12,7 +12,7 @@ function to_domains(tiles: TilesRecord) {
         return arr;
 }
 
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync, rmdirSync } from "fs";
 
 const tiles = JSON.parse(
         readFileSync("./webtiles.kicya.net/api/tiles", "utf8"),
@@ -28,4 +28,4 @@ for (const d of readdirSync("./webtiles.kicya.net/t/")) {
 }
 
 if (process.argv[2] != "--rm") console.log("use --rm to delete these");
-else d.forEach(t => fs.rmdirSync(path.join("./webtiles.kicya.net/t/", t)));
+else d.forEach(t => rmdirSync(path.join("./webtiles.kicya.net/t/", t)), { recursive: true });
