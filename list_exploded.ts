@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from "fs";
 
 const archived = JSON.parse(
-	readFileSync(existsSync("./_tiles_old") ? "./_tiles_old" : "./webtiles.kicya.net/api/tiles", "utf8"),
+	process.argv[2] ? (await fetch(process.argv[2]).then(r => r.text())) : readFileSync(existsSync("./_tiles_old") ? "./_tiles_old" : "./webtiles.kicya.net/api/tiles", "utf8"),
 ) as RootObject;
 const now = (await (
 	await fetch("https://webtiles.kicya.net/api/tiles?t=" + Math.floor(Date.now() / 1000))
@@ -29,18 +29,3 @@ function to_domains(tiles: TilesRecord) {
 	}
 	return arr;
 }
-
-type RootObject =
-	| {
-			success: true;
-			tiles: TilesRecord;
-	  }
-	| { success: false };
-
-type TilesRecord = Record<string, undefined | Record<string, undefined | Tile>>;
-
-interface Tile {
-	domain: string;
-	updated_at: number;
-}
-
