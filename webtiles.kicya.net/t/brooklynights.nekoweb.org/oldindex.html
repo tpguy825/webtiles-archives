@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <style>#ena {
+  color: #00f;
+  text-decoration: underline;
+}
+
+#ena:active {
+  color: red;
+}
+
+a {
+  color: #0ff;
+}
+
+a:hover {
+  color: #ff0;
+}
+
+a:active {
+  color: #f0f;
+}
+
+@keyframes softup {
+  0% {
+    transform: translateY(3px);
+  }
+
+  39% {
+    transform: translateY(3px);
+  }
+
+  40% {
+    transform: translateY(2px);
+  }
+
+  49% {
+    transform: translateY(2px);
+  }
+
+  50% {
+    transform: translateY(1px);
+  }
+
+  60% {
+    transform: translateY(1px);
+  }
+
+  61% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes side {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-1px);
+  }
+}
+
+@keyframes sgl {
+  from {
+    filter: brightness() saturate();
+  }
+
+  to {
+    filter: brightness(2.5) saturate(11.5);
+  }
+}
+
+.locked {
+  pointer-events: none;
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.invert:hover {
+  filter: invert();
+}
+
+.mainb:hover {
+  filter: sepia() saturate(40);
+}
+
+#shrug:hover {
+  mix-blend-mode: difference;
+  background: #efff00;
+}
+
+#random::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+#random::-webkit-scrollbar-track {
+  border: none;
+  width: 0;
+  height: 0;
+}
+
+.uplink {
+  display: block;
+  position: fixed;
+}
+
+.uplink:hover {
+  mix-blend-mode: difference;
+  background: #ff0;
+}
+</style>
+    </head>
+    <body style="margin: 0; width: 250px; height: 250px; overflow: hidden; image-rendering: pixelated;">
+        <img class="locked" style="animation: 7s steps(14, jump-none) infinite alternate sgl;" src="sgl.gif">
+        <img class="locked" src="fbg.gif">
+        <img class="locked" src="fg.gif">
+        <img id="b0" class="mainb" style="position: fixed;top: 4px;left: 5px;" src="b00.gif">
+        <img id="b1" class="mainb" style="position: fixed;top: 200px;left: 9px;" src="b10.gif">
+        <div id="shrug" style="position: fixed;top: 109px;left: 36px;width: 33px;height: 44px;"></div>
+        <a class="uplink" href="https://brooklynights.nekoweb.org" style="
+    top: 137px;
+    left: 237px;
+    width: 12px;
+    height: 112px;
+" target="_blank"></a>
+        
+        <div id="frame">
+        <img class="locked" src="frame.gif">
+        <div id="first">
+            <img style="    position: fixed;
+    top: 35px;
+    left: 27px;
+    pointer-events: none;" src="warn.png">
+        </div>
+            <img class="locked" id="holder" src="trans.png">
+            <div id="linkc">
+    <a class="uplink" href="https://brooklynights.nekoweb.org/torand?z=pages/universa" style="
+    top: 41px;
+    left: 152px;
+    width: 52px;
+    height: 11px;
+" target="_blank"></a>
+    <a class="uplink" href="https://brooklynights.nekoweb.org/we_bring/" style="
+    top: 84px;
+    left: 140px;
+    width: 70px;
+    height: 13px;
+" target="_blank"></a>
+    <a class="uplink" href="https://brooklynights.nekoweb.org/CHITW/feed" style="
+    top: 97px;
+    left: 101px;
+    width: 55px;
+    height: 11px;
+" target="_blank"></a>
+</div>
+            <div id="random" style="display: none;
+    position: fixed;
+    top: 28px;
+    left: 28px;
+    width: 194px;
+    height: 197px;
+    color: white;
+    font-family: MS Gothic;
+    font-size: 12px;
+    overflow-x: hidden;
+    animation: 0.6s steps(2, jump-none) infinite alternate side;
+">ayo we r those who upvotes downvoted empty/wip sites so when they finally make smth uh yea or this site kicks those bc inactive and downvotes disappear along w/it<br>
+            we dunno if we ever work on this webtile so majorly again lol<br>
+                collab-friendly, <a href="https://webtiles.kicya.net/cdn-cgi/l/email-protection#4123332e2e2a2d382f2826293532262501262c20282d6f222e2c#4123332e2e2a2d382f2826293532262501262c20282d6f222e2c" target="_blank">contact</a> (we do not join discord we r quite asocial)<br>
+                uh shrug
+            </div>
+        <img id="back" class="invert" style="position: fixed;
+    top: 209px;
+    left: 99px; display: none" src="back.gif">
+        <img id="hideok" class="invert" style="position: fixed;
+    top: 208px;
+    left: 165px;" src="ok.gif">
+            <a id="linkok" class="invert" href="p3d/r%20(19).html" style="position: fixed;
+    top: 208px;
+    left: 165px; display: none"><img src="ok.gif"></a>
+            </div>
+        
+        <audio loop src="waltz%20of%20snow%20citadel.mp3" preload="metadata"></audio>
+        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/tilescript"> //do not forget inline functions also do no work
+            var pubev;
+            function ichg(a, t){
+                pubev.target.src = "b" + a + ".gif";
+                pubev.target.style.animation = t ? "0.3s steps(2, jump-none) infinite alternate side" : "none";
+            }
+            function i01(ev){
+                pubev = ev;
+                ichg('01', true);
+            }
+            function i11(ev){
+                pubev = ev;
+                ichg('11', true);
+            }
+            function i00(ev){
+                pubev = ev;
+                ichg('00', false);
+            }
+            function i10(ev){
+                pubev = ev;
+                ichg('10', false);
+            }
+            
+            document.getElementById('b0').addEventListener('mouseover', i01);
+            document.getElementById('b1').addEventListener('mouseover', i11);
+            document.getElementById('b0').addEventListener('mouseout', i00);
+            document.getElementById('b1').addEventListener('mouseout', i10);
+            
+            function startrack(){
+    document.querySelector('audio').play();}
+    //document.body.removeEventListener('mousemove', startrack);
+            function stoptrack(){
+    document.querySelector('audio').pause();}
+            document.body.addEventListener('mouseout', stoptrack);
+            
+            var okid = false;
+            var frame = document.getElementById('frame');
+            function hidefr(){
+                frame.style.display = "none";
+                if (!okid){
+                okid = true;
+                document.body.addEventListener('mouseover', startrack);
+                    document.getElementById('first').remove();
+                }
+            }
+            function openb0()
+            {
+                frame.style.display = "block";
+                document.getElementById('hideok').style.display = "inline";
+                document.getElementById('linkok').style.display = "none";
+                document.getElementById('random').style.display = "none";
+                document.getElementById('linkc').style.display = "block";
+                document.getElementById('back').style.display = "none";
+                document.getElementById('holder').src = "info.gif";
+            }
+            function openb1()
+            {
+                frame.style.display = "block";
+                document.getElementById('hideok').style.display = "none";
+                document.getElementById('linkok').style.display = "inline";
+                document.getElementById('random').style.display = "none";
+                document.getElementById('linkc').style.display = "none";
+                document.getElementById('back').style.display = "inline";
+                document.getElementById('holder').src = "pseudo.gif";
+            }
+            function openshrug()
+            {
+                frame.style.display = "block";
+                document.getElementById('hideok').style.display = "inline";
+                document.getElementById('linkok').style.display = "none";
+                document.getElementById('random').style.display = "block";
+                document.getElementById('linkc').style.display = "none";
+                document.getElementById('back').style.display = "none";
+                document.getElementById('holder').src = "trans.png";
+            }
+            
+            document.getElementById('hideok').addEventListener('click', hidefr);
+            document.getElementById('back').addEventListener('click', hidefr);
+            document.getElementById('b0').addEventListener('click', openb0);
+            document.getElementById('b1').addEventListener('click', openb1);
+            document.getElementById('shrug').addEventListener('click', openshrug);
+        </script>
+    </body>
+</html>

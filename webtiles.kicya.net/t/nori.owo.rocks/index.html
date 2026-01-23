@@ -1,44 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
+    <style>@font-face {
+  font-family: superhelio;
+  src: url("superhelio.ttf");
+}
+
+.tile-body {
   color: #fff;
   text-align: center;
-  background: linear-gradient(to right, #ff2640, #fda24d);
+  margin: none;
+  box-sizing: border-box;
+  background: #000;
+  border: 4px solid #fff;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  gap: 5px;
+  padding-top: 1em;
+  font-family: superhelio, sans-serif;
+  font-size: 2rem;
   display: flex;
+}
+
+p {
+  margin: 0;
 }
 
 .tile-body #sub {
   opacity: .5;
-  font-size: .5em;
+  font-family: monospace;
+  font-size: .6rem;
 }
 
-.tile-body #bl {
-  opacity: .75;
+.tile-body #clip {
+  transform-origin: bottom;
+  max-height: 8rem;
+  margin: auto;
+  transition: transform .2s cubic-bezier(.175, .885, .32, 1.575);
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%)scaleY(1)scaleX(1);
 }
 
-.tile-body #br {
-  opacity: .75;
+.tile-body #clip:hover {
+  cursor: grab;
+}
+
+.tile-body #clip:active {
+  cursor: grabbing;
+  transform: translateX(-50%)scaleY(.8)scaleX(1.2);
+}
+
+#window-bar {
+  box-sizing: border-box;
+  border-bottom: 4px solid #fff;
+  flex-direction: row;
+  place-content: center space-between;
+  width: 100%;
+  padding: .25rem .5rem;
+  display: flex;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 0;
+}
+
+#window-bar #window-title {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+#window-bar #controls {
+  flex-direction: row;
+  gap: 5px;
+  display: flex;
+}
+
+#window-bar #controls .btn {
+  border: 2px solid #fff;
+  width: .5rem;
+  height: .5rem;
 }
 </style>
 </head>
 <body>
-    <p>I'll get around to finish this asap :)</p>
-    <div id="sub">also this is the most instagram-like gradient I could come up with :P</div>
+    <div id="window-bar">
+        <div id="window-title">
+            Browser
+        </div>
+        <div id="controls">
+           <div class="btn"></div>
+           <div class="btn"></div>
+           <div class="btn"></div>
+        </div>
+    </div>
+    <p>BLANKSPACE</p>
+    <div id="sub">Simply beautiful. // est. 2025</div>
+    <img src="clip_pa_f.webp" id="clip">
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
-    <div id="bl">#ff2640</div>
-    <div id="br">#fda24d</div>
-
 </body>
 </html>

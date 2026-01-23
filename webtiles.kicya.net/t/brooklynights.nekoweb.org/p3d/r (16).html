@@ -88,9 +88,9 @@ a:hover, move:hover {
            function mbfn(el){
                var m = el.target.dataset.id;
 				if (m == 1)
-                   comment("it'll prob capture me if i appear under this.");
+                   comment(anystring(["it'll prob capture me if i appear under this.", "clouds do not look like this.", "nor cloth.", "nor rocks.", "nor foam.", "because it's liquidmim.", "moves."]));
                else if (m == 2)
-                   comment('am i allowed to observe?');
+                   comment(anystring(["am i allowed to observe?", "i cannot.", "hey?- uhnotimsorry.", "'nevermind'. nevermind.", "...", "'you've not seen enough yet to answer me'. show me then??", "'light can contain interstellar worms seeking for shadows'. they're so light..."]));
                extd();
            }
            //document.querySelector('audio').playbackRate = 0.9;
@@ -185,9 +185,13 @@ function hd2(){ //screw no arrow fns
            }*/
 function startrack(){
     document.querySelector('audio').play();
-    document.body.removeEventListener('mousemove', startrack);
+    //document.body.removeEventListener('mousemove', startrack);
 }
-document.body.addEventListener('click', clrcm);
-document.body.addEventListener('mousemove', startrack);</script>
+            function stoptrack(){
+    document.querySelector('audio').pause();
+}
+document.body.addEventListener('mouseover', startrack);
+            document.body.addEventListener('mouseout', stoptrack);
+document.body.addEventListener('click', clrcm);</script>
     </body>
 </html>

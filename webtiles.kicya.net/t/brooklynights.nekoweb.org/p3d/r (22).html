@@ -178,9 +178,13 @@ function hd2(){ //screw no arrow fns
            }*/
 function startrack(){
     document.querySelector('audio').play();
-    document.body.removeEventListener('mousemove', startrack);
+    //document.body.removeEventListener('mousemove', startrack);
 }
-document.body.addEventListener('click', clrcm);
-document.body.addEventListener('mousemove', startrack);</script>
+            function stoptrack(){
+    document.querySelector('audio').pause();
+}
+document.body.addEventListener('mouseover', startrack);
+            document.body.addEventListener('mouseout', stoptrack);
+document.body.addEventListener('click', clrcm);</script>
     </body>
 </html>

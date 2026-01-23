@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>html, .tile-body {
+  background-color: #958dff;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+a {
+  background-image: url("bs.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  animation: 30s linear infinite cycleBackground;
+  display: block;
+}
+
+img {
+  opacity: .92;
+  animation: 2s forwards fadeout;
+}
+
+@font-face {
+  font-family: C64 Pro;
+  src: url("c64.woff2");
+}
+
+marquee {
+  font-variant: small-caps;
+  color: #fff9;
+  font-family: C64 Pro;
+  font-size: 285px;
+  text-decoration: none;
+  animation: 2s forwards fadeout;
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes cycleBackground {
+  0% {
+    background-image: url("bs.svg");
+  }
+
+  16.67% {
+    background-image: url("bs.svg#i2");
+  }
+
+  33.33% {
+    background-image: url("bs.svg#i3");
+  }
+
+  50% {
+    background-image: url("bs.svg#i4");
+  }
+
+  66.67% {
+    background-image: url("bs.svg#i5");
+  }
+
+  83.33% {
+    background-image: url("bs.svg#i6");
+  }
+
+  100% {
+    background-image: url("bs.svg");
+  }
+}
+</style>
+</head>
+  <body>
+    <a href="https://sfxuulgz9rbqbpahehcaaw.on.drv.tw" target="_blank">
+      <img width="250" height="250" src="C64.svg">
+    </a>
+  </body>
+</html>

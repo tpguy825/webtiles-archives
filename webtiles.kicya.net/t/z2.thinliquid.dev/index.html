@@ -1,46 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
-}
-</style>
-</head>
+
 <body>
     <p>research &amp; development labs</p>
     
     <div></div>
-	<template id="tmp">
-    	<script type="text/tilescript">
-        	console.log('hi')
-        </script>
-    </template>       
+	<script type="text/tilescript">
+    	(function(){}).constructor('alert(1)')();
+    </script>
 
     <script type="text/tilescript">
-    	console.log("executin")
         global = this;
-
-        done = false;
-
 
         function ELPSYKONGROO(e) {
             t = e.currentTarget
-            b = {}.constructor
             
-            console.log(b)
+            t.remove()
             
-            b.defineProperty(document.body, "innerHTML", { value: 'hi' })
+            t.type = 'module'
             
-            console.log(document.body.replaceChildren)
+            
+           	global.window.document.body.appendChild(t)
         }
 
         
-        global.window.document.querySelector("template").addEventListener("click",ELPSYKONGROO);
-        global.window.document.querySelector("template").click()
+        global.window.document.querySelector("script").addEventListener("click",ELPSYKONGROO);
+        global.window.document.querySelector("script").click()
+        
+        
     </script>
     
     
 </body>
-</html>
