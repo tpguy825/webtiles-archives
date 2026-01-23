@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  background: #1a3a5c;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+</style>
+</head>
+<body>
+    
+    <img id="preview" src="Fishstill.png" alt="Pasha's Mind Fishtank">
+    
+    <canvas id="tank" width="250" height="250"></canvas>
+    <script type="text/tilescript">// Pasha's Mind - Mini Fishtank Tile
+// ES5 compatible, WebTiles sandbox optimized
+
+(function() {
+    var canvas = document.getElementById('tank');
+    var ctx = canvas.getContext('2d');
+    var W = 250, H = 250;
+    
+    // Preview image (shown before interaction)
+    var previewImg = document.getElementById('preview');
+    var isInteractive = false;
+    
+    // Create offscreen buffer for double buffering
+    var buffer = document.createElement('canvas');
+    buffer.width = W;
+    buffer.height = H;
+    var bctx = buffer.getContext('2d');
+    
+    // Cache static background
+    var bgCache = document.createElement('canvas');
+    bgCache.width = W;
+    bgCache.height = H;
+    var bgCtx = bgCache.getContext('2d');
+    var bgDrawn = false;
+    
+    // Animation time
+    var time = 0;
+    
+    // Draw static background once
+    function drawStaticBackground() {
+        // Water gradient
+        var grad = bgCtx.createLinearGradient(0, 0, 0, H);
+        grad.addColorStop(0, '#1a4a7a');
+        grad.addColorStop(0.5, '#1a3d5c');
+        grad.addColorStop(1, '#0f2840');
+        bgCtx.fillStyle = grad;
+        bgCtx.fillRect(0, 0, W, H);
+        
+        // Light rays
+        bgCtx.globalAlpha = 0.035;
+        bgCtx.fillStyle = '#87ceeb';
+        for (var i = 0; i < 5; i++) {
+            bgCtx.beginPath();
+            var x = 15 + i * 55;
+            bgCtx.moveTo(x, 0);
+            bgCtx.lineTo(x + 35, H);
+            bgCtx.lineTo(x + 48, H);
+            bgCtx.lineTo(x + 12, 0);
+            bgCtx.fill();
+        }
+        bgCtx.globalAlpha = 1;
+        
+        // Sand base gradient
+        var sandGrad = bgCtx.createLinearGradient(0, H - 35, 0, H);
+        sandGrad.addColorStop(0, '#c4a574');
+        sandGrad.addColorStop(1, '#a08050');
+        bgCtx.fillStyle = sandGrad;
+        bgCtx.fillRect(0, H - 30, W, 30);
+        
+        bgDrawn = true;
+    }
+    
+    // ==================== FOOD PARTICLE ====================
+    function FoodParticle(x, y) {
+        this.x = x;
+        this.y = y;
+        this.wobblePhase = Math.random() * 6.28;
+        this.fallSpeed = 0.55;
+        this.eaten = false;
+        this.size = 4;
+    }
+    
+    FoodParticle.prototype.update = function() {
+        if (this.eaten) return;
+        this.x += Math.sin(time * 0.05 + this.wobblePhase) * 0.25;
+        if (this.x < 10) this.x = 10;
+        if (this.x > W - 10) this.x = W - 10;
+        this.y += this.fallSpeed;
+    };
+    
+    FoodParticle.prototype.draw = function(c) {
+        if (this.eaten) return;
+        c.save();
+        c.fillStyle = '#ff9f43';
+        c.shadowColor = '#ffa502';
+        c.shadowBlur = 4;
+        c.beginPath();
+        c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        c.fill();
+        c.restore();
+    };
+    
+    // ==================== HEART ====================
+    function Heart(x, y) {
+        this.x = x;
+        this.y = y;
+        this.age = 0;
+        this.isDead = false;
+        this.opacity = 1.0;
+        this.scale = 0.1;
+        this.maxScale = 1.0 + Math.random() * 0.4;
+        this.vy = -1.0 - Math.random() * 0.5;
+        this.vx = (Math.random() - 0.5) * 1.5;
+    }
+    
+    Heart.prototype.update = function() {
+        this.age += 33;
+        if (this.age >= 1200) {
+            this.isDead = true;
+            return;
+        }
+        this.y += this.vy;
+        this.x += this.vx;
+        var progress = this.age / 1200;
+        if (progress < 0.2) {
+            this.scale = this.maxScale * (progress / 0.2);
+        } else {
+            this.scale = this.maxScale * (1 - ((progress - 0.2) / 0.8));
+        }
+        if (progress > 0.7) {
+            this.opacity = 1 - ((progress - 0.7) / 0.3);
+        }
+    };
+    
+    Heart.prototype.draw = function(c) {
+        if (this.isDead || this.scale < 0.05) return;
+        c.save();
+        c.translate(this.x, this.y);
+        c.scale(this.scale, this.scale);
+        c.globalAlpha = this.opacity;
+        c.fillStyle = '#FF6B8A';
+        c.beginPath();
+        c.moveTo(0, 4);
+        c.bezierCurveTo(-7, -3, -7, -10, 0, -7);
+        c.bezierCurveTo(7, -10, 7, -3, 0, 4);
+        c.fill();
+        // Highlight
+        c.fillStyle = 'rgba(255,255,255,0.4)';
+        c.beginPath();
+        c.arc(-2, -5, 1.5, 0, Math.PI * 2);
+        c.fill();
+        c.restore();
+    };
+    
+    // ==================== FISH ====================
+    // Position matched to Fishstill.png preview image
+    var fish = {
+        x: 90, y: 82,
+        vx: 0, vy: 0,
+        targetX: 90, targetY: 82,
+        facingRight: true,
+        currentFood: null,
+        eatRadius: 14
+    };
+    
+    function updateFish() {
+        var speed = 0.6;
+        
+        if (fish.currentFood && !fish.currentFood.eaten) {
+            fish.targetX = fish.currentFood.x;
+            fish.targetY = fish.currentFood.y;
+            speed = 1.4;
+            
+            var dx = fish.currentFood.x - fish.x;
+            var dy = fish.currentFood.y - fish.y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < fish.eatRadius) {
+                fish.currentFood.eaten = true;
+                fish.currentFood = null;
+                hearts.push(new Heart(fish.x, fish.y - 14));
+                fish.targetX = 30 + Math.random() * (W - 60);
+                fish.targetY = 30 + Math.random() * (H - 80);
+            }
+        }
+        
+        var dx = fish.targetX - fish.x;
+        var dy = fish.targetY - fish.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        
+        if (dist > 2) {
+            fish.vx += (dx / dist * speed - fish.vx) * 0.05;
+            fish.vy += (dy / dist * speed - fish.vy) * 0.05;
+        }
+        
+        fish.x += fish.vx;
+        fish.y += fish.vy;
+        
+        if (Math.abs(fish.vx) > 0.08) {
+            fish.facingRight = fish.vx > 0;
+        }
+        
+        if (fish.x < 28) { fish.x = 28; fish.vx *= -0.5; }
+        if (fish.x > W - 28) { fish.x = W - 28; fish.vx *= -0.5; }
+        if (fish.y < 28) { fish.y = 28; fish.vy *= -0.5; }
+        if (fish.y > H - 50) { fish.y = H - 50; fish.vy *= -0.5; }
+        
+        if (!fish.currentFood && dist < 5 && Math.random() < 0.025) {
+            fish.targetX = 30 + Math.random() * (W - 60);
+            fish.targetY = 30 + Math.random() * (H - 80);
+        }
+    }
+    
+    function detectFood() {
+        if (fish.currentFood && !fish.currentFood.eaten) return;
+        var closest = null;
+        var closestDist = Infinity;
+        for (var i = 0; i < foodParticles.length; i++) {
+            var f = foodParticles[i];
+            if (f.eaten) continue;
+            var dx = f.x - fish.x;
+            var dy = f.y - fish.y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < closestDist) {
+                closestDist = dist;
+                closest = f;
+            }
+        }
+        if (closest) fish.currentFood = closest;
+    }
+    
+    function drawFish(c) {
+        var wobble = Math.sin(time * 0.12) * 2;
+        var dir = fish.facingRight ? 1 : -1;
+        var tailWag = Math.sin(time * 0.25) * 0.2;
+        
+        c.save();
+        c.translate(fish.x, fish.y + wobble);
+        c.scale(dir, 1);
+        
+        // Tail
+        c.save();
+        c.rotate(tailWag);
+        c.fillStyle = '#ff6b35';
+        c.beginPath();
+        c.moveTo(-11, 0);
+        c.lineTo(-22, -7);
+        c.lineTo(-22, 7);
+        c.closePath();
+        c.fill();
+        // Tail stripe
+        c.fillStyle = '#fff';
+        c.fillRect(-19, -4, 2, 8);
+        c.restore();
+        
+        // Body (ellipse via scale)
+        c.fillStyle = '#ff6b35';
+        c.save();
+        c.scale(1, 0.75);
+        c.beginPath();
+        c.arc(0, 0, 15, 0, Math.PI * 2);
+        c.fill();
+        c.restore();
+        
+        // White stripes
+        c.fillStyle = '#ffffff';
+        c.fillRect(-3, -12, 5, 24);
+        c.fillRect(7, -10, 3, 20);
+        
+        // Stripe outlines
+        c.strokeStyle = '#333';
+        c.lineWidth = 0.6;
+        c.strokeRect(-3, -12, 5, 24);
+        c.strokeRect(7, -10, 3, 20);
+        
+        // Top fin
+        c.fillStyle = '#ff8855';
+        c.beginPath();
+        c.moveTo(-4, -9);
+        c.quadraticCurveTo(0, -18, 6, -10);
+        c.closePath();
+        c.fill();
+        
+        // Bottom fin
+        c.fillStyle = '#ff8855';
+        c.save();
+        c.translate(4, 9);
+        c.scale(1, 0.5);
+        c.beginPath();
+        c.arc(0, 0, 5, 0, Math.PI * 2);
+        c.fill();
+        c.restore();
+        
+        // Eye
+        c.fillStyle = '#fff';
+        c.beginPath();
+        c.arc(6, -2, 4.5, 0, Math.PI * 2);
+        c.fill();
+        c.fillStyle = '#111';
+        c.beginPath();
+        c.arc(7, -2, 2.5, 0, Math.PI * 2);
+        c.fill();
+        c.fillStyle = '#fff';
+        c.beginPath();
+        c.arc(7.8, -3, 1, 0, Math.PI * 2);
+        c.fill();
+        
+        c.restore();
+    }
+    
+    // ==================== SEAWEED ====================
+    var seaweeds = [
+        { x: 22, segments: 5 },
+        { x: 140, segments: 4 },
+        { x: 192, segments: 6 },
+        { x: 222, segments: 4 }
+    ];
+    
+    function drawSeaweed(c, sw) {
+        var baseX = sw.x;
+        var baseY = H - 26;
+        
+        c.lineCap = 'round';
+        
+        for (var i = 0; i < sw.segments; i++) {
+            var segY = baseY - i * 11;
+            var sway = Math.sin(time * 0.03 + i * 0.5 + sw.x * 0.04) * (2 + i * 1.1);
+            
+            c.strokeStyle = i < sw.segments / 2 ? '#2d5a27' : '#3d7a37';
+            c.lineWidth = 3.5 - i * 0.3;
+            c.beginPath();
+            c.moveTo(baseX + sway * 0.4, segY + 11);
+            c.quadraticCurveTo(baseX + sway, segY + 5, baseX + sway, segY);
+            c.stroke();
+            
+            // Leaves
+            if (i > 0 && i % 2 === 0) {
+                c.fillStyle = '#3d8a3d';
+                c.save();
+                c.translate(baseX + sway + 4, segY + 3);
+                c.rotate(0.4);
+                c.scale(1, 0.45);
+                c.beginPath();
+                c.arc(0, 0, 5, 0, Math.PI * 2);
+                c.fill();
+                c.restore();
+            }
+        }
+    }
+    
+    // ==================== CLAM ====================
+    var clam = { x: 85, open: 0, timer: 0 };
+    
+    function drawClam(c) {
+        var cx = clam.x;
+        var cy = H - 26;
+        
+        clam.timer++;
+        if (clam.timer > 180) {
+            clam.open = Math.min(1, clam.open + 0.025);
+            if (clam.open >= 1 && clam.timer > 260) {
+                clam.timer = 0;
+                clam.open = 0;
+            }
+        }
+        
+        // Bottom shell
+        c.fillStyle = '#8b6b8b';
+        c.save();
+        c.translate(cx, cy + 3);
+        c.scale(1, 0.5);
+        c.beginPath();
+        c.arc(0, 0, 15, 0, Math.PI);
+        c.fill();
+        c.restore();
+        
+        // Shell ridges bottom
+        c.strokeStyle = '#6b4b6b';
+        c.lineWidth = 0.8;
+        for (var i = 0; i < 4; i++) {
+            c.beginPath();
+            c.arc(cx, cy + 3, 4 + i * 3, Math.PI, 0, true);
+            c.stroke();
+        }
+        
+        // Pearl
+        if (clam.open > 0.25) {
+            c.fillStyle = '#ffeedd';
+            c.beginPath();
+            c.arc(cx, cy - 2, 4, 0, Math.PI * 2);
+            c.fill();
+            c.fillStyle = '#fff';
+            c.beginPath();
+            c.arc(cx - 1, cy - 3, 1.5, 0, Math.PI * 2);
+            c.fill();
+        }
+        
+        // Top shell
+        c.save();
+        c.translate(cx, cy + 3);
+        c.rotate(-clam.open * 0.55);
+        c.fillStyle = '#9b7b9b';
+        c.save();
+        c.scale(1, 0.6);
+        c.beginPath();
+        c.arc(0, -5, 15, Math.PI, 0);
+        c.fill();
+        c.restore();
+        // Shell ridges top
+        c.strokeStyle = '#7b5b7b';
+        for (var i = 0; i < 4; i++) {
+            c.beginPath();
+            c.arc(0, -3, 4 + i * 3, 0, Math.PI, true);
+            c.stroke();
+        }
+        c.restore();
+    }
+    
+    // ==================== SAND WAVE ====================
+    function drawSandWave(c) {
+        c.fillStyle = '#caa87a';
+        c.beginPath();
+        c.moveTo(0, H - 26);
+        for (var x = 0; x <= W; x += 12) {
+            var y = H - 26 + Math.sin(x * 0.1 + time * 0.02) * 2;
+            c.lineTo(x, y);
+        }
+        c.lineTo(W, H - 22);
+        c.lineTo(0, H - 22);
+        c.closePath();
+        c.fill();
+    }
+    
+    // ==================== TITLE ====================
+    function drawTitle(c) {
+        // White dot before title
+        c.fillStyle = 'rgba(255,255,255,0.6)';
+        c.beginPath();
+        c.arc(W/2 - 42, 13, 2.5, 0, Math.PI * 2);
+        c.fill();
+        
+        c.fillStyle = 'rgba(255,255,255,0.75)';
+        c.font = 'bold 12px Arial';
+        c.textAlign = 'center';
+        c.fillText("pasha's mind", W / 2 + 2, 17);
+        
+        c.fillStyle = 'rgba(255,255,255,0.45)';
+        c.font = '9px Arial';
+        c.fillText('click to feed!', W / 2, H - 5);
+    }
+    
+    // ==================== BUBBLES ====================
+    var bubbles = [];
+    
+    function updateBubbles() {
+        if (Math.random() < 0.018) {
+            bubbles.push({
+                x: fish.x + (fish.facingRight ? -7 : 7),
+                y: fish.y - 3,
+                size: 1.5 + Math.random() * 2.5,
+                speed: 0.4 + Math.random() * 0.3
+            });
+        }
+        for (var i = bubbles.length - 1; i >= 0; i--) {
+            var b = bubbles[i];
+            b.y -= b.speed;
+            b.x += Math.sin(time * 0.08 + i) * 0.18;
+            if (b.y < -5) bubbles.splice(i, 1);
+        }
+    }
+    
+    function drawBubbles(c) {
+        c.strokeStyle = 'rgba(255,255,255,0.35)';
+        c.lineWidth = 1;
+        for (var i = 0; i < bubbles.length; i++) {
+            var b = bubbles[i];
+            c.beginPath();
+            c.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+            c.stroke();
+        }
+    }
+    
+    // ==================== MAIN ====================
+    var foodParticles = [];
+    var hearts = [];
+    
+    // Handle click - switch to interactive mode and/or drop food
+    canvas.addEventListener('click', function(e) {
+        // First click: switch to interactive mode
+        if (!isInteractive) {
+            isInteractive = true;
+            if (previewImg) {
+                previewImg.style.display = 'none';
+            }
+            canvas.style.display = 'block';
+        }
+        
+        // Drop food
+        if (foodParticles.length >= 6) return;
+        var rect = canvas.getBoundingClientRect();
+        var clickX = (e.clientX - rect.left) * (W / rect.width);
+        var num = 2 + Math.floor(Math.random() * 2);
+        for (var i = 0; i < num; i++) {
+            var x = clickX + (Math.random() - 0.5) * 25;
+            x = Math.max(15, Math.min(W - 15, x));
+            foodParticles.push(new FoodParticle(x, 20));
+        }
+    });
+    
+    // Also activate on preview image click
+    if (previewImg) {
+        previewImg.addEventListener('click', function(e) {
+            isInteractive = true;
+            previewImg.style.display = 'none';
+            canvas.style.display = 'block';
+            
+            // Drop food at click position
+            var rect = previewImg.getBoundingClientRect();
+            var clickX = (e.clientX - rect.left) * (W / rect.width);
+            var num = 2 + Math.floor(Math.random() * 2);
+            for (var i = 0; i < num; i++) {
+                var x = clickX + (Math.random() - 0.5) * 25;
+                x = Math.max(15, Math.min(W - 15, x));
+                foodParticles.push(new FoodParticle(x, 20));
+            }
+        });
+    }
+    
+    function loop() {
+        time++;
+        
+        // Always run animation (for preview capture or interactive)
+        if (!bgDrawn) drawStaticBackground();
+        bctx.drawImage(bgCache, 0, 0);
+        
+        drawSandWave(bctx);
+        
+        for (var i = 0; i < seaweeds.length; i++) {
+            drawSeaweed(bctx, seaweeds[i]);
+        }
+        
+        drawClam(bctx);
+        
+        for (var i = foodParticles.length - 1; i >= 0; i--) {
+            var f = foodParticles[i];
+            f.update();
+            if (f.eaten || f.y > H - 28) {
+                foodParticles.splice(i, 1);
+            } else {
+                f.draw(bctx);
+            }
+        }
+        
+        detectFood();
+        updateFish();
+        drawFish(bctx);
+        
+        for (var i = hearts.length - 1; i >= 0; i--) {
+            var h = hearts[i];
+            h.update();
+            if (h.isDead) {
+                hearts.splice(i, 1);
+            } else {
+                h.draw(bctx);
+            }
+        }
+        
+        updateBubbles();
+        drawBubbles(bctx);
+        drawTitle(bctx);
+        
+        ctx.drawImage(buffer, 0, 0);
+    }
+    
+    // Start animation
+    setInterval(loop, 33);
+    
+    // If no preview image, show canvas immediately
+    if (!previewImg) {
+        isInteractive = true;
+        canvas.style.display = 'block';
+    }
+})();
+</script>
+</body>
+</html>
