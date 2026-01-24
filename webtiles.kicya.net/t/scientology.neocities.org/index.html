@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML><html lang="en">
+
 <head>
-    <style>a {
-  width: fit-content;
-  margin: 0 auto;
-  padding-left: 6.67px;
-  font-size: 190px;
-  text-decoration: none;
-  display: inline-block;
+	
+	
+	
+	
+	<style>html, .tile-body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+.tile-body {
+  background-color: #fafad2;
+  box-shadow: inset 0 0 1em #daa520, inset 0 0 1em #daa520, 5em 5em 40em #daa520, 5em -5em 40em #daa520, -5em 5em 40em #daa520, -5em -5em 40em #daa520;
+}
+
+video:fullscreen, video:fullscreen::backdrop {
+  background-color: #daa520;
+  background-image: radial-gradient(closest-corner, #fafad2, #fafad2 67%, #0000);
 }
 </style>
+	<script type="text/tilescript">
+// @license magnet:?xt=urn:btih:90dc5c0be029de84e523b9b3922520e79e0e6f08&dn=cc0.txt
+document.onreadystatechange = function() {
+	if(document.readyState === "interactive") {
+		var v=document.querySelector("video");
+		v.addEventListener("fullscreenchange",function(e) {e.currentTarget.removeAttribute("title")},{once:true});
+		v.addEventListener("dblclick",function() {if(!document.fullscreenElement){v.requestFullscreen()}});
+	}
+}
+	</script>
 </head>
 <body>
-    <a href="https://scientology.neocities.org/" title="👽" target="_blank">👽</a>
-</body>
-</html>
+<video controls style="width:100%;height:100%;transform:scale(.95);cursor:context-menu" vocab="http://schema.org/" typeof="AudioObject" preload="metadata" poster="/t/scientology.neocities.org/👽.svg" title="Double-click toggles Fullscreen" src="%F0%9F%91%BD.ogg">
+</video>
+</body></html>

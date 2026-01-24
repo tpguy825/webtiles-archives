@@ -8,23 +8,49 @@
   height: 100%;
 }
 
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-3deg);
+  }
+
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
 #kuurp-logo-link {
-  z-index: 1;
+  z-index: 9999902;
   pointer-events: none;
-  margin-left: 50px;
+  margin-left: 0;
+  animation: 3s ease-in-out infinite floatUpDown;
   position: fixed;
-  top: 12px;
+  top: 180px;
   left: 3px;
 }
 
 #kuurp-logo {
   pointer-events: auto;
-  width: 110px;
+  width: 90px;
   display: block;
 }
 
 #kuurp-logo:hover {
   filter: brightness(1.2);
+  animation: .3s ease-in-out shake;
 }
 
 .bg-overlay {
@@ -46,68 +72,160 @@
   z-index: 10000;
 }
 
-#bg-overlay {
+#bgidle {
+  z-index: 2;
+  background-color: #111;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#screen-transition {
+  z-index: 3;
+  pointer-events: none;
+  clip-path: inset(50%);
+  opacity: 1;
+  background-image: url("bg.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@keyframes tvBootUp {
+  0% {
+    clip-path: inset(46%);
+  }
+
+  20% {
+    clip-path: inset(46% 23%);
+  }
+
+  40% {
+    clip-path: inset(46% 0%);
+  }
+
+  70% {
+    clip-path: inset(23% 0%);
+  }
+
+  100% {
+    clip-path: inset(0%);
+  }
+}
+
+.active #screen-transition {
+  animation: .26s ease-out forwards tvBootUp;
+}
+
+.active #bgidle {
   z-index: 0;
 }
 
-#bg-overlay img {
-  opacity: .7;
-}
-
 #noise-overlay {
-  z-index: 1;
+  z-index: 4;
 }
 
 #noise-overlay img {
   opacity: .1;
 }
 
-#main img {
+#main .idk {
+  z-index: 9999901;
   pointer-events: none;
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999901 !important;
 }
 
-#petted, #focused {
+#petted, #focused, .focused {
+  opacity: 0;
+}
+
+#main a {
   display: none;
 }
 
-.active #focused, #bg {
-  display: block;
+.active #focused, .active .focused {
+  opacity: 1;
 }
 
-.active #idle, #bgidle, .active #main.pet #focused {
+#bg {
   display: none;
+}
+
+.active #bg {
+  animation: 0s .8s forwards showBg;
+}
+
+@keyframes showBg {
+  to {
+    display: block;
+  }
+}
+
+.active #idle {
+  display: none;
+}
+
+.active #main.pet #focused, .active #main.pet .focused {
+  opacity: 0;
 }
 
 .active #main.pet #petted {
+  opacity: 1;
+}
+
+.active #main a {
   display: block;
+}
+
+#screen-transition {
+  filter: brightness(1.2) contrast(80%) !important;
+}
+
+#mouse-catcher {
+  z-index: 9999899;
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 </style>
 </head>
 <body>
-    <div id="bg-overlay" class="bg-overlay">
-        <img id="bg" src="bg.jpg">
-        <img id="bgidle" src="bg.jpg">
-    </div>
+    <div id="mouse-catcher"></div>
+    <div id="bgidle"></div>
+    <div id="screen-transition"></div>
     <div id="noise-overlay" class="bg-overlay">
         <img src="noise.gif">
     </div>
     
     <div id="border-overlay" class="bg-overlay">
-        <img src="border.png">
+        <img src="border.png" style="image-rendering: pixelated;">
     </div>
 
     <div id="main">
-        <img id="idle" src="idle.png">
-        <img id="petted" src="petted.png">
-        <div id="pet-hitbox" style="position: absolute; top: 18%; left: 28%; width: 55%; height: 22%; cursor: pointer;">
+        <img class="idk" id="idle" src="idle.png">
+        <img class="idk" id="petted" src="petted.png">
+        <div id="pet-hitbox" style="position: absolute; top: 18%; left: 28%; width: 55%; height: 22%; cursor: pointer; pointer-events: auto; z-index: 9999900;">
         </div>
-        <img id="focused" src="focused.png">
+        <img class="idk focused" id="focused_base" src="focused_base.png">
+        <img class="idk focused" id="eyeR" src="eyeR.png">
+        <img class="idk focused" id="eyeL" src="eyeL.png">
+        <img class="idk focused" id="eyebrows" src="weird.png">
+        <a id="kuurp-logo-link" href="https://kuurp.nekoweb.org" target="_blank">
+            <img id="kuurp-logo" src="kuurp.png">
+        </a>
     </div>
    
     <script type="text/tilescript">
@@ -131,6 +249,61 @@
         };
         petDiv.onmouseup = function() {
             exit();
+        };
+        
+        var eyeL = document.getElementById('eyeL');
+        var eyeR = document.getElementById('eyeR');
+        var mouseCatcher = document.getElementById('mouse-catcher');
+        
+        var centerX = 147;
+        var centerY = 137;
+        var maxOffsetX = 4;
+        var maxOffsetY = 2;
+        
+        function move(event) {
+            var rect = mainDiv.getBoundingClientRect();
+            var rectWidth = rect.right - rect.left;
+            var localX = event.clientX - rect.left;
+            var localY = event.clientY - rect.top;
+            var scale = 250 / rectWidth;
+            
+            var scaledX = localX * scale;
+            var scaledY = localY * scale;
+            
+            // Calculate offset from center
+            var deltaX = scaledX - centerX;
+            var deltaY = scaledY - centerY;
+            var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            
+            // Non-linear falloff with clamping
+            var factor = Math.min(distance / 50, 1);
+            factor = factor * factor;
+            
+            var offsetX = (deltaX / distance) * factor * maxOffsetX;
+            var offsetY = (deltaY / distance) * factor * maxOffsetY;
+            
+            // Handle case when mouse is at center
+            if (distance === 0) {
+                offsetX = 0;
+                offsetY = 0;
+            }
+            
+            eyeL.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+            eyeR.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+        }
+
+        var logo = document.getElementById('kuurp-logo');
+        
+        mouseCatcher.onmousemove = function(event) {
+            move(event);
+        };
+        
+        petDiv.onmousemove = function(event) {
+            move(event);
+        };
+        
+        logo.onmousemove = function(event) {
+            move(event);
         };
     </script>
 </body>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #42288a;
+}
+
+.bg-container {
+  z-index: -1;
+}
+
+.bg1 {
+  opacity: .25;
+  background: url("tilebg_layer_1.png") fixed;
+  width: 100%;
+  height: 100%;
+  -webkit-animation: 15s linear infinite dl;
+  -moz-animation: 15s linear infinite dl;
+  -o-animation: 15s linear infinite dl;
+  animation: 15s linear infinite dl;
+  position: absolute;
+}
+
+@-webkit-keyframes dl {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -500px 500px;
+  }
+}
+
+.bg2 {
+  background-blend-mode: lighten;
+  opacity: .5;
+  background: url("tilebg_layer_2.png") fixed;
+  width: 100%;
+  height: 100%;
+  -webkit-animation: 25s linear infinite ur;
+  -moz-animation: 25s linear infinite ur;
+  -o-animation: 25s linear infinite ur;
+  animation: 25s linear infinite ur;
+  position: absolute;
+}
+
+@-webkit-keyframes ur {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 500px -500px;
+  }
+}
+</style>
+    <style>.x {
+  animation: 1.373s linear infinite alternate x;
+}
+
+.y {
+  animation: 1.021s linear infinite alternate y;
+}
+
+@keyframes x {
+  100% {
+    transform: translateX(186px);
+  }
+}
+
+@keyframes y {
+  100% {
+    transform: translateY(186px);
+  }
+}
+
+div.border {
+  z-index: 5;
+  border: 5px solid #24b52e;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 240px;
+  padding: 0;
+  display: flex;
+  position: absolute;
+}
+
+div.border > a {
+  color: #fff;
+  text-shadow: 2px 2px #000000bf;
+  font-family: MS Gothic, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  text-decoration-line: none;
+}
+
+div.bordershadow {
+  z-index: 5;
+  border: 5px solid #000000bf;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 240px;
+  padding: 0;
+  display: flex;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+</style>
+</head>
+<body>
+    
+    <div class="bg-container">
+	  	<div class="bg1"></div>
+	  	<div class="bg2"></div>
+  	</div>
+    <div class=bordershadow></div>
+   	<div class=border><a href="https://kaddie.space" target="_blank">kaddie.space</a></div>
+    
+    <div class=y>
+    	<img class="x" src="smalmatcha.png">
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
