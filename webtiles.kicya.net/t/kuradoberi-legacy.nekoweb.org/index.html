@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("yeezus.gif");
+}
+</style>
+</head>
+<body>
+    <marquee id="nowPlaying" style="bottom: 1px;"></marquee>
+    <audio id="audio" src="Hurricane.mp3" preload="metadata" data-webtiles-paused="false"></audio>
+	<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var help = document.getElementById("audio");
+var nowPlaying = document.getElementById("nowPlaying");
+
+help.volume = 0.5;
+
+var musicInt = setInterval(musicCheat, 1000);
+
+function musicCheat() {
+    if (help.paused == true){
+        nowPlaying.style.bottom = "-100px"
+        help.play()
+    }else if (help.paused == false){
+        nowPlaying.style.bottom = "1px"
+    }
+} </script> 
+</body>
+</html>

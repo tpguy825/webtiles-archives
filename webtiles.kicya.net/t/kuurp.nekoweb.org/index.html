@@ -3,42 +3,9 @@
 <head>
     <style>
 </style>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-}
-
-#main {
+    <style>#main {
   width: 100%;
   height: 100%;
-}
-
-.krup-img {
-  image-rendering: pixelated;
-  z-index: 2;
-  width: 200px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.krup-img.active {
-  display: block !important;
-}
-
-#overlay {
-  pointer-events: none;
-  z-index: 9999;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-#overlay > div {
-  pointer-events: auto;
-  z-index: 1;
 }
 
 #kuurp-logo-link {
@@ -58,10 +25,6 @@
 
 #kuurp-logo:hover {
   filter: brightness(1.2);
-}
-
-#heart {
-  cursor: pointer;
 }
 
 .bg-overlay {
@@ -99,29 +62,37 @@
   opacity: .1;
 }
 
-#corners-overlay {
-  z-index: 1;
-}
-
-#wip {
+#main img {
   pointer-events: none;
-  z-index: 10000;
   width: 100%;
   height: 100%;
-  font-weight: bold;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9999901 !important;
 }
 
-.active #main p {
-  color: #fff;
+#petted, #focused {
+  display: none;
+}
+
+.active #focused, #bg {
+  display: block;
+}
+
+.active #idle, #bgidle, .active #main.pet #focused {
+  display: none;
+}
+
+.active #main.pet #petted {
+  display: block;
 }
 </style>
 </head>
 <body>
     <div id="bg-overlay" class="bg-overlay">
-        <img src="bg.jpg">
+        <img id="bg" src="bg.jpg">
+        <img id="bgidle" src="bg.jpg">
     </div>
     <div id="noise-overlay" class="bg-overlay">
         <img src="noise.gif">
@@ -130,123 +101,37 @@
     <div id="border-overlay" class="bg-overlay">
         <img src="border.png">
     </div>
+
     <div id="main">
-        <a id="kuurp-logo-link" href="https://kuurp.nekoweb.org" target="_blank">
-            <img id="kuurp-logo" src="kuurp.png">
-        </a>
-        <p id="wip" style="margin-bottom: 0px; margin-top: 20px; z-index: 3;">
-            &nbsp;&nbsp;&nbsp;(WIP)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;come pet Locha!
-        </p>
-    	
-    	<div style="position: relative; width: 200px; margin-left: 25px; margin-top:40px; margin-bottom: 10px;">
-            <img class="krup-img" id="img-upleft" src="upleft.png" style="display: none;">
-            <img class="krup-img" id="img-up" src="up.png" style="display: none;">
-            <img class="krup-img" id="img-upright" src="upright.png" style="display: none;">
-            <img class="krup-img" id="img-left" src="left.png" style="display: none;">
-            <img class="krup-img" id="img-neutral" src="neutral.png">
-            <img class="krup-img" id="img-right" src="right.png" style="display: none;">
-            <img class="krup-img" id="img-downleft" src="downleft.png" style="display: none;">
-            <img class="krup-img" id="img-down" src="down.png" style="display: none;">
-            <img class="krup-img" id="img-downright" src="downright.png" style="display: none;">
-            <img class="krup-img" id="img-heart" src="heart.png" style="display: none;">
+        <img id="idle" src="idle.png">
+        <img id="petted" src="petted.png">
+        <div id="pet-hitbox" style="position: absolute; top: 18%; left: 28%; width: 55%; height: 22%; cursor: pointer;">
         </div>
+        <img id="focused" src="focused.png">
     </div>
-    <div id="overlay">
-        <div id="upleft" style="position: absolute; top: 0; left: 0; width: 33.33%; height: 33.33%;"></div>
-        <div id="up" style="position: absolute; top: 0; left: 33.33%; width: 33.33%; height: 33.33%;"></div>
-        <div id="upright" style="position: absolute; top: 0; left: 66.66%; width: 33.33%; height: 33.33%;"></div>
-        <div id="left" style="position: absolute; top: 33.33%; left: 0; width: 33.33%; height: 33.33%;"></div>
-        <div id="neutral" style="position: absolute; top: 33.33%; left: 33.33%; width: 33.33%; height: 33.33%;"></div>
-        <div id="heart" style="position: absolute; top: 40%; left: 33.33%; width: 33.33%; height: 16.66%;"></div>
-        <div id="right" style="position: absolute; top: 33.33%; left: 66.66%; width: 33.33%; height: 33.33%;"></div>
-        <div id="downleft" style="position: absolute; top: 66.66%; left: 0; width: 33.33%; height: 33.33%;"></div>
-        <div id="down" style="position: absolute; top: 66.66%; left: 33.33%; width: 33.33%; height: 33.33%;"></div>
-        <div id="downright" style="position: absolute; top: 66.66%; left: 66.66%; width: 33.33%; height: 33.33%;"></div>   
-    </div>
+   
     <script type="text/tilescript">
     	console.log("Hello Miya :eye:!");
-
-
-		function addClass(el, cls) {
-  if (!el || !cls) return;
-  var current = el.className ? el.className.split(/\s+/) : [];
-  if (current.indexOf(cls) === -1) {
-    current.push(cls);
-    el.className = current.join(' ');
-  }
-}
-
-
-//var div = document.getElementById('main');
-//addClass(div, 'focused');
-
-        function showImage(state) {
-            var images = document.querySelectorAll('.krup-img');
-            for (var i = 0; i < images.length; i++) {
-                images[i].style.display = 'none';
+        
+        var petDiv = document.getElementById('pet-hitbox');
+        var mainDiv = document.getElementById('main');
+        
+        function enter() {
+            if (mainDiv.className.indexOf('pet') === -1) {
+                mainDiv.className += ' pet';
             }
-            var targetImage = document.getElementById(state);
-            targetImage.style.display = 'block';
         }
 
-        document.getElementById("upleft").onmouseenter = function() {
-            showImage('img-upleft');
-        };
-        document.getElementById("up").onmouseenter = function() {
-            showImage('img-up');
-        };
-        document.getElementById("upright").onmouseenter = function() {
-            showImage('img-upright');
-        };
-        document.getElementById("left").onmouseenter = function() {
-            showImage('img-left');
-        };
-        document.getElementById("neutral").onmouseenter = function() {
-            showImage('img-neutral');
-        };
-        var isHeartPressed = false;
-        var heartDiv = document.getElementById("heart");
-        
-        heartDiv.onmouseenter = function() {
-            if (!isHeartPressed) {
-                showImage('img-neutral');
-            }
-        };
-        
-        heartDiv.onmousedown = function() {
-            isHeartPressed = true;
-            showImage('img-heart');
-        };
-        
-        heartDiv.onmouseup = function() {
-            isHeartPressed = false;
-            showImage('img-neutral');
-        };
-        
-        heartDiv.onmouseleave = function() {
-            if (isHeartPressed) {
-                isHeartPressed = false;
-                showImage('img-neutral');
-            }
-        };
-        document.getElementById("right").onmouseenter = function() {
-            showImage('img-right');
-        };
-        document.getElementById("downleft").onmouseenter = function() {
-            showImage('img-downleft');
-        };
-        document.getElementById("down").onmouseenter = function() {
-            showImage('img-down');
-        };
-        document.getElementById("downright").onmouseenter = function() {
-            showImage('img-downright');
-        };
+        function exit() {
+            mainDiv.className = mainDiv.className.replace(' pet', '');
+        }
 
-
-        /*document.body.onmousemove = function (e) {
-          var pos = document.getElementById("pos");
-          pos.textContent = e.clientX + ", " + e.clientY;
-        };*/
+        petDiv.onmousedown = function() {
+            enter();  
+        };
+        petDiv.onmouseup = function() {
+            exit();
+        };
     </script>
 </body>
 </html>

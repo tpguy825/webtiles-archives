@@ -7,14 +7,37 @@
 </style>
 </head>
 <body>
-    <img src="sanctum.png">
-    <p style="font-family:ms gothic;font-size:15px;color:yellow;position:absolute;top:47px;right:0px;text-align:center;">
-        > this is <br>Withered-<br>Whisper of <br>Webtiles' <br>Riverclan <br>!!!
-        <br><br><img src="fullmoon.gif" style="position:relative;">
-    </p>
-        
-        <img src="riverclan_1.png" style="position:absolute;height:45px;top:10px;left:188px;">
-    <img src="spider.gif" style="position:absolute;bottom:0px;right:21px;">
+    <img src="sanctum_bg.png" style="position:absolute;">
+    <img src="sanctum_1.png" style="position:absolute;">
+    <img src="border_fishtank.png" style="position:absolute;top:0;left:0;">
+    <img src="border_layercake.png" style="position:absolute;top:0;right:0;">
+    <img src="border_sol.gif" style="position:absolute;bottom:0;left:0;">
+    <img src="sign.gif" style="position:absolute;pointer-events:none;">
+    <img src="riverclan_2.png" style="position:absolute;top:24px;left:191px;">
+	<audio id="player" preload="metadata"></audio>
 
+<script type="text/tilescript">
+var player = document.getElementById('player');
+
+function startAudio() {
+    player.src = '/ushiwaka_theme.mp3';
+    player.loop = false;
+
+    var playPromise = player.play();
+
+    if (playPromise !== undefined && playPromise.catch) {
+        playPromise.catch(function () {
+            function userStart() {
+                player.play();
+                document.removeEventListener('click', userStart);
+            }
+
+            document.addEventListener('click', userStart);
+        });
+    }
+}
+
+startAudio();
+</script>
 </body>
 </html>

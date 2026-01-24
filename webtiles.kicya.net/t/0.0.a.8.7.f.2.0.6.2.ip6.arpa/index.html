@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+    <head>
+        <style>* {
+  color: #fff;
+  font-family: Impact;
+}
+
+img {
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 0;
+}
+
+h1 {
+  z-index: 2;
+  text-align: center;
+  position: fixed;
+  top: 70px;
+  left: 40px;
+}
+
+form {
+  display: none;
+}
+
+.boom {
+  background: url("Operation_Upshot-Knothole_-_Badger_001.webp");
+  width: 250px;
+  height: 250px;
+}
+
+.boom * {
+  display: none;
 }
 </style>
-</head>
-<body>
-    <p>This is an example tile.</p>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
-</body>
+    </head>
+    <body>
+        <div>
+        <img src="Red_button.png">
+        <h1>
+            REFRESH PAGE
+        </h1>
+        <form target="_blank" action="#forbidden">
+            <input type="hidden" name="meow" value="purr" autocomplete="off">
+            <input type="submit" autocomplete="off">
+        </form>
+        </div>
+        <script type="text/tilescript">var f = document.querySelector('form');
+f.setAttribute('target', '');
+f.action = '';
+f.querySelector('input[type=hidden]').value = Math.random();
+f.querySelector('input[type=submit]').click();
+document.querySelector('div').classList.add('boom');
+</script>
+    </body>
 </html>
