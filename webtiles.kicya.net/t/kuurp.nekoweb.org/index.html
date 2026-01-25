@@ -219,7 +219,9 @@
         <img class="idk" id="petted" src="petted.png">
         <div id="pet-hitbox" style="position: absolute; top: 18%; left: 28%; width: 55%; height: 22%; cursor: pointer; pointer-events: auto; z-index: 9999900;">
         </div>
-        <img class="idk focused" id="focused_base" src="focused_base.png">
+        <img class="idk focused" id="nohead" src="nohead.png">
+        <img class="idk focused" id="head" src="head.png">
+        <img class="idk focused" id="tail" src="tail.png">
         <img class="idk focused" id="eyeR" src="eyeR.png">
         <img class="idk focused" id="eyeL" src="eyeL.png">
         <img class="idk focused" id="eyebrows" src="weird.png">
@@ -233,6 +235,7 @@
         
         var petDiv = document.getElementById('pet-hitbox');
         var mainDiv = document.getElementById('main');
+        var logo = document.getElementById('kuurp-logo-link');
         
         function enter() {
             if (mainDiv.className.indexOf('pet') === -1) {
@@ -253,12 +256,15 @@
         
         var eyeL = document.getElementById('eyeL');
         var eyeR = document.getElementById('eyeR');
+        var head = document.getElementById('head');
+        var eyebrows = document.getElementById('eyebrows');
         var mouseCatcher = document.getElementById('mouse-catcher');
         
         var centerX = 147;
         var centerY = 137;
-        var maxOffsetX = 4;
-        var maxOffsetY = 2;
+        var maxOffsetX = 5;
+        var maxOffsetY = 2.5;
+        var headFactor = 3.5;
         
         function move(event) {
             var rect = mainDiv.getBoundingClientRect();
@@ -270,19 +276,16 @@
             var scaledX = localX * scale;
             var scaledY = localY * scale;
             
-            // Calculate offset from center
             var deltaX = scaledX - centerX;
             var deltaY = scaledY - centerY;
             var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             
-            // Non-linear falloff with clamping
             var factor = Math.min(distance / 50, 1);
             factor = factor * factor;
             
             var offsetX = (deltaX / distance) * factor * maxOffsetX;
             var offsetY = (deltaY / distance) * factor * maxOffsetY;
             
-            // Handle case when mouse is at center
             if (distance === 0) {
                 offsetX = 0;
                 offsetY = 0;
@@ -290,20 +293,18 @@
             
             eyeL.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
             eyeR.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+            head.style.transform = 'translate(' + offsetX/headFactor + 'px, ' + offsetY/headFactor + 'px)';
+            eyebrows.style.transform = 'translate(' + offsetX/headFactor + 'px, ' + offsetY/headFactor + 'px)';
         }
-
-        var logo = document.getElementById('kuurp-logo');
         
         mouseCatcher.onmousemove = function(event) {
-            move(event);
+       		move(event);
         };
-        
         petDiv.onmousemove = function(event) {
-            move(event);
+        	move(event);
         };
-        
         logo.onmousemove = function(event) {
-            move(event);
+        	move(event);
         };
     </script>
 </body>

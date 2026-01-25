@@ -69,6 +69,17 @@ div.viewport {
   left: 2px;
 }
 </style>
+    <style>#street {
+  height: 50px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+.house {
+  bottom: -5px;
+}
+</style>
 </head>
 <body>
     <nav>
@@ -76,9 +87,17 @@ div.viewport {
         <a href="residents.html">[residents]</a>
         <a href="about.html">[about]</a>
     </nav>
-    <main>
-        <h2>About</h2>
-        <p>This tile is stand alone.</p>
+    <main style="background:url(snow.png),linear-gradient(#fff,#000); background-size: 100px; height: 200px;">
+        <h2>Residents</h2>
+        <p>Welcome to snowy street</p>
+        <div style="margin-left:-10px;height: 118px; width:249px; background:linear-gradient(#00000000,#000); padding-top:20px;">
+            <div style="height: 118px;  width:249px; background:linear-gradient(#00000000,#000);">
+                <img src="house.png" class="house" title="The Pebble's residence">
+                <img src="house.png" class="house" style="left: 85px;">
+                <img src="house.png" class="house" style="left: 165px;">
+                <img src="webtiletile10.png" id="street">
+			</div>
+        </div>
     </main>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.

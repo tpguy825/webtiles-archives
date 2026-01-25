@@ -23,7 +23,7 @@
   backface-visibility: hidden;
   width: 100%;
   height: 100%;
-  transform-origin: center center -1px;
+  transform-origin: center center -10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -87,18 +87,6 @@
 
   &.tile--flipped {
     transition: transform 1s linear;
-  }
-}
-
-.tile-body:not(.active) .tile--backside.neko-has-breached-confinement {
-  &:before {
-    content: "";
-  }
-
-  &:after {
-    content: "(click back here to move oneko around)";
-    opacity: .8;
-    font-size: 90%;
   }
 }
 </style>
@@ -507,6 +495,5 @@ function initTileOneko(options) {
             }
         });
     </script>
-    <a href="test1.html" style="position: absolute; top: 0; right: 0; width: 1px; aspect-ratio: 1; display: none;"></a>
 </body>
 </html>
