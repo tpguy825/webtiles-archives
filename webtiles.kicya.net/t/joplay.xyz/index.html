@@ -4,20 +4,60 @@
     <style>.tile-body {
   text-align: center;
   color: #00ff9d;
-  background-color: #070707;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0;
   display: flex;
 }
+
+.tile-body:before {
+  content: "";
+  pointer-events: none;
+  z-index: -1;
+  will-change: background-position;
+  background-color: #0000;
+  background-image: url("boxes.png");
+  background-position: 0 0, 30px 30px;
+  background-repeat: repeat;
+  background-size: 60px 60px;
+  background-attachment: scroll;
+  background-origin: padding-box;
+  background-clip: border-box;
+  width: 100%;
+  height: 100%;
+  animation: 5s linear infinite checkerMove;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@keyframes checkerMove {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -150px -150px;
+  }
+}
+
+a {
+  color: #00ff9d;
+  text-decoration: none;
+}
+
+h2 {
+  transition: all .2s;
+}
+
+h2:hover {
+  transform: scale(1.2);
+}
 </style>
 </head>
 <body>
-    <h2>Joplay.xyz / Joplayxyz.dev</h2>
-    <h3>Tile in progress</h3>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+    <h2 id="maintitle"><a href="https://joplay.xyz" target="_blank">Joplay.xyz / Joplayxyz.dev</a></h2>
+    <script type="text/tilescript"></script>
 </body>
 </html>

@@ -20,6 +20,7 @@
 .color-bands {
   height: 20px;
   display: flex;
+  transform: translateY(-50%);
 }
 
 .color-bands div {
@@ -55,16 +56,16 @@
 .logo {
   aspect-ratio: 1;
   width: 50%;
-  animation: 2s ease-in-out infinite alternate swooming;
+  animation: 2.5s linear infinite swooming;
 }
 
 @keyframes swooming {
   0% {
-    transform: scale(.7);
+    transform: rotateY(0);
   }
 
   100% {
-    transform: scale(1.1);
+    transform: rotateY(360deg);
   }
 }
 </style>
@@ -72,7 +73,7 @@
 <body>
     
     <div class="absolute">
-        <div id="wuas-show" style="margin-top: 30px; padding-left: 10px; padding-right: 10px; text-align: center; font-size: 0.8rem; opacity: 0.6; color: #FFF; display: none;">
+        <div id="wuas-show" style="margin-top: 10px; padding-left: 10px; padding-right: 10px; text-align: center; font-size: 0.8rem; opacity: 0.6; color: #FFF; display: none;">
             <p>
                 (🔁 Reload the Tile to get new fortune. Click again to go to my site.)
             </p>
@@ -89,18 +90,19 @@
             </a>
     </div>
     <div class="absolute">
-        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%; perspective: 90px;">
         <img class="logo" src="Starseal.png">    
         </div>
     </div>
-    <img src="picky.png" style="position: absolute; top: 0; right: 0; transform: translateX(20%); width: 20%;">
+    <img src="picky.png" style="position: absolute; top: 30px; right: 0; transform: translateX(18%); width: 20%;">
     <div class="absolute" style="display: flex; flex-direction: column; justify-content: end;">
-        <div style="height: 50%; position: relative; bottom: 0; display:flex; align-items: center; justify-content: center; perspective: 30px;">
+        <div style="height: 50%; position: relative; bottom: 0; display:flex; align-items: center; justify-content: center; perspective: 50px;">
             <p class="w-u-a-s">
                 CLICK TILE FOR RANDOM FORTUNE
             </p>
         </div>
     </div>
+    <img src="WTTT.png" style="position: absolute; bottom: 0; right: 0; width: 100%;">
     <a class="absolute" href="https://glitchypsi.xyz" target="_blank"></a>
     <script type="text/tilescript">var fortune = 
 [
@@ -123,6 +125,10 @@
     "MAJOR ARCANA IX",
     "MAJOR ARCANA XX",
     "MAJOR ARCANA XXI",
+    "LILYPADS ARE COOL",
+    "THESE RATS DO BE HAVING A WEDDING",
+    "[Hyperlink Blanked]",
+    "OFF BY ONE? HARDLY KNOW ONE"
 ]
 
 var wuas = document.querySelector(".w-u-a-s");

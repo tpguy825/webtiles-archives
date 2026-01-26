@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <div id="shadow">
+    <div id="container-shadow"></div>
+    <div id="container">
+      <p>i like your style, so flashy</p>
+
+      <a href="https://hrtowii.nekoweb.org" class="btn" target="_blank">
+        <div class="btn-shadow"></div>
+        <p>@h{r,t}owii</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
+
+<style>html, .tile-body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.tile-body {
+  background: radial-gradient(circle at 0 0, #ffe0ef 0%, #ffc7e3 45%, #f6a9d2 100%);
+  display: flex;
+}
+
+#shadow {
+  margin: auto;
+  position: relative;
+}
+
+#container-shadow {
+  background: #e48bb8;
+  border-radius: 3px;
+  position: absolute;
+  inset: 0;
+  transform: translate(8px, 10px);
+}
+
+#container {
+  background: #ffe0ef;
+  border: 1px solid #e48bb8;
+  border-radius: 3px;
+  padding: 14px 18px;
+  position: relative;
+}
+
+p {
+  color: #a84f7e;
+  margin: 0 0 12px;
+}
+
+.btn {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.btn-shadow {
+  background: #d97aa9;
+  border-radius: 4px;
+  position: absolute;
+  inset: 0;
+  transform: translate(2px, 2px);
+}
+
+.btn p {
+  color: #fff5fa;
+  background-color: #f3a3c8;
+  background-image: radial-gradient(#d97aa9 .8px, #0000 .8px), none;
+  background-position: 0 0, 0 0;
+  background-repeat: repeat, repeat;
+  background-size: 6px 6px;
+  background-attachment: scroll, scroll;
+  background-origin: padding-box, padding-box;
+  background-clip: border-box, border-box;
+  border-radius: 4px;
+  margin: 0;
+  padding: 10px 16px;
+  position: relative;
+}
+
+.btn:active .btn-shadow {
+  transform: translate(0);
+}
+
+.btn:active p {
+  transform: translate(2px, 2px);
+}
+</style>

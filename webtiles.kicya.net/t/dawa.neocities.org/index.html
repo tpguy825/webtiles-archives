@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+}
+
+#border {
+  z-index: 99;
+  user-select: none;
+  pointer-events: none;
+  background-image: url("border.png");
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+#moonbg {
+  background-image: url("bgmoon.png");
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+#title {
+  background-image: url("redmoon.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+#bigdick {
+  background-image: url("killthepast.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 120px;
+  left: 100px;
+  transform: skew(90deg);
+}
+
+.tile-body:hover #bigdick {
+  animation: 1s linear forwards skewer;
+}
+
+#elevator {
+  filter: opacity(0);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+  display: none;
+  position: absolute;
+  top: 225px;
+  left: 30px;
+}
+
+.tile-body:hover #elevator {
+  display: inherit;
+  animation: 1s ease-in 1s forwards ghost;
+}
+
+@keyframes skewer {
+  from {
+    transform: skew(90deg);
+  }
+
+  to {
+    transform: skew(0deg);
+  }
+}
+
+@keyframes ghost {
+  from {
+    filter: opacity(0);
+  }
+
+  to {
+    filter: opacity();
+  }
+}
+</style>
+</head>
+<body>
+    <div id="border">
+        
+    </div>
+	<div id="moonbg">
+      
+  		<div id="title">
+            
+        </div>
+        <img src="killthepast.png" id="bigdick">
+         <p id="elevator">
+             step into the mind of a <a style="color:#8b0000" href="https://dawa.neocities.org" target="_blank">killer ¶</a>
+        </p> 
+    </div>
+</body>
+</html>
+

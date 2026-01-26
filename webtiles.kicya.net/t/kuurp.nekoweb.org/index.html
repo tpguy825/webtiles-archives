@@ -200,14 +200,57 @@
   top: 0;
   left: 0;
 }
+
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines:before, .scanlines:after {
+  pointer-events: none;
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.scanlines:before {
+  z-index: 2147483647;
+  opacity: .75;
+  background: #0003;
+  width: 100%;
+  height: 3px;
+  animation: 6s linear infinite scanline;
+}
+
+.scanlines:after {
+  z-index: 2147483647;
+  background: linear-gradient(#0000 50%, #00000014 51%) 0 0 / 100% 6px;
+  animation: 1s steps(60, end) infinite scanlines;
+  inset: 0;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translate3d(0, 200000%, 0);
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0;
+  }
+}
+
+div.scanlines {
+  position: absolute;
+}
 </style>
 </head>
 <body>
     <div id="mouse-catcher"></div>
     <div id="bgidle"></div>
     <div id="screen-transition"></div>
-    <div id="noise-overlay" class="bg-overlay">
-        <img src="noise.gif">
+    <div id="noise-overlay" class="bg-overlay scanlines">
     </div>
     
     <div id="border-overlay" class="bg-overlay">
