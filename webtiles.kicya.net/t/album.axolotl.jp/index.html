@@ -1,17 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  background-image: url("album250.jpg");
-  margin: 0;
+    
+    
+    <style>.sitebox {
+  z-index: 0;
+  background-color: #ffe4e1;
+  width: 250px;
+  height: 250px;
+  display: block;
+  position: absolute;
+}
+
+.sitebox:before {
+  content: "";
+  opacity: 1;
+  background-image: url("bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  font-size: 35px;
+  font-weight: bold;
+  transition: opacity .5s ease-in-out;
+  animation: 2s infinite alternate color-change;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sitebox.playing:before {
+  opacity: 0;
+}
+
+.sitebox.playing #karaoke {
+  z-index: 1;
+}
+
+@keyframes color-change {
+  0% {
+    color: #00f;
+  }
+
+  100% {
+    color: red;
+  }
+}
+
+#karaoke {
+  z-index: -1;
+  box-sizing: border-box;
+  height: 250px;
+  padding-top: 90px;
+  padding-bottom: 90px;
+  font-size: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cue {
+  white-space: nowrap;
+  margin-right: 0;
+  display: inline-block;
+  position: relative;
+}
+
+.furigana {
+  pointer-events: none;
+  font-size: 5px;
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cue.empty, .furigana.empty {
+  color: gray;
+}
+
+.cue > .fill, .furigana > .fill {
+  color: #ff1493;
+  white-space: nowrap;
+  z-index: 1;
+  width: 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.line {
+  text-align: center;
+  opacity: .5;
+  margin-bottom: 8px;
+  transition: all .3s;
+  display: block;
+}
+
+.line.active {
+  opacity: 1;
+}
+
+#audio-karaoke {
+  z-index: 10;
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 </style>
 </head>
+
+
 <body>
-    <script type="text/tilescript">// Only executes while your tile is active
+<div class="sitebox">
+
+    <div id="karaoke"></div>
+    <audio id="audio-karaoke" src="song.mp3" controls preload="metadata"></audio>
+</div>
+
+<script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+var tileRoot = document.currentScript.getRootNode();
+function getElem(id) {
+    return tileRoot.querySelector('#' + id);
+}
+function initKaraoke(timedLyrics) {
+    var container = getElem('karaoke');
+    var audio = getElem('audio');
+
+
+    var wordData = [];
+    var rubyRules = [];
+    var currentScrollY = 0;
+    var lastActiveIndex = -1;
+    var reqAnim = window.requestAnimationFrame || function(cb) { setTimeout(cb, 16); };
+
+    function toSec(m, s, h) {
+        return parseInt(m, 10) * 60 + parseInt(s, 10) + parseInt(h, 10) / 100;
+    }
+
+    function createDualLayer(txt, cls) {
+        var wrapper = document.createElement('span');
+        if (cls) wrapper.className = cls;
+        var empty = document.createElement('span');
+        empty.className = 'empty';
+        empty.textContent = txt;
+        var fill = document.createElement('span');
+        fill.className = 'fill';
+        fill.textContent = txt;
+        wrapper.appendChild(empty);
+        wrapper.appendChild(fill);
+        return { wrapper: wrapper, fill: fill };
+    }
+
+    var rawLines = timedLyrics.replace(/\r\n/g, '\n').split('\n');
+    var lyricLines = [];
+
+    for (var i = 0; i < rawLines.length; i++) {
+        var line = rawLines[i].trim();
+        if (line.indexOf('@Ruby') === 0) {
+            var parts = line.split(',,');
+            var meta = parts[0].split('=')[1].split(',');
+            var timeStr = parts[1];
+            var tStart = 0;
+            if (timeStr) {
+                var tm = timeStr.match(/\[(\d{2}):(\d{2}):(\d{2})\]/);
+                if (tm) tStart = toSec(tm[1], tm[2], tm[3]);
+            }
+            rubyRules.push({ k: meta[0], v: meta[1], t: tStart });
+        } else if (line !== '') {
+            lyricLines.push(rawLines[i]);
+        }
+    }
+
+    for (var l = 0; l < lyricLines.length; l++) {
+        var lineText = lyricLines[l];
+        if (lineText.trim() === '') continue;
+        var div = document.createElement('div');
+        div.className = 'line';
+        var parts = lineText.split(/\[(\d{2}):(\d{2}):(\d{2})\]/);
+        if (parts.length > 1) {
+            var st = toSec(parts[1], parts[2], parts[3]);
+            div.setAttribute('data-start', st);
+        }
+        var lineEndTime = 0;
+        var k = 1;
+        while (k < parts.length) {
+            var s = toSec(parts[k], parts[k+1], parts[k+2]);
+            var txt = parts[k+3] || '';
+            var nextS = (k + 4 < parts.length) ? toSec(parts[k+4], parts[k+5], parts[k+6]) : s + 2;
+            var wds = txt.trim().split(/\s+/);
+            for (var w = 0; w < wds.length; w++) {
+                var word = wds[w];
+                if (!word) continue;
+                var dur = nextS - s;
+                var start = s + (dur * w / wds.length);
+                var end = s + (dur * (w + 1) / wds.length);
+                if (end > lineEndTime) lineEndTime = end;
+                var ruby = null;
+                for (var r = 0; r < rubyRules.length; r++) {
+                    if (s >= rubyRules[r].t && (rubyRules[r].k === word || rubyRules[r].k.indexOf(word) === 0)) {
+                        ruby = rubyRules[r];
+                        break;
+                    }
+                }
+                var layers = createDualLayer(word, 'cue');
+                var cue = layers.wrapper;
+                var mainFill = layers.fill;
+                var furiFill = null;
+                if (ruby) {
+                    var rLayers = createDualLayer(ruby.v, 'furigana');
+                    cue.insertBefore(rLayers.wrapper, cue.firstChild);
+                    furiFill = rLayers.fill;
+                }
+                div.appendChild(cue);
+                if (w < wds.length - 1) div.appendChild(document.createTextNode(' '));
+                wordData.push({ fill: mainFill, furi: furiFill, s: start, e: end });
+            }
+            if (/\s$/.test(txt)) div.appendChild(document.createTextNode(' '));
+            k += 4;
+        }
+        div.setAttribute('data-end', lineEndTime);
+        container.appendChild(div);
+    }
+
+    function animate() {
+        var t = audio.currentTime;
+        for (var i = 0; i < wordData.length; i++) {
+            var wd = wordData[i];
+            var pct = 0;
+            if (t > wd.e) pct = 100;
+            else if (t > wd.s) pct = ((t - wd.s) / (wd.e - wd.s)) * 100;
+            if (wd.lastPct !== pct) {
+                wd.fill.style.width = pct + '%';
+                if (wd.furi) wd.furi.style.width = pct + '%';
+                wd.lastPct = pct;
+            }
+        }
+        var lines = container.children;
+        var activeIdx = -1;
+        for (var j = 0; j < lines.length; j++) {
+            var ls = parseFloat(lines[j].getAttribute('data-start'));
+            var le = parseFloat(lines[j].getAttribute('data-end'));
+            if (t >= ls && t < le) {
+                activeIdx = j;
+                break;
+            }
+        }
+        if (activeIdx === -1 && lastActiveIndex !== -1) activeIdx = lastActiveIndex;
+        if (activeIdx !== -1 && activeIdx !== lastActiveIndex) {
+            for (var n = 0; n < lines.length; n++) lines[n].className = 'line';
+            lines[activeIdx].className = 'line active';
+            lastActiveIndex = activeIdx;
+        }
+        if (lastActiveIndex !== -1 && lines[lastActiveIndex]) {
+            var targetLine = lines[lastActiveIndex];
+            var targetY = targetLine.offsetTop - (container.clientHeight / 2) + (targetLine.offsetHeight / 2);
+            currentScrollY += (targetY - currentScrollY) * 0.1;
+            container.scrollTop = currentScrollY;
+        }
+        reqAnim(animate);
+    }
+    reqAnim(animate);
+}
+
+getElem('start-karaoke-button').onclick = function () {
+    var lyricsDiv = getElem('lyrics-data');
+    var fullText = lyricsDiv.textContent || lyricsDiv.innerText;
+    var box = tileRoot.querySelector('.sitebox');
+    var audio = getElem('audio');
+
+    audio.addEventListener('play', function() {
+        box.classList.add('playing');
+    });
+
+    initKaraoke(fullText);
+};</script>
+<div id="lyrics-data" style="display: none">
+    [00:00:23]chu [00:00:37]chu [00:00:62]yeah！[00:01:04] [00:03:68]please [00:04:12]me！[00:05:18]
+    [00:07:25]chu [00:07:46]chu [00:07:69]yeah！[00:08:30] [00:10:81]without [00:11:23]you[00:12:13]
+    [00:13:04]
+    [00:16:57]あー！[00:17:02]な[00:17:12]ん[00:17:23]て[00:17:36]こ[00:17:61]と[00:17:71]だ　[00:18:18]些[00:18:27]細[00:18:59]な[00:18:82]過[00:19:37]ち[00:19:60]だ[00:19:91]
+    [00:20:14]自[00:20:56]分[00:20:83]の[00:20:93]こ[00:21:16]と[00:21:28]に[00:21:70]タ[00:21:81]ラ[00:21:92]ラ[00:22:13]ッ[00:22:22]タ[00:22:31]ラ[00:22:48]ッ[00:22:61]タ[00:22:72]手[00:22:94]焼[00:23:07]く[00:23:16]
+    [00:23:70]ど[00:23:90]う[00:24:10]し[00:24:28]て[00:24:37]突[00:24:68]然？[00:25:22]逃[00:25:32]げ[00:25:44]切[00:25:52]っ[00:25:63]た[00:25:87]っ[00:25:97]て[00:26:22]い[00:26:32]い[00:26:50]で[00:26:72]しょ？[00:27:04]
+    [00:27:25]だ[00:27:68]け[00:27:80]ど[00:27:90]な[00:28:00]ん[00:28:24]だ[00:28:34]か[00:28:78]気[00:28:88]ま[00:28:99]ぐ[00:29:22]れ[00:29:33]モー[00:29:56]ド[00:29:78]に[00:30:00]な[00:30:11]り[00:30:36]
+    [00:30:57]そ[00:30:66]ん[00:30:78]な[00:31:01]気[00:31:12]分[00:31:55]に[00:31:91]な[00:32:01]っ[00:32:14]ちゃ[00:32:25]っ[00:32:39]て[00:32:43]
+    [00:32:78]
+    [00:32:86]始[00:33:09]ま[00:33:34]り[00:33:68]は[00:33:92]そ[00:34:15]ん[00:34:36]な[00:34:58]風[00:35:05]で[00:36:11]
+    [00:36:36]つ[00:36:60]ま[00:36:70]り[00:36:91]は[00:37:23]ら[00:37:44]し[00:37:67]く[00:37:93]な[00:38:12]い[00:38:23]よ[00:38:48]う[00:38:59]で[00:39:63]
+    [00:39:89]で[00:40:11]も[00:40:23]今[00:40:79]じゃ[00:41:03]扉[00:41:83]開[00:42:13]け[00:42:55]て[00:42:81]ほ[00:43:03]ら[00:43:26]
+    [00:43:50]声[00:43:70]が[00:43:91]聴[00:44:01]こ[00:44:13]え[00:44:37]る[00:44:61]よ　[00:44:81]さ[00:45:03]あ！[00:46:33]行[00:46:55]こ[00:46:78]う！[00:48:13]
+    [00:48:30]
+    [00:48:56]ど[00:48:77]こ[00:48:88]へ[00:49:12]で[00:49:23]も[00:49:97]
+    [00:50:05]
+    [00:50:27]僕[00:51:00]は[00:51:25]君[00:51:90]の[00:52:13]翼[00:53:02]に　[00:53:68]な[00:53:79]れ[00:53:90]る[00:54:18]勇[00:54:52]気[00:54:76]が[00:55:12]あ[00:55:42]る[00:55:70]よ！[00:55:88]
+    [00:56:16](please stay with me)[00:57:12]
+    [00:57:28]ど[00:57:37]ん[00:57:50]な[00:57:82]試[00:58:33]練[00:58:70]も[00:59:00]怖[00:59:56]く[00:59:89]な[01:00:13]い　[01:00:76]そ[01:00:86]の[01:01:03]魔[01:01:32]法[01:01:65]が[01:01:90]あ[01:02:23]る[01:02:56]か[01:02:77]ら[01:03:02]
+    [01:03:07](なんてったってコングラッチュレーション！)[01:04:13]
+    [01:04:33]初[01:04:90]め[01:05:23]て[01:05:46]出[01:05:79]会[01:06:14]う[01:06:36]世[01:07:03]界[01:07:26]に　[01:07:89]花[01:08:11]束[01:08:78]を[01:09:01]贈[01:09:64]ろ[01:09:88]う[01:10:03]
+    [01:10:30](made in society)[01:11:15]
+    [01:11:42]た[01:11:52]だ[01:11:94]こ[01:12:05]の[01:12:32]瞬[01:12:79]間[01:13:22]結[01:13:66]ば[01:13:77]れ[01:14:11]る[01:14:34]よ[01:15:02]
+    [01:15:23]ち[01:15:47]ぐ[01:15:70]は[01:15:80]ぐ[01:15:91]な[01:16:03]コ[01:16:26]ミュ[01:16:38]ニ[01:16:58]ケー[01:16:81]ショ[01:16:91]ン？[01:16:94]
+    [01:17:05]で[01:17:26]も[01:17:47]別[01:17:68]に[01:17:81]構[01:18:15]わ[01:18:36]な[01:18:58]い[01:18:68]
+    [01:18:84]明[01:19:27]日[01:19:38]か[01:19:49]ら[01:19:62]平[01:20:15]和[01:20:37]な[01:20:58]ら！[01:21:76]
+    [01:21:98]
+    [01:23:71]chu [01:23:93]chu [01:24:18]yeah！[01:25:11] [01:27:24]without [01:27:70]you！[01:29:43]
+    [01:29:79]
+    [01:31:25]あー！[01:31:68]ど[01:31:81]う[01:31:92]し[01:32:04]て[01:32:28]ま[01:32:37]た[01:32:80]素[01:32:91]直[01:33:26]に[01:33:48]な[01:33:58]れ[01:33:81]な[01:34:04]く[01:34:27]て[01:34:57]
+    [01:34:81]自[01:35:29]分[01:35:50]の[01:35:60]こ[01:35:83]と[01:35:96]で[01:36:36]チュ[01:36:47]ル[01:36:57]ル[01:36:67]ッ[01:36:81]チュ[01:36:95]ル[01:37:15]ッ[01:37:37]チュ[01:37:49]火[01:37:63]吹[01:37:73]く[01:38:07]
+    [01:38:33]
+    [01:38:47]ギ[01:38:74]ア[01:38:84]は[01:38:97]そ[01:39:07]の[01:39:33]ま[01:39:43]ま　[01:39:88]ス[01:40:01]ピー[01:40:36]ド[01:40:60]上[01:40:70]げ[01:40:93]て[01:41:16]い[01:41:38]こ[01:41:48]う[01:41:70]
+    [01:41:92]だ[01:42:36]け[01:42:48]ど[01:42:61]な[01:42:71]ん[01:42:94]だ[01:43:06]か[01:43:46]黄[01:43:66]昏[01:44:01]モー[01:44:25]ド[01:44:46]に[01:44:72]な[01:44:82]り[01:45:02]
+    [01:45:27]い[01:45:38]つ[01:45:48]か[01:45:70]を[01:45:79]思[01:46:26]い[01:46:61]出[01:46:71]し[01:46:81]ちゃ[01:46:90]っ[01:47:03]て[01:47:22]
+    [01:47:38]
+    [01:47:52]一[01:47:79]人[01:48:05]で[01:48:36]い[01:48:59]て[01:48:81]も[01:49:01]嫌[01:49:26]じゃ[01:49:40]な[01:49:69]い　[01:51:02]誰[01:51:37]に[01:51:59]も[01:51:89]頼[01:52:33]ら[01:52:58]な[01:52:80]く[01:52:89]て[01:53:14]も[01:53:25]い[01:53:32]い[01:53:90]
+    [01:54:55]で[01:54:79]も[01:54:90]扉[01:55:67]の[01:55:91]向[01:56:14]こ[01:56:47]う[01:56:48]騒[01:57:20]が[01:57:47]し[01:57:71]い　[01:58:15]声[01:58:37]が[01:58:58]聞[01:58:71]き[01:58:80]た[01:59:04]い[01:59:23]よ[01:59:41]
+    [01:59:45]今！[02:01:03]行[02:01:25]こ[02:01:46]う！[02:02:73]
+    [02:02:81]
+    [02:03:25]ど[02:03:46]こ[02:03:56]へ[02:03:82]で[02:03:92]も[02:04:44]
+    [02:04:62]
+    [02:04:94]僕[02:05:67]は[02:05:90]君[02:06:54]を[02:06:79]背[02:07:10]中[02:07:69]に　[02:08:34]乗[02:08:46]せ[02:08:58]て[02:08:88]空[02:09:47]を[02:09:76]舞[02:10:09]う[02:10:34]よ！[02:10:59]
+    [02:10:80](please fly with me)[02:11:71]
+    [02:11:93]い[02:12:12]つ[02:12:18]か[02:12:48]心[02:13:35]が[02:13:67]離[02:14:22]れ[02:14:56]て[02:14:80]も　[02:15:45]そ[02:15:56]の[02:15:70]時[02:16:32]は[02:16:56]笑[02:17:21]っ[02:17:38]て[02:17:45]て[02:17:69]
+    [02:17:80](なんてったってコングラッチュレーション)[02:18:83]
+    [02:19:02]守[02:19:54]り[02:19:87]た[02:20:13]い[02:20:48]こ[02:20:78]の[02:21:03]世[02:21:68]界[02:21:92]に　[02:22:58]青[02:22:79]空[02:23:45]の[02:23:67]ラ[02:23:99]プ[02:24:33]ソ[02:24:58]ディ[02:24:80]
+    [02:25:02](make me rhapsodic！)[02:26:06]
+    [02:26:09]た[02:26:20]だ[02:26:35]い[02:26:65]つ[02:26:97]ま[02:27:22]で[02:27:60]も[02:27:91]奏[02:28:36]で[02:28:49]て[02:28:70]い[02:28:80]て[02:29:02]よ[02:29:64]
+    [02:29:90]凸[02:30:36]凹[02:30:57]な[02:30:70]コ[02:30:90]ン[02:31:00]ビ[02:31:24]ネー[02:31:46]ショ[02:31:58]ン？[02:31:68]
+    [02:31:75]で[02:31:93]も[02:32:15]別[02:32:35]に[02:32:48]大[02:32:77]丈[02:33:02]夫[02:33:24]さ[02:33:36]
+    [02:33:48]明[02:33:69]日[02:33:93]は[02:34:03]ま[02:34:16]た[02:34:28]平[02:34:83]和[02:35:01]だ！[02:35:09]
+    [02:35:14]
+    [02:35:26]ほ[02:35:51]ん[02:35:61]の[02:35:90]小[02:36:61]さ[02:36:82]な[02:37:05]傷[02:37:37]を　[02:38:83]太[02:39:12]陽[02:39:87]に[02:40:09]さ[02:40:29]ら[02:40:56]し[02:40:91]て[02:42:05]
+    [02:42:35]分[02:42:66]け[02:43:02]合[02:43:42]っ[02:43:69]た[02:43:91]よ[02:44:15]君[02:44:84]と　[02:45:69]痛[02:45:94]み[02:46:23]は[02:46:58]熱[02:47:25]さ[02:47:46]の[02:47:71]中[02:48:40]に[02:48:78]溶[02:49:02]け[02:49:25]て[02:49:49]く！[02:51:06]
+    [02:51:29]
+    [02:52:58]chu [02:52:78]chu [02:53:01]yeah！[02:53:48] [02:54:75]粋[02:55:11]な[02:55:24]ビー[02:55:69]ト弾[02:55:97]く僕ら！
+    [02:56:15]please [02:56:55]me！[02:57:27] [02:58:55]手[02:58:83]を[02:59:01]叩[02:59:61]い[02:59:69]て[02:59:71]
+    [02:59:75]chu [02:59:89]chu [03:00:13]yeah！[03:00:59] [03:01:88]ブ[03:01:98]ギー[03:02:24]な[03:02:34]リ[03:02:44]ズ[03:02:68]ム[03:02:77]で[03:03:01]は[03:03:04]しゃ[03:03:26]ぐ二人！
+    [03:03:26]without [03:03:67]you！[03:04:11] [03:05:63]飛[03:05:83]び[03:06:08]跳[03:06:34]ね[03:06:76]てさ
+    [03:06:83]chu [03:07:00]chu [03:07:26]yeah！[03:07:87] [03:09:01]粋[03:09:37]な[03:09:46]ビー[03:09:81]ト[03:10:00]弾[03:10:26]く僕ら！
+    [03:10:37]please [03:10:76]me！[03:11:43] [03:12:78]手[03:12:99]を[03:13:23]叩[03:13:68]いて
+    [03:14:04]chu [03:14:21]chu [03:14:38]yeah！[03:14:98] [03:16:12]ブ[03:16:21]ギー[03:16:44]な[03:16:53]リ[03:16:73]ズ[03:16:87]ム[03:16:99]で[03:17:13]は[03:17:23]しゃ[03:17:44]ぐ[03:17:65]ア[03:17:87]リー[03:18:54]ナ！[03:19:62]
+    [03:20:12]
+    [03:39:25]ど[03:39:48]こ[03:39:59]ま[03:39:81]で[03:39:91]も！[03:40:62]
+    [03:40:80]
+    [03:41:00]僕[03:41:68]は[03:41:90]君[03:42:55]の[03:42:79]翼[03:43:67]に　[03:44:38]な[03:44:48]れ[03:44:58]る[03:44:88]勇[03:45:33]気[03:45:48]が[03:45:79]あ[03:46:12]る[03:46:35]よ！[03:46:55]
+    [03:46:78](please stay with me)[03:47:67]
+    [03:47:94]ど[03:48:10]ん[03:48:30]な[03:48:45]試[03:48:98]練[03:49:37]も[03:49:70]怖[03:50:25]く[03:50:56]な[03:50:81]い　[03:51:45]そ[03:51:55]の[03:51:68]魔[03:51:98]法[03:52:30]が[03:52:55]あ[03:52:87]る[03:53:23]か[03:53:45]ら[03:53:52]
+    [03:53:67](なんてったってコングラッチュレーション)[03:55:00]
+    [03:55:23]君[03:55:88]と[03:56:12]出[03:56:47]会[03:56:78]い[03:57:01]世[03:57:65]界[03:57:90]は　[03:58:57]花[03:58:78]束[03:59:41]に[03:59:66]溢[04:00:32]れ[04:00:58]た[04:00:88]
+    [04:01:02](made in society)[04:02:09]
+    [04:02:15]た[04:02:31]だ[04:02:40]そ[04:02:63]の[04:02:96]瞬[04:03:46]間[04:03:88]結[04:04:29]ば[04:04:41]れ[04:04:73]た[04:05:03]よ[04:05:48]
+    [04:05:87]ち[04:06:08]ぐ[04:06:32]は[04:06:43]ぐ[04:06:53]な[04:06:62]コ[04:06:86]ミュ[04:07:01]ニ[04:07:22]ケー[04:07:45]ショ[04:07:54]ン？[04:07:58]
+    [04:07:68]で[04:07:90]も[04:08:11]別[04:08:32]に[04:08:40]構[04:08:77]わ[04:08:99]な[04:09:22]い[04:09:32]
+    [04:09:46]明[04:09:88]日[04:10:09]が[04:10:20]平[04:10:74]和[04:10:95]な[04:11:19]ら[04:11:49]
+    [04:11:67]
+    [04:14:31]chu [04:14:51]chu [04:14:76]yeah！[04:15:94] [04:17:86]please [04:18:32]me！[04:19:21]
+    [04:21:45]息[04:21:87]を[04:23:47]切[04:23:58]ら[04:23:68]し[04:24:69]
+    [04:24:99]without[04:25:52] [04:25:88]you！[04:29:35]
+
+
+    @Ruby7=些,さ
+    @Ruby8=細,さい
+    @Ruby9=過,あやま
+    @Ruby10=自,じ
+    @Ruby11=分,ぶん,,[02:42:35]
+    @Ruby12=手,て
+    @Ruby13=焼,や
+    @Ruby14=突,とつ
+    @Ruby15=然,ぜん
+    @Ruby16=逃,に
+    @Ruby17=切,き
+    @Ruby18=気,き
+    @Ruby19=始,はじ
+    @Ruby20=風,ふう
+    @Ruby21=今,いま
+    @Ruby22=扉,とびら
+    @Ruby23=開,あ
+    @Ruby24=声,こえ
+    @Ruby25=聴,き
+    @Ruby26=行,ゆ
+    @Ruby27=僕,ぼく
+    @Ruby28=君,きみ
+    @Ruby29=翼,つばさ
+    @Ruby30=勇,ゆう
+    @Ruby31=試,し
+    @Ruby32=練,れん
+    @Ruby33=怖,こわ
+    @Ruby34=魔,ま
+    @Ruby35=法,ほう
+    @Ruby36=初,はじ
+    @Ruby37=出,で,,[01:46:61]
+    @Ruby38=会,あ
+    @Ruby39=世,せ
+    @Ruby40=界,かい
+    @Ruby41=花,はな
+    @Ruby42=束,たば
+    @Ruby43=贈,おく
+    @Ruby44=瞬,しゅん
+    @Ruby45=間,かん
+    @Ruby46=結,むす
+    @Ruby47=別,べつ
+    @Ruby48=構,かま
+    @Ruby49=明日,あした,,[02:33:48]
+    @Ruby50=平,へい
+    @Ruby51=和,わ
+    @Ruby52=素,す
+    @Ruby53=直,なお
+    @Ruby54=火,ひ
+    @Ruby55=吹,ふ
+    @Ruby56=上,あ
+    @Ruby57=黄,たそ
+    @Ruby58=昏,がれ
+    @Ruby59=思,おも
+    @Ruby60=出,だ,[01:46:61],[03:56:12]
+    @Ruby61=一人,ひとり
+    @Ruby62=嫌,いや
+    @Ruby63=誰,だれ
+    @Ruby64=頼,たよ
+    @Ruby65=向,む
+    @Ruby66=騒,さわ
+    @Ruby67=聞,き
+    @Ruby68=背,せ
+    @Ruby69=中,なか
+    @Ruby70=乗,の
+    @Ruby71=空,そら
+    @Ruby72=舞,ま
+    @Ruby73=心,こころ
+    @Ruby74=離,はな
+    @Ruby75=時,とき
+    @Ruby76=笑,わら
+    @Ruby77=守,まも
+    @Ruby78=青,あお
+    @Ruby79=奏,かな
+    @Ruby80=凸,でこ
+    @Ruby81=凹,ぼこ
+    @Ruby82=大,だい
+    @Ruby83=丈,じょう
+    @Ruby84=夫,ぶ
+    @Ruby85=明日,あす,[02:33:48],[04:09:46]
+    @Ruby86=小,ちい
+    @Ruby87=傷,きず
+    @Ruby88=太,たい
+    @Ruby89=陽,よう
+    @Ruby90=分,わ,[02:42:35]
+    @Ruby91=合,あ
+    @Ruby92=痛,いた
+    @Ruby93=熱,あつ
+    @Ruby94=溶,と
+    @Ruby95=粋,いき
+    @Ruby96=弾,ひ
+    @Ruby99=叩,たた
+    @Ruby100=二人,ふたり
+    @Ruby101=飛,と
+    @Ruby102=跳,は
+    @Ruby103=出,で,[03:56:12]
+    @Ruby104=溢,あふ
+    @Ruby105=明日,あした,[04:09:46]
+    @Ruby108=息,いき
+
+</div>
+
 </body>
+
+
 </html>
