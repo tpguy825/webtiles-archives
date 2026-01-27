@@ -9,6 +9,32 @@
   margin: 0;
 }
 
+.bg-wrapper, .character-wrapper, .front-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.bg-all {
+  filter: invert();
+  mix-blend-mode: hue;
+  background: url("tile.webp") 0 0 / 70px;
+  width: 100%;
+  height: 100%;
+  animation: 4s linear infinite tile_move;
+  position: absolute;
+}
+
+@keyframes tile_move {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -70px -70px;
+  }
+}
+
 .bg-left {
   background: linear-gradient(90deg, #000, #0000);
   width: 30%;
@@ -77,16 +103,23 @@
 </style>
 </head>
 <body>
-    <div class="bg-right"></div>
-    <div class="bg-bottom"></div>
-    <div class="bg-left"></div>
-    <div class="fuuka"></div>
-    <div class="fuuka"></div>
-    <div class="cloud-small cloud_1"></div>
-    <div class="cloud-small cloud_2"></div>
-    <div class="cloud-small cloud_3"></div>
-    <div class="cloud-big cloud_top"></div>
-    <div class="text"><span></span></div>
+    <div class="bg-wrapper">
+        <div class="bg-right"></div>
+        <div class="bg-bottom"></div>
+        <div class="bg-left"></div>
+        <div class="bg-all" style="animation-play-state: running ! important;"></div>
+    </div>
+    <div class="character-wrapper">
+        <div class="fuuka"></div>
+        <div class="fuuka"></div>
+        <div class="cloud-small cloud_1"></div>
+        <div class="cloud-small cloud_2"></div>
+        <div class="cloud-small cloud_3"></div>
+        <div class="cloud-big cloud_top"></div>
+    </div>
+    <div class="front-wrapper">
+	    <div class="text"><span></span></div>
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 </script>

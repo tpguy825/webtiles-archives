@@ -471,7 +471,6 @@ function initTileOneko(options) {
             tiles[i].className += ' tile--flipped';
         }
         
-        var GRID_SIZE = 25;
         var TILE_SIZE_PX = document.body.clientWidth;
         var CONTAINER_SPAN_TILES = 50;
         
@@ -488,10 +487,12 @@ function initTileOneko(options) {
             y2: TILE_SIZE_PX * (Math.floor(CONTAINER_SPAN_TILES / 2) + 1)
         };
         
+        var nekoPos = TILE_SIZE_PX * (CONTAINER_SPAN_TILES + (CONTAINER_SPAN_TILES % 2 ? 0 : 1)) / 2;
+        
         var hasNekoShownHerMagicTrickYet = false;
         var neko = initTileOneko({
-            nekoPosX: TILE_SIZE_PX * CONTAINER_SPAN_TILES / 2,
-            nekoPosY: TILE_SIZE_PX * CONTAINER_SPAN_TILES / 2 - TILE_SIZE_PX * 0.25,
+            nekoPosX: nekoPos,
+            nekoPosY: nekoPos - TILE_SIZE_PX * 0.25,
             onAnimationFrame: function() {
                 if (
                     !hasNekoShownHerMagicTrickYet && (

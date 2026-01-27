@@ -38,7 +38,7 @@
   -webkit-font-smoothing: antialiased;
   color: #fff;
   background-color: #131113;
-  background-image: linear-gradient(to top, #0000, #131113 64px), url("images/yefreitor.png");
+  background-image: url("images/border.png%3Fh=e940f791f5f8ee2867e7"), linear-gradient(to top, #0000, #131113 38px), url("images/yefreitor.png");
   justify-content: center;
   align-items: center;
   height: 250px;
@@ -52,11 +52,11 @@
 
 @keyframes marquee {
   0% {
-    background-position: 0 0, 6px 0;
+    background-position: 0 0, 0 0, 0 -6px;
   }
 
   100% {
-    background-position: 0 0, 134px 64px;
+    background-position: 0 0, 0 0, 128px 58px;
   }
 }
 
@@ -73,14 +73,6 @@
   opacity: 0;
   top: -80px;
   transform: rotate(35deg);
-}
-
-.tile-body:before {
-  content: "";
-  z-index: 1;
-  background-image: url("images/border.png%3Fh=56182904e1be37efddb9");
-  position: absolute;
-  inset: 0;
 }
 
 nav {
@@ -115,7 +107,6 @@ nav strong {
 #polaroid {
   transform-origin: 50% 16px;
   box-sizing: border-box;
-  z-index: 2;
   background-color: #fff;
   border-radius: 8px;
   width: 160px;
@@ -204,7 +195,6 @@ nav strong {
 #window {
   image-rendering: pixelated;
   box-sizing: border-box;
-  z-index: 1;
   border: 64px solid;
   border-image: url("images/border.gif") 32 repeat;
   width: 180px;

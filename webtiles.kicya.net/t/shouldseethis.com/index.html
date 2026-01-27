@@ -5,12 +5,16 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
 }
 
-.tile-img {
+.tile-link {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tile-link img {
   object-fit: cover;
-  object-position: center;
   width: 100%;
   height: 100%;
   display: block;
@@ -18,6 +22,10 @@
 </style>
 </head>
 <body>
-  <img class="tile-img" src="shouldseethis.png" alt>
+
+<a href="https://shouldseethis.com" class="tile-link" target="_blank">
+  <img src="shouldseethis.png" alt>
+</a>
+
 </body>
 </html>

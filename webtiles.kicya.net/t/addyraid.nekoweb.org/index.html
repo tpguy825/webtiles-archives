@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fffcd8;
+  min-height: 100vh;
+  image-rendering: pixelated;
+  background-image: url("webtile-bg.png");
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  font-family: Courier New, monospace;
+  font-size: 14px;
+  line-height: 1.2;
+  display: flex;
+}
+
+h1 {
+  text-align: center;
+  text-shadow: 2px 2px 3px #1f1aa1, -2px 2px 3px #1f1aa1, -2px -2px 3px #1f1aa1, 2px -2px 3px #1f1aa1;
+  font-size: 21px;
+}
+
+p {
+  text-shadow: 2px 2px 3px #1f1aa1, -2px 2px 3px #1f1aa1, -2px -2px 3px #1f1aa1, 2px -2px 3px #1f1aa1, 1px 1px 2px #1f1aa1, 1px 1px 2px #1f1aa1, -1px 1px 2px #1f1aa1, -1px -1px 2px #1f1aa1, 1px -1px 2px #1f1aa1;
+  background-color: inherit;
+  color: #fffcd8;
+}
+
+a {
+  color: #fffb00;
+  text-shadow: 1px 1px 1px #260e6b, -1px 1px 1px #260e6b, -1px -1px 1px #260e6b, 1px -1px 1px #260e6b, 1px 0 1px #260e6b, -1px 0 1px #260e6b, 0 -1px 1px #260e6b, 1px 0 1px #260e6b;
+  font-size: 22px;
+  text-decoration: underline;
+}
+
+a:hover, a:focus {
+  color: #28c6ff;
+}
+
+.two-columns {
+  display: flex;
+}
+
+.two-columns > * {
+  flex: 1 1 0;
+  margin: 0;
+}
+
+.two-columns > :first-child {
+  padding-right: 0;
+}
+
+.two-columns > :last-child {
+  padding-left: .75em;
+}
+</style>
+</head>
+<body>
+    <div class="two-columns" style="border: 0px dashed #2ca1e6;
+           padding: 0px;">
+        <div>
+            <img src="wavey.gif">
+        </div>
+<div>
+
+    <h1>
+        Addyraid* Garden
+    </h1>
+    <p>*a silly way to say my name, "Adelaide".</p>
+    <a href="https://addyraid.nekoweb.org/" target="_blank">&gt;Click 2 Enter&lt;</a>
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
