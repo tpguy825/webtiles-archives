@@ -11,11 +11,11 @@
   margin: 0;
   font-family: MS UI Gothic, Unifont, Times New Roman, Times, serif;
 
-  &.background-none {
+  &:has( > component[name="wallpaper"][preset="none"]) {
     background-image: none;
   }
 
-  &.background-corporate {
+  &:has( > component[name="wallpaper"][preset="corporate"]) {
     background-image: url("../img/iotacorporate.png");
   }
 }
@@ -223,6 +223,23 @@
         }
       }
     }
+
+    & #wallpaper-name {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    &:has(#first-wallpaper-choice > input:checked) #wallpaper-name:after {
+      content: "default";
+    }
+
+    &:has(#second-wallpaper-choice > input:checked) #wallpaper-name:after {
+      content: "none";
+    }
+
+    &:has(#third-wallpaper-choice > input:checked) #wallpaper-name:after {
+      content: "corporate";
+    }
   }
 }
 
@@ -240,6 +257,9 @@ button {
 </style>
     </head>
     <body>
+        
+        <component id="wallpaper-component" name="wallpaper" preset="default"></component>
+
         <audio src="../sfx/click2.wav" id="sound-click" preload="metadata"></audio>
         <div id="nav">
             <div><a href="index.html" id="home-button">IOTA</a></div>
@@ -341,16 +361,18 @@ function kv_fromstring(str) {
 }
 
 // wallpaper
+var wallpaperComponent = document.getElementById("wallpaper-component");
 var buf = fs0_parse();
 var wallpapercfgcontent = buf["config/wallpaper"];
 if (wallpapercfgcontent) {
   var kv = kv_fromstring(wallpapercfgcontent);
   switch (kv.preset) {
     case "none":
-      // document.body.setAttribute("preset", "none");
+      wallpaperComponent.setAttribute("preset", "none");
       break;
     case "corporate":
-      // document.body.setAttribute("preset", "corporate");
+      wallpaperComponent.setAttribute("preset", "corporate");
+      break;
   }
 }
 
