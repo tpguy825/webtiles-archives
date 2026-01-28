@@ -3,28 +3,32 @@
 <head>
     <style>.test {
   background-image: url("by_huniedham_on_twitter.png");
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  display: flex;
+}
+
+.clickme {
+  color: #bbe06d;
+  text-shadow: white;
+  font-size: 50px;
 }
 </style>
 </head>
 <body>
-    <div id='clickme'>
-        Click Me
-    </div>
     <div class='test'>
-        
+
     </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");
-
 setInterval(function () {
-    document.getElementById('clickme');
     var element = document.getElementsByClassName('test')[0]
+    element.removeChild(document.getElementsByClassName('clickme')[0]);
     var box = element.getBoundingClientRect();
     var mult = 1 / ((box.right - box.left) / 250)
-    element.setAttribute('style', 'background-position: ' + (-box.right * mult) + 'px ' + (-box.top * mult) + 'px');
+    element.setAttribute('style', 'background-position: ' + (-box.right * mult) + 'px ' + (-box.top * mult) + 'px; background-size: ' + mult * 50 + '%');
 }, 10);</script>
 </body>
 </html>

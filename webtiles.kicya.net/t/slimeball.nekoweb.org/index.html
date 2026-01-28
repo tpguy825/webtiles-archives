@@ -3,19 +3,41 @@
 <head>
     <style>.tile-body {
   color: #000;
-  overflow-y: wrap;
-  overflow-wrap: break-word;
   background-color: #fb0;
-  background-image: url("webtile-background-thingy.jpg");
+  background-image: url("webtilebackgroundthingy-highquality.png");
   margin: 0;
-  padding-top: 8px;
-  padding-left: 25px;
-  padding-right: 25px;
+}
+
+.text {
+  color: #000;
+  overflow-wrap: break-word;
+  max-height: 60px;
+  margin-top: 22px;
+  margin-left: 25px;
+  margin-right: 28px;
+  font-size: small;
+  font-weight: bold;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000;
 }
 </style>
 </head>
 <body>
-    <p><small><b>HELLO!!!!!!!!!!! my tile is a bit low <br> quality, but its more complete <br> than it used to be!!! -slimeball</b></small></p>
+    <div class="text">
+        yay my tile is so cool and epic and cool and epic and uuhhh yeah -slimeball
+    </div>
+    
     
     
     
