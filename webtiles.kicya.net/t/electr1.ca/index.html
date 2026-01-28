@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+    <style>.test {
+  background-image: url("by_huniedham_on_twitter.png");
+  width: 100%;
+  height: 100%;
 }
 </style>
 </head>
 <body>
-    <p>hi vivi :-)</p>
+    <div id='clickme'>
+        Click Me
+    </div>
+    <div class='test'>
+        
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+console.log("Hello world!");
+
+setInterval(function () {
+    document.getElementById('clickme');
+    var element = document.getElementsByClassName('test')[0]
+    var box = element.getBoundingClientRect();
+    var mult = 1 / ((box.right - box.left) / 250)
+    element.setAttribute('style', 'background-position: ' + (-box.right * mult) + 'px ' + (-box.top * mult) + 'px');
+}, 10);</script>
 </body>
 </html>
