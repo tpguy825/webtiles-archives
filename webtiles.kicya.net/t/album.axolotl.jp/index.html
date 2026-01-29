@@ -25,16 +25,6 @@
   left: 0;
 }
 
-#hide-when-button-clicked p {
-  z-index: 2;
-  font-size: 35px;
-  font-weight: bold;
-  animation: 2s infinite alternate color-change;
-  position: absolute;
-  top: -20px;
-  left: 20px;
-}
-
 #hide-when-button-clicked button {
   z-index: 3;
   position: absolute;
@@ -51,16 +41,6 @@
 
 .sitebox.playing #karaoke-lyrics-box {
   z-index: 1;
-}
-
-@keyframes color-change {
-  0% {
-    color: #00f;
-  }
-
-  100% {
-    color: red;
-  }
 }
 
 #karaoke-audio {
@@ -83,9 +63,8 @@
 
 #karaoke-lyrics-box #line-slot-1, #karaoke-lyrics-box #line-slot-2 {
   box-sizing: border-box;
-  border: 1px solid #000;
   width: 250px;
-  height: 30px;
+  height: 50px;
   position: absolute;
 }
 
@@ -102,6 +81,9 @@
   font-size: 10px;
   display: inline-block;
   position: absolute;
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  padding: 0 !important;
   font-family: monospace !important;
 }
 
@@ -110,24 +92,25 @@
 }
 
 .word {
-  vertical-align: bottom;
-  flex-direction: column-reverse;
-  align-items: center;
   display: inline-block;
   position: relative;
+  top: 10px;
 }
 
 .karaoke-lyric-overlay .word {
   color: #ff1493;
   white-space: nowrap;
+  width: 0;
+  display: inline-block;
   overflow: hidden;
 }
 
 .ruby {
-  white-space: nowrap;
-  text-align: center;
-  margin-bottom: -3px;
   font-size: 6px;
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @-moz-document url-prefix() {
@@ -135,19 +118,23 @@
     margin-bottom: 0;
   }
 }
+
+.karaoke-lyric-overlay .ruby {
+  display: none;
+}
 </style>
 </head>
 <body>
 <div class="sitebox">
     <div id="hide-when-button-clicked">
         <img src="bg.jpg">
-        <p></p>
-        <button id="start-karaoke-button" style="left: 70px;">yes</button>
-        <button id="dont-karaoke-button" style="left: 140px;">no</button>
+        <button id="start-karaoke-button" style="left: 90px;">カラオケ</button>
+        <button id="dont-karaoke-button" style="left: 140px; display: none;">いいえ</button>
+
     </div>
     <div id="karaoke-lyrics-box">
-        <div id="line-slot-1">hello</div>
-        <div id="line-slot-2">it's not working</div>
+        <div id="line-slot-1"></div>
+        <div id="line-slot-2"></div>
     </div>
     <audio id="karaoke-audio" src="song.mp3" controls preload="metadata"></audio>
     <div id="lyrics-data" style="display: none">
@@ -330,282 +317,7 @@
         @Ruby96=溢,あふ
         @Ruby97=息,いき
     </div>
-    <script type="text/tilescript">var lyricLines = [
-    {
-        "lineStartTime": 0.23,
-        "lineEndTime": 5.18,
-        "words": [
-            {
-                "startTime": 0.23,
-                "text": "chu ",
-                "endTime": 0.37,
-                "ruby": null,
-                "overlayElement": {},
-                "lastPct": 0
-            },
-            {
-                "startTime": 0.37,
-                "text": "chu ",
-                "endTime": 0.62,
-                "ruby": null,
-                "overlayElement": {},
-                "lastPct": 0
-            },
-            {
-                "startTime": 0.62,
-                "text": "yeah！",
-                "endTime": 1.04,
-                "ruby": null,
-                "overlayElement": {},
-                "lastPct": 0
-            },
-            {
-                "startTime": 1.04,
-                "text": " ",
-                "endTime": 3.68,
-                "ruby": null,
-                "overlayElement": {},
-                "lastPct": 0
-            },
-            {
-                "startTime": 3.68,
-                "text": "please ",
-                "endTime": 4.12,
-                "ruby": null,
-                "overlayElement": {},
-                "lastPct": 0
-            },
-            {
-                "startTime": 4.12,
-                "text": "me！",
-                "endTime": 5.18,
-                "ruby": null,
-                "overlayElement": {},
-                "lastPct": 0
-            }
-        ]
-    },
-    {
-        "lineStartTime": 7.25,
-        "lineEndTime": 12.13,
-        "words": [
-            {
-                "startTime": 7.25,
-                "text": "chu ",
-                "endTime": 7.46,
-                "ruby": null
-            },
-            {
-                "startTime": 7.46,
-                "text": "chu ",
-                "endTime": 7.6899999999999995,
-                "ruby": null
-            },
-            {
-                "startTime": 7.6899999999999995,
-                "text": "yeah！",
-                "endTime": 8.3,
-                "ruby": null
-            },
-            {
-                "startTime": 8.3,
-                "text": " ",
-                "endTime": 10.81,
-                "ruby": null
-            },
-            {
-                "startTime": 10.81,
-                "text": "without ",
-                "endTime": 11.23,
-                "ruby": null
-            },
-            {
-                "startTime": 11.23,
-                "text": "you",
-                "endTime": 12.13,
-                "ruby": null
-            }
-        ]
-    }
-]
-
-
-
-
-
-
-var populateKaraokeLine = function(lineToQueue, lyricTextContainer) {
-    var words = lineToQueue.words;
-    var lyricText = makeCustomElement('span', 'karaoke-lyric-line', null);
-    var lyricTextOverlay = makeCustomElement('span', 'karaoke-lyric-overlay', null);
-
-    for (var i = 0; i < words.length; i++) {
-        var wordObj = lineToQueue.words[i];
-
-        //for lyrics
-        var wordSpan = makeCustomElement('span', 'word', wordObj.text);
-        if (wordObj.ruby) {
-            var wordSpanRuby = makeCustomElement('span', 'ruby', wordObj.ruby);
-            wordSpan.appendChild(wordSpanRuby);
-        }
-        var wordSpanOverlay = wordSpan.cloneNode(true);
-
-        wordObj.baseElement = wordSpan;
-        wordObj.overlayElement = wordSpanOverlay;
-        wordObj.lastPct = -1;
-
-        lyricText.appendChild(wordSpan);
-        lyricTextOverlay.appendChild(wordSpanOverlay);
-    }
-    lyricTextContainer.appendChild(lyricText);
-    lyricTextContainer.appendChild(lyricTextOverlay);
-}
-
-var makeCustomElement = function(elementType, className, textContent) {
-    var el = document.createElement(elementType);
-    if (className) el.className = className;
-    if (textContent) el.textContent = textContent;
-    return el;
-};
-
-var updateHighlight = function(slot, time) {
-    if (!slot.lyricLine) return;
-    var words = slot.lyricLine.words;
-
-    for (var i = 0; i < words.length; i++) {
-        var w = words[i];
-        var pct = 0;
-
-        if (time >= w.endTime) {
-            pct = 100;
-        } else if (time > w.startTime) {
-            pct = ((time - w.startTime) / (w.endTime - w.startTime)) * 100;
-        }
-
-        if (w.lastPct !== pct && w.overlayElement && w.baseElement) {
-            var fullWidth = w.baseElement.offsetWidth;
-            var currentWidth = fullWidth * (pct / 100);
-
-            w.overlayElement.style.width = currentWidth + 'px';
-            w.lastPct = pct;
-        }
-
-        var debugEl = document.getElementById('hide-when-button-clicked');
-        if (debugEl) {
-            debugEl.textContent = karaokeState.karaokeTimerId;
-        }
-    }
-};
-
-var displayKaraokeLines = function() {
-    var lookahead = 0.5;
-    var clearDelay = 0.5;
-
-    var slot1 = karaokeState.lineSlot1;
-    var slot2 = karaokeState.lineSlot2;
-    var lyricLines = karaokeState.lyricLines
-    var audioCurrentTime = karaokeState.audio.currentTime;
-
-
-    updateHighlight(karaokeState.lineSlot1, karaokeState.audio.currentTime);
-    updateHighlight(karaokeState.lineSlot2, karaokeState.audio.currentTime);
-
-    //reset index if scrubbing audio
-    var newIndex = lyricLines.length;
-    for (var j = 0; j < lyricLines.length; j++) {
-        if (audioCurrentTime <= lyricLines[j].lineEndTime) {
-            newIndex = j;
-            break;
-        }
-    }
-    karaokeState.currentLineIndex = newIndex;
-
-
-    //clear lines if it's past [clearDelay] seconds after the line ended or [lookahead] seconds before it starts
-    [slot1, slot2].forEach(function(slot) {
-        if (slot.lyricLine) {
-            if (audioCurrentTime > slot.lyricLine.lineEndTime + clearDelay ||
-                audioCurrentTime < slot.lyricLine.lineStartTime - lookahead) {
-                slot.container.textContent = '';
-                slot.lyricLine = null;
-            }
-        }
-    });
-
-    //find line that is about to be active
-    var lineToQueue = null;
-    //start from stored index
-    for (var i = karaokeState.currentLineIndex; i < lyricLines.length; i++) {
-        var line = lyricLines[i];
-
-        //if line is finished then increment
-        if (audioCurrentTime > line.lineEndTime) {
-            karaokeState.currentLineIndex = i + 1;
-            continue;
-        }
-
-        if (audioCurrentTime > (line.lineStartTime - lookahead)) {
-            if (slot1.lyricLine === line || slot2.lyricLine === line) continue;
-            lineToQueue = line;
-            break;
-        }
-    }
-
-    //adds the lines if space is available
-    if (lineToQueue) {
-        if(!slot1.lyricLine) {
-            slot1.lyricLine = lineToQueue;
-            populateKaraokeLine(lineToQueue, slot1.container);
-        } else if (!slot2.lyricLine) {
-            slot2.lyricLine = lineToQueue;
-            populateKaraokeLine(lineToQueue, slot2.container);
-        }
-    }
-
-    karaokeState.karaokeTimerId = setTimeout(function() {
-        displayKaraokeLines();
-    }, 16);
-}
-
-
-var karaokeState = {
-    karaokeTimerId: -1,
-    lyricLines: null,
-    audio: null,
-    currentLineIndex: 0,
-
-    lineSlot1: {
-        lyricLine: null,
-        container: null,
-    },
-    lineSlot2: {
-        lyricLine: null,
-        container: null
-    },
-
-}
-
-document.getElementById('dont-karaoke-button').onclick = function() {
-    document.getElementById('dont-karaoke-button').className += 'hidden';
-}
-
-document.getElementById('start-karaoke-button').onclick = function() {
-    document.getElementById('hide-when-button-clicked').textContent = '';
-
-    clearTimeout(karaokeState.karaokeTimerId);
-    karaokeState.currentLineIndex = 0;
-    karaokeState.lineSlot1.lyricLine = karaokeState.lineSlot2.lyricLine = null;
-    var lyricsDiv = document.getElementById('lyrics-data');
-
-    karaokeState.lyricLines = lyricLines;
-
-    karaokeState.lineSlot1.container = document.getElementById('line-slot-1');
-    karaokeState.lineSlot2.container = document.getElementById('line-slot-2');
-    karaokeState.lineSlot1.container.textContent = karaokeState.lineSlot2.container.textContent = '';
-    karaokeState.audio = document.getElementById('karaoke-audio');
-    displayKaraokeLines();
-
-};</script>
+    <script type="text/tilescript">var bracketTimeToSeconds=function(b){if(!b)return 0;var c=b.substring(1,b.length-1);var a=c.split(':');return+a[0]*60+ +a[1]+(+a[2]||0)/100;};var getRubyMapFromLyrics=function(h){var a={};for(var d=0;d<h.length;d++){var e=h[d].trim();if(e.indexOf('@Ruby')!==0)continue;var b=e.slice(e.indexOf('=')+1).split(',');var f=b[0];var i=b[1];var g=[];for(var c=2;c<b.length;c++)b[c].trim()&&g.push(bracketTimeToSeconds(b[c]));a[f]||(a[f]=[]),a[f].push({ruby:i,times:g});}return console.log(a),a;};var getLinesWithDataFromLyricsWithoutRegex=function(z){var g=z.split('\n');var t=getRubyMapFromLyrics(g);var p=[];for(var h=0;h<g.length;h++){var a=g[h];if(a=a.trim(),!a)continue;if(document.getElementById('hide-when-button-clicked').textContent='ロード中 '+h+'/'+g.length,a.indexOf('[')!==0||a.indexOf(']')===-1)continue;var b=[];var k=0;while(k<a.length){var l=a.indexOf('[',k);if(l===-1)break;var i=a.indexOf(']',l);if(i===-1)break;var d=a.indexOf('[',i);if(d===-1)break;var q=a.indexOf(']',d);if(q===-1)break;var u=a.substring(l,i+1);var r=a.substring(i+1,d);var v=a.substring(d,q+1);var s=bracketTimeToSeconds(u);var w=bracketTimeToSeconds(v);var e=r;var x='!?\uFF01\uFF1F.,\u2026 \t\n\r';var j=e.length-1;while(j>=0&&x.indexOf(e.charAt(j))!==-1)j--;e=e.substring(0,j+1);var m=null;var c=t[e];if(c){var n=c.length;if(n===1&&(m=c[0].ruby),n>1)for(var f=0;f<n;f++){var y=c[f].times.length;for(var o=0;o<y;o++)if(Math.abs(s-c[f].times[o])<0.1){m=c[f].ruby;break;}}}b.push({startTime:s,text:r,endTime:w,ruby:m}),k=d;}b.length>0&&p.push({lineStartTime:b[0].startTime,lineEndTime:b[b.length-1].endTime,words:b});}return p;};var populateKaraokeLine=function(g,h){var i=g.words;var d=makeCustomElement('span','karaoke-lyric-line',null);var e=makeCustomElement('span','karaoke-lyric-overlay',null);for(var c=0;c<i.length;c++){var a=g.words[c];var b=makeCustomElement('span','word',a.text);if(a.ruby){var j=makeCustomElement('span','ruby',a.ruby);b.appendChild(j);}var f=b.cloneNode(!0);a.baseElement=b,a.overlayElement=f,a.lastPct=-1,d.appendChild(b),e.appendChild(f);}h.appendChild(d),h.appendChild(e);};var makeCustomElement=function(d,b,c){var a=document.createElement(d);return b&&(a.className=b),c&&(a.textContent=c),a;};var updateHighlight=function(h,d){if(!h.lyricLine)return;var e=h.lyricLine.words;for(var c=0;c<e.length;c++){var a=e[c];var b=0;if(d>=a.endTime?b=100:d>a.startTime&&(b=(d-a.startTime)/(a.endTime-a.startTime)*100),a.lastPct!==b&&a.overlayElement&&a.baseElement){var i=a.baseElement.getBoundingClientRect();var f=i.width;var g=a.baseElement.offsetWidth;var j=g>0?f/g:1;var k=f*(b/100)/j;a.overlayElement.style.width=k+'px',a.lastPct=b;}}};var displayKaraokeLines=function(){var i=0.5;var k=0.5;var b=karaokeState.lineSlot1;var c=karaokeState.lineSlot2;var d=karaokeState.lyricLines;var e=karaokeState.audio.currentTime;updateHighlight(karaokeState.lineSlot1,karaokeState.audio.currentTime),updateHighlight(karaokeState.lineSlot2,karaokeState.audio.currentTime);var j=d.length;for(var g=0;g<d.length;g++)if(e<d[g].lineEndTime){j=g,karaokeState.currentLineIndex=j;break;}[b,c].forEach(function(a){a.lyricLine&&(e>a.lyricLine.lineEndTime+k||e<a.lyricLine.lineStartTime-i)&&(a.container.textContent='',a.lyricLine=null);});var a=null;for(var h=karaokeState.currentLineIndex;h<d.length;h++){var f=d[h];if(e>f.lineEndTime){karaokeState.currentLineIndex=h+1;continue;}if(e>f.lineStartTime-i){if(b.lyricLine===f||c.lyricLine===f)continue;a=f;break;}}a&&(b.lyricLine?c.lyricLine||(c.lyricLine=a,populateKaraokeLine(a,c.container)):(b.lyricLine=a,populateKaraokeLine(a,b.container))),karaokeState.karaokeTimerId=setTimeout(function(){displayKaraokeLines();},16);};var karaokeState={karaokeTimerId:-1,lyricLines:null,audio:null,currentLineIndex:0,lineSlot1:{lyricLine:null,container:null},lineSlot2:{lyricLine:null,container:null}};document.getElementById('dont-karaoke-button').onclick=function(){document.getElementById('dont-karaoke-button').className+='hidden';},document.getElementById('start-karaoke-button').onclick=function(){document.getElementById('hide-when-button-clicked').textContent='',clearTimeout(karaokeState.karaokeTimerId),karaokeState.currentLineIndex=0,karaokeState.lineSlot1.lyricLine=karaokeState.lineSlot2.lyricLine=null;var a=document.getElementById('lyrics-data');karaokeState.lyricLines=getLinesWithDataFromLyricsWithoutRegex(a.textContent||a.innerText),document.getElementById('hide-when-button-clicked').textContent='',karaokeState.lineSlot1.container=document.getElementById('line-slot-1'),karaokeState.lineSlot2.container=document.getElementById('line-slot-2'),karaokeState.lineSlot1.container.textContent=karaokeState.lineSlot2.container.textContent='',karaokeState.audio=document.getElementById('karaoke-audio'),karaokeState.audio.currentTime=0,karaokeState.audio.play(),karaokeState.audio.className+='hidden',displayKaraokeLines();};</script>
 
 </div>
 </body>

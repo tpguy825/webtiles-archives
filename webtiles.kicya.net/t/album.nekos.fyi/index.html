@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    <style>.sitebox {
+  z-index: 0;
+  background-color: #ffe4e1;
+  width: 250px;
+  height: 250px;
+  display: block;
+  position: absolute;
+}
+
+.sitebox button {
+  z-index: 10;
+  opacity: 1;
+}
+
+#hide-when-button-clicked img {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+
+#hide-when-button-clicked button {
+  z-index: 3;
+  position: absolute;
+  top: 200px;
+}
+
+.hidden {
+  display: none;
+}
+
+.sitebox.playing:before {
+  opacity: 0;
+}
+
+.sitebox.playing #karaoke-lyrics-box {
+  z-index: 1;
+}
+
+#karaoke-audio {
+  z-index: 10;
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#karaoke-lyrics-box {
+  z-index: 1;
+  box-sizing: border-box;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+#karaoke-lyrics-box #line-slot-1, #karaoke-lyrics-box #line-slot-2 {
+  box-sizing: border-box;
+  width: 250px;
+  height: 50px;
+  position: absolute;
+}
+
+#karaoke-lyrics-box #line-slot-1 {
+  top: 110px;
+}
+
+#karaoke-lyrics-box #line-slot-2 {
+  top: 150px;
+}
+
+.karaoke-lyric-line, .karaoke-lyric-overlay {
+  white-space: pre;
+  font-size: 14px;
+  display: inline-block;
+  position: absolute;
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  padding: 0 !important;
+  font-family: monospace !important;
+}
+
+.karaoke-lyric-overlay {
+  color: #ff1493;
+}
+
+.word {
+  display: inline-block;
+  position: relative;
+  top: 10px;
+}
+
+.karaoke-lyric-overlay .word {
+  color: #ff1493;
+  white-space: nowrap;
+  width: 0;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.ruby {
+  font-size: 7px;
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@-moz-document url-prefix() {
+  .ruby {
+    margin-bottom: 0;
+  }
+}
+
+.karaoke-lyric-overlay .ruby {
+  display: none;
+}
+</style>
+</head>
+<body>
+<div class="sitebox">
+    <div id="hide-when-button-clicked">
+        <img src="bg.jpg">
+        <button id="start-karaoke-button" style="left: 90px;">カラオケ</button>
+        <button id="dont-karaoke-button" style="left: 140px; display: none;">いいえ</button>
+    </div>
+    <div id="karaoke-lyrics-box">
+        <div id="line-slot-1"></div>
+        <div id="line-slot-2"></div>
+    </div>
+    <audio id="karaoke-audio" src="song.mp3" controls preload="metadata"></audio>
+    <div id="lyrics-data" style="display: none">
+[00:01:45]あ[00:01:65]た[00:01:90]ま[00:02:14]ポ[00:02:38]フ[00:02:62]ポ[00:02:86]フ[00:03:11]し[00:03:42]て[00:03:78]よ[00:04:47]
+[00:05:23]あ[00:05:44]な[00:05:68]た[00:05:90]の[00:06:15]袖[00:06:62]を[00:06:83]つ[00:07:21]か[00:07:62]み[00:08:36]
+[00:08:99]ピ[00:09:22]コ[00:09:48]ピ[00:09:69]コ[00:09:90]し[00:10:13]た[00:10:38]ら[00:10:63]な[00:10:99]で[00:11:36]て[00:12:14]
+[00:12:80]ゴ[00:13:02]ロ[00:13:24]ゴ[00:13:47]ロ[00:13:69]し[00:13:92]た[00:14:18]い[00:14:42]の[00:15:27]
+
+[00:16:56]心[00:17:01]配[00:17:46]し[00:17:73]て[00:17:96]にゃ[00:18:20]い[00:18:61]の[00:18:95]よ[00:20:03]
+[00:20:35]少[00:20:79]し[00:21:00]気[00:21:23]に[00:21:49]な[00:21:74]る[00:21:99]だ[00:22:32]け[00:22:69]よ[00:23:43]
+[00:24:13]ニ[00:24:36]ヨ[00:24:60]ニ[00:24:85]ヨ[00:25:07]し[00:25:30]た[00:25:54]ら[00:25:76]そっ[00:26:54]と[00:27:20]
+[00:27:90]背[00:28:14]中[00:28:58]借[00:28:84]り[00:29:09]る[00:29:32]か[00:29:58]ら[00:30:12]
+
+[00:31:39]い[00:32:59]つ[00:32:84]ま[00:33:05]で[00:33:55]も[00:34:55]　[00:34:71]不[00:35:01]器[00:35:44]用[00:36:35]な[00:36:83]ま[00:37:35]ま[00:37:61]よ[00:38:19]
+[00:38:55]こっ[00:39:29]ち[00:41:32]向[00:41:80]い[00:42:31]て[00:42:78]よ[00:44:65]
+
+[00:45:40]好[00:45:55]き…っ[00:46:14]て[00:46:34]言[00:46:49]え[00:46:62]な[00:46:70]い[00:46:98]
+
+[00:47:75]そ[00:47:97]ば[00:48:21]に[00:48:42]い[00:48:65]て[00:48:96]
+[00:49:15]あ[00:50:80]な[00:51:07]た[00:51:50]の[00:51:97]こ[00:52:43]と[00:52:94]を[00:55:80]　[00:56:26]ひ[00:56:49]と[00:56:75]り[00:58:30]じ[00:58:60]め[00:59:03]し[00:59:52]た[00:59:98]い[01:00:49]よ[01:02:79]
+[01:03:77]素[01:04:06]直[01:05:86]に[01:06:41]な[01:06:83]れ[01:07:34]な[01:07:56]い[01:08:05]の[01:08:36]　[01:08:76]だ[01:09:19]け[01:09:71]ど[01:09:94]ね[01:10:13]
+[01:11:31]つ[01:11:62]な[01:11:85]い[01:13:03]で[01:13:45]い[01:13:96]い[01:14:86]か[01:15:42]ら[01:15:77]ね[01:17:62]
+[01:20:62]手[01:21:02]を[01:21:53]ギュ[01:22:46]し[01:22:94]て[01:23:15]ね[01:23:23]
+
+[01:38:74]ま[01:39:00]く[01:39:25]ら[01:39:49]モ[01:39:69]フ[01:39:97]モ[01:40:19]フ[01:40:44]し[01:40:79]た[01:41:13]い[01:41:89]
+[01:42:54]あ[01:42:77]な[01:43:01]た[01:43:22]の[01:43:45]香[01:43:91]り[01:44:14]い[01:44:51]だ[01:44:86]き[01:46:00]
+[01:46:32]ポ[01:46:57]カ[01:46:78]ポ[01:47:00]カ[01:47:27]し[01:47:52]た[01:47:74]ら[01:47:99]ちょっ[01:48:74]と[01:49:81]
+[01:50:09]瞳[01:50:79]閉[01:51:06]じ[01:51:29]る[01:51:54]の[01:51:79]よ[01:52:28]
+
+[01:53:93]気[01:54:16]ま[01:54:37]ぐ[01:54:58]れ[01:54:80]に[01:55:01]頬[01:55:47]つ[01:55:86]か[01:56:26]み[01:57:38]
+[01:57:67]ウ[01:57:89]ニ[01:58:10]ウ[01:58:34]ニ[01:58:59]し[01:58:81]た[01:59:05]ら[01:59:30]い[01:59:66]や[02:00:03]よ[02:00:80]
+[02:01:46]手[02:01:69]の[02:01:91]にゅ[02:02:13]く[02:02:36]も[02:02:62]り[02:02:83]を[02:03:07]感[02:03:83]じ[02:04:97]
+[02:05:13]テ[02:05:37]レ[02:05:66]テ[02:05:89]レ[02:06:14]し[02:06:40]ちゃ[02:06:64]う[02:06:91]の[02:06:97]
+
+[02:08:72]複[02:10:17]雑[02:10:85]で[02:10:92]　[02:12:01]不[02:12:31]器[02:12:77]用[02:13:67]な[02:14:16]ま[02:14:68]ま[02:14:92]よ[02:15:35]
+[02:15:80]あっ[02:16:56]ち[02:18:68]向[02:19:12]い[02:19:62]て[02:20:09]よ[02:21:93]
+
+[02:38:73]い[02:38:88]つ[02:39:14]か[02:39:72]心[02:40:60]の[02:42:24]奥[02:42:75]に[02:43:23]宿[02:44:15]る[02:44:65]思[02:45:10]い[02:45:35]を[02:46:08]
+[02:46:48]聞[02:46:68]い[02:47:27]て[02:47:75]　[02:48:22]知っ[02:49:15]て[02:49:86]よ[02:50:29]ね[02:52:23]
+
+[02:54:17]恥[02:54:37]ず…[02:55:07]か[02:55:29]し[02:55:48]い[02:55:65]の[02:55:71]
+
+[02:56:21]こ[02:56:43]こ[02:56:67]に[02:56:90]い[02:57:13]て[02:57:40]
+[02:57:64]あ[02:59:27]な[02:59:54]た[03:00:46]の[03:00:48]こ[03:00:94]と[03:01:44]を[03:04:34]　[03:04:78]ずっ[03:05:27]と[03:06:85]見[03:07:06]て[03:07:53]い[03:08:02]る[03:08:52]か[03:09:03]ら[03:10:92]
+[03:12:26]気[03:12:57]持[03:12:81]ち[03:14:40]わ[03:14:89]か[03:15:35]ら[03:15:85]な[03:16:08]い[03:16:51]の[03:17:07]　[03:17:18]だ[03:17:70]け[03:18:22]ど[03:18:44]ね[03:19:29]
+[03:19:87]と[03:20:11]な[03:20:33]り[03:21:47]に[03:21:92]い[03:22:42]て[03:23:39]い[03:23:87]い[03:24:10]よ[03:26:05]
+
+[03:26:43]そ[03:26:66]ば[03:26:90]に[03:27:15]い[03:27:42]て[03:27:65]
+[03:27:91]あ[03:29:48]な[03:29:70]た[03:30:19]の[03:30:66]こ[03:31:15]と[03:31:65]を[03:34:40]　[03:35:01]ひ[03:35:26]と[03:35:53]り[03:37:09]じ[03:37:32]め[03:37:77]し[03:38:24]た[03:38:76]い[03:39:23]よ[03:41:32]
+[03:42:55]素[03:42:77]直[03:44:67]に[03:45:14]な[03:45:60]れ[03:46:12]な[03:46:32]い[03:46:76]の[03:47:24]　[03:47:49]だ[03:47:91]け[03:48:42]ど[03:48:66]ね[03:49:70]
+[03:50:16]つ[03:50:37]な[03:50:61]い[03:51:74]で[03:52:20]い[03:52:68]い[03:53:59]か[03:54:11]ら[03:54:30]ね[03:56:39]
+[03:59:32]手[03:59:76]を[04:00:23]ギュ[04:01:14]し[04:01:68]て[04:01:95]ね[04:02:23]
+
+@Ruby1=袖,そで,[00:00:25]
+@Ruby2=心,しん,[00:00:23],[02:39:72],[00:16:56]
+@Ruby3=配,ぱい,[00:00:23]
+@Ruby4=少,すこ,[00:00:23]
+@Ruby5=気,き
+@Ruby6=背,せ
+@Ruby7=中,なか,[00:00:22]
+@Ruby8=借,か
+@Ruby9=不,ぶ
+@Ruby10=器,き
+@Ruby11=用,よう,[00:00:45],[02:12:77],[00:35:44]
+@Ruby12=向,む
+@Ruby13=好,す
+@Ruby14=言,い
+@Ruby15=素,す
+@Ruby16=直,なお,[00:00:26],[03:42:77],[01:04:06]
+@Ruby17=手,て
+@Ruby18=香,かお,[00:00:23]
+@Ruby19=瞳,ひとみ,[00:00:21],[00:00:45]
+@Ruby20=閉,と
+@Ruby21=頬,ほお,[00:00:21]
+@Ruby22=感,かん,[00:00:37]
+@Ruby23=複,ふく,[00:01:25]
+@Ruby24=雑,ざつ,[00:00:24]
+@Ruby25=用,よう,[02:12:77],[00:00:46]
+@Ruby26=心,こころ,[02:39:72],[00:00:45],[00:00:65]
+@Ruby27=奥,おく,[00:00:31]
+@Ruby28=宿,やど,[00:00:42]
+@Ruby29=思,おも,[00:00:24]
+@Ruby30=聞,き
+@Ruby31=知,し
+@Ruby32=恥,は
+@Ruby33=見,み
+@Ruby34=持,も
+@Ruby35=直,なお,[03:42:77],[00:00:25]
+@Ruby36=知っ,し
+
+    </div>
+    <script type="text/tilescript">var bracketTimeToSeconds=function(b){if(!b)return 0;var c=b.substring(1,b.length-1);var a=c.split(':');return+a[0]*60+ +a[1]+(+a[2]||0)/100;};var getRubyMapFromLyrics=function(h){var a={};for(var d=0;d<h.length;d++){var e=h[d].trim();if(e.indexOf('@Ruby')!==0)continue;var b=e.slice(e.indexOf('=')+1).split(',');var f=b[0];var i=b[1];var g=[];for(var c=2;c<b.length;c++)b[c].trim()&&g.push(bracketTimeToSeconds(b[c]));a[f]||(a[f]=[]),a[f].push({ruby:i,times:g});}return console.log(a),a;};var getLinesWithDataFromLyricsWithoutRegex=function(z){var g=z.split('\n');var t=getRubyMapFromLyrics(g);var p=[];for(var h=0;h<g.length;h++){var a=g[h];if(a=a.trim(),!a)continue;if(document.getElementById('hide-when-button-clicked').textContent='ロード中 '+h+'/'+g.length,a.indexOf('[')!==0||a.indexOf(']')===-1)continue;var b=[];var k=0;while(k<a.length){var l=a.indexOf('[',k);if(l===-1)break;var i=a.indexOf(']',l);if(i===-1)break;var d=a.indexOf('[',i);if(d===-1)break;var q=a.indexOf(']',d);if(q===-1)break;var u=a.substring(l,i+1);var r=a.substring(i+1,d);var v=a.substring(d,q+1);var s=bracketTimeToSeconds(u);var w=bracketTimeToSeconds(v);var e=r;var x='!?\uFF01\uFF1F.,\u2026 \t\n\r';var j=e.length-1;while(j>=0&&x.indexOf(e.charAt(j))!==-1)j--;e=e.substring(0,j+1);var m=null;var c=t[e];if(c){var n=c.length;if(n===1&&(m=c[0].ruby),n>1)for(var f=0;f<n;f++){var y=c[f].times.length;for(var o=0;o<y;o++)if(Math.abs(s-c[f].times[o])<0.1){m=c[f].ruby;break;}}}b.push({startTime:s,text:r,endTime:w,ruby:m}),k=d;}b.length>0&&p.push({lineStartTime:b[0].startTime,lineEndTime:b[b.length-1].endTime,words:b});}return p;};var populateKaraokeLine=function(g,h){var i=g.words;var d=makeCustomElement('span','karaoke-lyric-line',null);var e=makeCustomElement('span','karaoke-lyric-overlay',null);for(var c=0;c<i.length;c++){var a=g.words[c];var b=makeCustomElement('span','word',a.text);if(a.ruby){var j=makeCustomElement('span','ruby',a.ruby);b.appendChild(j);}var f=b.cloneNode(!0);a.baseElement=b,a.overlayElement=f,a.lastPct=-1,d.appendChild(b),e.appendChild(f);}h.appendChild(d),h.appendChild(e);};var makeCustomElement=function(d,b,c){var a=document.createElement(d);return b&&(a.className=b),c&&(a.textContent=c),a;};var updateHighlight=function(h,d){if(!h.lyricLine)return;var e=h.lyricLine.words;for(var c=0;c<e.length;c++){var a=e[c];var b=0;if(d>=a.endTime?b=100:d>a.startTime&&(b=(d-a.startTime)/(a.endTime-a.startTime)*100),a.lastPct!==b&&a.overlayElement&&a.baseElement){var i=a.baseElement.getBoundingClientRect();var f=i.width;var g=a.baseElement.offsetWidth;var j=g>0?f/g:1;var k=f*(b/100)/j;a.overlayElement.style.width=k+'px',a.lastPct=b;}}};var displayKaraokeLines=function(){var i=0.5;var k=0.5;var b=karaokeState.lineSlot1;var c=karaokeState.lineSlot2;var d=karaokeState.lyricLines;var e=karaokeState.audio.currentTime;updateHighlight(karaokeState.lineSlot1,karaokeState.audio.currentTime),updateHighlight(karaokeState.lineSlot2,karaokeState.audio.currentTime);var j=d.length;for(var g=0;g<d.length;g++)if(e<d[g].lineEndTime){j=g,karaokeState.currentLineIndex=j;break;}[b,c].forEach(function(a){a.lyricLine&&(e>a.lyricLine.lineEndTime+k||e<a.lyricLine.lineStartTime-i)&&(a.container.textContent='',a.lyricLine=null);});var a=null;for(var h=karaokeState.currentLineIndex;h<d.length;h++){var f=d[h];if(e>f.lineEndTime){karaokeState.currentLineIndex=h+1;continue;}if(e>f.lineStartTime-i){if(b.lyricLine===f||c.lyricLine===f)continue;a=f;break;}}a&&(b.lyricLine?c.lyricLine||(c.lyricLine=a,populateKaraokeLine(a,c.container)):(b.lyricLine=a,populateKaraokeLine(a,b.container))),karaokeState.karaokeTimerId=setTimeout(function(){displayKaraokeLines();},16);};var karaokeState={karaokeTimerId:-1,lyricLines:null,audio:null,currentLineIndex:0,lineSlot1:{lyricLine:null,container:null},lineSlot2:{lyricLine:null,container:null}};document.getElementById('dont-karaoke-button').onclick=function(){document.getElementById('dont-karaoke-button').className+='hidden';},document.getElementById('start-karaoke-button').onclick=function(){document.getElementById('hide-when-button-clicked').textContent='',clearTimeout(karaokeState.karaokeTimerId),karaokeState.currentLineIndex=0,karaokeState.lineSlot1.lyricLine=karaokeState.lineSlot2.lyricLine=null;var a=document.getElementById('lyrics-data');karaokeState.lyricLines=getLinesWithDataFromLyricsWithoutRegex(a.textContent||a.innerText),document.getElementById('hide-when-button-clicked').textContent='',karaokeState.lineSlot1.container=document.getElementById('line-slot-1'),karaokeState.lineSlot2.container=document.getElementById('line-slot-2'),karaokeState.lineSlot1.container.textContent=karaokeState.lineSlot2.container.textContent='',karaokeState.audio=document.getElementById('karaoke-audio'),karaokeState.audio.currentTime=0,karaokeState.audio.play(),karaokeState.audio.className+='hidden',displayKaraokeLines();};</script>
+
+</div>
+</body>
+</html>
