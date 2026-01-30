@@ -1,0 +1,136 @@
+<head>
+    <style>canvas {
+  z-index: -1;
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+h1 {
+  color: #00f;
+}
+</style>
+</head>
+
+<canvas id="noiseCanvas"></canvas>
+<script type="text/tilescript">
+// =====================
+// Perlin noise setup
+// =====================
+var gradP = new Array(512);
+var perm = new Array(512);
+
+function Grad(x, y, z) { this.x = x; this.y = y; this.z = z; }
+var grad3 = [
+  new Grad(1,1,0), new Grad(-1,1,0), new Grad(1,-1,0), new Grad(-1,-1,0),
+  new Grad(1,0,1), new Grad(-1,0,1), new Grad(1,0,-1), new Grad(-1,0,-1),
+  new Grad(0,1,1), new Grad(0,-1,1), new Grad(0,1,-1), new Grad(0,-1,-1)
+];
+
+var permBase = [];
+for (var i=0;i<256;i++) permBase[i]=i;
+for (var i=255;i>0;i--) { var j=Math.floor(Math.random()*(i+1)); [permBase[i],permBase[j]]=[permBase[j],permBase[i]]; }
+for (var i=0;i<256;i++) { 
+  var v=(i&1)?(permBase[i]^(65536&255)):(permBase[i]^((65536>>8)&255));
+  perm[i]=perm[i+256]=v; gradP[i]=gradP[i+256]=grad3[v%12];
+}
+
+Grad.prototype.dot3=function(x,y,z){return this.x*x+this.y*y+this.z*z;}
+function fade(t){return t*t*t*(t*(t*6-15)+10);}
+function lerp(a,b,t){return (1-t)*a+t*b;}
+
+function perlin3(x,y,z){
+  var X=Math.floor(x)&255, Y=Math.floor(y)&255, Z=Math.floor(z)&255;
+  x-=Math.floor(x); y-=Math.floor(y); z-=Math.floor(z);
+  var n000=gradP[X+perm[Y+perm[Z]]].dot3(x,y,z);
+  var n001=gradP[X+perm[Y+perm[Z+1]]].dot3(x,y,z-1);
+  var n010=gradP[X+perm[Y+1+perm[Z]]].dot3(x,y-1,z);
+  var n011=gradP[X+perm[Y+1+perm[Z+1]]].dot3(x,y-1,z-1);
+  var n100=gradP[X+1+perm[Y+perm[Z]]].dot3(x-1,y,z);
+  var n101=gradP[X+1+perm[Y+perm[Z+1]]].dot3(x-1,y,z-1);
+  var n110=gradP[X+1+perm[Y+1+perm[Z]]].dot3(x-1,y-1,z);
+  var n111=gradP[X+1+perm[Y+1+perm[Z+1]]].dot3(x-1,y-1,z-1);
+  var u=fade(x), v=fade(y), w=fade(z);
+  return lerp(
+    lerp(lerp(n000,n100,u),lerp(n001,n101,u),w),
+    lerp(lerp(n010,n110,u),lerp(n011,n111,u),w),
+  v);
+}
+
+var canvas1 = document.getElementById('buffer1');
+var canvas2 = document.getElementById('buffer2');
+
+canvas1.width = canvas1.width * 2;
+canvas1.height = canvas1.height * 2;
+canvas2.width = canvas2.width * 2;
+canvas2.height = canvas2.height * 2;
+
+var ctx1 = canvas1.getContext('2d');
+var ctx2 = canvas2.getContext('2d');
+
+var bufferW = canvas1.width;
+var bufferH = canvas1.height;
+
+var canvas = canvas1;
+var ctx = ctx1;
+
+var imageData1 = ctx1.createImageData(bufferW, bufferH);
+var data1 = imageData1.data;
+
+var imageData2 = ctx2.createImageData(bufferW, bufferH);
+var data2 = imageData2.data;
+
+var scrollX = 0;
+
+// Helper to swap buffers
+function swapBuffers() {
+  if (canvas === canvas1) {
+    canvas1.style.display = 'block';
+    canvas2.style.display = 'none';
+    canvas = canvas2;
+    ctx = ctx2;
+  } else {
+    canvas2.style.display = 'block';
+    canvas1.style.display = 'none';
+    canvas = canvas1;
+    ctx = ctx1;
+  }
+}
+
+function drawNoise(data) {
+  var idx = 0;
+  for (var y = 0; y < bufferH; y++) {
+    for (var x = 0; x < bufferW; x++) {
+      var value = perlin3(x * 0.01, y * 0.01, scrollX);
+      var c = ((value + 1) * 0.5 * 255) | 0;
+      
+      data[idx++] = 0;     // R
+      data[idx++] = 0;     // G
+      data[idx++] = 200;   // B
+      data[idx++] = c;     // A
+    }
+  }
+}
+
+function update() {
+  scrollX += 0.01;
+
+  if (canvas === canvas1) {
+    drawNoise(data2);
+    ctx2.putImageData(imageData2, 0, 0);
+  } else {
+    drawNoise(data1);
+    ctx1.putImageData(imageData1, 0, 0);
+  }
+
+  swapBuffers();
+  requestAnimationFrame(update);
+}
+
+requestAnimationFrame(update);
+
+
+</script>
