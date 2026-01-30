@@ -7,43 +7,115 @@
   padding: 0;
 }
 
-.tile-body {
-  background-image: url("Columbina_Wish.jpg");
-  background-size: cover;
-}
-
 .container {
+  height: 100%;
+  display: flex;
+}
+
+aside {
   text-align: center;
-  position: absolute;
-  top: 90px;
-  right: 20px;
+  color: #fff;
+  background-color: #ff96a6;
+  border-right: 1px solid #913349;
+  width: 20px;
+  padding-top: 20px;
+  font-weight: bold;
+  line-height: 17px;
+  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
 }
 
-h4 {
-  text-shadow: 0 0 5px #fff;
+aside button {
   color: #fff;
-  margin-bottom: 5px;
-}
-
-button {
-  text-shadow: 0 0 5px #fff;
-  color: #fff;
-  background-color: #cecced;
+  cursor: pointer;
+  background-color: #ff96a6;
   border: 0;
-  border-radius: 3px;
-  padding: 5px 10px;
-  transition: all .2s ease-in-out;
+  border-top: 1px solid #913349;
+  width: 100%;
+  margin-top: 30px;
+  padding: 10px 0;
+  font-weight: bold;
+  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
 }
 
-button:hover {
-  background-color: #aeaeeb;
+aside button:hover {
+  color: #913349;
+  background-color: #fffdde;
+}
+
+main {
+  width: 100%;
+  position: relative;
+}
+
+#catTop {
+  position: absolute;
+  top: 0;
+}
+
+#catBottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.inner {
+  width: 180px;
+  margin: 105px auto;
+}
+
+.tooltip {
+  border-bottom: 1px dotted gray;
+  position: relative;
+}
+
+.tooltip:hover .tooltipContent {
+  visibility: visible;
+}
+
+.tooltipContent {
+  text-align: center;
+  visibility: hidden;
+  background-color: #f0f4fa;
+  border-radius: 5px;
+  width: 150px;
+  margin-right: -80px;
+  padding: 5px;
+  position: absolute;
+  top: 150%;
+  right: 50%;
+}
+
+.tooltipContent:before {
+  content: "";
+  border: 7px solid #0000;
+  border-bottom-color: #f0f4fa;
+  margin-left: -7px;
+  position: absolute;
+  bottom: 100%;
+  right: 50%;
 }
 </style>
 </head>
 <body>
     <div class="container">
-        <h4>Nebula</h4>
-        <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Website</button></a>
+        <aside>
+            N<br>E<br>B<br>U<br>L<br>A
+            <a href="https://nogood-angel.neocities.org/" target="_blank">
+            	<button>
+                    E<br>N<br>T<br>E<br>R
+                </button>
+            </a>
+        </aside>
+        <main>
+        	<img id="catTop" src="cat1.gif">
+            <div class="inner">
+                <p>
+                    Webtile for
+                    <span class="tooltip">my<span class="tooltipContent">mine. no one else's. </span></span>
+                    site. This is a paragraph. Go see my site. yay
+                </p>
+            </div>
+            <img id="catBottom" src="cat2.gif">
+        </main>
     </div>
 </body>
 </html>
