@@ -22,6 +22,7 @@ echo "Archiving $claimedtiles tiles..."
 # -e robots=off because cloudflare ai protection breaks fedora wget
 echo started wget at `date --date='TZ="UTC" now' -Iseconds`
 # wget -mpEk -D webtiles.kicya.net --referer https://webtiles.kicya.net/ -i t.urls.txt -w 3 --user-agent "WebTiles-Archiver/1.0 Wget/2.2.1 (+https://github.com/tpguy825/webtiles-archives)" -e robots=off
+# NOTE: if you're not on fedora, switch compression to "auto"
 wget -o wget.log -mpEkc --compression=zstd,br,gzip,deflate -D webtiles.kicya.net --referer https://webtiles.kicya.net/ -i t.urls.txt -w 3 --user-agent "WebTiles-Archiver/1.0 Wget/2.2.1 (+https://github.com/tpguy825/webtiles-archives)" -e robots=off
 echo finished wget at `date --date='TZ="UTC" now' -Iseconds`
 date --date='TZ="UTC" now' -Iseconds > webtiles.kicya.net/_archivetime.txt
