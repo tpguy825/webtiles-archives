@@ -50,6 +50,20 @@
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("toho prawjaect!");
 
+// AUTOPLAY MUSIC when clicking on tile
+
+var music = document.getElementById('bg_music');
+
+function automusicplayer() {
+    music.src = 'resources/th9_marisa.mp3';
+    music.volume = 0.2;
+    music.play()
+}
+
+automusicplayer();
+
+
+//OTHER WIP SHID IDK
 
 window.addEventListener("load", function() {
     var triggered = false;
@@ -80,6 +94,7 @@ function fadeOutStartScreen() {
 </script>
 </head>
 <body>
+    <audio id="bg_music" src="resources/th9_marisa.mp3" loop type="audio/mpeg" preload="metadata" data-webtiles-paused="false"></audio>
     <div id="root_background" class="root">
 
         <img id="bg" src="resources/bg_lowfps.webp">
