@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #e8e8e8;
+  text-align: center;
+  background: #282828;
+  font-family: sans-serif;
+}
+
+a:link {
+  color: #ffd400;
+  background-color: #0000;
+  border: thin solid #0000;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ffd400;
+  border: thin solid inherit;
+  background-color: #0000;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #282828;
+  background-color: #ffd400;
+  border: thin solid #ffd400;
+  text-decoration: none;
+}
+
+.top {
+  z-index: 5;
+  background: linear-gradient(#191919 0%, #282828 100%);
+  width: 100%;
+  height: 25%;
+  position: absolute;
+  top: 0;
+}
+
+.top span {
+  width: 200px;
+  height: 30px;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
+.top img {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.bottom {
+  background: linear-gradient(#282828 0%, #191919 100%);
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+        <div class="top">
+            <img src="arrowtop.png">
+            <span>yep. i'm ALSO saying<br>to check them out.</span>
+      </div>
+    <br>
+    <br><br><br>
+    <img src="art.png" style="width: 100%;">
+    <div class="bottom">
+        <a href="https://redk1tty.net" target="_blank">redk1tty.net</a>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
