@@ -22,21 +22,53 @@ a:hover {
   transition: all .8s;
 }
 
+#txt {
+  color: #fff;
+  text-align: center;
+  background-color: #80808063;
+  width: 220px;
+  margin: auto;
+  display: block;
+}
+
+#backg {
+  z-index: 1;
+  background-image: url("bts.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  transition: all 1.1s;
+  position: absolute;
+}
+
 #wholeimg {
-  background-color: gray;
-  background-image: url("icantsee.gif");
+  z-index: 2;
+  background-image: url("BeHereNowcover.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   width: 100%;
   height: 100%;
+  transition: all 1.1s;
+  position: absolute;
+}
+
+#wholeimg:hover {
+  padding-left: 520px;
+  transition: all 1.1s;
 }
 </style>
 </head>
 <body>
-    
+ <div id="backg">
+     <p id="txt" style="margin-top:10px;">
+       <b> OASIS - BE HERE NOW (1997)</b> <br>
+     </p>
+    </div>   
  <div id="wholeimg">
-     <a href="https://sisterpsychosis.online/" target="_blank">BE HERE NOW.</a>
+     
     </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
