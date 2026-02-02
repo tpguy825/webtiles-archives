@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>html, .tile-body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+.tile-body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: initial;
+  text-decoration: none;
+}
+</style>
+    <style>@font-face {
+  font-family: Sen;
+  src: url("Sen-Regular.ttf");
+}
+
+.tile-body {
+  color: #111;
+  background-color: #0000;
+  margin: 10px;
+  font-family: Sen;
+}
+
+.content {
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.backdrop {
+  opacity: .25;
+  z-index: -1;
+  background: url("background.webp");
+  position: absolute;
+  inset: 0;
+}
+
+.backdrop-color {
+  z-index: -2;
+  background-color: #f6fbff;
+  position: absolute;
+  inset: 0;
+}
+</style>
+    <style>.tile-body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.content {
+  max-height: 100%;
+  padding: 30px 10px 10px;
+  font-family: Sen;
+  display: block;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.header {
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.header img {
+  border: 3px solid #061959;
+  border-radius: 50%;
+  height: 35px;
+}
+
+.backdrop {
+  opacity: .25;
+  background: url("background.webp");
+  position: absolute;
+  inset: 0;
+}
+
+.reviews {
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.review {
+  border: 1px solid #061959;
+  transition: all .1s linear;
+  display: flex;
+}
+
+.review:hover {
+  background-color: #0619591a;
+}
+
+.title {
+  border-right: 1px solid #061959;
+  flex: 1;
+  padding: 5px 10px;
+}
+
+.score {
+  border-right: 1px solid #061959;
+  flex-basis: 40px;
+  justify-content: center;
+  place-items: center;
+  display: flex;
+}
+
+.rank {
+  color: #fff;
+  background: #061959;
+  flex-basis: 40px;
+  justify-content: center;
+  place-items: center;
+  font-weight: bold;
+  display: flex;
+}
+
+.footer {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+  display: flex;
+}
+
+.footer img {
+  border-radius: 50%;
+}
+
+.footer h3 {
+  opacity: .7;
+}
+
+.footer:hover h3 {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+    <div class="content">
+        <div class="backdrop-color"></div>
+        <div class="backdrop"></div>
+        <div class="header">
+            <img src="tbm_logo.png" alt="TBM Logo" height="35" width="35">
+            <h1>
+                Reviews
+            </h1>
+        </div>
+        <div class="reviews"><a href="http://toothbrushblog.local/review/against-the-storm/" target="_blank" class="review"><div class="title">Against the Storm</div><div class="score">4.8</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/ai-the-somnium-files/" target="_blank" class="review"><div class="title">AI: The Somnium Files</div><div class="score">4.7</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/alan-wake/" target="_blank" class="review"><div class="title">Alan Wake</div><div class="score">4.8</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/balatro/" target="_blank" class="review"><div class="title">Balatro</div><div class="score">5.6</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/banishers-ghosts-of-new-eden/" target="_blank" class="review"><div class="title">Banishers: Ghosts of New Eden</div><div class="score">4.5</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/blasphemous/" target="_blank" class="review"><div class="title">Blasphemous</div><div class="score">3.9</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/blue-prince/" target="_blank" class="review"><div class="title">Blue Prince</div><div class="score">5.7</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/call-of-duty-modern-warfare-2-2009/" target="_blank" class="review"><div class="title">Call of Duty: Modern Warfare 2 (2009)</div><div class="score">5.4</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/capsized/" target="_blank" class="review"><div class="title">Capsized</div><div class="score">3.5</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/circa-infinity/" target="_blank" class="review"><div class="title">Circa Infinity</div><div class="score">4.7</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/dave-the-diver/" target="_blank" class="review"><div class="title">Dave the Diver</div><div class="score">4.0</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/deadlight/" target="_blank" class="review"><div class="title">Deadlight</div><div class="score">4.1</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/defcon/" target="_blank" class="review"><div class="title">DEFCON</div><div class="score">5.0</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/destiny-2/" target="_blank" class="review"><div class="title">Destiny 2</div><div class="score">4.4</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/detroit-become-human/" target="_blank" class="review"><div class="title">Detroit: Become Human</div><div class="score">5.9</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/deus-ex/" target="_blank" class="review"><div class="title">Deus Ex</div><div class="score">4.4</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/duck-game/" target="_blank" class="review"><div class="title">Duck Game</div><div class="score">5.0</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/dungeons-of-dredmor/" target="_blank" class="review"><div class="title">Dungeons of Dredmor</div><div class="score">3.3</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/dungeons-of-hinterberg/" target="_blank" class="review"><div class="title">Dungeons of Hinterberg</div><div class="score">4.7</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/duskers/" target="_blank" class="review"><div class="title">Duskers</div><div class="score">5.4</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/edge/" target="_blank" class="review"><div class="title">EDGE</div><div class="score">5.0</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/elden-ring/" target="_blank" class="review"><div class="title">Elden Ring</div><div class="score">6.0</div><div class="rank">S</div></a><a href="http://toothbrushblog.local/review/elden-ring-nightreign/" target="_blank" class="review"><div class="title">Elden Ring: Nightreign</div><div class="score">3.5</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/eufloria/" target="_blank" class="review"><div class="title">Eufloria</div><div class="score">3.7</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/everspace/" target="_blank" class="review"><div class="title">EVERSPACE</div><div class="score">4.8</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/firewatch/" target="_blank" class="review"><div class="title">Firewatch</div><div class="score">3.7</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/hexagod/" target="_blank" class="review"><div class="title">Hexagod</div><div class="score">4.0</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/minami-lane/" target="_blank" class="review"><div class="title">Minami Lane</div><div class="score">4.8</div><div class="rank">B</div></a><a href="http://toothbrushblog.local/review/racine/" target="_blank" class="review"><div class="title">Racine</div><div class="score">3.3</div><div class="rank">C</div></a><a href="http://toothbrushblog.local/review/signalis/" target="_blank" class="review"><div class="title">Signalis</div><div class="score">5.3</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/slay-the-spire/" target="_blank" class="review"><div class="title">Slay the Spire</div><div class="score">5.7</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/soma/" target="_blank" class="review"><div class="title">SOMA</div><div class="score">5.1</div><div class="rank">A</div></a><a href="http://toothbrushblog.local/review/unpacking/" target="_blank" class="review"><div class="title">Unpacking</div><div class="score">4.8</div><div class="rank">B</div></a>
+        </div>
+        <a href="https://toothbrush.blog" target="_blank" class="footer">
+        	<img src="tbm_logo.png" alt="TBM Logo" height="35" width="35">
+            <h3>
+                toothbrush.blog
+            </h3>
+        </a>
+    </div>
+</body>
+</html>

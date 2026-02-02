@@ -1,140 +1,107 @@
-<!DOCTYPE html>
-<body>
-<label>
-    <input type="checkbox" id="check1" autocomplete="off">
-	CLICK TO START ANIMATION
-</label>
-
-<div class="cube">
-    <c-der><img src="obamium.webp" alt></c-der>
-    <c-haut><img src="obamium.webp" alt></c-haut>
-    <c-bas><img src="obamium.webp" alt></c-bas>
-    <c-gauche><img src="obamium.webp" alt></c-gauche>
-    <c-droit><img src="obamium.webp" alt></c-droit>
-    <c-avan><img src="obamium.webp" alt></c-avan>
-</div>
-
-<div class="ombre">
-
-</div>
-    <marquee>Breaking news: obamnium cube is temporary (sorry tile -6 -9), real webtile will appear soon !</marquee>
-</body>
-
+<section>
+    <header>
+        <img src="vaporeon.gif" alt="Vaporeon">
+	<desc>Its cell structure is similar to water molecules. It will melt away and become invisible in water.</desc>
+    </header>
+	
+	<stats>
+        <atk   stat="65">atk:<div> click</div></atk>
+		<def   stat="60">def:<div> to</div></def>
+		<spd   stat="65">spd:<div> enable</div></spd>
+		<spatk stat="110">spatk:<div> java</div></spatk>
+		<spdef stat="95">spdef:<div> script</div></spdef>
+		<hp    stat="130">hp:<div></div></hp>
+	</stats>
+</section>
+<nav>← other pokemon soon →</nav>
 <style>.tile-body {
-  z-index: -1;
-  background-color: #141414;
-}
-
-.cube {
-  perspective: none;
-  width: 100px;
-  height: 100px;
-  transform-style: preserve-3d;
-  margin: 50px;
-
-  & > * {
-    width: 100px;
-    height: 100px;
-    display: block;
-    position: absolute;
-  }
-
-  & c-haut {
-    background-color: #f5f5f5;
-    transform: translate3d(0, -50px, 0)rotateX(90deg);
-  }
-
-  & c-der {
-    background-color: #ff000080;
-    transform: translate3d(0, 0, -50px)rotateY(180deg);
-  }
-
-  & c-gauche {
-    background-color: #ffff0080;
-    transform: translate3d(-50px, 0, 0)rotateY(90deg);
-  }
-
-  & c-droit {
-    background-color: #0000ff80;
-    transform: translate3d(50px, 0, 0)rotateY(90deg);
-  }
-
-  & c-avan {
-    background-color: #00ff0080;
-    transform: translate3d(0, 0, 50px)rotateY(0);
-  }
-
-  & c-bas {
-    background-color: #00000080;
-    transform: translate3d(0, 50px, 0)rotateX(-90deg);
-  }
-}
-
-.ombre {
-  z-index: -1;
-  background: radial-gradient(#000, #000, #0000, #0000);
-  width: 140px;
-  height: 140px;
-  margin: 50px;
-  position: absolute;
-  top: 70px;
-  left: -20px;
-  transform: rotateX(60deg);
-}
-
-label {
-  cursor: pointer;
   color: #fff;
-  background: #00f;
-  position: absolute;
-  top: 2px;
-  left: 2px;
+  background: #141414;
+  font-family: monospace;
 }
 
-input {
-  opacity: 0;
-  position: absolute;
+header {
+  image-rendering: pixelated;
+  grid-template-columns: 60px 1fr;
+  display: grid;
 }
 
-@keyframes silly {
-  0% {
-    transform: rotate3d(.5, 1, .5, 0);
+section {
+  width: 100%;
+  padding: 1ch;
+  display: inline-block;
+
+  & desc {
+    display: inline;
   }
 
-  100% {
-    transform: rotate3d(.5, 1, .5, 360deg);
+  & stats {
+    & atk, & def, & spd, & spatk, & spdef, & hp {
+      padding: 1px 5px;
+      display: block;
+      position: relative;
+
+      & div {
+        color: #000;
+        background: #fff;
+        border-radius: 3px;
+        width: calc(100% - 8ch);
+        height: 1em;
+        padding: 0 1ch;
+        display: inline-block;
+        position: absolute;
+        left: 7ch;
+      }
+    }
+
+    & atk div {
+      background: red;
+    }
+
+    & def div {
+      background: orange;
+    }
+
+    & spd div {
+      background: #ff0;
+    }
+
+    & spatk div {
+      background: #32cd32;
+    }
+
+    & spdef div {
+      background: #87ceeb;
+    }
+
+    & hp div {
+      background: violet;
+    }
   }
 }
 
-.tile-body {
-  &:has(#check1:checked) .cube {
-    animation-name: silly;
-    animation-duration: 5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-}
-
-marquee {
-  color: #fff;
-  background: #00f;
-  border-radius: .5rem;
-  animation: 5s linear infinite marquee;
-  position: absolute;
-  bottom: 0;
-  left: 10px;
-  right: 10px;
-}
-
-@keyframes marqueetest {
-  from {
-    left: 0;
-    right: unset;
-  }
-
-  to {
-    left: unset;
-    right: 0;
-  }
+nav {
+  text-align: center;
+  background: #222;
 }
 </style>
+
+<script type="text/tilescript">
+
+document.querySelectorAll("atk,def,spd,spatk,spdef,hp").forEach( function (chaquestat) {
+
+//lire la vauelr de chaque statistique et set longueur en px a ce chiffre
+	statvar = chaquestat.getAttribute("stat");
+    chaquestat.querySelector("div").innerText = statvar
+    chaquestat.querySelector("div").style.width = statvar + "px"
+//lire stat et appliquer couleur
+	if (statvar <= 30) {chaquestat.querySelector("div").style.backgroundColor ="red"}
+    else if (statvar <= 60) {chaquestat.querySelector("div").style.backgroundColor ="orange"}
+	else if (statvar <= 80) {chaquestat.querySelector("div").style.backgroundColor ="yellow"}
+	else if (statvar <= 120) {chaquestat.querySelector("div").style.backgroundColor ="limegreen"}
+	else if (statvar <= 160) {chaquestat.querySelector("div").style.backgroundColor ="green"}
+	else if (statvar <= 300) {chaquestat.querySelector("div").style.backgroundColor ="skyblue"}
+	else {console.log("erreur - stat invalide")}
+})
+
+</script>
