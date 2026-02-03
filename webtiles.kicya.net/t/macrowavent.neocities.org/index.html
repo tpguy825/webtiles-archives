@@ -3,7 +3,12 @@
 <head>
     <style>@font-face {
   font-family: MS Sans Serif;
-  src: url("Sansserif.ttf");
+  src: url("MSSansSerif.ttf");
+}
+
+@font-face {
+  font-family: MS Sans Serif Bold;
+  src: url("MSSansSerifBold.ttf");
 }
 
 .cubiertagris {
@@ -12,9 +17,10 @@
   background-color: silver;
   border-style: none;
   margin: 3px 20px 20px;
+  padding: 3px;
   font-family: MS Sans Serif;
-  font-size: 15px;
-  box-shadow: 1.5px 1.5px #0a0a0a, 0 0 1.5px 1.5px #fff, 0 0 1px 1px silver, 1.5px 1.5px #b3b3b3;
+  font-size: 17px;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px gray, inset 2px 2px #fff;
 }
 
 ul {
@@ -32,7 +38,7 @@ ul {
   border: 1px;
   width: 16px;
   height: 14px;
-  box-shadow: inset -1px -1px #000, inset 1px 1px #fff, inset -2px -2px #000, inset 2px 2px silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px gray, inset 2px 2px #fff;
 }
 
 .skullcavebuttons:active {
@@ -50,18 +56,26 @@ ul {
   background: linear-gradient(75deg, #1c19e4, #809ef1);
   margin-bottom: -10px;
   padding: 3px;
-  font-family: MS Sans Serif;
-  font-size: 8px;
+  font-size: 12px;
+  font-family: MS Sans Serif Bold !important;
+}
+
+.text {
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px gray, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
 }
 </style>
 </head>
 <body>
     <div class="cubiertagris" id="skullcave">
-        <div style="padding: 2px"> <div class="toolbarjsjs"> skullcave.txt <button class="skullcavebuttons" style="float: right"></button> </div> </div>
-  <p><img src="images/skull-skullgif.gif" height="50" style="float: left">
-  <img src="images/skull-skullgif.gif" height="50" style="float: right">
+         <div style="padding: 2px"> <div class="toolbarjsjs"> skullcave.txt <button class="skullcavebuttons" style="float: right"></button> </div> </div>
+        <div class="text">
        
-   	HELL-O THERE GO TO THE
+  <p style="margin-top:10px"><img src="images/skull-skullgif.gif" height="50" style="float: left; margin-top: -5px">
+  <img src="images/skull-skullgif.gif" height="50" style="float: right; margin-top: -10px">
+       
+      <br>	HELL-O THERE GO TO THE 
       <a href="https://macrowavent.neocities.org" target="_blank"> <img src="images/cooltext455436588914211.png" width="200"></a>
    </p>
             <ul><u><i>OTHER MEDIA</i></u>
@@ -71,6 +85,7 @@ ul {
            
                 <a href="https://neocities.org/site/macrowavent" style="color: black !important; text-decoration: none !important" target="_blank"><li><img src="images/favicon.png" height="20"> NEOCITIES AGAIN</li></a> </ul>
         </div>
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
     			var howdy = document.getElementById("skullcave");</script>
