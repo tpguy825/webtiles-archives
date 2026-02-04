@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: fivebyfive;
+  src: url("fivebyfive.ttf");
+}
+
+@font-face {
+  font-family: Better;
+  src: url("BetterPixels.ttf");
+}
+
+.tile-body {
+  text-align: center;
+  box-sizing: border-box;
+  color: #fff;
+  background-image: url("backstar.gif");
+  font-family: Better;
+  font-size: 1.1rem;
+}
+
+.main {
+  background: linear-gradient(168deg, #0b041b 0%, #130931 34%, #0a1b4a 100%);
+  border: 2px ridge #dbf043;
+  height: fit-content;
+  margin: 8px;
+}
+
+.box {
+  grid-gap: 0 .5rem;
+  grid-template-columns: 1fr 2fr;
+  width: 100%;
+  display: grid;
+}
+
+.box img {
+  place-self: flex-end center;
+  width: 75%;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #dbf043;
+  margin-bottom: -.5rem;
+  font-family: fivebyfive;
+  font-size: 2rem;
+}
+
+ul li {
+  flex-wrap: wrap;
+  margin: 0 0 -.3rem -.5rem;
+  font-size: 1.5rem;
+  list-style-type: none;
+  display: flex;
+}
+
+a {
+  color: #a8f402;
+}
+</style>
+</head>
+<body>
+    <div class="main">
+       <h1>
+           Bekianee
+       </h1>
+        <div class="box">
+          <ul>
+        <li><a href="https://bekianee.art/about.html" target="_blank">About</a></li> 
+        <li><a href="https://bekianee.art/blog/blog.html" target="_blank">Blog</a></li>
+        <li><a href="https://bekianee.art/Portfolio/Portfolio.html" target="_blank">Art</a></li>
+        <li><a href="https://bekianee.art/bookmarks.html" target="_blank">Bookmarks</a></li>
+       </ul>
+         <img src="new_tv.gif"> 
+        </div>
+         
+       <p>
+         <img src="spinnstar3.gif" style="vertical-align: middle"> And much, much more!  <img src="spinnstar3.gif" style="vertical-align: middle">
+        </p>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
