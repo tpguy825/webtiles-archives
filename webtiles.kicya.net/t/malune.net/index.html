@@ -1,33 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background: url("wallpaper.webp") 0 0 / cover;
+    <style>* {
+  margin: 0;
+  padding: 0;
+}
+
+.pink-text {
+  color: #feb1d4 !important;
+}
+
+.tile-body {
+  color: #b4bbb4;
+  background: #000;
+  padding: 4px;
+  font-family: MS PGothic, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  font-size: 4px;
 }
 
 .main {
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  flex-direction: column;
+  gap: 3px;
+  width: 96.5%;
+  display: flex;
+  position: relative;
+}
+
+.malunetext {
+  filter: hue-rotate(240deg);
+  text-decoration: none;
+  position: absolute;
+  bottom: -50px;
+  left: 62.5px;
+}
+
+.malunetext img {
+  width: 120px;
+}
+
+.malunetext:hover {
+  filter: hue-rotate();
+  transform: scale(1.1)rotate(-7deg);
+}
+
+.left {
+  flex-direction: column;
+  gap: 1px;
   display: flex;
 }
 
-a {
+.banner img {
+  object-fit: cover;
+  border-radius: 3px;
+  width: 100%;
+  height: 70px;
+}
+
+.container {
+  grid-template-columns: 50px 1fr;
+  gap: 3px;
+  display: grid;
+}
+
+.profile {
+  background: #181818;
+  border: 1px dotted #797979;
+  border-radius: 3px;
+  align-items: center;
+  gap: 2px;
+  padding: 1px;
+  display: flex;
+}
+
+.profile img {
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+}
+
+.profile div {
+  flex-direction: column;
+  gap: 1px;
+  display: flex;
+}
+
+.navigation {
+  background: #181818;
+  border: 1px dotted #797979;
+  border-radius: 3px;
+  flex-direction: column;
+  gap: 2px;
+  padding: 1px;
+  display: flex;
+}
+
+.navigation p {
+  padding-left: 3px;
+}
+
+.navigation div {
+  background: #101010;
+  flex-direction: column;
+  padding-left: 2px;
+  display: flex;
+}
+
+.navigation div a {
+  color: #b4bbb4;
+  border-bottom: 1px dotted #797979;
+  padding-block: 1.5px;
+  text-decoration: none;
+}
+
+.navigation div a:last-child {
+  border-bottom: none;
+}
+
+.navigation div a:hover {
+  color: #feb1d4;
+  text-decoration: underline;
+}
+
+.right {
+  padding: 1px;
+  background: #181818;
+  border: 1px dotted #797979;
+  border-radius: 3px;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px;
+  display: flex;
+}
+
+.first-line {
+  padding: 1px;
+  background: #181818;
+  border: 1px dotted #797979;
+  border-radius: 3px;
+  gap: 2px;
+  height: 40px;
+  padding: 2px;
+  display: flex;
+}
+
+.first-line h2 {
+  color: #ffff91;
   text-align: center;
-  color: #fff;
-  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000, 0 0;
-  font-size: 20px;
+}
+
+.first-line img {
+  border-radius: 3px;
+  width: 40px;
+  height: 100%;
+}
+
+.second-line {
+  padding: 1px;
+  background: #181818;
+  grid-template-columns: 1fr 1fr 1fr 20px;
+  gap: 2px;
+  height: 45px;
+  padding: 2px;
+  display: grid;
+}
+
+.card {
+  text-align: center;
+  border: 1px dotted #797979;
+  border-radius: 2px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  display: flex;
+}
+
+.card p {
+  margin-bottom: 2px;
+}
+
+.button {
+  width: 33px !important;
+  height: 11px !important;
+}
+
+.second-line img {
+  object-fit: cover;
+  border-radius: 3px;
+  width: 100%;
+  height: 45px;
 }
 </style>
 </head>
 <body>
+
     <div class="main">
-    <a href="https://malune.net" target="_blank">malune.net</a>
+
+        <div class="banner">
+        	<img src="banner.jpg">
+        </div>
+
+    	<div class="container">
+
+    	<div class="left">
+            <div class="profile">
+                <img src="profile.webp">
+                <div>
+                    <p><span class="pink-text">name:</span> malune</p>
+                	<p><span class="pink-text">age:</span> 20</p>
+                	<p><span class="pink-text">hobby:</span> games</p>
+                </div>
+            </div>
+            <div class="navigation">
+                <p>Navigation</p>
+                <div>
+                    <a href="https://malune.net" target="_blank">Home</a>
+                    <a href="https://malune.net/about" target="_blank">About</a>
+                    <a href="https://malune.net/blog" target="_blank">Blog</a>
+                    <a href="https://malune.net/medialog" target="_blank">Medialog</a>
+                    <a href="https://malune.net/links" target="_blank">Links</a>
+                </div>
+            </div>
+        </div>
+
+    	<div class="right">
+            <div class="first-line">
+            	<img src="leftone.jpg">
+                <div>
+                    <h2>WELCOME! ようこそ！</h2>
+                    <p>Hey, you found my room on the internet, welcome! Here I'll post about my hobbies.</p>
+                    <p>My hobbies include; not leaving my room, programming, playing videogames, watching anime and listening to music. I ramble about said hobbies most of the time here.</p>
+                    <p>The idea of this site is to have something more personal and personalized, basically something more ME, so enjoy and have fun here :D</p>
+                    <p>Since I'm Brazilian, I might post something in Portuguese from time to time, but no language barrier will stop you!!!</p>
+                </div>
+            </div>
+            <div class="second-line">
+            	<div class="card">
+                    <p>MyButton</p>
+                    <img class="button" src="malune-btn.gif">
+                    <p> - feel free to add me! +</p>
+                    <p>
+                        If you do, please
+let me know in the chat :D
+                    </p>
+                </div>
+                <img src="miku.jpg">
+                <img src="gojo.jpg">
+                <img src="leftone.jpg">
+            </div>
+        </div>
+        </div>
+        <a href="https://malune.net" target="_blank" class="malunetext"><img src="logo.png"></a>
     </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+// console.log("Hello world!");</script>
 </body>
 </html>
