@@ -7,115 +7,137 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: NanumGothic;
+  src: url("NanumGothicCoding-Regular.woff");
+}
+
+.tile-body {
+  letter-spacing: .8px;
+  color: #2c2394;
+  background-image: linear-gradient(#bccee8, #fff);
+  font-family: NanumGothic;
+  font-size: 13px;
+  line-height: 14px;
+}
+
 .container {
-  height: 100%;
-  display: flex;
-}
-
-aside {
-  text-align: center;
-  color: #fff;
-  background-color: #ff96a6;
-  border-right: 1px solid #913349;
-  width: 20px;
-  padding-top: 20px;
-  font-weight: bold;
-  line-height: 17px;
-  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
-}
-
-aside button {
-  color: #fff;
-  cursor: pointer;
-  background-color: #ff96a6;
-  border: 0;
-  border-top: 1px solid #913349;
-  width: 100%;
-  margin-top: 30px;
-  padding: 10px 0;
-  font-weight: bold;
-  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
-}
-
-aside button:hover {
-  color: #913349;
-  background-color: #fffdde;
-}
-
-main {
-  width: 100%;
-  position: relative;
-}
-
-#catTop {
-  position: absolute;
-  top: 0;
-}
-
-#catBottom {
-  position: absolute;
-  bottom: 0;
-}
-
-.inner {
-  width: 180px;
-  margin: 105px auto;
-}
-
-.tooltip {
-  border-bottom: 1px dotted gray;
-  position: relative;
-}
-
-.tooltip:hover .tooltipContent {
-  visibility: visible;
-}
-
-.tooltipContent {
-  text-align: center;
-  visibility: hidden;
-  background-color: #f0f4fa;
+  background-image: linear-gradient(#b0c4eb, #bdcff2);
+  border: 1px solid #2c2394;
   border-radius: 5px;
-  width: 150px;
-  margin-right: -80px;
+  column-gap: 5px;
+  width: 240px;
+  margin: 50px auto;
   padding: 5px;
-  position: absolute;
-  top: 150%;
-  right: 50%;
+  display: flex;
+  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
 }
 
-.tooltipContent:before {
-  content: "";
-  border: 7px solid #0000;
-  border-bottom-color: #f0f4fa;
-  margin-left: -7px;
-  position: absolute;
-  bottom: 100%;
-  right: 50%;
+p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #00f;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  color: red;
+}
+
+a:has(button) {
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: #2c2394;
+}
+
+section {
+  border: 1px solid #2c2394;
+  box-shadow: 0 1px #2c2394;
+}
+
+section:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+section .top {
+  color: #fff;
+  background-image: linear-gradient(#2c2394, #94b6eb);
+  border-bottom: 1px solid #2c2394;
+  padding: 5px;
+  box-shadow: inset 0 1px 5px #fff6, inset 0 -1px 5px #fff6;
+}
+
+section .top:not(:first-child) {
+  border-top: 1px solid #2c2394;
+}
+
+section .inner {
+  background-color: #fff;
+  padding: 5px;
+  box-shadow: inset 0 1px #0003;
+}
+
+#welcome {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  margin-bottom: 1px;
+  overflow: hidden;
+}
+
+#nav {
+  border-top-right-radius: 4px;
+  overflow: hidden;
+}
+
+#nav button {
+  background-image: linear-gradient(#bccee8, #f0f4fa);
+  border: 0;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  box-shadow: inset 0 1px 5px #fff6, inset 0 -1px 5px #fff6;
+}
+
+#nav a:not(:last-child) button {
+  border-bottom: 1px solid #2c2394;
+}
+
+#nav button:hover {
+  letter-spacing: 1.4px;
+  background-image: linear-gradient(#fffccf, #fffdde);
+  font-style: italic;
 }
 </style>
 </head>
 <body>
     <div class="container">
-        <aside>
-            N<br>E<br>B<br>U<br>L<br>A
-            <a href="https://nogood-angel.neocities.org/" target="_blank">
-            	<button>
-                    E<br>N<br>T<br>E<br>R
-                </button>
-            </a>
-        </aside>
         <main>
-        	<img id="catTop" src="cat1.gif">
-            <div class="inner">
-                <p>
-                    Webtile for
-                    <span class="tooltip">my<span class="tooltipContent">mine. no one else's. </span></span>
-                    site. This is a paragraph. Go see my site. yay
-                </p>
-            </div>
-            <img id="catBottom" src="cat2.gif">
+        	<section id="welcome">
+            	<div class="top">Welcome</div>
+                <div class="inner">Welcome to my website (mini in webtiles). I am Bianca and the creater of this place.</div>
+            </section>
         </main>
+        <aside>
+        	<section id="nav">
+            	<div class="top">Navigation</div>
+                <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Home</button></a>
+                <a href=""><button>Webmaster</button></a>
+                <a href=""><button>Blog</button></a>
+            </section>
+        </aside>
     </div>
 </body>
 </html>
