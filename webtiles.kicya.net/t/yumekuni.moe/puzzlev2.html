@@ -614,6 +614,39 @@ var cursor = "";
 var timeleft = 4;
 var win = false;
 
+var playerId = null;
+
+
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0;
+    var v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+
+function checkOrCreatePlayerId(){
+    var id = window.localStorage.getItem("playerId");
+    
+    if (id)
+        playerId = id;
+    else {
+        playerId = generateUUID();
+    }
+    
+    window.localStorage.setItem("playerId", playerId);
+    
+    console.log(playerId);
+}
+
+function clearPlayerData(){
+    window.localStorage.removeItem("playerId");
+}
+
+checkOrCreatePlayerId();
+
+
 var puzzleContainer = document.getElementById("puzzle");
 puzzleContainer.style.display = "none";
 var countdown = document.getElementById("countdown");

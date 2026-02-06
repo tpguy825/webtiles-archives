@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+    <style>.tile-body {
+  box-sizing: border-box;
+  background-color: #9f8fd19d;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Courier New, Courier, monospace;
+  display: flex;
+  overflow: hidden;
+}
+
+.container {
+  cursor: pointer;
+  width: 30vw;
+  height: 30vh;
+  position: relative;
+}
+
+.bg-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.text-layer {
+  color: #fff;
+  opacity: 0;
+  text-shadow: 0 -3px 3px #32003c, 2px -2px 2px #32003c, 3px 0 2px #32003c, 2px 2px 2px #32003c, 0 3px 2px #32003c, -2px 2px 2px #32003c, -3px 0 2px #32003c, -2px -2px 2px #32003c;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .3s;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.container:hover .text-layer {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <img src="%E5%85%AD%E8%8A%B1%E8%BD%AC%E6%89%8B%E6%8C%87.gif" class="bg-img">
+                <a href="https://starone.top/welcome.html" target="_blank" class="text-layer">
+                    hello:)<br>
+                    welcome to my site!<br>
+                    click to jump
+                </a>
+            </div>
+        </main>
+</body>
+</html>

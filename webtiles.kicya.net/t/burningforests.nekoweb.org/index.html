@@ -1,3 +1,94 @@
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background: #141414;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+header {
+  & img {
+    float: left;
+    padding: 1ch;
+  }
+
+  image-rendering: pixelated;
+  margin-bottom: .25ch .5ch;
+}
+
+section {
+  width: 100%;
+  padding: 1ch;
+  display: inline-block;
+
+  & desc {
+    display: inline;
+  }
+
+  & stats {
+    & atk, & def, & spd, & spatk, & spdef, & hp {
+      padding: 1px 5px;
+      display: block;
+      position: relative;
+
+      & div {
+        color: #000;
+        background: #fff;
+        border-radius: 3px;
+        width: calc(100% - 8ch);
+        height: 1em;
+        padding: 0 1ch;
+        display: inline-block;
+        position: absolute;
+        left: 7ch;
+      }
+    }
+
+    & atk div {
+      background: red;
+    }
+
+    & def div {
+      background: orange;
+    }
+
+    & spd div {
+      background: #ff0;
+    }
+
+    & spatk div {
+      background: #32cd32;
+    }
+
+    & spdef div {
+      background: #87ceeb;
+    }
+
+    & hp div {
+      background: violet;
+    }
+  }
+}
+
+nav {
+  text-align: center;
+  color: gold;
+  background: #222;
+  width: 100%;
+  position: absolute;
+  bottom: .5ch;
+
+  & a {
+    color: gold;
+    border-radius: 3px;
+    outline: 1px solid gold;
+    width: 1rem;
+    text-decoration: none;
+    display: inline-block;
+  }
+}
+</style>
+</head>
 <section>
     <header>
         <img src="vaporeon.gif" alt="Vaporeon">
