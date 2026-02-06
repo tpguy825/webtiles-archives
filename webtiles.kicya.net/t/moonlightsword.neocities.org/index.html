@@ -6,9 +6,38 @@
   background-image: url("webtitle.gif");
   background-size: contain;
 }
+
+p {
+  margin: 2px;
+  font-family: MS PGothic, Meiryo, メイリオ, Hiragino Kaku Gothic ProN, ヒラギノ角ゴ Pro W3, sans-serif;
+  font-size: 11px;
+}
+
+.stuff {
+  text-align: right;
+  background-color: #ffffff80;
+  border: 3px double #000;
+  width: 120px;
+  margin: 10px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+#wing {
+  position: absolute;
+  top: 39%;
+  right: 21%;
+}
 </style>
 </head>
 <body>
+    <img id="wing" src="wing.gif">
+    <div class="stuff">
+        <p>
+            a personal website with patchouli knowledge mascot. <img src="cdd.webp" height="12">
+        </p>
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>

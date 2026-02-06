@@ -99,6 +99,28 @@
              step into the mind of a <a style="color:#8b0000" href="https://dawa.neocities.org" target="_blank">killer ¶</a>
         </p> 
     </div>
+    
+    <audio id="titleaudio" preload="metadata"></audio>
+    <script type="text/tilescript">
+/*function playSound(url) {
+    var audio = document.createElement('audio')
+    audio.src = url
+    audio.load()
+    audio.play()
+}
+
+playSound('/song.mp3') */
+
+var audio = document.getElementById("titleaudio");
+
+function joke(){
+audio.volume = 1;
+audio.src = "/titleopening.wav";
+audio.play();
+console.log("does this shit work???")
+}
+
+joke();</script>
 </body>
 </html>
 

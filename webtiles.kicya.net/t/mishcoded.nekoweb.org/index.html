@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
+    <style>@font-face {
+  font-family: W95FA;
+  src: url("w95fa.woff2");
+  src: url("w95fa.woff");
+  src: url("W95FA.otf");
+}
+
+.tile-body {
   color: #111;
-  background-color: #f0f0f0;
+  font: W95FA;
+  background-image: url("webtile-of-87-small.gif");
+  background-size: cover;
+}
+
+#container {
+  width: 500px;
+  height: 250px;
   margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+#movingText {
+  color: #fff;
+  font: bold 1.2em W95FA;
+  position: absolute;
+  top: 200px;
+  left: 15px;
 }
 </style>
 </head>
 <body>
-    <p>This is an example tile.</p>
+    <div id="container">
+  		<div id="movingText">Was that the mish of 87???</div>
+	</div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
