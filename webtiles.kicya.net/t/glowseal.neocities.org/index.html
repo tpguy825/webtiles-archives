@@ -3,7 +3,14 @@
 <head>
     <style>@font-face {
   font-family: Patrick Hand;
-  src: url("assets/PatrickHand-Regular.ttf");
+  src: url("assets/fonts/PatrickHand-Regular.ttf");
+}
+
+@font-face {
+  font-family: TR Tempus Sans ITC;
+  font-style: normal;
+  font-weight: 400;
+  src: url("assets/fonts/TRTempusSansITC.woff") format("woff");
 }
 
 * {
@@ -11,6 +18,7 @@
 }
 
 .tile-body {
+  background-color: #1d1c1e;
   margin: 0;
 }
 
@@ -18,38 +26,1569 @@
   color: #fff;
   background-color: #1d1c1e;
   background-image: url("assets/forest.png");
+  background-repeat: no-repeat;
   border: 3px solid #ffeea9;
   margin: 0;
   font-family: Patrick Hand, cursive;
   position: relative;
-  overflow: hidden;
   width: 250px !important;
   height: 250px !important;
 }
+</style>
+    <style>button {
+  z-index: 15;
+  text-align: center;
+  color: #ffeea9;
+  cursor: pointer;
+  background-color: #1d1c1e;
+  border: 3px solid #ffeea9;
+  margin: 5px;
+  padding: 5px;
+  font-family: TR Tempus Sans ITC, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+p {
+  margin: 0;
+}
+
+.game-area {
+  width: 100%;
+  height: 169px;
+  position: relative;
+}
 
 .dialogue-box {
+  z-index: 20;
+  text-align: left;
+  white-space: pre-wrap;
+  cursor: pointer;
   background-color: #1d1c1e;
-  border-top: 3px solid #ffeea9;
-  width: 100%;
-  height: 75px;
+  border: 3px solid #ffeea9;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 250px;
+  height: 78px;
   padding: 10px;
+  font-family: Patrick Hand, cursive;
+  font-size: 12px;
+  display: flex;
   position: absolute;
-  bottom: 0;
+  bottom: -3px;
+  right: -3px;
+  overflow: hidden;
 }
 
 .dialogue-text {
   margin: 0;
 }
+
+.centered-content {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.centered-text {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+.box-on-top {
+  z-index: 20;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -khtml-user-select: none;
+}
+
+.dialogue-box-show-animation {
+  animation: .5s forwards dialogue-box-show;
+}
+
+.dialogue-box-hide-animation {
+  animation: .5s forwards dialogue-box-hide;
+}
+
+@keyframes dialogue-box-show {
+  from {
+    visibility: hidden;
+    height: 0;
+    min-height: 0;
+    padding: 0 20px;
+    top: -6px;
+  }
+
+  to {
+    visibility: visible;
+    height: auto;
+    min-height: 150px;
+    padding: 17px 20px;
+    top: -3px;
+  }
+}
+
+@keyframes dialogue-box-hide {
+  from {
+    visibility: visible;
+    height: auto;
+    min-height: 150px;
+    padding: 17px 20px;
+    top: -3px;
+  }
+
+  to {
+    visibility: hidden;
+    height: 0;
+    min-height: 0;
+    padding: 0 20px;
+    top: -6px;
+  }
+}
+
+.next-arrow {
+  visibility: hidden;
+  width: 12px;
+  animation-name: arrow-animation;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.end {
+  visibility: hidden;
+  width: 15px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  animation-name: logo-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  position: absolute;
+}
+
+.logo-img {
+  height: 55px;
+  position: absolute;
+  top: -1px;
+  left: 43px;
+}
+
+.logo-disappear {
+  animation-name: logo-disappear;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.logo-appear {
+  animation-name: logo-appear;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.visible {
+  visibility: visible;
+}
+
+@keyframes logo-animation {
+  0% {
+    transform: translateY(-1px);
+  }
+
+  50% {
+    transform: translateY(1px);
+  }
+
+  100% {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes logo-disappear {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes logo-appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes arrow-animation {
+  0% {
+    transform: translate(-2px);
+  }
+
+  50% {
+    transform: translate(2px);
+  }
+
+  100% {
+    transform: translate(-2px);
+  }
+}
+
+.character-container {
+  width: 80px;
+  height: 100px;
+  transition: left .5s;
+  position: absolute;
+  bottom: 0;
+}
+
+.portrait {
+  background-size: contain;
+  width: 70px;
+  height: 70px;
+  -webkit-transition: background-image .3s ease-in-out;
+  -moz-transition: background-image .3s ease-in-out;
+  transition: background-image .3s ease-in-out;
+}
+
+.character-active .portrait {
+  visibility: visible;
+  filter: brightness();
+  bottom: 27px;
+}
+
+.character-active .displayname-box {
+  visibility: visible;
+  bottom: -3px;
+}
+
+.character-inactive .portrait {
+  visibility: visible;
+  filter: brightness(50%);
+  bottom: 0;
+}
+
+.character-inactive .displayname-box {
+  visibility: hidden;
+  bottom: -27px;
+}
+
+.character-hidden .portrait {
+  visibility: hidden;
+  bottom: -70px;
+}
+
+.character-hidden .displayname-box {
+  visibility: hidden;
+  bottom: -27px;
+}
+
+.portrait {
+  position: absolute;
+  bottom: -70px;
+  left: 5px;
+}
+
+.displayname-box {
+  z-index: 15;
+  text-align: center;
+  color: #ffeea9;
+  background-color: #1d1c1e;
+  border: 3px solid #ffeea9;
+  width: auto;
+  min-width: 80px;
+  height: 30px;
+  padding: 4px;
+  font-family: TR Tempus Sans ITC, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  bottom: -30px;
+}
+
+.a1 {
+  left: 10px;
+}
+
+.a2 {
+  left: 5px;
+}
+
+.a3 {
+  left: 15px;
+}
+
+.b1 {
+  left: 154px;
+}
+
+.b2 {
+  left: 149px;
+}
+
+.b3 {
+  left: 159px;
+}
+
+.c1 {
+  left: 75px;
+}
+
+.c2 {
+  left: 70px;
+}
+
+.c3 {
+  left: 80px;
+}
+
+@keyframes show-displayname {
+  from {
+    visibility: hidden;
+    bottom: -30px;
+  }
+
+  to {
+    visibility: visible;
+    bottom: -3px;
+  }
+}
+
+@keyframes hide-displayname {
+  from {
+    visibility: visible;
+    bottom: -3px;
+  }
+
+  to {
+    visibility: hidden;
+    bottom: -30px;
+  }
+}
+
+.hidden-to-active .portrait {
+  animation: .5s forwards hidden-to-active-portrait;
+}
+
+@keyframes hidden-to-active-portrait {
+  from {
+    visibility: hidden;
+    bottom: -70px;
+  }
+
+  to {
+    visibility: visible;
+    bottom: 27px;
+  }
+}
+
+.hidden-to-active .displayname-box {
+  animation: .5s forwards show-displayname;
+}
+
+.hidden-to-inactive .portrait {
+  filter: brightness(50%);
+  animation: .5s forwards hidden-to-inactive-portrait;
+}
+
+@keyframes hidden-to-inactive-portrait {
+  from {
+    visibility: hidden;
+    bottom: -70px;
+  }
+
+  to {
+    visibility: visible;
+    bottom: 0;
+  }
+}
+
+.hidden-to-inactive .displayname-box {
+  visibility: hidden;
+  bottom: -30px;
+}
+
+.inactive-to-active .portrait {
+  visibility: visible;
+  animation: .5s forwards inactive-to-active-portrait;
+}
+
+@keyframes inactive-to-active-portrait {
+  from {
+    filter: brightness(50%);
+    bottom: 0;
+  }
+
+  to {
+    filter: brightness();
+    bottom: 27px;
+  }
+}
+
+.inactive-to-active .displayname-box {
+  animation: .5s forwards show-displayname;
+}
+
+.active-to-inactive .portrait {
+  visibility: visible;
+  animation: .5s forwards active-to-inactive-portrait;
+}
+
+@keyframes active-to-inactive-portrait {
+  from {
+    filter: brightness();
+    bottom: 27px;
+  }
+
+  to {
+    filter: brightness(50%);
+    bottom: 0;
+  }
+}
+
+.active-to-inactive .displayname-box {
+  animation: .5s forwards hide-displayname;
+}
+
+.active-to-hidden .portrait {
+  animation: .5s forwards active-to-hidden-portrait;
+}
+
+@keyframes active-to-hidden-portrait {
+  from {
+    visibility: visible;
+    bottom: 27px;
+  }
+
+  to {
+    visibility: hidden;
+    bottom: -70px;
+  }
+}
+
+.active-to-hidden .displayname-box {
+  animation: .5s forwards hide-displayname;
+}
+
+.inactive-to-hidden .portrait {
+  filter: brightness(50%);
+  animation: .5s forwards inactive-to-hidden-portrait;
+}
+
+@keyframes inactive-to-hidden-portrait {
+  from {
+    visibility: visible;
+    bottom: 0;
+  }
+
+  to {
+    visibility: hidden;
+    bottom: -70px;
+  }
+}
+
+.inactive-to-hidden .displayname-box {
+  visibility: hidden;
+  bottom: -30px;
+}
+
+.shake {
+  animation-name: shake;
+  animation-duration: .25s;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+
+.shake-slow {
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+
+@keyframes shake {
+  0% {
+    top: 1px;
+    right: 1px;
+  }
+
+  10% {
+    top: -1px;
+    right: -2px;
+  }
+
+  20% {
+    top: -3px;
+    right: 0;
+  }
+
+  30% {
+    top: 3px;
+    right: 2px;
+  }
+
+  40% {
+    top: 1px;
+    right: -1px;
+  }
+
+  50% {
+    top: -1px;
+    right: 2px;
+  }
+
+  60% {
+    top: -3px;
+    right: 1px;
+  }
+
+  70% {
+    top: 3px;
+    right: 1px;
+  }
+
+  80% {
+    top: -1px;
+    right: -1px;
+  }
+
+  90% {
+    top: 1px;
+    right: 2px;
+  }
+
+  100% {
+    top: 1px;
+    right: -2px;
+  }
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: .25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.spin-slow {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.violencia {
+  animation-name: violencia;
+  animation-duration: .25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+
+@keyframes violencia {
+  0% {
+    top: 10px;
+    right: 10px;
+  }
+
+  10% {
+    top: -10px;
+    right: -20px;
+  }
+
+  20% {
+    top: -30px;
+    right: 0;
+  }
+
+  30% {
+    top: 30px;
+    right: 20px;
+  }
+
+  40% {
+    top: 10px;
+    right: -10px;
+  }
+
+  50% {
+    top: -10px;
+    right: 20px;
+  }
+
+  60% {
+    top: -30px;
+    right: 10px;
+  }
+
+  70% {
+    top: 30px;
+    right: 10px;
+  }
+
+  80% {
+    top: -10px;
+    right: -10px;
+  }
+
+  90% {
+    top: 10px;
+    right: 20px;
+  }
+
+  100% {
+    top: 10px;
+    right: -20px;
+  }
+}
+
+.super-violencia {
+  animation-name: super-violencia;
+  animation-duration: .25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+
+@keyframes super-violencia {
+  0% {
+    top: 20px;
+    right: 20px;
+  }
+
+  10% {
+    top: -20px;
+    right: -40px;
+  }
+
+  20% {
+    top: -60px;
+    right: 0;
+  }
+
+  30% {
+    top: 60px;
+    right: 40px;
+  }
+
+  40% {
+    top: 20px;
+    right: -20px;
+  }
+
+  50% {
+    top: -20px;
+    right: 40px;
+  }
+
+  60% {
+    top: -60px;
+    right: 20px;
+  }
+
+  70% {
+    top: 60px;
+    right: 20px;
+  }
+
+  80% {
+    top: -20px;
+    right: -20px;
+  }
+
+  90% {
+    top: 20px;
+    right: 40px;
+  }
+
+  100% {
+    top: 20px;
+    right: -40px;
+  }
+}
+
+.colorwheel {
+  animation-name: colorwheel;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes colorwheel {
+  0% {
+    color: red;
+  }
+
+  17% {
+    color: #ff0;
+  }
+
+  33% {
+    color: #0f0;
+  }
+
+  50% {
+    color: #0ff;
+  }
+
+  67% {
+    color: #00f;
+  }
+
+  83% {
+    color: #f0f;
+  }
+
+  100% {
+    color: red;
+  }
+}
+
+.rainbow {
+  animation-name: rainbow;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    color: #e50203;
+  }
+
+  17% {
+    color: #ff8b01;
+  }
+
+  33% {
+    color: #feed00;
+  }
+
+  50% {
+    color: #008026;
+  }
+
+  67% {
+    color: #004dfe;
+  }
+
+  83% {
+    color: #750685;
+  }
+
+  100% {
+    color: #e50203;
+  }
+}
+
+.shrinkgrow {
+  animation-name: shrinkgrow;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+
+@keyframes shrinkgrow {
+  0% {
+    font-size: 1em;
+  }
+
+  50% {
+    font-size: 2em;
+  }
+
+  100% {
+    font-size: 1em;
+  }
+}
+
+.wave {
+  animation-name: wave;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  position: relative;
+  top: .5em;
+}
+
+@keyframes wave {
+  0% {
+    top: .5em;
+  }
+
+  50% {
+    top: -.5em;
+  }
+
+  100% {
+    top: .5em;
+  }
+}
+
+.late-shrink {
+  animation-name: late-shrink;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+@keyframes late-shrink {
+  100% {
+    font-size: 5px;
+  }
+}
+
+.tinylineheight {
+  animation-name: tinylineheight;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes tinylineheight {
+  0% {
+    line-height: 14px;
+  }
+
+  20% {
+    line-height: 13px;
+  }
+
+  40% {
+    line-height: 12px;
+  }
+
+  60% {
+    line-height: 11px;
+  }
+
+  80% {
+    line-height: 10px;
+  }
+
+  100% {
+    line-height: 9px;
+  }
+}
+
+.colorwheel-wave {
+  animation: 1.3s linear infinite colorwheel, 1.3s ease-in-out infinite wave;
+  position: relative;
+  top: .5em;
+}
+
+.colorwheel-shrinkgrow-wave {
+  animation: 1.3s ease-in-out infinite shrinkgrow, 1.3s ease-in-out infinite wave, 1.3s linear infinite colorwheel;
+  position: relative;
+  top: .5em;
+}
+
+.shrinkgrow-wave {
+  animation: 1.3s ease-in-out infinite shrinkgrow, 1.3s ease-in-out infinite wave;
+  position: relative;
+  top: .5em;
+}
 </style>
+    
 </head>
 <body>
     <div class="webtile">
-        <div class="dialogue-box">
-            <p class="dialogue-text">Through the Pines & Oaks!!</p>
+        <div class="game-area"></div>
+        <div class="dialogue-box unselectable">
+            <div class="logo">
+                <img class="logo-img unselectable" src="assets/img/ui/logo.png">
+            </div>
+            <p class="dialogue-text unselectable"></p>
+            <img class="next-arrow unselectable" src="assets/img/ui/arrow.png">
+            <img class="end unselectable" src="assets/img/ui/end.png">
         </div>
     </div>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+	<script type="text/tilescript">var messages = [
+    { 
+        id: 0,
+        text: "Empty event",
+        next: 0
+    },
+    {
+        id: 1,
+        characters: {
+            naica : { name: "Naica", portrait: "normal_1", position: "a1", active: false },
+            karmin: { name: "Karmin", portrait: "normal_2", position: "b1", active: true },
+        },
+        text: "Alright!@ Here's the camera,@ we can start recording now.",
+        next: 2
+    },
+    {
+        id: 2,
+        characters: {
+            naica : { active: true },
+            karmin: { active: false },
+        },
+        text: "Did you bring the script?",
+        next: 3
+    }, 
+    {
+        id: 3,
+        characters: {
+            naica : { active: false },
+            karmin: { portrait: "yaay_2", active: true },
+        },
+        text: "Yup, it's right he-",
+        next: 4
+    },
+    {
+        id: 4,
+        characters: {
+            naica : { },
+            karmin: { portrait: "yay_2", active: true },
+        },
+        text: "...",
+        next: 5
+    },
+    {
+        id: 5,
+        characters: {
+            naica : { },
+            karmin: { portrait: "needmoment_2" },
+        },
+        text: "...",
+        next: 6
+    }, 
+    {
+        id: 6,
+        characters: {
+            naica : { portrait: "what_1" },
+            karmin: { position: "b3" },
+        },
+        text: "I forgot the script.",
+        next: 7
+    }, 
+    {
+        id: 7,
+        characters: {
+            naica : { portrait: "uh_1", active: true },
+            karmin: { active: false },
+        },
+        text: ".@.@.@What do we do now?",
+        next: 8
+    }, 
+    {
+        id: 8,
+        characters: {
+            naica : { portrait: "what_1", active: false },
+            karmin: { portrait: "heh_2", position: "b1", active: true },
+        },
+        text: "It's okay, we can improvise!",
+        next: 9
+    }, 
+    {
+        id: 9,
+        characters: {
+            naica : { portrait: "normal_1", active: false },
+            karmin: { portrait: "hmmmm_2", active: true },
+        },
+        text: "...",
+        next: 10
+    }, 
+    {
+        id: 10,
+        characters: {
+            naica : { active: false },
+            karmin: { portrait: "yaay_2", active: true },
+        },
+        text: ".@.@.@Lorem ipsum <p|naica{\"portrait\":\"eh_1\"}| >dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad...",
+        next: 11
+    }, 
+    {
+        id: 11,
+        characters: {
+            naica : { active: true },
+            karmin: { portrait: "yay_2", active: false },
+        },
+        text: "@Let's call it a day.",
+        next: 0
+    },
+
+    
+
+];</script>
+    <script type="text/tilescript">
+// HTML document elements
+var gameContainer = document.querySelector('.game-area');
+var dialogueText = document.querySelector('.dialogue-text');
+var dialogueBox = document.querySelector('.dialogue-box');
+var nextArrow = document.querySelector('.next-arrow');
+var endMark = document.querySelector('.end');
+var logo = document.querySelector('.logo');
+var logoimg = document.querySelector('.logo-img'); //selecting the image to add the fade
+var evBtns = document.querySelectorAll('button');
+
+// Global variables
+var debugMode = true;
+var currEv = 0;
+var currMsg = 0;
+var sceneIsPlaying = false;
+var currentlyTyping = false;
+var allowPlayDialogue = false;
+var didSkipText = false;
+var typingSpeed = 20;
+var pauseLength = '@@@@@@@@@@@@@'; // How many times to "multiply" the @ symbol for the pause effect
+var spanArray = [];
+var ti = 0; // Index of the character being typed in the dialogue
+var tia = 0; // Index of the character being typed in the dialogue, starting to count from where the user chose to skip text, used in animations with delays
+var wholeEffect = '';
+var individualEffect = '';
+var removeDBoxEffectNext = ['centered-content']; // Instruction to remove a class from the dialogue box on the next message or when the scene ends
+var loadedCharacters = {};
+
+// The message IDs that the events are supposed to trigger
+var evIndex = [0, 1];
+var sfx = {
+    knock1: new Audio("assets/sound/knock.mp3"),
+    //shortKnock: new Audio("assets/sound/short_knock.mp3")
+}
+
+function debugLog(string) {
+    if (debugMode) console.log(string);
+}
+
+//------------------------------------------------------------------------------------------------------
+
+function playDialogue() {   
+    debugLog('playDialogue fired');
+    // Dont't do anything if there's no set event or the box is still animating.
+    if (currEv === 0 || !allowPlayDialogue) {
+        return;
+    }
+
+    // If user clicks on the box while the text is still printing out, toggle the typing status and show the entire text
+    if (currentlyTyping) {  
+        // Toggle printing status and show text, the instructions are the same as the timed printing, but without the interval
+        currentlyTyping = false;
+        didSkipText = true; // Set the global variable that knows if the user skipped the text to true, this is important for text animations with intervals
+        var message = messages[currMsg]['text'].replaceAll('@', pauseLength);
+        debugLog('Skipped typing animation');
+        tia = 0;
+        while (ti < message.length) {            
+            processDialogueText(message);
+            ti++;
+        }
+        didSkipText = false; // Reset the value of the "did user skip text" variable
+        // If it's not the last message, show the 'next' arrow
+        if (messages[currMsg]['next'] !== 0) {
+            nextArrow.classList.add('visible');
+        } 
+        // If this is the last message of the scene, show the 'end' UI mark
+        else {
+            endMark.classList.add('visible');
+        }
+
+    // If text wasn't being printed when the user clicked...
+    } else {
+        // If there was already a scene playing, go to next message
+        if (sceneIsPlaying) {
+            // Play SFX
+            //sfx.knock1.play();  
+
+            currMsg = messages[currMsg]['next'];
+            debugLog('Moved to next message: ' + currMsg);
+            // If, after that, the current message ID is 0, the scene ends
+            if (currMsg === 0) {  
+                allowPlayDialogue = false;
+                dialogueText.textContent = "";
+                // If there is an instruction to remove an entire-dialogue-box effect, do that 
+                if (removeDBoxEffectNext.length > 0) {
+                    for (var effect of removeDBoxEffectNext) {
+                        dialogueBox.classList.remove(effect);
+                    }
+                    removeDBoxEffectNext.length = 0;
+                }              
+                sceneIsPlaying = false;
+                debugLog('Scene ended');   
+                currEv = 0;
+                debugLog('Event ' + currEv + ' set');
+                // Clear UI elements
+                clearDialogueBox();
+                showLogo();
+                // If there are loaded characters, remove them
+                if (Object.keys(loadedCharacters).length > 0)
+                    removeAllCharacters();
+                return;
+            }
+        // If there wasn't already a scene playing (the event was just triggered), keep the assigned messageID triggered by the event and set status to sceneIsPlaying
+        } else {
+            sceneIsPlaying = true;
+            debugLog('Scene started');
+        }
+
+        // Hide any previous UI elements
+        nextArrow.classList.remove('visible');
+        endMark.classList.remove('visible');
+            
+        // Clear the paragraph and the array of spans, create a new first span and append it
+        dialogueText.textContent = "";
+        spanArray.length = 0;
+        spanArray.push(document.createElement('span'));
+        dialogueText.appendChild(spanArray[spanArray.length - 1]);
+
+        // If there is an instruction to remove an entire-dialogue-box effect, do that 
+        if (removeDBoxEffectNext.length > 0) {
+            for (var effect of removeDBoxEffectNext) {
+                dialogueBox.classList.remove(effect);
+            }
+            removeDBoxEffectNext.length = 0;
+        }
+        
+        // If the scene calls certain characters to appear on screen...
+        if ('characters' in messages[currMsg]) {
+            // For each character in the 'characters' attribute of the message
+            for (var [key, value] of Object.entries(messages[currMsg]['characters'])) {
+                // Check if character is NOT already loaded
+                if (!(key in loadedCharacters)) {
+                    loadCharacter(value, key);
+                }
+                // If the character is already loaded, compare attributes and update
+                else {
+                    updateCharacter(value, key);
+                }
+            }
+            // Iterate through loaded characters to compare
+            for (var key of Object.keys(loadedCharacters)) {
+                // If the loaded character is NOT in the array of characters for the current message
+                if (!(key in messages[currMsg]['characters'])) {
+                    // Hide and remove this character
+                    removeCharacter(key);
+                }
+            }
+        }
+        // Else, if the property 'characters' doesn't exist in the message object...
+        else {
+            // Check if there were any loaded characters in the global variable and remove them all
+            if (Object.keys(loadedCharacters).length > 0)
+                removeAllCharacters();
+        }
+
+        // Multiply each pause symbol (@) by 15 to make each pause last 15x the miliseconds it takes for a character to be printed out
+        var message = messages[currMsg]['text'].replaceAll('@', pauseLength);
+
+        // Toggle printing status and begin typing
+        currentlyTyping = true;
+        debugLog(message);
+        debugLog('Now typing');
+        ti = 0;
+        var intervalID = setInterval(function() {
+            // Keep typing if the typing status is true and the end of the text hasn't been reached yet
+            if (currentlyTyping && ti < message.length) {
+                processDialogueText(message)
+                ti++;
+            } 
+            // If the user clicked the box to skip the typing animation, or the text reached the end, toggle status and clear interval to stop
+            else {                
+                currentlyTyping = false;
+                debugLog('Finished typing');
+                // If it's not the last message, show the 'next' arrow
+                if (messages[currMsg]['next'] !== 0) {
+                    nextArrow.classList.add('visible');
+                } 
+                // If this is the last message of the scene, show the 'end' UI mark
+                else {
+                    endMark.classList.add('visible');
+                }
+                clearInterval(intervalID);
+            }
+        }, typingSpeed); // Typing speed in miliseconds   
+    }      
+}
+
+dialogueBox.addEventListener('click', playDialogue)
+
+// Interpreting what to do with each character of the dialogue text
+function processDialogueText(message) {
+    if (message[ti] === '\\') {
+        // Escape character. Skip (ti++) and print the next character normally (Code repeated from the "else" at the end here, I know)
+        ti++
+        /*if(currentlyTyping && message[ti] !== ' ')
+            sfx.shortKnock.play();*/
+        // Append next character
+        if (individualEffect !== '') {
+            // If there's an individual effect to apply, create a sub-span for each letter inside the current span
+            subSpan = document.createElement('span');
+            subSpan.textContent = message[ti];
+            if (didSkipText) {
+                subSpan.style.animationDelay = String(typingSpeed/1000*tia) +'s'; // If the animation requires delay and the user skipped text, add a delay that is equal to the typing speed in miliseconds times the tia (position of the character counting from the moment the text was skipped)
+                tia++;
+            }
+            //if (message[ti] !== ' ') // Apply inline-block display only if the character isn't a space, for some reason inline-block makes the space not count [[OLD STUFF, IDEALLY THESE SHOULDN'T BE INLINE BLOCKS]]
+                //subSpan.style.display = 'inline-block';
+            subSpan.classList.add(individualEffect);
+            spanArray[spanArray.length - 1].appendChild(subSpan);
+        } else {
+            // There is no individual effect, append normally
+            spanArray[spanArray.length - 1].textContent += message[ti];
+        }
+        if (message[ti] === '@') {
+            // If the escaped character was the pause symbol, skip through the following @s that were added for the pause effect
+            ti += pauseLength.length - 1;
+        }
+    }
+    else if (message[ti] === '@') {
+        // Don't type anything if there's a pause symbol, skip. Increase the index that is used for animation delays if the user skipped text
+        if (didSkipText) tia++;
+        
+    } else if (message[ti] === '|') {
+        // Create and append a line break
+        dialogueText.appendChild(document.createElement('br'));
+        // Create a new span for the following text, with the style and whole-span effects as the previous one, to keep those properties in case the line break was inserted in the middle of a styled span
+        spanArray.push(document.createElement('span'));
+        dialogueText.appendChild(spanArray[spanArray.length - 1]);
+        if (wholeEffect !== '') spanArray[spanArray.length - 1].classList.add(wholeEffect);
+        spanArray[spanArray.length - 1].style.cssText = spanArray[spanArray.length - 2].style.cssText;
+
+    } else if (message[ti] === '<') {
+        // Start styled span
+        spanArray.push(document.createElement('span'));
+        dialogueText.appendChild(spanArray[spanArray.length - 1]);
+        ti++;
+        // Read style code and apply styles
+        while (message[ti] !== ' ') {
+            switch (message[ti]) {
+                case 'c': // Color
+                    ti += 2; // Skip the | delimiter and position the index on the charcter after it
+                    var color = message.substring(ti, message.indexOf('|', ti)); // Read the string between the |
+                    ti = message.indexOf('|', ti); // Move the index to the second | delimiter
+                    spanArray[spanArray.length - 1].style.color = color;
+                    break;
+                case 's': // Size
+                    ti += 2;
+                    var size = message.substring(ti, message.indexOf('|', ti));
+                    ti = message.indexOf('|', ti);
+                    spanArray[spanArray.length - 1].style.fontSize = size;
+                    break;
+                case 'f': // Font
+                    ti += 2; // Skip the | delimiter and position the index on the charcter after it
+                    var font = message.substring(ti, message.indexOf('|', ti)); // Read the string between the |
+                    ti = message.indexOf('|', ti); // Move the index to the second | delimiter
+                    spanArray[spanArray.length - 1].style.fontFamily = font;
+                    break;
+                case 'b': // Bold
+                    spanArray[spanArray.length - 1].style.fontWeight = 'bold';
+                    break;
+                case 'i': // Italics
+                    spanArray[spanArray.length - 1].style.fontStyle = 'italic';
+                    break;
+                case 'u': // Underlined
+                    spanArray[spanArray.length - 1].style.textDecoration = 'underline';
+                    break;
+                case 't': // Strikethrough
+                    spanArray[spanArray.length - 1].style.textDecoration = 'line-through';
+                    break;
+                case 'a': // Simple animation or effect
+                    ti += 2; 
+                    var typingEffectCode = message.substring(ti, message.indexOf('|', ti)); 
+                    ti = message.indexOf('|', ti);
+                    debugLog('Effect: ' + typingEffectCode);
+                    // WHOLE EFFECT - To process animations and effects that get applied to the entire span at once or need to change global properties
+                    if (typingEffectCode.startsWith('w-')) {
+                        wholeEffect = typingEffectCode.substring(2);
+                        debugLog('Whole effect: ' + wholeEffect);
+                        //spanArray[spanArray.length - 1].style.display = 'inline-block' // Turn it into an inline block [[OLD STUFF, IDEALLY THESE SHOULDN'T BE INLINE BLOCKS]]
+                        spanArray[spanArray.length - 1].classList.add(wholeEffect);
+                    } 
+                    // INDIVIDUAL EFFECT - Animations that get applied to each letter individually and will have a slight delay
+                    else if (typingEffectCode.startsWith('i-')) {
+                        individualEffect = typingEffectCode.substring(2);
+                        debugLog('Individual effect: ' + individualEffect);
+                    }
+                    break;
+                case 'p': // Change in character portrait, position, display name, or active status in the middle of dialogue
+                    ti += 2; // Skip the | delimiter and position the index on the charcter after it
+                    var codename = message.substring(ti, message.indexOf('{', ti)); // Read the string between the | and the {
+                    ti = message.indexOf('{', ti); // Move the index to the { delimiter
+                    var characterString = message.substring(ti, message.indexOf('|', ti)); // Read the string between the { and the second |
+                    ti = message.indexOf('|', ti); // Move the index to the second | delimiter
+                    debugLog('Changing character ' + codename + ' to properties ' + characterString);
+                    var character = JSON.parse(characterString);
+                    debugLog(character);
+                    updateCharacter(character, codename);
+                    break;
+                case 'd': // Apply style class to entire dialogue box
+                    ti += 2;
+                    var divEffectAdd = message.substring(ti, message.indexOf('|', ti));
+                    ti = message.indexOf('|', ti);
+                    debugLog('Dialogue box effect to add: ' + divEffectAdd);
+                    dialogueBox.classList.add(divEffectAdd);
+                    break;
+                case 'r': // Remove style class to entire dialogue box after the current message is dismissed
+                    ti += 2;
+                    var effectsToRemoveStr = message.substring(ti, message.indexOf('|', ti));
+                    ti = message.indexOf('|', ti);
+                    var effectsToRemoveArr = effectsToRemoveStr.split(',');
+                    for (var effect of effectsToRemoveArr) {
+                        removeDBoxEffectNext.push(effect);
+                    }
+                    debugLog('Dialogue box effects to remove:');
+                    debugLog(removeDBoxEffectNext);
+                    break;
+
+                default:
+                    debugLog("Unknown style code \"" + message[ti] + "\"");
+            }
+            ti++;
+        }
+        // Finished reading style code, last character is ' ', it will get skipped after the iteration of the loop this function got called from
+
+    } else if (message[ti] === '>') {
+        // Finished styled span, start new span for normal text
+        if (message[ti] !== '<') {
+            spanArray.push(document.createElement('span'));
+            dialogueText.appendChild(spanArray[spanArray.length - 1]);
+            wholeEffect = '';
+            individualEffect = '';
+        }
+    } else {
+        /*if(currentlyTyping && message[ti] !== ' ')
+            sfx.shortKnock.play();*/
+        // Append next character
+        if (individualEffect !== '') {
+            // If there's an individual effect to apply, create a sub-span for each letter inside the current span
+            subSpan = document.createElement('span');
+            subSpan.textContent = message[ti];
+            if (didSkipText) {
+                subSpan.style.animationDelay = String(typingSpeed/1000*tia)+'s'; // If the animation requires delay and the user skipped text, add a delay that is equal to the typing speed in miliseconds times the tia (position of the character counting from the moment the text was skipped)
+                tia++;
+            }
+            //if (message[ti] !== ' ') // Apply inline-block display only if the character isn't a space, for some reason inline-block makes the space not count [[OLD STUFF, IDEALLY THESE SHOULDN'T BE INLINE BLOCKS]]
+                //subSpan.style.display = 'inline-block';
+            subSpan.classList.add(individualEffect);
+            spanArray[spanArray.length - 1].appendChild(subSpan);
+        } else {
+            // There is no individual effect, append normally
+            spanArray[spanArray.length - 1].textContent += message[ti];
+        }
+    }
+}
+
+function triggerEvent(evId) { 
+    debugLog('triggerEvent fired');
+    debugLog(evId);
+    /* Trigger the event only if: there isn't a scene already playing, 
+       there isn't a set event yet, and the ID of the event to trigger isn't the placeholder empty event*/
+    if (!sceneIsPlaying && currEv === 0 && evId !==0) {      
+        currEv = evId;  
+        debugLog('Event ' + currEv + ' set');   
+        currMsg = evIndex[currEv];
+
+        clearDialogueBox();
+        hideLogo();
+
+        // Start event after the logo vanishes 0.5 seconds
+        setTimeout(function () {         
+            // If the scene calls certain characters to appear on screen, load their portraits
+            if ('characters' in messages[currMsg]) {
+                loadAllCharacters(); 
+            }
+            // Play SFX
+            sfx.knock1.play();
+            // Show dialogue text after the box finishes animating (0.5 seconds)
+            setTimeout(function () {   
+                allowPlayDialogue = true;      
+                playDialogue();
+            }, 500);  
+        }, 500);  
+           
+    }   
+}
+
+function clearDialogueBox() {
+    // Hide UI elements
+    nextArrow.classList.remove('visible');
+    endMark.classList.remove('visible');
+}
+
+function hideLogo() {
+    logoimg.classList.remove('logo-appear');
+    logoimg.classList.add('logo-disappear');
+    setTimeout(function () {         
+        logo.style.display = "none";
+    }, 500);
+}
+
+function showLogo() {
+    setTimeout(function () {         
+        logo.style.display = "block";
+        logoimg.classList.remove('logo-disappear');
+        logoimg.classList.add('logo-appear');
+    }, 500);
+}
+
+function loadCharacter(character, codename) {
+    var newCharacter = document.createElement('div');
+    newCharacter.classList.add('character-container');
+    newCharacter.classList.add('unselectable');
+    newCharacter.classList.add('character-hidden');
+    newCharacter.classList.add(character.position);
+
+    var portrait = document.createElement('div');
+    portrait.classList.add('portrait');
+    portrait.style.backgroundImage = `url(assets/img/portraits/${codename}_${character.portrait}.png)`;
+    newCharacter.appendChild(portrait);
+    
+    var displaynameBox = document.createElement('div');
+    displaynameBox.classList.add('displayname-box');
+    displaynameBox.textContent = character.name;
+    newCharacter.appendChild(displaynameBox);
+
+    gameContainer.appendChild(newCharacter);
+    if (character.active)
+        newCharacter.classList.add('hidden-to-active');
+    else
+        newCharacter.classList.add('hidden-to-inactive');
+    setTimeout(function () {  
+        newCharacter.classList.remove('character-hidden');
+        if (character.active) {
+            newCharacter.classList.add('character-active');
+            newCharacter.classList.remove('hidden-to-active');
+        } else {
+            newCharacter.classList.add('character-inactive');
+            newCharacter.classList.remove('hidden-to-inactive');
+        }
+        loadedCharacters[codename] = {data: {...character}, element: newCharacter};
+        debugLog(loadedCharacters);
+    }, 500); 
+    
+}
+
+function loadAllCharacters() {
+    for (var [key, value] of Object.entries(messages[currMsg]['characters'])) {
+        loadCharacter(value, key);
+    }
+}
+
+function updateCharacter(character, codename) {
+    if ('name' in character) {
+        // If the display name changed
+        if (loadedCharacters[codename].data.name != character.name) {
+            var displaynameBox = loadedCharacters[codename].element.getElementsByClassName('displayname-box');
+            displaynameBox[0].textContent = character.name;
+        }
+    }
+ 
+    if ('portrait' in character) {
+        // If the portrait changed
+        if (loadedCharacters[codename].data.portrait != character.portrait) {
+            var portrait = loadedCharacters[codename].element.querySelector('.portrait');
+            portrait.style.backgroundImage = `url(assets/img/portraits/${codename}_${character.portrait}.png)`;
+        }
+    }
+
+    if ('position' in character) {
+        // If the position changes
+        if (loadedCharacters[codename].data.position != character.position) {
+            debugLog(loadedCharacters);
+            debugLog('position of loaded '+codename+': '+loadedCharacters[codename].data.position+'. Position of new: '+character.position);
+            loadedCharacters[codename].element.classList.add(character.position);
+            loadedCharacters[codename].element.classList.remove(loadedCharacters[codename].data.position)
+        }
+    }
+
+    if ('active' in character) {
+        // If it goes from active to inactive
+        if (loadedCharacters[codename].data.active && !character.active) {
+            loadedCharacters[codename].element.classList.add('active-to-inactive');
+            setTimeout(function () {
+                loadedCharacters[codename].element.classList.remove('character-active');
+                loadedCharacters[codename].element.classList.add('character-inactive');
+                loadedCharacters[codename].element.classList.remove('active-to-inactive');
+            }, 500);  
+        }
+        // If it goes from inactive to active
+        if (!loadedCharacters[codename].data.active && character.active) {
+            loadedCharacters[codename].element.classList.add('inactive-to-active');
+            setTimeout(function () {
+                loadedCharacters[codename].element.classList.remove('character-inactive');
+                loadedCharacters[codename].element.classList.add('character-active');
+                loadedCharacters[codename].element.classList.remove('inactive-to-active');
+            }, 500);  
+        }
+    }
+
+    // Update data properties
+    if ('name' in character) loadedCharacters[codename].data.name = character.name;
+    if ('portrait' in character) loadedCharacters[codename].data.portrait = character.portrait;
+    if ('position' in character) loadedCharacters[codename].data.position = character.position;
+    if ('active' in character) loadedCharacters[codename].data.active = character.active;
+}
+
+function removeCharacter(codename) {
+    if (loadedCharacters[codename].data.active) {
+        loadedCharacters[codename].element.classList.add('active-to-hidden');
+    }
+    else {
+        loadedCharacters[codename].element.classList.add('inactive-to-hidden');
+    }
+    setTimeout(function() {
+        loadedCharacters[codename].element.remove();
+        delete loadedCharacters[codename];
+        debugLog(loadedCharacters);
+    }, 500);  
+}
+
+function removeAllCharacters() {
+    for (var key of Object.keys(loadedCharacters)) {
+        removeCharacter(key);
+    }
+    
+}
+
+// Scene trigger
+logo.addEventListener('click', function (e) {
+    if (currEv != 0)
+        return;
+    debugLog('clicked the box');
+    e.stopPropagation();
+    triggerEvent(1);
+});</script>
 </body>
 </html>

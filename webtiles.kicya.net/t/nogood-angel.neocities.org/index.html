@@ -27,7 +27,7 @@
   border-radius: 5px;
   column-gap: 5px;
   width: 240px;
-  margin: 50px auto;
+  margin: 40px auto;
   padding: 5px;
   display: flex;
   box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
@@ -96,14 +96,10 @@ section .inner {
   overflow: hidden;
 }
 
-#nav {
-  border-top-right-radius: 4px;
-  overflow: hidden;
-}
-
-#nav button {
+button {
   background-image: linear-gradient(#bccee8, #f0f4fa);
   border: 0;
+  border-bottom: 1px solid #2c2394;
   justify-content: space-between;
   width: 100%;
   padding: 5px;
@@ -111,11 +107,7 @@ section .inner {
   box-shadow: inset 0 1px 5px #fff6, inset 0 -1px 5px #fff6;
 }
 
-#nav a:not(:last-child) button {
-  border-bottom: 1px solid #2c2394;
-}
-
-#nav button:hover {
+button:hover {
   letter-spacing: 1.4px;
   background-image: linear-gradient(#fffccf, #fffdde);
   font-style: italic;
@@ -124,20 +116,14 @@ section .inner {
 </head>
 <body>
     <div class="container">
-        <main>
-        	<section id="welcome">
-            	<div class="top">Welcome</div>
-                <div class="inner">Welcome to my website (mini in webtiles). I am Bianca and the creater of this place.</div>
-            </section>
-        </main>
-        <aside>
-        	<section id="nav">
-            	<div class="top">Navigation</div>
-                <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Home</button></a>
-                <a href=""><button>Webmaster</button></a>
-                <a href=""><button>Blog</button></a>
-            </section>
-        </aside>
+        <section>
+            <div class="top">Welcome</div>
+            <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Home</button></a>
+            <div class="inner">
+            	<p>Welcome to my website (mini in webtiles). I am Bianca and the creater of this place.</p>
+                <p>I love coding and the indie web.</p>
+            </div>
+        </section>
     </div>
 </body>
 </html>

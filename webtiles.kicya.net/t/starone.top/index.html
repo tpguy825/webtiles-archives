@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    
-    
     <style>.tile-body {
   box-sizing: border-box;
   background-color: #9f8fd19d;
@@ -23,6 +20,7 @@
   cursor: pointer;
   width: 30vw;
   height: 30vh;
+  text-decoration: none;
   position: relative;
 }
 
@@ -30,27 +28,57 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+  transition: all .3s;
 }
 
 .text-layer {
   color: #fff;
   opacity: 0;
-  text-shadow: 0 -3px 3px #32003c, 2px -2px 2px #32003c, 3px 0 2px #32003c, 2px 2px 2px #32003c, 0 3px 2px #32003c, -2px 2px 2px #32003c, -3px 0 2px #32003c, -2px -2px 2px #32003c;
+  background: #00000080;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   font-weight: bold;
   text-decoration: none;
-  transition: all .3s;
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
 }
 
+.float-item {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.container:hover .float-item {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .container:hover .text-layer {
   opacity: 1;
+}
+
+.item-1 {
+  width: 100px;
+  top: -40px;
+  left: 160px;
+  transform: rotate(-10deg);
+}
+
+.item-2 {
+  width: 130px;
+  bottom: -50px;
+  right: 150px;
+}
+
+.item-3 {
+  width: 220px;
+  bottom: -40px;
+  right: 0;
 }
 </style>
 </head>
@@ -58,12 +86,18 @@
     <main>
         <div class="container">
             <img src="%E5%85%AD%E8%8A%B1%E8%BD%AC%E6%89%8B%E6%8C%87.gif" class="bg-img">
-                <a href="https://starone.top/welcome.html" target="_blank" class="text-layer">
-                    hello:)<br>
-                    welcome to my site!<br>
-                    click to jump
-                </a>
-            </div>
-        </main>
+            <a href="https://starone.top/hello/" target="_blank" class="text-layer">
+                hello:)<br>
+                welcome to my site!<br>
+                click to jump
+            </a>
+              
+   <img src="https://webtiles.kicya.net/t/starone.top/3848026.png" class="float-item item-1">
+	<img src="https://webtiles.kicya.net/t/starone.top/屏幕截图1.png" class="float-item item-3">
+  
+  	<img src="https://webtiles.kicya.net/t/starone.top/屏幕截图5.png" class="float-item item-2">
+
+        </div>
+    </main>
 </body>
 </html>

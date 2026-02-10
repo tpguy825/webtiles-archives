@@ -559,18 +559,51 @@
                 <div id="instructions" style="display:flex; align-items: center; justify-items: center; flex-direction:column;">
                     
                
-                <img src="puzzle_label.png" style="margin-top: 4px;">
+                    <img src="puzzle_label.png" style="margin-top: 4px;">
 
-                <button id="gameButton" class=" game-button pixel deepFried" >
-                    Play
-                </button>
-                <p> Instructions: </p>
-                1. Try to memorize the images, you have 3 seconds for it!!<br><br>
-                2. Click on one block then click on another to swap places<br><br>
-                Future plans for this game:<br> * Add global highscore <br> *Add timeattack
+                    <button id="gameButton" class=" game-button pixel deepFried" >
+                        Play
+                    </button>
+                    <p> Instructions: </p>
+                    1. Try to memorize the images, you have 3 seconds for it!!<br><br>
+                    2. Click on one block then click on another to swap places<br><br>
+                    Future plans for this game:<br> * Add global highscore <br> *Add timeattack
 
-
+	
             	 </div>
+                <div id="highscore" style="display:flex; align-items:center; justify-content:center; flex-direction: column;">
+                    <p style="font-size: 12px; margin: 0px; margin-top: 6px;">
+                        Submit highscore
+                        
+                    </p>
+                    
+                    
+                    <span>
+                   
+                    	<input id="inputName" type="text" maxlength="3" class="pixel deepFried" style="margin: 0px; outline: none; background-color:transparent; border:0px; color:white; text-align: start; width: 62px;  letter-spacing: 8px;" autocomplete="off">
+                        <div style="display: flex; width:50px; flex-direction: row; gap: 4px; align-items:center; justify-content:center;">
+                            <span style="height: 2px; width: 16px; background-color:white;"></span>
+                            <span style="height: 2px; width: 16px; background-color:white;"></span>
+                            <span style="height: 2px; width: 16px; background-color:white;"></span>
+                        </div>
+                    </span>
+                    
+                    <button id="submitHighscore" class="game-button pixel deepFried" style="margin-top: 8px;">
+                        Submit
+                    </button>
+                    
+                    <table id="highscoreTable" class="border: 0px; pixel deepFried" style="font-size: 8px; border-spacing: 3px;">
+                        <th>PLAYER</th>
+                        <th>TIME</th>
+                        <th>SCORE</th>
+                        <th>DATE</th>
+                        
+         
+        
+                    </table>
+                  
+                </div>
+                
                 <table id="puzzle">
                     <th>
                     	<tr>
@@ -608,22 +641,54 @@
          
             </div>
         </div>
-        <script type="text/tilescript">var gameStart = false;
+        <script type="text/tilescript"></script>
+        <script type="text/tilescript">// object id
+var puzzleContainer = document.getElementById("puzzle");
+var instructions = document.getElementById("instructions");
+var highscore = document.getElementById("highscore");
 
-var cursor = "";
-var timeleft = 4;
-var win = false;
-
+var highscoreBtn = document.getElementById("submitHighscore");
+var lastUpdate = "2026-02-09";
+// Highscore service
 var playerId = null;
-
+var moves = 0;
+var initialTime = Date.now();
+var playerName = "";
+var gameId = 1;
 
 function generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0;
-    var v = c === 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
+  return Date.now().toString() + "_webtileskuni_" + Math.random(2039).toString(); 
 }
+
+
+function formatDate(date) {
+    date = new Date(date);
+    var year = date.getFullYear();
+	var hours = ('0' + date.getHours()).slice(-2);
+  	var minutes = ('0' + date.getMinutes()).slice(-2);
+
+    var month = date.getMonth();
+
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // 3. Manually pad the day
+    var day = date.getDate();
+    if (day < 10) {
+        day = '0' + day;
+    }
+    
+    var thing = "";
+    if (day==3) thing = "rd";
+    if (date==2) thing = "nd";
+    if (date==1) thing = "st";
+    
+    if (date > 3) thing = "th";
+    
+
+
+    return months[month]  +" " + day+thing + " " + year;
+}
+
 
 
 function checkOrCreatePlayerId(){
@@ -636,8 +701,8 @@ function checkOrCreatePlayerId(){
     }
     
     window.localStorage.setItem("playerId", playerId);
+    console.log("playing as " + playerId);
     
-    console.log(playerId);
 }
 
 function clearPlayerData(){
@@ -647,15 +712,133 @@ function clearPlayerData(){
 checkOrCreatePlayerId();
 
 
+function downloadHighscore(){
+        
+    console.log("downloading data from " + 'https://kunigames-api.vercel.app/api/getScoresByDate/'+lastUpdate+'/1');
+    var xhr = new XMLHttpRequest();
+	
+    xhr.open('GET', 'https://kunigames-api.vercel.app/api/getScoresByDate/'+lastUpdate+'/1', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-API-Key', 'ilikeharajuku-core');
+
+    xhr.onload = function () {
+
+
+    if (xhr.status >= 200 && xhr.status < 300) {
+        var scoreData = JSON.parse(xhr.responseText);
+	
+        for(var i = 0; i < scoreData.length; i++){
+        var data = scoreData[i];
+        console.log("adding row for:", data.name);
+        addScoreRow(data.name, data.time, data.score, data.date);
+        
+            
+            
+    }
+
+        
+    } else {
+    if (xhr.status == 404) 
+        console.log ("scores not found");
+    }
+    };
+
+    xhr.onerror = function () {
+        console.error('Network request failed');
+    };
+
+    xhr.send();
+
+}
+
+function sendHighscore(){
+    if (playerId == null) return;
+
+    var elapsedTime = Date.now() - initialTime;
+    var seconds = Math.floor(elapsedTime / 1000);
+    var nameInput = document.getElementById("inputName");
+    playerName = nameInput.value;
+    console.log("pname: "  + nameInput)
+    var score = calculateScore(seconds, moves);
+    console.log("score: " + score);
+    
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://kunigames-api.vercel.app/api/submitScore', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-API-Key', 'ilikeharajuku-core');
+    
+    // Handle the response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+
+                // Do your stuff BEFORE calling callback
+                console.log("is this running?");
+                var nameInput = document.getElementById("inputName");
+                nameInput.value = "";
+                loadAndShowHighscore();
+
+                // Then call callback with (error, data)
+                callback(null, response);  // null = no error
+
+            } else {
+                callback(new Error('Request failed with status ' + xhr.status), null);
+            }
+        }
+    };
+    
+    // Handle network errors
+    xhr.onerror = function() {
+        callback(new Error('Network error occurred'), null);
+    };
+    
+    // Prepare the data
+    var data = {
+        name: playerName,
+        gameId: gameId,
+        time: seconds,
+        score: score,
+        playerId: playerId
+    };
+    
+    // Send the request
+    xhr.send(JSON.stringify(data));
+    
+  
+    
+    
+    
+}
+
+
+
+
+// Puzzle game variables and init program
+
+var gameStart = false;
+
+var cursor = "";
+var timeleft = 4;
+var win = false;
+
+
+
 var puzzleContainer = document.getElementById("puzzle");
 puzzleContainer.style.display = "none";
 var countdown = document.getElementById("countdown");
 countdown.style.display = "none";
 
+highscore.style.display = "none" ;
+
 var gameButton = document.getElementById("gameButton");
 gameButton.addEventListener("click", function (e) {
    startGame(); 
+    initialTime = Date.now();
 });
+
+
 
 //Add click events
 function addTilesEventListener (){
@@ -743,17 +926,86 @@ function checkWinCondition (){
     p.style.display = "block";
     p.textContent  =" WIN!!";
 	win = true;
+    
+    setTimeout(function () {
+        loadAndShowHighscore();
+        var p = document.getElementById("countdown");
+        p.style.display = "none";
+    }, 2000);
+
 }
 
 addTilesEventListener();
 
 
+
+function loadAndShowHighscore() {
+    puzzleContainer.style.display = "none";
+    instructions.style.display = "none";
+    highscore.style.display = "flex";
+    
+ 	downloadHighscore();
+
+    
+}
+
+
+function addScoreRow(name, time, score, date){
+
+    var table = document.getElementById("highscoreTable");
+
+    var tr = document.createElement("tr");
+
+    var td1 = document.createElement("td");
+    td1.textContent = name;
+
+    var td2 = document.createElement("td");
+    td2.textContent = time;
+
+    var td3 = document.createElement("td");
+    td3.textContent = score;
+
+    var td4 = document.createElement("td");
+    td4.textContent = formatDate(date);
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+
+    table.appendChild(tr);
+
+
+}
+
+function calculateScore(timeInSeconds, moves) {
+    var baseScore = 500;
+
+    baseScore -= timeInSeconds;
+
+    baseScore -= (moves * 2) / 2;
+    if (moves <= 10) {
+        baseScore += 50;
+    }
+
+    // Ensure score doesn't go negative
+    return Math.max(0, baseScore);
+}
+
+
+highscoreBtn.addEventListener("click", function (){
+    sendHighscore();
+});
+
 function startGame() {
- 	var puzzleContainer = document.getElementById("puzzle");
+
 	puzzleContainer.style.display = "block";
     
-    var instructions = document.getElementById("instructions");
+
     instructions.style.display = "none";
+    
+  
+  
     
     var downloadTimer = setInterval(function(){
     var p = document.getElementById("countdown");
@@ -770,6 +1022,8 @@ function startGame() {
     timeleft -= 1;
 }, 1000);
 }
+
+
 
 </script>
     </body>

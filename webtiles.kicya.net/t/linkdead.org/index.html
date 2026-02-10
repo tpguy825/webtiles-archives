@@ -1,0 +1,251 @@
+<html>
+<head>
+<style>html, .tile-body {
+  background: #000;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  overflow: hidden;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tile {
+  width: 250px;
+  height: 250px;
+  image-rendering: pixelated;
+  background: repeating-linear-gradient(#ffffff14 0 1px, #0000 1px 3px), radial-gradient(circle, #040404 0 28%, #000 76%);
+  position: relative;
+  overflow: hidden;
+}
+
+.grid {
+  opacity: .5;
+  mix-blend-mode: screen;
+  background: repeating-linear-gradient(to right, #00f7ff24 0 1px, #0000 1px 8px), repeating-linear-gradient(#00f7ff1a 0 1px, #0000 1px 8px);
+  position: absolute;
+  inset: 0;
+}
+
+.copy {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+
+.title {
+  letter-spacing: 2px;
+  color: #f5ffff;
+  text-shadow: 0 0 10px #fff9, 0 0 16px #00f7ffa6, 3px 0 #ff216ed9, -3px 0 #00f7fff2;
+  font: 300 26px / 1 monospace;
+  animation: .45s steps(2, end) infinite titleShake, 2.4s step-end infinite titleFlash;
+  position: relative;
+  transform: translateZ(0);
+}
+
+.title:before, .title:after {
+  content: attr(data-text);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.title:before {
+  color: #ff216e;
+  opacity: .9;
+  mix-blend-mode: screen;
+  text-shadow: 0 0 10px #ff216ecc;
+  animation: 1.8s steps(2, end) infinite rgbRed;
+  transform: translate(2px);
+}
+
+.title:after {
+  color: #00f7ff;
+  opacity: .95;
+  mix-blend-mode: screen;
+  text-shadow: 0 0 10px #00f7ffe6;
+  animation: 1.3s steps(2, end) infinite rgbCyan;
+  transform: translate(-2px);
+}
+
+.sub {
+  letter-spacing: 2px;
+  color: #00f7ff;
+  opacity: .95;
+  text-shadow: 0 0 8px #00f7ff99;
+  font: 10px / 1 monospace;
+}
+
+.frame {
+  pointer-events: none;
+  border: 1px solid #00f7ff9e;
+  position: absolute;
+  inset: 8px;
+  box-shadow: inset 0 0 24px #00f7ff3d, 0 0 14px #00f7ff47, inset 0 0 6px #ff216e40;
+}
+
+.frame:before {
+  content: "";
+  mix-blend-mode: screen;
+  pointer-events: none;
+  border: 1px solid #ff216e61;
+  position: absolute;
+  inset: 0;
+}
+
+.noise {
+  opacity: .24;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.flash {
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: linear-gradient(#ffffff1a, #0000 20% 78%, #ff216e2e);
+  animation: 2.4s step-end infinite flash;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes titleShake {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translate(1px, -1px);
+  }
+
+  50% {
+    transform: translate(-1px, 1px);
+  }
+
+  75% {
+    transform: translate(1px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes titleFlash {
+  0%, 94%, 100% {
+    filter: brightness();
+  }
+
+  95% {
+    filter: brightness(1.5) contrast(1.2);
+  }
+
+  96% {
+    filter: brightness(.8) contrast(1.4);
+  }
+}
+
+@keyframes rgbRed {
+  0%, 100% {
+    clip-path: inset(0);
+    opacity: .9;
+    transform: translate(2px);
+  }
+
+  12% {
+    clip-path: inset(0 0 64%);
+    opacity: 1;
+    transform: translate(6px, -1px);
+  }
+
+  18% {
+    clip-path: inset(74% 0 0);
+    opacity: .95;
+    transform: translate(-4px, 1px);
+  }
+
+  40% {
+    clip-path: inset(38% 0 34%);
+    transform: translate(3px);
+  }
+
+  72% {
+    clip-path: inset(12% 0 70%);
+    opacity: 1;
+    transform: translate(8px);
+  }
+}
+
+@keyframes rgbCyan {
+  0%, 100% {
+    clip-path: inset(0);
+    opacity: .95;
+    transform: translate(-2px);
+  }
+
+  8% {
+    clip-path: inset(58% 0 8%);
+    opacity: 1;
+    transform: translate(-7px, 1px);
+  }
+
+  22% {
+    clip-path: inset(6% 0 72%);
+    transform: translate(5px, -1px);
+  }
+
+  54% {
+    clip-path: inset(42% 0 30%);
+    transform: translate(-5px);
+  }
+
+  80% {
+    clip-path: inset(78% 0 0);
+    opacity: 1;
+    transform: translate(-8px, 1px);
+  }
+}
+
+@keyframes flash {
+  0%, 87%, 100% {
+    opacity: 0;
+  }
+
+  88% {
+    opacity: .35;
+  }
+
+  90% {
+    opacity: .05;
+  }
+
+  92% {
+    opacity: .22;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="tile" id="tile">
+    <div class="grid"></div>
+    <div class="copy">
+      <div class="title" id="title" data-text="LINKDEAD.ORG">
+        <a href="https://linkdead.org/" target="_blank">LINKDEAD.ORG</a></div>
+      <div class="sub">SOFTWARE / BLOG / MUSIC</div>
+    </div>
+    <div class="frame"></div>
+    <div class="flash"></div>
+    <canvas class="noise" id="noise" width="250" height="250"></canvas>
+  </div>
+  
+</body>
+</html>
