@@ -14,20 +14,20 @@
 
 .tile-body {
   letter-spacing: .8px;
-  color: #2c2394;
-  background-image: linear-gradient(#bccee8, #fff);
+  color: #873652;
+  background-image: url("background.jpg");
   font-family: NanumGothic;
-  font-size: 13px;
+  font-size: 11px;
   line-height: 14px;
 }
 
 .container {
-  background-image: linear-gradient(#b0c4eb, #bdcff2);
-  border: 1px solid #2c2394;
+  background-color: #faafc9;
+  border: 1px solid #873652;
   border-radius: 5px;
   column-gap: 5px;
   width: 240px;
-  margin: 40px auto;
+  margin: 5px auto;
   padding: 5px;
   display: flex;
   box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
@@ -59,12 +59,13 @@ button {
   font-family: inherit;
   font-size: inherit;
   letter-spacing: inherit;
-  color: #2c2394;
+  color: #873652;
 }
 
 section {
-  border: 1px solid #2c2394;
-  box-shadow: 0 1px #2c2394;
+  border: 1px solid #873652;
+  padding: 5px;
+  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
 }
 
 section:not(:last-child) {
@@ -72,11 +73,10 @@ section:not(:last-child) {
 }
 
 section .top {
+  text-shadow: 1px 1px #873652, -1px -1px #873652, -1px 1px #873652, 1px -1px #873652, 0 -1px #873652, 0 1px #873652, -1px 0 #873652, 1px 0 #873652;
   color: #fff;
-  background-image: linear-gradient(#2c2394, #94b6eb);
-  border-bottom: 1px solid #2c2394;
-  padding: 5px;
-  box-shadow: inset 0 1px 5px #fff6, inset 0 -1px 5px #fff6;
+  padding: 0 5px 3px;
+  font-weight: bold;
 }
 
 section .top:not(:first-child) {
@@ -85,45 +85,93 @@ section .top:not(:first-child) {
 
 section .inner {
   background-color: #fff;
+  border: 1px solid #873652;
   padding: 5px;
-  box-shadow: inset 0 1px #0003;
+  box-shadow: -1px -1px #0003, 1px 1px #fff6;
+}
+
+.left {
+  width: 150px;
+}
+
+.right {
+  width: 75px;
 }
 
 #welcome {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  margin-bottom: 1px;
   overflow: hidden;
 }
 
-button {
-  background-image: linear-gradient(#bccee8, #f0f4fa);
+#pfp {
+  border-top-right-radius: 4px;
+  height: 75px;
+  padding: 0;
+  overflow: hidden;
+}
+
+#pfp img {
+  width: 75px;
+  image-rendering: pixelated;
+  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
+}
+
+#nav {
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+}
+
+#nav .inner {
+  box-shadow: none;
+  padding: 0;
+}
+
+#nav button {
+  text-shadow: 1px 1px #873652, -1px -1px #873652, -1px 1px #873652, 1px -1px #873652, 0 -1px #873652, 0 1px #873652, -1px 0 #873652, 1px 0 #873652;
+  color: #fff;
+  background-color: #faafc9;
   border: 0;
-  border-bottom: 1px solid #2c2394;
   justify-content: space-between;
   width: 100%;
   padding: 5px;
+  font-weight: bold;
   display: flex;
-  box-shadow: inset 0 1px 5px #fff6, inset 0 -1px 5px #fff6;
+  box-shadow: inset 0 1px #fff6, inset 0 -1px #0003;
 }
 
-button:hover {
-  letter-spacing: 1.4px;
-  background-image: linear-gradient(#fffccf, #fffdde);
-  font-style: italic;
+#nav button:hover {
+  box-shadow: inset -1px -1px #fff6, inset 1px 1px #0003;
+}
+
+#nav a:not(:last-child) button {
+  border-bottom: 1px solid #873652;
 }
 </style>
 </head>
 <body>
     <div class="container">
-        <section>
-            <div class="top">Welcome</div>
-            <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Home</button></a>
-            <div class="inner">
-            	<p>Welcome to my website (mini in webtiles). I am Bianca and the creater of this place.</p>
-                <p>I love coding and the indie web.</p>
-            </div>
-        </section>
+        <div class="left">
+            <section id="welcome">
+            	<div class="top">Welcome</div>
+                <div class="inner">
+                    <p>Welcome to my website (mini in webtiles). I am Bianca and the creater of this place.</p>
+                    <p>I love coding and the indie web.</p>
+                </div>
+            </section>
+        </div>
+		<div class="right">
+            <section id="pfp">
+            	<img src="pfp.jpg">
+            </section>
+            <section id="nav">
+            	<div class="top">Navi</div>
+                <div class="inner">
+                    <a href="https://nogood-angel.neocities.org/" target="_blank"><button>Home</button></a>
+                    <a href="https://nogood-angel.neocities.org/webmaster" target="_blank"><button>Webm</button></a>
+                </div>
+            </section>
+        </div>
     </div>
 </body>
 </html>
