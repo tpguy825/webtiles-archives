@@ -16,13 +16,21 @@ a {
   left: 23px;
 }
 
-a:hover {
+.active a {
   color: #701512;
   text-decoration: underline;
 }
 
+a:before {
+  content: url("bunhdlurkaww.webp");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
 a:after {
-  content: url("bunhdlurk.png");
+  content: url("bunhdlurk.webp");
   image-rendering: pixelated;
   position: fixed;
   top: 60px;
@@ -30,8 +38,8 @@ a:after {
   transform: scale(2);
 }
 
-a:hover:after {
-  content: url("bunhdlurkaww.png");
+.active a:after {
+  content: url("bunhdlurkaww.webp");
 }
 </style>
 </head>
