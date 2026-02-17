@@ -3,7 +3,8 @@
         <img src="vaporeon.gif" alt="Vaporeon">
 	<desc>Its cell structure is similar to water molecules. It will melt away and become invisible in water.</desc>
     </header>
-	
+	<hr>
+<br>
 	<stats>
         <atk   stat="65">atk:<div> click</div></atk>
 		<def   stat="60">def:<div> to</div></def>
@@ -28,11 +29,11 @@ header {
 
   image-rendering: pixelated;
   margin-bottom: .25ch .5ch;
+  width: 100%;
 }
 
 section {
-  width: 100%;
-  padding: 1ch;
+  margin: 1ch;
   display: inline-block;
 
   & desc {
@@ -40,6 +41,8 @@ section {
   }
 
   & stats {
+    clear: both;
+
     & atk, & def, & spd, & spatk, & spdef, & hp {
       padding: 1px 5px;
       display: block;

@@ -3,6 +3,7 @@
     			<img src="slowbro.gif" alt="slowbro">
     			<desc>Slowpoke became Slowbro when a Shellder bit on to its tail. Sweet flavors seeping from the tail make the Shellder feel as if its life is a dream.</desc>
 			</header>
+    <hr>
 			<stats>
     			<atk stat="75">atk:<div></div></atk>
     			<def stat="110">def:<div></div></def>
@@ -30,11 +31,11 @@ header {
 
   image-rendering: pixelated;
   margin-bottom: .25ch .5ch;
+  width: 100%;
 }
 
 section {
-  width: 100%;
-  padding: 1ch;
+  margin: 1ch;
   display: inline-block;
 
   & desc {
@@ -42,6 +43,8 @@ section {
   }
 
   & stats {
+    clear: both;
+
     & atk, & def, & spd, & spatk, & spdef, & hp {
       padding: 1px 5px;
       display: block;

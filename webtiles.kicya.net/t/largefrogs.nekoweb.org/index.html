@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  font-family: Lucida Sans;
+}
+
+#link {
+  white-space: nowrap;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#link a {
+  text-align: center;
+  color: #28394d;
+  opacity: .9;
+  margin: 0;
+  font-size: 24pt;
+}
+</style>
+</head>
+<body>
+    
+    <div id="link">
+    <a href="https://largefrogs.nekoweb.org" target="_blank">
+            go to my site
+    </a>
+    </div>
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
