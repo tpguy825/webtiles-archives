@@ -1,18 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE html>                                                                                                                       
 <html lang="en">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 0;
+    <style>#main {
+  width: 100%;
+  height: 100%;
 }
 </style>
 </head>
 <body>
-    <p>Hi so Aru here, I uh I'm too busy to edit that rn but yk, it's fine, enjoy the doodle</p>
-    <img src="doodle.png" margin="0" height="100">
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+    <div id="main">
+        
+        <img src="img1.jpg" height="250">
+    </div>
+
+    <script type="text/tilescript">
+        var mainDiv = document.getElementById('main');
+
+        function enter() {
+            if (mainDiv.className.indexOf('focused') === -1) {
+                mainDiv.className += ' focused';
+                // You can add things here, for example, changing images !
+                // document.getElementById('coolimg').src = "/t/aruru.nekoweb.org/img2.jpg";
+            }
+        }
+
+        function exit() {
+            mainDiv.className = mainDiv.className.replace(' focused', '');
+                // You can add things here, for example, changing images ! (Part 2 : resetting to first one)
+                // document.getElementById('coolimg').src = "/t/kuurp.nekoweb.org/img1.png";
+        }
+
+        mainDiv.onmouseenter = function() {
+            enter();  
+        };
+        mainDiv.onmouseleave = function() {
+            exit();
+        };
+
+        enter(); // Necessary because mouse is already in on load
+    </script>
 </body>
 </html>
