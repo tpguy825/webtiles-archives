@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    
+    
+    
+    <style>.title {
+  animation-name: floating;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0);
+  }
+
+  50% {
+    transform: translate(0, 6px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+</style>
+    <style>.tile-body {
+  color: #fff;
+  background-image: url("assets/THEbg.gif");
+  font-family: cattoBoiFont;
+}
+
+@font-face {
+  font-family: cattoBoiFont;
+  src: url("assets/GaliverSans.ttf");
+}
+
+.random {
+  color: #fff;
+  width: 70%;
+}
+
+a:link {
+  color: #fff;
+}
+
+.random {
+  transition: transform .2s ease-out;
+  transform: skew(5deg);
+}
+
+.random:hover {
+  transform: skew(-5deg);
+}
+
+img {
+  width: 100px;
+}
+</style>
+  </head>
+  <body>
+  
+    
+    <center>
+    <img src="assets/newlogo.webp">
+    <div class=title>
+    <h1><a href="https://kabez.neocities.org" target="_blank">Kabez' Corner</a></h1>
+    </div>
+    <div class="random">
+    <p>A work in progress</p>
+    <img src="assets/WIP.gif">
+    </div>
+    </center>
+  </body>
+</html>
