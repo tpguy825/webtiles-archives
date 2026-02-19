@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
-  font-family: Lucida Sans;
+    <style>@font-face {
+  font-family: TF2Build;
+  src: url("TF2Build.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 #link {
   white-space: nowrap;
+  background-color: #28394d;
+  border-radius: 15px;
   width: fit-content;
   height: fit-content;
+  padding: 2vh 1vh 1vh;
+  font-family: TF2Build;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17,21 +24,32 @@
 
 #link a {
   text-align: center;
-  color: #28394d;
+  color: #fff;
   opacity: .9;
   margin: 0;
-  font-size: 24pt;
+  font-size: 22pt;
+  text-decoration: none;
+}
+
+#link a:hover {
+  opacity: .65;
+  transition-duration: .25s;
+}
+</style>
+<style>.tile-body {
+  background-image: url("heavy.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 </style>
 </head>
 <body>
-    
     <div id="link">
     <a href="https://largefrogs.nekoweb.org" target="_blank">
-            go to my site
+    	go to my site
     </a>
     </div>
-    
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
