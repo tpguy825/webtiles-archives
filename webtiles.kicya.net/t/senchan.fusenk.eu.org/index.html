@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html lang="jp">
 <head>
-<style>.tile-body {
-  background: #ffe6d0 url("senchan.jpg") no-repeat;
+<style>bosy {
+  background: #ffe6d0;
 }
 
-#🐰 {
+#🎀 {
+  white-space: nowrap;
+  font-size: 15px;
   display: flex;
 }
 
 a {
+  color: #000;
   padding: 250px;
+}
+
+a:before {
+  content: url("senchanactive.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("senchan.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("senchanactive.jpg");
 }
 </style>
 </head>
 <body>
-<div id="🐰"><a href="https://fusen-k.nekoweb.org/" target="_blank">せん🐰</a></div>
+<div id="🎀"><a href="https://fusen-k.nekoweb.org/" target="_blank">せん🐰</a></div>
 </body>
 </html>

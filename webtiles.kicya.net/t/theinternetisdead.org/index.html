@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+
+  
+
+  <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, .tile-body {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.tile-body {
+  color: #0f6;
+  font-family: Courier New, Courier, monospace;
+}
+
+#header-container {
+  width: 100%;
+}
+
+#content {
+  padding: 16px;
+}
+
+.content-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+}
+
+@media (width <= 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#readme {
+  background-color: #32004680;
+  line-height: 1.6;
+}
+
+#readme h1, #readme h2, #readme h3 {
+  color: #4b6cff;
+  margin: 1em 0 .5em;
+}
+
+#readme pre {
+  background: #020202;
+  border: 1px solid #032;
+  margin: 12px 0;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+#readme a {
+  color: #0fc;
+}
+
+#yt-feed h2 {
+  color: #f36;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.yt-item {
+  text-align: center;
+  border-bottom: 1px dashed #032;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+}
+
+.yt-thumb {
+  border: 1px solid #032;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.yt-title {
+  color: #0fc;
+  margin-bottom: 6px;
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+}
+
+.yt-title:hover {
+  text-decoration: underline;
+}
+
+.yt-date {
+  color: #096;
+  margin-bottom: 8px;
+  font-size: .8em;
+}
+
+.yt-desc {
+  color: #0c8;
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: .85em;
+  line-height: 1.4;
+}
+</style>
+</head>
+<body>
+
+  
+  <div id="header-container"></div>
+
+  <div id="content">
+    <div class="content-grid">
+
+      <div id="readme">Loading README.md...</div>
+
+      <div id="yt-feed">
+        <h2>LATEST BROADCASTS</h2>
+        <div id="yt-items">Tuning signal...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/tilescript">
+    /* ===== Header loader ===== */
+    fetch("/index/header.html")
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        startHeaderClock();
+      });
+
+    /* ===== EST Clock ===== */
+    function startHeaderClock() {
+      const clockEl = document.getElementById("nav-clock");
+      if (!clockEl) return;
+
+      function updateClock() {
+        const now = new Date();
+        const est = new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/New_York",
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        }).format(now);
+
+        clockEl.textContent = est + " EST";
+      }
+
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
+
+    /* ===== README loader ===== */
+    fetch("/readme.md")
+      .then(r => r.text())
+      .then(md => {
+        document.getElementById("readme").innerHTML = renderMarkdown(md);
+      });
+
+    function renderMarkdown(md) {
+      return md
+        .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+        .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+        .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+        .replace(/```([^`]+)```/gim, "<pre><code>$1</code></pre>")
+        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href=\"$2\" target=\"_blank\">$1</a>")
+        .replace(/\n$/gim, "<br>");
+    }
+
+    /* ===== YouTube RSS ===== */
+    const rssURL =
+      "https://api.rss2json.com/v1/api.json?rss_url=" +
+      encodeURIComponent(
+        "https://www.youtube.com/feeds/videos.xml?channel_id=UCn3WLZT7k8nO24XimlJVJVQ"
+      );
+
+    fetch(rssURL)
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById("yt-items");
+        container.innerHTML = "";
+
+        data.items.slice(0, 5).forEach(item => {
+          const div = document.createElement("div");
+          div.className = "yt-item";
+
+          div.innerHTML = `
+            <a href="${item.link}" target="_blank">
+              <img class="yt-thumb" src="${item.thumbnail}" alt="${item.title}">
+            </a>
+            <a class="yt-title" href="${item.link}" target="_blank">
+              ${item.title}
+            </a>
+            <div class="yt-date">
+              ${new Date(item.pubDate).toLocaleDateString()}
+            </div>
+            <div class="yt-desc">
+              ${item.description.substring(0, 180)}…
+            </div>
+          `;
+
+          container.appendChild(div);
+        });
+      })
+      .catch(() => {
+        document.getElementById("yt-items").textContent =
+          "Signal lost in the void.";
+      });
+  </script>
+
+</body>
+</html>

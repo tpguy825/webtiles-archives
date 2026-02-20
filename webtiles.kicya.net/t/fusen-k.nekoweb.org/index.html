@@ -2,26 +2,38 @@
 <html lang="jp">
 <head>
 <style>.tile-body {
-  background: #fbdceb url("250x250.jpg") no-repeat;
-}
-
-#🎈 {
   white-space: nowrap;
-  font-size: 15px;
-  display: flex;
+  background: #fbdceb no-repeat;
 }
 
 a {
-  padding: 185px 175px;
-  text-decoration: none;
+  padding: 250px;
+  font-size: 15px;
+  position: absolute;
 }
 
-.active a {
-  text-decoration: underline;
+a:before {
+  content: url("250x250fubeam.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("250x250.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("250x250fubeam.jpg");
 }
 </style>
 </head>
 <body>
-<div id="🎈"><a href="https://fusen-k.nekoweb.org/" target="_blank">ふう🎀<br>せん🐰</a></div>
+<a href="https://fusen-k.nekoweb.org/" target="_blank">ふう🎀<br>せん🐰</a>
 </body>
 </html>
