@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# path bugged???????
 . ~/.bashrc
 . stats.txt
 
@@ -11,5 +12,11 @@ echo "  Tiles not in archive ('File not found' tiles): $notfoundtiles"
 echo "  Unedited tiles ('This is an example tile.'): $exampletiles"
 echo "  Wormed tiles: $wormedtiles"
 echo ""
+
+if [ ! -f ~/.bun/bin/bun ]; do
+  echo "Bun not found in ~/.bun/bin/bun"
+  echo "In order to view the archive in a web browser, you need to install Bun and run 'bash serve.sh' again."
+  echo "Install Bun by running 'curl -fsSL https://bun.sh/install | bash -'"
+done
 
 wget -q -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/serve.ts | ~/.bun/bin/bun -
