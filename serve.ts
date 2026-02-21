@@ -17,7 +17,12 @@ const { port } = Bun.serve({
 			return new Response(Bun.file("./webtiles.kicya.net/index.copy.html"), {
 				headers: { "Content-Type": "text/html" },
 			});
-		if (!staticpath.startsWith(import.meta.dir + "/webtiles.kicya.net/")) return new Response("", { status: 404 });
+		if (url.pathname.startsWith("/s/dist/game.js"))
+			return fetch("https://webtiles.kicya.net/s/dist/game.js?t=" + Math.floor(Date.now()));
+		if (url.pathname.startsWith("/s/dist/buildtime.txt"))
+			return fetch("https://webtiles.kicya.net/s/dist/buildtime.txt?t=" + Math.floor(Date.now()));
+			if (!staticpath.startsWith(import.meta.dir + "/webtiles.kicya.net/"))
+				return new Response("", { status: 404 });
 		if (existsSync(staticpath)) {
 			const f = Bun.file(staticpath);
 			if (url.pathname.endsWith(".html") && url.pathname.startsWith("/t/")) {
