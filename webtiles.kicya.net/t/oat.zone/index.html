@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background: linear-gradient(#fff, #eee);
+  margin: 0;
+}
+
+#bun {
+  image-rendering: pixelated;
+  transform-origin: 50%;
+  filter: drop-shadow(4px 4px 1px #aaa);
+  animation: 5s linear infinite hop1, 5s ease-out infinite hop2;
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+@keyframes hop1 {
+  0% {
+    left: 30%;
+    transform: translate(-50%)scaleX(-100%);
+  }
+
+  30% {
+    left: 70%;
+    transform: translate(-50%)scaleX(-100%);
+  }
+
+  40% {
+    left: 70%;
+    transform: translate(-50%)scaleX(-100%);
+  }
+
+  50% {
+    left: 70%;
+    transform: translate(-50%)scaleX(100%);
+  }
+
+  80% {
+    left: 30%;
+    transform: translate(-50%)scaleX(100%);
+  }
+
+  90% {
+    left: 30%;
+    transform: translate(-50%)scaleX(100%);
+  }
+
+  100% {
+    left: 30%;
+    transform: translate(-50%)scaleX(-100%);
+  }
+}
+
+@keyframes hop2 {
+  0% {
+    animation-timing-function: cubic-bezier(0, .55, .45, 1);
+    bottom: 0%;
+  }
+
+  7.5% {
+    animation-timing-function: cubic-bezier(.55, 0, 1, .45);
+    bottom: 10%;
+  }
+
+  15% {
+    animation-timing-function: cubic-bezier(0, .55, .45, 1);
+    bottom: 0%;
+  }
+
+  22.5% {
+    animation-timing-function: cubic-bezier(.55, 0, 1, .45);
+    bottom: 10%;
+  }
+
+  30% {
+    bottom: 0%;
+  }
+
+  50% {
+    animation-timing-function: cubic-bezier(0, .55, .45, 1);
+    bottom: 0%;
+  }
+
+  57.5% {
+    animation-timing-function: cubic-bezier(.55, 0, 1, .45);
+    bottom: 10%;
+  }
+
+  65% {
+    animation-timing-function: cubic-bezier(0, .55, .45, 1);
+    bottom: 0%;
+  }
+
+  73.5% {
+    animation-timing-function: cubic-bezier(.55, 0, 1, .45);
+    bottom: 10%;
+  }
+
+  80% {
+    bottom: 0%;
+  }
+}
+
+.credit {
+  color: #fff;
+  background-color: #000a;
+  border-bottom-right-radius: 4px;
+  width: fit-content;
+  padding: 2px;
+  font-size: 9px;
+}
+
+.credit a {
+  color: #fff;
+}
+
+#note {
+  transform-origin: 50%;
+  color: #000;
+  text-align: center;
+  text-shadow: 2px 2px 1px #aaa;
+  width: 90px;
+  font-size: 10px;
+  animation: .9s cubic-bezier(.37, 0, .63, 1) infinite alternate floatX, .9s cubic-bezier(.37, 0, .63, 1) -.45s infinite alternate floatY;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%)rotateZ(-3deg);
+}
+
+@keyframes floatX {
+  from {
+    left: 34%;
+  }
+
+  to {
+    left: 36%;
+  }
+}
+
+@keyframes floatY {
+  from {
+    top: 51%;
+  }
+
+  to {
+    top: 49%;
+  }
+}
+</style>
+</head>
+<body>
+    <img src="bun.png" id="bun" width="83" height="71">
+    <div id="note">
+        the creature in its natural habitat.......
+    </div>
+    <div class="credit">
+        art by <a href="https://bsky.app/profile/bobisnotaperson.bsky.social/post/3lwhdohu65k25" target="_blank">bobbu</a>
+    </div>
+</body>
+</html>
