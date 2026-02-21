@@ -2,9 +2,11 @@
 
 Twice daily mirrors of [webtiles](https://webtiles.kicya.net).
 
-Cron job at 00:00 and 12:00 UTC
+Cron job at midnight and midday UTC
 
 ## how to see archive
+
+> (Viewing archives in a web browser requires [Bun](https://bun.sh))
 
 Open the [commit history](https://github.com/tpguy825/webtiles-archives/commits/main/) and pick the commit for the backup you want to view, then:
 
