@@ -27,6 +27,9 @@ wget -o wget.log -mpEkc --compression=zstd,br,gzip,deflate -D webtiles.kicya.net
 echo finished wget at `date --date='TZ="UTC" now' -Iseconds`
 date --date='TZ="UTC" now' -Iseconds > webtiles.kicya.net/_archivetime.txt
 
+echo "Cleaning up unreferenced tiles..."
+bun clearup.ts --rm
+
 echo "Generating stats..."
 
 # will take a moment
