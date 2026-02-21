@@ -20,6 +20,13 @@ To view an already cloned archive:
 bash serve.sh
 ```
 
+NOTE: There is a pretty high chance the scripts fail, if they do: 
+```bash
+git clone https://github.com/tpguy825/webtiles-archives && cd webtiles-archives
+git reset --hard <commit id>
+wget -O- https://raw.githubusercontent.com/tpguy825/webtiles-archives/refs/heads/main/serve.ts | bun -
+```
+
 ## scripts
 
 - backup.sh
