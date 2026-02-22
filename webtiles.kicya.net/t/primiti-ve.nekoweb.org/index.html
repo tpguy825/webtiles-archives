@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Funnel Display, sans-serif;
+}
+
+.tile-body {
+  background-image: url("stud.jpg");
+  background-color: linear-gradient(#c8c8c8, #969696);
+  background-size: 10px 10px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: .75rem;
+}
+
+.container {
+  text-align: center;
+  background-color: #ffffffb3;
+  border-radius: 4px;
+  width: 96%;
+  min-height: 240px;
+  margin: 2% auto;
+  padding: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-wrapper {
+  transition: transform .3s;
+  display: inline-block;
+}
+
+.logo-wrapper:hover {
+  transform: scale(1.1);
+}
+
+.logo {
+  width: 125px;
+  height: auto;
+  animation: 15s linear infinite rotate;
+}
+
+.logo:before, .logo:after {
+  animation: 15s linear infinite rotate;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.page {
+  width: 100%;
+  transition: opacity .25s;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  overflow: auto;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#gateway-text {
+  width: 75%;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  border-top: 1px solid #aaa;
+  width: 85%;
+  margin: 8px auto;
+}
+</style>
+        <script type="text/tilescript">var logo = document.getElementById("logo");
+var back = document.getElementById("back");
+
+var home = document.querySelector('.home');
+var gateway = document.querySelector('.gateway');
+
+logo.addEventListener("click", function () {
+    home.className = "page home hidden";
+    
+    setTimeout(function() {
+        gateway.className = "page gateway visible";
+    }, 500);
+});
+
+back.addEventListener("click", function () {
+    gateway.className = "page gateway hidden";
+    
+    setTimeout(function() {
+        home.className = "page home visible";
+    }, 500);
+});</script>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="page home visible">
+                <div class="logo-wrapper">
+                    <img class="logo" src="logo.png" id="logo">
+                </div>
+                
+                <h1 class="title">pillarworks</h1>
+                <p>coming never</p>
+            </div>
+
+            <div class="page gateway hidden">
+                <h1>info</h1>
+                <hr>
+                
+                <p id="gateway-text">pillarworks is a tower obby game on roblox.</p>
+                <br>
+                <p id="gateway-text">want to see the kit? check out the links below.</p>
+                
+                <hr>
+                <h1>socials</h1>
+                <hr>
+                
+                <p>im lazy rn, check back later</p>
+                
+            	<hr>
+                <button id="back">back</button>
+            </div>
+        </div>
+    </body>
+</html>
