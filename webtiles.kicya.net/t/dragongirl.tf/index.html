@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
+    <style>* {
+  box-sizing: border-box;
+}
+
+.tile-body {
   color: #111;
   background-color: #f0f0f0;
   width: 100%;
@@ -11,15 +15,60 @@
 }
 
 .main {
+  pointer-events: none;
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.wrapperInner {
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  margin: auto;
+  display: flex;
+}
+
+.wrapperOuter {
+  flex-direction: column;
+  align-items: center;
+  height: 40%;
+  display: flex;
+}
+
+.weblink {
+  font-family: Atkinson Hyperlegible;
+  font-size: 2em;
+}
+
+a {
+  color: #f08080;
 }
 </style>
 </head>
 <body>
-    <img src="main.gif" class="main">
+    
+	<div class="wrapperOuter">
+        <div class="wrapperInner">
+            <div class="weblink">
+                <a href="https://dragongirl.tf" target="_blank">dragongirl.tf</a>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <img src="main.gif" class="main" draggable="false">
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+
 </body>
+
 </html>

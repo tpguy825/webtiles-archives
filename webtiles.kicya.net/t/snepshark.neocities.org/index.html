@@ -5,9 +5,36 @@
   color: #ff8c00;
   background: url("deeeer.webp") 0 0 / cover;
 }
+
+p {
+  color: #3f3f74;
+  text-align: center;
+  -webkit-text-stroke: 1px #fffcf7cc;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #c1add4cc, 1px 1px 1px #d4adc1, -1px -1px 1px #d4adc0, 1px -1px 1px #d4adc1, -1px 1px 1px #d4adc1;
+  margin-top: 2px;
+  font-family: sans-serif;
+  font-size: 2em;
+  font-weight: 900;
+  line-height: 1em;
+}
+
+.blurred:hover {
+  opacity: .1;
+  transition: opacity 1.3s ease-in, filter 1s ease-in;
+}
 </style>
 </head>
 <body>
+    <a href="https://snepshark.neocities.org/" style="text-decoration: none;" target="_blank"><div class="blurred" style="opacity = 0.5; transition: opacity 1.2s ease-out;">
+        <p>
+            Succumb to deer pressure
+        </p>
+        <br><br><br><br><br><br>
+        <p>
+            Turn into a deer today!
+        </p>
+    </div></a>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
