@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #d80fd5d2;
+  -webkit-text-stroke: 2px #b413b147;
+  text-align: center;
+  background-image: url("https://webtiles.kicya.net/t/genper.nekoweb.org/https:/webtiles.kicya.net/t/genper.nekoweb.org/statcskull.gif");
+}
+
+#Neighbor {
+  width: 100%;
+  position: absolute;
+  top: 30px;
+  right: -10px;
+}
+
+.crt-frame {
+  pointer-events: none;
+  z-index: 9000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+</style>
+    <style>
+</style>
+</head>
+<body>
+        <img class="crt-frame" src="crt_green_mask.png">
+    <p>Howdy diddly do?</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
