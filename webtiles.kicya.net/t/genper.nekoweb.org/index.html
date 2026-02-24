@@ -8,6 +8,13 @@
   right: -10px;
 }
 
+#background {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .crt-frame {
   pointer-events: none;
   z-index: 9000;
@@ -45,17 +52,20 @@
   color: #d80fd5d2;
   -webkit-text-stroke: 2px #b413b147;
   text-align: center;
-  background-image: url("https://webtiles.kicya.net/t/genper.nekoweb.org/https:/webtiles.kicya.net/t/genper.nekoweb.org/statcskull.gif");
 }
 </style>
 </head>
 <body>
         <img class="crt-frame" src="crt_green_mask.png">
     <p>Howdy diddly do?</p>
+    <a href="https://genper.nekoweb.org/" target="_blank">
+     <img src="genperbutton.png">
+    </a>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
     <div class=scanlines></div>
     <img class=dirt src="suciedad.png">
+        <img id=background src="statcskull.gif">
 </body>
 </html>
