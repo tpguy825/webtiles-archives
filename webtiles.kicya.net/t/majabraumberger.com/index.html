@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <style>.tile {
+  filter: grayscale();
+  border: 1px solid #ccc;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  overflow: hidden;
+}
+
+.tile img {
+  filter: grayscale();
+  max-width: 100%;
+  max-height: 100%;
+}
+</style>
+    
+</head>
+<body>
+
+    <div class="tile">
+        <img src="kicya.gif" alt="Kicya GIF">
+    </div>
+
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

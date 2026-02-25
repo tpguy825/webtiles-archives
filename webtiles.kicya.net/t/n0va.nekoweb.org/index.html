@@ -1,183 +1,22 @@
-<!doctype html>
-<html lang="en">
+<html>
     <head>
         
-        
-        
-        <style>* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-.tile-body {
-  color: #4da6ff;
-  background: #000;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  height: 250px;
-  font-family: Courier New, monospace;
-  display: flex;
-  position: relative;
-  overflow: hidden;
-}
-
-.scanline {
-  pointer-events: none;
-  background: linear-gradient(#0000 50%, #4da6ff05 50%) 0 0 / 100% 4px;
-  width: 100%;
-  height: 100%;
-  animation: 8s linear infinite scan;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-@keyframes scan {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(4px);
-  }
-}
-
-.border {
-  pointer-events: none;
-  border: 2px solid #333;
-  position: absolute;
-}
-
-.border-top {
-  border-bottom: none;
-  height: 0;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-}
-
-.border-bottom {
-  border-top: none;
-  height: 0;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
-}
-
-.border-left {
-  border-right: none;
-  width: 0;
-  top: 5px;
-  bottom: 5px;
-  left: 5px;
-}
-
-.border-right {
-  border-left: none;
-  width: 0;
-  top: 5px;
-  bottom: 5px;
-  right: 5px;
-}
-
-.content {
-  text-align: center;
-  z-index: 1;
-  padding: 20px;
-}
-
-.title {
-  color: gold;
-  text-shadow: 0 0 10px #ffd70080;
-  margin-bottom: 10px;
-  font-size: 32px;
-  animation: 2s ease-in-out infinite glow;
-}
-
-@keyframes glow {
-  0%, 100% {
-    text-shadow: 0 0 5px #ffd70080;
-  }
-
-  50% {
-    text-shadow: 0 0 15px #ffd700cc;
-  }
-}
-
-.subtitle {
-  color: #888;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
-  font-size: 10px;
-}
-
-.links {
-  flex-direction: column;
-  gap: 8px;
-  font-size: 11px;
-  display: flex;
-}
-
-.link {
-  color: #4da6ff;
-  border: 1px solid #0000;
-  padding: 3px 8px;
-  text-decoration: none;
-  transition: all .2s;
-}
-
-.link:hover {
-  color: gold;
-  background: #ffd7001a;
-  border-color: #333;
-}
-
-.link:before {
-  content: "> ";
-  color: #666;
-}
-
-.link:hover:before {
-  color: gold;
-}
-
-.blink {
-  animation: 1s step-end infinite blink;
-}
-
-@keyframes blink {
-  0%, 49% {
-    opacity: 1;
-  }
-
-  50%, 100% {
-    opacity: 0;
-  }
-}
-</style>
     </head>
-    <body>
-        <div class="scanline"></div>
-        <div class="border border-top"></div>
-        <div class="border border-bottom"></div>
-        <div class="border border-left"></div>
-        <div class="border border-right"></div>
-
-        <div class="content">
-            <div class="title">N0\A</div>
-            <div class="subtitle">═══════════════</div>
-            <p>
-                I have so many ideas and can't even manage to start thinking
-                about one
-            </p>
-            <br>
-            <div class="links">
-                <a href="https://n0va.nekoweb.org" class="link" target="_blank">website</a>
-                <a href="https://fedi.krzak.org/@n0va" class="link" target="_blank">fediverse</a>
-            </div>
+    <body style="
+            background-color: black;
+            display: table;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            color: yellow;
+        ">
+        <div style="
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            ">
+            <h1>UNDER CONSTRUCTION!</h1>
+            
         </div>
     </body>
 </html>
