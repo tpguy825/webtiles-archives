@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+
+<style>@font-face {
+  font-family: lain;
+  src: url("font.ttf");
+}
+
+.tile-body {
+  color: #c9c9c944;
+  background-color: #000;
+  background-image: url("lain.jpg");
+  background-size: 100% 100%;
+}
+
+p {
+  text-align: justify;
+  margin: 0;
+  font-family: lain;
+  font-size: 30px;
+  font-style: italic;
 }
 </style>
 </head>
 <body>
-    <p>This is an example tile.</p>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+<div class="container">
+    <div class="content">
+        <p>close the world, open the next</p>
+		<p>close the world, open the next</p>
+        <p>close the world, open the next</p>
+        <p>close the world, open the next</p>
+        <p>close the world, open the next</p>
+        <p>close the world, open the next</p>
+        <p>close the world, open the next</p>
+        <p>close the world, open the next</p>
+    </div>
+</div>
 </body>
 </html>
