@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+</head>
+<body>
+<p><img src="gunsawian.gif" alt width="250" height="250"></p>
+        <script type="text/tilescript">// Plays hh.mp3 on the first click anywhere on the page
+document.addEventListener('click', function() {
+    const audio = new Audio('HyvatHerrat.mp3');
+    audio.play().catch(error => {
+        console.error('Audio playback failed:', error);
+    });
+}, { once: true }); // Remove { once: true } if you want the sound on every click</script>
+</body>
+</html>
