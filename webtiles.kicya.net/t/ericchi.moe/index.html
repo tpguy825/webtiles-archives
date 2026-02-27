@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Dudu Calligraphy q;
+  src: url("fonts/Dudu_Calligraphy_q.woff") format("woff");
+  font-weight: normal;
+}
+
+.tile-body {
+  color: #111;
+  background-image: url("images/stripes-teal.webp");
+  margin: 0;
+}
+
+.paper {
+  outline-offset: 10rem;
+  background-position: -.1rem -.1rem;
+  border: 7px solid #fff;
+  border-image: url("images/cloudborder_7.png") 7 fill round;
+  align-items: center;
+  max-width: 46rem;
+  margin-bottom: 1rem;
+  padding: .5rem 1.6rem 1rem;
+  font-family: Dudu Calligraphy q;
+  font-size: 1.1em;
+}
+</style>
+</head>
+<body>
+    <div class="paper">
+        <p style="text-align: center;">ericchi.moe</p>
+        <p style="text-align: center;">this tile is a work in progress</p>
+        <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    </div>
+</body>
+</html>
