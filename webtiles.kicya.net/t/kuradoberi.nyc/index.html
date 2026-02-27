@@ -4,68 +4,113 @@
 <style>EndOfInput Error at 1:25</style>
     
     <style>.tile-body {
-  background-image: url("city.gif");
+  background-image: url("imgs/saya-bg.png");
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-attachment: fixed;
+  background-size: cover;
+  width: 500px;
+  height: 500px;
 }
 
-h1 {
-  color: #fff;
-  font-family: Helvetica Neue;
-  font-size: 30px;
+.logo {
+  height: 130px;
   position: fixed;
-  top: 2px;
-  left: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-p {
-  color: #fff;
-  font-family: Helvetica Neue;
-  font-size: 13px;
+.nyc {
+  content: url("imgs/kuradoberi-text.png");
+  height: 40px;
   position: fixed;
-  top: 45px;
-  left: 56px;
+  top: 20%;
 }
 
-a {
-  color: #fff;
-  text-decoration: none;
+.nyc:hover {
+  content: url("imgs/kuradoberi-red-text.png");
+}
+
+.disc {
+  content: url("imgs/discord-text.png");
+  height: 40px;
+  position: fixed;
+  top: 40%;
+}
+
+.disc:hover {
+  content: url("imgs/discord-red-text.png");
+}
+
+.twit {
+  content: url("imgs/twitter-text.png");
+  height: 40px;
+  position: fixed;
+  top: 70%;
+}
+
+.twit:hover {
+  content: url("imgs/twitter-red-text.png");
+}
+
+.status {
+  content: url("imgs/status-text.png");
+  height: 40px;
+  position: fixed;
+  top: 30%;
+  left: 60%;
+}
+
+.status:hover {
+  content: url("imgs/status-red-text.png");
+}
+
+.webring {
+  content: url("imgs/webring-text.png");
+  height: 40px;
+  position: fixed;
+  top: 70%;
+  left: 53%;
+}
+
+.webring:hover {
+  content: url("imgs/webring-red-text.png");
 }
 </style>
 </head>
 <body>  
-    <marquee id="nowPlaying" style="bottom: 1px;"></marquee>
-    <h1><a href="https://kuradoberi.nyc/" target="_blank">we miss you.</a></h1>
-    <p><a href="https://kuradoberi.nyc/" target="_blank">[kuradoberi]</a></p> 
-    <audio id="audio" src="braziliant-thought.mp3" preload="metadata" data-webtiles-paused="false"></audio>
-	 <script type="text/tilescript">// Only executes while your tile is active
+    <a href="https://vndb.org/v97" target="_blank"><img class="logo" src="imgs/saya-logo.png"></a>
+    <a href="https://kuradoberi.nyc/" target="_blank"><img class="nyc"></a>
+    <a href="https://discordid.netlify.app/?id=218174573626130432" target="_blank"><img class="disc"></a>
+    <a href="https://x.com/nebb_y" target="_blank"><img class="twit"></a>
+    <a href="https://status.cafe/users/kuradoberi" target="_blank"><img class="status"></a>
+    <a href="https://fgc-webring.nekoweb.org/" target="_blank"><img class="webring"></a>
+    <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-/*function playSound(url) {
-    var audio = document.createElement('audio')
-    audio.src = url
-    audio.load()
-    audio.play()
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-playSound('/song.mp3') */
-// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-var help = document.getElementById("audio");
-var nowPlaying = document.getElementById("nowPlaying");
+  const classes = ["nyc", "disc", "twit", "status", "webring"];
 
-help.volume = 0.5;
+  classes.forEach(className => {
+    const images = document.querySelectorAll("." + className);
 
-var musicInt = setInterval(musicCheat, 1000);
+    images.forEach(img => {
 
-function musicCheat() {
-    if (help.paused == true){
-        nowPlaying.style.bottom = "-100px"
-        help.play()
-    }else if (help.paused == false){
-        nowPlaying.style.bottom = "1px"
-    }
-} </script> 
-  
+      const originalSrc = img.src;
+      const hoverSrc = img.getAttribute("data-hover");
+
+      img.addEventListener("mouseenter", function () {
+        img.src = hoverSrc;
+      });
+
+      img.addEventListener("mouseleave", function () {
+        img.src = originalSrc;
+      });
+
+    });
+  });
+
+});
+</script> 
 </body>
 </html>
