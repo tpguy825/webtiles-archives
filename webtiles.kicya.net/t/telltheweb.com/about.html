@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>.tile-body {
+  color: #fff;
+  word-wrap: break-word;
+  background: #000 url("stars.png");
+  margin: 0;
+  overflow-y: scroll;
+}
+
+main {
+  box-sizing: border-box;
+  gap: 0;
+  padding: 0;
+  display: grid;
+}
+
+.center {
+  text-align: center;
+}
+
+nav[aria-label="breadcrumbs"] {
+  flex-wrap: wrap;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+}
+
+nav[aria-label="breadcrumbs"] ol {
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+nav[aria-label="breadcrumbs"] li + li:before {
+  content: "/";
+  color: #888;
+  padding: .25em;
+}
+
+.box {
+  color: #fff;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  background: #000;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.box.center {
+  text-align: center;
+}
+
+.box.compact {
+  margin: 0;
+  padding: 0;
+}
+
+header time {
+  font-style: oblique;
+}
+
+q {
+  font-style: italic;
+}
+
+img {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  display: block;
+}
+
+img.compact {
+  vertical-align: bottom;
+  margin: 0;
+  padding: 0 1rem 0 0;
+  display: inline-block;
+}
+
+figure {
+  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+.tile-body a:not(.button) {
+  color: wheat;
+}
+
+.tile-body a:not(.button):visited, .tile-body a:not(.button):hover {
+  color: #bfa8ad;
+}
+
+.button {
+  color: #fff;
+  text-align: center;
+  user-select: none;
+  border-radius: 5px;
+  width: auto;
+  max-width: none;
+  margin: .5rem 10px 10px .5rem;
+  padding: .6rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button.compact {
+  margin: 0;
+}
+
+.button:hover, .button.background {
+  color: #000;
+  background: wheat;
+}
+
+.button.background:hover {
+  color: #fff;
+  background: #000;
+}
+
+.button.inactive {
+  color: gray;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.button.inactive:hover {
+  color: #faf7f0;
+  background: #a18f78;
+}
+
+.button.secondary {
+  float: right;
+}
+
+.button.selectable {
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+
+:not(nav) > ol li, :not(nav) > ul li {
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+}
+
+:not(nav) > ul li::marker {
+  color: #888;
+}
+
+footer {
+  text-align: center;
+}
+
+.byline {
+  font-style: italic;
+}
+
+.byline .author {
+  color: gray;
+  font-weight: bold;
+}
+
+.edge-glow {
+  pointer-events: none;
+  z-index: 9999;
+  position: fixed;
+}
+
+.edge-glow.left {
+  background: linear-gradient(to right, #751855, #0000 100%);
+  border-top-right-radius: 5px;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.edge-glow.right {
+  background: linear-gradient(to left, #000, #0000 100%);
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+
+.edge-glow.top {
+  background: linear-gradient(#fff, #0000 100%);
+  border-bottom-right-radius: 10px;
+  width: 100%;
+  height: 10px;
+  top: 0;
+  left: 0;
+}
+
+.edge-glow.bottom {
+  background: linear-gradient(to top, #fff, #0000 100%);
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 10px;
+  bottom: 0;
+  left: 0;
+}
+</style>
+		
+	</head>
+	<body>
+		<nav aria-label="breadcrumbs">
+			<ol>
+				<li><a href="index.html">home</a></li>
+				<li aria-current="page">about</li>
+			</ol>
+		</nav>
+		<main>
+			<div class="box">
+				<p>Hi, I'm Callum. I've been tinkering with web code since 2015, at age 9. I love exploring music-centric projects. I've documented a bunch of my projects on my website. <a href="https://callumfisher.netlify.app/" target="_blank">Take a look.</a></p>
+			</div>
+		</main>
+	</body>
+</html>

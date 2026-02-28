@@ -8,99 +8,177 @@
 }
 
 @font-face {
-  font-family: Geist;
-  src: url("geist.ttf");
+  font-family: Inter;
+  font-weight: normal;
+  font-style: normal;
+  src: url("inter.woff2");
 }
 
-.bg, section, section * {
-  opacity: 0;
-  visibility: collapse;
+@font-face {
+  font-family: Inter;
+  font-weight: 600;
+  font-style: normal;
+  src: url("inter-bold.woff2");
 }
 
-.bg {
-  z-index: 1;
-  transition: all 2s ease-in-out;
-  position: absolute;
+@font-face {
+  font-family: Inter;
+  font-weight: 500;
+  font-style: normal;
+  src: url("inter-medium.woff2");
 }
 
-.logo {
-  z-index: 2;
-  filter: grayscale() brightness(.8);
-  transition: all .8s ease-in-out .2s;
+:focus {
+  outline: 3px solid #5496f2;
 }
 
 .tile-body {
   color: #fff;
-  letter-spacing: -.06em;
-  background: #000;
-  justify-content: center;
-  align-items: center;
-  font-family: Geist, system-ui;
-  font-size: 1.25rem;
-  display: flex;
+  letter-spacing: -.015em;
+  background: repeating-linear-gradient(-45deg, #000, #000 30px, #1c1c1f 30px 60px) 0 0 / 200%;
+  font-family: Inter, system-ui;
+  animation: 7s cubic-bezier(.85, 0, .15, 1) infinite moveBackground;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 70% 100%;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+header {
+  text-align: center;
+  backdrop-filter: blur(3px) saturate(1.5);
+  user-select: none;
+  background: #32323999;
+  padding: .5em;
+  font-size: .95rem;
+  font-weight: 500;
   position: relative;
+  box-shadow: 0 1px 3px #0000004d;
 }
 
-.tile-body:hover section, .tile-body:hover section * {
-  opacity: 1;
-  visibility: visible;
+header .close-button {
+  background: #424246;
+  border-radius: 5rem;
+  padding: .2em;
+  transition: all .1s ease-in-out;
+  display: inline-flex;
+  position: absolute;
+  right: .5em;
 }
 
-.tile-body:hover .bg {
-  opacity: .7;
-  visibility: visible;
+header .close-button:hover {
+  filter: brightness(1.2);
 }
 
-.tile-body:hover img.logo {
-  filter: grayscale(0) brightness();
-  rotate: 360deg;
-  scale: 1.5;
+article {
+  place-items: center;
+  gap: 1.15em;
+  padding: 1rem;
+  display: grid;
+}
+
+article > img:first-child {
+  transition: all .11s ease-in-out;
+}
+
+article > img:first-child:hover {
+  scale: 1.15;
+}
+
+article p {
+  text-align: center;
+  font-size: .9rem;
+}
+
+article > img:first-child, article p {
+  mix-blend-mode: plus-lighter;
+}
+
+article nav {
+  grid-template-columns: repeat(2, 1fr);
+  gap: .3em;
+  width: 100%;
+  display: grid;
+}
+
+article nav a {
+  backdrop-filter: blur(3px) saturate(1.5);
+  background: #323239a6;
+  border-radius: .5em;
+  align-items: center;
+  gap: .4em;
+  padding: .5em;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all .1s ease-in-out;
+  display: flex;
+  box-shadow: 0 1px 3px #00000026;
+}
+
+article nav a img {
+  width: 16px;
+  height: 16px;
+}
+
+article nav a:hover {
+  filter: brightness(1.15);
+  scale: 1.1;
+}
+
+article nav a:active {
+  filter: brightness(.9);
+  scale: 1.05;
+}
+
+article nav a:hover:nth-child(2n) {
+  rotate: 3deg;
+}
+
+article nav a:hover:nth-child(odd) {
+  rotate: -3deg;
 }
 
 a {
   color: #eee;
   text-decoration: none;
 }
-
-section {
-  opacity: 0;
-  backdrop-filter: blur(4px) saturate(1.2);
-  z-index: 100;
-  background: #00000040;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all .5s ease-in-out;
-  display: flex;
-  position: absolute;
-  inset: 0;
-}
-
-section * {
-  z-index: 100;
-  transition: all .3s ease-in-out .8s;
-}
-
-section div {
-  grid-template-columns: repeat(2, 1fr);
-  justify-items: center;
-  gap: .25rem 1rem;
-  display: grid;
-}
 </style>
 </head>
 <body>
-    <section>
-        <h2>reduxflakes</h2>
-        <div>
-    		<a href="https://reduxflakes.nekoweb.org" target="_blank">website</a>
-        	<a href="https://bsky.app/profile/reduxflakes.bsky.social" target="_blank">bluesky</a>
-        	<a href="https://fosstodon.org/@redux" target="_blank">fediverse</a>
-        	<a href="https://www.youtube.com/@reduxflakes" target="_blank">youtube</a>
-        </div>
-    </section>
-    <img class="logo" src="lo.png" width="128">
-    <img class="bg" src="background.jpg">
+
+<header>
+  <strong>reduxflakes</strong>
+    <span class="close-button">
+<img src="x.svg" width="13" height="13">
+       </span>
+</header>  
+<article>
+  <img src="lo.png" width="56" height="56">
+    <p>
+        Software developer &amp; designer
+    </p>
+    <nav>
+    		<a href="https://reduxflakes.nekoweb.org" target="_blank">
+                <img src="lucide--globe.svg"> website</a>
+        	<a href="https://bsky.app/profile/reduxflakes.bsky.social" target="_blank">
+                <img src="ri--bluesky.svg">
+                bluesky</a>
+        	<a href="https://fosstodon.org/@redux" target="_blank">
+                <img src="mdi--mastodon.svg">
+                fediverse</a>
+        	<a href="https://www.youtube.com/@reduxflakes" target="_blank"><img src="mdi--youtube.svg">youtube</a>
+        </nav>
+    </article>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
