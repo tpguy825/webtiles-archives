@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  text-align: center;
+  color: #fe8bc1;
+  background-image: url("img/bg.gif");
+  font-family: Margarine;
+}
+
+h1 {
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.header {
+  pointer-events: none;
+  z-index: 1;
+  background: url("img/divider.gif") 0 0 / auto 30px;
+  width: 100%;
+  height: 30px;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.header2 {
+  pointer-events: none;
+  z-index: 1;
+  background: url("img/divider.gif") 0 0 / auto 30px;
+  width: 100%;
+  height: 30px;
+  position: fixed;
+  top: 220px;
+  right: 0;
+}
+
+.text {
+  animation: .5s infinite doodle;
+}
+
+@keyframes doodle {
+  0% {
+    transform: rotate(2deg);
+  }
+
+  50% {
+    transform: rotate(2deg);
+  }
+
+  51% {
+    transform: rotate(-2deg);
+  }
+
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+
+@font-face {
+  font-family: Margarine;
+  src: url("Margarine.ttf");
+}
+</style>
+
+</head>
+<body>
+    <div class="header"> 
+    </div>
+    
+        <div class="header2"> 
+        </div>
+    
+    
+    <br>
+    <br><img src="img/rbstar.gif">&#x20;&#x20;<img src="img/rbstar.gif">&#x20;&#x20;<img src="img/rbstar.gif">
+    <h1 class="text">wafflechuu.nekoweb.org</h1>
+    <img src="img/decopig.gif" width="150" style="z-index:10;">
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #001017;
+  margin: 10px;
+}
+
+p {
+  color: #50ebec;
+}
+
+.rotate {
+  justify-content: center;
+  align-items: center;
+  animation: 10s linear infinite rotate;
+  display: flex;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+    <p>cool</p>
+    <img src="tuffgrouptuff.png" width="150" class="rotate">
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

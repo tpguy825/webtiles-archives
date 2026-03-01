@@ -1,6 +1,6 @@
 totaltiles=2601
-claimedtiles=1346
-exampletiles=73
+claimedtiles=1351
+exampletiles=74
 wormedtiles=26
-backeduptiles=1322
+backeduptiles=1327
 notfoundtiles=24
