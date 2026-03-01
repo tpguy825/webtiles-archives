@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+  <head>
+    <style>html, .tile-body {
+  background: #000;
+  margin: 0;
+  padding: 0;
+}
+
+#tile {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+#c {
+  background: #000;
+  width: 250px;
+  height: 250px;
+  display: block;
+}
+
+#pre {
+  cursor: pointer;
+  user-select: none;
+  background: radial-gradient(closest-side, #0000 40%, #000000bf 100%);
+  width: 250px;
+  height: 250px;
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#pre:focus {
+  outline: none;
+}
+
+.crt {
+  color: #ff9c2a;
+  letter-spacing: .15px;
+  filter: brightness(1.15);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+.crt__inner {
+  vertical-align: middle;
+  text-align: left;
+  text-shadow: 0 0 .1px #fff3d6, 0 0 2px #ffb347, 0 0 6px #ffa03ce6, 0 0 14px #ff8c28b3, 0 0 28px #ff781473, 0 0 45px #ff640040;
+  padding: 18px;
+  display: table-cell;
+}
+
+#pre:before {
+  content: "";
+  pointer-events: none;
+  opacity: .9;
+  mix-blend-mode: multiply;
+  background: repeating-linear-gradient(#ff8c2803 0, #0000 1px, #0000000d 2px, #00000026 3px);
+  position: absolute;
+  inset: 0;
+}
+
+#pre:after {
+  content: "";
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background: linear-gradient(#ffffff0d, #00000026);
+  position: absolute;
+  inset: 0;
+}
+
+.kicker {
+  opacity: .9;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.title {
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.sub {
+  opacity: .8;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+
+.hint {
+  background: #00000073;
+  border: 1px solid #ff962873;
+  padding: 4px 8px;
+  font-size: 12px;
+  display: inline-block;
+  box-shadow: 0 0 6px #ff962899, inset 0 0 6px #ff962840;
+}
+
+.hidden {
+  display: none !important;
+}
+</style>
+  </head>
+  <body>
+    <div id="tile">
+      <canvas id="c" width="250" height="250"></canvas>
+
+      <div id="pre" class="crt" role="button" tabindex="0">
+        <div class="crt__inner">
+          <div class="kicker">https://ddl.red/el-display</div>
+          <div class="title">Click to start</div>
+          <div class="sub">XOR field • 250×250</div>
+          <div class="hint">▶ press / click</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/tilescript">(function () {
+  var pre = document.getElementById('pre');
+  var started = false;
+
+  function start() {
+    if (started) return;
+    started = true;
+
+    if (pre) pre.className += ' hidden';
+
+    var canvas = document.getElementById('c');
+    var ctx = canvas.getContext('2d');
+
+    var W = 250, H = 250;
+
+    // Ramp settings
+    var cellStart = 10;
+    var cellTarget = 3;
+    var rampFrames = 7;
+
+    var cell = cellStart;
+    var cols = (W / cell) | 0;
+    var rows = (H / cell) | 0;
+
+    var offset = 0;
+    var frame = 0;
+
+    // Precompute 10 grayscale colors (0..9)
+    var pal = [];
+    (function () {
+      var i, g;
+      for (i = 0; i < 10; i++) {
+        g = (i * 255 / 9) | 0;
+        pal[i] = 'rgb(' + (g * 0.909) + ',' + (g * 0.529) + ',' + (g * 0.090) + ')';
+      }
+    })();
+
+    // Reusable per-color coordinate lists (avoid re-alloc every frame)
+    var paths = [];
+    (function () {
+      var i;
+      for (i = 0; i < 10; i++) paths[i] = [];
+    })();
+
+    // x pixel positions cache (recomputed when cell changes)
+    var xpix = [];
+    function rebuildCaches() {
+      cols = (W / cell) | 0;
+      rows = (H / cell) | 0;
+
+      xpix.length = cols;
+      for (var x = 0; x < cols; x++) xpix[x] = x * cell;
+    }
+    rebuildCaches();
+
+    function updateCellRamp() {
+      if (frame >= rampFrames) return;
+
+      // Linear ramp: cellStart -> cellTarget over rampFrames
+      var t = (frame + 1) / rampFrames;
+      var nextCell = (cellStart + (cellTarget - cellStart) * t) | 0;
+      if (nextCell < cellTarget) nextCell = cellTarget;
+
+      if (nextCell !== cell) {
+        cell = nextCell;
+        rebuildCaches();
+      }
+    }
+
+    function drawStep() {
+      // ramp down resolution for first frames
+      updateCellRamp();
+
+      // clear per-color lists without reallocating
+      for (var v = 0; v < 10; v++) paths[v].length = 0;
+
+      // Build lists of rects per color
+      for (var y = 0; y < rows; y++) {
+        var yy = (y + offset) & 65535;
+        var ypix = y * cell;
+        for (var x = 0; x < cols; x++) {
+          var xx = (x + offset) & 65535;
+          var c = (xx ^ yy) % 10;
+          paths[c].push(xpix[x], ypix);
+        }
+      }
+
+      // Paint: 10 fillStyle changes + up to 10 fills
+      for (var cidx = 0; cidx < 10; cidx++) {
+        var p = paths[cidx];
+        var n = p.length;
+        if (!n) continue;
+
+        ctx.fillStyle = pal[cidx];
+        ctx.beginPath();
+        for (var i = 0; i < n; i += 2) {
+          ctx.rect(p[i], p[i + 1], cell, cell);
+        }
+        ctx.fill();
+      }
+
+      offset = (offset + 1) & 65535;
+      frame++;
+    }
+
+    setInterval(drawStep, 16);
+  }
+
+  if (pre) {
+    pre.addEventListener('click', start, false);
+    pre.addEventListener('keydown', function (e) {
+      e = e || window.event;
+      var k = e.keyCode;
+      if (k === 13 || k === 32) start();
+    }, false);
+  } else {
+    // If no overlay exists, just start immediately
+    start();
+  }
+})();</script>
+  </body>
+</html>

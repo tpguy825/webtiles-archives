@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, .tile-body {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script type="text/tilescript">
+(function() {
+  var C = document.getElementById('c');
+  var X = C.getContext('2d');
+  var W = 375, H = 375;
+  C.width = W; C.height = H;
+
+  /* ── Persistence ── */
+  var bestWin  = parseInt(localStorage.getItem('h4l_best')  || '0', 10);
+  var totalPlays = parseInt(localStorage.getItem('h4l_plays') || '0', 10);
+
+  /* ── RNG ── */
+  var MAX = 2147483647;
+  function genJackpot() {
+    // Экспоненциальное — чаще маленькое, иногда огромное
+    return Math.max(1, Math.round(Math.pow(MAX, Math.random() * 0.7)));
+  }
+  function rndNum() {
+    return Math.floor(Math.random() * 12) + 1; // 1–12
+  }
+
+  /* ── Prize formula ── */
+  // matches: 0→0, 1→jackpot/1000, 2→jackpot/50, 3→jackpot/3, 4→jackpot*10
+  var PRIZE_MULT = [0, 0.001, 0.02, 0.333, 10];
+  var PRIZE_LABEL = ['NOTHING', '1/1000', '1/50', '1/3', 'x10'];
+  var PRIZE_COL   = ['#552222', '#cc6600', '#4488ff', '#aa44ff', '#ffdd00'];
+
+  /* ── State machine ── */
+  // states: idle | spinning | reveal | result
+  var state    = 'idle';
+  var frame    = 0;
+  var jackpot  = 0;
+  var drawn    = [];      // 4 drawn numbers
+  var ticket   = [];      // player's 4 numbers
+  var matches  = 0;
+  var prize    = 0;
+  var revealIdx = 0;      // which drawn number to reveal next
+  var revealTimer = 0;    // countdown to next reveal
+  var REVEAL_DELAY = 28;  // frames between each reveal
+  var spinNums = [0,0,0,0]; // spinning display numbers
+  var spinFrame = 0;
+  var btnHover = false;
+  var linkHover = false;
+  var flashA   = 0;
+  var flashCol = '#ff0000';
+  var particles = [];
+  var hue = 0;
+
+  /* ── Generate new game ── */
+  function startGame() {
+    jackpot = genJackpot();
+    drawn   = [rndNum(), rndNum(), rndNum(), rndNum()];
+    // Player ticket: also random (they don't pick — it's fate!)
+    ticket  = [rndNum(), rndNum(), rndNum(), rndNum()];
+
+    // Count matches (order doesn't matter — how many ticket nums appear in drawn)
+    var drawnCopy = drawn.slice();
+    matches = 0;
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < drawnCopy.length; j++) {
+        if (ticket[i] === drawnCopy[j]) {
+          matches++;
+          drawnCopy.splice(j, 1);
+          break;
+        }
+      }
+    }
+
+    prize = Math.floor(jackpot * PRIZE_MULT[matches]);
+    if (prize > bestWin) { bestWin = prize; localStorage.setItem('h4l_best', bestWin); }
+    totalPlays++;
+    localStorage.setItem('h4l_plays', totalPlays);
+
+    revealIdx   = 0;
+    revealTimer = 30; // небольшая пауза перед первым reveal
+    spinFrame   = 0;
+    state       = 'spinning';
+    frame       = 0;
+    flashA = 0.6; flashCol = '#ff2a2a';
+    particles   = [];
+  }
+
+  /* ── Particles ── */
+  function spawnPts(n, col) {
+    for (var i = 0; i < n; i++) {
+      var a = Math.random() * Math.PI * 2;
+      var s = Math.random() * 3 + 0.5;
+      particles.push({
+        x: W/2, y: H*0.52,
+        vx: Math.cos(a)*s, vy: Math.sin(a)*s - Math.random()*2,
+        life: 1, decay: Math.random()*0.03+0.01,
+        sz: Math.random()*3+1, col: col
+      });
+    }
+  }
+
+  /* ── Draw helpers ── */
+  function txt(str, x, y, col, font, align, baseline) {
+    X.font        = font || '11px monospace';
+    X.textAlign   = align || 'center';
+    X.textBaseline= baseline || 'middle';
+    // Drop shadow via pixel offset
+    X.fillStyle = '#000';
+    X.fillText(str, x+1, y+1);
+    X.fillStyle = col;
+    X.fillText(str, x, y);
+  }
+
+  function rect(x, y, w, h, fill, stroke, lw) {
+    if (fill)   { X.fillStyle = fill;     X.fillRect(x, y, w, h); }
+    if (stroke) { X.strokeStyle = stroke; X.lineWidth = lw||1.5; X.strokeRect(x, y, w, h); }
+  }
+
+  /* ── Number cell ── */
+  // state: 'spin' | 'hidden' | 'match' | 'miss'
+  function drawCell(x, y, num, cellState, label) {
+    var size = 42;
+    var bx = x - size/2, by = y - size/2;
+
+    var bg, border, tc;
+    if (cellState === 'hidden') {
+      bg = '#0a0000'; border = '#441111'; tc = '#331111';
+    } else if (cellState === 'spin') {
+      bg = '#0d0000'; border = '#882222'; tc = '#ff4444';
+    } else if (cellState === 'match') {
+      bg = '#0a1a00'; border = '#44cc22'; tc = '#88ff44';
+    } else { // miss
+      bg = '#0a0000'; border = '#552222'; tc = '#884444';
+    }
+
+    rect(bx, by, size, size, bg, border, 2);
+
+    // Corner accents
+    var cs = 5;
+    X.strokeStyle = border;
+    X.lineWidth = 1.5;
+    X.beginPath();
+    X.moveTo(bx, by+cs);       X.lineTo(bx, by);       X.lineTo(bx+cs, by);
+    X.moveTo(bx+size-cs, by);  X.lineTo(bx+size, by);  X.lineTo(bx+size, by+cs);
+    X.moveTo(bx, by+size-cs);  X.lineTo(bx, by+size);  X.lineTo(bx+cs, by+size);
+    X.moveTo(bx+size-cs, by+size); X.lineTo(bx+size, by+size); X.lineTo(bx+size, by+size-cs);
+    X.stroke();
+
+    // Number
+    if (cellState !== 'hidden') {
+      txt(String(num), x, y, tc, 'bold 18px monospace');
+    } else {
+      txt('?', x, y, '#331111', 'bold 18px monospace');
+    }
+
+    // Label under cell
+    if (label) {
+      txt(label, x, by + size + 10, '#662222', '8px monospace');
+    }
+  }
+
+  /* ── Button ── */
+  function drawBtn(x, y, w, h, label, active) {
+    var col    = active ? (btnHover ? '#ff6666' : '#ff3333') : '#441111';
+    var border = active ? (btnHover ? '#ff6666' : '#ff2a2a') : '#331111';
+    var bg     = active ? (btnHover ? '#1a0000' : '#0f0000') : '#050000';
+
+    rect(x - w/2, y - h/2, w, h, bg, border, btnHover && active ? 2.5 : 2);
+    txt(label, x, y, col, 'bold 13px monospace');
+  }
+
+  /* ── Screens ── */
+  function drawBg() {
+    X.fillStyle = '#060606';
+    X.fillRect(0, 0, W, H);
+    // Grid
+    X.strokeStyle = 'rgba(255,0,0,0.035)';
+    X.lineWidth = 1;
+    for (var x = 0; x < W; x += 20) { X.beginPath(); X.moveTo(x,0); X.lineTo(x,H); X.stroke(); }
+    for (var y = 0; y < H; y += 20) { X.beginPath(); X.moveTo(0,y); X.lineTo(W,y); X.stroke(); }
+    // Outer border
+    X.strokeStyle = '#331111';
+    X.lineWidth = 2;
+    X.strokeRect(3, 3, W-6, H-6);
+  }
+
+  function drawHUD() {
+    txt('H4.LOTTERY', W/2, 18, '#ff3333', 'bold 13px monospace');
+    txt('PLAYS: '+totalPlays, 10, H-18, '#662222', '9px monospace', 'left');
+    txt('BEST: '+(bestWin>0?bestWin:'--'), W-10, H-18, '#662222', '9px monospace', 'right');
+    // Site link
+    var lc = linkHover ? '#ff5555' : '#551111';
+    txt('h4offc.nekoweb.org', W/2, H-6, lc, '8px monospace', 'center', 'bottom');
+  }
+
+  function drawTicketSection(revealedCount) {
+    // Section labels
+    txt('YOUR TICKET', W/2, 70, '#882222', 'bold 9px monospace');
+    txt('DRAWN NUMBERS', W/2, 180, '#882222', 'bold 9px monospace');
+
+    // Jackpot display
+    txt('JACKPOT: ' + jackpot, W/2, 42, '#cc4422', '10px monospace');
+
+    // Ticket row (player's numbers) — always fully visible
+    var ticketXs = [68, 128, 188+10, 248+20];
+    var labels = ['#1', '#2', '#3', '#4'];
+    for (var i = 0; i < 4; i++) {
+      var isMatch = false;
+      if (revealedCount > 0) {
+        // Check if this ticket number matched any revealed drawn number
+        var drawnSoFar = drawn.slice(0, revealedCount);
+        var drawnCopy2 = drawnSoFar.slice();
+        for (var k = 0; k < 4; k++) {
+          for (var j = 0; j < drawnCopy2.length; j++) {
+            if (ticket[k] === drawnCopy2[j]) {
+              if (k === i) isMatch = true;
+              drawnCopy2.splice(j, 1);
+              break;
+            }
+          }
+        }
+      }
+      var cs2 = revealedCount > 0 ? (isMatch ? 'match' : 'miss') : 'spin';
+      drawCell(ticketXs[i], 100, ticket[i], cs2, labels[i]);
+    }
+
+    // Drawn row
+    for (var i = 0; i < 4; i++) {
+      var cx = ticketXs[i];
+      if (i < revealedCount) {
+        // Check if this drawn num matched any ticket num
+        var drawnCopy3 = drawn.slice(0, i+1);
+        var tickCopy   = ticket.slice();
+        var matched = false;
+        for (var d = 0; d < drawnCopy3.length; d++) {
+          for (var t2 = 0; t2 < tickCopy.length; t2++) {
+            if (drawnCopy3[d] === tickCopy[t2]) {
+              if (d === i) matched = true;
+              tickCopy.splice(t2, 1);
+              break;
+            }
+          }
+        }
+        drawCell(cx, 210, drawn[i], matched ? 'match' : 'miss', labels[i]);
+      } else if (i === revealedCount && state === 'spinning') {
+        // Spinning cell
+        drawCell(cx, 210, spinNums[i], 'spin', labels[i]);
+      } else {
+        drawCell(cx, 210, 0, 'hidden', labels[i]);
+      }
+    }
+  }
+
+  function drawIdle() {
+    txt('H4.LOTTERY', W/2, 18, '#ff3333', 'bold 13px monospace');
+    txt('4 numbers  1–12  infinite jackpot', W/2, H/2 - 60, '#662222', '9px monospace');
+    txt('Match numbers to win a share', W/2, H/2 - 44, '#552222', '9px monospace');
+
+    // Prize table
+    var rows = [
+      ['4 matches', 'JACKPOT x10', '#ffdd00'],
+      ['3 matches', 'JACKPOT / 3', '#aa44ff'],
+      ['2 matches', 'JACKPOT / 50', '#4488ff'],
+      ['1 match',   'JACKPOT / 1000', '#ff6600'],
+      ['0 matches', 'NOTHING', '#552222']
+    ];
+    for (var i = 0; i < rows.length; i++) {
+      var ry = H/2 - 12 + i * 20;
+      txt(rows[i][0], W/2 - 50, ry, '#882222', '9px monospace', 'right');
+      txt('→', W/2 - 38, ry, '#441111', '9px monospace');
+      txt(rows[i][1], W/2 - 26, ry, rows[i][2], '9px monospace', 'left');
+    }
+
+    drawBtn(W/2, H/2 + 70, 130, 40, '[ PLAY ]', true);
+  }
+
+  function drawSpinning() {
+    drawTicketSection(revealIdx);
+    // Pulse the current spinning cell label
+    var msg = revealIdx < 4 ? 'drawing #'+(revealIdx+1)+'...' : 'counting matches...';
+    txt(msg, W/2, 240 + 30, '#882222', '9px monospace');
+  }
+
+  function drawResult() {
+    drawTicketSection(4);
+
+    // Matches line
+    var mc = PRIZE_COL[matches];
+    txt(matches + ' MATCH' + (matches !== 1 ? 'ES' : ''), W/2, 248, mc, 'bold 11px monospace');
+    txt(PRIZE_LABEL[matches], W/2, 262, mc, '9px monospace');
+
+    // Prize
+    if (prize > 0) {
+      txt('YOU WIN:', W/2, 284, '#884422', '9px monospace');
+      txt(prize, W/2, 300, '#ffdd00', 'bold 15px monospace');
+    } else {
+      txt('YOU WIN NOTHING', W/2, 292, '#552222', '10px monospace');
+    }
+
+    // Rainbow border on big win
+    if (matches >= 3) {
+      hue = (hue + 4) % 360;
+      X.strokeStyle = 'hsl('+hue+',100%,55%)';
+      X.lineWidth = 2;
+      X.strokeRect(5, 5, W-10, H-10);
+    }
+
+    drawBtn(W/2, H - 44, 130, 34, '[ PLAY AGAIN ]', true);
+  }
+
+  /* ── Main loop via setInterval ── */
+  setInterval(function() {
+    frame++;
+    spinFrame++;
+
+    // Spin animation
+    if (state === 'spinning') {
+      // Update spinning numbers for unrevealed slots
+      if (spinFrame % 3 === 0) {
+        for (var i = revealIdx; i < 4; i++) spinNums[i] = rndNum();
+      }
+      // Reveal logic
+      revealTimer--;
+      if (revealTimer <= 0 && revealIdx < 4) {
+        revealIdx++;
+        revealTimer = REVEAL_DELAY;
+        if (revealIdx === 4) {
+          // All revealed — show result
+          setTimeout(function() {
+            state = 'result';
+            frame = 0;
+            if (matches >= 2) spawnPts(matches * 15, PRIZE_COL[matches]);
+            if (matches === 4) { flashA = 0.9; flashCol = '#ffdd00'; }
+          }, 400);
+        }
+      }
+    }
+
+    // Flash decay
+    if (flashA > 0) flashA -= 0.04;
+
+    // Particles
+    for (var i = particles.length-1; i >= 0; i--) {
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.08; p.vx *= 0.99;
+      p.life -= p.decay;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+
+    /* ── Render ── */
+    drawBg();
+
+    // Flash
+    if (flashA > 0) {
+      X.globalAlpha = flashA * 0.2;
+      X.fillStyle = flashCol;
+      X.fillRect(0, 0, W, H);
+      X.globalAlpha = 1;
+    }
+
+    // Particles
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      X.globalAlpha = p.life;
+      X.fillStyle = p.col;
+      X.fillRect(p.x - p.sz/2, p.y - p.sz/2, p.sz, p.sz);
+    }
+    X.globalAlpha = 1;
+
+    if      (state === 'idle')     { drawIdle();     drawHUD(); }
+    else if (state === 'spinning') { drawSpinning(); drawHUD(); }
+    else if (state === 'result')   { drawResult();   drawHUD(); }
+
+  }, 33); // ~30fps
+
+  /* ── Input ── */
+  C.addEventListener('click', function(e) {
+    var rect2 = C.getBoundingClientRect();
+    var mx = (e.clientX - rect2.left) * (W / rect2.width);
+    var my = (e.clientY - rect2.top)  * (H / rect2.height);
+
+    // Site link zone
+    if (my > H-22 && mx > W/2-80 && mx < W/2+80) {
+      window.open('https://h4offc.nekoweb.org', '_blank');
+      return;
+    }
+
+    // Button zone
+    if (state === 'idle') {
+      if (mx > W/2-65 && mx < W/2+65 && my > H/2+50 && my < H/2+90) {
+        startGame();
+      }
+    } else if (state === 'result') {
+      if (mx > W/2-65 && mx < W/2+65 && my > H-62 && my < H-28) {
+        state = 'idle'; particles = [];
+      }
+    }
+  });
+
+  C.addEventListener('mousemove', function(e) {
+    var rect2 = C.getBoundingClientRect();
+    var mx = (e.clientX - rect2.left) * (W / rect2.width);
+    var my = (e.clientY - rect2.top)  * (H / rect2.height);
+    linkHover = (my > H-22 && mx > W/2-80 && mx < W/2+80);
+    if (state === 'idle') {
+      btnHover = (mx > W/2-65 && mx < W/2+65 && my > H/2+50 && my < H/2+90);
+    } else if (state === 'result') {
+      btnHover = (mx > W/2-65 && mx < W/2+65 && my > H-62 && my < H-28);
+    } else {
+      btnHover = false;
+    }
+    C.style.cursor = (btnHover || linkHover) ? 'pointer' : 'default';
+  });
+
+  C.addEventListener('mouseleave', function() {
+    btnHover = false; linkHover = false;
+  });
+
+})();
+</script>
+</body>
+</html>
