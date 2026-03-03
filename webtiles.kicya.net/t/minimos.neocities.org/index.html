@@ -38,10 +38,22 @@
 
   50% {
     background-image: url("Fountains.png");
+    background-size: unset;
   }
 
   55% {
+    background-image: url("bang.png");
+    background-size: cover;
+  }
+
+  80% {
+    background-image: url("bang.png");
+    background-size: cover;
+  }
+
+  85% {
     background-image: url("brand.png");
+    background-size: unset;
   }
 
   100% {
@@ -82,15 +94,6 @@
 
 #screensaver:hover ~ #bang {
   display: none;
-}
-
-#green {
-  z-index: 2;
-  height: 100%;
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  box-shadow: 0 0 10px 2px green !important;
 }
 
 input {
@@ -211,8 +214,6 @@ input.addEventListener('keyup', function(event) {
         input.value = sessionStorage.getItem("history");
     }
 });</script>
-    <div id="green">
-    </div>
     <div id="bang">
     </div>
     <div id="screensaver">

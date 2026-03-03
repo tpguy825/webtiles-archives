@@ -12,36 +12,38 @@
 <body>	
     
     <div>
-        	<script type="text/tilescript"></script>
-	
+        
+
+        <SCRIPT type="text/tilescript">console.log("gucci")</SCRIPT>
+
+        
     </div>
 
     <script type="text/tilescript">console.log("executin")
 global = this;
 
 done = false;
-test = document.querySelector("div")
-
+test = document.querySelector("script")
 test = test.cloneNode(true)
 
 
 function ELPSYKONGROO() {
-test = document.querySelector("div")
-script = test.firstElementChild
-test.remove()
 
-script.removeAttribute("type")
-script.src = "./test.js"
+test.removeAttribute("type")
+test.setAttribute("type","text/tilescript")
+test.src = "/script.js"
+
+test.setAttribute("default-src","/t/0rion.nekoweb.org/script.js")
 
 lol = test.cloneNode(true)
 
-console.log(lol)
-
-document.body.after(document)
-
+document.body.appendChild(lol)
 }
 
-global.window.document.querySelector("button").addEventListener("click",ELPSYKONGROO);</script>
+global.window.document.querySelector("button").addEventListener("click",ELPSYKONGROO);
+
+button = global.window.document.querySelector("button")
+button.setAttribute(["onclick"],new String("console.log(`hello`)"))</script>
 
     
 
