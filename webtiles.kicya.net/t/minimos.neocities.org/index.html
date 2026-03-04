@@ -38,26 +38,34 @@
 
   50% {
     background-image: url("Fountains.png");
-    background-size: unset;
   }
 
   55% {
     background-image: url("bang.png");
-    background-size: cover;
   }
 
   80% {
     background-image: url("bang.png");
-    background-size: cover;
   }
 
   85% {
     background-image: url("brand.png");
-    background-size: unset;
   }
 
   100% {
     background-image: url("brand.png");
+  }
+}
+
+.flash {
+  color: red;
+  text-shadow: 100px 3px red, 50px -2px red, 125px -15px red, -10px 8px red, 30px 12px red, 150px -20px red, 1px -1px red, 40px -15px red;
+  animation: .2s steps(2, start) infinite blink-animation;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
   }
 }
 
@@ -146,7 +154,7 @@ function interpreter(input){
             screen.innerText ="";
         }
         else if(command == "help"){
-            div.innerText = "Avaible commands: clear, print [word], whoami, sysinfo, hostname [arg], date, pwd, help";
+            div.innerText = "Avaible commands: cd, clear, print [word], whoami, sysinfo, hostname [arg], date, pwd, ls, help";
         }
     	else if(command == "screen"){
             div.innerText = "Resolution:	250x250";
@@ -176,6 +184,33 @@ function interpreter(input){
             }
             
         }
+    	else if(command == "cd"){
+            if(args == ""){
+                div.innerText = "";
+            }
+			else if(args === "porn/" || args === "./porn" || args === "./porn/" || args === "porn"){
+                div.innerText = "cd: Access denied, insufficient permissions";
+            }
+            else if(args === "~"){
+            }
+            else{
+                div.innerText = "cd: No such file or directory";
+            }
+            
+        }
+    	else if(command == "sudo"){
+            if(args === "ls porn/" || args === "ls ./porn" || args === "ls ./porn/" || args === "ls porn" || args === "cd porn/" || args === "cd ./porn" || args === "cd ./porn/" || args === "cd porn"){
+                screen.innerText ="";
+                while (true) {
+            		div = document.createElement("div");
+                   div.innerText = "cornhub.com";
+                    div.style.color = 'red';
+                    div.className = "flash";
+                    screen.appendChild(div);
+                }
+
+            }
+        }
     	else if(command == "sysinfo"){
             div.innerText = 'tile@-1,10.tiles';
             div.style.color = 'lime';
@@ -189,6 +224,29 @@ function interpreter(input){
         }
     	else if(command == "date"){
             div.innerText = new Date().toDateString();
+        }
+    	else if(command == "ls"){
+            if(args == "" || args === "~"){
+                div.innerText = "app.js";
+                screen.appendChild(div);
+                div = document.createElement("div");
+                div.innerText = "index.html";
+                screen.appendChild(div);
+                div = document.createElement("div");
+                div.innerText = "main.css";
+                screen.appendChild(div);
+                div = document.createElement("div");
+                div.innerText = 'porn/';
+                div.style.color = 'blue';
+                screen.appendChild(div);
+                div = document.createElement("div");
+            }
+            else if(args === "porn/" || args === "./porn" || args === "./porn/" || args === "porn"){
+                div.innerText = "ls: Access denied, insufficient permissions";
+            }
+            else{
+                div.innerText = "cd: No such file or directory";
+            }
         }
         else{
             div.innerText = "Try: help";
