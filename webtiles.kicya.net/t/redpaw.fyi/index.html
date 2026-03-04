@@ -12,10 +12,50 @@ img.animated-gif {
   width: 250px;
   height: auto;
 }
+
+.GoofyCorner {
+  rotation-point: center;
+  width: 40px;
+  height: auto;
+  transition: transform .3s ease-in-out;
+  position: absolute;
+  top: 215px;
+  left: -10px;
+  rotate: 5deg;
+}
+
+.GoofyCorner:hover {
+  transform: translateY(-20px)translateX(10px)scale(1.7);
+}
+
+.hover-text {
+  white-space: nowrap;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  background: #000000b3;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: transform .3s ease-in-out;
+  position: absolute;
+  top: 190px;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.GoofyContainer:hover .hover-text {
+  opacity: 1;
+  transform: translateY(-20px)translateX(30px)scale(1.1);
+}
 </style>
 </head>
 
-    <img class="animated-gif" src="https://webtiles.kicya.net/t/redpaw.fyi/yixi extention.png">
+    <img width="250" src="ab0ple.jpg">
+    <div class="GoofyContainer">
+        <img src="goofypapnobkgrd.gif" class="GoofyCorner" alt="Goofy">
+        <span class="hover-text">U should visit <br> :3</span>
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
