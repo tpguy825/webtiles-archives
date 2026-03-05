@@ -4,7 +4,7 @@
     <style>.tile-body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e1e1e1;
+  background: linear-gradient(169deg, #e33130 0%, #a1326d 100%);
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -61,17 +61,17 @@ button:hover .button-outer {
   border-radius: inherit;
   will-change: box-shadow, clip-path, background-image, transform;
   clip-path: inset(0 round 256vw);
-  background-image: linear-gradient(135deg, #e6e6e6, #b4b4b4);
+  background-image: linear-gradient(135deg, #f59f40, #f6623c);
   padding: 1em 1.5em;
   transition: box-shadow .3s, clip-path .25s, background-image .25s, transform .25s;
   position: relative;
   overflow: clip;
-  box-shadow: inset 0 0 #0505051a, inset -.05em -.05em .05em #05050540, inset 0 0 #0505051a, inset 0 0 .05em .2em #ffffff40, inset .025em .05em .1em #fff, inset .12em .12em .12em #ffffff40, inset -.075em -.25em .25em .1em #05050540;
+  box-shadow: inset 0 0 #0505051a, inset -.05em -.05em .05em #05050540, inset 0 0 #0505051a, inset 0 0 .05em .2em #ffffcc40, inset .025em .05em .1em #ffc, inset .12em .12em .12em #ffffcc40, inset -.075em -.25em .25em .1em #05050540;
 }
 
 button:hover .button-inner {
   clip-path: inset(clamp(1px, .0625em, 2px) round 256vw);
-  box-shadow: inset .1em .15em .05em #050505bf, inset -.025em -.03em .05em .025em #05050580, inset .25em .25em .2em #05050580, inset 0 0 .05em .5em #ffffff26, inset 0 0 #fff, inset .12em .12em .12em #ffffff40, inset -.075em -.12em .2em .1em #05050540;
+  box-shadow: inset .1em .15em .05em #050505bf, inset -.025em -.03em .05em .025em #05050580, inset .25em .25em .2em #05050580, inset 0 0 .05em .5em #ffffcc26, inset 0 0 #ffc, inset .12em .12em .12em #ffffcc40, inset -.075em -.12em .2em .1em #05050540;
 }
 
 button .button-inner span {
@@ -103,7 +103,7 @@ button:hover .button-inner span, button:active .button-inner {
 
 				<button                     id="sound-btn"
 					type="button"
-					data-audio-url="fart.mp3"
+					data-audio-url="cartoon-sfx.mp3"
 					style="">
                       <div class="button-outer">
     <div class="button-inner">
@@ -123,6 +123,7 @@ button:hover .button-inner span, button:active .button-inner {
         function playsound(player, url) {
 			player.src = url;
 			player.muted = false;
+            player.volume = 0.5;
 			player.currentTime = 0;
 			player.play().catch(function (err) {
 				console.log('Playback error:', err);
