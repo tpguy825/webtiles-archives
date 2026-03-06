@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head><style>.tile-body {
+  color: #fff;
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  display: flex;
+}
+
+#start {
+  font-size: 125px;
+}
+
+#start p {
+  text-align: center;
+  font-size: 12px;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style></head>
+	<body><span id="start">🤩<p>Click to warp</p></span><a href="https://thykka.nekoweb.org/" target="_blank"><canvas width="250" height="250" id="canvas"></canvas></a><script type="text/tilescript">PI2 = Math.PI * 2;
+canvas = document.getElementById('canvas');
+ctx = canvas.getContext('2d');
+
+function rnd(a, b) {
+	l = Math.min(a, b);
+	h = Math.max(a, b);
+	return Math.random() * (h - l) + l;
+}
+
+particles = [];
+for (i = 0; i < 32; i++) {
+	particles.push([rnd(-1, 1), rnd(-1, 1), rnd(-50, 0)]);
+}
+
+function draw() {
+    ctx.fillStyle = '#00000044';
+    ctx.fillRect(0, 0, 250, 250);
+    ctx.fillStyle = '#fff';
+	particles.forEach(function (p) {
+		w = 0.6 + Math.pow((50 + p[2]) / 25, 2);
+        ctx.fillRect(project(p[0] * 250, p[2] * 250, 128), project(p[1] * 250, p[2] * 250, 128), w, w);
+		p[2] += 1/4;
+		if (p[2] > 0) {
+            p[0] = rnd(-2, 2);
+            p[1] = rnd(-2, 2);
+            p[2] = -50;
+        };
+	});
+	setTimeout(draw, 1000 / 60);
+}
+
+function project(starXY, starZ, camXY) {
+	return ((2000 * starXY) / (starZ - 0)) + camXY
+}
+
+draw();
+</script></body>
+</html>

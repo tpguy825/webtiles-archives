@@ -19,14 +19,27 @@ p {
   line-height: 1em;
 }
 
-.blurred:hover {
+.fadetext:hover {
   opacity: .1;
   transition: opacity 1.3s ease-in, filter 1s ease-in;
+}
+
+.fadepet {
+  opacity: 0;
+  transition: opacity 2.3s ease-out;
+  position: absolute;
+  top: 60px;
+  left: 80px;
+}
+
+.fadepet:hover {
+  opacity: 1;
+  transition: opacity .8s ease-in;
 }
 </style>
 </head>
 <body>
-    <a href="https://snepshark.neocities.org/" style="text-decoration: none;" target="_blank"><div class="blurred" style="opacity = 0.5; transition: opacity 1.2s ease-out;">
+    <a href="https://snepshark.neocities.org/" style="text-decoration: none;" target="_blank"><div class="fadetext" style="opacity = 0.5; transition: opacity 1.2s ease-out;">
         <p>
             Succumb to deer pressure
         </p>
@@ -34,7 +47,11 @@ p {
         <p>
             Turn into a deer today!
         </p>
-    </div></a>
+    </div>
+    </a>
+    <div class="fadepet">
+        <img src="petpetsnep.webp">
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
