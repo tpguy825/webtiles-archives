@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>* {
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  cursor: pointer;
+  background: #021627;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
+</style>
+</head>
+<body>
+<audio id="player" src="song.mp3" preload="metadata"></audio>
+<canvas id="viz" width="250" height="250"></canvas>
+<script type="text/tilescript">
+var canvas = document.getElementById('viz');
+var ctx    = canvas.getContext('2d');
+var player = document.getElementById('player');
+var playing = false;
+var t = 0;
+var amp = 0;
+
+canvas.addEventListener('click', function() {
+  if (playing) { player.pause(); } else { player.play(); }
+});
+player.addEventListener('play',  function() { playing = true; });
+player.addEventListener('pause', function() { playing = false; });
+player.addEventListener('ended', function() { playing = false; });
+
+function sample(x) {
+  return Math.sin(x * 1.0  + t * 31.0) * 0.38
+       + Math.sin(x * 3.7  + t * 57.0) * 0.24
+       + Math.sin(x * 7.3  + t * 20.0) * 0.18
+       + Math.sin(x * 13.1 + t * 83.0) * 0.12
+       + Math.sin(x * 19.5 + t * 14.0) * 0.08;
+}
+
+var W = 250, H = 250;
+var midY = 138;
+var waveTop = midY - 55, waveH = 110;
+var lastPlaying = null, lastProg = -1;
+
+ctx.fillStyle = '#021627';
+ctx.fillRect(0, 0, W, H);
+ctx.fillStyle = '#7fbff5';
+ctx.font = 'bold 14px monospace';
+ctx.textAlign = 'center';
+ctx.fillText('On a hand-me-down deck chair', W / 2, 26);
+ctx.fillStyle = '#2c4255';
+ctx.font = '10px monospace';
+ctx.fillText('robida.net', W / 2, 42);
+
+function draw() {
+  ctx.fillStyle = 'rgba(2,22,39,0.18)';
+  ctx.fillRect(0, waveTop, W, waveH);
+
+  var targetAmp = playing ? 48 : 0;
+  amp += (targetAmp - amp) * (playing ? 0.06 : 0.04);
+
+  ctx.beginPath();
+  for (var i = 0; i <= W; i++) {
+    var x = i / W * 6.28;
+    var y = midY + sample(x) * amp;
+    if (i === 0) { ctx.moveTo(i, y); } else { ctx.lineTo(i, y); }
+  }
+  ctx.strokeStyle = '#7fbff5';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  if (!playing && amp < 1) {
+    ctx.fillStyle = '#16222c';
+    ctx.fillRect(0, midY, W, 1);
+  }
+
+  var prog = player.duration > 0 ? player.currentTime / player.duration : 0;
+  var progBucket = Math.round(prog * 210);
+  if (playing !== lastPlaying || progBucket !== lastProg) {
+    ctx.fillStyle = '#021627';
+    ctx.fillRect(0, H - 30, W, 30);
+    ctx.fillStyle = playing ? '#456986' : '#2c4255';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(playing ? '\u25a0  stop' : '\u25b6  click to play', W / 2, H - 20);
+    ctx.fillStyle = '#131c24';
+    ctx.fillRect(20, H - 11, 210, 2);
+    if (progBucket > 0) {
+      ctx.fillStyle = playing ? '#456986' : '#131c24';
+      ctx.fillRect(20, H - 11, progBucket, 2);
+    }
+    lastPlaying = playing;
+    lastProg = progBucket;
+  }
+
+  if (playing) t += 0.008;
+  setTimeout(draw, 40);
+}
+
+draw();
+</script>
+</body>
+</html>
