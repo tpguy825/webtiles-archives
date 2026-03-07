@@ -2,36 +2,46 @@
 <html lang="en">
 <head>
     <style>root {
-  --text: #5e636d;
-  --border: lightgrey;
-  --accent: #a6a6a6;
-  --bg: #f7f0f0;
-  --gradientTop: #e8e8e8;
-  --gradientBottom: #f1f2f3;
+  --text: #2d4a7a;
+  --h3h4: #5d93e3;
+  --h1h2: #407bcf;
+  --border: #2865bd;
+  --section: #dbe9ff;
+  --accent: #bfdaff;
+  --pagebg: #f7faff;
+  --sidegradientTop: #6ba4f2;
+  --sidegradientBottom: #2865bd;
+  --title: url("https://webtiles.kicya.net/t/dovetown.nekoweb.org/blocked");
+  --link: #6fa6f7;
+  --linkhover: #5d93e3;
 }
 
 .tile-body {
   color: #5e636d;
   background-color: #f7f0f0;
-  background-image: url("bg.jpg");
+  background-image: url("background.png");
   padding: 10px;
   font-family: Tahoma, sans-serif;
 }
 
-a:link {
-  color: gray;
+a {
+  color: #6fa6f7;
+  font-weight: underline;
   background-color: #0000;
   text-decoration: none;
+  transition: all .3s;
 }
 
 a:hover, a:focus {
-  font-style: italic;
+  letter-spacing: 1px;
+  color: #5d93e3;
+  transition: all .3s;
 }
 
 .container {
   outline-offset: 2px;
-  background-color: #f1f2f3;
-  border: 6px ridge #d3d3d3;
+  background-color: #f7faff;
+  border: 3px solid #2865bd;
   border-radius: 10px;
   flex-wrap: wrap;
   gap: 2px;
@@ -70,12 +80,13 @@ h3 {
 }
 
 h4 {
-  color: #a6a6a6;
+  color: #5d93e3;
   padding-left: 12px;
   font-size: .9rem;
 }
 
 p {
+  color: #2d4a7a;
   font-size: .75rem;
 }
 
@@ -127,7 +138,7 @@ a:visited {
             <br><br>
             
             <br><br>
-            <img src="dovetown.png" style="border:2px ridge lightgrey">
+            <img src="dovetown.png" style="border:1px solid darkblue">
                                    
         
         </p>
@@ -139,11 +150,18 @@ a:visited {
      <img class="static" src="dianediane.png" width="250" height="250">
 
     <div class=dt>
-        <p>
+      
             
         
-    <b>  <a href="https://dovetown.nekoweb.org/" target="_blank">dove.town</a>
-        </b>
+      <p>
+          
+       
+          
+          <a href="https://dovetown.nekoweb.org/" style="color: #6FA6F7;
+  background-color: transparent;
+        font-weight: underlined;
+  text-decoration: none;" target="_blank">dove.town</a>
+        
         </p>
     </div>
     

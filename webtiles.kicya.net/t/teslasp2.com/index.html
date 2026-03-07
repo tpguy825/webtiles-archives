@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>@font-face {
+  font-family: Poppins;
+  src: url("font/Poppins-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.tile-body {
+  color: #009693;
+  user-select: none;
+  background-color: #2d2d2d;
+  background-image: url("images/general/bg.png");
+  background-size: 16px;
+  background-attachment: fixed;
+  margin: 0;
+  font-family: Poppins, Arial, sans-serif;
+  font-size: 12px;
+  position: absolute;
+  inset: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: .75rem;
+  padding-right: .75rem;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.align-items-baseline {
+  align-items: baseline !important;
+}
+
+.row {
+  flex-wrap: wrap;
+  margin-top: 0;
+  margin-left: -.75rem;
+  margin-right: -.75rem;
+  display: flex;
+}
+
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0;
+  padding-left: .75rem;
+  padding-right: .75rem;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.col-auto {
+  flex: none;
+  width: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.flex-col {
+  flex-direction: column;
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+  display: flex;
+}
+
+.plant {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.general-div-gar {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.body-div-gar {
+  width: 100%;
+  height: 100%;
+}
+
+a.f-button {
+  color: #fff !important;
+}
+
+.content-div-gar {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.content-div-gar > div.content {
+  background-color: #1d1d1d;
+  border: 1px solid #101010;
+  border-radius: 15px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  margin: 10px;
+  padding: 20px;
+  box-shadow: inset 0 0 10px 5px #101010;
+}
+
+.content-div-gar > div.content .signature {
+  aspect-ratio: 1;
+  background: #bdb46a;
+  width: 60px;
+  margin-top: -20px;
+  transition: background .5s ease-in-out;
+  display: inline-block;
+  mask: url("images/general/signature.png") center / contain no-repeat;
+}
+
+.bobbing > .arrow {
+  border: 5px solid #bdb46a;
+  border-top: #bdb46a;
+  border-left: #bdb46a;
+  width: 19px;
+  height: 19px;
+  animation-name: bobbing;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bobbing {
+  from {
+    transform: translateY(-4px)rotate(45deg);
+  }
+
+  to {
+    transform: translateY(12px)rotate(45deg);
+  }
+}
+
+a {
+  transition: color .5s ease-in-out;
+  position: relative;
+  color: #bdb46a !important;
+  text-decoration: none !important;
+}
+
+a:active {
+  color: #bdb46a !important;
+  text-decoration: none !important;
+}
+
+a::selection {
+  color: #1d1d1d;
+  background: #bdb46a;
+}
+
+.f-button {
+  color: #fff;
+  fill: #fff;
+  text-align: center;
+  user-select: none;
+  background: #006e6d linear-gradient(#009693 50%, #006e6d 50%) top / 100% 200%;
+  border-radius: 10px;
+  padding: 15px;
+  transition: background-position .5s ease-in-out, color .5s ease-in-out, background-color .5s ease-in-out;
+  border: none !important;
+}
+
+.f-button:disabled {
+  opacity: .5;
+}
+
+.f-button:hover:not(:disabled) {
+  background-position: bottom;
+}
+</style>
+</head>
+
+<body>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+    <div class="plant">
+        <div class="flex-col general-div-gar overflow-hidden">
+            <div class="flex-row body-div-gar overflow-hidden">
+                <div class="content-div-gar overflow-auto">
+                    <div class="content container">
+                        <div class="row justify-content-center">
+                            <div class="col-auto p-0 ">
+                                <div class="signature"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center" style="margin-top: -10px;">
+                            <div class="col-auto text-center">
+                                <p>hi! my name is alex! (any/all) <img src="images/flags/nonbinary_flag.svg" width="24" height="24"><img src="images/flags/agender_flag.svg" width="24" height="24"></p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center" style="margin-top: -10px;">
+                            <div class="col-auto text-center">
+                                <p>I do <a href="https://teslasp2.com/p/random" target="_blank">art</a>, <a href="https://teslasp2.com/chars/random" target="_blank">ocs</a>, web dev and
+                                    anything that
+                                    crosses my mind! Feel free to enter my place if you really want to</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center" style="margin-top: -10px;">
+                            <div class="col-auto text-center bobbing">
+                                <div class="arrow"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between align-items-baseline" style="margin-top: 10px;">
+                            <div class="col-auto">
+                                <img src="images/general/skeleton.gif" width="32" height="32">
+                            </div>
+                            <div class="col-auto">
+                                <a class="f-button" style="padding: 5px; border-radius: 5px;" href="https://teslasp2.com" target="_blank">Enter!</a>
+                            </div>
+                            <div class="col-auto">
+                                <img src="images/general/skeleton.gif" width="32" height="32" style="transform: scaleX(-1);">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

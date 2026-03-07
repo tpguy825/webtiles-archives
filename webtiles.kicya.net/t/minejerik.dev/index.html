@@ -2,17 +2,57 @@
 <html lang="en">
 <head>
     <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+  color: #ccc;
+  background-color: #181818;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}
+
+ul {
+  color: #fff;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+li:before {
+  content: "-";
+}
+
+a {
+  color: #ff2e88;
+  text-decoration: none;
 }
 </style>
 </head>
 <body>
-    <h1>still in the works :3</h1>
-    <p>minejerik.dev</p>
-    <script type="text/tilescript">// Only executes while your tile is active
+    <div style="text-align:center; margin:10px; border-color:rgba(95,95,95,.78); width: 90%; height: 90%; border-width: 2px; border-style: solid;">
+        
+       <div style="border-bottom: 2px solid; padding-top: 5px; padding-bottom: 5px; border-color:rgba(95,95,95,.78);">
+       		<i>minejerik.dev</i>    
+       </div>
+        
+       <div style="text-align:left; padding: 5px; padding-top: 0px; margin-top: 10px">
+            <strong style="padding: 0px;">haii :3 im minejerik!</strong>
+            <p>
+           	im a webdev & student! <br>
+            i can be found here:
+           </p>
+           <ul>
+               <li>
+               <a href="https://github.com/minejerik" target="_blank">my github!</a>
+               </li>
+               <li>
+               <a href="https://minejerik.dev" target="_blank">my website!</a>
+               </li>
+           </ul>
+           <div>
+               heres some stuff ive made:
+           </div>
+            <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
+        </div>
+    </div>
 </body>
 </html>
