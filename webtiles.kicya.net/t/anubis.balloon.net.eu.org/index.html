@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>.tile-body {
+  background: #f9f5d8;
+}
+
+#🔍 {
+  white-space: nowrap;
+  font-size: 15px;
+  display: flex;
+}
+
+a {
+  color: #fff;
+  padding: 250px;
+}
+
+a:before {
+  content: url("anubis-web.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("anubis-check.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("anubis-web.jpg");
+}
+</style>
+</head>
+<body>
+<div id="🔍"><a href="https://anubis.techaro.lol/" target="_blank">Anubis: Web AI Firewall Utility</a></div>
+</body>
+</html>
