@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@keyframes border_pulse {
+  0% {
+    color: #836fff;
+    text-shadow: 1px 1px #15f5ba;
+  }
+
+  25% {
+    color: #000;
+  }
+
+  50% {
+    color: #15f5ba;
+    text-shadow: 1px 1px #836fff;
+  }
+
+  75% {
+    color: #000;
+  }
+
+  100% {
+    color: #836fff;
+    text-shadow: 1px 1px #15f5ba;
+  }
+}
+
+@keyframes logo_pulse {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.nofilter {
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+.tile-body {
+  background-color: #000;
+}
+
+h2 {
+  text-align: center;
+  text-shadow: 1px 1px #836fff;
+  color: #000;
+  width: 100%;
+  height: 100%;
+  animation-name: border_pulse;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+
+html, .tile-body {
+  font-family: "Courier New" monospace;
+}
+
+.unobserved {
+  filter: drop-shadow(2px 2px 2px #836fff);
+  animation-name: logo_pulse;
+  animation-duration: 10s;
+  animation-iteration-count: 1;
+}
+</style>
+</head>
+<body>
+    <div id="mainbody">
+        <img class="nofilter" style="width : 100%; height : 100%; position: fixed; top:0px; z-index:1" src="dust.gif">
+        <h2 style="position:fixed; z-index:2;">
+            WELCOME BACK
+        </h2>
+        <div style="position:fixed; z-index:1;width:100%;top:50px; text-align:center;">
+            <img class="unobserved" style="width:75%" src="logo.png">
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+</script>
+</body>
+</html>
