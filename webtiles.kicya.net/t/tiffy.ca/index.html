@@ -8,19 +8,34 @@
   padding: 5px 20px 20px;
 }
 
-div {
+h1, p {
   color: #f0f8ff;
+}
+
+.sticker {
+  transition: transform 2s;
+}
+
+.sticker:hover {
+  transform: scale(1.5);
+}
+
+div {
   text-align: center;
+  color: #000;
   background-image: url("textbg.webp");
   width: 210px;
   height: 200px;
   padding: 0;
+  box-shadow: 5px 5px 5px;
 }
 </style>
 </head>
 <body>
     <div>
         <h1>Haii!</h1>
+        <p>Hello!</p>
+        <a href="https://tiffy.ca" target="_blank"><img class="sticker" width="80" height="80" src="broken.svg"></a>
     </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.

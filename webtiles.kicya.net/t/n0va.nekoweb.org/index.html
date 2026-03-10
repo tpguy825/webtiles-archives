@@ -1,22 +1,158 @@
+<!DOCTYPE html>
 <html>
     <head>
-        
+        <style>html, .tile-body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.tile-body {
+  color: #f8eeff;
+  box-sizing: border-box;
+  background: #261437 linear-gradient(#4b2270 0%, #261437 45%, #150a21 100%);
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  font-family: Georgia, Times New Roman, serif;
+  display: flex;
+}
+
+.tile-container {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  max-width: 250px;
+  height: 100vw;
+  max-height: 250px;
+  padding: 10px;
+  display: flex;
+}
+
+.kewt-frame {
+  box-sizing: border-box;
+  text-align: center;
+  background: #3a1b58;
+  border: 1px solid #755896;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  box-shadow: 0 0 0 2px #150a21, 0 4px 12px #0006;
+}
+
+h1 {
+  letter-spacing: 2px;
+  margin: 0 0 10px;
+  font-family: Palatino Linotype, Palatino, Book Antiqua, serif;
+  font-size: 2em;
+  font-weight: normal;
+}
+
+h1 a {
+  color: #f2c2ff;
+  padding: 1px 2px;
+  text-decoration: none;
+}
+
+h1 a:hover {
+  color: #150a21;
+  background: #f2c2ff;
+}
+
+.button-box {
+  min-height: 31px;
+  margin: 10px 0;
+}
+
+.button-box a {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+  display: inline-block;
+}
+
+.button-box a:hover {
+  background: none;
+  border: none;
+}
+
+.button-box img {
+  image-rendering: pixelated;
+  margin: 0 auto;
+  display: block;
+}
+
+.sidebar-style {
+  box-sizing: border-box;
+  color: #f8eeff;
+  text-transform: none;
+  letter-spacing: 0;
+  background: #f2c2ff14;
+  border: 1px solid #755896;
+  width: 100%;
+  margin: 4px 0;
+  padding: 6px 8px;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: block;
+}
+
+a.sidebar-style.btn-3d {
+  color: #150a21;
+  text-shadow: 0 1px #fff6;
+  background: linear-gradient(#f582e8 0%, #ffd9f9 50%, #f582e8 100%);
+  border: 1px solid #c957ba;
+  border-bottom: 3px solid #9c3b8e;
+  border-radius: 4px;
+  transition: transform .1s;
+  box-shadow: inset 0 1px #fffc, 0 2px 5px #0006;
+}
+
+a.sidebar-style.btn-3d:hover {
+  background: linear-gradient(#ff9cf4 0%, #fff2fd 50%, #ff9cf4 100%);
+  border-color: #e075d1 #e075d1 #b54dab;
+  box-shadow: inset 0 1px #ffffffe6, 0 3px 8px #ff8af366;
+}
+
+a.sidebar-style.btn-3d:active {
+  border-bottom-width: 1px;
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px #0003;
+}
+
+.attribution, .enter-link {
+  width: 100%;
+  margin-top: 5px;
+}
+</style>
     </head>
-    <body style="
-            background-color: black;
-            display: table;
-            width: 100%;
-            height: 100vh;
-            margin: 0;
-            color: yellow;
-        ">
-        <div style="
-                display: table-cell;
-                vertical-align: middle;
-                text-align: center;
-            ">
-            <h1>UNDER CONSTRUCTION!</h1>
-            
+    <body>
+        <div class="tile-container">
+            <div class="kewt-frame">
+                <h1><a href="https://n0va.nekoweb.org" target="_blank">N0\A</a></h1>
+                <div class="button-box">
+                    <a href="https://kewt.krzak.org" target="_blank">
+                        <img src="kewt_button.gif" alt="kewt" width="88" height="31">
+                        <span style="display:none; border:1px solid #ff8af3; padding:5px; font-size:0.8em; color:#ff8af3;">KEWT</span>
+                    </a>
+                </div>
+                
+                <div class="attribution">
+                    <div class="sidebar-style">Made with a custom SSG</div>
+                </div>
+                
+                <div class="enter-link">
+                    <a href="https://n0va.nekoweb.org" target="_blank" class="sidebar-style btn-3d">ENTER SITE</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
