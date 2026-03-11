@@ -13,45 +13,119 @@
 
 .tile-body {
   color: #f5f5f5;
-  text-align: center;
   background-color: #111;
   background-image: url("images/paper.jpg");
+  background-size: contain;
   font-family: JetBrains Mono, Monaco;
 }
 
-.content {
-  max-width: 200px;
-  margin: auto;
+#logo {
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  position: relative;
+  top: 6px;
 }
 
-h1 {
-  font-family: Courier Prime Bold, Courier New;
-  font-size: 30px;
+.sticky {
+  filter: drop-shadow(-.5px .5px 1px #000);
+  background-image: url("images/sticky.png");
+  background-repeat: no-repeat;
+  width: 206px;
+  height: 87px;
+  margin-left: 23px;
+  margin-right: auto;
+  position: relative;
+  top: 10px;
+}
+
+#sticky-text {
+  text-align: center;
+  max-width: 170px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 13px;
+  position: relative;
+  top: 24px;
+  right: 1px;
+}
+
+#blinkee {
+  margin-left: 50px;
+  margin-right: 50px;
+  position: relative;
+  top: 22px;
+  left: 1px;
 }
 
 a {
   color: #ffe713;
 }
 
-a:hover {
-  color: #f129b2;
+.play-btn {
+  width: 75px;
+  position: relative;
+  top: 23px;
+  left: 12px;
+}
+
+.play-btn:hover {
+  color: #ffe713;
+  filter: invert(45%) sepia(69%) saturate(6568%) hue-rotate(298deg) brightness(94%) contrast(102%);
+}
+
+#play-text {
+  text-align: center;
+  font-size: 10px;
+}
+
+#btn {
+  margin-left: 22px;
+  margin-right: 23px;
+}
+
+.pink-paper {
+  filter: drop-shadow(-1px -.5px 1px #000);
+  background-image: url("images/pinkpaper.png");
+  background-repeat: no-repeat;
+  width: 140px;
+  height: 68px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#new-dj {
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+  top: 22px;
+  left: 8px;
+  rotate: -10deg;
 }
 </style>
 </head>
 <body>
-    <div class="content">
-        
-    <h1>
-        asahidenpa
-        </h1>
-    
-    <p>work in progress!</p>
-    <p>in the meantime, listen to <a href="https://asahidenpa.net" target="_blank">asahidenpa radio</a>!</p>
-       <p>
-           <img src="images/blinkee.gif" height="20">
-        </p>
-    
-    </div>
+        <img src="images/logo.png" alt="asahidenpa" id="logo" width="200">
+
+        <div class="sticky">
+            <div id="sticky-text">a collaborative online radio station on neocites!</div>
+        </div>
+
+        <a href="https://asahidenpa.net/" target="_blank"><img src="images/blinkee.gif" alt="asahidenpa radio blinkee" id="blinkee" height="20"></a>
+
+        <div class="play-btn">
+            <a href="https://asahidenpa.net/listen" target="_blank">
+                <img src="images/play-button.svg" id="btn" width="30">
+                <br>
+                <div id="play-text">listen now w/ live chat</div>
+            </a>
+        </div>
+
+        <div class="pink-paper">
+            <div id="new-dj">now accepting new DJs!</div>
+        </div>
+
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
