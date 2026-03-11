@@ -1,53 +1,589 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style type="text/css">.tile-body {
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	
+	<head>
+		
+		
+		<style>.tile-body {
   color: #fff;
   background-color: #000;
-  background-image: url("space_background.gif");
-  font-family: Verdana;
-  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: .82em;
+  line-height: 133%;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2em;
-}
-
-h2 {
-  text-align: center;
-  font-size: 1.5em;
+p {
+  line-height: 125%;
 }
 
 h3 {
-  font-size: 1.25em;
   font-weight: bold;
 }
 
-a {
-  color: #add8e6;
-  text-decoration: none;
+.homeBtn {
+  background: linear-gradient(#0d0d0d 0%, #000 50% 51%, #000 100%);
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 12px;
+  line-height: 150%;
+  transition: all .3s;
+  display: inline-block;
+  box-shadow: 0 0 3px #1a1a1a;
 }
 
-a:visited {
-  color: #40e0d0;
+.homeBtn:hover {
+  text-shadow: 0 0 3px green;
+  background: linear-gradient(#333c 0%, #1c261ecc 50%, #0b0f0b80 51%, #0a080980 100%);
+  box-shadow: 0 0 3px #333;
+}
+
+.homeBtn:active {
+  text-shadow: 0 0 3px #00e600;
+  background: linear-gradient(#3c473fcc 0%, #344935cc 50%, #12191280 51%, #333d3399 100%);
+  border: 1px solid #666;
+  box-shadow: 0 0 5px #333;
+}
+
+.indent {
+  margin-left: 40px;
+}
+
+.toc ul {
+  padding-left: 80px;
+}
+
+.toc ul li {
+  list-style: circle;
+}
+
+.ul2 {
+  margin-left: 40px;
+}
+
+.ul2 li {
+  list-style: circle;
+}
+
+.small {
+  font-size: 75%;
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: separate;
+  width: 100%;
+}
+
+a, a:visited {
+  text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
+#Timeline-row {
+  color: #2f4f4f;
+  clear: both;
+  white-space: nowrap;
+  z-index: 0;
+  border: 1px solid #666;
+  border-style: solid none;
+  width: 220px;
+  height: 18px;
+  margin: 4px auto 0;
+  padding: 0;
+  font-size: 97%;
+  position: relative;
+  overflow: visible;
+}
+
+.tl-PreC {
+  text-align: left;
+  width: 207.231px;
+  height: 100%;
+  color: inherit;
+  background: linear-gradient(to right, #fff 0%, #fed96a 15% 100%);
+  padding-left: 5px;
+  position: absolute;
+  left: 0;
+}
+
+.tl-C {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #7fa056;
+  width: 17.5831px;
+  position: absolute;
+  left: 37.6369px;
+}
+
+.tl-O {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #009270;
+  width: 14.8077px;
+  position: absolute;
+  left: 55.22px;
+}
+
+.tl-S {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #b3e1b6;
+  width: 7.94708px;
+  position: absolute;
+  left: 70.0277px;
+}
+
+.tl-D {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #cb8c37;
+  width: 20.5649px;
+  position: absolute;
+  left: 77.9748px;
+}
+
+.tl-Carb {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #67a599;
+  width: 20.2942px;
+  position: absolute;
+  left: 98.5397px;
+}
+
+.tl-P {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #f04028;
+  width: 15.907px;
+  position: absolute;
+  left: 118.834px;
+}
+
+.tl-T {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #812b92;
+  width: 17.093px;
+  position: absolute;
+  left: 134.741px;
+}
+
+.tl-J {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #34b2c9;
+  width: 19.7323px;
+  position: absolute;
+  left: 151.834px;
+}
+
+.tl-K {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #7fc64e;
+  width: 26.0954px;
+  position: absolute;
+  left: 171.566px;
+}
+
+.tl-Pg {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #fd9a52;
+  width: 14.5403px;
+  position: absolute;
+  left: 197.662px;
+}
+
+.tl-N {
+  text-align: center;
+  height: 100%;
+  color: inherit;
+  background-color: #ffe619;
+  width: 6.92492px;
+  position: absolute;
+  left: 212.202px;
+}
+
+.tl-border {
+  color: inherit;
+  background-color: #666;
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  left: 219px;
+}
+
+.tl-marker-row {
+  clear: both;
+  width: 220px;
+  height: 8px;
+  color: inherit;
+  z-index: 100;
+  background-color: #0000;
+  margin: 0 auto;
+  padding: 0;
+  line-height: 0;
+  position: relative;
+  top: -4px;
+  overflow: visible;
+}
+
+.tl-marker {
+  font-size: 50%;
+  position: absolute;
+  left: 219.898px;
+}
+
+.tl-marker-inner {
+  color: #fff;
+  position: relative;
+  left: -.42em;
+}
+
+.groove {
+  border: 2px groove #000;
+}
+
+.ridge {
+  border: 1px ridge #333;
+}
+
+.image-container {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.image-container img {
+  width: 182px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.code {
+  background-color: #1a1a1acc;
+  border-radius: 3px;
+  font-family: Consolas, Courier New, Courier, monospace;
+}
+
+.date {
+  color: #666;
+  background-color: #1a1a1acc;
+  border-bottom: 2px groove #000;
+  padding: 5px 15px;
+}
+
+#glossary {
+  text-align: left;
+  color: #fff;
+  background: linear-gradient(#80808080 0%, #1a1a1a80 10px, #00000080 100%);
+  border: 1px solid #333;
+  width: 250px;
+  max-height: 500px;
+  padding: 5px;
+  font-size: 100%;
+  position: absolute;
+  top: 70px;
+  right: 50%;
+  overflow: hidden auto;
+  transform: translateX(-420px);
+}
+
+#glossary table {
+  width: 250px;
+}
+
+#glossary dl {
+  margin: 0 0 0 10px;
+  font-size: 85%;
+}
+
+#glossary dt {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#glossary dd {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.creed {
+  max-width: 400px;
+  margin-left: 20px;
+  font-style: italic;
+}
+
+.creed-wide {
+  margin-left: 20px;
+  font-style: italic;
+}
+
+.council-section {
+  text-align: left;
+  border-left: #333;
+  border-right: #333;
+  min-width: 600px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 15px;
+  position: relative;
+}
+
+.c-blue {
+  color: #75b3ff;
+}
+
+.c-green {
+  color: #27f584;
+}
+
+.c-purple {
+  color: #5254ff;
+}
+
+.c-cyan {
+  color: #80ffff;
+}
+
+.c-red {
+  color: #ff9191;
+}
+
+.c-pink {
+  color: #ff80ce;
+}
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee div {
+  padding-left: 100%;
+  animation: 60s linear infinite animate;
+  display: inline-block;
+}
+
+.marquee:hover div {
+  animation-play-state: paused;
+}
+
+@keyframes animate {
+  100% {
+    transform: translate(-100%);
+  }
+}
+
+.cbar {
+  width: 500px;
+  margin: 0 auto;
+  display: block;
+}
+
+.sidebar {
+  float: right;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  max-width: 360px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 4px #0003, 0 3px 10px #00000030;
+}
+
+.sidebar table {
+  border-spacing: 0 10px;
+}
+
+.styled {
+  width: 98%;
+  margin-left: 1%;
+}
+
+.styled, .styled tr, .styled td {
+  border-radius: 0;
+}
+
+.styled td {
+  border-bottom: 1px solid #dadad2;
+  margin: 0;
+  padding: 0;
+}
+
+.styled td p {
+  margin: 0;
+  padding: .4em;
+}
+
+.styled tr:hover {
+  background-color: #eaeae2;
+}
+
+.styled > tbody > tr:first-child:hover {
+  background-color: inherit;
+}
+
+.styled > tbody > tr:first-child > td {
+  color: #fff;
+  background-color: #cacac2;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.box {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+  line-height: 200%;
+  box-shadow: 0 2px 4px #0003, 0 3px 10px #00000030;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.toc {
+  text-align: center;
+}
+
+.toc ul, .toc ol {
+  text-align: left;
+}
+</style>
+		<style type="text/css">html, .tile-body {
+  background-image: url("space_background.gif");
+  height: 100%;
+  margin: 0;
+  font-family: Consolas, Courier New, Courier, monospace;
+  font-size: 100%;
+}
+
+a {
+  color: #85e0dd;
+}
+
+a:visited {
+  color: #34cbc6;
+}
+
 a:active, a:visited:active {
   color: #00ff7f;
 }
+
+h3 {
+  text-shadow: 0 0 3px gray;
+}
+
+.content {
+  text-align: center;
+  box-sizing: border-box;
+  background: linear-gradient(#80808080 0%, #00000080 10px);
+  border: 1px solid #333;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: table;
+  position: absolute;
+  overflow: hidden;
+}
+
+.content-inner {
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+}
+
+#statusInput {
+  color: #fff;
+  background: linear-gradient(#33333380 0%, #00000080 34% 80%, #26262680 100%);
+  border: 1px solid #333;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  font-family: Consolas, Courier New, Courier, monospace;
+  transition: all .3s;
+  box-shadow: 0 0 5px #333;
+}
+
+#statusInput:focus {
+  background: linear-gradient(#56565680 0%, #11111180 34%, #00000080 57%, #11111180 80%, #47474780 100%);
+  border: 1px solid gray;
+  outline: none;
+  box-shadow: 0 0 5px gray;
+}
+
+#submit {
+  color: #fff;
+  margin: 0 auto;
+  font-family: Consolas, Courier New, Courier, monospace;
+  display: inline-block;
+}
+
+#response {
+  margin-top: 20px;
+}
+
+.spaced, .homeBtn {
+  margin-bottom: 30px;
+}
+
+.glow {
+  text-shadow: 0 0 3px gray;
+}
+
+.notice {
+  background: linear-gradient(#0000 0%, #00000080 50%, #0000 100%);
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  margin: 0 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 75%;
+}
 </style>
-</head>
-<body>
-    <div align="center">
-		<img style="width: 225px; top: 1400px" src="this%20is%20a%20website.png">
-	</div>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
-</body>
+	</head>
+	
+	<body>
+		<div class="content">
+            <div class="content-inner">
+				<span class="glow">hello</span><br>
+				<p class="spaced glow">do you wish to enter my website?</p>
+				<a class="homeBtn glow" href="https://jovidmtp.nekoweb.org/index.html" target="_blank">
+					yes
+				</a>
+           	    <a class="homeBtn glow">
+					no
+				</a><br>
+				<p class="glow notice c-green">a browser from 2013 or later is recommended</p>
+			</div>
+		</div>
+	</body>
+	
 </html>

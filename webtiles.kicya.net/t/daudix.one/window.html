@@ -4,34 +4,36 @@
 <head>
     <style>@font-face {
   font-style: normal;
-  font-weight: 100 900;
-  src: url("fonts/geist.woff2") format("woff2");
-  font-family: Geist;
+  font-weight: 400 900;
+  src: url("golos-text.woff2") format("woff2");
+  font-family: Golos Text;
   font-display: swap;
 }
 
 @font-face {
   font-style: italic;
-  font-weight: 100 900;
-  src: url("fonts/geist-italic.woff2") format("woff2");
-  font-family: Geist;
+  font-style: oblique -12deg;
+  font-weight: 400 900;
+  src: url("golos-text.woff2") format("woff2");
+  font-family: Golos Text;
   font-display: swap;
 }
 
 @font-face {
   font-style: normal;
   font-weight: 100 900;
-  src: url("fonts/geist-mono.woff2") format("woff2");
-  font-family: Geist Mono;
+  src: url("commit-mono.woff2") format("woff2");
+  font-family: Commit Mono;
   font-display: swap;
 }
 
 @font-face {
   font-style: italic;
   font-weight: 100 900;
-  src: url("fonts/geist-mono-italic.woff2") format("woff2");
-  font-family: Geist Mono;
+  src: url("commit-mono.woff2") format("woff2");
+  font-family: Commit Mono;
   font-display: swap;
+  font-variation-settings: "ital" 1;
 }
 
 .tile-body {
@@ -43,7 +45,7 @@
   align-items: center;
   height: 250px;
   margin: 0;
-  font-family: Geist, system-ui, sans-serif;
+  font-family: Golos Text, system-ui, sans-serif;
   font-weight: 400;
   line-height: 1;
   animation: 8s linear infinite marquee;
@@ -175,7 +177,7 @@ nav strong {
 
 #title, #content {
   color: #000c;
-  font-family: Geist Mono, ui-monospace, monospace;
+  font-family: Commit Mono, ui-monospace, monospace;
   line-height: 1;
   display: block;
 }
