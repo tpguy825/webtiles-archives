@@ -8,33 +8,131 @@
 .tile-body {
   color: #fff;
   background-color: #1a1a1a;
+  flex-direction: column;
+  height: 100vh;
   font-family: "M PLUS 2", "M PLUS 1", Helvetica, Arial, sans-serif;
+  display: flex;
 }
 
 main {
-  margin: 16px 8px;
+  flex: 1;
+  height: 100%;
+  margin: 16px 0 0 8px;
+  line-height: 1.1;
+}
+
+h4, p {
+  margin: 0 0 4pt;
 }
 
 header {
-  background: #2f2f2f;
+  background: #77b19d;
   line-height: 1;
 }
 
 header > * {
   vertical-align: bottom;
 }
+
+#links {
+  background-color: #0f73ff;
+  grid-template-columns: auto auto auto;
+  margin: 0 -8px;
+  padding: 0 12pt 0 0;
+  line-height: 1.3;
+  list-style: none;
+  display: grid;
+}
+
+#links li a {
+  color: inherit;
+  padding: 0 0 0 8px;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+}
+
+#links li a:hover {
+  text-decoration: underline;
+}
+
+#website {
+  background: #77b19d;
+  color: #000 !important;
+}
+
+:has( > #masto) {
+  background-color: #6364ff;
+}
+
+:has( > #bsky) {
+  background-color: #0f73ff;
+}
+
+#bye {
+  cursor: grab;
+  margin: auto;
+  padding-right: 12pt;
+}
+
+#bye:active {
+  cursor: grabbing;
+}
+
+#joiner {
+  background: url("background-adj.png");
+  width: 23px;
+  height: 100%;
+  transition: right .25s ease-in-out;
+  position: absolute;
+  top: 0;
+  right: -1px;
+}
+
+.tile-body:hover #joiner {
+  right: -23px;
+}
 </style>
 </head>
 <body>
-    <header><a href="https://byemc.xyz/" target="_blank"><img src="byespace-banner.png" width="100" alt="byespace"></a></header>
+    <header><a href="https://byemc.xyz/" target="_blank"><img src="byespace-wordmark.png" width="100" alt="byespace"></a></header>
 	<main>
-		<p>hey there, i'm bye, welcome to my <small>(mini)</small> space </p>
-        <p>
-            this tile is a work in progress, so hang tight!
+        <h4>
+            i'm bye, welcome to my space
+        </h4>
+        <p style="margin-right: 12pt;">
+            i code in c# a lot... one day i'll have more to show off
         </p>
+        <ul id="links">
+            <li>
+            	<a id="website" href="https://byemc.xyz" target="_blank">website</a>
+            </li>
+            <li>
+            	<a id="masto" href="https://wetdry.world/@bye" target="_blank">mastodon</a>
+            </li>
+            <li>
+            	<a id="bsky" href="https://bsky.app/profile/byemc.xyz" target="_blank">bsky</a>
+            </li>
+        </ul>
     </main>
+    <img id="bye" alt src="webtile-wink.webp">
+    <div id="joiner">
+        
+    </div>
 <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+
+var bye = document.getElementById("bye");
+
+bye.addEventListener("mousedown", function(e) {
+    e.preventDefault();
+    bye.src = "/webtile-flustered.webp";
+});
+
+bye.addEventListener("mouseup", function(e) {
+    bye.src = "/webtile-wink.webp";
+})
+
+console.log(bye);</script>
 </body>
 </html>
