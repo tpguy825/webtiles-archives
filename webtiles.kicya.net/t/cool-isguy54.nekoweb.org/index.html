@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #ffb42b;
+  background-image: url("BG.png");
+  background-size: 150px;
+  animation: 25s linear infinite MoveBg;
+}
+
+a {
+  color: #000;
+  font-size: 60%;
+}
+</style>
+</head>
+<body>
+    <div style="display:flex;">
+        <style>@keyframes MoveBg {
+  from {
+    background-position: 0 -32px;
+  }
+
+  to {
+    background-position: 0 32px;
+  }
+}
+</style>
+		<div style="background: #ff852b;width: 25%;height: 250px; border-right: 1px solid;">
+            <div style="background: rgb(255, 233, 43);color: #000000;padding: .5em;font-size: 17.03px;font-family: impact;text-align: center; border-bottom: 1px solid;">
+                COOL
+                <br>
+                ISGUY
+            </div>
+            <ul style="padding: 0 0 0 5px;list-style: none;">
+            	<li><a href="https://cool-isguy54.nekoweb.org/" target="_blank">Visit Website</a></li>
+            	<li><a href="https://cool-isguy54.nekoweb.org/" target="_blank">Art</a></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
