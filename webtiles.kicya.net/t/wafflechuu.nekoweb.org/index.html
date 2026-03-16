@@ -5,12 +5,17 @@
   text-align: center;
   color: #fe8bc1;
   background-image: url("img/bg.gif");
-  font-family: Margarine;
+  font-family: Smalle;
 }
 
 h1 {
   font-size: 15px;
   text-decoration: underline;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
 }
 
 .header {
@@ -24,42 +29,15 @@ h1 {
   right: 0;
 }
 
-.header2 {
-  pointer-events: none;
-  z-index: 1;
-  background: url("img/divider.gif") 0 0 / auto 30px;
-  width: 100%;
-  height: 30px;
-  position: fixed;
-  top: 220px;
+#pink {
+  z-index: 10;
+  border-style: solid;
+  border-width: 7px;
+  border-image: url("img/pink.gif") 6 fill round;
+  width: 100px;
+  position: absolute;
+  top: 35px;
   right: 0;
-}
-
-.text {
-  animation: .5s infinite doodle;
-}
-
-@keyframes doodle {
-  0% {
-    transform: rotate(2deg);
-  }
-
-  50% {
-    transform: rotate(2deg);
-  }
-
-  51% {
-    transform: rotate(-2deg);
-  }
-
-  100% {
-    transform: rotate(-2deg);
-  }
-}
-
-@font-face {
-  font-family: Margarine;
-  src: url("Margarine.ttf");
 }
 </style>
 
@@ -68,13 +46,17 @@ h1 {
     <div class="header"> 
     </div>
     
-        <div class="header2"> 
-        </div>
+    <div id="pink">
+        <p>Personal pink webbie frum hell</p>
+        <p>Art, OC showcasing, videos and more :3!!</p>
+        <h2><a href="https://wafflechuu.nekoweb.org/" target="_blank">Enter</a></h2>
+    </div>
     
     
     <br>
-    <br><img src="img/rbstar.gif">&#x20;&#x20;<img src="img/rbstar.gif">&#x20;&#x20;<img src="img/rbstar.gif">
-    <h1 class="text">wafflechuu.nekoweb.org</h1>
-    <img src="img/decopig.gif" width="150" style="z-index:10;">
+    <img src="img/nana.gif" width="250">
+
+    <img src="img/logo.png" width="200" style="position:absolute; top:-10px; z-index:20; right:5px;">
+    <img src="img/frame.png" width="250" style="position:absolute; top:0px; z-index:15; right:0px; pointer-events:none;">
 </body>
 </html>
