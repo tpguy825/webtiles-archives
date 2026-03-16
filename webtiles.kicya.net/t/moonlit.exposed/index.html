@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #bfb381;
+  background-color: #141a17;
+  margin: 0;
+}
+
+.moon {
+  color: #ffb909;
+  z-index: 1;
+  position: relative;
+}
+
+.moon:after {
+  content: "";
+  filter: blur(15px);
+  z-index: -1;
+  background: radial-gradient(circle, #ffff9699 10%, #ffc80033 50%, #ffff9600 90%);
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  animation: 10s infinite alternate moonGlow;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes moonGlow {
+  0% {
+    opacity: .3;
+    transform: translate(-50%, -50%)scale(1);
+  }
+
+  50% {
+    opacity: .6;
+    transform: translate(-50%, -50%)scale(1.5);
+  }
+
+  100% {
+    opacity: .3;
+    transform: translate(-50%, -50%)scale(1);
+  }
+}
+
+.preformatted {
+  white-space: pre;
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 10px;
+  line-height: 1.3;
+  position: relative;
+}
+
+.container, .train {
+  white-space: pre;
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.come-along {
+  color: #235e1f;
+  background-color: #d7b83b;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+a.kettle {
+  background-color: #0000;
+  border-radius: 3px;
+  text-decoration: none;
+  animation: 5s ease-in-out infinite color-animation, 1.5s ease-in-out infinite wiggle;
+  display: inline-block;
+}
+
+a.kettle:hover {
+  color: #235e1f;
+  background-color: #d7b83b;
+  animation: none;
+}
+
+@keyframes color-animation {
+  0% {
+    color: #bfb381;
+  }
+
+  30% {
+    color: #eeb60d;
+  }
+
+  60% {
+    color: #eeb60d;
+  }
+
+  100% {
+    color: #bfb381;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: scale(1)rotate(0);
+  }
+
+  22% {
+    transform: scale(1.05)rotate(3deg);
+  }
+
+  44% {
+    transform: scale(.95)rotate(-3deg);
+  }
+
+  66% {
+    transform: scale(1.05)rotate(3deg);
+  }
+
+  67% {
+    transform: scale(1)rotate(0);
+  }
+
+  100% {
+    transform: scale(1)rotate(0);
+  }
+}
+
+.firework-particle {
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+}
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 0;
+    transform: translate(0)scale(.5);
+  }
+
+  15% {
+    opacity: .6;
+    transform: translate(calc(var(--tx) * .3), calc(var(--ty) * .3)) scale(.8);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(calc(var(--tx) * .6), calc(var(--ty) * .6)) scale(1);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) scale(1.1);
+  }
+
+  60% {
+    opacity: .7;
+    transform: translate(calc(var(--tx) * 1.05), calc(var(--ty) * 1.05)) scale(.95);
+  }
+
+  80% {
+    opacity: .3;
+    transform: translate(calc(var(--tx) * 1.1), calc(var(--ty) * 1.1)) scale(.7);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--tx) * 1.15), calc(var(--ty) * 1.15)) scale(.5);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .4;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="preformatted">    .--                  ☆      _  (`  ). ☆   
+ .+(   )   ☆   /\  (`)       -(`  )  ☆    ོོོོ   (      ).   
+ (   .  )     /  \(__)_)   :(      ))      _(        '`. 
+(   (   )) ˚ /\/\/\   ˚ °  `(    )  ))` ( (         .   )
+ `- __.'    /↟↟↟↟↟↟\  <span class="moon"> ☽ </span>    ` __.:'((     (..__.:'-'    
+  ☆   /\   /↟↟↟↟↟↟↟↟\      ˚         `(       ) ) ☆      
+˚ °  /↟↟\ /↟↟↟↟↟↟↟↟↟↟\  /\ °   °   ོོོོ      (__.:'   )˚       
+ °  /↟↟↟↟'::.↟↟↟↟%%&%,\/↟↟\   °      ོོོོ ˚   °   (__.'   ˚    
+° ˚/_______Π__ %<a class="kettle" href="https://moonlit.exposed/somewhere/the-fall.html" rel="noopener noreferrer" target="_blank">&&%%&</a>%/↟↟↟↟\      °    °       °         
+˚ //\^_^_^_^_^\%&%%&&%%↟↟↟↟↟\   ˚         ˚         °   ˚
+ //  \_^_/^\_^_\%\Y&%%↟↟↟↟↟↟↟\     ˚    °    ˚    ° ˚    
+/ |  | .-. <a class="come-along" href="https://moonlit.exposed/weathered-memos/" rel="noopener noreferrer" target="_blank">[{}]</a>| ||↟↟↟↟↟↟↟↟↟↟↟\       °   ˚    °   ˚     
+~~@._|@|||@_@_@|~||~~~~~~~~~~††~~~~~~~~~~
+"`"""`""") )"""`"""`""""everything i know
+.".''𖥧".(.  \.'".𖥧".'melts away like snow
+".'𖥧.'".')   ).'".'..'"𖥧'."'.'.'".'..'".'."'.'.'"𖥧'..'".'
+.".''𖥧"./   (".."𖥧''.".''.".'"..".''.".''."𖥧'"..".''.".'.
+"𖥧'..'"/    .\.'".'..'".'."'𖥧'.'".'..'".'."'.'.'".'.𖥧'".'
+.".''.(       \"..".''."𖥧''.".'"<a class="kettle" href="https://webtiles.kicya.net/t/moonlit.exposed/somewhere/kids.html" rel="noopener noreferrer">(:ᘌꇤ⁐)꒱</a>.".'"..".''.".
+</div>
+
+</body>
+</html>

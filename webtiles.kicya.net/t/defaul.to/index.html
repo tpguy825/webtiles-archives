@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+  
+  <style>@font-face {
+  font-family: Planet Kosmos;
+  src: url("PLANK___.TTF") format("truetype");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, .tile-body {
+  color: #e0f4f4;
+  -webkit-font-smoothing: antialiased;
+  background: teal;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  padding: 1.25rem;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.sketch {
+  object-fit: cover;
+  opacity: .25;
+  pointer-events: none;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.tile-content {
+  z-index: 1;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.brand {
+  text-align: center;
+  letter-spacing: .02em;
+  font-family: Planet Kosmos, sans-serif;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.tag {
+  opacity: .9;
+  margin-top: .5rem;
+  font-family: ui-monospace, Cascadia Code, Consolas, monospace;
+  font-size: .7rem;
+}
+</style>
+</head>
+<body>
+  <img src="sketch.png" alt class="sketch" aria-hidden="true">
+  <div class="tile-content">
+    <span class="brand">defaul.to</span>
+    <span class="tag">teal corner</span>
+  </div>
+</body>
+</html>
