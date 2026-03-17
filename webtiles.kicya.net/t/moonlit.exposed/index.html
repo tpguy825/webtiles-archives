@@ -47,10 +47,24 @@
 
 .preformatted {
   white-space: pre;
-  margin: 0 auto;
+  width: 250px;
+  height: 250px;
+  margin: 0;
   font-family: monospace;
   font-size: 10px;
   line-height: 1.3;
+  position: relative;
+  overflow: hidden;
+}
+
+.preformatted-bg-link {
+  z-index: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.preformatted a:not(.preformatted-bg-link), .preformatted span {
+  z-index: 1;
   position: relative;
 }
 
@@ -190,7 +204,7 @@ a.kettle:hover {
 </style>
 </head>
 <body>
-    <div class="preformatted">    .--                  ☆      _  (`  ). ☆   
+    <div class="preformatted"><a class="preformatted-bg-link" href="https://moonlit.exposed" target="_blank" rel="noopener noreferrer"></a>    .--                  ☆      _  (`  ). ☆   
  .+(   )   ☆   /\  (`)       -(`  )  ☆    ོོོོ   (      ).   
  (   .  )     /  \(__)_)   :(      ))      _(        '`. 
 (   (   )) ˚ /\/\/\   ˚ °  `(    )  ))` ( (         .   )
