@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		
+		<style>.tile-body {
+  color: #fff;
+  box-sizing: border-box;
+  background: #000;
+}
+
+main {
+  box-sizing: border-box;
+  display: grid;
+}
+
+h2 {
+  color: green;
+}
+
+.center {
+  text-align: center;
+}
+
+.tile-body a:not(.button), .tile-body a:not(.button):visited, .tile-body a:not(.button):hover {
+  color: green;
+}
+</style>
+		
+        <script type="text/tilescript">
+  			setInterval(function(){
+				var colors = ['red','yellow'];
+                document.getElementById('star').style.color = 'yellow';
+                document.getElementById('msg').textContent = 'x';
+                setTimeout(function() {
+                    document.getElementById('msg').style.display = 'none';
+                }, 1000);
+    			document.getElementById('bulb1').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb2').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb3').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb4').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb5').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb6').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb7').style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('bulb8').style.color = colors[Math.floor(Math.random() * colors.length)];
+			}, 1000);
+        </script>
+	</head>
+	<body>
+		<main>
+                <center>
+                    <small style="position: absolute"><p id="msg">
+                        click to turn on lights
+                        </p></small>
+                	<h2 id="star" style="color:gray;text-shadow:1px 1px 10px;">
+                       ★
+                	</h2>
+                    <h2>
+                        <font id="bulb7" style="color:gray">.</font>/==\<font id="bulb8" style="color:gray">.</font>
+                    </h2>
+					<h2><font id="bulb1" style="color:gray">.</font>/<a href="https://telltheweb.com/authors/callumfisher/index.html" target="_blank">blog</a>\<font id="bulb2" style="color:gray">.</font></h2>
+					<h2><font id="bulb3" style="color:gray">.</font>/<a href="https://callumfisher.com/about/index.html" target="_blank">about</a>\<font id="bulb4" style="color:gray">.</font></h2>
+					<h2><font id="bulb5" style="color:gray">.</font>/<a href="https://telltheweb.com/index.html" target="_blank">featured</a>\<font id="bulb6" style="color:gray">.</font></h2>
+                    <small style="color:brown">||||||</small>
+                </center>
+		</main>
+	</body>
+</html>
