@@ -15,7 +15,7 @@
   src: url("assets/RSE_HandwritingPixel.ttf");
 }
 
-.lop {
+.bun {
   width: 100px;
   height: 200px;
   image-rendering: crisp-edges;
@@ -25,12 +25,12 @@
   background-size: contain;
   display: block;
   position: absolute;
-  top: 60px;
+  top: 30px;
   left: 40px;
   transform: scale(-1, 1);
 }
 
-.lop-shadow {
+.bun-shadow {
   width: 100px;
   height: 200px;
   image-rendering: crisp-edges;
@@ -40,9 +40,24 @@
   background-size: contain;
   display: block;
   position: absolute;
-  top: 151px;
+  top: 121px;
   left: 40px;
   transform: scale(-1, -.4);
+}
+
+.lop-shadow {
+  height: 200px;
+  image-rendering: crisp-edges;
+  filter: opacity(.5) contrast(0%) brightness(22.8%) sepia() hue-rotate(300deg);
+  background-image: url("assets/lopsass.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 250px;
+  display: block;
+  position: absolute;
+  top: -85px;
+  left: 31px;
+  transform: scale(1, -.4);
 }
 
 a {
@@ -62,10 +77,10 @@ a {
   border: 30px solid #0000;
   border-image: url("assets/pixelbt.png") 30 /  / 10px repeat;
   border-radius: 40px;
-  width: 200px;
-  height: 174px;
+  width: 174px;
+  height: 200px;
   position: absolute;
-  top: 8px;
+  bottom: 8px;
   left: 8px;
 }
 </style>
@@ -80,12 +95,16 @@ a {
                 # 427
             </div>
             
-        	<div class="url" style="position: absolute; bottom: 8px;  width: 100%; right: -125px;">
+        	<div class="url" style="position: absolute; bottom: 8px;  width: 100%; bottom: 8px; z-index: 6">
             	lopunny.nekoweb.org
         	</div>
             
-        	<div class="lop"></div>
+        	<div class="bun"></div>
+            <div class="bun-shadow"></div>
             <div class="lop-shadow"></div>
+                
+            
+            
         
     	</a>
     
