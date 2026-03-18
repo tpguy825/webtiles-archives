@@ -44,9 +44,6 @@ Disallow: /
 User-agent: ClaudeBot
 Disallow: /
 
-User-agent: CloudflareBrowserRenderingCrawler
-Disallow: /
-
 User-agent: Google-Extended
 Disallow: /
 
