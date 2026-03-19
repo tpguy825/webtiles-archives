@@ -5,6 +5,31 @@
   color: #fff;
   background-color: #000;
 }
+
+.bicho {
+  transition: all .5s;
+  position: absolute;
+  top: 28px;
+  right: 25px;
+}
+
+.bicho:hover {
+  transition: all .8s;
+  transform: scale(1.9)rotate(400deg);
+}
+
+.button {
+  transition: all .5s;
+  position: absolute;
+  bottom: -2px;
+  right: 1px;
+}
+
+.button:hover {
+  transform-origin: 100% 100%;
+  transition: all .5s;
+  transform: scale(1.2)rotate(10deg);
+}
 </style>
 </head>
 <body>
@@ -12,9 +37,9 @@
     
     <p style="position:absolute; top: -7px; left: 60px">Still working on it &#60;3</p>
     
-    <img src="mon%CC%83ecocontructor.png" alt="This page is under construction" style="position: absolute; right: 25px; top: 28px;">
+    <img src="mon%CC%83ecocontructor.png" alt="This page is under construction" Class="bicho">
     
-    <a href="https://loke-artemis.neocities.org/" target="_blank" style="position: absolute; right: 1px; bottom: -2px;">
+    <a href="https://loke-artemis.neocities.org/" target="_blank" Class="button">
         <img src="Button.gif" alt="Loke's webpage">
     </a>
     

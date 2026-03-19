@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-image: url("kicya.gif");
+  background-repeat: repeat;
+  height: 98%;
+  margin: 0;
+  padding: 1px;
+  font-family: Lato, Arial;
+  font-size: 16px;
+}
+</style>
+</head>
+<body>
+    <p><img src="luigi.png" style="display: block; margin: auto;"></p>
+        <canvas id="canvas" style="width: 50%; height: 50%; display: block; margin: 0 auto;"></canvas>
+    
+    
+    
+    <script type="text/tilescript">
+      var emulator = new Emulator(document.querySelector("#canvas"),
+                                  null,
+                                  new JSMAMELoader(JSMAMELoader.driver("bublbobl"),
+                                                   JSMAMELoader.nativeResolution(256, 256),
+                                                   JSMAMELoader.scale(3),
+                                                   JSMAMELoader.emulatorJS("emulators/mamebublbobl.js"),
+                                                   JSMAMELoader.mountFile("bublbobl.zip",
+                                                                          JSMAMELoader.fetchFile("Game File",
+                                                                                                 "examples/bublbobl.zip"))))
+      emulator.start({ waitAfterDownloading: true });
+    </script>
+    
+</body>
+</html>
