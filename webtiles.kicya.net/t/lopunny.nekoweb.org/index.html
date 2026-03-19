@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/tilescript">
+      function freezegifs() {
+        var x = document.querySelectorAll('.sparkle img, img.sparkle'); 
+        for(var i=0; i<x.length; i++) {
+          x[i].src = x[i].src.slice(0, -3) + 'png' ;}}
+
+      function resumegifs() {
+        var x = document.querySelectorAll('.sparkle img, img.sparkle'); 
+        for(var i=0; i<x.length; i++) {
+          x[i].src = x[i].src.slice(0, -3) + 'gif' ;}}
+    </script>
     
     <style>.tile-body {
   background-color: pink;
@@ -20,28 +31,29 @@
 }
 
 .lop {
+  width: 230px;
   height: 100%;
   image-rendering: crisp-edges;
-  z-index: 2;
+  z-index: 1;
   background-image: url("assets/lopsass.gif");
   display: block;
-  position: relative;
+  position: absolute;
   top: 12px;
   left: 20px;
 }
 
 .lop-shadow {
+  width: 230px;
   height: 100%;
   image-rendering: crisp-edges;
   filter: opacity(.5) contrast(0%) brightness(22.8%) sepia() hue-rotate(300deg);
   background-image: url("assets/lopsass.gif");
   background-repeat: no-repeat;
   background-size: contain;
-  width: 250px;
   display: block;
   position: absolute;
-  top: 131px;
-  left: 11px;
+  top: 128px;
+  left: 23px;
   transform: scale(1, -.4);
 }
 
@@ -57,13 +69,31 @@ a {
   text-decoration: none;
 }
 
+.sparkle {
+  opacity: 0;
+  width: 220px;
+  height: 220px;
+  image-rendering: crisp-edges;
+  z-index: 10;
+  background-image: url("assets/gen3_sparkle.gif");
+  background-size: cover;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+
+.sparkle:hover {
+  opacity: 1;
+  border: 0;
+}
+
 .main-pixel-border {
   z-index: 2;
   border: 30px solid #0000;
   border-image: url("assets/pixelbt.png") 30 /  / 10px repeat;
   border-radius: 40px;
   width: 174px;
-  height: 200px;
+  height: 220px;
   position: absolute;
   top: 8px;
   right: 8px;
@@ -83,6 +113,9 @@ a {
         	<div class="url" style="position: absolute; bottom: 8px;  width: 100%; bottom: 0px; z-index:5">
             	
         	</div>
+            
+            <div class="sparkle" mouseover="resumegifs()"> </div>
+                
             
         	<div class="lop"></div>
             <div class="lop-shadow"></div>
