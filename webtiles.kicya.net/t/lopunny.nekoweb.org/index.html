@@ -46,8 +46,7 @@
   width: 230px;
   height: 100%;
   image-rendering: crisp-edges;
-  filter: opacity(.5) contrast(0%) brightness(22.8%) sepia() hue-rotate(300deg);
-  background-image: url("assets/lopsass.gif");
+  background-image: url("assets/lop-shadow.gif");
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
@@ -55,6 +54,22 @@
   top: 128px;
   left: 23px;
   transform: scale(1, -.4);
+}
+
+.bun {
+  width: 100px;
+  height: 200px;
+  image-rendering: crisp-edges;
+  z-index: 2;
+  opacity: 0;
+  background-image: url("https://webtiles.kicya.net/t/lopunny.nekoweb.org/assets/bun.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  transform: scale(-1, 1);
 }
 
 a {
@@ -116,9 +131,11 @@ a {
             
             <div class="sparkle" mouseover="resumegifs()"> </div>
                 
-            
-        	<div class="lop"></div>
             <div class="lop-shadow"></div>
+        	<div class="lop"></div>
+            
+            
+            
         
     	</a>
     

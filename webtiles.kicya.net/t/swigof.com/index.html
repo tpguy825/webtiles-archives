@@ -2,16 +2,129 @@
 <html lang="en">
 <head>
     <style>.tile-body {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+  user-select: none;
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
+  display: inline !important;
 }
 
-img {
-  height: 100%;
+.bg {
+  margin-top: -75px;
+  margin-left: -75px;
+  display: block;
+}
+
+.glass-div {
+  backdrop-filter: blur(2px);
+  background: #ffffff40;
+  border: 1px solid #ffffff80;
+  border-radius: 3px;
+  outline: 1px solid #0006;
+}
+
+.main {
+  width: 150px;
+  height: 156px;
+  animation: 3s linear infinite bounceX, 3s linear infinite alternate bounceY;
+  position: absolute;
+  top: 0;
+  left: 50px;
+  box-shadow: 0 0 20px #000;
+}
+
+.frame {
+  border: none;
+  width: 142px;
+  height: 156px;
+  margin-top: 3px;
+  margin-left: 4px;
+}
+
+.window-title {
+  text-shadow: 0 0 5px #fff;
+  cursor: default;
+  user-select: none;
+  height: 17px;
+  font-size: 12px;
+}
+
+.window-content {
+  background: #fff;
+  border: 1px solid #000000bf;
+  outline: 1px solid #ffffff80;
+  height: 124px;
+  margin: 5px 1px 1px;
+}
+
+.content {
+  border: 1px solid #b9d0df;
+  height: 122px;
+}
+
+.content > img {
+  width: 100%;
+}
+
+@keyframes bounceX {
+  0% {
+    left: 50px;
+  }
+
+  25% {
+    left: 100px;
+  }
+
+  75% {
+    left: 0;
+  }
+
+  100% {
+    left: 50px;
+  }
+}
+
+@keyframes bounceY {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 94px;
+  }
 }
 </style>
 </head>
 <body>
-    <img src="bnuuy.gif" alt="bnuuy">
+    <img class="bg" src="bg.png">
+    <div class="glass-div main" id="main">
+        <div class="frame">
+            <div class="window-title">🐇 Bnuuy</div>
+            <div class="window-content">
+                <div class="content">
+                    <img src="bnuuy.gif" alt="bnuuy">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/tilescript">// var main = document.getElementById("main");
+// var top = 0;
+// var left = 0;
+
+// //setInterval(move, 50);
+// main.style.top = "0px";
+// main.style.left = "0px";
+
+// function move() {
+//     top += 1;
+//     left += 1;
+//     main.style.top = top + "px";
+//     main.style.left = left + "px";
+// }
+</script>
 </body>
 </html>

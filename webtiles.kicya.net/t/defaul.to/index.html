@@ -86,25 +86,25 @@
 }
 
 .tile-container .title-bar-controls button[aria-label="Minimize"] {
-  background-image: url("https://webtiles.kicya.net/t/defaul.to/minimize.svg");
+  background-image: url("minimize.png");
   background-position: left 4px bottom 3px;
   background-repeat: no-repeat;
 }
 
 .tile-container .title-bar-controls button[aria-label="Maximize"] {
-  background-image: url("https://webtiles.kicya.net/t/defaul.to/maximize.svg");
+  background-image: url("maximize.png");
   background-position: 3px 2px;
   background-repeat: no-repeat;
 }
 
 .tile-container .title-bar-controls button[aria-label="Help"] {
-  background-image: url("https://webtiles.kicya.net/t/defaul.to/help.svg");
+  background-image: url("help.png");
   background-position: 5px 2px;
   background-repeat: no-repeat;
 }
 
 .tile-container .title-bar-controls button[aria-label="Close"] {
-  background-image: url("https://webtiles.kicya.net/t/defaul.to/close.svg");
+  background-image: url("close.png");
   background-position: 4px 3px;
   background-repeat: no-repeat;
   margin-left: 2px;
@@ -152,6 +152,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 html, .tile-body {
@@ -351,23 +353,74 @@ html, .tile-body {
           <span class="window-menu-item"><u>H</u>elp</span>
         </div>
       </div>
-      <div class="window" id="window-defaul-main">
-      <div class="title-bar">
-        <div class="title-bar-text">defaul.to</div>
-        <div class="title-bar-controls">
-          <button aria-label="Help"></button>
-          <button aria-label="Close"></button>
+      <div class="window window-clone" style="left:14px;top:14px;z-index:4">
+        <div class="title-bar">
+          <div class="title-bar-text">defaul.to</div>
+          <div class="title-bar-controls">
+            <button aria-label="Help"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <p class="win98-brand">defaul.to</p>
+          <p>Do you want to be happy?</p>
+          <section class="field-row justify-end">
+            <button type="button">Yes</button>
+            <button type="button">Yes</button>
+          </section>
         </div>
       </div>
-      <div class="window-body">
-        <p class="win98-brand">defaul.to</p>
-        <p>Do you want to be happy?</p>
-        <section class="field-row justify-end">
-          <button type="button">Yes</button>
-          <button type="button">Yes</button>
-        </section>
+      <div class="window window-clone" style="left:14px;top:14px;z-index:3">
+        <div class="title-bar">
+          <div class="title-bar-text">defaul.to</div>
+          <div class="title-bar-controls">
+            <button aria-label="Help"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <p class="win98-brand">defaul.to</p>
+          <p>Do you want to be happy?</p>
+          <section class="field-row justify-end">
+            <button type="button">Yes</button>
+            <button type="button">Yes</button>
+          </section>
+        </div>
       </div>
-    </div>
+      <div class="window window-clone" style="left:14px;top:14px;z-index:2">
+        <div class="title-bar">
+          <div class="title-bar-text">defaul.to</div>
+          <div class="title-bar-controls">
+            <button aria-label="Help"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <p class="win98-brand">defaul.to</p>
+          <p>Do you want to be happy?</p>
+          <section class="field-row justify-end">
+            <button type="button">Yes</button>
+            <button type="button">Yes</button>
+          </section>
+        </div>
+      </div>
+      <div class="window" id="window-defaul-main" style="z-index:5">
+        <div class="title-bar">
+          <div class="title-bar-text">defaul.to</div>
+          <div class="title-bar-controls">
+            <button aria-label="Help"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <p class="win98-brand">defaul.to</p>
+          <p>Do you want to be happy?</p>
+          <section class="field-row justify-end">
+            <button type="button">Yes</button>
+            <button type="button">Yes</button>
+          </section>
+        </div>
+      </div>
       <div class="window" id="window-cool-websites">
         <div class="title-bar inactive">
           <div class="title-bar-text">cool websites</div>
@@ -398,157 +451,184 @@ html, .tile-body {
         </div>
       </div>
     </div>
-    <p class="tile-load-warning">Switch to this tile a few times to load the script and experience it as intended. At some point will convert to a gif to fit in, I guess. ; _ ;</p>
   </div>
-  <script type="text/tilescript">(function() {
-  var stack = document.querySelector('.tile-container .window-stack');
-  var container = document.querySelector('.tile-container');
-  if (!stack || !container) return;
 
-  var mainWin = document.getElementById('window-defaul-main');
-  if (!mainWin) return;
+  
+  <script type="text/tilescript">
+  (function() {
+    console.log('[help] script start');
+    var mainWin = document.getElementById('window-defaul-main');
+    if (!mainWin) { console.log('[help] mainWin not found'); return; }
 
-  var TRAIL_LEN = 3;
-  var TRAIL_STEP = 22;
-  var clones = [];
-  for (var i = 0; i < TRAIL_LEN; i++) {
-    var clone = mainWin.cloneNode(true);
-    clone.id = '';
-    clone.classList.add('window-clone');
-    clone.style.left = '14px';
-    clone.style.top = '14px';
-    clone.style.zIndex = 2 + (TRAIL_LEN - 1 - i);
-    stack.insertBefore(clone, mainWin);
-    clones.push(clone);
-  }
-  mainWin.style.zIndex = 2 + TRAIL_LEN;
-
-  var startX = 14, startY = 14;
-  var historyLen = 1 + (TRAIL_LEN + 1) * TRAIL_STEP;
-  var history = [];
-  for (var j = 0; j < historyLen; j++) history.push({ x: startX, y: startY });
-
-  var vx = 0.48, vy = 0.4;
-  var w = mainWin.offsetWidth, h = mainWin.offsetHeight;
-  var stackW = stack.offsetWidth, stackH = stack.offsetHeight;
-  var paused = false;
-  var moveUntil = 0;
-  var pauseUntil = 0;
-
-  function px(n) { return Math.round(n) + 'px'; }
-
-  function virusStep(now) {
-    now = now || 0;
-    if (!moveUntil) moveUntil = now + 2000;
-    if (!pauseUntil) pauseUntil = 0;
-
-    if (paused) {
-      if (now >= pauseUntil) {
-        paused = false;
-        moveUntil = now + 2000;
-      } else {
-        history.unshift({ x: history[0].x, y: history[0].y });
-        history.pop();
-      }
-    } else {
-      if (now >= moveUntil) {
-        paused = true;
-        pauseUntil = now + 1500;
-      } else {
-        var head = history[0];
-        var nx = head.x + vx, ny = head.y + vy;
-        if (nx <= 0) { vx = -vx; nx = 0; }
-        if (ny <= 0) { vy = -vy; ny = 0; }
-        if (nx >= stackW - w) { vx = -vx; nx = stackW - w; }
-        if (ny >= stackH - h) { vy = -vy; ny = stackH - h; }
-        history.unshift({ x: nx, y: ny });
-        history.pop();
-      }
+    // find Help button by looping — attribute selectors may not be supported
+    var buttons = mainWin.querySelectorAll('button');
+    var helpBtn = null;
+    for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i].getAttribute('aria-label') === 'Help') { helpBtn = buttons[i]; break; }
     }
+    console.log('[help] helpBtn found:', !!helpBtn);
 
-    mainWin.style.left = px(history[0].x);
-    mainWin.style.top = px(history[0].y);
-    for (var k = 0; k < TRAIL_LEN; k++) {
-      var idx = 1 + (k + 1) * TRAIL_STEP;
-      clones[k].style.left = px(history[idx].x);
-      clones[k].style.top = px(history[idx].y);
-    }
-  }
-  setInterval(function() { virusStep(Date.now()); }, 16);
+    var helpOverlay = document.getElementById('help-overlay');
+    var helpPopupOk = document.getElementById('help-popup-ok');
+    var helpPopupClose = document.getElementById('help-popup-close');
+    console.log('[help] overlay:', !!helpOverlay);
+    if (!helpBtn || !helpOverlay) return;
 
-  var windows = stack.querySelectorAll('.window:not(.window-clone)');
-  var dragging = null;
-  var dragOffsetX = 0, dragOffsetY = 0;
-
-  windows.forEach(function(win) {
-    if (win.id === 'window-defaul-main') return;
-    var titleBar = win.querySelector('.title-bar');
-    if (!titleBar) return;
-    titleBar.addEventListener('mousedown', function(e) {
-      var node = e.target;
-      while (node) {
-        if (node.classList && node.classList.contains('title-bar-controls')) return;
-        if (node === titleBar) break;
-        node = node.parentNode;
-      }
-      e.preventDefault();
-      var rect = win.getBoundingClientRect();
-      dragging = win;
-      dragOffsetX = e.clientX - rect.left;
-      dragOffsetY = e.clientY - rect.top;
-      win.style.zIndex = 10;
-    });
-  });
-
-  document.addEventListener('mousemove', function(e) {
-    if (!dragging) return;
-    var stackRect = stack.getBoundingClientRect();
-    var left = e.clientX - stackRect.left - dragOffsetX;
-    var top = e.clientY - stackRect.top - dragOffsetY;
-    var ww = dragging.offsetWidth, hh = dragging.offsetHeight;
-    left = Math.max(-ww + 20, Math.min(stackRect.width - 20, left));
-    top = Math.max(-hh + 20, Math.min(stackRect.height - 20, top));
-    dragging.style.left = px(left);
-    dragging.style.top = px(top);
-  });
-
-  document.addEventListener('mouseup', function() {
-    if (dragging) {
-      dragging.style.zIndex = dragging.id === 'window-ida' ? 1 : 3;
-      dragging = null;
-    }
-  });
-
-  var helpBtn = mainWin.querySelector('button[aria-label="Help"]');
-  var helpOverlay = document.getElementById('help-overlay');
-  var helpPopupOk = document.getElementById('help-popup-ok');
-  var helpPopupClose = document.getElementById('help-popup-close');
-  var tileContainer = document.querySelector('.tile-container');
-  if (helpBtn && helpOverlay && tileContainer) {
-    function setDefaulTitleBarsInactive(inactive) {
-      var bar = mainWin && mainWin.querySelector('.title-bar');
-      if (bar) bar.classList.toggle('inactive', inactive);
-      clones.forEach(function(c) {
-        var b = c.querySelector('.title-bar');
-        if (b) b.classList.toggle('inactive', inactive);
-      });
-    }
     helpBtn.addEventListener('click', function() {
-      tileContainer.classList.add('help-open');
-      helpOverlay.classList.add('is-open');
-      helpOverlay.setAttribute('aria-hidden', 'false');
-      setDefaulTitleBarsInactive(true);
+      console.log('[help] showing overlay');
+      helpOverlay.style.display = 'flex';
     });
+
     function closeHelp() {
-      tileContainer.classList.remove('help-open');
-      helpOverlay.classList.remove('is-open');
-      helpOverlay.setAttribute('aria-hidden', 'true');
-      setDefaulTitleBarsInactive(false);
+      console.log('[help] hiding overlay');
+      helpOverlay.style.display = 'none';
     }
+
     if (helpPopupOk) helpPopupOk.addEventListener('click', closeHelp);
     if (helpPopupClose) helpPopupClose.addEventListener('click', closeHelp);
-  }
-})();
-</script>
+    console.log('[help] script done');
+  })();
+  </script>
+
+  
+  <script type="text/tilescript">
+  (function() {
+    console.log('[main] script start');
+    var stack = document.querySelector('.tile-container .window-stack');
+    var container = document.querySelector('.tile-container');
+    if (!stack || !container) { console.log('[main] stack/container missing'); return; }
+
+    var mainWin = document.getElementById('window-defaul-main');
+    if (!mainWin) { console.log('[main] mainWin missing'); return; }
+
+    var TRAIL_STEP = 22;
+    var cloneNodes = stack.querySelectorAll('.window-clone');
+    var clones = [];
+    for (var i = 0; i < cloneNodes.length; i++) { clones.push(cloneNodes[i]); }
+    console.log('[main] clones found:', clones.length);
+
+    var startX = 14, startY = 14;
+    var historyLen = 1 + (clones.length + 1) * TRAIL_STEP;
+    var history = [];
+    for (var j = 0; j < historyLen; j++) history.push({ x: startX, y: startY });
+
+    var vx = 0.48, vy = 0.4;
+    var paused = false;
+    var moveUntil = 0;
+    var pauseUntil = 0;
+
+    function px(n) { return Math.round(n) + 'px'; }
+
+    function virusStep(now) {
+      now = now || 0;
+      var w = mainWin.offsetWidth, h = mainWin.offsetHeight;
+      var stackW = stack.offsetWidth, stackH = stack.offsetHeight;
+      if (!stackW || !stackH || !w || !h) return;
+
+      if (!moveUntil) {
+        console.log('[main] first valid frame, dims:', stackW, stackH, w, h);
+        moveUntil = now + 2000;
+      }
+
+      if (paused) {
+        if (now >= pauseUntil) {
+          paused = false;
+          moveUntil = now + 2000;
+        } else {
+          history.unshift({ x: history[0].x, y: history[0].y });
+          history.pop();
+        }
+      } else {
+        if (now >= moveUntil) {
+          paused = true;
+          pauseUntil = now + 1500;
+        } else {
+          var head = history[0];
+          var nx = head.x + vx, ny = head.y + vy;
+          if (nx <= 0) { vx = -vx; nx = 0; }
+          if (ny <= 0) { vy = -vy; ny = 0; }
+          if (nx >= stackW - w) { vx = -vx; nx = stackW - w; }
+          if (ny >= stackH - h) { vy = -vy; ny = stackH - h; }
+          history.unshift({ x: nx, y: ny });
+          history.pop();
+        }
+      }
+
+      mainWin.style.left = px(history[0].x);
+      mainWin.style.top = px(history[0].y);
+      for (var k = 0; k < clones.length; k++) {
+        var idx = 1 + (k + 1) * TRAIL_STEP;
+        clones[k].style.left = px(history[idx].x);
+        clones[k].style.top = px(history[idx].y);
+      }
+    }
+
+    setInterval(function() { virusStep(Date.now()); }, 16);
+
+    // clones are always behind the main window — force inactive title bars
+    for (var ci = 0; ci < clones.length; ci++) {
+      var cloneTitleBar = clones[ci].querySelector('.title-bar');
+      if (cloneTitleBar) cloneTitleBar.className = 'title-bar inactive';
+    }
+
+    var mainTitleBar = mainWin.querySelector('.title-bar');
+    var windows = stack.querySelectorAll('.window');
+    var dragging = null;
+    var dragTitleBar = null;
+    var dragOffsetX = 0, dragOffsetY = 0;
+
+    for (var wi = 0; wi < windows.length; wi++) {
+      (function(win) {
+        if (win.id === 'window-defaul-main') return;
+        if (win.className.indexOf('window-clone') !== -1) return;
+        var titleBar = win.querySelector('.title-bar');
+        if (!titleBar) return;
+        titleBar.addEventListener('mousedown', function(e) {
+          var node = e.target;
+          while (node) {
+            if (node.className && node.className.indexOf('title-bar-controls') !== -1) return;
+            if (node === titleBar) break;
+            node = node.parentNode;
+          }
+          e.preventDefault();
+          var rect = win.getBoundingClientRect();
+          dragging = win;
+          dragTitleBar = titleBar;
+          dragOffsetX = e.clientX - rect.left;
+          dragOffsetY = e.clientY - rect.top;
+          win.style.zIndex = 10;
+          titleBar.className = 'title-bar';
+          if (mainTitleBar) mainTitleBar.className = 'title-bar inactive';
+        });
+      })(windows[wi]);
+    }
+
+    // document/window.addEventListener not supported — attach to container element
+    container.addEventListener('mousemove', function(e) {
+      if (!dragging) return;
+      var stackRect = stack.getBoundingClientRect();
+      var left = e.clientX - stackRect.left - dragOffsetX;
+      var top = e.clientY - stackRect.top - dragOffsetY;
+      var ww = dragging.offsetWidth, hh = dragging.offsetHeight;
+      left = Math.max(-ww + 20, Math.min(stackRect.width - 20, left));
+      top = Math.max(-hh + 20, Math.min(stackRect.height - 20, top));
+      dragging.style.left = px(left);
+      dragging.style.top = px(top);
+    });
+
+    container.addEventListener('mouseup', function() {
+      if (dragging) {
+        dragging.style.zIndex = dragging.id === 'window-ida' ? 1 : 3;
+        if (dragTitleBar) dragTitleBar.className = 'title-bar inactive';
+        if (mainTitleBar) mainTitleBar.className = 'title-bar';
+        dragging = null;
+        dragTitleBar = null;
+      }
+    });
+
+    console.log('[main] script done, interval started');
+  })();
+  </script>
+
 </body>
 </html>

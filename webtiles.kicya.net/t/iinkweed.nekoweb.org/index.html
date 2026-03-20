@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	
+    
+  	
+  	
+
+    
+    
+  	<style>.tile-body, html {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+p {
+  margin: 8px;
+}
+
+@font-face {
+  font-family: RS07;
+  src: url("RS07.ttf");
+  font-weight: normal;
+}
+
+.tile-body {
+  letter-spacing: 1px;
+  color: #ff0;
+  text-shadow: 1px 1px #000;
+  background: #000 url("bg.png");
+  margin-left: auto;
+  margin-right: auto;
+  font-family: RS07;
+  font-size: 18px;
+}
+
+#wrapper {
+  max-width: 250px;
+  margin: auto;
+  padding: 5px;
+  position: relative;
+}
+
+.grid-template {
+  grid-template: "grid2 grid2"
+                 "grid3 grid4"
+                 / 50% 50%;
+  grid-auto-flow: row dense;
+  gap: 10px;
+  display: grid;
+}
+
+.grid1 {
+  grid-area: grid1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.grid2 {
+  grid-area: grid2;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.grid3 {
+  grid-area: grid3;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+  display: flex;
+}
+
+.grid4 {
+  grid-area: grid4;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10%;
+  display: flex;
+}
+
+.buyinggf {
+  max-width: 100%;
+  height: auto;
+  position: absolute;
+  top: 95%;
+  left: 35%;
+}
+
+.centeredtext {
+  text-align: center;
+  text-wrap: balance;
+  margin: auto;
+}
+
+.loginbg {
+  filter: drop-shadow(2px 2px 2px #3b3b3b);
+  background: url("login.png") 0 0 / contain;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 100px;
+  display: flex;
+}
+
+.loginbtnL, .loginbtnR {
+  filter: drop-shadow(2px 2px 2px #3b3b3b);
+  background: url("loginbutton.png");
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  display: flex;
+}
+</style>
+  </head>
+  <body>
+    
+  <div id="wrapper">
+      
+    <div class="grid-template">
+      
+      <div class="grid2">
+        <div class="loginbg">
+          <div class="centeredtext">
+            <p>hi i'm ink</p>
+              <p>come check out my stuff on the internet</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid3">
+        <div class="loginbtnL">
+          <div class="centeredtext">
+            <a href="https://www.youtube.com/watch?v=u1UZHXB_r6g" target="_blank">Log out</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid4">
+        <div class="loginbtnR">
+          <div class="centeredtext">
+            <a href="https://iinkweed.nekoweb.org/" target="_blank">Log in →</a>
+          </div>
+        </div>
+      </div>
+      
+  <div class="buyinggf">
+    <img src="buyinggf.png" style="width:100px;filter:drop-shadow(2px 2px 2px #3B3B3B)">
+  </div>
+      
+    </div>
+  </div>
+  
+  
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+
+</body>
+</html>
