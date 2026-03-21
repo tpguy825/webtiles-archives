@@ -2,25 +2,90 @@
 <html lang="en">
 <head>
     <style>.tile-body {
-  color: #081820;
-  background-color: #e0f8d0;
-  overflow-y: scroll;
+  color: #fff;
+  background-color: #000;
+}
+
+.smallBullet {
+  background-color: #fff;
+  width: 4px;
+  height: 4px;
+  position: fixed;
 }
 </style>
 </head>
 <body>
-    <p>in progess. ^ this looked cool</p>
-    <br>
-    <p>do not visit <a href="https://tricoefi.itch.io/" target="_blank">tricoefi.itch.io</a> (it's empty)</p>
-    <p>^ Also</p>
-    <img src="tenor.gif" height="80">
-    <img src="shink.webp" height="80">
-    <br>
-    <br>
-    <button type="button">mogus</button>
+    <p>Empty hell test thing (shaping into a bullet hell)</p>
+    <img src="shink.webp">
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 
+var pos = [0, 0];
+var spd = [1, 1];
+
+var QuadSize = 16
+var QuadsWidth = 16;
+var QuadsHeight = 16;
+
+var bulletQuads = {};
+
+function calculateQuad(x, y) {
+    return y * QuadsWidth + x;
+}
+
+for (y = 0; y < QuadsWidth; y++) {
+    for (x = 0; x < QuadsHeight; x++) {
+        bulletQuads[calculateQuad(x, y)] = {};
+    }
+}
+
+function setBulletQuad(bullet) {
+    delete bulletQuads[bullet.currentQuad][bullet.id];
+    
+    bulletQuads[calculateQuad(Math.round(bullet.x / QuadSize), Math.round(bullet.y / QuadSize))][bullet.id] = bullet;
+}
+
+var nextId = 0;
+
+function createBullet(x, y) {
+    var bullet = {
+        "x": x,
+        "y": y,
+        "div": document.createElement("div"),
+
+        "id": nextId++,
+        "currentQuad": calculateQuad(Math.round(x / QuadSize), Math.round(y / QuadSize)),
+    };
+
+    bulletQuads[calculateQuad(Math.round(x / QuadSize), Math.round(y / QuadSize))][bullet.id] = bullet;
+}
+
+createBullet(0, 0);
+createBullet(0, 1);
+createBullet(1, 2);
+createBullet(2, 16);
+
+function gameUpdate() {
+    pos[0] += spd[0];
+    pos[1] += spd[1];
+
+    if (pos[0] >= 128 || pos[0] <= 0) {
+        spd[0] = -spd[0];
+    }
+
+    if (pos[1] >= 128 || pos[1] <= 0) {
+        spd[1] = -spd[1];
+    }
+
+    Object.keys(bulletQuads).forEach(function(quadKey) {
+        var quad = bulletQuads[quadKey];
+        Object.keys(quad).forEach(function(bulletKey) {
+            var bullet = quad[bulletKey];
+        });
+    })
+}
+
+setInterval(gameUpdate, 250);
 </script>
 </body>
 </html>
