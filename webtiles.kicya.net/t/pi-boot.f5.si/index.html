@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>.tile-body {
-  background: url("pi-boot.jpg") no-repeat;
-}
-
-#🌈 {
+<style>#🌈 {
+  white-space: nowrap;
+  font-size: 15px;
   display: flex;
 }
 
 a {
+  color: #000;
   padding: 250px;
+}
+
+a:before {
+  content: url("raspberry-pi-os-boot.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("pi-boot.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("raspberry-pi-os-boot.jpg");
 }
 </style>
 </head>
 <body>
-<div id="🌈"><a href="https://www.youtube.com/watch?v=8cB3O4Ofnh4" target="_blank">Raspberry Pi rainbow screen</a></div>
+<div id="🌈"><a href="https://www.youtube.com/watch?v=8cB3O4Ofnh4" target="_blank">Raspberry Pi boot screen</a></div>
 </body>
 </html>
+

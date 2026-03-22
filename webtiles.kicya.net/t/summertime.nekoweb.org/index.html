@@ -7,8 +7,48 @@
   margin: 0;
 }
 </style>
+    <style>.tile-body {
+  background-image: url("FUTCT.jpg");
+  background-size: 250px 250px;
+}
+
+#overlay {
+  color: #fff;
+  opacity: 0;
+  background-color: #1e0a0a;
+  width: 240px;
+  height: 100%;
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#overlay:hover {
+  opacity: .8;
+  transition: opacity 1s;
+}
+
+#name {
+  font-size: large;
+}
+
+a, a:visited {
+  color: #fff;
+}
+
+audio {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+</style>
 </head>
 <body>
-    <img src="FUTCT.jpg" width="250" height="250">
+    <div id="overlay">
+        <span id="name">A Little Less Sixteen Candles, a Little More "Touch Me"</span><br><br>
+        <a href="https://open.spotify.com/album/5nkUSlIhtoJZMOUlB0sNCp" target="_blank"><i>From Under the Cork Tree</i></a> by Fall Out Boy
+    </div>
+    <audio controls src="16CANDLES.mp3" type="audio/mpeg" preload="metadata"></audio>
 </body>
 </html>

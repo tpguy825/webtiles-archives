@@ -14,8 +14,6 @@
 }
 
 .bg {
-  margin-top: -75px;
-  margin-left: -75px;
   display: block;
 }
 
@@ -100,31 +98,131 @@
 </style>
 </head>
 <body>
-    <img class="bg" src="bg.png">
+    
+    <img class="bg" src="dress2.png">
+
     <div class="glass-div main" id="main">
         <div class="frame">
             <div class="window-title">🐇 Bnuuy</div>
             <div class="window-content">
                 <div class="content">
-                    <img src="bnuuy.gif" alt="bnuuy">
+					<img src="bnuuy.gif" alt="bnuuy">
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/tilescript">// var main = document.getElementById("main");
-// var top = 0;
-// var left = 0;
+    <script type="text/tilescript">/** 
+Copyright (c) 2026 by Julien Az (https://codepen.io/ju-az/pen/eYJQwLx)
 
-// //setInterval(move, 50);
-// main.style.top = "0px";
-// main.style.left = "0px";
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-// function move() {
-//     top += 1;
-//     left += 1;
-//     main.style.top = top + "px";
-//     main.style.left = left + "px";
-// }
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+**/
+
+"use strict";
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var img = document.createElement('img');
+img.src = "https://i.ibb.co/0RxNhhCV/flappy-bird-set.png";
+
+// general settings
+var gamePlaying = true;
+var gravity = .16;
+var speed = 2;
+var size = [17, 12];
+var jump = -3.8;
+var cTenth = canvas.width / 10;
+var index = 0,
+  bestScore = 0,
+  flight,
+  flyHeight,
+  currentScore,
+  pipes;
+
+// pipe settings
+var pipeWidth = 26;
+var pipeGap = 90;
+function pipeLoc() {
+  return Math.random() * (canvas.height - (pipeGap + pipeWidth) - pipeWidth) + pipeWidth;
+};
+function setup() {
+  currentScore = 0;
+  flight = jump;
+
+  // set initial flyHeight (middle of screen - size of the bird)
+  flyHeight = canvas.height / 2 - size[1] / 2;
+
+  // setup first 3 pipes
+  pipes = [
+      [canvas.width + 0 * (pipeGap + pipeWidth), pipeLoc()],
+      [canvas.width + 1 * (pipeGap + pipeWidth), pipeLoc()],
+      [canvas.width + 2 * (pipeGap + pipeWidth), pipeLoc()]
+  ];
+};
+function render() {
+  // make the pipe and bird moving 
+  index++;
+
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // background first part 
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -(index * (speed / 2) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
+  // background second part
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
+
+  // pipe display
+  if (gamePlaying) {
+    pipes.map(function (pipe) {
+      // pipe moving
+      pipe[0] -= speed;
+
+      // top pipe
+      ctx.drawImage(img, 72, 65 - pipe[1], pipeWidth, pipe[1], pipe[0], 0, pipeWidth, pipe[1]);
+      // bottom pipe
+      ctx.drawImage(img, 144 + pipeWidth, 36, pipeWidth, canvas.height - pipe[1] + pipeGap, pipe[0], pipe[1] + pipeGap, pipeWidth, canvas.height - pipe[1] + pipeGap);
+
+      // give 1 point & create new pipe
+      if (pipe[0] <= -pipeWidth) {
+        currentScore++;
+        // check if it's the best score
+        bestScore = Math.max(bestScore, currentScore);
+
+        // remove & create new pipe
+        pipes = [].concat(_toConsumableArray(pipes.slice(1)), [[pipes[pipes.length - 1][0] + pipeGap + pipeWidth, pipeLoc()]]);
+      }
+
+      // if hit the pipe, end
+      if ([pipe[0] <= cTenth + size[0], pipe[0] + pipeWidth >= cTenth, pipe[1] > flyHeight || pipe[1] + pipeGap < flyHeight + size[1]].every(function (elem) {
+        return elem;
+      })) {
+        gamePlaying = false;
+        setup();
+      }
+    });
+  }
+  // draw bird
+  if (gamePlaying) {
+    ctx.drawImage.apply(ctx, [img, 144, Math.floor(index % 9 / 3) * size[1]].concat(size, [cTenth, flyHeight], size));
+    flight += gravity;
+    flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
+  } else {
+    ctx.drawImage.apply(ctx, [img, 144, Math.floor(index % 9 / 3) * size[1]].concat(size, [canvas.width / 2 - size[0] / 2, flyHeight], size));
+    flyHeight = canvas.height / 2 - size[1] / 2;
+  }
+};
+
+// launch setup
+setup();
+
+setInterval(render, 33);
+
+window.onclick = function () {
+  return flight = jump;
+};
+
 </script>
 </body>
 </html>
