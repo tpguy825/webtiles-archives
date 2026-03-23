@@ -329,7 +329,7 @@ ul {
         var lilMoons = document.getElementsByClassName("lil-moon");
          
         function checkOnlineStatus() {
-            request("GET", "https://dimden.dev/services/slave/status/", function(code, text) {
+            request("GET", "https://dimden.dev/services/status", function(code, text) {
                 if(code !== 200) return;
                 var json = JSON.parse(text);
                 if(json.dimden === "online") {
@@ -342,11 +342,11 @@ ul {
             });
         }
         function checkSong() {
-            request("GET", "https://dimden.dev/services/nowplaying", function(code, text) {
+            request("GET", "https://dimden.dev/services/lastfm", function(code, text) {
                 if(code !== 200) return;
                 var json = JSON.parse(text);
-                currentSong.innerText = (json['@attr'] && json['@attr'].nowplaying === 'true') ? 'Current song: ' : 'Last song: ';
-                songName.innerText = json.artist['#text'] + ' - ' + json.name;
+                currentSong.innerText = json.nowplaying === 'true' ? 'Current song: ' : 'Last song: ';
+                songName.innerText = json.artist + ' - ' + json.name;
             });
         }
         function checkCounter() {
