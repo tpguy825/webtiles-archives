@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <style>.tile-body {
@@ -100,14 +99,13 @@
 <body>
     
     <img class="bg" src="dress2.png">
-
     <div class="glass-div main" id="main">
         <div class="frame">
-            <div class="window-title">🐇 Bnuuy</div>
+            <div class="window-title">🐦 Bord (wip)</div>
             <div class="window-content">
                 <div class="content">
-					<img src="bnuuy.gif" alt="bnuuy">
 
+                    <canvas id="canvas" width="136" height="122"></canvas>
                 </div>
             </div>
         </div>
@@ -123,6 +121,20 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
+// fix flashing bird (reduce draw calls / generally optimize)
+//  single backgroud draw call / draw background as normal css scrolling bg image
+//  single pipes draw call
+//  predraw pipes to offscreen canvas then draw that for each
+//  draw integer coordinates only
+//  getContext { alpha: false }?
+//  dont canvas draw text
+// try timeout vs interval vs busy loop
+// change sprites / game
+// add placeholder image before load
+// move down initial window position
+// fix bounce edges
+// fix inner window bordering
+
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var img = document.createElement('img');
@@ -130,18 +142,18 @@ img.src = "flappy-bird-set.png";
 
 // general settings
 var gamePlaying = false;
-var gravity = .166667;
-var speed = 2.066667;
+var gravity = .2;
+var speed = 2;
 var size = [17, 12];
-var jump = -3.83333;
-var cTenth = (canvas.width / 10);
+var jump = -4;
+var cTenth = 14;
 
 var index = 0,
     bestScore = 0,
     flight,
     flyHeight,
     currentScore,
-    pipe;
+    updateBenchmark = 0;
 
 // pipe settings
 var pipeWidth = 26;
@@ -150,93 +162,101 @@ function pipeLoc() {
     return (Math.random() * ((canvas.height - (pipeGap + pipeWidth)) - pipeWidth)) + pipeWidth;
 }
 
+function start() {
+    gamePlaying = true;
+}
+
+function doJump() {
+    flight = jump;
+}
+
 function setup() {
-  currentScore = 0;
-  flight = jump;
+    currentScore = 0;
+    flight = jump;
 
-  // set initial flyHeight (middle of screen - size of the bird)
-  flyHeight = (canvas.height / 2) - (size[1] / 2);
-
-  // setup first 3 pipes
-  pipes = [
-    [canvas.width + (0 * (pipeGap + pipeWidth)), pipeLoc()],
-    [canvas.width + (1 * (pipeGap + pipeWidth)), pipeLoc()],
-    [canvas.width + (2 * (pipeGap + pipeWidth)), pipeLoc()]
-  ]
-}
-
-function render() {
-  // make the pipe and bird moving
-  index++;
-
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // background first part
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
-  // background second part
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
-
-  // pipe display
-  if (gamePlaying){
-    for (var pipe of pipes) {
-      // pipe moving
-      pipe[0] -= speed;
-
-      // top pipe
-      ctx.drawImage(img, 144, 196 - pipe[1], pipeWidth, pipe[1], pipe[0], 0, pipeWidth, pipe[1]);
-      // bottom pipe
-      ctx.drawImage(img, 144 + pipeWidth, 36, pipeWidth, canvas.height - pipe[1] + pipeGap, pipe[0], pipe[1] + pipeGap, pipeWidth, canvas.height - pipe[1] + pipeGap);
-
-      // give 1 point & create new pipe
-      if(pipe[0] <= -pipeWidth){
-        currentScore++;
-        // check if it's the best score
-        bestScore = Math.max(bestScore, currentScore);
-
-        // remove & create new pipe
-        pipes = [pipes[1], pipes[2], [pipes[pipes.length-1][0] + pipeGap + pipeWidth, pipeLoc()]];
-        console.log(pipes);
-      }
-
-      // if hit the pipe, end
-      if ([
-        pipe[0] <= cTenth + size[0],
-        pipe[0] + pipeWidth >= cTenth,
-        pipe[1] > flyHeight || pipe[1] + pipeGap < flyHeight + size[1]
-      ].every(elem => elem)) {
-        gamePlaying = false;
-        setup();
-      }
-    }
-  }
-  // draw bird
-  if (gamePlaying) {
-    ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], ...size, cTenth, flyHeight, ...size);
-    flight += gravity;
-    flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
-  } else {
-    ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
+    // set initial flyHeight (middle of screen - size of the bird)
     flyHeight = (canvas.height / 2) - (size[1] / 2);
-    // text accueil
-    ctx.fillText(`Best score : ${bestScore}`, 28, 81);
-    ctx.fillText('Click to play', 30, 45);
-    ctx.font = "bold 10px courier";
-  }
 
-//  document.getElementById('bestScore').innerHTML = `Best : ${bestScore}`;
-//  document.getElementById('currentScore').innerHTML = `Current : ${currentScore}`;
-
-  // tell the browser to perform anim
-  window.requestAnimationFrame(render);
+    // setup first 3 pipes
+    pipes = [
+        [canvas.width + (0 * (pipeGap + pipeWidth)), pipeLoc()],
+        [canvas.width + (1 * (pipeGap + pipeWidth)), pipeLoc()],
+        [canvas.width + (2 * (pipeGap + pipeWidth)), pipeLoc()]
+    ]
 }
 
-// launch setup
-setup();
-img.onload = render;
+function update() {
+//     var tickStart = Performance.now();
+    // make the pipe and bird moving
+    index++;
 
-// start game
-canvas.addEventListener('click', () => gamePlaying = true);
-canvas.onclick = () => flight = jump;
+    // background first part
+//     ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
+    // background second part
+//     ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // pipe display
+    if (gamePlaying){
+        for (var i = 0; i < pipes.length; i++) {
+            // pipe moving
+            pipes[i][0] -= speed;
+
+            // top pipe
+            ctx.drawImage(img, 144, 196 - pipes[i][1], pipeWidth, pipes[i][1], pipes[i][0], 0, pipeWidth, pipes[i][1]);
+            // bottom pipe
+            ctx.drawImage(img, 144 + pipeWidth, 36, pipeWidth, canvas.height - pipes[i][1] + pipeGap, pipes[i][0], pipes[i][1] + pipeGap, pipeWidth, canvas.height - pipes[i][1] + pipeGap);
+        }
+
+        // give 1 point & create new pipe
+        if(pipes[0][0] <= -pipeWidth){
+            currentScore++;
+            // check if it's the best score
+            bestScore = Math.max(bestScore, currentScore);
+
+            // remove & create new pipe
+            pipes[0] = pipes[1];
+            pipes[1] = pipes[2];
+            pipes[2] = [pipes[1][0] + pipeGap + pipeWidth, pipeLoc()];
+        }
+
+        // if hit the pipe, end
+        if ((pipes[0][0] <= cTenth + size[0]) &&
+            (pipes[0][0] + pipeWidth >= cTenth) &&
+            (pipes[0][1] > flyHeight || pipes[0][1] + pipeGap < flyHeight + size[1])) {
+            gamePlaying = false;
+            setup();
+        }
+    } 
+    
+    if (gamePlaying) {
+        ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], size[0], size[1], cTenth, flyHeight, size[0], size[1]);
+        flight += gravity;
+        flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
+    }
+    else {
+        ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], size[0], size[1], ((canvas.width / 2) - size[0] / 2), flyHeight, size[0], size[1]);
+        flyHeight = (canvas.height / 2) - (size[1] / 2);
+        // text accueil
+        ctx.fillText('Best score : ' + bestScore, 28, 81);
+        ctx.fillText('Click to play', 30, 45);
+        ctx.font = "bold 10px courier";
+    }
+
+    //  document.getElementById('bestScore').innerHTML = `Best : ${bestScore}`;
+    //  document.getElementById('currentScore').innerHTML = `Current : ${currentScore}`;
+
+    setTimeout(update, 16);
+//     updateBenchmark +=  Performance.now() - tickStart;
+//     console.log(updateBenchmark / index);
+}
+
+setup();
+
+canvas.addEventListener('click', start);
+canvas.onclick = doJump;
+
+update();
 </script>
 </body>
 </html>
