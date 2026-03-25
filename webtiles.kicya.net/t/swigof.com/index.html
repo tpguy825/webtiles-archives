@@ -64,7 +64,11 @@
 }
 
 .content > img {
-  width: 100%;
+  position: absolute;
+}
+
+.content > canvas {
+  image-rendering: pixelated;
 }
 
 @keyframes bounceX {
@@ -104,7 +108,7 @@
             <div class="window-title">🐦 Bord (wip)</div>
             <div class="window-content">
                 <div class="content">
-
+					<img id="thumb" src="thumb.png" alt="bord">
                     <canvas id="canvas" width="136" height="122"></canvas>
                 </div>
             </div>
@@ -121,22 +125,21 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
+// fix pipes not appearing at first
+// fix loop breaking after a pause
+// change sprites / game
+// move down initial window position
+// text as elements, draw scores during gameplay
+// fix inner window border choppiness from css anim?
 // fix flashing bird (reduce draw calls / generally optimize)
 //  single backgroud draw call / draw background as normal css scrolling bg image
-//  single pipes draw call
-//  predraw pipes to offscreen canvas then draw that for each
+//  predraw background and bird frames to offscreen canvas then draw the canvas to frame
 //  draw integer coordinates only
-//  getContext { alpha: false }?
-//  dont canvas draw text
-// try timeout vs interval vs busy loop
-// change sprites / game
-// add placeholder image before load
-// move down initial window position
-// fix bounce edges
-// fix inner window bordering
+//  shrink pipes height
 
 var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+var thumb = document.getElementById('thumb');
+var ctx = canvas.getContext('2d', { alpha: false });
 var img = document.createElement('img');
 img.src = "flappy-bird-set.png";
 
@@ -153,7 +156,9 @@ var index = 0,
     flight,
     flyHeight,
     currentScore,
-    updateBenchmark = 0;
+	idealFrameStart,
+    pipeCanvas,
+    pipeContext;
 
 // pipe settings
 var pipeWidth = 26;
@@ -180,21 +185,19 @@ function setup() {
     // setup first 3 pipes
     pipes = [
         [canvas.width + (0 * (pipeGap + pipeWidth)), pipeLoc()],
-        [canvas.width + (1 * (pipeGap + pipeWidth)), pipeLoc()],
-        [canvas.width + (2 * (pipeGap + pipeWidth)), pipeLoc()]
+        [canvas.width + (1 * (pipeGap + pipeWidth)), pipeLoc()]
     ]
 }
 
 function update() {
-//     var tickStart = Performance.now();
     // make the pipe and bird moving
     index++;
 
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // background first part
-//     ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
     // background second part
-//     ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
 
     // pipe display
     if (gamePlaying){
@@ -202,10 +205,7 @@ function update() {
             // pipe moving
             pipes[i][0] -= speed;
 
-            // top pipe
-            ctx.drawImage(img, 144, 196 - pipes[i][1], pipeWidth, pipes[i][1], pipes[i][0], 0, pipeWidth, pipes[i][1]);
-            // bottom pipe
-            ctx.drawImage(img, 144 + pipeWidth, 36, pipeWidth, canvas.height - pipes[i][1] + pipeGap, pipes[i][0], pipes[i][1] + pipeGap, pipeWidth, canvas.height - pipes[i][1] + pipeGap);
+            ctx.drawImage(pipeCanvas, pipes[i][0], pipes[i][1] - 160);
         }
 
         // give 1 point & create new pipe
@@ -216,8 +216,7 @@ function update() {
 
             // remove & create new pipe
             pipes[0] = pipes[1];
-            pipes[1] = pipes[2];
-            pipes[2] = [pipes[1][0] + pipeGap + pipeWidth, pipeLoc()];
+            pipes[1] = [pipes[0][0] + pipeGap + pipeWidth, pipeLoc()];
         }
 
         // if hit the pipe, end
@@ -227,7 +226,7 @@ function update() {
             gamePlaying = false;
             setup();
         }
-    } 
+    }
     
     if (gamePlaying) {
         ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], size[0], size[1], cTenth, flyHeight, size[0], size[1]);
@@ -246,15 +245,27 @@ function update() {
     //  document.getElementById('bestScore').innerHTML = `Best : ${bestScore}`;
     //  document.getElementById('currentScore').innerHTML = `Current : ${currentScore}`;
 
-    setTimeout(update, 16);
-//     updateBenchmark +=  Performance.now() - tickStart;
-//     console.log(updateBenchmark / index);
+    idealFrameStart += 16;
+    setTimeout(update, idealFrameStart - Date.now());
 }
 
-setup();
+thumb.style.display = 'none';
 
 canvas.addEventListener('click', start);
 canvas.onclick = doJump;
+
+ctx.imageSmoothingEnabled = false;
+
+pipeCanvas = document.createElement("canvas");
+pipeCanvas.width = "26";
+pipeCanvas.height = "410";
+pipeContext = pipeCanvas.getContext("2d");
+pipeContext.drawImage(img, 144, 36, pipeWidth, 160, 0, 0, pipeWidth, 160);
+pipeContext.drawImage(img, 170, 36, pipeWidth, 160, 0, 160 + pipeGap, pipeWidth, 160);
+
+setup();
+
+idealFrameStart = Date.now();
 
 update();
 </script>
