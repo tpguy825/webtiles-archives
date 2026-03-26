@@ -92,22 +92,24 @@ a {
   border: 30px solid #0000;
   border-image: url("assets/pixelbt.png") 30 /  / 10px repeat;
   border-radius: 40px;
-  width: 154px;
-  height: 220px;
+  width: 220px;
+  height: 154px;
   position: absolute;
-  bottom: 8px;
-  left: 19px;
+  top: 19px;
+  right: 19px;
 }
 
 .wrapper {
   z-index: 1;
   background-color: pink;
+  border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
-  border-bottom-left-radius: 40px;
-  width: 90%;
-  height: 100%;
-  margin-left: 15px;
+  width: 100%;
+  height: 90%;
+  margin-top: 15px;
+  margin-left: -15px;
   bottom: 0;
+  overflow: clip;
 }
 
 .bottom-left {
@@ -119,11 +121,13 @@ a {
 }
 
 .bottom-left-2 {
-  z-index: -10;
-  background: linear-gradient(#fcbf74 0%, #ffe4a8 100%);
-  width: 40px;
-  height: 100%;
+  z-index: -2;
+  background: linear-gradient(45deg, #ffe4a8 0% 86%, #0000 87%);
+  width: 100%;
+  height: 40px;
   position: absolute;
+  top: 0;
+  transform: scale(1, -1);
 }
 
 .bottom-right {
@@ -142,6 +146,15 @@ a {
   position: absolute;
 }
 
+.bottom-duck {
+  z-index: -11;
+  background: linear-gradient(0deg, #06237c 0%, #041b72 100%);
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+}
+
 .bow {
   width: 41px;
   height: 37.5px;
@@ -157,9 +170,12 @@ a {
     <div class="bow" style="right: 0px; bottom: 0px;"></div>
     
     <div class="bottom-left" style="left: 0px; bottom: 0px"></div>
-    <div class="bottom-left-2" style="left: 0px; bottom: 0px"></div>
+    <div class="bottom-left-2" style="left: 0px;"></div>
     <div class="bottom-right" style="right: 0px; bottom: 0px"></div>
     <div class="bottom-right-2" style="right: 0px; bottom: 0px"></div>
+    <div class="bottom-duck">
+        
+    </div>
     <div class="wrapper">
     
 	<div class="main-pixel-border"></div> 
@@ -195,7 +211,7 @@ a {
             </div>
         	<div class="bun"></div>
             <div class="bun-shadow"></div>
-            <div class="lop-shadow"></div>
+            
                 
             
             

@@ -30,8 +30,8 @@
 }
 
 .lop {
-  width: 220px;
-  height: 100%;
+  width: 100%;
+  height: 220px;
   image-rendering: crisp-edges;
   z-index: 1;
   background-image: url("assets/lopsass.gif");
@@ -42,15 +42,15 @@
 }
 
 .lop-shadow {
-  width: 230px;
-  height: 100%;
+  width: 90%;
+  height: 220px;
   image-rendering: crisp-edges;
   background-image: url("assets/lop-shadow.gif");
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
   position: absolute;
-  top: 128px;
+  top: 138px;
   left: 23px;
   transform: scale(1, -.4);
 }
@@ -106,10 +106,10 @@ a {
   border: 30px solid #0000;
   border-image: url("assets/pixelbt.png") 30 /  / 10px repeat;
   border-radius: 40px;
-  width: 154px;
-  height: 220px;
+  width: 240px;
+  height: 154px;
   position: absolute;
-  top: 8px;
+  top: 19px;
   left: 19px;
 }
 
@@ -117,24 +117,26 @@ a {
   z-index: 1;
   background-color: pink;
   border-radius: 40px;
-  width: 90%;
-  height: 200%;
+  width: 200%;
+  height: 90%;
+  margin-top: 15px;
   margin-left: 15px;
+  overflow: clip;
 }
 
 .top-left {
   z-index: -1;
-  background: linear-gradient(45deg, #000 48%, red 52%);
-  width: 40px;
+  background: #000;
+  width: 100%;
   height: 40px;
   position: absolute;
 }
 
-.top-right {
+.bottom {
   z-index: -1;
-  background: red;
-  width: 40px;
-  height: 100%;
+  background-color: #ffc2e0;
+  width: 100%;
+  height: 40px;
   position: absolute;
 }
 
@@ -153,8 +155,8 @@ a {
     <div class="bow" style="left: 0px;"></div>
     
     <div class="top-left" style="left: 0px; top: 0px"></div>
-    <div style="left: 0px; top: 0px; background-color: black; width: 20px; height: 100%; position: absolute; z-index: -15"></div>
-    <div class="top-right" style="right: 0px; top: 0px"></div>
+
+    <div class="bottom" style="bottom: 0px"></div>
     <div class="wrapper">
         
     
@@ -170,8 +172,10 @@ a {
         	</div>
             
             <div class="sparkle" mouseover="resumegifs()"> </div>
-                
-            <div class="lop-shadow"></div>
+            
+               <div class="lop-shadow"></div> 
+            
+            
         	<div class="lop"></div>
             
             
