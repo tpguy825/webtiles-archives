@@ -125,31 +125,33 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
-// fix pipes not appearing at first
-// fix loop breaking after a pause
+// fix first load not working (data image has nothing but is correct size)
+//   put base64 data img directly in html?
+//   put asset sheet in main html hidden?
 // change sprites / game
 // move down initial window position
 // text as elements, draw scores during gameplay
 // fix inner window border choppiness from css anim?
-// fix flashing bird (reduce draw calls / generally optimize)
-//  single backgroud draw call / draw background as normal css scrolling bg image
-//  predraw background and bird frames to offscreen canvas then draw the canvas to frame
-//  draw integer coordinates only
-//  shrink pipes height
+// fix flashing bird
+//   predraw bird frames to offscreen canvas dataimg
+//   draw integer coordinates only
+//   shrink pipes height
 
 var canvas = document.getElementById('canvas');
 var thumb = document.getElementById('thumb');
 var ctx = canvas.getContext('2d', { alpha: false });
 var img = document.createElement('img');
-img.src = "flappy-bird-set.png";
+var dataImageBG = document.createElement('img');
+var dataImagePipe = document.createElement('img');
 
-// general settings
 var gamePlaying = false;
 var gravity = .2;
 var speed = 2;
 var size = [17, 12];
 var jump = -4;
 var cTenth = 14;
+var pipeWidth = 26;
+var pipeGap = 90;
 
 var index = 0,
     bestScore = 0,
@@ -157,12 +159,42 @@ var index = 0,
     flyHeight,
     currentScore,
 	idealFrameStart,
-    pipeCanvas,
-    pipeContext;
+    frameDelay;
 
-// pipe settings
-var pipeWidth = 26;
-var pipeGap = 90;
+function load() {
+    ctx.imageSmoothingEnabled = false;
+    canvas.offscreenCanvas = document.createElement('canvas');
+
+    thumb.style.display = 'none';
+    canvas.addEventListener('click', start);
+    canvas.onclick = doJump;
+
+    var offscreenCanvas = canvas.offscreenCanvas;
+    var offscreenCanvasCtx = offscreenCanvas.getContext('2d');
+
+    // Prep background
+    offscreenCanvas.width = canvas.width * 2;
+    offscreenCanvas.height = canvas.height;
+    offscreenCanvasCtx.drawImage(img, 0, 100, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+    offscreenCanvasCtx.drawImage(img, 0, 100, canvas.width, canvas.height, canvas.width, 0, canvas.width, canvas.height);
+    dataImageBG.src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Prep pipes
+    offscreenCanvas.width = "26";
+    offscreenCanvas.height = "410";
+    offscreenCanvasCtx.drawImage(img, 144, 36, pipeWidth, 160, 0, 0, pipeWidth, 160);
+    offscreenCanvasCtx.drawImage(img, 170, 36, pipeWidth, 160, 0, 160 + pipeGap, pipeWidth, 160);
+    dataImagePipe.src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    setup();
+
+    idealFrameStart = Date.now();
+
+    update();
+}
+
 function pipeLoc() {
     return (Math.random() * ((canvas.height - (pipeGap + pipeWidth)) - pipeWidth)) + pipeWidth;
 }
@@ -193,19 +225,15 @@ function update() {
     // make the pipe and bird moving
     index++;
 
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // background first part
-    ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
-    // background second part
-    ctx.drawImage(img, 0, 100, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
+    ctx.drawImage(dataImageBG, 0, 0, canvas.width * 2, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width * 2, canvas.height);
 
     // pipe display
-    if (gamePlaying){
+    if (gamePlaying) {
         for (var i = 0; i < pipes.length; i++) {
             // pipe moving
             pipes[i][0] -= speed;
 
-            ctx.drawImage(pipeCanvas, pipes[i][0], pipes[i][1] - 160);
+            ctx.drawImage(dataImagePipe, pipes[i][0], pipes[i][1] - 160);
         }
 
         // give 1 point & create new pipe
@@ -246,28 +274,19 @@ function update() {
     //  document.getElementById('currentScore').innerHTML = `Current : ${currentScore}`;
 
     idealFrameStart += 16;
-    setTimeout(update, idealFrameStart - Date.now());
+    frameDelay = idealFrameStart - Date.now();
+    if (frameDelay < -100) {
+        // fallen very far behind, likely caused by engine pause
+        frameDelay = 0;
+        idealFrameStart = Date.now();
+    }
+    setTimeout(update, frameDelay);
 }
 
-thumb.style.display = 'none';
-
-canvas.addEventListener('click', start);
-canvas.onclick = doJump;
-
-ctx.imageSmoothingEnabled = false;
-
-pipeCanvas = document.createElement("canvas");
-pipeCanvas.width = "26";
-pipeCanvas.height = "410";
-pipeContext = pipeCanvas.getContext("2d");
-pipeContext.drawImage(img, 144, 36, pipeWidth, 160, 0, 0, pipeWidth, 160);
-pipeContext.drawImage(img, 170, 36, pipeWidth, 160, 0, 160 + pipeGap, pipeWidth, 160);
-
-setup();
-
-idealFrameStart = Date.now();
-
-update();
+img.src = "flappy-bird-set.png";
+// img.onload = load;
+load();
 </script>
+
 </body>
 </html>
