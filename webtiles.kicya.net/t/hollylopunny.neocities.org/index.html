@@ -24,23 +24,24 @@
   background-size: contain;
   display: block;
   position: absolute;
-  top: 30px;
-  left: 40px;
-  transform: scale(-1, 1);
+  top: 40px;
+  left: 65px;
+  transform: scale(1);
 }
 
 .bun-shadow {
   width: 100px;
-  height: 200px;
+  height: 120px;
   image-rendering: crisp-edges;
   background-image: url("assets/bun-shadow.gif");
+  background-position: 0 -72px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   display: block;
   position: absolute;
-  top: 121px;
-  left: 40px;
-  transform: scale(-1, -.4);
+  bottom: -29px;
+  left: 65px;
+  transform: scale(1, -.4);
 }
 
 .lop-shadow {
@@ -88,6 +89,7 @@ a {
 }
 
 .main-pixel-border {
+  image-rendering: crisp-edges;
   z-index: 2;
   border: 30px solid #0000;
   border-image: url("assets/pixelbt.png") 30 /  / 10px repeat;
@@ -100,8 +102,9 @@ a {
 }
 
 .wrapper {
+  image-rendering: crisp-edges;
   z-index: 1;
-  background-color: pink;
+  background: pink url("assets/sparkle2.gif") 48px 0;
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
   width: 100%;
@@ -110,14 +113,6 @@ a {
   margin-left: -15px;
   bottom: 0;
   overflow: clip;
-}
-
-.bottom-left {
-  z-index: -1;
-  background: linear-gradient(315deg, #06237c 0%, #041b72 48%, #0000 52%);
-  width: 40px;
-  height: 40px;
-  position: absolute;
 }
 
 .bottom-left-2 {
@@ -148,9 +143,9 @@ a {
 
 .bottom-duck {
   z-index: -11;
-  background: linear-gradient(0deg, #06237c 0%, #041b72 100%);
+  background: url("assets/bun_bottom_blu.png") 0% bottom / 250px 10px;
   width: 100%;
-  height: 40px;
+  height: 10px;
   position: absolute;
   bottom: 0;
 }
@@ -164,12 +159,24 @@ a {
   background-size: cover;
   position: absolute;
 }
+
+.heart-spin {
+  z-index: 100;
+  background-image: url("assets/heartspin.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  top: 70px;
+  left: 0;
+}
 </style>
 </head>
 <body>
     <div class="bow" style="right: 0px; bottom: 0px;"></div>
     
-    <div class="bottom-left" style="left: 0px; bottom: 0px"></div>
+    
     <div class="bottom-left-2" style="left: 0px;"></div>
     <div class="bottom-right" style="right: 0px; bottom: 0px"></div>
     <div class="bottom-right-2" style="right: 0px; bottom: 0px"></div>
@@ -185,30 +192,32 @@ a {
                 # 427
             </div>
             
-        	<div class="url" style="position: absolute; width: 100%; bottom: 10px; left: -6px; z-index: 6; font-weight: bold; font-size: 19px">
+        	<div class="url" style="position: absolute; width: 100%; bottom: 10px; left: -124px; z-index: 6; font-weight: bold; font-size: 19px">
             	lopunny.nekoweb.org
         	</div>
             
             
-            <div class="url" style="position: absolute; width: 100%; bottom: 9px; left: -5px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            <div class="url" style="position: absolute; width: 100%; bottom: 9px; left: -123px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
             	lopunny.nekoweb.org
         	</div>
-            <div class="url" style="position: absolute; width: 100%; bottom: 9px; left: -7px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            <div class="url" style="position: absolute; width: 100%; bottom: 9px; left: -125px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
             	lopunny.nekoweb.org
         	</div>
-            <div class="url" style="position: absolute; width: 100%; bottom: 11px; left: -5px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            <div class="url" style="position: absolute; width: 100%; bottom: 11px; left: -123px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
             	lopunny.nekoweb.org
         	</div>
-            <div class="url" style="position: absolute; width: 100%; bottom: 11px; left: -7px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            <div class="url" style="position: absolute; width: 100%; bottom: 11px; left: -125px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
             	lopunny.nekoweb.org
         	</div>
             
             
             
             
-            <div class="sparkle">
+            <div class="heart-spin">
                 
             </div>
+            <div class="sparkle"></div>
+           
         	<div class="bun"></div>
             <div class="bun-shadow"></div>
             

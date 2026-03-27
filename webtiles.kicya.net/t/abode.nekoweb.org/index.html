@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <style>.tile-body {
-  color: #111;
   background-image: url("frogblink.gif");
   background-size: 100% 100%;
 }
@@ -29,9 +28,24 @@ img {
 </style>
 </head>
 <body>
-    <a href="https://abode.nekoweb.org" target="_blank"><img class="text" src="cometomywebsite.gif"></a>
+	<br><br><br><br><br><br><br><br>
+    <a href="https://abode.nekoweb.org" target="_blank"><img class="text" src="cometomywebsite.gif"></a><br>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+console.log("Hello world!");
+var audio = document.createElement("audio");
+audio.src = "/olderthanmecrushed.ogg";
+audio.autoplay = true;
+audio.loop = true;
+document.body.appendChild(audio);
+const bgImage = document.querySelector('.bg-image');
+        const changeBgBtn = document.querySelector('.change-bg-btn');
+
+        changeBgBtn.addEventListener('click', () => {
+            bgImage.style.backgroundImage = `url('dansen.gif')`;
+            bgImage.style.backgroundPosition = 'left center';
+        })
+
+</script>
 </body>
 </html>

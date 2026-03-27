@@ -37,38 +37,24 @@
   background-image: url("assets/lopsass.gif");
   display: block;
   position: absolute;
-  top: 12px;
-  left: 20px;
+  top: 8px;
+  left: 18px;
+  transform: scale(-1, 1);
 }
 
 .lop-shadow {
-  width: 90%;
-  height: 220px;
+  width: 250px;
+  height: 60px;
   image-rendering: crisp-edges;
   background-image: url("assets/lop-shadow.gif");
+  background-position: 0 -160px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   display: block;
   position: absolute;
-  top: 138px;
-  left: 23px;
-  transform: scale(1, -.4);
-}
-
-.bun {
-  width: 100px;
-  height: 200px;
-  image-rendering: crisp-edges;
-  z-index: 2;
-  opacity: 0;
-  background-image: url("https://webtiles.kicya.net/t/lopunny.nekoweb.org/assets/bun.gif");
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
-  position: absolute;
-  top: 30px;
-  left: 40px;
-  transform: scale(-1, 1);
+  bottom: -5px;
+  left: 24px;
+  transform: scale(-1, -.3);
 }
 
 a {
@@ -102,6 +88,7 @@ a {
 }
 
 .main-pixel-border {
+  image-rendering: crisp-edges;
   z-index: 2;
   border: 30px solid #0000;
   border-image: url("assets/pixelbt.png") 30 /  / 10px repeat;
@@ -114,8 +101,9 @@ a {
 }
 
 .wrapper {
+  image-rendering: crisp-edges;
   z-index: 1;
-  background-color: pink;
+  background: pink url("assets/sparkle2.gif") 2px 0;
   border-radius: 40px;
   width: 200%;
   height: 90%;
@@ -126,18 +114,50 @@ a {
 
 .top-left {
   z-index: -1;
+  background: linear-gradient(45deg, #0000 0% 49%, #000 51%);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+
+.top {
+  z-index: -4;
   background: #000;
   width: 100%;
   height: 40px;
   position: absolute;
 }
 
-.bottom {
+.left {
+  z-index: -2;
+  background-image: url("assets/wip_1.gif");
+  background-position: 40px 0;
+  background-size: cover;
+  width: 40px;
+  height: 100%;
+  position: absolute;
+  transform: scale(-1, 1);
+}
+
+.bottom-left {
   z-index: -1;
-  background-color: #ffc2e0;
-  width: 100%;
+  background: linear-gradient(315deg, #0000 0%, #ffc2e0 19% 49%, #0000 51%);
+  width: 40px;
   height: 40px;
   position: absolute;
+  bottom: 0;
+}
+
+.bottom {
+  z-index: -2;
+  background-color: #ffc2e0;
+  background-image: url("assets/bottom-g.png");
+  background-position: -19px 2px;
+  background-size: 253px 18px;
+  width: 90%;
+  height: 20px;
+  position: absolute;
+  right: 0;
 }
 
 .bow {
@@ -153,9 +173,10 @@ a {
 </head>
 <body>
     <div class="bow" style="left: 0px;"></div>
-    
     <div class="top-left" style="left: 0px; top: 0px"></div>
-
+    <div class="top" style="left: 0px; top: 0px"></div>
+	<div class="left"></div>
+    <div class="bottom-left" style=""></div>
     <div class="bottom" style="bottom: 0px"></div>
     <div class="wrapper">
         
@@ -171,11 +192,28 @@ a {
             	
         	</div>
             
+            <div class="url" style="position: absolute; width: 100%; bottom: 10px; right: -126px; z-index: 6; font-weight: bold; font-size: 19px">
+            	lopunny.nekoweb.org
+        	</div>
+            
+            
+            <div class="url" style="position: absolute; width: 100%; bottom: 9px; right: -125px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            	lopunny.nekoweb.org
+        	</div>
+            <div class="url" style="position: absolute; width: 100%; bottom: 9px; right: -127px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            	lopunny.nekoweb.org
+        	</div>
+            <div class="url" style="position: absolute; width: 100%; bottom: 11px; right: -125px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            	lopunny.nekoweb.org
+        	</div>
+            <div class="url" style="position: absolute; width: 100%; bottom: 11px; right: -127px; z-index: 5; font-weight: bold; font-size: 19px; color: white;">
+            	lopunny.nekoweb.org
+        	</div>
+            
             <div class="sparkle" mouseover="resumegifs()"> </div>
             
-               <div class="lop-shadow"></div> 
             
-            
+            <div class="lop-shadow"></div>             
         	<div class="lop"></div>
             
             

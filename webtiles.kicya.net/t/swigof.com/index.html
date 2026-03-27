@@ -14,6 +14,12 @@
 
 .bg {
   display: block;
+  position: absolute;
+}
+
+.marquee-container {
+  position: relative;
+  top: -30px;
 }
 
 .glass-div {
@@ -27,10 +33,8 @@
 .main {
   width: 150px;
   height: 156px;
-  animation: 3s linear infinite bounceX, 3s linear infinite alternate bounceY;
-  position: absolute;
-  top: 0;
-  left: 50px;
+  position: relative;
+  top: 30px;
   box-shadow: 0 0 20px #000;
 }
 
@@ -101,18 +105,25 @@
 </style>
 </head>
 <body>
+    <img hidden id="sheet" src="flappy-bird-set.png" alt="spritesheet">
     
     <img class="bg" src="dress2.png">
-    <div class="glass-div main" id="main">
-        <div class="frame">
-            <div class="window-title">🐦 Bord (wip)</div>
-            <div class="window-content">
-                <div class="content">
-					<img id="thumb" src="thumb.png" alt="bord">
-                    <canvas id="canvas" width="136" height="122"></canvas>
+    <div class="marquee-container">
+        <marquee direction="up" behavior="alternate" height="312" width="250">
+            <marquee behavior="alternate" height="220">
+                <div class="glass-div main" id="main">
+                    <div class="frame">
+                        <div id="window-title" class="window-title">🐦 Floppy Bord</div>
+                        <div class="window-content">
+                            <div class="content">
+                                <img id="thumb" src="thumb.png" alt="thumbnail">
+                                <canvas id="canvas" width="136" height="122"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </marquee>
+        </marquee>
     </div>
     <script type="text/tilescript">/**
 Copyright (c) 2026 by swigof
@@ -125,33 +136,35 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
-// fix first load not working (data image has nothing but is correct size)
-//   put base64 data img directly in html?
-//   put asset sheet in main html hidden?
+/**
+Performance is good on chrome
+Performance is good on firefox when locally hosted
+Performance is abysmal on firefox in webtiles
+JS-Interpreter >:(
+**/
+
 // change sprites / game
-// move down initial window position
-// text as elements, draw scores during gameplay
-// fix inner window border choppiness from css anim?
-// fix flashing bird
-//   predraw bird frames to offscreen canvas dataimg
-//   draw integer coordinates only
-//   shrink pipes height
 
 var canvas = document.getElementById('canvas');
 var thumb = document.getElementById('thumb');
+var img = document.getElementById('sheet');
+var title = document.getElementById('window-title');
 var ctx = canvas.getContext('2d', { alpha: false });
-var img = document.createElement('img');
 var dataImageBG = document.createElement('img');
 var dataImagePipe = document.createElement('img');
+var dataImageBird = document.createElement('img');
 
 var gamePlaying = false;
 var gravity = .2;
 var speed = 2;
+var halfSpeed = speed/2;
 var size = [17, 12];
+var spriteCenter = [~~((canvas.width / 2) - size[0] / 2), ~~((canvas.height / 2) - (size[1] / 2))]
 var jump = -4;
 var cTenth = 14;
 var pipeWidth = 26;
-var pipeGap = 90;
+var pipeGap = 80;
+var pipeSpacing = pipeWidth + pipeGap;
 
 var index = 0,
     bestScore = 0,
@@ -159,15 +172,16 @@ var index = 0,
     flyHeight,
     currentScore,
 	idealFrameStart,
-    frameDelay;
+    frameDelay,
+    doubleCanvasWidth;
 
 function load() {
     ctx.imageSmoothingEnabled = false;
     canvas.offscreenCanvas = document.createElement('canvas');
 
     thumb.style.display = 'none';
-    canvas.addEventListener('click', start);
-    canvas.onclick = doJump;
+    
+    doubleCanvasWidth = canvas.width * 2;
 
     var offscreenCanvas = canvas.offscreenCanvas;
     var offscreenCanvasCtx = offscreenCanvas.getContext('2d');
@@ -178,7 +192,7 @@ function load() {
     offscreenCanvasCtx.drawImage(img, 0, 100, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
     offscreenCanvasCtx.drawImage(img, 0, 100, canvas.width, canvas.height, canvas.width, 0, canvas.width, canvas.height);
     dataImageBG.src = offscreenCanvas.toDataURL();
-    offscreenCanvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
 
     // Prep pipes
     offscreenCanvas.width = "26";
@@ -186,7 +200,16 @@ function load() {
     offscreenCanvasCtx.drawImage(img, 144, 36, pipeWidth, 160, 0, 0, pipeWidth, 160);
     offscreenCanvasCtx.drawImage(img, 170, 36, pipeWidth, 160, 0, 160 + pipeGap, pipeWidth, 160);
     dataImagePipe.src = offscreenCanvas.toDataURL();
-    offscreenCanvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    
+    // Prep bird
+    offscreenCanvas.width = size[0];
+    offscreenCanvas.height = size[1] * 3;
+    offscreenCanvasCtx.drawImage(img, 144, 0 * size[1], size[0], size[1], 0, 0 * size[1], size[0], size[1]);
+    offscreenCanvasCtx.drawImage(img, 144, 1 * size[1], size[0], size[1], 0, 1 * size[1], size[0], size[1]);
+    offscreenCanvasCtx.drawImage(img, 144, 2 * size[1], size[0], size[1], 0, 2 * size[1], size[0], size[1]);
+    dataImageBird.src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     
     setup();
 
@@ -196,11 +219,13 @@ function load() {
 }
 
 function pipeLoc() {
-    return (Math.random() * ((canvas.height - (pipeGap + pipeWidth)) - pipeWidth)) + pipeWidth;
+    return ~~((Math.random() * (canvas.height - pipeGap - 20)) + 10);
 }
 
 function start() {
     gamePlaying = true;
+    canvas.onclick = doJump;
+    title.innerText = '🐦 Now: ' + currentScore + ' -- Best: ' + bestScore;
 }
 
 function doJump() {
@@ -212,20 +237,24 @@ function setup() {
     flight = jump;
 
     // set initial flyHeight (middle of screen - size of the bird)
-    flyHeight = (canvas.height / 2) - (size[1] / 2);
+    flyHeight = spriteCenter[1];
 
-    // setup first 3 pipes
+    // setup pipes
     pipes = [
-        [canvas.width + (0 * (pipeGap + pipeWidth)), pipeLoc()],
-        [canvas.width + (1 * (pipeGap + pipeWidth)), pipeLoc()]
+        [canvas.width, pipeLoc()],
+        [canvas.width + pipeSpacing, pipeLoc()]
     ]
+    
+    title.innerText = '🐦 Floppy Bord';
+    
+    canvas.onclick = start;
 }
 
 function update() {
     // make the pipe and bird moving
     index++;
 
-    ctx.drawImage(dataImageBG, 0, 0, canvas.width * 2, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width * 2, canvas.height);
+    ctx.drawImage(dataImageBG, 0, 0, doubleCanvasWidth, canvas.height, -(index * halfSpeed) % canvas.width, 0, doubleCanvasWidth, canvas.height);
 
     // pipe display
     if (gamePlaying) {
@@ -244,7 +273,9 @@ function update() {
 
             // remove & create new pipe
             pipes[0] = pipes[1];
-            pipes[1] = [pipes[0][0] + pipeGap + pipeWidth, pipeLoc()];
+            pipes[1] = [pipes[0][0] + pipeSpacing, pipeLoc()];
+            
+    		title.innerText = '🐦 Now: ' + currentScore + ' -- Best: ' + bestScore;
         }
 
         // if hit the pipe, end
@@ -257,21 +288,17 @@ function update() {
     }
     
     if (gamePlaying) {
-        ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], size[0], size[1], cTenth, flyHeight, size[0], size[1]);
+        ctx.drawImage(dataImageBird, 0, ~~((index % 9) / 3) * size[1], size[0], size[1], cTenth, ~~flyHeight, size[0], size[1]);
         flight += gravity;
         flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
     }
     else {
-        ctx.drawImage(img, 144, Math.floor((index % 9) / 3) * size[1], size[0], size[1], ((canvas.width / 2) - size[0] / 2), flyHeight, size[0], size[1]);
-        flyHeight = (canvas.height / 2) - (size[1] / 2);
+        ctx.drawImage(dataImageBird, 0, ~~((index % 9) / 3) * size[1], size[0], size[1], spriteCenter[0], ~~flyHeight, size[0], size[1]);
         // text accueil
         ctx.fillText('Best score : ' + bestScore, 28, 81);
         ctx.fillText('Click to play', 30, 45);
-        ctx.font = "bold 10px courier";
+        ctx.font = "bold 10px monospace";
     }
-
-    //  document.getElementById('bestScore').innerHTML = `Best : ${bestScore}`;
-    //  document.getElementById('currentScore').innerHTML = `Current : ${currentScore}`;
 
     idealFrameStart += 16;
     frameDelay = idealFrameStart - Date.now();
@@ -283,10 +310,7 @@ function update() {
     setTimeout(update, frameDelay);
 }
 
-img.src = "flappy-bird-set.png";
-// img.onload = load;
 load();
 </script>
-
 </body>
 </html>
