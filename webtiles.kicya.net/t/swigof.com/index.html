@@ -15,6 +15,8 @@
 .bg {
   display: block;
   position: absolute;
+  top: -35px;
+  left: -85px;
 }
 
 .marquee-container {
@@ -105,15 +107,15 @@
 </style>
 </head>
 <body>
-    <img hidden id="sheet" src="flappy-bird-set.png" alt="spritesheet">
+    <img hidden id="sheet" src="sheet.png" alt="sheet">
     
-    <img class="bg" src="dress2.png">
+    <img class="bg" src="bg.webp">
     <div class="marquee-container">
         <marquee direction="up" behavior="alternate" height="312" width="250">
             <marquee behavior="alternate" height="220">
                 <div class="glass-div main" id="main">
                     <div class="frame">
-                        <div id="window-title" class="window-title">🐦 Floppy Bord</div>
+                        <div id="window-title" class="window-title">🐇 Bnuuy Run</div>
                         <div class="window-content">
                             <div class="content">
                                 <img id="thumb" src="thumb.png" alt="thumbnail">
@@ -143,7 +145,8 @@ Performance is abysmal on firefox in webtiles
 JS-Interpreter >:(
 **/
 
-// change sprites / game
+// Add thrown barrels spining in the air? No air control so would suck?
+// Blend neighbor bgs
 
 var canvas = document.getElementById('canvas');
 var thumb = document.getElementById('thumb');
@@ -151,20 +154,20 @@ var img = document.getElementById('sheet');
 var title = document.getElementById('window-title');
 var ctx = canvas.getContext('2d', { alpha: false });
 var dataImageBG = document.createElement('img');
-var dataImagePipe = document.createElement('img');
-var dataImageBird = document.createElement('img');
+var dataImageBarrels = [document.createElement('img'), document.createElement('img'), document.createElement('img')];
+var dataImageBunny = document.createElement('img');
 
 var gamePlaying = false;
+var jumping = false;
 var gravity = .2;
 var speed = 2;
 var halfSpeed = speed/2;
-var size = [17, 12];
+var size = [14, 18];
 var spriteCenter = [~~((canvas.width / 2) - size[0] / 2), ~~((canvas.height / 2) - (size[1] / 2))]
-var jump = -4;
+var jump = -4.2;
 var cTenth = 14;
-var pipeWidth = 26;
-var pipeGap = 80;
-var pipeSpacing = pipeWidth + pipeGap;
+var barrelSizes = [[14, 15], [14, 30], [28, 15]];
+var ground = 106;
 
 var index = 0,
     bestScore = 0,
@@ -173,7 +176,8 @@ var index = 0,
     currentScore,
 	idealFrameStart,
     frameDelay,
-    doubleCanvasWidth;
+    doubleCanvasWidth,
+    barrels;
 
 function load() {
     ctx.imageSmoothingEnabled = false;
@@ -189,26 +193,36 @@ function load() {
     // Prep background
     offscreenCanvas.width = canvas.width * 2;
     offscreenCanvas.height = canvas.height;
-    offscreenCanvasCtx.drawImage(img, 0, 100, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
-    offscreenCanvasCtx.drawImage(img, 0, 100, canvas.width, canvas.height, canvas.width, 0, canvas.width, canvas.height);
+    offscreenCanvasCtx.drawImage(img, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+    offscreenCanvasCtx.drawImage(img, 0, 0, canvas.width, canvas.height, canvas.width, 0, canvas.width, canvas.height);
     dataImageBG.src = offscreenCanvas.toDataURL();
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
 
-    // Prep pipes
-    offscreenCanvas.width = "26";
-    offscreenCanvas.height = "410";
-    offscreenCanvasCtx.drawImage(img, 144, 36, pipeWidth, 160, 0, 0, pipeWidth, 160);
-    offscreenCanvasCtx.drawImage(img, 170, 36, pipeWidth, 160, 0, 160 + pipeGap, pipeWidth, 160);
-    dataImagePipe.src = offscreenCanvas.toDataURL();
+    // Prep barrels
+    offscreenCanvas.width = barrelSizes[0][0];
+    offscreenCanvas.height = barrelSizes[0][1];
+    offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, 0, barrelSizes[0][0], barrelSizes[0][1]);
+    dataImageBarrels[0].src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    offscreenCanvas.width = barrelSizes[1][0];
+    offscreenCanvas.height = barrelSizes[1][1];
+    offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, 0, barrelSizes[0][0], barrelSizes[0][1]);
+    offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, barrelSizes[0][1], barrelSizes[0][0], barrelSizes[0][1]);
+    dataImageBarrels[1].src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    offscreenCanvas.width = barrelSizes[2][0];
+    offscreenCanvas.height = barrelSizes[2][1];
+    offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, 0, barrelSizes[0][0], barrelSizes[0][1]);
+    offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], barrelSizes[0][0], 0, barrelSizes[0][0], barrelSizes[0][1]);
+    dataImageBarrels[2].src = offscreenCanvas.toDataURL();
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     
-    // Prep bird
+    // Prep bunny
     offscreenCanvas.width = size[0];
     offscreenCanvas.height = size[1] * 3;
-    offscreenCanvasCtx.drawImage(img, 144, 0 * size[1], size[0], size[1], 0, 0 * size[1], size[0], size[1]);
-    offscreenCanvasCtx.drawImage(img, 144, 1 * size[1], size[0], size[1], 0, 1 * size[1], size[0], size[1]);
-    offscreenCanvasCtx.drawImage(img, 144, 2 * size[1], size[0], size[1], 0, 2 * size[1], size[0], size[1]);
-    dataImageBird.src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.drawImage(img, 136, 0 * size[1], size[0], size[1], 0, 0 * size[1], size[0], size[1]);
+    offscreenCanvasCtx.drawImage(img, 136, 1 * size[1], size[0], size[1], 0, 1 * size[1], size[0], size[1]);
+    dataImageBunny.src = offscreenCanvas.toDataURL();
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     
     setup();
@@ -218,84 +232,91 @@ function load() {
     update();
 }
 
-function pipeLoc() {
-    return ~~((Math.random() * (canvas.height - pipeGap - 20)) + 10);
+function generateNextBarrel() {
+    var spacing = ~~((Math.random() * 50) + 100);
+    var type = ~~(Math.random() * 3);
+    barrels[1] = [barrels[0][0] + spacing, ground - barrelSizes[type][1], type];
 }
 
 function start() {
     gamePlaying = true;
     canvas.onclick = doJump;
-    title.innerText = '🐦 Now: ' + currentScore + ' -- Best: ' + bestScore;
+    title.innerText = '🐇 Now: ' + currentScore + ' -- Best: ' + bestScore;
 }
 
 function doJump() {
-    flight = jump;
+    if (!jumping) {
+        flight = jump;
+        jumping = true;
+    }
 }
 
 function setup() {
     currentScore = 0;
-    flight = jump;
+    flight = 0;
 
-    // set initial flyHeight (middle of screen - size of the bird)
-    flyHeight = spriteCenter[1];
+    flyHeight = ground - size[1];
 
-    // setup pipes
-    pipes = [
-        [canvas.width, pipeLoc()],
-        [canvas.width + pipeSpacing, pipeLoc()]
+    barrels = [
+        [canvas.width, ground - barrelSizes[0][1], 0],
+        [canvas.width + 100, ground - barrelSizes[0][1], 0]
     ]
     
-    title.innerText = '🐦 Floppy Bord';
+    title.innerText = '🐇 Bnuuy Run';
     
     canvas.onclick = start;
 }
 
 function update() {
-    // make the pipe and bird moving
     index++;
 
     ctx.drawImage(dataImageBG, 0, 0, doubleCanvasWidth, canvas.height, -(index * halfSpeed) % canvas.width, 0, doubleCanvasWidth, canvas.height);
 
-    // pipe display
+    // obstacle display
     if (gamePlaying) {
-        for (var i = 0; i < pipes.length; i++) {
-            // pipe moving
-            pipes[i][0] -= speed;
+        for (var i = 0; i < barrels.length; i++) {
+            barrels[i][0] -= speed;
 
-            ctx.drawImage(dataImagePipe, pipes[i][0], pipes[i][1] - 160);
+            ctx.drawImage(dataImageBarrels[barrels[i][2]], barrels[i][0], barrels[i][1]);
         }
 
-        // give 1 point & create new pipe
-        if(pipes[0][0] <= -pipeWidth){
-            currentScore++;
-            // check if it's the best score
-            bestScore = Math.max(bestScore, currentScore);
+        if (barrels[0][0] <= cTenth + size[0]) {
+            // give 1 point & create new obstacle
+            if(barrels[0][0] <= -barrelSizes[barrels[0][2]][0]) {
+                currentScore++;
+                // check if it's the best score
+                bestScore = Math.max(bestScore, currentScore);
 
-            // remove & create new pipe
-            pipes[0] = pipes[1];
-            pipes[1] = [pipes[0][0] + pipeSpacing, pipeLoc()];
-            
-    		title.innerText = '🐦 Now: ' + currentScore + ' -- Best: ' + bestScore;
-        }
+                // remove & create new obstacle
+                barrels[0] = barrels[1];
+                generateNextBarrel();
 
-        // if hit the pipe, end
-        if ((pipes[0][0] <= cTenth + size[0]) &&
-            (pipes[0][0] + pipeWidth >= cTenth) &&
-            (pipes[0][1] > flyHeight || pipes[0][1] + pipeGap < flyHeight + size[1])) {
-            gamePlaying = false;
-            setup();
+                title.innerText = '🐇 Now: ' + currentScore + ' -- Best: ' + bestScore;
+            }
+            // if hit the obstacle, end
+            else if ((barrels[0][1] < flyHeight + size[1]) &&
+            	(barrels[0][0] + barrelSizes[barrels[0][2]][0] >= cTenth)) {
+                gamePlaying = false;
+                setup();
+            }
         }
     }
     
     if (gamePlaying) {
-        ctx.drawImage(dataImageBird, 0, ~~((index % 9) / 3) * size[1], size[0], size[1], cTenth, ~~flyHeight, size[0], size[1]);
-        flight += gravity;
-        flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
+        ctx.drawImage(dataImageBunny, 0, ~~((index % 10) / 5) * size[1], size[0], size[1], cTenth, ~~flyHeight, size[0], size[1]);
+        if (jumping) {
+            flight += gravity;
+            flyHeight += flight;
+            if (flyHeight > ground - size[1]) {
+            	flyHeight = ground - size[1];
+            	jumping = false;
+        	}
+        }
     }
     else {
-        ctx.drawImage(dataImageBird, 0, ~~((index % 9) / 3) * size[1], size[0], size[1], spriteCenter[0], ~~flyHeight, size[0], size[1]);
+        ctx.drawImage(dataImageBunny, 0, ~~((index % 10) / 5) * size[1], size[0], size[1], spriteCenter[0], ~~flyHeight, size[0], size[1]);
         // text accueil
-        ctx.fillText('Best score : ' + bestScore, 28, 81);
+        ctx.fillText('Best score : ' + bestScore, 28, 60);
         ctx.fillText('Click to play', 30, 45);
         ctx.font = "bold 10px monospace";
     }
