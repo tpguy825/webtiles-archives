@@ -1,491 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>* {
+  <style>*, :before, :after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html, .tile-body {
-  height: 100%;
-}
-
-.tile-body {
-  color: #000;
-  background: #fff;
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  overflow: hidden;
-}
-
-.tile {
-  flex-direction: column;
-  gap: 10px;
   width: 100%;
   height: 100%;
-  padding: 10px;
-  display: flex;
-}
-
-.top {
-  background: #00000008;
-  border: 1px solid #00000059;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
-  padding: 8px 10px;
-  display: flex;
-}
-
-.brand {
-  flex-direction: column;
-  display: flex;
-}
-
-.title {
-  letter-spacing: .3px;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.sub {
-  opacity: .85;
-  margin-top: 2px;
-  font-size: 12px;
-}
-
-.cta {
-  color: #000;
-  white-space: nowrap;
-  background: #0000000d;
-  border: 1px solid #00000073;
-  padding: 6px 8px;
-  font-size: 12px;
-  text-decoration: none;
-}
-
-.cta:hover {
-  background: #0000001f;
-  border-color: #000000bf;
-}
-
-.mid {
-  flex-direction: column;
-  flex: auto;
-  gap: 8px;
-  min-height: 0;
-  display: flex;
-}
-
-.gameWrap {
-  background: #fff;
-  border: 1px solid #00000059;
-  flex: auto;
-  min-height: 0;
-  position: relative;
+  font-family: MS Sans Serif, Tahoma, Arial, sans-serif;
+  font-size: 11px;
   overflow: hidden;
 }
 
-#snakeCanvas {
-  background: #fff;
+#desktop {
+  background: teal repeating-linear-gradient(0deg, #0000000a 0 1px, #0000 1px 2px);
+  position: absolute;
+  inset: 0;
+}
+
+#reopen {
+  cursor: pointer;
+  user-select: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 68px;
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#reopen img {
+  object-fit: contain;
+  width: 56px;
+  height: 56px;
+  image-rendering: pixelated;
+}
+
+#reopen span {
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#reopen:hover span {
+  background: navy;
+  outline: 1px dotted #fff;
+}
+
+#webbtn-win {
+  z-index: 1;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+  outline: 2px solid gray;
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  box-shadow: 2px 2px #0006;
+}
+
+#webbtn-bar {
+  color: #fff;
+  cursor: move;
+  user-select: none;
+  background: linear-gradient(to right, navy, #1084d0);
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+}
+
+#webbtn-body {
+  background: silver;
+  padding: 4px;
+}
+
+#webbtn-body a {
+  display: block;
+}
+
+#webbtn-body img {
+  object-fit: contain;
+  width: 88px;
+  height: 31px;
+  image-rendering: pixelated;
+  border: 1px solid gray;
+  display: block;
+}
+
+#win {
+  z-index: 2;
+  background: silver;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+  outline: 2px solid gray;
+  flex-direction: column;
+  display: flex;
+  position: absolute;
+  inset: 6px;
+  box-shadow: 3px 3px #00000080;
+}
+
+#titlebar {
+  user-select: none;
+  background: linear-gradient(to right, navy, #1084d0);
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  display: flex;
+}
+
+#title-icon {
+  object-fit: contain;
+  width: 14px;
+  height: 14px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+#titlebar span {
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+  font-size: 11px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+#win-btns {
+  flex-shrink: 0;
+  gap: 2px;
+  display: flex;
+}
+
+.wbtn {
+  cursor: pointer;
+  color: #000;
+  background: silver;
+  border: 1px solid #000;
+  border-color: #fff #000 #000 #fff;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 14px;
+  padding: 0;
+  font-size: 9px;
+  font-weight: bold;
+  display: flex;
+}
+
+.wbtn:active {
+  border: 1px solid #fff;
+  border-color: #000 #fff #fff #000;
+}
+
+#menubar {
+  background: silver;
+  border-bottom: 1px solid gray;
+  flex-shrink: 0;
+  gap: 2px;
+  padding: 1px 4px;
+  display: flex;
+}
+
+.mitem {
+  cursor: default;
+  user-select: none;
+  padding: 1px 6px;
+}
+
+.mitem:hover {
+  color: #fff;
+  background: navy;
+}
+
+#win-body {
+  flex-direction: column;
+  flex: auto;
+  gap: 4px;
+  min-height: 0;
+  padding: 4px;
+  display: flex;
+  overflow: hidden;
+}
+
+#art-wrap {
+  background: #000;
+  border: 2px solid #fff;
+  border-color: gray #fff #fff gray;
+  flex: auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#art {
+  object-fit: cover;
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.cmd {
-  background: #00000008;
-  border: 1px solid #00000059;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 10px;
-  font-size: 12px;
-  line-height: 1;
+#lcd {
+  background: #000;
+  border: 2px solid #dfdfdf;
+  border-color: gray #dfdfdf #dfdfdf gray;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 3px;
+  padding: 4px 6px;
   display: flex;
 }
 
-.prompt {
-  color: #000;
-  opacity: .9;
+#lcd-top {
+  justify-content: space-between;
+  align-items: baseline;
+  display: flex;
 }
 
-.cmdtext {
-  opacity: .95;
+#track-name {
+  color: #0f0;
+  letter-spacing: .06em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 72%;
+  font-family: Courier New, monospace;
+  font-size: 11px;
+  font-weight: bold;
+  overflow: hidden;
 }
 
-.spacer {
-  flex: 1;
+#track-num {
+  color: #0c0;
+  font-family: Courier New, monospace;
+  font-size: 9px;
 }
 
-.status {
-  color: #000;
-  background: #0000000d;
-  border: 1px solid #00000040;
-  padding: 2px 6px;
+#prog-bg {
+  cursor: pointer;
+  background: #001a00;
+  border: 1px solid #0a0;
+  border-color: #040 #0a0 #0a0 #040;
+  height: 8px;
+  position: relative;
 }
 
-.statusLive {
-  color: #fff;
-  background: #c00;
-  border-color: #00000059;
-  box-shadow: 0 0 8px #cc0000a6, 0 0 16px #cc000059;
+#prog-fill {
+  pointer-events: none;
+  background: #0f0;
+  width: 0%;
+  height: 100%;
 }
 
-.bot {
-  flex: none;
+#time-row {
+  color: #0c0;
+  justify-content: space-between;
+  font-family: Courier New, monospace;
+  font-size: 9px;
+  display: flex;
 }
 
-.links {
-  opacity: .9;
+#btn-row {
+  flex-shrink: 0;
   justify-content: center;
+  align-items: center;
   gap: 8px;
-  font-size: 12px;
+  padding: 2px 0;
   display: flex;
 }
 
-.links a {
-  color: #000;
-  border-bottom: 1px dotted #00000073;
-  text-decoration: none;
+.cbtn {
+  cursor: pointer;
+  background: silver;
+  border: 2px solid gray;
+  border-color: #fff gray gray #fff;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 6px;
+  display: flex;
 }
 
-.links a:hover {
-  border-bottom-color: #000000d9;
+.cbtn:active {
+  border: 2px solid #fff;
+  border-color: gray #fff #fff gray;
+  padding: 5px 5px 3px 7px;
 }
 
-.sep {
-  opacity: .6;
+#btn-play {
+  padding: 4px 8px;
 }
 
-a:focus {
-  outline-offset: 2px;
-  outline: 2px solid #000000b3;
+#btn-play:active {
+  padding: 5px 7px 3px 9px;
 }
 </style>
 </head>
 <body>
-  <div class="tile">
-    <div class="top">
-      <div class="brand">
-        <div class="title">RedtailWorks</div>
-        <div class="sub">personal slice of the net</div>
+
+  <div id="desktop">
+    <div id="webbtn-win">
+      <div id="webbtn-bar">
+        <span>redtail.works</span>
+        <button id="webbtn-x" class="wbtn">&#10005;</button>
       </div>
-
-      <a class="cta" href="https://www.redtail.works" target="_blank" rel="noopener noreferrer">
-        enter →
-      </a>
-    </div>
-
-    <div class="mid">
-      <div class="gameWrap" aria-label="Snake preview (auto-play)">
-        <canvas id="snakeCanvas"></canvas>
-      </div>
-
-      <div class="cmd">
-        <span class="prompt">/:</span>
-        <span class="cmdtext">Snake (auto)</span>
-        <span class="spacer"></span>
-        <span class="status statusLive" id="rwStatus">ONLINE</span>
+      <div id="webbtn-body">
+        <a href="https://redtail.works" target="_blank" rel="noopener">
+          <img src="redtailglitter.gif" alt="redtail.works">
+        </a>
       </div>
     </div>
 
-    <div class="bot">
-      <div class="links">
-        <a href="https://www.redtail.works/#whois#whois" target="_blank" rel="noopener noreferrer">whois</a>
-        <span class="sep">·</span>
-        <a href="https://www.redtail.works/#projects#projects" target="_blank" rel="noopener noreferrer">projects</a>
-        <span class="sep">·</span>
-        <a href="https://www.redtail.works/#photos#photos" target="_blank" rel="noopener noreferrer">photos</a>
+    <div id="reopen">
+      <img src="musicicon.webp" alt="Core Dump">
+      <span>Core Dump</span>
+    </div>
+  </div>
+
+  <div id="win">
+    <div id="titlebar">
+      <img id="title-icon" src="musicicon.webp" alt>
+      <span>Core Dump - Media Player</span>
+      <div id="win-btns">
+        <button class="wbtn">_</button>
+        <button class="wbtn">&#9633;</button>
+        <button class="wbtn" id="btn-close">&#10005;</button>
       </div>
     </div>
 
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-//
-// Snake: pseudo-random movement + growth + random fruit spawns.
-// Safety rule: until 20 fruits are eaten, it avoids self-collision (and avoids instant reverse).
-// After 20 fruits, it stops playing safe and will eventually die and reset.
+    <div id="menubar">
+      <span class="mitem">File</span>
+      <span class="mitem">Play</span>
+      <span class="mitem">Help</span>
+    </div>
 
-(function () {
-  var canvas = document.getElementById('snakeCanvas');
-  if (!canvas || !canvas.getContext) return;
-  var ctx = canvas.getContext('2d');
+    <div id="win-body">
+      <div id="art-wrap">
+        <img id="art" src="AlbumCover1.webp" alt>
+      </div>
+      <div id="lcd">
+        <div id="lcd-top">
+          <span id="track-name">FRACTURE</span>
+          <span id="track-num">01 / 08</span>
+        </div>
+        <div id="prog-bg">
+          <div id="prog-fill"></div>
+        </div>
+        <div id="time-row">
+          <span id="time-cur">0:00</span>
+          <span id="time-dur">2:08</span>
+        </div>
+      </div>
+      <div id="btn-row">
+        <button class="cbtn" id="btn-prev"><canvas id="ic-prev" width="20" height="20"></canvas></button>
+        <button class="cbtn" id="btn-play"><canvas id="ic-play" width="24" height="24"></canvas></button>
+        <button class="cbtn" id="btn-next"><canvas id="ic-next" width="20" height="20"></canvas></button>
+      </div>
+    </div>
+  </div>
 
-  // Grid
-  var COLS = 18;
-  var ROWS = 12;
+  <audio id="audio" preload="metadata"></audio>
+  <script type="text/tilescript">(function () {
 
-  // Timing
-  var TICK_MS = 110;
+  var COVERS = ['/AlbumCover1.webp', '/AlbumCover2.webp', '/AlbumCover3.jpg'];
+  var TRACKS = [
+    { file: '/Fracture.mp3',    name: 'Fracture',    dur: '2:08' },
+    { file: '/Glass.mp3',       name: 'Glass',       dur: '2:23' },
+    { file: '/God Machine.mp3', name: 'God Machine', dur: '1:44' },
+    { file: '/Manhunt.mp3',     name: 'Manhunt',     dur: '1:41' },
+    { file: '/Puddles.mp3',     name: 'Puddles',     dur: '2:13' },
+    { file: '/Rot.mp3',         name: 'Rot',         dur: '1:38' },
+    { file: '/Specter.mp3',     name: 'Specter',     dur: '2:41' },
+    { file: '/japaneese.mp3',   name: '\u512a\u96c5\u306a\u7d42\u4e86', dur: '1:43' }
+  ];
 
-  // Game tuning
-  var START_LEN = 4;
-  var FRUITS_SAFE = 20;       // play safe until this many fruits eaten
-  var GROW_PER_FRUIT = 5;     // growth steps added per fruit
-  var POST_SAFE_GRACE = 90;   // after FRUITS_SAFE, allow collisions; force a reset if still alive this long
+  // Random cover
+  document.getElementById('art').src = COVERS[Math.floor(Math.random() * COVERS.length)];
 
-  // Rendering / resize
-  var lastW = 0, lastH = 0;
+  // DOM
+  var audio      = document.getElementById('audio');
+  var win        = document.getElementById('win');
+  var reopen     = document.getElementById('reopen');
+  var btnClose   = document.getElementById('btn-close');
+  var btnPlay    = document.getElementById('btn-play');
+  var btnPrev    = document.getElementById('btn-prev');
+  var btnNext    = document.getElementById('btn-next');
+  var progBg     = document.getElementById('prog-bg');
+  var progFill   = document.getElementById('prog-fill');
+  var timeCur    = document.getElementById('time-cur');
+  var timeDur    = document.getElementById('time-dur');
+  var trackName  = document.getElementById('track-name');
+  var trackNum   = document.getElementById('track-num');
 
-  // State
-  var snake = [];  // head at [0]
-  var dir = { x: 1, y: 0 };
-  var grow = 0;
-  var fruitsEaten = 0;
-  var postSafeSteps = 0;
-  var fruit = { x: 0, y: 0 };
+  // Canvas icons
+  function drawPlay(id) {
+    var c = document.getElementById(id); var cx = c.getContext('2d'); var s = c.width;
+    cx.clearRect(0,0,s,s); cx.fillStyle = '#000'; cx.beginPath();
+    cx.moveTo(s*.25,s*.15); cx.lineTo(s*.82,s*.5); cx.lineTo(s*.25,s*.85);
+    cx.closePath(); cx.fill();
+  }
+  function drawPause(id) {
+    var c = document.getElementById(id); var cx = c.getContext('2d'); var s = c.width;
+    cx.clearRect(0,0,s,s); cx.fillStyle = '#000';
+    cx.fillRect(s*.2,s*.15,s*.22,s*.7);
+    cx.fillRect(s*.58,s*.15,s*.22,s*.7);
+  }
+  function drawPrev(id) {
+    var c = document.getElementById(id); var cx = c.getContext('2d'); var s = c.width;
+    cx.clearRect(0,0,s,s); cx.fillStyle = '#000';
+    cx.fillRect(s*.12,s*.15,s*.14,s*.7);
+    cx.beginPath();
+    cx.moveTo(s*.85,s*.15); cx.lineTo(s*.30,s*.5); cx.lineTo(s*.85,s*.85);
+    cx.closePath(); cx.fill();
+  }
+  function drawNext(id) {
+    var c = document.getElementById(id); var cx = c.getContext('2d'); var s = c.width;
+    cx.clearRect(0,0,s,s); cx.fillStyle = '#000';
+    cx.fillRect(s*.74,s*.15,s*.14,s*.7);
+    cx.beginPath();
+    cx.moveTo(s*.15,s*.15); cx.lineTo(s*.70,s*.5); cx.lineTo(s*.15,s*.85);
+    cx.closePath(); cx.fill();
+  }
+  drawPlay('ic-play');
+  drawPrev('ic-prev');
+  drawNext('ic-next');
 
-  // Deterministic PRNG (so it "looks random" but is stable)
-  var seed = 2463534242; // change this number for a different pattern
+  // Close / reopen
+  btnClose.addEventListener('click', function () {
+    win.style.display = 'none';
+    reopen.style.display = 'flex';
+  });
+  reopen.addEventListener('click', function () {
+    win.style.display = 'flex';
+    reopen.style.display = 'none';
+  });
 
-  function rand32() {
-    // xorshift32
-    seed ^= (seed << 13);
-    seed ^= (seed >>> 17);
-    seed ^= (seed << 5);
-    return (seed >>> 0);
+  // Drag webbutton - use tile as move surface, not document
+  var webbtnWin = document.getElementById('webbtn-win');
+  var webbtnBar = document.getElementById('webbtn-bar');
+  var tile      = document.getElementById('desktop');
+  var dragging  = false;
+  var ox = 0, oy = 0;
+
+  webbtnBar.addEventListener('mousedown', function (e) {
+    dragging = true;
+    var r = webbtnWin.getBoundingClientRect();
+    ox = e.clientX - r.left;
+    oy = e.clientY - r.top;
+    webbtnWin.style.right  = 'auto';
+    webbtnWin.style.bottom = 'auto';
+  });
+  tile.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    webbtnWin.style.left = (e.clientX - ox) + 'px';
+    webbtnWin.style.top  = (e.clientY - oy) + 'px';
+  });
+  tile.addEventListener('mouseup', function () { dragging = false; });
+  tile.addEventListener('mouseleave', function () { dragging = false; });
+
+  // Player state
+  var idx     = 0;
+  var playing = false;
+
+  function loadTrack(i, autoplay) {
+    idx = i;
+    var t = TRACKS[i];
+    audio.src = t.file;
+    trackName.textContent = t.name.toUpperCase();
+    timeDur.textContent   = t.dur;
+    trackNum.textContent  = pad2(i + 1) + ' / ' + pad2(TRACKS.length);
+    progFill.style.width  = '0%';
+    timeCur.textContent   = '0:00';
+    if (autoplay) { audio.play(); }
   }
 
-  function randInt(n) {
-    return (rand32() % n) | 0;
+  loadTrack(0, false);
+
+  btnPlay.addEventListener('click', function () {
+    if (playing) { audio.pause(); } else { audio.play(); }
+  });
+  btnPrev.addEventListener('click', function () {
+    if (audio.currentTime > 3) { audio.currentTime = 0; }
+    else { loadTrack((idx - 1 + TRACKS.length) % TRACKS.length, playing); }
+  });
+  btnNext.addEventListener('click', function () {
+    loadTrack((idx + 1) % TRACKS.length, playing);
+  });
+  progBg.addEventListener('click', function (e) {
+    if (!audio.duration) return;
+    var r = progBg.getBoundingClientRect();
+    audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+  });
+
+  audio.addEventListener('play',  function () { playing = true;  drawPause('ic-play'); });
+  audio.addEventListener('pause', function () { playing = false; drawPlay('ic-play'); });
+  audio.addEventListener('ended', function () { loadTrack((idx + 1) % TRACKS.length, true); });
+  audio.addEventListener('timeupdate', function () {
+    if (!audio.duration) return;
+    progFill.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
+    timeCur.textContent  = fmt(audio.currentTime);
+  });
+
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+  function fmt(s) {
+    if (!isFinite(s) || s < 0) return '0:00';
+    var m = Math.floor(s / 60); var sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
   }
 
-  function fitCanvasIfNeeded() {
-    var w = canvas.clientWidth || 1;
-    var h = canvas.clientHeight || 1;
-    if (w !== lastW || h !== lastH) {
-      lastW = w;
-      lastH = h;
-      canvas.width = w;
-      canvas.height = h;
-      return true;
-    }
-    return false;
-  }
-
-  function inBounds(x, y) {
-    return x >= 0 && x < COLS && y >= 0 && y < ROWS;
-  }
-
-  function cellInSnake(x, y, ignoreTail) {
-    var len = snake.length;
-    var max = ignoreTail ? (len - 1) : len;
-    for (var i = 0; i < max; i++) {
-      if (snake[i].x === x && snake[i].y === y) return true;
-    }
-    return false;
-  }
-
-  function spawnFruit() {
-    var tries = 0;
-    while (tries < 400) {
-      var fx = randInt(COLS);
-      var fy = randInt(ROWS);
-      if (!cellInSnake(fx, fy, false)) {
-        fruit.x = fx;
-        fruit.y = fy;
-        return;
-      }
-      tries++;
-    }
-
-    for (var y = 0; y < ROWS; y++) {
-      for (var x = 0; x < COLS; x++) {
-        if (!cellInSnake(x, y, false)) {
-          fruit.x = x;
-          fruit.y = y;
-          return;
-        }
-      }
-    }
-
-    fruit.x = snake[0].x;
-    fruit.y = snake[0].y;
-  }
-
-  function reset() {
-    fitCanvasIfNeeded();
-
-    snake = [];
-    fruitsEaten = 0;
-    postSafeSteps = 0;
-    grow = 0;
-
-    var sx = (COLS / 2) | 0;
-    var sy = (ROWS / 2) | 0;
-
-    for (var i = 0; i < START_LEN; i++) {
-      snake.push({ x: sx - i, y: sy });
-    }
-
-    dir.x = 1; dir.y = 0;
-
-    spawnFruit();
-    draw();
-  }
-
-  function reverseOf(d) {
-    return d.x === -dir.x && d.y === -dir.y;
-  }
-
-  function scoreDir(d) {
-    var head = snake[0];
-    var nx = head.x + d.x;
-    var ny = head.y + d.y;
-
-    var dist = Math.abs(fruit.x - nx) + Math.abs(fruit.y - ny);
-    var noise = (randInt(9) - 4); // -4..+4
-    return (dist * 10) + noise;
-  }
-
-  function pickDirection(safeMode) {
-    var dirs = [
-      { x: 1, y: 0 },
-      { x: -1, y: 0 },
-      { x: 0, y: 1 },
-      { x: 0, y: -1 }
-    ];
-
-    // Shuffle deterministically
-    for (var i = dirs.length - 1; i > 0; i--) {
-      var j = randInt(i + 1);
-      var tmp = dirs[i]; dirs[i] = dirs[j]; dirs[j] = tmp;
-    }
-
-    var head = snake[0];
-    var best = null;
-    var bestScore = 1e9;
-
-    var ignoreTail = (grow === 0);
-
-    for (var k = 0; k < 4; k++) {
-      var d = dirs[k];
-
-      // avoid instant reverse
-      if (reverseOf(d)) continue;
-
-      var nx = head.x + d.x;
-      var ny = head.y + d.y;
-
-      if (!inBounds(nx, ny)) continue;
-
-      if (safeMode) {
-        if (cellInSnake(nx, ny, ignoreTail)) continue;
-      }
-
-      var s = scoreDir(d);
-      if (s < bestScore) {
-        bestScore = s;
-        best = d;
-      }
-    }
-
-    if (best) return best;
-
-    // Relaxation
-    if (safeMode) {
-      for (k = 0; k < 4; k++) {
-        d = dirs[k];
-        if (reverseOf(d)) continue;
-        nx = head.x + d.x;
-        ny = head.y + d.y;
-        if (!inBounds(nx, ny)) continue;
-        return d;
-      }
-    }
-
-    // Fallback
-    var keepNx = head.x + dir.x;
-    var keepNy = head.y + dir.y;
-    if (inBounds(keepNx, keepNy)) return { x: dir.x, y: dir.y };
-    return { x: -dir.x, y: -dir.y };
-  }
-
-  function step() {
-    if (fitCanvasIfNeeded()) draw();
-
-    var safeMode = (fruitsEaten < FRUITS_SAFE);
-
-    var nd = pickDirection(safeMode);
-    dir.x = nd.x; dir.y = nd.y;
-
-    var head = snake[0];
-    var nx = head.x + dir.x;
-    var ny = head.y + dir.y;
-
-    if (!inBounds(nx, ny)) {
-      reset();
-      return;
-    }
-
-    var ignoreTail = (grow === 0);
-    if (cellInSnake(nx, ny, ignoreTail)) {
-      reset();
-      return;
-    }
-
-    snake.unshift({ x: nx, y: ny });
-
-    if (nx === fruit.x && ny === fruit.y) {
-      fruitsEaten += 1;
-      grow += GROW_PER_FRUIT;
-      spawnFruit();
-    }
-
-    if (grow > 0) {
-      grow -= 1;
-    } else {
-      snake.pop();
-    }
-
-    if (!safeMode) {
-      postSafeSteps += 1;
-      if (postSafeSteps >= POST_SAFE_GRACE) {
-        reset();
-        return;
-      }
-    }
-
-    draw();
-  }
-
-  function draw() {
-    var cw = canvas.width;
-    var ch = canvas.height;
-
-    var cell = Math.floor(Math.min(cw / COLS, ch / ROWS));
-    if (cell < 2) cell = 2;
-
-    var gw = cell * COLS;
-    var gh = cell * ROWS;
-    var ox = Math.floor((cw - gw) / 2);
-    var oy = Math.floor((ch - gh) / 2);
-
-    ctx.clearRect(0, 0, cw, ch);
-
-    // Background (white)
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, cw, ch);
-
-    // Border
-    ctx.strokeStyle = "rgba(0,0,0,0.25)";
-    ctx.strokeRect(ox + 0.5, oy + 0.5, gw - 1, gh - 1);
-
-    // Fruit (red)
-    ctx.fillStyle = "#cc0000";
-    ctx.fillRect(ox + fruit.x * cell, oy + fruit.y * cell, cell, cell);
-
-    // Snake (black)
-    ctx.fillStyle = "#000000";
-    for (var i = 0; i < snake.length; i++) {
-      var s = snake[i];
-      ctx.fillRect(ox + s.x * cell, oy + s.y * cell, cell, cell);
-    }
-  }
-
-  reset();
-  setInterval(step, TICK_MS);
 })();
 </script>
-  </div>
 </body>
 </html>
