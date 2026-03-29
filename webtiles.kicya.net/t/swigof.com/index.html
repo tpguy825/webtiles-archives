@@ -15,8 +15,6 @@
 .bg {
   display: block;
   position: absolute;
-  top: -35px;
-  left: -85px;
 }
 
 .marquee-container {
@@ -109,7 +107,7 @@
 <body>
     <img hidden id="sheet" src="sheet.png" alt="sheet">
     
-    <img class="bg" src="bg.webp">
+    <img class="bg" src="bg.png">
     <div class="marquee-container">
         <marquee direction="up" behavior="alternate" height="312" width="250">
             <marquee behavior="alternate" height="220">
@@ -145,8 +143,10 @@ Performance is abysmal on firefox in webtiles
 JS-Interpreter >:(
 **/
 
-// Add thrown barrels spining in the air? No air control so would suck?
-// Blend neighbor bgs
+// Add sound: jump, lose, music?
+// better edge blend pattern?
+// retest site performance. better on laptop?
+//   move barrel sizes into barrel data
 
 var canvas = document.getElementById('canvas');
 var thumb = document.getElementById('thumb');
@@ -154,19 +154,24 @@ var img = document.getElementById('sheet');
 var title = document.getElementById('window-title');
 var ctx = canvas.getContext('2d', { alpha: false });
 var dataImageBG = document.createElement('img');
-var dataImageBarrels = [document.createElement('img'), document.createElement('img'), document.createElement('img')];
+var dataImageBarrels = [document.createElement('img'),
+                        document.createElement('img'),
+                        document.createElement('img'),
+                        document.createElement('img')];
 var dataImageBunny = document.createElement('img');
 
 var gamePlaying = false;
 var jumping = false;
 var gravity = .2;
 var speed = 2;
+var flyingBarrelSpeed = speed * 1.2;
 var halfSpeed = speed/2;
 var size = [14, 18];
-var spriteCenter = [~~((canvas.width / 2) - size[0] / 2), ~~((canvas.height / 2) - (size[1] / 2))]
+var spriteCenter = [~~((canvas.width / 2) - size[0] / 2), ~~((canvas.height / 2) - (size[1] / 2))];
 var jump = -4.2;
 var cTenth = 14;
-var barrelSizes = [[14, 15], [14, 30], [28, 15]];
+var barrelSizes = [[14, 15], [14, 30], [28, 15], [15, 15]];
+var barrelHeightOffsets = [0, 0, 0, 30];
 var ground = 106;
 
 var index = 0,
@@ -199,22 +204,31 @@ function load() {
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
 
     // Prep barrels
+    // single
     offscreenCanvas.width = barrelSizes[0][0];
     offscreenCanvas.height = barrelSizes[0][1];
     offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, 0, barrelSizes[0][0], barrelSizes[0][1]);
     dataImageBarrels[0].src = offscreenCanvas.toDataURL();
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    // vertical double
     offscreenCanvas.width = barrelSizes[1][0];
     offscreenCanvas.height = barrelSizes[1][1];
     offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, 0, barrelSizes[0][0], barrelSizes[0][1]);
     offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, barrelSizes[0][1], barrelSizes[0][0], barrelSizes[0][1]);
     dataImageBarrels[1].src = offscreenCanvas.toDataURL();
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    // horizontal double
     offscreenCanvas.width = barrelSizes[2][0];
     offscreenCanvas.height = barrelSizes[2][1];
     offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], 0, 0, barrelSizes[0][0], barrelSizes[0][1]);
     offscreenCanvasCtx.drawImage(img, 150, 0, barrelSizes[0][0], barrelSizes[0][1], barrelSizes[0][0], 0, barrelSizes[0][0], barrelSizes[0][1]);
     dataImageBarrels[2].src = offscreenCanvas.toDataURL();
+    offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    // flying
+    offscreenCanvas.width = barrelSizes[3][0];
+    offscreenCanvas.height = barrelSizes[3][1];
+    offscreenCanvasCtx.drawImage(img, 150, 15, barrelSizes[3][0], barrelSizes[3][1], 0, 0, barrelSizes[3][0], barrelSizes[3][1]);
+    dataImageBarrels[3].src = offscreenCanvas.toDataURL();
     offscreenCanvasCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     
     // Prep bunny
@@ -234,8 +248,8 @@ function load() {
 
 function generateNextBarrel() {
     var spacing = ~~((Math.random() * 50) + 100);
-    var type = ~~(Math.random() * 3);
-    barrels[1] = [barrels[0][0] + spacing, ground - barrelSizes[type][1], type];
+    var type = ~~(Math.random() * 4);
+    barrels[1] = [barrels[0][0] + spacing, ground - barrelSizes[type][1] - barrelHeightOffsets[type], type];
 }
 
 function start() {
@@ -260,7 +274,7 @@ function setup() {
     barrels = [
         [canvas.width, ground - barrelSizes[0][1], 0],
         [canvas.width + 100, ground - barrelSizes[0][1], 0]
-    ]
+    ];
     
     title.innerText = '🐇 Bnuuy Run';
     
@@ -275,9 +289,17 @@ function update() {
     // obstacle display
     if (gamePlaying) {
         for (var i = 0; i < barrels.length; i++) {
-            barrels[i][0] -= speed;
-
-            ctx.drawImage(dataImageBarrels[barrels[i][2]], barrels[i][0], barrels[i][1]);
+            if (barrels[i][2] != 3) {
+                barrels[i][0] -= speed;
+                ctx.drawImage(dataImageBarrels[barrels[i][2]], barrels[i][0], barrels[i][1]);
+            } else {
+                barrels[i][0] -= flyingBarrelSpeed;
+                if ((~~(index % 20 / 10)) == 0) {
+                    ctx.drawImage(dataImageBarrels[3], ~~(barrels[i][0]), barrels[i][1]);
+                } else {
+                    ctx.drawImage(dataImageBarrels[0], ~~(barrels[i][0]), barrels[i][1]);
+                }
+            }
         }
 
         if (barrels[0][0] <= cTenth + size[0]) {
@@ -294,10 +316,11 @@ function update() {
                 title.innerText = '🐇 Now: ' + currentScore + ' -- Best: ' + bestScore;
             }
             // if hit the obstacle, end
-            else if ((barrels[0][1] < flyHeight + size[1]) &&
-            	(barrels[0][0] + barrelSizes[barrels[0][2]][0] >= cTenth)) {
-                gamePlaying = false;
-                setup();
+            else if ((barrels[0][1] < flyHeight + size[1]) && // obstacle top edge v player bottom edge
+                (barrels[0][0] + barrelSizes[barrels[0][2]][0] >= cTenth) && // obstacle right edge v player left edge
+                (barrels[0][1] + barrelSizes[barrels[0][2]][1] >= flyHeight)) { // obstacle bottom edge v player top edge
+                    gamePlaying = false;
+                    setup();
             }
         }
     }
