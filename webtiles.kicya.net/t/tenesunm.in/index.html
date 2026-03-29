@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Cormorant SC;
+  font-style: normal;
+  font-weight: 400;
+  src: local(Cormorant SC Regular), local(CormorantSC-Regular), url("https://webtiles.kicya.net/t/fonts/Cormorant_SC-ext.woff2") format("woff2");
+  unicode-range: U+100-24F, U+1E??, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: Cormorant SC;
+  font-style: normal;
+  font-weight: 400;
+  src: local(Cormorant SC Regular), local(CormorantSC-Regular), url("https://webtiles.kicya.net/t/fonts/Cormorant_SC.woff2") format("woff2");
+  unicode-range: U+??, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: Pinyon Script;
+  font-style: normal;
+  font-weight: 400;
+  src: local(Pinyon Script), local(PinyonScript), url("https://webtiles.kicya.net/t/fonts/PinyonScript.woff2") format("woff2");
+  unicode-range: U+??, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+</style>
+    <style>html {
+  box-sizing: border-box;
+}
+
+*, :before, :after {
+  box-sizing: inherit;
+}
+
+.tile-body {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  font-family: Cormorant SC, sans-serif;
+  font-size: .8em;
+}
+
+#flasher {
+  pointer-events: none;
+  z-index: 1500;
+  opacity: 0;
+  background-color: #fff;
+}
+
+@keyframes flash {
+  from {
+    opacity: .3;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.flash {
+  animation: .4s linear flash;
+}
+
+.inset-fixed {
+  position: fixed;
+  inset: 0;
+}
+
+h1 {
+  color: #fff;
+  text-shadow: 0 1px 4px #000000b3;
+  text-align: center;
+  font-family: Pinyon Script;
+  font-size: 2em;
+}
+
+p {
+  color: #fff;
+  text-shadow: 0 1px 3px #00000080;
+}
+
+#particles-js {
+  z-index: 1000;
+}
+
+#estrellas {
+  z-index: 998;
+  background-image: url("static/img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#particles-js, #estrellas {
+  position: fixed;
+  inset: 0;
+}
+
+.cosocontenedor {
+  z-index: 1001;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  background-color: #4e4e4e9b;
+  border: 1px solid #2f2f2f50;
+  border-radius: 5px;
+  width: calc(100vw - 80px);
+  margin: 0 auto;
+  padding: 5px 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 .5px 1px #838181b4;
+}
+
+.footer {
+  pointer-events: none;
+  text-align: right;
+  background-color: #00000080;
+  border-top: 1px solid #000;
+  justify-content: space-between;
+  height: 20px;
+  padding: 5px;
+  font-size: .8em;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.footer a {
+  pointer-events: visible;
+}
+
+.footer p {
+  height: 100%;
+  margin: 0;
+}
+
+.share-btn {
+  display: inline-block;
+}
+
+.share-btn span {
+  display: none;
+}
+
+.video-container {
+  z-index: 998;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.video-container > video#bg-video {
+  z-index: 0;
+  background: url("https://webtiles.kicya.net/t/img/space_bg-1422.jpg") 0 0 / contain no-repeat;
+  width: auto;
+  height: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#quote {
+  font-size: 12pt;
+}
+
+#who {
+  text-align: right;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+    <a href="https://www.tenesunm.in/" target="_blank">
+    <div id="particles-js" class="inset-fixed">
+      <div class="cosocontenedor">
+        <h1>I'm with stupid</h1>
+        <h1>
+            &#8592;
+          </h1>
+      </div>
+    </div>
+        </a>
+<div id="estrellas">
+    
+    </div>
+</body>
+</html>

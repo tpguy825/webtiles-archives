@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-image: url("propeller.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+.button {
+  text-align: center;
+  word-wrap: wrap;
+  text-shadow: 0 0 4px #9da824;
+  color: #fff;
+  width: 140px;
+  padding-top: 35%;
+  padding-left: 25%;
+  padding-right: 25%;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: inline-block;
+}
+
+a {
+  color: #fff;
+  text-shadow: 0 0 4px #9da824;
+  text-decoration: none;
+  transition: transform .1s ease-out;
+}
+
+a:hover {
+  color: #000;
+  text-shadow: 0 0 4px #9da824;
+  opacity: .6;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .1s;
+}
+</style>
+    
+    
+</head>
+<body>
+    
+    <div class="button">
+    <a href="https://crunk.nekoweb.org" target="_blank">
+    GET CRUNK GET CRUNK GET CRUNK
+    </a>
+    </div>
+        
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");
+const audio = new Audio("gentleding.mp3");
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    audio.play();
+  });
+});</script>
+</body>
+</html>

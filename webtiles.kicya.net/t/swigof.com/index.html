@@ -75,6 +75,21 @@
   image-rendering: pixelated;
 }
 
+.taskbar {
+  background: linear-gradient(#c8c8c8b3, #969696b3 50%, #7d7d7db3 50%, #7d7d7db3);
+  outline: 1px solid #0000004d;
+  width: 250px;
+  height: 29px;
+  display: inline;
+  position: absolute;
+  top: 220px;
+}
+
+.task {
+  width: 125px;
+  height: 30px;
+}
+
 @keyframes bounceX {
   0% {
     left: 50px;
@@ -109,7 +124,7 @@
     
     <img class="bg" src="bg.png">
     <div class="marquee-container">
-        <marquee direction="up" behavior="alternate" height="312" width="250">
+        <marquee direction="up" behavior="alternate" height="281" width="250">
             <marquee behavior="alternate" height="220">
                 <div class="glass-div main" id="main">
                     <div class="frame">
@@ -124,6 +139,10 @@
                 </div>
             </marquee>
         </marquee>
+    </div>
+    <div class="taskbar">
+    	<div class="task"></div>
+        <div class="task"></div>
     </div>
     <script type="text/tilescript">/**
 Copyright (c) 2026 by swigof
@@ -145,8 +164,6 @@ JS-Interpreter >:(
 
 // Add sound: jump, lose, music?
 // better edge blend pattern?
-// retest site performance. better on laptop?
-//   move barrel sizes into barrel data
 
 var canvas = document.getElementById('canvas');
 var thumb = document.getElementById('thumb');
