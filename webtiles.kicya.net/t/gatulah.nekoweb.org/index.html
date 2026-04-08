@@ -10,6 +10,10 @@
   overflow: scroll;
 }
 
+table {
+  opacity: .3;
+}
+
 .wow {
   text-align: center;
   background: url("energy_release_2.gif") 0 0 / 30%;
@@ -45,13 +49,76 @@ p:first-of-type {
 <body>
     
     
-    <div class="wow">
-        <h2 class="texts" id="title">Click to load</h2>
-        <div class="texts" id="par1">Please</div>
-        <div class="texts" id="par2">Also I'm reusing this fire cuz i burned my drawing once for my main website</div>
-        <button id="buttony">Go to season 1</button>
-    </div>
-    <a href="index.html" class="chat-coord-link" data-x="2" data-y="2" style="position:absolute;">1, 1</a>
+    
+    
+
+	<center>
+     <table>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/ɪ/</button></th>
+        <th><button style="position:relative;z-index:1;">/e/</button></th>
+        <th><button style="position:relative;z-index:1;">/æ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ɒ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʌ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʊ/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/ə/</button></th>
+        <th><button style="position:relative;z-index:1;">/i:/</button></th>
+        <th><button style="position:relative;z-index:1;">/a:/</button></th>
+        <th><button style="position:relative;z-index:1;">/u:/</button></th>
+        <th><button style="position:relative;z-index:1;">/ɔ:/</button></th>
+        <th><button style="position:relative;z-index:1;">/ɜ:/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/aɪ/</button></th>
+        <th><button style="position:relative;z-index:1;">/eɪ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ɔɪ/</button></th>
+        <th><button style="position:relative;z-index:1;">/aʊ/</button></th>
+        <th><button style="position:relative;z-index:1;">/oʊ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ɪə/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/eə/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʊə/</button></th>
+        <th><button style="position:relative;z-index:1;">/p/</button></th>
+        <th><button style="position:relative;z-index:1;">/b/</button></th>
+        <th><button style="position:relative;z-index:1;">/t/</button></th>
+        <th><button style="position:relative;z-index:1;">/d/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/k/</button></th>
+        <th><button style="position:relative;z-index:1;">/g/</button></th>
+        <th><button style="position:relative;z-index:1;">/f/</button></th>
+        <th><button style="position:relative;z-index:1;">/v/</button></th>
+        <th><button style="position:relative;z-index:1;">/θ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ð/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/s/</button></th>
+        <th><button style="position:relative;z-index:1;">/z/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʃ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʒ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʧ/</button></th>
+        <th><button style="position:relative;z-index:1;">/ʤ/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/l/</button></th>
+        <th><button style="position:relative;z-index:1;">/n/</button></th>
+        <th><button style="position:relative;z-index:1;">/ŋ/</button></th>
+        <th><button style="position:relative;z-index:1;">/h/</button></th>
+        <th><button style="position:relative;z-index:1;">/r/</button></th>
+        <th><button style="position:relative;z-index:1;">/j/</button></th>
+      </tr>
+      <tr>
+        <th><button style="position:relative;z-index:1;">/w/</button></th>
+      </tr>
+    </table> 
+    </center>
+    <img style="width:100%;height:100%;position:absolute;top:0;z-index:-1" src id="ha">
+   	<audio id="aud" preload="metadata"></audio>
+
+	<input type="text" id="input" style="opacity:0%;" autocomplete="off">
     <script type="text/tilescript">
 
 
@@ -76,19 +143,124 @@ function addTXT(text){
     para.appendChild(node);
     document.body.appendChild(para);
 }
-var butt = document.getElementById("buttony");
-butt.addEventListener("click",function(e){createSeason1()});
-var textes = document.getElementsByClassName("texts");
-for (var i = 0;i<textes.length;i++){
-    textes[i].addEventListener("click",function(e){
-        var storyNum = parseInt(localStorage.getItem("story"));
-        incrementText(storyNum);
-        if(typeof monologue[storyNum+1] !== 'undefined'){
-            localStorage.setItem("story",storyNum+1);
+var keyArr = [];
+
+
+var spongebob = [115, 112, 652, 110, 676, 98, 594, 98];
+var delayList = {122: 299.54166666666663, 115: 252.24999999999997, 679: 260.14583333333337, 102: 220.72916666666666, 98: 267.5625, 104: 173.4375, 108: 591.2291666666667, 240: 307.4375, 331: 543.9375, 596618: 758.0833333333334, 112: 624.3125, 618601: 680.0416666666666, 643: 220.72916666666666, 101618: 802.6666666666666, 119: 307.4375, 114: 181.3125, 650601: 602.0, 116: 312.16666666666663, 106: 567.5833333333334, 97650: 802.6875, 107: 401.3333333333333, 952: 307.4583333333333, 110: 646.4166666666666, 230: 301.0, 118: 291.6666666666667, 10558: 543.5625, 601: 662.1666666666666, 111650: 992.2083333333334, 594: 356.75, 60458: 880.7291666666666, 100: 401.3333333333333, 59658: 880.7291666666666, 652: 379.0416666666667, 97618: 1159.4166666666667, 658: 346.8541666666667, 9758: 954.5625, 618: 304.0833333333333, 11758: 808.7083333333334, 676: 331.0833333333333, 101601: 557.4166666666666, 650: 362.6041666666667, 101: 272.4375, 103: 220.72916666666666};
+
+function playSound(file){
+    console.log(file)
+    var aud = document.getElementById('aud');
+    aud.setAttribute("src",file);
+    aud.play();
+}
+var answCheck = [];
+var allButtons = document.getElementsByTagName("button");
+for(var i =0;i<allButtons.length;i++){
+    allButtons[i].addEventListener('click',function(event){
+        var txt = event.target.innerText;
+    	if(txt.length==4){
+            answCheck.push(txt.charCodeAt(1)+''+txt.charCodeAt(2));
+            playSound('./sounds/'+txt.charCodeAt(1)+''+txt.charCodeAt(2)+'.mp3');
+        } else {
+            answCheck.push(''+txt.charCodeAt(1));
+            playSound('./sounds/'+txt.charCodeAt(1)+'.mp3');
         }
-        
+    })
+}
+if (!localStorage.getItem("puzzle")){
+    localStorage.setItem("puzzle",1);
+    incrementPuzzle(1);
+} else {
+    incrementPuzzle(parseInt(localStorage.getItem("puzzle")));
+}
+function incrementPuzzle(num){
+    document.getElementById("ha").setAttribute("src","./quest/"+num+".png");
+    
+}
+var spongDon = false;
+if(spongDon){
+    var input = document.getElementById("input");
+    input.focus();
+    document.body.addEventListener('click',function(event){input.focus()})
+    document.body.getElementsByTagName("img")[0].addEventListener('click',function(event){input.focus()})
+    input.addEventListener('keyup', function(event) {
+    //     console.log(event.key);
+        if(keyArr.length<21){
+            keyArr.push(event.key);
+        } else {
+            keyArr.shift();
+            keyArr.push(event.key);
+        }
+        if(keyArr.join("").toLowerCase()=="i deny your salvation"){
+            createSeason2();
+        }
     });
 }
+
+function createSeason2(){
+    var alltext = document.body.getElementsByTagName("*");
+    var tmp = document.body.getElementsByTagName("*");
+    //console.log(tmp)
+    var spaces = "";
+    document.body.getElementsByTagName("img")[0].remove();
+    for(var i = 0;i<alltext.length;i++){
+        //console.log(tmp[i].tagName)
+        if(!tmp[i].src&&tmp[i].tagName!="STYLE"){
+           tmp[i].remove();
+        }
+    }
+    var para = document.createElement("div");
+    var node = document.createTextNode("");
+    para.setAttribute("class","wow");
+    para.appendChild(node);
+    document.body.appendChild(para);
+    var newS1 = document.body.getElementsByClassName("wow")[0];
+    var para = document.createElement("h2");
+    var node = document.createTextNode("Click to load");
+    para.setAttribute("class","texts");
+    para.setAttribute("id","title");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var para = document.createElement("div");
+    var node = document.createTextNode("Please");
+    para.setAttribute("class","texts");
+    para.setAttribute("id","par1");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var para = document.createElement("div");
+    var node = document.createTextNode("Also I'm reusing this fire cuz i burned my drawing once for my main website");
+    para.setAttribute("class","texts");
+    para.setAttribute("id","par2");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var para = document.createElement("button");
+    var node = document.createTextNode("Go to season 1");
+    para.setAttribute("id","buttony");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var butt = document.getElementById("buttony");
+	butt.addEventListener("click",function(e){createSeason1()});
+	var textes = document.getElementsByClassName("texts");
+    for (var i = 0;i<textes.length;i++){
+        textes[i].addEventListener("click",function(e){
+            var storyNum = parseInt(localStorage.getItem("story"));
+            incrementText(storyNum);
+            if(typeof monologue[storyNum+1] !== 'undefined'){
+                localStorage.setItem("story",storyNum+1);
+            }
+
+        });
+    }
+    if (!localStorage.getItem("story")){
+        localStorage.setItem("story",0);
+        incrementText(0);
+    } else {
+        incrementText(parseInt(localStorage.getItem("story")));
+    }
+}
+
 var monologue = [
     {
         "h2": "My website is chaotic and unpredictable, so will this thingie",
@@ -187,12 +359,7 @@ var monologue = [
         "p2": "I think that's it for now, Jan 18, 2026"
     }
 ]
-if (!localStorage.getItem("story")){
-    localStorage.setItem("story",0);
-    incrementText(0);
-} else {
-    incrementText(parseInt(localStorage.getItem("story")));
-}
+
 function incrementText(num){
 	var thingy = monologue[num];
     if(typeof thingy["h2"] !== 'undefined'){
@@ -207,10 +374,10 @@ function incrementText(num){
 function createSeason1(){
     var alltext = document.body.getElementsByTagName("*");
     var tmp = document.body.getElementsByTagName("*");
-    console.log(tmp)
+    //console.log(tmp)
     var spaces = "";
     for(var i = 0;i<alltext.length;i++){
-        console.log(tmp[i].tagName)
+        //console.log(tmp[i].tagName)
         if(!tmp[i].src&&tmp[i].tagName!="STYLE"){
            tmp[i].remove();
         }

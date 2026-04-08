@@ -3,8 +3,40 @@
 <head>
     <style>.tile-body {
   color: #111;
-  background-color: #f0f0f0;
+  background-color: #e42024;
+  grid-template-areas: "anchor-left anchor-center anchor-right"
+                       "feed-left feed-center feed-right";
   margin: 10px;
+}
+
+.container {
+  background-color: #1e90ff;
+  grid-template-columns: 200px 100px auto auto;
+  padding: 10px;
+  display: grid;
+}
+
+.grid-container {
+  width: min (50px, 55px);
+  background-color: green;
+  grid-template-columns: .2fr .2fr .2fr;
+  gap: 1em;
+  margin: 10px auto;
+  display: grid;
+}
+
+feed-left {
+  background-color: gold;
+  grid-area: feed-left;
+}
+</style>
+<style>@font-face {
+  font-family: myFont;
+  src: url("HelveticaInseratLTStd-Roman.woff");
+}
+
+* {
+  font-family: myFont;
 }
 </style>
 </head>
@@ -13,5 +45,14 @@
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
+    <div class="grid-container">
+        <anchor-left><img src="rat-png.png" height="64"></anchor-left>
+        <anchor-center><img src="radio.jpg" height="40"></anchor-center>
+        <anchor-right><img src="window-view-of-antarctica.jpg" height="64"></anchor-right>        
+    </div> 
+    <div class="feed-container">
+    	<feed-left><img src="button.jpg" height="32"></feed-left>   
+    </div>
+    
 </body>
 </html>

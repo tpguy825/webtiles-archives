@@ -9,10 +9,14 @@
 		
 		<style>.tile-body {
   color: #fff;
-  background-color: #000;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  background: #000;
+  font-family: Consolas, Courier New, Courier, monospace;
   font-size: .82em;
   line-height: 133%;
+}
+
+h3 {
+  font-size: 117%;
 }
 
 p {
@@ -23,30 +27,35 @@ h3 {
   font-weight: bold;
 }
 
+a img {
+  border: 0;
+}
+
 .homeBtn {
-  background: linear-gradient(#0d0d0d 0%, #000 50% 51%, #000 100%);
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/homeBtn.png");
   border: 1px solid #333;
-  border-radius: 3px;
   padding-left: 6px;
   padding-right: 6px;
   font-size: 12px;
   line-height: 150%;
-  transition: all .3s;
   display: inline-block;
-  box-shadow: 0 0 3px #1a1a1a;
 }
 
 .homeBtn:hover {
-  text-shadow: 0 0 3px green;
-  background: linear-gradient(#333c 0%, #1c261ecc 50%, #0b0f0b80 51%, #0a080980 100%);
-  box-shadow: 0 0 3px #333;
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/homeBtnHover.png");
+}
+
+.hbBig:hover {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/hbBigHover.png");
 }
 
 .homeBtn:active {
-  text-shadow: 0 0 3px #00e600;
-  background: linear-gradient(#3c473fcc 0%, #344935cc 50%, #12191280 51%, #333d3399 100%);
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/homeBtnActive.png");
   border: 1px solid #666;
-  box-shadow: 0 0 5px #333;
+}
+
+.hbBig:active {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/hbBigActive.png");
 }
 
 .indent {
@@ -69,7 +78,7 @@ h3 {
   list-style: circle;
 }
 
-.small {
+small, .small {
   font-size: 75%;
 }
 
@@ -80,11 +89,16 @@ table {
 }
 
 a, a:visited {
+  color: #85e0dd;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+a:active, a:visited:active {
+  color: #00ff7f;
 }
 
 #Timeline-row {
@@ -108,7 +122,7 @@ a:hover {
   width: 207.231px;
   height: 100%;
   color: inherit;
-  background: linear-gradient(to right, #fff 0%, #fed96a 15% 100%);
+  background: #fed96a;
   padding-left: 5px;
   position: absolute;
   left: 0;
@@ -118,7 +132,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #7fa056;
+  background: #7fa056;
   width: 17.5831px;
   position: absolute;
   left: 37.6369px;
@@ -128,7 +142,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #009270;
+  background: #009270;
   width: 14.8077px;
   position: absolute;
   left: 55.22px;
@@ -138,7 +152,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #b3e1b6;
+  background: #b3e1b6;
   width: 7.94708px;
   position: absolute;
   left: 70.0277px;
@@ -148,7 +162,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #cb8c37;
+  background: #cb8c37;
   width: 20.5649px;
   position: absolute;
   left: 77.9748px;
@@ -158,7 +172,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #67a599;
+  background: #67a599;
   width: 20.2942px;
   position: absolute;
   left: 98.5397px;
@@ -168,7 +182,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #f04028;
+  background: #f04028;
   width: 15.907px;
   position: absolute;
   left: 118.834px;
@@ -178,7 +192,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #812b92;
+  background: #812b92;
   width: 17.093px;
   position: absolute;
   left: 134.741px;
@@ -188,7 +202,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #34b2c9;
+  background: #34b2c9;
   width: 19.7323px;
   position: absolute;
   left: 151.834px;
@@ -198,7 +212,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #7fc64e;
+  background: #7fc64e;
   width: 26.0954px;
   position: absolute;
   left: 171.566px;
@@ -208,7 +222,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #fd9a52;
+  background: #fd9a52;
   width: 14.5403px;
   position: absolute;
   left: 197.662px;
@@ -218,7 +232,7 @@ a:hover {
   text-align: center;
   height: 100%;
   color: inherit;
-  background-color: #ffe619;
+  background: #ffe619;
   width: 6.92492px;
   position: absolute;
   left: 212.202px;
@@ -226,7 +240,7 @@ a:hover {
 
 .tl-border {
   color: inherit;
-  background-color: #666;
+  background: #666;
   width: 1px;
   height: 100%;
   position: absolute;
@@ -239,7 +253,7 @@ a:hover {
   height: 8px;
   color: inherit;
   z-index: 100;
-  background-color: #0000;
+  background: none;
   margin: 0 auto;
   padding: 0;
   line-height: 0;
@@ -261,7 +275,7 @@ a:hover {
 }
 
 .groove {
-  border: 2px groove #000;
+  border: 2px groove #333;
 }
 
 .ridge {
@@ -275,27 +289,47 @@ a:hover {
 
 .image-container img {
   width: 182px;
+  display: -moz-inline-block;
   margin: 5px;
   display: inline-block;
 }
 
-.code {
-  background-color: #1a1a1acc;
-  border-radius: 3px;
+code {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/gtblack.png");
+  border: 1px solid #1a1a1a;
+  padding: 1px;
   font-family: Consolas, Courier New, Courier, monospace;
 }
 
 .date {
   color: #666;
-  background-color: #1a1a1acc;
-  border-bottom: 2px groove #000;
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/date.png");
+  border-bottom: 1px ridge #333;
   padding: 5px 15px;
+  font-family: Consolas, Courier New, Courier, monospace;
+}
+
+.dgloss {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/dateFirst.png");
+}
+
+.date h1, .date h2, .date h3 {
+  display: -moz-inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 3px;
+  font-weight: normal;
+  display: inline-block;
+}
+
+.dbig {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/dateBig.png");
 }
 
 #glossary {
   text-align: left;
   color: #fff;
-  background: linear-gradient(#80808080 0%, #1a1a1a80 10px, #00000080 100%);
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/aSidebar.png") top repeat-x;
   border: 1px solid #333;
   width: 250px;
   max-height: 500px;
@@ -305,7 +339,6 @@ a:hover {
   top: 70px;
   right: 50%;
   overflow: hidden auto;
-  transform: translateX(-420px);
 }
 
 #glossary table {
@@ -373,25 +406,27 @@ a:hover {
   color: #ff80ce;
 }
 
+.c-grey {
+  color: #919ba1;
+}
+
+.c-orange {
+  color: #f93;
+}
+
+.c-yellow {
+  color: #ffe066;
+}
+
 .marquee {
   white-space: nowrap;
   overflow: hidden;
 }
 
 .marquee div {
+  display: -moz-inline-block;
   padding-left: 100%;
-  animation: 60s linear infinite animate;
   display: inline-block;
-}
-
-.marquee:hover div {
-  animation-play-state: paused;
-}
-
-@keyframes animate {
-  100% {
-    transform: translate(-100%);
-  }
 }
 
 .cbar {
@@ -404,12 +439,10 @@ a:hover {
   float: right;
   border-style: solid;
   border-width: 1px;
-  border-radius: 3px;
   max-width: 360px;
   margin-left: 10px;
   margin-right: 10px;
   padding: 16px;
-  box-shadow: 0 2px 4px #0003, 0 3px 10px #00000030;
 }
 
 .sidebar table {
@@ -419,10 +452,6 @@ a:hover {
 .styled {
   width: 98%;
   margin-left: 1%;
-}
-
-.styled, .styled tr, .styled td {
-  border-radius: 0;
 }
 
 .styled td {
@@ -454,12 +483,10 @@ a:hover {
 .box {
   border-style: solid;
   border-width: 1px;
-  border-radius: 3px;
   margin-left: 10px;
   margin-right: 10px;
   padding: 10px;
   line-height: 200%;
-  box-shadow: 0 2px 4px #0003, 0 3px 10px #00000030;
 }
 
 .green {
@@ -476,6 +503,203 @@ a:hover {
 
 .toc ul, .toc ol {
   text-align: left;
+}
+
+.sbpHeader h3, .sbpHeaderTitle h3, .sbpHeaderTitle, .gameHeaderTitle, .gameHeader {
+  display: -moz-inline-block;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.sbpHeader h3, .sbpHeaderTitle h3 {
+  margin: 0;
+  padding: 5px 0;
+  font-size: 13pt;
+  font-weight: bold;
+}
+
+.sbpHeaderTitle {
+  padding-left: 20px;
+}
+
+.gameHeaderTitle {
+  padding-left: 3px;
+}
+
+.gameHeader {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.gameImageContainer {
+  float: left;
+  margin: 5px 0;
+  display: block;
+}
+
+.gameImage {
+  width: 644px;
+}
+
+.sidebarGame {
+  float: left;
+  width: 226px;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.left {
+  text-align: right;
+}
+
+.right {
+  text-align: left;
+  border-left: 1px solid #4d4d4d;
+}
+
+.download {
+  margin-top: 10px;
+  font-size: 10pt;
+}
+
+.rating {
+  margin-left: 10px;
+}
+
+.desc {
+  clear: both;
+  margin: 20px 0;
+}
+
+.desc h2, .desc h3 {
+  color: #f93;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+.desc h2 {
+  font-size: 125%;
+}
+
+.desc h3 {
+  font-size: 117%;
+}
+
+.icon {
+  vertical-align: middle;
+  height: 20px;
+}
+
+.commentaryContainer {
+  clear: both;
+  margin-right: 20px;
+}
+
+.commentsContainer {
+  margin: 10px 20px 15px;
+}
+
+.comment {
+  width: 100%;
+  margin-bottom: 10px;
+  display: table;
+}
+
+.cmtConContainer {
+  vertical-align: top;
+  width: 758px;
+  display: table-cell;
+}
+
+.cmtHeader {
+  vertical-align: top;
+  width: 100%;
+  height: 18px;
+  margin-bottom: 2px;
+}
+
+.fleft {
+  float: left;
+}
+
+.fright {
+  float: right;
+}
+
+.cmtContent {
+  word-wrap: break-word;
+  width: 100%;
+  margin: 2px 0;
+}
+
+.cmtImg {
+  vertical-align: top;
+  width: 80px;
+  height: 80px;
+  margin: 8px;
+  display: table-cell;
+}
+
+a.green, a:visited.green {
+  color: #228b22;
+}
+
+a:hover.green {
+  color: #00e600;
+}
+
+.notsup {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/notsup.png");
+}
+
+.notsup:hover {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/notsupHover.png");
+}
+
+.partsup {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/partsup.png");
+}
+
+.partsup:hover {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/partsupHover.png");
+}
+
+.fullsup {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/fullsup.png");
+}
+
+.fullsup:hover {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/fullsupHover.png");
+}
+
+.uksup {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/uksup.png");
+}
+
+.uksup:hover {
+  background: url("https://webtiles.kicya.net/t/jovidmtp.nekoweb.org/images/gradients/uksupHover.png");
+}
+
+.nslg {
+  color: red;
+}
+
+.pslg {
+  color: #ffbf00;
+}
+
+.fslg {
+  color: #80ff00;
+}
+
+.uslg {
+  color: gray;
+}
+
+big {
+  font-family: Georgia, Times New Roman, Times, serif;
+  font-size: 150%;
 }
 </style>
 		<style type="text/css">html, .tile-body {
@@ -504,7 +728,12 @@ h3 {
 
 .content {
   text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+  background: -webkit-linear-gradient(top, #80808080 0%, #00000080 10px);
+  background: -moz-linear-gradient(top, #80808080 0%, #00000080 10px);
+  background: -o-linear-gradient(top, #80808080 0%, #00000080 10px);
   background: linear-gradient(#80808080 0%, #00000080 10px);
   border: 1px solid #333;
   width: 100%;
@@ -521,35 +750,6 @@ h3 {
   display: table-cell;
 }
 
-#statusInput {
-  color: #fff;
-  background: linear-gradient(#33333380 0%, #00000080 34% 80%, #26262680 100%);
-  border: 1px solid #333;
-  border-radius: 3px;
-  margin-bottom: 20px;
-  font-family: Consolas, Courier New, Courier, monospace;
-  transition: all .3s;
-  box-shadow: 0 0 5px #333;
-}
-
-#statusInput:focus {
-  background: linear-gradient(#56565680 0%, #11111180 34%, #00000080 57%, #11111180 80%, #47474780 100%);
-  border: 1px solid gray;
-  outline: none;
-  box-shadow: 0 0 5px gray;
-}
-
-#submit {
-  color: #fff;
-  margin: 0 auto;
-  font-family: Consolas, Courier New, Courier, monospace;
-  display: inline-block;
-}
-
-#response {
-  margin-top: 20px;
-}
-
 .spaced, .homeBtn {
   margin-bottom: 30px;
 }
@@ -559,6 +759,10 @@ h3 {
 }
 
 .notice {
+  background: -webkit-gradient(linear, left top, left bottom, from(#0000), color-stop(.5, #00000080), to(#0000));
+  background: -webkit-linear-gradient(top, #0000 0%, #00000080 50%, #0000 100%);
+  background: -moz-linear-gradient(top, #0000 0%, #00000080 50%, #0000 100%);
+  background: -o-linear-gradient(top, #0000 0%, #00000080 50%, #0000 100%);
   background: linear-gradient(#0000 0%, #00000080 50%, #0000 100%);
   border-left: 1px solid #333;
   border-right: 1px solid #333;
@@ -573,7 +777,7 @@ h3 {
 	<body>
 		<div class="content">
             <div class="content-inner">
-				<span class="glow">hello</span><br>
+				<span class="glow"><b>hello</b></span><br>
 				<p class="spaced glow">do you wish to enter my website?</p>
 				<a class="homeBtn glow" href="https://jovidmtp.nekoweb.org/index.html" target="_blank">
 					yes
@@ -581,7 +785,7 @@ h3 {
            	    <a class="homeBtn glow">
 					no
 				</a><br>
-				<p class="glow notice c-green">a browser from 2013 or later is recommended</p>
+				<p class="glow notice c-green">a PC or laptop is recommended</p>
 			</div>
 		</div>
 	</body>

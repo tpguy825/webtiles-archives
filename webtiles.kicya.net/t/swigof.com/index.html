@@ -15,6 +15,8 @@
 .bg {
   display: block;
   position: absolute;
+  top: -35px;
+  left: -85px;
 }
 
 .marquee-container {
@@ -76,18 +78,81 @@
 }
 
 .taskbar {
-  background: linear-gradient(#c8c8c8b3, #969696b3 50%, #7d7d7db3 50%, #7d7d7db3);
-  outline: 1px solid #0000004d;
+  background: linear-gradient(#c8c8c8b3, #969696b3 50%, #7d7d7db3 50%);
+  border-top: 1px solid #ffffff80;
+  border-bottom: 1px solid #000;
+  outline: 1px solid #464646b3;
   width: 250px;
-  height: 29px;
-  display: inline;
+  height: 27px;
+  display: inline-flex;
   position: absolute;
-  top: 220px;
+  top: 221px;
 }
 
 .task {
-  width: 125px;
-  height: 30px;
+  border: 1px solid #46464633;
+  border-radius: 3px;
+  width: 123px;
+  height: 26px;
+  margin: -1px 0 0;
+  padding: 0;
+}
+
+.task > div {
+  border: 1px solid #464646b3;
+  border-radius: 3px;
+  height: 24px;
+}
+
+.task > div > div {
+  border: 1px solid #fff3;
+  border-radius: 3px;
+  height: 22px;
+}
+
+.task > div > div > div {
+  color: #fff;
+  height: 20px;
+  padding-top: 3px;
+  padding-left: 3px;
+  font-size: 12px;
+}
+
+.task-selected > div, .task:hover:active > div {
+  border: 1px solid #000;
+}
+
+.task-selected > div > div, .task:hover:active > div > div {
+  background: #000000b3;
+  border: 1px solid #fff0;
+  border-top-color: #323232;
+}
+
+.task:hover > div > div > div {
+  background: radial-gradient(70% 80% at bottom, #4ed9e2, #4ed9e200);
+}
+
+.task:hover:active > div > div > div {
+  background: none;
+}
+
+.site-link > div > div > div > a {
+  color: #fff;
+  cursor: default;
+  width: 100%;
+  height: 100%;
+  margin: -3px;
+  padding: 3px;
+  font-size: 12px;
+  text-decoration: none;
+  display: inline-flex;
+}
+
+.site-link > div > div > div > a > img {
+  width: 15px;
+  height: 15px;
+  padding-top: 1px;
+  padding-right: 5px;
 }
 
 @keyframes bounceX {
@@ -121,10 +186,9 @@
 </head>
 <body>
     <img hidden id="sheet" src="sheet.png" alt="sheet">
-    
-    <img class="bg" src="bg.png">
+    <img class="bg" src="bg.webp">
     <div class="marquee-container">
-        <marquee direction="up" behavior="alternate" height="281" width="250">
+        <marquee direction="up" behavior="alternate" height="282" width="250">
             <marquee behavior="alternate" height="220">
                 <div class="glass-div main" id="main">
                     <div class="frame">
@@ -141,8 +205,10 @@
         </marquee>
     </div>
     <div class="taskbar">
-    	<div class="task"></div>
-        <div class="task"></div>
+        <div class="task task-selected"><div><div><div>🐇 Bnuuy Run</div></div></div></div>
+        <div class="task site-link"><div><div><div>
+            <a href="https://swigof.com/" target="_blank"><img src="icon.webp" alt="swigof"> swigof</a>
+        </div></div></div></div>
     </div>
     <script type="text/tilescript">/**
 Copyright (c) 2026 by swigof
@@ -161,9 +227,6 @@ Performance is good on firefox when locally hosted
 Performance is abysmal on firefox in webtiles
 JS-Interpreter >:(
 **/
-
-// Add sound: jump, lose, music?
-// better edge blend pattern?
 
 var canvas = document.getElementById('canvas');
 var thumb = document.getElementById('thumb');
