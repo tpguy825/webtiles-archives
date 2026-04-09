@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+</style>
+</head>
+    
+<body style="margin: 0px,0px,0px,0px;">
+    <p>WIP tile please ignore :P</p>
+    
+    <img id="random-image" class="image pixelated" src="https://webtiles.kicya.net/t/KovaBoxed.png" alt="random Kova" style="hight: 220px; width: 220px; float: right;">
+    
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+	
+    <script type="text/tilescript">
+	// amazing js by openjavascript.info
+	var imgEl = document.getElementById('random-image');
+
+	var srcArray = ['../KovaBoxed.png', '../KovaBoxed2.png', '../KovaBoxed3.png', '../KovaBoxed4.png', '../KovaBoxed5.png', '../KovaBoxed6.png', '../KovaBoxed7.png'];
+
+	imgEl.addEventListener('click', randomImage);
+    // Refreshes page when image clicked
+        
+    randomImage();
+	function randomImage() {
+    	var randomIndex = Math.floor(Math.random()*srcArray.length);
+    	if (localStorage.getItem('currentIndex') !== String(randomIndex)) {
+    	// Checks if current index in local storage is NOT equal to new randm value (as string)...      
+        imgEl.src = srcArray[randomIndex];
+        //...if so, set random value as new image src...
+        localStorage.setItem('currentIndex', randomIndex);
+        //...and save as current index value in local storage
+    	} else {
+      	// random value and current index value match...
+        randomImage();
+        // ... so call random image function again
+    	}
+	}
+	</script>
+</body>
+</html>
