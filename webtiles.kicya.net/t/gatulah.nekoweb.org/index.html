@@ -115,6 +115,9 @@ p:first-of-type {
       </tr>
     </table> 
     </center>
+    <div style=";background:white;padding:3px">
+        broken will be puzzle soon
+    </div>
     <img style="width:100%;height:100%;position:absolute;top:0;z-index:-1" src id="ha">
    	<audio id="aud" preload="metadata"></audio>
 
@@ -161,13 +164,44 @@ for(var i =0;i<allButtons.length;i++){
     allButtons[i].addEventListener('click',function(event){
         var txt = event.target.innerText;
     	if(txt.length==4){
-            answCheck.push(txt.charCodeAt(1)+''+txt.charCodeAt(2));
-            playSound('./sounds/'+txt.charCodeAt(1)+''+txt.charCodeAt(2)+'.mp3');
+            var ant = txt.charCodeAt(1)+''+txt.charCodeAt(2);
+            answCheck.push(parseInt(ant));
+            answCheck = checkRight(ant,parseInt(localStorage.getItem("puzzle")),answCheck);
+            playSound('./sounds/'+ant+'.mp3');
         } else {
-            answCheck.push(''+txt.charCodeAt(1));
-            playSound('./sounds/'+txt.charCodeAt(1)+'.mp3');
+            var ant = ''+txt.charCodeAt(1);
+            answCheck.push(parseInt(ant));
+            answCheck = checkRight(ant,parseInt(localStorage.getItem("puzzle")),answCheck);
+            playSound('./sounds/'+ant+'.mp3');
         }
     })
+}
+var answers={
+    1:[115,112,652,240,110,676,98,594,601,98],
+    2:[112,230,116,119,114,618,107],
+    3:[115,107,119,618,100,119,59658,60458,100],
+    4:[100,115,230,110,100,618],
+    5:[115,112,652,618,110,676,98,594,122,98],
+    6:[112,101,618,110,116,618,331],
+    "key":[115,618,108,618]
+}
+
+function checkRight(answ,num,curAnsw){
+    var answLen = curAnsw.length-1;
+    console.log(answers["key"][answLen],answ,answLen);
+    if(answers[num][answLen]==answ||answers["key"][answLen]==answ){
+        console.log(curAnsw);
+        if(curAnsw.sort().join(',') === answers[num].sort().join(',')){
+            
+        }
+        if(curAnsw.sort().join(',') === answers["key"].sort().join(',')){
+            console.log("key");
+        }
+    } else {
+        curAnsw = [];
+    }
+    
+    return curAnsw;
 }
 if (!localStorage.getItem("puzzle")){
     localStorage.setItem("puzzle",1);
