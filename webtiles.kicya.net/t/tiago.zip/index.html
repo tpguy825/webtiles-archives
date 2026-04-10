@@ -6,14 +6,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
   margin: 0;
   display: flex;
 }
 
 .tile-body:before {
   content: "";
-  opacity: .08;
+  opacity: .03;
   pointer-events: none;
   image-rendering: pixelated;
   background-image: url("https://webtiles.kicya.net/t/tiago.zip/blocked");
@@ -26,7 +26,7 @@
   content: "";
   z-index: 3;
   pointer-events: none;
-  opacity: .5;
+  opacity: .3;
   background-image: linear-gradient(0deg, #dadce009 1.5px, #0000 1.5px);
   background-size: 100% 3px;
   animation: .5s linear infinite scrollGradient;
@@ -35,12 +35,16 @@
 }
 
 .wip {
-  color: #4dfe9a;
-  text-shadow: 0 0 2px #4dfe9a99, 0 0 5px #4dfe9a66, 0 0 10px #4dfe9a4d, 0 0 18px #4dfe9a33, 0 0 30px #4dfe9a1a;
+  color: #fff;
   text-align: center;
   margin: 0;
   font-family: SF Pro Rounded, InterVariable, InterVar, Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
-  font-size: 50px;
+  font-size: 18px;
+}
+
+.wip b {
+  color: #4dfe9a;
+  text-shadow: 0 0 2px #4dfe9a99, 0 0 5px #4dfe9a66, 0 0 10px #4dfe9a4d, 0 0 18px #4dfe9a33, 0 0 30px #4dfe9a1a;
   animation: 3s linear infinite flickerGlow;
 }
 
@@ -62,6 +66,15 @@
     transition: all .2s;
     box-shadow: 0 2px 4px #00000026, inset 0 1px #fffc;
   }
+}
+
+img {
+  width: 180px;
+  transition: transform .2s;
+}
+
+img:hover {
+  transform: scale(1.1);
 }
 
 @font-face {
@@ -92,8 +105,9 @@
 </style>
 </head>
 <body>
-    <p class="wip">wip!!</p>
-    <p class="goto"><a href="https://tiago.zip" target="_blank"> go to tiago.zip</a></p>
+    <p class="wip">DOWNLOAD AWESOME<br>
+<b>YURI FOR FREE</b> 👇👇👇👇</p>
+    <a href="https://tiago.zip" target="_blank"> <img src="yuri.png"></a>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
