@@ -2,18 +2,56 @@
 <html lang="en">
 <head>
     <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
+  image-rendering: pixelated;
+  background: url("background.png");
   margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+marquee {
+  color: #fff;
+  position: justify;
+  justify-content: space-between;
+  margin: 0;
+  padding-top: 5px;
+  display: flex;
+}
+
+label {
+  margin-right: 250px;
+}
+
+.pixelated {
+  image-rendering: pixelated;
 }
 </style>
 </head>
     
 <body style="margin: 0px,0px,0px,0px;">
-    <p>WIP tile please ignore :P</p>
+	<div style="height: 28px;">
+   		<marquee>
+        	<label> New art whenever I feel like it (probably not soon tbh i'm doing an MA) </label>
+            <label> BREAKING NEWS!!! THEY ARE STUCK IN A BOX!!! </label>
+            <label> Kova.core? more like... KOVA DOT... *sigh* I dont know anymore. </label>
+            <label>  </label>
+        </marquee>
+   	</div>
+    <div style=" position:absolute; top: 29px; left: -3px; width: 27px; height: 220px;">
+    	<marquee direction="down" style="writing-mode: vertical-rl; text-orientation: mixed; height: 220px;">
+    		<label> Click me to help me escape! </label>
+    	</marquee>
+    </div>
     
-    <img id="random-image" class="image pixelated" src="https://webtiles.kicya.net/t/KovaBoxed.png" alt="random Kova" style="hight: 220px; width: 220px; float: right;">
-    
+    <img id="random-image" class="image pixelated" src="KovaBoxed.png" style="hight: 220px; width: 220px;  position:absolute; bottom: 1px; right: 1px;">
+        
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
