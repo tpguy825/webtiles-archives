@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #f0f0f0;
+}
+</style>
+</head>
+<body>
+    <audio id="music" preload="metadata"></audio>
+    <img src="Battlecry.webp" style="height:250px;width:250px">
+    	<script type="text/tilescript">
+		var themusic = document.getElementById('music');
+		function playmus() {
+			themusic.src = './Victory.ogg';
+			var mCtx = themusic.play();
+			if (mCtx !== undefined && mCtx.catch) {
+				mCtx.catch(function (error) {
+					function clickHandler() {
+						themusic.play();
+						document.removeEventListener('click', clickHandler);
+					}
+
+					document.addEventListener('click', clickHandler);
+				});
+			}
+		}
+		themusic.addEventListener('ended', function () {
+			playmus();
+		});
+
+		playmus();
+	</script>
+</body>
+</html>
