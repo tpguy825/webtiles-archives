@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>#hover {
+  display: hidden;
+  opacity: 0;
+  z-index: 3;
+  background: #fff;
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+}
+
+#hover a:on-hover {
+  display: block;
+}
+
+#wm {
+  z-index: 4;
+  position: absolute;
+  bottom: 220px;
+  left: 0;
+}
+
+#album img {
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+<div id="album">
+  <a href="https://open.spotify.com/album/2noRn2Aes5aoNVsU6iWThc?si=EhGDdIZFTwOMKwS_ruzElA" target="_blank">
+    <img src="Daft_Punk_-_Discovery.jpg" style="width:250px;">
+  </a>
+<div id="hover">
+<a></a>
+    </div>
+<audio id="myAudio" src="crescendolls.mp3" preload="metadata"></audio>
+</div>
+    <script type="text/tilescript">            var audio = document.getElementById('myAudio');
+        if (audio) {
+            audio.play();
+        }</script>
+</body>
+</html>
