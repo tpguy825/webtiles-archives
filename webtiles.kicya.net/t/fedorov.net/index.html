@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>* {
+  margin: 0;
+  padding: 0;
+}
+
+html, .tile-body {
+  background: #1a1a2e;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+</style>
+</head>
+<body>
+<canvas id="c" width="250" height="250"></canvas>
+<script type="text/tilescript">
+var c=document.getElementById('c'),x=c.getContext('2d');
+var P=4;
+
+function px(cx,cy,col){
+  x.fillStyle=col;
+  x.fillRect(cx*P,cy*P,P,P);
+}
+
+function drawRows(rows,ox,oy,palette){
+  for(var y=0;y<rows.length;y++){
+    for(var cx=0;cx<rows[y].length;cx++){
+      var ch=rows[y][cx];
+      if(ch!==' '&&palette[ch])px(ox+cx,oy+y,palette[ch]);
+    }
+  }
+}
+
+var britishPal={
+  'e':'#5a5a6e','b':'#7a7a8e','B':'#8a8a9e','f':'#c8b8a8',
+  'n':'#3a2a2a','w':'#e8e8e8','p':'#e8a0a0','g':'#5ab85a',
+  't':'#6a6a7e','T':'#5a5a6e','i':'#2a2a3e'
+};
+
+var britishBody=[
+  '    ee    ',
+  '   eBBe   ',
+  '  eBBBBe  ',
+  '  eBBBBe  ',
+  ' eBgBBgBe ',
+  ' eBnffnBe ',
+  '  eBpfBe  ',
+  '  eeBBee  ',
+  '  eBBBBe  ',
+  ' eBBBBBBe ',
+  'eBBBBBBBBe',
+  'eBBBBBBBBe',
+  'eBBBBBBBBe',
+  ' eBBBBBBe ',
+  '  etetet  '
+];
+
+var britishEarL=[' e ','eBe','eBe'];
+var britishEarR=['e  ','eBe','eBe'];
+
+var scottishPal={
+  'e':'#8a5a2a','b':'#c8883a','B':'#e8a848','f':'#e8d0b0',
+  'n':'#3a2a1a','w':'#f0e8d8','p':'#e8a0a0','g':'#4a88d8',
+  's':'#a06828','t':'#9a6830','T':'#8a5a28','i':'#2a1a0a',
+  'd':'#b07030'
+};
+
+var scottishBody=[
+  '          ',
+  '  eBBBBe  ',
+  ' eBBBBBBe ',
+  ' edBBBdBe ',
+  ' eBgBBgBe ',
+  ' eBnffnBe ',
+  '  eBpfBe  ',
+  '  eeBBee  ',
+  '  eBdBBe  ',
+  ' eBBdBBBe ',
+  'eBdBBBdBBe',
+  'eBBBBBBBBe',
+  'eBBdBBdBBe',
+  ' eBBBBBBe ',
+  '  etetet  '
+];
+
+var scottishFoldEarL=['    ','eBBe','eBe '];
+var scottishFoldEarR=['    ','eBBe',' eBe'];
+
+var heartShape=[
+  ' e e ',
+  'eeeee',
+  'eeeee',
+  ' eee ',
+  '  e  '
+];
+
+var zSmall=['eee',' e ','ee '];
+
+var t=0;
+var hearts=[];
+var zzz=[];
+
+function spawnHeart(){
+  hearts.push({
+    x:25+Math.random()*12,
+    y:18+Math.random()*4,
+    life:60+Math.random()*40,
+    age:0,
+    dx:(Math.random()-0.5)*0.3
+  });
+}
+
+function spawnZ(){
+  zzz.push({
+    x:28+Math.random()*6,
+    y:12+Math.random()*3,
+    life:50+Math.random()*30,
+    age:0,
+    size:0.6+Math.random()*0.4
+  });
+}
+
+var stars=[];
+for(var i=0;i<25;i++){
+  stars.push({
+    x:Math.random()*62,
+    y:Math.random()*15,
+    blink:Math.random()*200|0,
+    bright:Math.random()>0.5
+  });
+}
+
+function drawMoon(ox,oy){
+  var moonPal={'m':'#f0e868','M':'#e8d858','s':'#d0c048'};
+  var moon=[
+    '  mmm ',
+    ' mMMMm',
+    'mMMsMm',
+    'mMMMmm',
+    ' mMmm ',
+    '  mm  '
+  ];
+  drawRows(moon,ox,oy,moonPal);
+}
+
+function drawGround(){
+  for(var gx=0;gx<63;gx++){
+    px(gx,52,'#2a6a2a');
+    px(gx,53,'#1a5a1a');
+    for(var gy=54;gy<63;gy++) px(gx,gy,'#1a4a1a');
+  }
+  for(var i=0;i<63;i+=2){
+    var h=Math.sin(i*0.7+t*0.05)*0.8;
+    px(i,51+Math.round(h),'#3a8a3a');
+  }
+}
+
+function drawFence(){
+  var fenceCol='#6a5040';
+  var fenceHi='#8a7060';
+  for(var fx=0;fx<63;fx+=8){
+    for(var fy=44;fy<53;fy++) px(fx,fy,fenceCol);
+    px(fx,43,fenceHi);
+    px(fx,44,fenceHi);
+  }
+  for(var fx=0;fx<63;fx++){
+    px(fx,46,fenceHi);
+    px(fx,50,fenceHi);
+  }
+}
+
+function drawTail(tx,ty,time,flip,col1,col2){
+  var dir=flip?-1:1;
+  for(var i=0;i<8;i++){
+    var wave=Math.sin(time*0.05+i*0.5)*1.5;
+    var cx=(tx+i*dir*0.8+wave)|0;
+    var cy=(ty-i*0.3+Math.sin(i*0.8)*1.2)|0;
+    px(cx,cy,col1);
+    px(cx,cy+1,col2);
+  }
+}
+
+function rgbaStr(r,g,b,a){
+  return 'rgba('+r+','+g+','+b+','+a+')';
+}
+
+function draw(){
+  x.fillStyle='#1a1a2e';
+  x.fillRect(0,0,250,250);
+
+  var s,i,h,z,alpha;
+
+  // Stars
+  for(i=0;i<stars.length;i++){
+    s=stars[i];
+    s.blink++;
+    if(s.blink>8){s.blink=0;s.bright=!s.bright;}
+    if(s.bright) px(s.x|0,s.y|0,'#f0f0c0');
+    else px(s.x|0,s.y|0,'#606050');
+  }
+
+  drawMoon(50,2);
+  drawFence();
+  drawGround();
+
+  var breathe=Math.sin(t*0.06)*0.5;
+  var nuzzle=Math.sin(t*0.04)*1.2;
+  var purr=Math.sin(t*0.15)*0.3;
+
+  var bx=12+nuzzle*0.5;
+  var by=34+breathe+purr;
+  var sx=28-nuzzle*0.5;
+  var sy=34+Math.sin(t*0.06+1)*0.5-purr;
+
+  // Tails
+  drawTail(bx-2,by+12,t,false,'#7a7a8e','#5a5a6e');
+  drawTail(sx+10,sy+12,t,true,'#c8883a','#8a5a2a');
+
+  // British Shorthair
+  drawRows(britishEarL,bx+1,(by-3)|0,britishPal);
+  drawRows(britishEarR,bx+6,(by-3)|0,britishPal);
+  drawRows(britishBody,bx|0,by|0,britishPal);
+
+  // Scottish Fold
+  drawRows(scottishFoldEarL,sx+1,(sy-1)|0,scottishPal);
+  drawRows(scottishFoldEarR,sx+6,(sy-1)|0,scottishPal);
+  drawRows(scottishBody,sx|0,sy|0,scottishPal);
+
+  // Nuzzle cheek connection
+  if(nuzzle>0.5){
+    px((bx+9)|0,(by+5)|0,britishPal.B);
+    px((sx)|0,(sy+5)|0,scottishPal.B);
+  }
+
+  // Eye blink
+  var blinkCycle=t%180;
+  if(blinkCycle>175){
+    px((bx+2)|0,(by+4)|0,britishPal.e);
+    px((bx+6)|0,(by+4)|0,britishPal.e);
+    px((sx+2)|0,(sy+4)|0,scottishPal.e);
+    px((sx+6)|0,(sy+4)|0,scottishPal.e);
+  }
+
+  // Spawn particles
+  if(t%30===0) spawnHeart();
+  if(t%25===0) spawnZ();
+
+  // Draw hearts
+  var hPal={'e':'#e84080'};
+  for(i=hearts.length-1;i>=0;i--){
+    h=hearts[i];
+    h.age++;
+    h.x+=h.dx;
+    h.y-=0.15;
+    alpha=1-h.age/h.life;
+    if(alpha<=0){hearts.splice(i,1);continue;}
+    hPal.e=rgbaStr(232,64,128,alpha);
+    drawRows(heartShape,(h.x)|0,(h.y)|0,hPal);
+  }
+
+  // Draw Zzz
+  var zPal={'e':'#8888cc'};
+  for(i=zzz.length-1;i>=0;i--){
+    z=zzz[i];
+    z.age++;
+    z.x+=0.1;
+    z.y-=0.12;
+    alpha=1-z.age/z.life;
+    if(alpha<=0){zzz.splice(i,1);continue;}
+    zPal.e=rgbaStr(136,136,204,alpha);
+    drawRows(zSmall,(z.x)|0,(z.y)|0,zPal);
+  }
+
+  // "purr~" text
+  var purrAlpha=Math.abs(Math.sin(t*0.02))*0.6;
+  if(purrAlpha>0.2){
+    x.font='bold 10px monospace';
+    x.fillStyle=rgbaStr(255,200,220,purrAlpha);
+    x.textAlign='center';
+    x.fillText('purr~',125,230);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

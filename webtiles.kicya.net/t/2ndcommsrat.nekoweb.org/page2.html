@@ -30,30 +30,15 @@ feed-left {
   grid-area: feed-left;
 }
 </style>
-<style>@font-face {
-  font-family: myFont;
-  src: url("HelveticaInseratLTStd-Roman.woff");
-}
-
-* {
-  font-family: myFont;
-}
-</style>
 </head>
 <body>
-    <p>Hello this is rat.</p>
+    <p>You click the button go back:
+    <a target="_blank" href="index.html">
+        Click me!
+    </a>
+</p>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
-    <div class="grid-container">
-        <anchor-left><img src="rat-png.png" height="64"></anchor-left>
-        <anchor-center><img src="radio.jpg" height="40"></anchor-center>
-        <anchor-right><img src="window-view-of-antarctica.jpg" height="64"></anchor-right>        
-    </div> 
-    <div class="feed-container">
-    	<feed-left><a href="page2.html"><img src="button.jpg" height="32"></a></feed-left>
-        <feed-center><img src="bopimo.jpg" height="64"></feed-center>
-    </div>
-    
 </body>
 </html>
