@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>.tile-body {
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  display: flex;
+  overflow: hidden;
+}
+
+#rain-box {
+  z-index: 1;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.glass-pane {
+  z-index: 5;
+  opacity: .65;
+  -webkit-backdrop-filter: blur(15px);
+  pointer-events: none;
+  background: #fff;
+  border: 1px solid #0000001a;
+  border-radius: 12px;
+  width: 160px;
+  height: 80px;
+  position: absolute;
+}
+
+.content-overlay {
+  z-index: 10;
+  text-align: center;
+  position: relative;
+}
+
+.drop {
+  background: #00000026;
+  width: 1px;
+  position: absolute;
+}
+
+@keyframes fallDown {
+  from {
+    top: -50px;
+  }
+
+  to {
+    top: 300px;
+  }
+}
+
+@font-face {
+  font-family: LMBT;
+  src: url("LMBT.ttf");
+}
+
+@font-face {
+  font-family: LMBT-R;
+  src: url("LMBT-R.ttf");
+}
+</style>
+</head>
+<body>
+
+    <div class="glass-pane"></div>
+
+    <div class="content-overlay">
+        <div style="letter-spacing: 2px; font-weight: bold; margin-bottom: 8px; color: #000; font-family: LMBT; font-size: 20px;">monospace</div>
+        <div style="font-size: 10px;">
+            <a href="https://monospace.nekoweb.org/index.html" style="color: rgb(117, 117, 117); text-decoration: none; font-weight: normal;font-family: LMBT-R;" target="_blank">home</a> 
+            <span style="opacity: 0.3;">&nbsp;&bull;&nbsp;</span>
+            <a href="https://monospace.nekoweb.org/pages/vault.html" style="color: rgb(117, 117, 117); text-decoration: none; font-weight: normal; font-family: LMBT-R;" target="_blank">vault</a>
+        </div>
+    </div>
+
+    <div id="rain-box"></div>
+
+    <script type="text/tilescript">
+        var container = document.getElementById('rain-box');
+        for (var i = 0; i < 35; i++) {
+            var d = document.createElement('div');
+            d.className = 'drop';
+            d.style.left = Math.floor(Math.random() * 250) + 'px';
+            d.style.height = (15 + Math.random() * 10) + 'px';
+            
+            var duration = (1.5 + Math.random() * 0.4) + 's';
+            var delay = (Math.random() * -2) + 's';
+
+            d.style.animation = "fallDown " + duration + " linear " + delay + " infinite";
+            d.style.animationPlayState = 'running';
+            d.style.webkitAnimationPlayState = 'running';
+
+            container.appendChild(d);
+        }
+    </script>
+</body>
+</html>

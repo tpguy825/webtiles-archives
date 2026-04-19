@@ -5,10 +5,65 @@
 </style>
 </head>
 <body>
-    <a href="https://amoeba.nekoweb.org/petridish" target="_blank">
+    <a class="float" href="https://amoeba.nekoweb.org" target="_blank">
     amoeba.nekoweb.org
     </a>
-    
+    <style>.tile-body {
+  color: #414d4c;
+  text-align: center;
+  text-shadow: 0 -1px #8786838a, 0 0 #7a7a73ad, 0 1px #5f5a574d;
+  background: url("red.webp") 0 0 / 110% 100%;
+  padding-bottom: 30px;
+  font-family: ms gothic;
+  font-size: 11px;
+}
+
+a {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  backdrop-filter: blur(2px);
+  color: #414d4c;
+  letter-spacing: -1px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: linear-gradient(#eeeeece8 0%, #c1c4b9e5 49%, #e4e4e0cc 50%, #eeeee8fc 100%);
+  border: 1px solid #191916;
+  border-radius: 8px;
+  padding: 3px 14.5px 3px 5px;
+  font-size: 12px;
+  text-decoration: none;
+  animation: 4s cubic-bezier(1, 1.11, 1, .29) infinite pulseblur;
+  position: absolute;
+  top: 77%;
+  right: -3%;
+  transform: translateZ(0);
+  box-shadow: inset 0 -4px 4px 4px #ffffff5e, 0 0 8px 3px #ffffff17;
+}
+
+a:hover {
+  background: linear-gradient(#ffffffde 0%, #cfd2c6e8 49%, #ddddd8cc 50%, #ffffffd6 100%);
+  transform: translateY(2px);
+}
+
+@keyframes pulseblur {
+  10% {
+    filter: blur();
+  }
+
+  50% {
+    filter: blur(.5px);
+  }
+
+  90% {
+    filter: blur();
+  }
+}
+</style>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.</script>
 </body>
