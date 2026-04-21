@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  background-image: url("383030f0.webp");
+}
+
+@keyframes heart {
+  0%, 12%, 25%, 50% {
+    transform: rotate(0);
+  }
+
+  55% {
+    transform: rotate(-2.5deg);
+  }
+
+  65% {
+    transform: rotate(3.5deg);
+  }
+
+  75% {
+    transform: rotate(-7deg);
+  }
+}
+
+#image02 {
+  animation: 1.5s infinite heart;
+}
+</style>
+    <style>#float {
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000, 0 0;
+  color: #fff;
+  font-size: 2em;
+  font-style: italic;
+  font-weight: bold;
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0);
+  }
+
+  50% {
+    transform: translate(0, 15px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+</style>
+</head>
+<body>
+    <center>
+        <div id="float"><img src="magaridilatte%20trans2%20resize.webp" width="200" alt="blue and white angel character"></div>
+    </center>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
