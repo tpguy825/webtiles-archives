@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
 <style>.tile-body {
-  background: url("life.jpg") no-repeat;
+  color: #fff;
+  background: #00469c url("lifeback.jpg") no-repeat;
+  padding: 150px 10px;
+  font-size: 13px;
+}
+
+p {
+  width: 230px;
 }
 
 a {
-  color: #0000;
-  padding: 250px;
-  display: flex;
+  color: #fff;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+}
+
+.active img {
+  top: -39px;
+  left: -39px;
+  transform: scale(.6);
 }
 </style>
-</head>
 <body>
-<a href="https://www.youtube.com/watch?v=mrBmFuLoQzs" target="_blank">LIFE feat.bird - MONDO GROSSO</a>
+<p>
+<strong>LIFE feat. bird / MONDO GROSSO</strong><br>
+<a href="https://www.youtube.com/watch?v=mrBmFuLoQzs" target="_blank">
+YouTube: (Music Video)</a><br>
+<a href="https://www.youtube.com/watch?v=mrBmFuLoQzs" target="_blank">
+YouTube: (Full)</a><br>
+<a href="https://www.youtube.com/watch?v=oZtgn6OUCTA&pp=ygUeTElGRSBmZWF0LiBiaXJkIC0gTU9ORE8gR1JPU1NP" target="_blank">
+YouTube: (Retune)</a><br>
+</p>
+<img src="life.jpg">
 </body>
+
 </html>
