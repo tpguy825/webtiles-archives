@@ -2,17 +2,48 @@
 <html lang="en">
 <head>
 <style>.tile-body {
-  background: #000 url("hello.jpg") no-repeat;
+  color: #fff;
+  text-align: center;
+  background: #000 url("helloback.jpg") no-repeat;
+  padding: 150px 10px;
+  font-size: 13px;
+}
+
+p {
+  width: 230px;
 }
 
 a {
-  color: #fff0;
-  padding: 250px;
-  display: flex;
+  color: #fff;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .15s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+}
+
+.active img {
+  top: -39px;
+  left: 3px;
+  transform: scale(.6);
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=AWRYCGefTvY" target="_blank">CAPSULE - Hello</a>
+<p>
+<strong>Hello - CAPSULE</strong><br>
+<a href="https://www.youtube.com/watch?v=lwGHIZYTdew" target="_blank">
+Hello x iida</a><br>
+<a href="https://www.youtube.com/watch?v=AWRYCGefTvY" target="_blank">
+Hello (Original)</a><br>
+<a href="https://www.youtube.com/watch?v=w-W708PFS2E" target="_blank">
+Hello (2021 Remaster)</a><br>
+</p>
+<a href="https://www.youtube.com/watch?v=AWRYCGefTvY" target="_blank">
+<img src="hello.jpg"></a>
 </body>
 </html>

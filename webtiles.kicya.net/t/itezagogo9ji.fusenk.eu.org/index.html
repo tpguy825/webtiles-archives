@@ -2,17 +2,59 @@
 <html lang="jp">
 <head>
 <style>.tile-body {
-  background: url("iteza.jpg") no-repeat;
+  color: #000;
+  text-align: center;
+  background: #d2ada0 no-repeat;
+  border: 0;
+  margin: 0;
+  padding: 150px 10px;
+  font-size: 13px;
+}
+
+header, footer {
+  width: 230px;
+}
+
+header {
+  position: absolute;
+  top: 5px;
+}
+
+footer {
+  position: absolute;
+  top: 205px;
 }
 
 a {
-  color: #0000;
-  padding: 250px;
-  display: flex;
+  color: #000;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+}
+
+.active img {
+  top: -10px;
+  transform: scale(.7);
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=5sKSCRuKLHo" target="_blank">シェリル・ノーム starring May'n - 射手座☆午後九時Don't be late - 私の歌を聴け!!</a>
+<header>
+シェリル・ノーム starring May'n<br>
+</header>
+<footer>
+<a href="https://www.youtube.com/watch?v=5sKSCRuKLHo" target="_blank">
+射手座☆午後九時Don't be late</a><br>
+<a href="https://www.youtube.com/watch?v=YYxRvpLPyLQ" target="_blank">
+ダイアモンド クレバス</a><br>
+</footer>
+<a href="https://www.youtube.com/watch?v=5sKSCRuKLHo" target="_blank">
+<img src="iteza.jpg"></a>
 </body>
 </html>

@@ -2,17 +2,58 @@
 <html lang="jp">
 <head>
 <style>.tile-body {
-  background: url("tigerrampage.jpg") no-repeat;
+  color: #000;
+  text-align: center;
+  background: #ddd;
+  border: 0;
+  margin: 0;
+  padding: 150px 10px;
+  font-size: 13px;
+}
+
+header, footer {
+  width: 230px;
+}
+
+header {
+  position: absolute;
+  top: 10px;
+}
+
+footer {
+  position: absolute;
+  top: 200px;
 }
 
 a {
-  color: #0000;
-  padding: 250px;
-  display: flex;
+  color: #000;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .1s;
+  position: absolute;
+  top: 0;
+  left: -97px;
+  transform: scale(1);
+}
+
+.active img {
+  transform: scale(.56);
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=ZDUS04dtMu8" target="_blank">sasakure.UK - タイガーランペイジ - Tiger Rampage feat. Rin Kagamine</a>
+<header>
+sasakure.UK<br>
+feat. Rin Kagamine<br>
+</header>
+<footer>
+<a href="https://www.youtube.com/watch?v=ZDUS04dtMu8" target="_blank">
+タイガーランペイジ<br>
+Tiger Rampage</a><br>
+</footer>
+<a href="https://www.youtube.com/watch?v=ZDUS04dtMu8" target="_blank">
+<img src="tiger-rampage.jpg"></a>
 </body>
 </html>

@@ -1,268 +1,295 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-    <style>.tile-body {
-  background-color: #000;
-  width: 250px;
-  height: 250px;
+<style>* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  position: relative;
+}
+
+html, .tile-body {
+  background: #1d1d1d;
+  width: 250px;
+  height: 250px;
   overflow: hidden;
 }
 
-#intro-layer {
-  z-index: 10;
-  cursor: pointer;
-  background: #000;
-  justify-content: center;
-  align-items: center;
+.tile-body {
+  color: #c8c8c8;
+  font-family: monospace;
+  font-size: 8px;
+}
+
+.root {
+  flex-direction: column;
   width: 250px;
   height: 250px;
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
-.cover-media {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+.menubar {
+  background: #1a1a1a;
+  border-bottom: 1px solid #0d0d0d;
+  align-items: center;
+  gap: 6px;
+  height: 14px;
+  padding: 0 4px;
+  display: flex;
 }
 
-.click-hint {
-  color: #fff;
-  pointer-events: none;
-  background: #00000080;
-  border-radius: 15px;
-  padding: 5px 10px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  position: absolute;
-  bottom: 20px;
-}
-
-.messange {
-  color: #fff;
-  writing-mode: vertical-lr;
-  pointer-events: none;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-#canvas {
-  z-index: 1;
+.mb {
+  color: #909090;
   cursor: pointer;
-  display: none;
+}
+
+.mb:hover {
+  color: #c8c8c8;
+}
+
+.mbtab {
+  color: #c8c8c8;
+  background: #3d3d3d;
+  border-radius: 2px;
+  margin-left: auto;
+  padding: 1px 6px;
+}
+
+canvas {
+  display: block;
+}
+
+#vp {
+  cursor: grab;
+  background: #393939;
+}
+
+#vp:active {
+  cursor: grabbing;
+}
+
+#tl {
+  cursor: pointer;
+  background: #1d1d1d;
+  border-top: 1px solid #0d0d0d;
+}
+
+.status {
+  color: #606060;
+  background: #1a1a1a;
+  border-top: 1px solid #0d0d0d;
+  justify-content: space-between;
+  align-items: center;
+  height: 14px;
+  padding: 0 6px;
+  display: flex;
+}
+
+#frame {
+  color: #4d9de0;
+}
+
+.hint {
+  color: #4a4a4a;
 }
 </style>
 </head>
 <body>
-    <div id="intro-layer">
-        <img src="owo_hue_video.gif" class="cover-media">
-        
-        <div class="click-hint">Click Start</div>
-		<div class="messange">嗨嗨！兩位鄰居～</div>
-    </div>
+<div class="root">
+  <div class="menubar">
+    <span class="mb">File</span>
+    <span class="mb">Edit</span>
+    <span class="mb">View</span>
+    <span class="mbtab">Layout</span>
+  </div>
+  <canvas id="vp" width="250" height="186"></canvas>
+  <canvas id="tl" width="250" height="36"></canvas>
+  <div class="status">
+    <span>F:<span id="frame">1</span></span>
+    <span class="hint">drag · scroll · click</span>
+  </div>
+</div>
+<script type="text/tilescript">(function () {
+  var vp = document.getElementById('vp');
+  var ctx = vp.getContext('2d');
+  var frameEl = document.getElementById('frame');
+  var W = 250, H = 186;
+  var angle = 0, frame = 0;
+  var hover = false;
+  var started = false;
+  var btn = { x: 95, y: 110, w: 60, h: 24 };
 
-    <canvas id="canvas" width="250" height="250"></canvas>
-    
-    <script type="text/tilescript">// 取得外部控制元素
-var introLayer = document.getElementById('intro-layer');
+  var cube = [
+    [-1,-1,-1],[ 1,-1,-1],[ 1, 1,-1],[-1, 1,-1],
+    [-1,-1, 1],[ 1,-1, 1],[ 1, 1, 1],[-1, 1, 1]
+  ];
+  var edges = [
+    [0,1],[1,2],[2,3],[3,0],
+    [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7]
+  ];
 
-function startGame() {
-    // 1. 介面切換：隱藏封面，顯示 Canvas
-    introLayer.style.display = 'none';
-    document.getElementById('canvas').style.display = 'block';
+  function project(p) {
+    var x = p[0] * Math.cos(angle) - p[2] * Math.sin(angle);
+    var z = p[0] * Math.sin(angle) + p[2] * Math.cos(angle);
+    var y = p[1];
+    var d = z + 5;
+    if (d < 0.1) d = 0.1;
+    return { x: x * 150 / d + W / 2, y: -y * 150 / d + H / 2 };
+  }
 
-    // ==========================================
-    // 以下是您的原始代碼 (完全未修改，僅縮排)
-    // ==========================================
-    
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
+  function getBounds() {
+    var pts = [], i;
+    for (i = 0; i < cube.length; i++) pts.push(project(cube[i]));
+    var minX = pts[0].x, maxX = pts[0].x, minY = pts[0].y, maxY = pts[0].y;
+    for (i = 1; i < pts.length; i++) {
+      if (pts[i].x < minX) minX = pts[i].x;
+      if (pts[i].x > maxX) maxX = pts[i].x;
+      if (pts[i].y < minY) minY = pts[i].y;
+      if (pts[i].y > maxY) maxY = pts[i].y;
+    }
+    return { pts: pts, minX: minX, maxX: maxX, minY: minY, maxY: maxY };
+  }
 
-    // 變數設定
-    var particles = [];
-    var mouseX = 125;
-    var mouseY = 125;
-    var hue = 0;
-    var isMouseDown = false; // 新增：追蹤滑鼠是否按下
+  // 啟動畫面
+  function drawSplash() {
+    ctx.fillStyle = '#1d1d1d';
+    ctx.fillRect(0, 0, W, H);
 
-    // 粒子物件
-    function Particle() {
-        this.reset();
+    // 標題
+    ctx.fillStyle = '#e89c5a';
+    ctx.font = 'bold 14px monospace';
+    var t1 = 'KevinOwO';
+    var t1w = ctx.measureText(t1).width;
+    ctx.fillText(t1, W / 2 - t1w / 2, 50);
+
+    ctx.fillStyle = '#909090';
+    ctx.font = '9px monospace';
+    var t2 = '3D Portfolio';
+    var t2w = ctx.measureText(t2).width;
+    ctx.fillText(t2, W / 2 - t2w / 2, 68);
+
+    // 按鈕
+    var bg = hover ? '#5ab0f5' : '#4d9de0';
+    ctx.fillStyle = bg;
+    ctx.fillRect(btn.x, btn.y, btn.w, btn.h);
+    ctx.strokeStyle = '#7abef0';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(btn.x, btn.y, btn.w, btn.h);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 10px monospace';
+    var bt = 'START';
+    var btw = ctx.measureText(bt).width;
+    ctx.fillText(bt, btn.x + btn.w / 2 - btw / 2, btn.y + 16);
+
+    // 提示
+    ctx.fillStyle = '#606060';
+    ctx.font = '8px monospace';
+    var t3 = 'Click START to load scene';
+    var t3w = ctx.measureText(t3).width;
+    ctx.fillText(t3, W / 2 - t3w / 2, 158);
+  }
+
+  // 3D 場景
+  function drawScene() {
+    ctx.fillStyle = '#393939';
+    ctx.fillRect(0, 0, W, H);
+
+    var b = getBounds();
+    var i;
+
+    ctx.strokeStyle = hover ? '#ff8c00' : '#e89c5a';
+    ctx.lineWidth = hover ? 2 : 1.5;
+    for (i = 0; i < edges.length; i++) {
+      var a = b.pts[edges[i][0]];
+      var c = b.pts[edges[i][1]];
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(c.x, c.y);
+      ctx.stroke();
     }
 
-    Particle.prototype.reset = function() {
-        this.x = Math.random() * 250;
-        this.y = Math.random() * 250;
-        // 預設漂浮速度
-        this.vx = (Math.random() - 0.5) * 1; 
-        this.vy = (Math.random() - 0.5) * 1;
-        this.radius = Math.random() * 2 + 1;
-        this.life = Math.random() * 0.5 + 0.5;
-        // 紀錄原始速度，方便恢復
-        this.baseVx = this.vx;
-        this.baseVy = this.vy;
-    };
+    var label = 'KevinOwO Blog';
+    ctx.font = '9px monospace';
+    var tw = ctx.measureText(label).width;
+    var cx = (b.minX + b.maxX) / 2;
+    var ty = b.minY - 14;
+    if (ty < 4) ty = 4;
 
-    Particle.prototype.update = function() {
-        // === 互動邏輯 ===
-        var dx = mouseX - this.x;
-        var dy = mouseY - this.y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
+    ctx.fillStyle = 'rgba(20,20,20,0.9)';
+    ctx.strokeStyle = hover ? '#ff8c00' : '#4d9de0';
+    ctx.lineWidth = 0.8;
+    ctx.fillRect(cx - tw / 2 - 4, ty, tw + 8, 12);
+    ctx.strokeRect(cx - tw / 2 - 4, ty, tw + 8, 12);
 
-        if (isMouseDown) {
-            // [點擊互動]：強力吸引
-            // 當滑鼠按下，粒子會加速飛向滑鼠
-            var force = 0.05; // 吸引力強度
-            this.vx += dx * force;
-            this.vy += dy * force;
-            
-            // 增加一點阻尼，避免粒子失控亂飛
-            this.vx *= 0.9;
-            this.vy *= 0.9;
-        } else {
-            // [平常狀態]：滑鼠靠近時稍微逃開
-            if (dist < 50) {
-                var force = (50 - dist) / 50;
-                this.vx -= (dx / dist) * force * 0.5;
-                this.vy -= (dy / dist) * force * 0.5;
-            }
-            
-            // 恢復到原本的飄浮速度 (讓被吸引後的粒子慢慢慢下來)
-            this.vx += (this.baseVx - this.vx) * 0.05;
-            this.vy += (this.baseVy - this.vy) * 0.05;
-        }
+    ctx.fillStyle = '#d8d8d8';
+    ctx.fillText(label, cx - tw / 2, ty + 9);
+  }
 
-        // 更新位置
-        this.x += this.vx;
-        this.y += this.vy;
-        
-        // 邊界檢查：超出範圍就重置到另一邊
-        if (this.x < 0) this.x = 250;
-        if (this.x > 250) this.x = 0;
-        if (this.y < 0) this.y = 250;
-        if (this.y > 250) this.y = 0;
-    };
+  // 初始畫啟動畫面（這個會立刻畫一次）
+  drawSplash();
 
-    Particle.prototype.draw = function() {
-        // 按下時粒子變亮一點
-        ctx.globalAlpha = isMouseDown ? 0.8 : (this.life * 0.5);
-        ctx.fillStyle = 'hsl(' + hue + ', 70%, 60%)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fill();
-    };
-
-    function initParticles() {
-        for (var i = 0; i < 40; i++) {
-            particles.push(new Particle());
-        }
+  // 主迴圈
+  setInterval(function () {
+    if (!started) {
+      drawSplash();
+      return;
     }
+    angle = angle + 0.02;
+    frame = frame + 1;
+    frameEl.textContent = frame;
+    drawScene();
+  }, 50);
 
-    function drawText() {
-        ctx.save();
-        
-        // 視差效果
-        var textX = 256 + (mouseX - 256);
-        var textY = 256 + (mouseY - 256);
+  // hover / cursor
+  function isInButton(mx, my) {
+    return mx >= btn.x && mx <= btn.x + btn.w && my >= btn.y && my <= btn.y + btn.h;
+  }
+  function isInCube(mx, my) {
+    var b = getBounds();
+    return mx >= b.minX && mx <= b.maxX && my >= b.minY && my <= b.maxY;
+  }
 
-        ctx.globalAlpha = 1;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        
-        // 文字發光效果
-        // 如果按下，發光範圍變大 (25)，平常是 (15)
-        ctx.shadowBlur = isMouseDown ? 30 : 15; 
-        ctx.shadowColor = 'hsl(' + hue + ', 80%, 60%)';
-        
-        ctx.fillStyle = '#FFFFFF';
-        
-        // [點擊互動]：字體變大
-        // 如果按下，字體變為 75px，平常是 70px
-        var fontSize = isMouseDown ? 100 : 70;
-        ctx.font = 'bold ' + fontSize + 'px Arial';
-        
-        ctx.fillText('OwO', textX, textY);
-        
-        ctx.restore();
+  vp.addEventListener('mousemove', function (e) {
+    var r = vp.getBoundingClientRect();
+    var mx = e.clientX - r.left;
+    var my = e.clientY - r.top;
+    var inside = started ? isInCube(mx, my) : isInButton(mx, my);
+    if (inside !== hover) {
+      hover = inside;
+      vp.style.cursor = inside ? 'pointer' : 'default';
     }
+  });
 
-    // === 事件監聽 ===
-    canvas.addEventListener('mousemove', function(e) {
-        var rect = canvas.getBoundingClientRect();
-        mouseX = e.clientX - rect.left;
-        mouseY = e.clientY - rect.top;
-    });
-
-    // 新增：按下滑鼠
-    canvas.addEventListener('mousedown', function() {
-        isMouseDown = true;
-    });
-
-    // 新增：放開滑鼠
-    canvas.addEventListener('mouseup', function() {
-        isMouseDown = false;
-    });
-
-    // 手機版觸控
-    canvas.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-        var rect = canvas.getBoundingClientRect();
-        var touch = e.touches[0];
-        mouseX = touch.clientX - rect.left;
-        mouseY = touch.clientY - rect.top;
-    });
-    canvas.addEventListener('touchstart', function(e) {
-        isMouseDown = true;
-        var rect = canvas.getBoundingClientRect();
-        var touch = e.touches[0];
-        mouseX = touch.clientX - rect.left;
-        mouseY = touch.clientY - rect.top;
-    });
-    canvas.addEventListener('touchend', function() {
-        isMouseDown = false;
-    });
-
-
-    function animate() {
-        // === 關鍵修改：解決閃爍 ===
-        // 改用全黑 (alpha = 1.0) 清除畫面
-        // 雖然犧牲了粒子的長長拖尾，但保證文字絕對穩固不閃爍
-        ctx.fillStyle = 'rgba(0, 0, 0, 1.0)';
-        
-        // 顏色循環 (慢一點比較舒服)
-        hue = (hue + 1) % 360;
-        
-        // 繪製粒子
-        for (var i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-        }
-        
-        // 繪製文字
-        drawText();
-        
-        setTimeout(animate, 33);
+  vp.addEventListener('click', function (e) {
+    var r = vp.getBoundingClientRect();
+    var mx = e.clientX - r.left;
+    var my = e.clientY - r.top;
+    if (!started) {
+      if (isInButton(mx, my)) {
+        started = true;
+        hover = false;
+      }
+      return;
     }
+    if (isInCube(mx, my)) {
+      location.href = 'https://kevinowo.com';
+    }
+  });
 
-    // 初始化與啟動
-    initParticles();
-    animate();
-    
-    // ==========================================
-    // 您的原始代碼結束
-    // ==========================================
-}
-
-// 綁定點擊事件：點擊封面後執行上述 startGame
-introLayer.addEventListener('click', startGame);</script>
+  vp.addEventListener('touchend', function (e) {
+    if (!e.changedTouches.length) return;
+    var r = vp.getBoundingClientRect();
+    var mx = e.changedTouches[0].clientX - r.left;
+    var my = e.changedTouches[0].clientY - r.top;
+    if (!started) {
+      if (isInButton(mx, my)) { started = true; hover = false; }
+      return;
+    }
+    if (isInCube(mx, my)) {
+      location.href = 'https://kevinowo.com';
+    }
+  });
+})();
+</script>
 </body>
 </html>

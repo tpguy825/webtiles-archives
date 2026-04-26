@@ -2,22 +2,61 @@
 <html lang="jp">
 <head>
 <style>.tile-body {
-  background: #fc8d45 url("oratokyosaikuda.jpg") no-repeat;
+  color: #fff;
+  background: #fc8d45 url("oratokyosaikudaback.jpg") no-repeat;
+  font-size: 11px;
 }
 
-#body {
-  white-space: nowrap;
-  font-size: 15px;
-  display: flex;
+header, footer {
+  width: 230px;
+}
+
+header {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+footer {
+  position: absolute;
+  top: 195px;
+  left: 10px;
 }
 
 a {
-  padding: 250px;
-  text-decoration: none;
+  color: #000;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .15s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+}
+
+.active img {
+  top: -10px;
+  left: -40px;
+  transform: scale(.6);
 }
 </style>
 </head>
 <body>
-<div id="body"><a href="https://www.youtube.com/watch?v=GWiovtCkI60" target="_blank">吉幾三 - 俺ら東京さ行ぐだ</a></div>
+<header>
+俺ら東京さ行くだ / 吉幾三<br>
+Ora Tokyo sa ikuda / Yoshi Ikuzo<br>
+</header>
+<footer>
+<a href="https://www.youtube.com/watch?v=GWiovtCkI60" target="_blank">
+俺ら東京さ行くだ</a><br>
+<a href="https://www.youtube.com/watch?v=6SqA0SZ4vIw" target="_blank">
+俺ら東京さ行くだ (Reiwa edition)</a><br>
+<a href="https://www.youtube.com/watch?v=UQJKLhim4pM" target="_blank">
+これが本当のゴルフだ!!</a><br>
+</footer>
+<a href="https://www.youtube.com/watch?v=GWiovtCkI60" target="_blank">
+<img src="oratokyosaikuda.jpg"></a>
 </body>
 </html>

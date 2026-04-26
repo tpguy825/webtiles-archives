@@ -2,17 +2,56 @@
 <html lang="en">
 <head>
 <style>.tile-body {
-  background: url("jmf.jpg") no-repeat;
+  color: #000;
+  text-align: center;
+  background: #fff;
+  border: 0;
+  margin: 0;
+  padding: 150px 10px;
+  font-size: 13px;
+}
+
+header, footer {
+  width: 230px;
+}
+
+header {
+  position: absolute;
+  top: 5px;
+}
+
+footer {
+  position: absolute;
+  top: 225px;
 }
 
 a {
-  color: #0000;
-  padding: 250px;
-  display: flex;
+  color: #000;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+}
+
+.active img {
+  transform: scale(.8);
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=5sKSCRuKLHo" target="_blank">Dixie Flatline - Just Be Friends</a>
+<header>
+Dixie Flatline<br>
+</header>
+<footer>
+<a href="https://www.youtube.com/watch?v=rR_ZDyhi7Eg" target="_blank">
+Just Be Friends</a><br>
+</footer>
+<a href="https://www.youtube.com/watch?v=rR_ZDyhi7Eg" target="_blank">
+<img src="jmf.jpg"></a>
 </body>
 </html>
