@@ -2,17 +2,49 @@
 <html lang="jp">
 <head>
 <style>.tile-body {
-  background: #537cbe url("lion.jpg") no-repeat;
+  text-align: center;
+  color: #000;
+  background: #68c;
+  font-size: 13px;
+}
+
+p {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 a {
-  color: #0000;
-  padding: 250px;
-  display: flex;
+  color: #fff;
+}
+
+img {
+  image-rendering: pixelated;
+  transition: all .3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+}
+
+.active img {
+  top: 125px;
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=fGGTf044UPI" target="_blank"> シェリル・ノーム starring May'n ランカ・リー=中島愛 - ライオン</a>
+<p>
+シェリル・ノーム starring May'n<br>
+ランカ・リー=中島愛<br>
+<a href="https://www.youtube.com/watch?v=fGGTf044UPI" target="_blank">
+ライオン</a><br>
+<a href="https://www.youtube.com/watch?v=NW7lvC7xeRQ" target="_blank">
+ライオン －May'n Ver.－ (シェリル)</a><br>
+<a href="https://www.youtube.com/watch?v=vHXoYvZs0BI" target="_blank">
+ライオン －ランカver.－ (中島愛)</a><br>
+</p>
+<a href="https://www.youtube.com/watch?v=fGGTf044UPI" target="_blank">
+<img src="lion.jpg"></a>
 </body>
 </html>

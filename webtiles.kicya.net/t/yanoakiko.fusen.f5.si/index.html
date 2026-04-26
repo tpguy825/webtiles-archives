@@ -2,13 +2,34 @@
 <html lang="en">
 <head>
 <style>.tile-body {
-  background: #9a1c34 url("japanesegirl.jpg") no-repeat;
+  white-space: nowrap;
+  background: #181312;
 }
 
 a {
-  color: #0000;
   padding: 250px;
-  display: flex;
+  font-size: 15px;
+  position: absolute;
+}
+
+a:before {
+  content: url("record.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("japanesegirl.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("record.jpg");
 }
 </style>
 </head>

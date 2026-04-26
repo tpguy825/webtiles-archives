@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 <head>
 <style>.tile-body {
-  background: url("sweetfantasy.jpg") no-repeat;
+  width: 250px height: 250px;
+  text-align: center;
+  background: #c44a85;
+  font-size: 13px;
+}
+
+span:before {
+  content: url("sweetfantasy.jpg");
+  transition: all .3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: rotate(0);
+}
+
+.active span:before {
+  top: -130px;
+  transform: rotate(-90deg);
+}
+
+span {
+  color: #fff;
+  width: 250px;
+  transition: all .3s;
+  position: fixed;
+  top: 113px;
+  left: 0;
 }
 
 a {
-  color: #0000;
-  padding: 250px;
-  display: flex;
+  color: #fff;
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=3j6RNJdlcsg" target="_blank">FIRE BOMBER - SWEET FANTASY</a>
+<span>
+<p>
+FIRE BOMBER<br>
+ミレーヌ・フレア・ジーナス<br>
+Mylene Flare Jenius<br>
+<a href="https://www.youtube.com/watch?v=3j6RNJdlcsg" target="_blank">
+SWEET FANTASY</a><br>
+<a href="https://www.youtube.com/watch?v=kdGJzd0-fS0" target="_blank">
+MY FRIENDS</a><br>
+<a href="https://www.youtube.com/watch?v=hLlRlBSzkq4" target="_blank">
+…だけどベイビー！！</a><br>
+</p>
+</span>
 </body>
 </html>
