@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #888;
+  text-align: center;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+#secrt {
+  color: #f9f9f9 !important;
+}
+</style>
+</head>
+<body>
+    <p>Useless Space 10, -14</p>
+    <p id="secrt">what happends if i attack tho</p>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+var cv = document.getElementById("cv");
+var c  = cv.getContext('2d')
+cv.style.width  = "100vw";
+cv.style.height = "100vh";
+var w, h;
+w = cv.width;
+h = cv.height;
+
+dust = [];
+
+frames = 0;
+
+function addDust(x, y) {
+    this.x = x;
+    this.y = y;
+}
+
+function clamp(val, min, max) return Math.min(Math.max(val, min), max);
+
+for(var i=0; i<10; i++) {
+    addDust(i * 2, 0);
+}
+
+function loop() {
+    c.fillStyle = "#000";
+    c.fillRect(0, 0, w, h);
+    
+    dust.forEach((d, i) => {
+        var moveX = Math.round((Math.random() * 2) - 1);
+        var moveY = Math.round(Math.random());
+        
+        var x = Math.round(x);
+        var y = Math.round(y);
+        c.fillRect(x,y, 1,1)
+    });
+    
+    loop();
+    frames ++;
+}
+
+loop()</script>
+</body>
+</html>
