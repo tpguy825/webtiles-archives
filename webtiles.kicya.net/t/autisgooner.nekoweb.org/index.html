@@ -19,50 +19,66 @@
 </style>
 </head>
 <body>
-    <p>Useless Space 10, -14</p>
-    <p id="secrt">what happends if i attack tho</p>
-    <script type="text/tilescript">// Only executes while your tile is active
+    <p>im working both the site and this tile. listen to my first 'cuz were playing bedny' funk (i made this without hearing it and im too skilled at this)</p>
+    <audio src="bendy-funk.mp3" controls preload="metadata"></audio>
+    <!--<script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 var cv = document.getElementById("cv");
 var c  = cv.getContext('2d')
 cv.style.width  = "100vw";
 cv.style.height = "100vh";
 var w, h;
-w = cv.width;
-h = cv.height;
+sw = cv.width;
+sh = cv.height;
 
 dust = [];
 
 frames = 0;
 
 function addDust(x, y) {
-    this.x = x;
-    this.y = y;
+    return {
+        x : x,
+        y : y
+	}
 }
 
-function clamp(val, min, max) return Math.min(Math.max(val, min), max);
+function clamp(val, min, max){
+	return Math.min(Math.max(val, min), max);
+}
 
 for(var i=0; i<10; i++) {
-    addDust(i * 2, 0);
+    dust.push(addDust(i * 2, 0));
 }
 
 function loop() {
     c.fillStyle = "#000";
-    c.fillRect(0, 0, w, h);
+    //c.fillRect(0, 0, sw/2, sh/2);
+    //c.clearRect(0,0, sw,sh)
     
-    dust.forEach((d, i) => {
+    c.fillStyle = "#fff";
+    for(var i=0; i < dust.length; i ++) {
+        var d = dust[i];
+        
         var moveX = Math.round((Math.random() * 2) - 1);
         var moveY = Math.round(Math.random());
         
-        var x = Math.round(x);
-        var y = Math.round(y);
-        c.fillRect(x,y, 1,1)
-    });
+        d.x = clamp(d.x + moveX, 0,sw);
+        d.y = clamp(d.y + moveY, 0,sh);
+        
+        
+        var dx = Math.round(d.x);
+        var dy = Math.round(d.y);
+        c.fillStyle = "#eee";
+        c.fillRect(dx,dy, sw,sh)
+        console.log(dx, dy)
+    };
     
     loop();
     frames ++;
 }
 
-loop()</script>
+console.log("neighbourrr helooo")
+//while(true) loop()
+loop()</script>--!>
 </body>
 </html>
