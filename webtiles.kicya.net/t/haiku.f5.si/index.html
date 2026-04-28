@@ -2,22 +2,38 @@
 <html lang="en">
 <head>
 <style>.tile-body {
-  background: #306699 url("haiku.jpg") no-repeat;
-}
-
-#body {
   white-space: nowrap;
-  font-size: 15px;
-  display: flex;
+  background: #000;
 }
 
 a {
   padding: 250px;
-  text-decoration: none;
+  font-size: 15px;
+  position: absolute;
+}
+
+a:before {
+  content: url("haikuactive.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("haiku.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("haikuactive.jpg");
 }
 </style>
 </head>
 <body>
-<div id="body"><a href="https://www.haiku-os.org/" target="_blank">Haiku</a></div>
+<a href="https://www.haiku-os.org/" target="_blank">Haiku</a>
 </body>
 </html>
