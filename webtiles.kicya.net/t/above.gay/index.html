@@ -2,14 +2,50 @@
 <html lang="en">
 <head>
     <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+  color: #eee;
+  background: linear-gradient(135deg, #0b031f, #2b0b52, #0b031f, #150630) 0 0 / 300% 300%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  animation: 12s ease-in-out infinite bgShift;
+  display: flex;
+  overflow: hidden;
+}
+
+@keyframes bgShift {
+  0% {
+    background-position: 0%;
+  }
+
+  50% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
+}
+
+@keyframes swinging {
+  0%, 100% {
+    transform: rotate(5deg);
+  }
+
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+.logo {
+  width: 95%;
+  height: auto;
+  animation: 4s ease-in-out infinite swinging;
 }
 </style>
 </head>
 <body>
-    <p>This is an example tile.</p>
+    <img src="biglogo.webp" class="logo">
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>

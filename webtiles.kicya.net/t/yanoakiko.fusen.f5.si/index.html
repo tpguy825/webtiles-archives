@@ -1,39 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 <head>
 <style>.tile-body {
-  white-space: nowrap;
-  background: #181312;
+  color: #fff;
+  text-align: center;
+  background: #702b24 url("japanesegirlback.jpg") no-repeat;
+  width: 250px;
+  height: 250px;
+  padding: 0 5px;
+}
+
+header, footer {
+  width: 240px;
+  position: absolute;
+}
+
+header {
+  font-size: 15px;
+  top: 5px;
+}
+
+footer {
+  font-size: 8px;
+  top: 220px;
 }
 
 a {
-  padding: 250px;
-  font-size: 15px;
-  position: absolute;
+  color: #fff;
 }
 
-a:before {
-  content: url("record.jpg");
-  opacity: 0;
-  position: absolute;
-  top: -256rem;
-  left: -256rem;
-}
-
-a:after {
-  content: url("japanesegirl.jpg");
+img {
   image-rendering: pixelated;
-  position: fixed;
+  transition: all .15s;
+  position: absolute;
   top: 0;
   left: 0;
+  transform: scale(1);
 }
 
-.active a:after {
-  content: url("record.jpg");
+.active img {
+  top: 10px;
+  transform: scale(.65);
 }
 </style>
 </head>
 <body>
-<a href="https://www.youtube.com/watch?v=SgX0IoQ-Sd4" target="_blank">Japanese Giel / Akiko Yano</a>
+<header>
+<strong>矢野顕子 Yano Akiko</strong><br>
+<a href="https://www.youtube.com/watch?v=SgX0IoQ-Sd4" target="_blank">
+Japanese Girl</a>
+</header>
+<footer>
+↓ Akiko Yano temporarily participated in YMO and worked together. She was the wife of Ryuichi Sakamoto for a while.
+</footer>
+<a href="https://www.youtube.com/watch?v=SgX0IoQ-Sd4" target="_blank">
+<img src="japanesegirl.jpg"></a>
 </body>
 </html>
