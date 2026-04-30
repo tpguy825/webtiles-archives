@@ -13,7 +13,7 @@ a {
 }
 
 a:before {
-  content: url("250x250fubeam.jpg");
+  content: url("fubeam.jpg");
   opacity: 0;
   position: absolute;
   top: -256rem;
@@ -29,11 +29,33 @@ a:after {
 }
 
 .active a:after {
-  content: url("250x250fubeam.jpg");
+  content: url("fubeam.jpg");
+}
+
+button {
+  cursor: pointer;
+  background-color: #0000;
+  border: none;
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  top: 170px;
+  left: 170px;
 }
 </style>
 </head>
 <body>
 <a href="https://fusen-k.nekoweb.org/" target="_blank">ふう🎀<br>せん🐰</a>
+<button id="fubeam-btn"></button>
+<audio id="fubeam-sound" preload="metadata" controlslist="nodownload" src="fubeam.mp3"></audio>
+<script type="text/tilescript">
+var fubeambtn = document.getElementById("fubeam-btn");
+var fubeamsound = document.getElementById("fubeam-sound");
+
+fubeambtn.addEventListener("click", function() {
+  fubeamsound.currentTime = 0;
+  fubeamsound.play();
+});
+</script>
 </body>
 </html>

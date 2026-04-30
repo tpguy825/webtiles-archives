@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: IBM Plex Sans;
+  src: url("IBMPlexSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: IBM Plex Sans;
+  src: url("IBMPlexSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Square One;
+  src: url("Square%20One.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tile-body {
+  color: #ccccd0;
+  background: url("lines.png") 100% repeat-y, #282a36;
+  font-family: IBM Plex Sans, sans-serif;
+}
+
+.top {
+  text-align: center;
+  color: #fff;
+  background: url("cat_gray.png"), radial-gradient(at 50% 500%, #3d4053, #282a36);
+  border: 0 solid #ccccd0;
+  border-bottom-width: 4px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.main {
+  text-align: center;
+  grid-template-areas: "divide content";
+  justify-content: center;
+  font-size: 16px;
+  display: grid;
+}
+
+.main p {
+  margin: 6px 4px;
+}
+
+.lie {
+  font-size: 10px;
+  position: absolute;
+  bottom: -6px;
+  left: 0%;
+  transform: translateX(33.3%);
+}
+
+h1, h2, h3 {
+  text-transform: uppercase;
+  margin: 16px;
+  font-family: Square One;
+  font-size: 32px;
+}
+
+img {
+  justify-self: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+a {
+  color: #ccccd0;
+  text-align: center;
+  background-image: linear-gradient(#535871, #282a36);
+  border: 2px groove #ccccd0;
+  align-content: center;
+  width: 67%;
+  margin: 0;
+  padding: 2px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration-line: none;
+}
+
+.container {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+    <div class="top">
+    	<h1>THE PIGSTY</h1>
+    </div>
+    <div class="main">
+        <div class="divide">
+            <img src="steamhappy-bounce.gif">
+        </div>
+        <div class=content>
+            <p>
+                Games, sick tunes, links, and more!</p>
+                <p>The site of the coolest<sup><strong>*</strong></sup> guy on the net.
+            </p>
+            <div class="container">
+                <a href="https://pigsty.neocities.org/" target="_blank">
+                    Check it out!
+                </a>
+            </div>
+            <p class="lie">
+                <strong>*</strong>I lied. I'm not actually that cool...
+            </p>
+        </div>
+    </div>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>

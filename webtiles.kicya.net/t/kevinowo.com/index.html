@@ -31,7 +31,6 @@ html, .tile-body {
   background: #1a1a1a;
   border-bottom: 1px solid #0d0d0d;
   align-items: center;
-  gap: 6px;
   height: 14px;
   padding: 0 4px;
   display: flex;
@@ -40,6 +39,7 @@ html, .tile-body {
 .mb {
   color: #909090;
   cursor: pointer;
+  margin-right: 6px;
 }
 
 .mb:hover {
@@ -52,6 +52,12 @@ html, .tile-body {
   border-radius: 2px;
   margin-left: auto;
   padding: 1px 6px;
+}
+
+.vp-wrap {
+  width: 250px;
+  height: 186px;
+  position: relative;
 }
 
 canvas {
@@ -91,6 +97,62 @@ canvas {
 .hint {
   color: #4a4a4a;
 }
+
+.splash {
+  z-index: 10;
+  background: #1d1d1d;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 186px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.splash.hidden {
+  display: none;
+}
+
+.splash-title {
+  color: #e89c5a;
+  margin-bottom: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.splash-sub {
+  color: #909090;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: 9px;
+}
+
+.start-btn {
+  color: #fff;
+  cursor: pointer;
+  background: #4d9de0;
+  border: 1px solid #7abef0;
+  border-radius: 2px;
+  margin-bottom: 12px;
+  padding: 6px 22px;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.start-btn:hover {
+  background: #5ab0f5;
+}
+
+.splash-hint {
+  color: #606060;
+  font-family: monospace;
+  font-size: 8px;
+}
 </style>
 </head>
 <body>
@@ -101,7 +163,15 @@ canvas {
     <span class="mb">View</span>
     <span class="mbtab">Layout</span>
   </div>
-  <canvas id="vp" width="250" height="186"></canvas>
+  <div class="vp-wrap">
+    <canvas id="vp" width="250" height="186"></canvas>
+    <div id="splash" class="splash">
+      <div class="splash-title">KevinOwO</div>
+      <div class="splash-sub"> </div>
+      <button id="start-btn" class="start-btn" type="button">START</button>
+      <div class="splash-hint">Click to load scene</div>
+    </div>
+  </div>
   <canvas id="tl" width="250" height="36"></canvas>
   <div class="status">
     <span>F:<span id="frame">1</span></span>
@@ -112,11 +182,12 @@ canvas {
   var vp = document.getElementById('vp');
   var ctx = vp.getContext('2d');
   var frameEl = document.getElementById('frame');
+  var splash = document.getElementById('splash');
+  var startBtn = document.getElementById('start-btn');
   var W = 250, H = 186;
   var angle = 0, frame = 0;
   var hover = false;
   var started = false;
-  var btn = { x: 95, y: 110, w: 60, h: 24 };
 
   var cube = [
     [-1,-1,-1],[ 1,-1,-1],[ 1, 1,-1],[-1, 1,-1],
@@ -150,47 +221,7 @@ canvas {
     return { pts: pts, minX: minX, maxX: maxX, minY: minY, maxY: maxY };
   }
 
-  // 啟動畫面
-  function drawSplash() {
-    ctx.fillStyle = '#1d1d1d';
-    ctx.fillRect(0, 0, W, H);
-
-    // 標題
-    ctx.fillStyle = '#e89c5a';
-    ctx.font = 'bold 14px monospace';
-    var t1 = 'KevinOwO';
-    var t1w = ctx.measureText(t1).width;
-    ctx.fillText(t1, W / 2 - t1w / 2, 50);
-
-    ctx.fillStyle = '#909090';
-    ctx.font = '9px monospace';
-    var t2 = '3D Portfolio';
-    var t2w = ctx.measureText(t2).width;
-    ctx.fillText(t2, W / 2 - t2w / 2, 68);
-
-    // 按鈕
-    var bg = hover ? '#5ab0f5' : '#4d9de0';
-    ctx.fillStyle = bg;
-    ctx.fillRect(btn.x, btn.y, btn.w, btn.h);
-    ctx.strokeStyle = '#7abef0';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(btn.x, btn.y, btn.w, btn.h);
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 10px monospace';
-    var bt = 'START';
-    var btw = ctx.measureText(bt).width;
-    ctx.fillText(bt, btn.x + btn.w / 2 - btw / 2, btn.y + 16);
-
-    // 提示
-    ctx.fillStyle = '#606060';
-    ctx.font = '8px monospace';
-    var t3 = 'Click START to load scene';
-    var t3w = ctx.measureText(t3).width;
-    ctx.fillText(t3, W / 2 - t3w / 2, 158);
-  }
-
-  // 3D 場景
-  function drawScene() {
+  function draw() {
     ctx.fillStyle = '#393939';
     ctx.fillRect(0, 0, W, H);
 
@@ -225,35 +256,27 @@ canvas {
     ctx.fillText(label, cx - tw / 2, ty + 9);
   }
 
-  // 初始畫啟動畫面（這個會立刻畫一次）
-  drawSplash();
+  // 啟動：點 START 按鈕後隱藏 HTML 啟動畫面，開始跑 3D
+  startBtn.addEventListener('click', function () {
+    started = true;
+    splash.className = 'splash hidden';
+    draw();
+    setInterval(function () {
+      angle = angle + 0.02;
+      frame = frame + 1;
+      frameEl.textContent = frame;
+      draw();
+    }, 50);
+  });
 
-  // 主迴圈
-  setInterval(function () {
-    if (!started) {
-      drawSplash();
-      return;
-    }
-    angle = angle + 0.02;
-    frame = frame + 1;
-    frameEl.textContent = frame;
-    drawScene();
-  }, 50);
-
-  // hover / cursor
-  function isInButton(mx, my) {
-    return mx >= btn.x && mx <= btn.x + btn.w && my >= btn.y && my <= btn.y + btn.h;
-  }
-  function isInCube(mx, my) {
-    var b = getBounds();
-    return mx >= b.minX && mx <= b.maxX && my >= b.minY && my <= b.maxY;
-  }
-
+  // 立方體互動
   vp.addEventListener('mousemove', function (e) {
+    if (!started) return;
     var r = vp.getBoundingClientRect();
     var mx = e.clientX - r.left;
     var my = e.clientY - r.top;
-    var inside = started ? isInCube(mx, my) : isInButton(mx, my);
+    var b = getBounds();
+    var inside = mx >= b.minX && mx <= b.maxX && my >= b.minY && my <= b.maxY;
     if (inside !== hover) {
       hover = inside;
       vp.style.cursor = inside ? 'pointer' : 'default';
@@ -261,35 +284,26 @@ canvas {
   });
 
   vp.addEventListener('click', function (e) {
+    if (!started) return;
     var r = vp.getBoundingClientRect();
     var mx = e.clientX - r.left;
     var my = e.clientY - r.top;
-    if (!started) {
-      if (isInButton(mx, my)) {
-        started = true;
-        hover = false;
-      }
-      return;
-    }
-    if (isInCube(mx, my)) {
+    var b = getBounds();
+    if (mx >= b.minX && mx <= b.maxX && my >= b.minY && my <= b.maxY) {
       location.href = 'https://kevinowo.com';
     }
   });
 
   vp.addEventListener('touchend', function (e) {
-    if (!e.changedTouches.length) return;
+    if (!started || !e.changedTouches.length) return;
     var r = vp.getBoundingClientRect();
     var mx = e.changedTouches[0].clientX - r.left;
     var my = e.changedTouches[0].clientY - r.top;
-    if (!started) {
-      if (isInButton(mx, my)) { started = true; hover = false; }
-      return;
-    }
-    if (isInCube(mx, my)) {
+    var b = getBounds();
+    if (mx >= b.minX && mx <= b.maxX && my >= b.minY && my <= b.maxY) {
       location.href = 'https://kevinowo.com';
     }
   });
-})();
-</script>
+})();</script>
 </body>
 </html>
