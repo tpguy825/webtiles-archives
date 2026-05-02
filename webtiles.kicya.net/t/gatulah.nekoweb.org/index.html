@@ -115,187 +115,12 @@ p:first-of-type {
       </tr>
     </table> 
     </center>
-    <div style=";background:white;padding:3px">
-        broken will be puzzle soon
-    </div>
-    <img style="width:100%;height:100%;position:absolute;top:0;z-index:-1" src id="ha">
+    <div style="padding:3px;" id="showTXT"></div>
+    <img style="width:100%;height:100%;position:absolute;top:0;z-index:-1" src="quest/meow2.png" id="ha">
    	<audio id="aud" preload="metadata"></audio>
 
 	<input type="text" id="input" style="opacity:0%;" autocomplete="off">
-    <script type="text/tilescript">
-
-
-function randomCol(){
-    return Math.floor(Math.random() * 255)
-}
-function sliderPress(){
-    console.log("a")
-    var self = document.getElementById("txt");
-    var root = document.body;
-    var sizeNum = 420 * (self.value/1000);
-    root.style.setProperty("font-size", sizeNum + "pt");
-    root.style.setProperty("background", "linear-gradient("+(sizeNum * 100) % 360 + "deg"+", rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%)");
-    var texts = document.getElementsByTagName("span");
-    for(var i = 0;i<texts.length;i++){
-        texts[i].style.setProperty("color","rgb("+randomCol()+", "+randomCol()+", "+randomCol()+")");
-    }
-}
-function addTXT(text){
-    var para = document.createElement("p");
-    var node = document.createTextNode(text);
-    para.appendChild(node);
-    document.body.appendChild(para);
-}
-var keyArr = [];
-
-
-var spongebob = [115, 112, 652, 110, 676, 98, 594, 98];
-var delayList = {122: 299.54166666666663, 115: 252.24999999999997, 679: 260.14583333333337, 102: 220.72916666666666, 98: 267.5625, 104: 173.4375, 108: 591.2291666666667, 240: 307.4375, 331: 543.9375, 596618: 758.0833333333334, 112: 624.3125, 618601: 680.0416666666666, 643: 220.72916666666666, 101618: 802.6666666666666, 119: 307.4375, 114: 181.3125, 650601: 602.0, 116: 312.16666666666663, 106: 567.5833333333334, 97650: 802.6875, 107: 401.3333333333333, 952: 307.4583333333333, 110: 646.4166666666666, 230: 301.0, 118: 291.6666666666667, 10558: 543.5625, 601: 662.1666666666666, 111650: 992.2083333333334, 594: 356.75, 60458: 880.7291666666666, 100: 401.3333333333333, 59658: 880.7291666666666, 652: 379.0416666666667, 97618: 1159.4166666666667, 658: 346.8541666666667, 9758: 954.5625, 618: 304.0833333333333, 11758: 808.7083333333334, 676: 331.0833333333333, 101601: 557.4166666666666, 650: 362.6041666666667, 101: 272.4375, 103: 220.72916666666666};
-
-function playSound(file){
-    console.log(file)
-    var aud = document.getElementById('aud');
-    aud.setAttribute("src",file);
-    aud.play();
-}
-var answCheck = [];
-var allButtons = document.getElementsByTagName("button");
-for(var i =0;i<allButtons.length;i++){
-    allButtons[i].addEventListener('click',function(event){
-        var txt = event.target.innerText;
-    	if(txt.length==4){
-            var ant = txt.charCodeAt(1)+''+txt.charCodeAt(2);
-            answCheck.push(parseInt(ant));
-            answCheck = checkRight(ant,parseInt(localStorage.getItem("puzzle")),answCheck);
-            playSound('./sounds/'+ant+'.mp3');
-        } else {
-            var ant = ''+txt.charCodeAt(1);
-            answCheck.push(parseInt(ant));
-            answCheck = checkRight(ant,parseInt(localStorage.getItem("puzzle")),answCheck);
-            playSound('./sounds/'+ant+'.mp3');
-        }
-    })
-}
-var answers={
-    1:[115,112,652,240,110,676,98,594,601,98],
-    2:[112,230,116,119,114,618,107],
-    3:[115,107,119,618,100,119,59658,60458,100],
-    4:[100,115,230,110,100,618],
-    5:[115,112,652,618,110,676,98,594,122,98],
-    6:[112,101,618,110,116,618,331],
-    "key":[115,618,108,618]
-}
-
-function checkRight(answ,num,curAnsw){
-    var answLen = curAnsw.length-1;
-    console.log(answers["key"][answLen],answ,answLen);
-    if(answers[num][answLen]==answ||answers["key"][answLen]==answ){
-        console.log(curAnsw);
-        if(curAnsw.sort().join(',') === answers[num].sort().join(',')){
-            
-        }
-        if(curAnsw.sort().join(',') === answers["key"].sort().join(',')){
-            console.log("key");
-        }
-    } else {
-        curAnsw = [];
-    }
-    
-    return curAnsw;
-}
-if (!localStorage.getItem("puzzle")){
-    localStorage.setItem("puzzle",1);
-    incrementPuzzle(1);
-} else {
-    incrementPuzzle(parseInt(localStorage.getItem("puzzle")));
-}
-function incrementPuzzle(num){
-    document.getElementById("ha").setAttribute("src","./quest/"+num+".png");
-    
-}
-var spongDon = false;
-if(spongDon){
-    var input = document.getElementById("input");
-    input.focus();
-    document.body.addEventListener('click',function(event){input.focus()})
-    document.body.getElementsByTagName("img")[0].addEventListener('click',function(event){input.focus()})
-    input.addEventListener('keyup', function(event) {
-    //     console.log(event.key);
-        if(keyArr.length<21){
-            keyArr.push(event.key);
-        } else {
-            keyArr.shift();
-            keyArr.push(event.key);
-        }
-        if(keyArr.join("").toLowerCase()=="i deny your salvation"){
-            createSeason2();
-        }
-    });
-}
-
-function createSeason2(){
-    var alltext = document.body.getElementsByTagName("*");
-    var tmp = document.body.getElementsByTagName("*");
-    //console.log(tmp)
-    var spaces = "";
-    document.body.getElementsByTagName("img")[0].remove();
-    for(var i = 0;i<alltext.length;i++){
-        //console.log(tmp[i].tagName)
-        if(!tmp[i].src&&tmp[i].tagName!="STYLE"){
-           tmp[i].remove();
-        }
-    }
-    var para = document.createElement("div");
-    var node = document.createTextNode("");
-    para.setAttribute("class","wow");
-    para.appendChild(node);
-    document.body.appendChild(para);
-    var newS1 = document.body.getElementsByClassName("wow")[0];
-    var para = document.createElement("h2");
-    var node = document.createTextNode("Click to load");
-    para.setAttribute("class","texts");
-    para.setAttribute("id","title");
-    para.appendChild(node);
-    newS1.appendChild(para);
-    var para = document.createElement("div");
-    var node = document.createTextNode("Please");
-    para.setAttribute("class","texts");
-    para.setAttribute("id","par1");
-    para.appendChild(node);
-    newS1.appendChild(para);
-    var para = document.createElement("div");
-    var node = document.createTextNode("Also I'm reusing this fire cuz i burned my drawing once for my main website");
-    para.setAttribute("class","texts");
-    para.setAttribute("id","par2");
-    para.appendChild(node);
-    newS1.appendChild(para);
-    var para = document.createElement("button");
-    var node = document.createTextNode("Go to season 1");
-    para.setAttribute("id","buttony");
-    para.appendChild(node);
-    newS1.appendChild(para);
-    var butt = document.getElementById("buttony");
-	butt.addEventListener("click",function(e){createSeason1()});
-	var textes = document.getElementsByClassName("texts");
-    for (var i = 0;i<textes.length;i++){
-        textes[i].addEventListener("click",function(e){
-            var storyNum = parseInt(localStorage.getItem("story"));
-            incrementText(storyNum);
-            if(typeof monologue[storyNum+1] !== 'undefined'){
-                localStorage.setItem("story",storyNum+1);
-            }
-
-        });
-    }
-    if (!localStorage.getItem("story")){
-        localStorage.setItem("story",0);
-        incrementText(0);
-    } else {
-        incrementText(parseInt(localStorage.getItem("story")));
-    }
-}
-
-var monologue = [
+    <script type="text/tilescript">var monologue = [
     {
         "h2": "My website is chaotic and unpredictable, so will this thingie",
         "p1": "This also operates within the same bounds.",
@@ -392,7 +217,292 @@ var monologue = [
         "p1": "I like being myself, and I need to make art that reflects that. Also coding is art too, obviously, everything that takes effort is. Your life can be art, but for most people it's not. We don't really get the luxury to choose however.",
         "p2": "I think that's it for now, Jan 18, 2026"
     }
-]
+];
+
+
+function randomCol(){
+    return Math.floor(Math.random() * 255)
+}
+function sliderPress(){
+    console.log("a")
+    var self = document.getElementById("txt");
+    var root = document.body;
+    var sizeNum = 420 * (self.value/1000);
+    root.style.setProperty("font-size", sizeNum + "pt");
+    root.style.setProperty("background", "linear-gradient("+(sizeNum * 100) % 360 + "deg"+", rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%)");
+    var texts = document.getElementsByTagName("span");
+    for(var i = 0;i<texts.length;i++){
+        texts[i].style.setProperty("color","rgb("+randomCol()+", "+randomCol()+", "+randomCol()+")");
+    }
+}
+function addTXT(text){
+    var para = document.createElement("p");
+    var node = document.createTextNode(text);
+    para.appendChild(node);
+    document.body.appendChild(para);
+}
+var keyArr = [];
+
+
+var spongebob = [115, 112, 652, 110, 676, 98, 594, 98];
+var delayList = {122: 299.54166666666663, 115: 252.24999999999997, 679: 260.14583333333337, 102: 220.72916666666666, 98: 267.5625, 104: 173.4375, 108: 591.2291666666667, 240: 307.4375, 331: 543.9375, 596618: 758.0833333333334, 112: 624.3125, 618601: 680.0416666666666, 643: 220.72916666666666, 101618: 802.6666666666666, 119: 307.4375, 114: 181.3125, 650601: 602.0, 116: 312.16666666666663, 106: 567.5833333333334, 97650: 802.6875, 107: 401.3333333333333, 952: 307.4583333333333, 110: 646.4166666666666, 230: 301.0, 118: 291.6666666666667, 10558: 543.5625, 601: 662.1666666666666, 111650: 992.2083333333334, 594: 356.75, 60458: 880.7291666666666, 100: 401.3333333333333, 59658: 880.7291666666666, 652: 379.0416666666667, 97618: 1159.4166666666667, 658: 346.8541666666667, 9758: 954.5625, 618: 304.0833333333333, 11758: 808.7083333333334, 676: 331.0833333333333, 101601: 557.4166666666666, 650: 362.6041666666667, 101: 272.4375, 103: 220.72916666666666};
+
+function playSound(file){
+    console.log(file)
+    var aud = document.getElementById('aud');
+    aud.setAttribute("src",file);
+    aud.play();
+}
+var answCheck = [];
+
+var answers={
+    1:[115,112,652,240,110,676,98,594,601,98],
+    2:[112,230,116,119,114,618,107],
+    3:[115,107,119,618,100,119,59658,60458,100],
+    4:[100,115,230,110,100,618],
+    5:[115,112,652,618,110,676,98,594,122,98],
+    6:[112,101,618,110,116,618,331],
+    "key":[115,618,108,618]
+}
+function soundToStr(st){
+    if(st.length>3){
+        if(st=="101601"){
+            return "eə";
+        }
+        if(st=="101618"){
+            return "eɪ";
+        }
+        if(st=="10558"){
+            return "i:";
+        }
+        if(st=="111650"){
+            return "oʊ";
+        }
+        if(st=="11758"){
+            return "u:";
+        }
+        if(st=="59658"){
+            return "ɔ:";
+        }
+        if(st=="596618"){
+            return "ɔɪ";
+        }
+        if(st=="60458"){
+            return "ɜ:";
+        }
+        if(st=="618601"){
+            return "ɪə";
+        }
+        if(st=="650601"){
+            return "ʊə";
+        }
+        if(st=="9758"){
+            return "a:";
+        }
+        if(st=="97650"){
+            return "aʊ";
+        }
+    } else {
+        return String.fromCharCode(st);
+    }
+}
+function checkRight(answ,num,curAnsw){
+    var answLen = curAnsw.length-1;
+    //console.log(answers["key"][answLen],answ,answLen);
+    if(answers[num][answLen]==answ||answers["key"][answLen]==answ){
+        document.getElementById("showTXT").innerText += soundToStr(answ);
+        
+        
+        if(curAnsw.join(',') === answers[num].join(',')){
+            var puzNum = parseInt(localStorage.getItem("puzzle"));
+            if(puzNum<7){
+                localStorage.setItem("puzzle",puzNum+1);
+                incrementPuzzle(puzNum+1);
+            }
+            if(puzNum<6){
+                curAnsw=[];
+                document.getElementById("showTXT").innerText = "";
+            }
+            
+        }
+        if(curAnsw.join(',') === answers["key"].join(',')){
+            localStorage.setItem("puzzle",7);
+            incrementPuzzle(7);
+            localStorage.setItem("puzzle2",1);
+        }
+    } else {
+        document.getElementById("showTXT").innerText = "";
+        curAnsw = [];
+    }
+    
+    return curAnsw;
+}
+var spongDon = false;
+if (!localStorage.getItem("puzzle")){
+    localStorage.setItem("puzzle",1);
+    incrementPuzzle(1);
+} else {
+    
+    if(parseInt(localStorage.getItem("puzzle"))==7){
+        spongDon = true;
+        localStorage.setItem("puzzle2",1);
+    } else {
+        incrementPuzzle(parseInt(localStorage.getItem("puzzle")));
+    }
+}
+if (!localStorage.getItem("puzzle2")){
+    localStorage.setItem("puzzle2",0);
+} else {
+    if(localStorage.getItem("puzzle2")=="1"){
+        incrementPuzzle(7);
+    }
+    if(localStorage.getItem("puzzle2")=="2"){
+        createSeason2();
+    }
+}
+function incrementPuzzle(num){
+    if(num==7){
+        localStorage.setItem("puzzle2",1);
+        var alltext = document.body.getElementsByTagName("*");
+        var tmp = document.body.getElementsByTagName("*");
+        //console.log(tmp)
+        var spaces = "";
+        document.body.getElementsByTagName("img")[0].remove();
+        for(var i = 0;i<alltext.length;i++){
+            //console.log(tmp[i].tagName)
+            if(!tmp[i].src&&tmp[i].tagName!="STYLE"){
+               tmp[i].remove();
+            }
+        }
+        var para = document.createElement("img");
+        var node = document.createTextNode("");
+        para.setAttribute("id","ha");
+        para.setAttribute("src","./lol.png");
+        para.setAttribute("style","width:100%;height:100%;position:absolute;top:0;z-index:-1");
+        para.appendChild(node);
+        document.body.appendChild(para);
+        var para = document.createElement("input");
+        var node = document.createTextNode("");
+        para.setAttribute("id","input");
+        para.setAttribute("type","text");
+        para.setAttribute("style","opacity:0%;");
+        para.appendChild(node);
+        document.body.appendChild(para);
+        
+        denyPuzz();
+    } else {
+        document.getElementById("ha").setAttribute("src","./quest/"+num+".png");
+    }
+    
+}
+
+if(!spongDon){
+    var allButtons = document.getElementsByTagName("button");
+    for(var i =0;i<allButtons.length;i++){
+        allButtons[i].addEventListener('click',function(event){
+            var txt = event.target.innerText;
+            if(txt.length==4){
+                var ant = txt.charCodeAt(1)+''+txt.charCodeAt(2);
+                answCheck.push(parseInt(ant));
+                answCheck = checkRight(ant,parseInt(localStorage.getItem("puzzle")),answCheck);
+                playSound('./sounds/'+ant+'.mp3');
+            } else {
+                var ant = ''+txt.charCodeAt(1);
+                answCheck.push(parseInt(ant));
+                answCheck = checkRight(ant,parseInt(localStorage.getItem("puzzle")),answCheck);
+                playSound('./sounds/'+ant+'.mp3');
+            }
+        })
+    }
+}
+function denyPuzz(){
+    var input = document.getElementById("input");
+    input.focus();
+    document.body.addEventListener('click',function(event){input.focus()})
+    document.body.getElementsByTagName("img")[0].addEventListener('click',function(event){input.focus()})
+    input.addEventListener('keyup', function(event) {
+    //     console.log(event.key);
+        if(keyArr.length<21){
+            keyArr.push(event.key);
+        } else {
+            keyArr.shift();
+            keyArr.push(event.key);
+        }
+        if(keyArr.join("").toLowerCase()=="i deny your salvation"){
+            createSeason2();
+            localStorage.setItem("puzzle2",2);
+        }
+    });
+}
+
+
+function createSeason2(){
+    var alltext = document.body.getElementsByTagName("*");
+    var tmp = document.body.getElementsByTagName("*");
+    //console.log(tmp)
+    var spaces = "";
+    document.body.getElementsByTagName("img")[0].remove();
+    for(var i = 0;i<alltext.length;i++){
+        //console.log(tmp[i].tagName)
+        if(!tmp[i].src&&tmp[i].tagName!="STYLE"){
+           tmp[i].remove();
+        }
+    }
+    var para = document.createElement("div");
+    var node = document.createTextNode("");
+    para.setAttribute("class","wow");
+    para.appendChild(node);
+    document.body.appendChild(para);
+    var newS1 = document.body.getElementsByClassName("wow")[0];
+    var para = document.createElement("h2");
+    var node = document.createTextNode("Click to load");
+    para.setAttribute("class","texts");
+    para.setAttribute("id","title");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var para = document.createElement("div");
+    var node = document.createTextNode("Please");
+    para.setAttribute("class","texts");
+    para.setAttribute("id","par1");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var para = document.createElement("div");
+    var node = document.createTextNode("Also I'm reusing this fire cuz i burned my drawing once for my main website");
+    para.setAttribute("class","texts");
+    para.setAttribute("id","par2");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    var para = document.createElement("button");
+    var node = document.createTextNode("Go to season 1");
+    para.setAttribute("id","buttony");
+    para.appendChild(node);
+    newS1.appendChild(para);
+    
+    var butt = document.getElementById("buttony");
+	butt.addEventListener("click",function(e){createSeason1()});
+	var textes = document.getElementsByClassName("texts");
+    
+    if (!localStorage.getItem("story")){
+        localStorage.setItem("story",0);
+        incrementText(0);
+    } else {
+        incrementText(parseInt(localStorage.getItem("story")));
+    }
+    for (var i = 0;i<textes.length;i++){
+        textes[i].addEventListener("click",function(e){
+            var storyNum = parseInt(localStorage.getItem("story"));
+            incrementText(storyNum);
+            if(typeof monologue[storyNum+1] !== 'undefined'){
+                localStorage.setItem("story",storyNum+1);
+            }
+
+        });
+    }
+    
+    
+}
+
+
 
 function incrementText(num){
 	var thingy = monologue[num];
