@@ -1,24 +1,294 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>.tile-body {
+
+
+
+<style>* {
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #d8ded3;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  background-color: #3e4637;
+  width: 250px;
+  height: 250px;
+  font-family: Trebuchet MS, Verdana, sans-serif;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+.bevel-out {
+  border: 1px solid #292d23;
+  border-color: #899281 #292d23 #292d23 #899281;
+}
+
+.bevel-in {
+  border: 1px solid #899281;
+  border-color: #292d23 #899281 #899281 #292d23;
+}
+
+.titlebar {
+  background-color: #4c5844;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  height: 18px;
+  padding: 0 4px;
+  display: flex;
+}
+
+.titlebar-icon {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.titlebar-text {
+  letter-spacing: 1px;
+  text-transform: uppercase;
   color: #fff;
-  text-align: center;
-  background: #f05;
+  white-space: nowrap;
+  flex: 1;
+  font-size: 10px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.titlebar-btn {
+  color: #d8ded3;
+  cursor: default;
+  background: #4c5844;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: sans-serif;
-  font-weight: bold;
+  width: 14px;
+  height: 14px;
+  font-size: 9px;
+  display: flex;
+}
+
+.window {
+  background-color: #4c5844;
+  flex-direction: column;
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.content {
+  flex-direction: column;
+  flex: 1;
+  gap: 5px;
+  padding: 6px;
   display: flex;
   overflow: hidden;
+}
+
+.panel {
+  color: #d8ded3;
+  background-color: #3e4637;
+  padding: 5px 6px;
+}
+
+.panel-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #c4b550;
+  margin-bottom: 3px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.panel-value {
+  color: #d8ded3;
+  font-size: 11px;
+}
+
+.domain {
+  color: #c4b550;
+  letter-spacing: 0;
+  text-align: center;
+  background: #3e4637;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.statusbar {
+  background-color: #4c5844;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  height: 16px;
+  padding: 0 4px;
+  display: flex;
+}
+
+.status-item {
+  color: #899281;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-size: 9px;
+}
+
+.status-dot {
+  background: #c4b550;
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+}
+
+.status-dot.green {
+  background: #6a9a4a;
+}
+
+.row {
+  gap: 5px;
+  display: flex;
+}
+
+.row .panel {
+  flex: 1;
+}
+
+.progress-wrap {
+  background: #3e4637;
+  padding: 4px 6px;
+}
+
+.progress-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #c4b550;
+  margin-bottom: 3px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.progress-track {
+  background: #2a2e24;
+  height: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: repeating-linear-gradient(to right, #96892d 0 7px, #3e4637 7px 10px);
+  width: 72%;
+  height: 100%;
+  animation: 3s step-end infinite prog;
+}
+
+@keyframes prog {
+  0% {
+    width: 60%;
+  }
+
+  33% {
+    width: 72%;
+  }
+
+  66% {
+    width: 85%;
+  }
+
+  100% {
+    width: 60%;
+  }
+}
+
+.cursor {
+  vertical-align: middle;
+  background: #c4b550;
+  width: 6px;
+  height: 11px;
+  margin-left: 2px;
+  animation: 1s step-end infinite blink;
+  display: inline-block;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.sep {
+  background: #292d23;
+  flex-shrink: 0;
+  height: 1px;
+  box-shadow: 0 1px #899281;
 }
 </style>
 </head>
 <body>
-    <div>
-        Work In Progress<br>
+<div class="window bevel-out">
+
+  
+  <div class="titlebar bevel-out">
+    
+    
+    <span class="titlebar-text">theleft4deadguy.site</span>
+    <div class="titlebar-btn bevel-out">_</div>
+    <div class="titlebar-btn bevel-out">x</div>
+  </div>
+
+  <div class="sep"></div>
+
+  
+  <div class="content">
+
+    
+    <div class="domain bevel-in">
+      theleft4deadguy.site<span class="cursor"></span>
     </div>
+
+    
+    <div class="row">
+      <div class="panel bevel-in">
+        <div class="panel-label">Status</div>
+        <div class="panel-value" style="color:#6aaa4a;">ONLINE</div>
+      </div>
+      <div class="panel bevel-in">
+        <div class="panel-label">Engine</div>
+        <div class="panel-value">GoldSrc</div>
+      </div>
+    </div>
+
+    
+    <div class="progress-wrap bevel-in">
+      <div class="progress-label">Loading resources...</div>
+      <div class="progress-track bevel-in">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    
+    <div class="panel bevel-in" style="flex:1;">
+      <div class="panel-label">Message</div>
+      <div class="panel-value" style="font-size:10px; line-height:1.5; color:#b8c4ad;">
+        STILL WORK IN PROGRESS.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sep"></div>
+
+  
+  <div class="statusbar">
+    <div class="status-dot green bevel-out"></div>
+    <span class="status-item">Connected</span>
+    <div class="status-dot bevel-out" style="background:#4c5844; margin-left:auto;"></div>
+    <span class="status-item" style="margin-right:2px;">v1.0</span>
+  </div>
+
+</div>
 </body>
 </html>

@@ -2,22 +2,42 @@
 <html lang="jp">
 <head>
 <style>.tile-body {
-  background: #060606 url("msx256.jpg") no-repeat;
+  background: #2424ff;
 }
 
-#body {
+#⌨ {
   white-space: nowrap;
   font-size: 15px;
   display: flex;
 }
 
 a {
+  color: #000;
   padding: 250px;
-  text-decoration: none;
+}
+
+a:before {
+  content: url("msx256-program.jpg");
+  opacity: 0;
+  position: absolute;
+  top: -256rem;
+  left: -256rem;
+}
+
+a:after {
+  content: url("msx256.jpg");
+  image-rendering: pixelated;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.active a:after {
+  content: url("msx256-program.jpg");
 }
 </style>
 </head>
 <body>
-<div id="body"><a href="https://msxjpn.jimdofree.com/プログラム/256-色表示/" target="_blank">MSX JAPAN▉ - 256 色表示</a></div>
+<div id="⌨"><a href="https://msxjpn.jimdofree.com/プログラム/256-色表示/" target="_blank">MSX JAPAN▉ - 256 色表示</a></div>
 </body>
 </html>
