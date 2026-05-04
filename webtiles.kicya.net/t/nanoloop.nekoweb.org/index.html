@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en" style="text-rendering:optimizeLegibility">
+<head><style>* {
+  margin: auto;
+  transition: all .3s;
+}
+
+.tile-body {
+  color: #ccc;
+  background: linear-gradient(#000, #100) fixed;
+  font-family: VCR, monospace;
+  overflow-x: clip;
+}
+
+img {
+  max-width: 100%;
+}
+
+#site, p {
+  z-index: 4;
+}
+
+.tile-body:has(img[src*="2.svg"]) #site {
+  left: auto;
+  right: .25rem;
+}
+
+.tile-body:has(img[src*="1.svg"]) #site {
+  left: .25rem;
+  right: auto;
+}
+
+.tile-body:has(img[src*="2.svg"]) p {
+  text-align: right;
+  right: .5rem;
+}
+
+.tile-body:has(img[src*="1.svg"]) p {
+  text-align: left;
+  left: .5rem;
+  right: auto;
+}
+
+#site {
+  opacity: .5;
+  background-color: #000c;
+  border: 1px dotted #fff;
+  padding: .25rem;
+  position: absolute;
+  bottom: .5rem;
+}
+
+#site:hover {
+  opacity: 1;
+}
+
+h1 {
+  font-size: 90%;
+  font-weight: 300;
+}
+
+p {
+  font-size: xx-large;
+  font-weight: 700;
+  position: absolute;
+  top: .25rem;
+}
+
+a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+div:has( > h1):hover, a:hover {
+  letter-spacing: 1.15px;
+}
+
+p a:hover {
+  color: red;
+}
+
+@font-face {
+  font-family: VCR;
+  src: url("VCR_OSD_MONO.woff2") format("woff2");
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+</style></head>
+
+<body>
+    <div id=site><h1><a href="https://nanoloop.nekoweb.org" target="_blank" title="NANOLOOP">nanoloop.nekoweb.org</a></h1></div>
+    <p><a href="https://nanoloop.nekoweb.org" target="_blank" title="ULTRAKILL FANFICTION GALLERY">ULTK<br>FANFIC<br>GALLERY</a></p>
+	<img src="img1.svg" role="presentation" alt="A simple illustration of the character Mirage from the videogame ULTRAKILL. She is wearing a simple white dress and clutching a bouquet of lightly-colored flowers.">
+</body></html>
