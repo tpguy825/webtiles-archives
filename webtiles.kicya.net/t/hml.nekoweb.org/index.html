@@ -1,0 +1,137 @@
+<div id="game-container" style="background-iamge: url(https://webtiles.kicya.net/t/hml.nekoweb.org/low-tech1.jpg); width: 512px; height: 512px;"></div>
+<script type="text/tilescript">
+var container = document.getElementById('game-container');
+
+// 2. 創建 Canvas
+var canvas = document.createElement('canvas');
+canvas.width = 512;
+canvas.height = 512;
+canvas.style.backgroundColor = '#000';
+canvas.style.display = 'block';
+canvas.style.margin = 'auto';
+
+// 3. 取代原本的 document.body.appendChild，改放入 div
+if (container) {
+    container.appendChild(canvas);
+} else {
+    // 如果找不到 div，作為保險方案才掛載到 body
+    document.body.appendChild(canvas);
+}
+
+var ctx = canvas.getContext('2d');
+var gridSize = 16;
+var tileCount = 512 / gridSize;
+
+var score = 0;
+var dx = 1;
+var dy = 0; 
+var snake = [
+    {x: 10, y: 10},
+    {x: 9, y: 10},
+    {x: 8, y: 10}
+];
+var food = {x: 15, y: 15};
+var nextDx = 1;
+var nextDy = 0;
+
+// 繪製背景
+function drawBackground() {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+// 繪製蛇身
+function drawSnake() {
+    ctx.fillStyle = '#4CAF50';
+    for (var i = 0; i < snake.length; i++) {
+        ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 2, gridSize - 2);
+    }
+}
+
+// 繪製食物
+function drawFood() {
+    ctx.fillStyle = '#F44336';
+    ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+}
+
+// 移動邏輯
+function moveSnake() {
+    dx = nextDx;
+    dy = nextDy;
+
+    var head = {x: snake[0].x + dx, y: snake[0].y + dy};
+
+    // 穿牆處理 (可以改為碰撞死亡)
+    if (head.x < 0) head.x = tileCount - 1;
+    if (head.x >= tileCount) head.x = 0;
+    if (head.y < 0) head.y = tileCount - 1;
+    if (head.y >= tileCount) head.y = 0;
+
+    // 檢查是否咬到自己
+    for (var i = 0; i < snake.length; i++) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
+            resetGame();
+            return;
+        }
+    }
+
+    snake.unshift(head);
+
+    // 檢查是否吃到食物
+    if (head.x === food.x && head.y === food.y) {
+        score += 10;
+        createFood();
+    } else {
+        snake.pop();
+    }
+}
+
+// 生成新食物
+function createFood() {
+    food.x = Math.floor(Math.random() * tileCount);
+    food.y = Math.floor(Math.random() * tileCount);
+}
+
+// 重置遊戲
+function resetGame() {
+    alert('Game Over! Score: ' + score);
+    score = 0;
+    snake = [
+        {x: 10, y: 10},
+        {x: 9, y: 10},
+        {x: 8, y: 10}
+    ];
+    nextDx = 1;
+    nextDy = 0;
+}
+
+// 鍵盤控制
+function handleKeyDown(e) {
+    var key = e.keyCode;
+    // 37: Left, 38: Up, 39: Right, 40: Down
+    if (key === 37 && dx === 0) { nextDx = -1; nextDy = 0; }
+    if (key === 38 && dy === 0) { nextDx = 0; nextDy = -1; }
+    if (key === 39 && dx === 0) { nextDx = 1; nextDy = 0; }
+    if (key === 40 && dy === 0) { nextDx = 0; nextDy = 1; }
+}
+
+canvas.tabIndex = 1; // 讓 canvas 可以接收焦點
+canvas.style.outline = 'none'; // 移除選中時的外框
+canvas.addEventListener('keydown', handleKeyDown);
+canvas.focus(); // 自動聚焦
+
+// 遊戲主迴圈
+function gameLoop() {
+    drawBackground();
+    moveSnake();
+    drawFood();
+    drawSnake();
+    
+    // 顯示分數
+    ctx.fillStyle = 'white';
+    ctx.font = '11px Courier New';
+    ctx.fillText('(Arrow Keys To Control)Score: ' + score, 10, 25);
+}
+
+// 使用 setInterval 進行循環（約每秒 10 幀）
+setInterval(gameLoop, 100);</script>

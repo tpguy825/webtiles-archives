@@ -43,3 +43,17 @@ svg{width:100dvw;height:100dvh;background-size:cover;background-image:url('data:
     />
    </path>
 </svg>
+8,0.43537 -26.18174,-8.58521 -15.317939,-26.53125"
+       >
+       <!-- The Path rotates inside the group -->
+       <animateTransform attributeName="transform"
+                          type="rotate"
+                          from="0 57 71"
+                          to="360 57 71"
+                          begin="0s"
+                          dur="60s"
+                          repeatCount="indefinite"
+        />
+      </path>
+  </g>
+</svg>
