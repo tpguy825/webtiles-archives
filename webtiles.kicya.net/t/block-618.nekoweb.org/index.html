@@ -51,6 +51,47 @@
   display: flex;
 }
 
+.content {
+  text-shadow: 0 1px #f6f7f8;
+  color: #4c566c;
+  padding: 20px 8px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.where {
+  border: 1px solid #ababab;
+  border-radius: 9px;
+  grid-template-rows: repeat(2, 1fr);
+  height: 70px;
+  margin-top: 5px;
+  display: grid;
+  overflow: hidden;
+  box-shadow: inset 0 1px 1px #0000001a, 0 1px #f6f7f8;
+}
+
+.where a div {
+  box-sizing: border-box;
+  color: #000;
+  background: #f7f7f7;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 9px;
+  line-height: 1;
+  transition: filter 70ms ease-in-out;
+  display: flex;
+}
+
+.where a div:active {
+  filter: brightness(.9);
+}
+
+.where a:first-child div {
+  border-bottom: 1px solid #ababab;
+}
+
 .nav {
   background: linear-gradient(#2f2f2f, #151515 50%, #000 50% 100%);
   border-top: 1px solid #0f0f0f;
@@ -127,46 +168,64 @@ a {
 </head>
 
 <body>
-   <div>
-            <div class="upperbar">
-                <div class="wifi">
-                    <img src="images/wifi.png">
-                    WBTL
-                    <img src="images/signal.png" style="margin-left: 2px;">
+    <div>
+        <div class="upperbar">
+            <div class="wifi">
+                <img src="images/wifi.png">
+                WBTL
+                <img src="images/signal.png" style="margin-left: 2px;">
+            </div>
+            <span id="time"></span>
+            <div class="battery">
+                100%
+                <img src="images/battery.png">
+            </div>
+        </div>
+        <div class="header">
+            block_618's WebTile
+        </div>
+    </div>
+    <div class="content">
+        <span style="margin-left: 9px;">where to?</span>
+        <div class="where">
+            <a href="https://block-618.com/" target="_blank">
+                <div>
+                    neocities
+                    <img src="images/arrow.png">
                 </div>
-                <span id="time"></span>
-                <div class="battery">
-                    100%
-                    <img src="images/battery.png"></div>
-            </div>
-            <div class="header">
-                block_618's WebTile
-            </div>
+            </a>
+            <a href="https://block-618.nekoweb.org/" target="_blank">
+                <div>
+                    nekoweb
+                    <img src="images/arrow.png">
+                </div>
+            </a>
         </div>
-        <div class="nav">
-            <div class="icon active">
-                <img src="images/home.png">
-                <span>Home</span>
-            </div>
-            <div class="icon">
-                <a href="https://block-618.com/portfolio" target="_blank">
-                    <img src="images/portfolio.png">
-                    <span>Portfolio</span>
-                </a>
-            </div>
-            <div class="icon">
-                <a href="https://yellowtealpurple.net/forums/blogs/blog/618.18/" target="_blank">
-                    <img src="images/blog.png">
-                    <span>Blog</span>
-                </a>
-            </div>
-            <div class="icon">
-                <a href="https://block-618.atabook.org/" target="_blank">
-                    <img src="images/guestbook.png">
-                    <span>Guestbook</span>
-                </a>
-            </div>
+    </div>
+    <div class="nav">
+        <div class="icon active">
+            <img src="images/home.png">
+            <span>Home</span>
         </div>
+        <div class="icon">
+            <a href="https://block-618.com/portfolio" target="_blank">
+                <img src="images/portfolio.png">
+                <span>Portfolio</span>
+            </a>
+        </div>
+        <div class="icon">
+            <a href="https://yellowtealpurple.net/forums/blogs/blog/618.18/" target="_blank">
+                <img src="images/blog.png">
+                <span>Blog</span>
+            </a>
+        </div>
+        <div class="icon">
+            <a href="https://block-618.atabook.org/" target="_blank">
+                <img src="images/guestbook.png">
+                <span>Guestbook</span>
+            </a>
+        </div>
+    </div>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 var time = document.getElementById('time');
