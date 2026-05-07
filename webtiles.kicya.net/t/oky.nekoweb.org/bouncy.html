@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #111;
+  background-color: #bcddeb;
+}
+</style>
+</head>
+<body>
+    <a href="describe.html">
+    	<canvas id="bouncy" style="background-color: #000; cursor: pointer;" width="250" height="250"></canvas>
+    </a>
+    <image src="waeve.png" style="display: none;" id="plsUseMe"></image>
+    <script type="text/tilescript">var canvas = document.getElementById('bouncy');
+var ctx = canvas.getContext('2d');
+
+var image = document.getElementById('plsUseMe');
+
+var velocity = { x: 1, y: 2 };
+var position = { x: 0, y: 0 };
+var speedScale = { x: 1, y: 1 };
+
+ctx.fillStyle = "white";
+ctx.font = "12px serif";
+ctx.textBaseline = "top";
+
+function clamp(value, min, max) {
+    return value < min ? min : (value > max ? max : value);
+}
+
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, position.x, position.y, 50, 50);
+    ctx.fillText("Click to go back!", 0, 0);
+    position.x += velocity.x;
+    position.y += velocity.y;
+    if (position.x + 50 > canvas.width || position.x < 0) {
+        speedScale.x = clamp(speedScale.x + (Math.random() - 0.5) * 0.2, 0.85, 1.15);
+        velocity.x = -velocity.x * speedScale.x;
+    }
+    if (position.y + 50 > canvas.height || position.y < 0) {
+        speedScale.y = clamp(speedScale.y + (Math.random() - 0.5) * 0.2, 0.85, 1.15);
+        velocity.y = -velocity.y * speedScale.y;
+    }
+}
+
+image.onload = setInterval(animate, 1000/60);</script>
+</body>
+</html>

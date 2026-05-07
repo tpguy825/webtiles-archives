@@ -1,20 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
-  color: #111;
-  background-color: #f0f0f0;
-  margin: 10px;
+    
+    
+    
+    <style>#containerthingy {
+  width: 80%;
+  margin: auto;
+}
+
+.tile-body {
+  background-color: #263d26;
+  height: 100vh;
+  margin: 0;
+}
+
+#main {
+  color: #faebd7;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+footer {
+  padding: 1rem;
+}
+
+#vezono-logo {
+  width: 10rem;
+  margin: 0;
+}
+
+.overblock {
+  background-color: #001b00;
+  align-items: flex-start;
+  margin: 1px 0 0;
+  display: flex;
+}
+
+#meblock {
+  width: 12rem;
+}
+
+.block {
+  border-width: 1px;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1px;
+  padding: 1px;
+  display: flex;
 }
 </style>
 </head>
 <body>
-    <p>hi!!! i'm vezono from <a href="https://rentry.org/vezono" target="_blank">rentry/vezono</a>. i'm still figuring out my place here, but i'm very curious!</p>
-    <p>
-        also i'm glad about my neighbours on the right, they seem cool! ()
-    </p>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+    <div id="main">
+        <div id="containerthingy">
+            <div class="overblock">
+                <div class="block" id="bioblock">
+                    <p>hi!!! i'm vezono from <a href="https://rentry.org/vezono" target="_blank">rentry/vezono</a>. i'm still figuring out my place here, but i'm very curious!</p>
+                    <p>
+                        also i'm glad about my neighbours on the right, they seem cool!
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer>made by vezono! :3</footer>
+    </div>
 </body>
 </html>
