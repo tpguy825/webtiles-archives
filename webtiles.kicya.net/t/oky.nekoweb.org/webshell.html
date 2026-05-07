@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  color: #fff;
+  background-color: #000;
+  font-family: monospace;
+}
+
+input:before {
+  content: ">";
+}
+</style>
+</head>
+<body>
+    <p id="shell">
+        welcome to tileShell!<br>
+        use the help command for commands.<br>
+    </p>
+    <input id="mirai" style="opacity: 0.9;" autocomplete="off">
+    <script type="text/tilescript">
+var last = [];
+var shellContents = [
+    "welcome to tileShell!",
+    "use the help command",
+    "unfortunately we are",
+    "limited due to keydown",
+    "take the input and go"
+];
+
+var shell = document.getElementById("shell");
+var input = document.getElementById("mirai");
+var currentInput = "";
+
+function render() {
+    shell.innerText = shellContents.join('\n');;
+}
+
+function addLine(line) {
+    shellContents.push(line);
+    if (shellContents.length > 10) {
+        last.push(shellContents.shift());
+    }
+}
+
+
+function handleCommand(inp) {
+    var cmd = inp.split(" ")[0];
+    if (cmd == "help") {
+        addLine("echo: echo string back")
+        addLine("upper: see last few lines")
+        return;
+    }
+    if (cmd == "echo") {
+        addLine(inp.split(" ").slice(1).join(" "))
+        return;
+    }
+    if (cmd == "flavorfoley") {
+        document.body.style.backgroundColor = "#FF670F";
+        return;
+    }
+    if (cmd == "upper") {
+        shellContents = last.slice(-10);
+        return;
+    }
+    addLine("!! " + cmd + " does not exist");
+    addLine("use the help cmd")
+}
+
+window.document.body.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        var command = currentInput.trim();
+        addLine("> " + command);
+        handleCommand(currentInput);
+        currentInput = "";
+        input.value = "";
+    } else if (event.key === "Backspace") {
+        currentInput = currentInput.slice(0, -1);
+    } else if (event.key.length === 1) {
+        currentInput += event.key;
+    }
+    render();
+});
+
+render();</script>
+</body>
+</html>
