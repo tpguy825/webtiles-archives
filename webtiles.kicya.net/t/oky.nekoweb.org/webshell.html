@@ -17,6 +17,7 @@ input:before {
         welcome to tileShell!<br>
         use the help command for commands.<br>
     </p>
+    <a id="exit" style="display: none;" href="describe.html">Emergency Exit</a>
     <input id="mirai" style="opacity: 0.9;" autocomplete="off">
     <script type="text/tilescript">
 var last = [];
@@ -49,6 +50,7 @@ function handleCommand(inp) {
     if (cmd == "help") {
         addLine("echo: echo string back")
         addLine("upper: see last few lines")
+        addLine("exit: leave")
         return;
     }
     if (cmd == "echo") {
@@ -61,6 +63,13 @@ function handleCommand(inp) {
     }
     if (cmd == "upper") {
         shellContents = last.slice(-10);
+        return;
+    }
+    if (cmd == "exit") {
+        addLine("It's safe to turn off");
+        var btn = document.getElementById("exit");
+        btn.click();
+        btn.style.display = "block";
         return;
     }
     addLine("!! " + cmd + " does not exist");
