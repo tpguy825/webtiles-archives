@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
     <style>@font-face {
-  font-family: "Jacquard 24";
-  src: url("gfx/Jacquard24-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Jacquard 12";
-  src: url("gfx/Jacquard12-Regular.ttf");
+  font-family: DoubleHomicide;
+  src: url("gfx/DoubleHomicide.ttf");
 }
 
 .tile-body:before {
@@ -18,10 +13,11 @@
   user-select: none;
   pointer-events: none;
   content: " ";
-  opacity: .85;
-  z-index: 67;
-  mix-blend-mode: color-dodge;
-  background: url("gfx/rain.gif") 0 0 / cover;
+  z-index: -1;
+  background-image: linear-gradient(#772323 5%, #7f2323 5% 10%, #8f2323 10% 15%, #9d2828 15% 20%, #ac2626 20% 25%, #b82727 25% 30%, #b82727 30% 35%, #ac2626 35% 40%, #ac2626 40% 45%, #a52323 45% 50%, #9c2121 50% 55%, #9c2121 55% 60%, #911f1f 60% 65%, #861d1d 65% 70%, #7a1b1b 70% 75%, #6e1918 75% 80%, #611616 80% 85%, #551414 85% 90%, #4a1212 90% 95%, #3e100f 95% 100%);
+  background-size: cover;
+  max-width: 250px;
+  max-height: 250px;
   display: block;
   position: fixed;
   inset: 0;
@@ -33,12 +29,10 @@
   -ms-user-select: none;
   user-select: none;
   color: #fff;
-  background: #000 url("gfx/tile.gif");
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  background-image: url("gfx/checkeredblack.gif");
+  background-size: 20% 20%;
+  max-width: 250px;
+  max-height: 250px;
 }
 
 @keyframes scroll {
@@ -57,34 +51,28 @@
 }
 
 .url {
-  z-index: 2;
-  filter: drop-shadow(1px 1px 1px #000);
+  -webkit-text-stroke: 4px black;
+  paint-order: stroke fill;
+  z-index: 8;
   padding-left: 10px;
-  font-family: "Jacquard 24", MS UI Gothic, sans-serif;
+  font-family: DoubleHomicide, MS UI Gothic, sans-serif;
   font-size: 32px;
   line-height: 0;
   position: absolute;
-  top: -15px;
+  top: -12px;
 }
 
 .tldr {
+  -webkit-text-stroke: 4px black;
+  paint-order: stroke fill;
   text-underline-offset: 1px;
-  z-index: 3;
-  filter: drop-shadow(1px 1px 1px #000);
+  z-index: 7;
   padding-left: 12px;
-  font-family: "Jacquard 12", MS UI Gothic, sans-serif;
-  font-size: 16.5px;
-  font-weight: 100;
-  line-height: 11.5px;
+  font-family: DoubleHomicide, MS UI Gothic, sans-serif;
+  font-size: 18px;
+  line-height: 14px;
   position: absolute;
-  top: 20px;
-}
-
-.test {
-  z-index: 1;
-  width: 250px;
-  height: 250px;
-  position: absolute;
+  top: 18px;
 }
 </style>
     <script type="text/tilescript">// Only executes while your tile is active
@@ -96,14 +84,14 @@ console.log("\u2007\u2007\u2007\u2007\u2007\u2007\u2007\u2007\u2007\u2007\u2007\
     
     <a href="https://zomg.wtf" target="_blank" class="emo">
     
-    <img src="gfx/piercedheart2.png">
+    <img class="heart" src="gfx/piercedheart250.png">
     </a><p class="url">
-    zomg.wtf
+    <i>ZOMG.WTF</i>
     </p>
     <p class="tldr">
-        wip!!!
+        <i>add me on
         <br>
-        my meowspace
+        myspace ! ! !</i>
     </p>
 </div>
 </body>

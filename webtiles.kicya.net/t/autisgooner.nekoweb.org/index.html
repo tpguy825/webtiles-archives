@@ -8,17 +8,29 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 25vw 50vh;
-  flex-direction: row;
-  align-items: flex-end;
-  padding-left: 32px;
+  padding-left: 16px;
   padding-right: 32px;
   font-size: 16px;
+}
+
+div {
+  flex-direction: column;
+  align-items: center;
   display: flex;
+  padding-right: 16px !important;
+}
+
+#hide {
+  opacity: .2;
 }
 </style>
 </head>
 <body>
-    <p>Tea for tile wanderers?</p>
+    <div>
+        <p>Tea for tile explorers?</p>
+        <p id="hide">some tiktok comment reference pls dont judge</p>
+    </div>
+    
     <!--<script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 var cv = document.getElementById("cv");
