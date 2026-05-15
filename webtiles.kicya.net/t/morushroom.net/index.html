@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>.tile-body {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+.wrap {
+  aspect-ratio: 1;
+  width: 80px;
+  image-rendering: pixelated;
+  position: relative;
+}
+
+.wrap img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.wrap .eye02, .wrap:hover .eye01 {
+  opacity: 0;
+}
+
+.wrap:hover .eye02 {
+  opacity: 1;
+}
+</style>
+    
+</head>
+<body>
+    <a href="https://morushroom.net/" target="_blank" class="wrap">
+        <img class="eye01" src="box_eye01.png">
+        <img class="eye02" src="box_eye02.png">
+    </a>
+    <script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
