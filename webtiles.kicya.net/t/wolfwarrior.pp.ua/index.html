@@ -3,7 +3,7 @@
 <head>
     <style>.tile-body {
   color: #111;
-  background-color: #f0f0f0;
+  background-color: #0f2dff;
   margin: 0;
 }
 
@@ -12,6 +12,24 @@ html, .tile-body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+
+.content {
+  animation: 4s linear infinite ratAtion;
+}
+
+@keyframes ratAtion {
+  0% {
+    rotate: none;
+  }
+
+  80% {
+    rotate: 359deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
 }
 
 #bg {
@@ -37,9 +55,16 @@ html, .tile-body {
   }
 }
 
+p {
+  text-align: right;
+  color: #fff;
+  z-index: 100;
+  padding: 80% 10px 10px;
+}
+
 .content {
-  z-index: 1;
-  position: relative;
+  z-index: -1;
+  position: absolute;
 }
 </style>
 </head>
@@ -49,6 +74,7 @@ html, .tile-body {
         	<img class="img" style="" src="rect2.jpg">
     	</div>
   	</div>
+    <p>wolfwarrior.pp.ua</p>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
