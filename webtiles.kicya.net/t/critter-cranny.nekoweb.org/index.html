@@ -1,49 +1,211 @@
 <!DOCTYPE html>
+
 <html>
   
 <head>
+    
+    
 
 
+    <style>.tile-body {
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-BG-DBrown-Quilt.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: cover;
+  cursor: none;
+  width: 100%;
+  height: 100%;
+}
 
-<style>h1, h2, h3, h4 {
-  letter-spacing: 6px;
-  color: #3f2e1c;
+* {
+  cursor: url("%5BAssets%5D/crusor.png") 16 16, auto !important;
+}
+
+:active {
+  cursor: url("%5BAssets%5D/cursorclicked.png") 16 16, auto !important;
+}
+
+a, button {
+  cursor: url("%5BAssets%5D/crusor.png") 16 16, auto !important;
+}
+
+a:active, button:active {
+  cursor: url("%5BAssets%5D/cursorclicked.png") 16 16, auto !important;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: 1px;
+  color: #4e3f31;
+  margin: 6px 0 10px;
+  font-family: SVBold;
+  font-size: 24px;
+}
+
+.tile-body, p {
+  letter-spacing: 1px;
+  color: #4e3f31;
   margin: 6px 0 10px;
   font-family: SVThin;
+  font-size: 24px;
 }
 
-h2 {
-  font-family: SVThin;
-  font-size: 20px;
-}
-
-h4 {
-  font-family: SVThin;
-  font-size: 12px;
+a:link, a:visited, a:hover, a:active {
+  color: #4e3f31;
 }
 
 @font-face {
   font-family: SVBold;
-  src: url("https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/[Assets]/Fonts/SVBold.ttf");
+  src: url("%5BAssets%5D/Fonts/SVBold.ttf");
 }
 
 @font-face {
   font-family: SVThin;
-  src: url("https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/[Assets]/Fonts/SVThin.ttf");
+  src: url("%5BAssets%5D/Fonts/SVThin.ttf");
 }
 
-.tile-body {
-  font-family: SVThin;
+#BackButton {
+  z-index: 99;
+  color: #4e3f31;
+  cursor: pointer;
+  background-color: #0000;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  padding: 15px;
+  font-size: 18px;
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 30px;
 }
 
-* {
-  box-sizing: border-box;
+#BackButton:hover {
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker-MEDIUM-FLIPPED.png");
 }
 
-html, .tile-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
+#BackButton {
+  color: #4e3f31;
+  text-align: center;
+  float: center;
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker-MEDIUM.png");
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 60px;
+  margin: auto;
+  padding: 10px 20px;
+  font-family: SVBold;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+}
+
+#myBtn {
+  z-index: 99;
+  color: #4e3f31;
+  cursor: pointer;
+  background-color: #0000;
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker-MEDIUM-FLIPPED.png");
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  width: 150px;
+  height: 60px;
+  padding: 15px;
+  font-family: SVBold;
+  font-size: 18px;
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+}
+
+#myBtn:hover {
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker-MEDIUM.png");
+}
+
+#myButton {
+  color: #d6b98c;
+  text-align: center;
+  float: center;
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker-MEDIUM.png");
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 60px;
+  margin: auto;
+  padding: 10px 20px;
+  font-family: SVBold;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+}
+
+#myButton:hover {
+  background-image: url("%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker-MEDIUM.png");
+}
+
+#music-player {
+  color: #3f2e1c;
+  z-index: 9999;
+  background: #d6b98c;
+  border-radius: 12px;
+  width: 220px;
+  padding: 10px;
+  font-family: SVBold;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 0 0 15px #00000080;
+}
+
+#player-header {
+  cursor: move;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#controls {
+  justify-content: space-between;
+  margin-bottom: 6px;
+  display: flex;
+}
+
+button {
+  color: #d6b98c;
+  cursor: pointer;
+  background: #222;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+button:hover {
+  background: #444;
+}
+
+#track-name {
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+#playlist {
+  max-height: 120px;
+  padding: 0;
+  font-size: 12px;
+  list-style: none;
+  overflow-y: auto;
+}
+
+#playlist li {
+  cursor: pointer;
+  padding: 4px;
+}
+
+#playlist li:hover {
+  background: #333;
 }
 
 @keyframes float {
@@ -81,7 +243,7 @@ html, .tile-body {
 
 .depth-near {
   z-index: 30;
-  animation-duration: 4s;
+  animation-duration: 2.8s;
 }
 
 .depth-mid {
@@ -92,119 +254,277 @@ html, .tile-body {
 .depth-far {
   z-index: 10;
   opacity: .9;
-  animation-duration: 4s;
-}
-
-.float-box h2, .float-box h4 {
-  background: #cbb28a99;
-  border: 2px ridge #8a6c56;
-  border-radius: 6px;
-  padding: 4px 8px;
-  display: inline-block;
-}
-
-.button-link {
-  color: #cbb28a99 text-decoration: none;
-  cursor: pointer;
-  text-align: center;
-  background-color: #3f2e1c;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  display: inline-block;
-}
-
-.button-link:hover {
-  background-color: #3f2e1c;
-}
-
-.profile-link {
-  color: #000;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  display: inline-flex;
-}
-
-.profile-link:hover {
-  text-decoration: underline;
-}
-
-.online {
-  font-weight: bold;
-}
-
-.tile-body {
-  background-image: url("https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/Critter-s-Cranny-BG-DBrown-Quilt.jpg");
-}
-
-footer {
-  text-align: center;
-  padding: 10px;
-  font-family: SVBold;
-  display: none;
-}
-
-html, .tile-body {
-  width: 100%;
-  height: 100%;
-  cursor: url("https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/crusor.png") 16 16, auto !important;
-}
-
-html *, .tile-body * {
-  cursor: url("https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/crusor.png") 16 16, auto !important;
-}
-
-html.cursor-clicked, html.cursor-clicked * {
-  cursor: url("https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/cursor2.png") 16 16, auto !important;
+  animation-duration: 6s;
 }
 
 html {
-  cursor: none;
+  scrollbar-width: auto;
+  scrollbar-color: #8a6c56 #cbb28a;
+}
+
+html::-webkit-scrollbar {
+  width: 14px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #cbb28a;
+  border-left: 2px solid #6f563a;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #8a6c56;
+  border: 2px solid #3f2e1c;
+  border-radius: 8px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #72533a;
+}
+
+.float-box::-webkit-scrollbar {
+  width: 14px;
+}
+
+.float-box::-webkit-scrollbar-track {
+  background: #cbb28a;
+  border-left: 2px solid #6f563a;
+}
+
+.float-box::-webkit-scrollbar-thumb {
+  background: #8a6c56;
+  border: 2px solid #3f2e1c;
+  border-radius: 8px;
+}
+
+.float-box::-webkit-scrollbar-thumb:hover {
+  background: #72533a;
+}
+
+.float-box {
+  scrollbar-width: auto;
+  scrollbar-color: #8a6c56 #cbb28a;
+}
+
+.container {
+  grid-template-rows: auto;
+  grid-template-columns: repeat(3, 3fr);
+  gap: 5px;
+  padding-top: 10px;
+  display: grid;
 }
 
 .box-1 {
-  width: 1000px;
-  height: 830px;
+  width: 1650px;
+  height: 850px;
   top: 17px;
-  left: 500px;
+  left: 100px;
 }
 
 .box-2 {
-  width: 350px;
-  height: 170px;
-  top: 17px;
-  left: 1398px;
+  width: 650px;
+  height: 120px;
+  top: 420px;
+  left: 600px;
 }
 
 .box-3 {
-  width: 270px;
-  top: 206px;
-  left: 15px;
-  transform: translateX(-50%);
+  width: 1750px;
+  height: 1300px;
+  top: 590px;
+  left: 60px;
 }
 </style>
+
 </head>
 
 
+  <button id="BackButton" title="Go back">[Back]</button>
 
 
-  
+
+
  <u> [ W E L C O M E  ! ] </u> 
 <br>
-<img src="Critter's_Cranny_SalmonPlush1_Sticker.png" height="300" alt="Critter-s-Cranny-Wilf-F-Sticker.png" loading="lazy">
-<br>
+ <img src="%5BAssets%5D/PNG-JPEGs/emotes%20&%20tinies/caution.gif" height="20" alt="caution" loading="lazy"> <i><b><u> [under heavy construction] </u> <img src="%5BAssets%5D/PNG-JPEGs/emotes%20&%20tinies/caution.gif" height="20" alt="caution" loading="lazy">
 
-<br>
-<a href="https://critter-cranny.nekoweb.org/" class="button-link" style="color: rgba(203, 178, 138, 0.6);" target="_blank">[Go to site]</a>
-<br>
-<br>
-<img src="fishingrod%201.gif" height="30" alt="fishing rod" loading="lazy">
-<p> woof ! welcome to my cozy corner of the indie web ! tysm for visiting :3 </p>
-<p> my name is zeb, and you can learn more abt me on my "<i><b><u> <a href="https://critter-cranny.nekoweb.org/Webmaster.html" style="color: #3f2e1c;" target="_blank">web-master</a> </u></b></i>" page </p>
-<p> feel free to sign my  "<i><b><u> <a href="https://critter-cranny.nekoweb.org/Guest-Book.html" style="color: #3f2e1c;" target="_blank">guest-book</a> </u></b></i>" page ! </p>
+<img src="%5BAssets%5D/PNG-JPEGs/graphics/Critter-s-Cranny-Salmon-Plush1-Sticker.png" height="300" alt="Critter-s-Cranny-Wilf-F-Sticker.png" loading="lazy">
 
 
+<h2> <a href="https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/Interior.html" class="button-link" style="color: #3f2e1c;">[Go to site]</a> </h2>
+ <img src="%5BAssets%5D/PNG-JPEGs/emotes%20&%20tinies/fishingrod%201.gif" height="20" alt="fishing rod" loading="lazy">
+<hr>
+<p> <i><b><u>Note; </u></b></i> </p>
+<p>
+</p><p> ✦ clear your cache (Command + Shift + R), to see updates ! </p>
+<p> 〃 not compatible for mobile  ! </p>
+<hr>
+<p> ✦ site last updated: 5.9.2026 // created by zeb c. </p>
+<hr>
+<p> ✦ woof ! welcome to my cozy corner of the indie web ! tysm for visiting :3 </p>
+<p> ✦ my name is zeb, and you can learn more abt me on my "<i><b><u> <a href="https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/Webmaster.html" style="color: #3f2e1c;">web-master</a> </u></b></i>" page </p>
+<p> ✦ feel free to sign my  "<i><b><u> <a href="https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/Guest-Book.html" style="color: #3f2e1c;">guest-book</a> </u></b></i>" page ! </p>
+<p> ✦ use the  "<i><b><u> <a href="https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/Link-Tree.html" style="color: #3f2e1c;">link-tree</a> </u></b></i>" page to find my other platforms </p>
+<p> ✦ click  <i><b><u> <a href="https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/SiteMap.html" style="color: #3f2e1c;">here</a> </u></b></i> to see the Site-Map </p>
+<p> ✦ pls read my  <i><b><u> <a href="https://webtiles.kicya.net/t/critter-cranny.nekoweb.org/Site info.html" style="color: #3f2e1c;">D.N.I & C.W.</a> </u></b></i> before viewing my site ! </p>
+<hr>
+
+<hr>
+<p> <i> link back to my website:</i>  </p><p>
+              <a href="https://critter-cranny.nekoweb.org/" target="_blank"><img src="%5BAssets%5D/site%20button%20animated.gif"></a> 
+<br>
+</p><p>(save image & copy website link)</p>
+
+
+</b></i>
+
+
+ 
+
+
+<button id="myBtn" title="Go to top">[top]</button>
+
+
+<div id="music-player">
+  <div id="player-header">[Zeb's Walkman]</div>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <div id="controls">
+    <button id="prev">↺</button>
+    <button id="play">➤</button>
+    <button id="next">↻</button>
+  </div>
+
+  <div id="track-name">No track</div>
+
+  <ul id="playlist"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/tilescript">
+     window.addEventListener("mousedown", () => {
+  document.documentElement.classList.add("cursor-clicked");
+});
+
+window.addEventListener("mouseup", () => {
+  document.documentElement.classList.remove("cursor-clicked");
+});
+
+
+
+
+
+const tracks = [
+  { name: "Rory - Foxing", src: "./[Assets]/MP4/MUSIC/foxing/Rory.mp3" },
+];
+
+let current = 0;
+
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('play');
+const trackName = document.getElementById('track-name');
+const playlistEl = document.getElementById('playlist');
+
+function loadTrack(i) {
+  current = i;
+  audio.src = tracks[i].src;
+  trackName.textContent = tracks[i].name;
+}
+
+function playPause() {
+  if (audio.paused) {
+    audio.play();
+    playBtn.textContent = "⏸";
+  } else {
+    audio.pause();
+    playBtn.textContent = "▶️";
+  }
+}
+
+document.getElementById('play').onclick = playPause;
+
+document.getElementById('next').onclick = () => {
+  loadTrack((current + 1) % tracks.length);
+  audio.play();
+};
+
+document.getElementById('prev').onclick = () => {
+  loadTrack((current - 1 + tracks.length) % tracks.length);
+  audio.play();
+};
+
+tracks.forEach((t, i) => {
+  const li = document.createElement('li');
+  li.textContent = t.name;
+  li.onclick = () => {
+    loadTrack(i);
+    audio.play();
+  };
+  playlistEl.appendChild(li);
+});
+
+loadTrack(0);
+
+/* DRAGGING */
+const player = document.getElementById("music-player");
+const header = document.getElementById("player-header");
+
+let offsetX = 0, offsetY = 0, isDown = false;
+
+header.addEventListener("mousedown", (e) => {
+  isDown = true;
+  offsetX = player.offsetLeft - e.clientX;
+  offsetY = player.offsetTop - e.clientY;
+});
+
+document.addEventListener("mouseup", () => isDown = false);
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  player.style.left = (e.clientX + offsetX) + "px";
+  player.style.top = (e.clientY + offsetY) + "px";
+  player.style.right = "auto";
+  player.style.bottom = "auto";
+});
+
+
+
+
+
+// Get the button
+let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+
+
+</script>
 
 
 </html>
