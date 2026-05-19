@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    
+
+    <style>.tile-body {
+  background: #d8d2c3;
+  padding: 20px;
+  font-family: Tahoma, sans-serif;
+}
+
+.webtile {
+  width: 320px;
+  height: 220px;
+  image-rendering: pixelated;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-window {
+  background: #d4d0c8;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+  width: 215px;
+  height: 150px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  box-shadow: inset -1px -1px gray, inset 1px 1px #dfdfdf;
+}
+
+.small-window {
+  z-index: 5;
+  background: #d4d0c8;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+  width: 110px;
+  height: 90px;
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  box-shadow: inset -1px -1px gray, inset 1px 1px #dfdfdf;
+}
+
+.titlebar {
+  color: #fff;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #2424b8, #6a63ff);
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+}
+
+.controls {
+  gap: 2px;
+  display: flex;
+}
+
+.btn {
+  box-sizing: border-box;
+  background: #d4d0c8;
+  border: 1px solid #000;
+  border-color: #fff #000 #000 #fff;
+  width: 13px;
+  height: 13px;
+  position: relative;
+}
+
+.close:before {
+  content: "×";
+  color: #000;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+
+.preview {
+  object-fit: cover;
+  border: 2px solid #8fb1ff;
+  width: calc(100% - 12px);
+  height: calc(100% - 32px);
+  margin: 6px;
+  display: block;
+}
+
+.planet {
+  object-fit: contain;
+  width: calc(100% - 10px);
+  height: calc(100% - 30px);
+  margin: 5px;
+  display: block;
+}
+
+.webtile:hover .small-window {
+  transition: all .15s;
+  transform: translateY(-4px);
+}
+
+.webtile:hover .main-window {
+  transition: all .15s;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+<div class="webtile">
+
+    
+    <div class="main-window">
+
+        <div class="titlebar">
+            <span>ulon.nekoweb.org [+]</span>
+
+            <div class="controls">
+                <div class="btn"></div>
+                <div class="btn close"></div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+    
+    <div class="small-window">
+
+        <div class="titlebar smallbar">
+            <span>Ulon's Website</span>
+
+            <div class="btn close"></div>
+        </div>
+
+        
+
+    </div>
+
+</div>
+
+</body>
+</html>
