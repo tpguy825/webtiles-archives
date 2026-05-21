@@ -1,4 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
 
-i quit webtiles is tweaking out and saying my image doesn't exist when it does😭😭
-&nbsp;<br>
-<small>i'll try again some other time</small>
+<head>
+    
+    
+    
+    <style>::-webkit-scrollbar {
+  background: none;
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: silver;
+}
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.tile-body {
+  text-align: center;
+  margin: 0;
+  font-family: Radio Canada, sans-serif;
+}
+
+h1, h2 {
+  font-family: Yusei Magic, sans-serif;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  width: 60%;
+  margin: 10px auto 0;
+}
+
+a {
+  color: #6b4e6b;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a[aria-disabled="true"] {
+  color: #aaa;
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: .6;
+  text-decoration: none;
+}
+
+.links {
+  margin-top: 15px;
+}
+
+.links a {
+  margin: 0 15px;
+  font-size: 18px;
+  display: inline-block;
+}
+
+.container {
+  justify-content: center;
+  margin-top: 40px;
+  display: flex;
+}
+
+.section.main {
+  text-align: left;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  max-width: 900px;
+  padding: 20px;
+  display: flex;
+  position: relative;
+}
+
+.jvc-arrow {
+  vertical-align: middle;
+  opacity: .7;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+
+.text {
+  max-width: 400px;
+}
+
+figure {
+  text-align: left;
+  margin: 0;
+}
+
+figure img {
+  width: 300px;
+  height: auto;
+}
+
+figcaption {
+  color: #555;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.text-change-container {
+  display: inline-block;
+  position: relative;
+}
+
+.text-change-container img {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: -28px;
+}
+
+.text-wrapper {
+  font-size: 0;
+  display: inline-block;
+}
+
+.colored {
+  font-size: 16px;
+  transition: color .4s, transform .2s;
+  display: inline-block;
+}
+
+.colored.animated {
+  transform: scale(1.2);
+}
+
+.marquee-text {
+  animation: 10s linear infinite marquee;
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+</style>
+    <style>.misc-dropdown {
+  opacity: 0;
+  background: none;
+  width: 100%;
+  max-height: 0;
+  transition: max-height .35s, opacity .25s;
+  display: none;
+  overflow: hidden;
+}
+
+.misc-dropdown.open {
+  opacity: 1;
+  display: block;
+}
+
+.misc-dropdown-inner {
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px 20px 16px;
+  display: flex;
+}
+
+.misc-links {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  display: flex;
+}
+
+.misc-links a {
+  padding: 4px 0;
+  font-family: Radio Canada, sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.misc-links a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  margin-bottom: 0;
+}
+</style>
+    
+    
+    
+</head>
+
+<body>
+    <header>
+        <h1>welcome to <b><i>squirrelz.xyz</i></b> !</h1>
+    </header>
+
+    <div class="links">
+        <a href="https://squirrelz.xyz/" target="_blank">home</a>
+        <a href="https://squirrelz.xyz/about" target="_blank">about me</a>
+        <a href="https://squirrelz.xyz/blog/" target="_blank">blog</a>
+        <a href="https://squirrelz.xyz/guestbook" target="_blank">guestbook</a>
+        <a href="" id="miscTrigger">misc</a>
+    </div>
+
+    <hr>
+
+    <div class="misc-dropdown" id="miscDropdown">
+        <div class="misc-dropdown-inner">
+            <div class="misc-links">
+                <a href="https://squirrelz.xyz/" target="_blank">go to my actual site to see more shit.....</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/tilescript">document.addEventListener("includesLoaded", () => {
+    const trigger = document.getElementById("miscTrigger");
+    const dropdown = document.getElementById("miscDropdown");
+
+    if (!trigger || !dropdown) return;
+
+    let isOpen = false;
+
+    const open = () => {
+        dropdown.style.display = "block";
+
+        requestAnimationFrame(() => {
+            dropdown.classList.add("open");
+            dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+            dropdown.style.opacity = "1";
+        });
+
+        isOpen = true;
+    };
+
+    const close = () => {
+        dropdown.style.maxHeight = "0";
+        dropdown.style.opacity = "0";
+        dropdown.classList.remove("open");
+
+        dropdown.addEventListener(
+            "transitionend",
+            () => {
+                if (!isOpen) dropdown.style.display = "none";
+            },
+            { once: true }
+        );
+
+        isOpen = false;
+    };
+
+    trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        isOpen ? close() : open();
+    });
+
+    document.addEventListener("click", (e) => {
+        if (
+            isOpen &&
+            !trigger.contains(e.target) &&
+            !dropdown.contains(e.target)
+        ) {
+            close();
+        }
+    });
+
+    dropdown.style.display = "none";
+    dropdown.style.maxHeight = "0";
+    dropdown.style.opacity = "0";
+});</script>
+</body>
+  </html>
