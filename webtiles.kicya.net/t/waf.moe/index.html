@@ -349,7 +349,7 @@ button:where([data-user-info], [data-post-info]) {
                     <option value="wafrn">WAFRN account</option>
                     <option value="bluesky">Bluesky/ATProto account (WIP)</option>
                 </select>
-                <input type="text" id="instance" placeholder="Instance" value="waf.moe" autocomplete="off">
+                <input type="text" id="instance" placeholder="Instance" value="app.wafrn.net" autocomplete="off">
                 <input type="text" id="username" placeholder="Email" autocomplete="off">
                 <input type="password" id="password" placeholder="Password" autocomplete="off">
                 <p id="additionalInfo">
@@ -399,7 +399,7 @@ button:where([data-user-info], [data-post-info]) {
                 <option value="25">Create new woot</option>
             </select>
             <select id="userLevel">
-                <option value="1" selected class="userName">jb (waf.moe)</option>
+                <option value="1" selected class="userName">jb (tokyonight.city)</option>
                 <option value="5">Notifications</option>
                 <option value="2">Log out</option>
                 <option value="3">About</option>
@@ -429,7 +429,7 @@ button:where([data-user-info], [data-post-info]) {
                 <option value="25" selected>Create new woot</option>
             </select>
             <select id="userLevel">
-                <option value="1" selected class="userName">jb (waf.moe)</option>
+                <option value="1" selected class="userName">jb (tokyonight.city)</option>
                 <option value="5">Notifications</option>
                 <option value="2">Log out</option>
                 <option value="3">About</option>
@@ -474,7 +474,7 @@ button:where([data-user-info], [data-post-info]) {
                 &lt; Back
             </p>
             <select id="userLevel">
-                <option value="1" selected class="userName">jb (waf.moe)</option>
+                <option value="1" selected class="userName">jb (tokyonight.city)</option>
                 <option value="5">Notifications</option>
                 <option value="2">Log out</option>
                 <option value="3">About</option>
@@ -494,7 +494,7 @@ var loadingMessage = document.getElementById('loadingMessage')
 loadingMessage.textContent = 'Initalizing...'
 var userNames = document.querySelectorAll('.userName')
 var userNotifs = document.querySelectorAll('.userNotif')
-var userName = '@jb@waf.moe'
+var userName = '@jb@tokyonight.city'
 var userLevels = document.querySelectorAll('#userLevel')
 var sessionData = JSON.parse(localStorage.getItem('wafTilesSession') || '{}')
 var dashboardCurrentPage
@@ -522,7 +522,7 @@ function init() {
         if (!sessionData.loginData) {
             console.log(sessionData)
             if (!sessionData.instance) {
-                sessionData.instance = 'waf.moe'
+                sessionData.instance = 'app.wafrn.net'
                 fetchXhr(getApiUrl(sessionData.instance) + '/environment', 'GET', function (e, r) {
                     sessionData.instanceEnv = r
                     saveSessionData()
@@ -531,7 +531,7 @@ function init() {
             showDashboardLoggedOut()
         } else {
             if (!sessionData.instance) {
-                sessionData.instance = 'waf.moe'
+                sessionData.instance = 'app.wafrn.net'
             }
             showDashboard()
             setInterval(function () {
@@ -583,7 +583,7 @@ function showDashboardLoggedOut() {
         e.remove()
         p.textContent = ''
         var wafTilesThing = document.createElement('p')
-        wafTilesThing.textContent = 'WafTiles - waf.moe'
+        wafTilesThing.textContent = 'WafTiles - app.wafrn.net'
         p.appendChild(wafTilesThing)
         var loginBtn = document.createElement('p')
         loginBtn.textContent = 'Login'
@@ -602,7 +602,7 @@ function showLoginForm() {
     accountType.addEventListener('input', function (f) {
         switch (accountType.value) {
             case 'wafrn': {
-                document.getElementById('instance').value = "waf.moe"
+                document.getElementById('instance').value = "app.wafrn.net"
                 document.getElementById('instance').placeholder = "Instance"
                 document.getElementById('username').placeholder = "Email"
                 document.getElementById('password').placeholder = "Password"
