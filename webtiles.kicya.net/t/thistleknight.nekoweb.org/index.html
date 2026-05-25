@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>.tile-body {
+    <style>* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: CharpentierRenRedNormal;
+  src: url("CharpentierRenRedNormal.ttf");
+}
+
+.tile-body {
   color: #fff;
   text-align: center;
-  background-color: #10102a;
+  background-image: url("backgroundimage.jpg");
+  background-size: 100%;
   align-content: center;
   margin: 0;
   font-size: 2em;
 }
+
+img {
+  height: 80%;
+}
+
+p {
+  width: 90%;
+  margin: auto;
+  font-family: CharpentierRenRedNormal;
+  font-size: 16px;
+  line-height: 16px;
+  position: relative;
+  top: -5px;
+}
 </style>
 </head>
 <body>
-    <p><strong>WIP TILE!!!!</strong>
-    <br>visit my site to see a fun medieval-ish website!</p>
+	<img src="keyholecastle.png">
+    <p>
+        > you look through a keyhole<br>and see a castle...
+    </p>
     <script type="text/tilescript">// Only executes while your tile is active
 // Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
 console.log("Hello world!");</script>
