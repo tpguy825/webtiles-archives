@@ -21,11 +21,8 @@ html, .tile-body {
   overflow: hidden;
 }
 
-button, input {
-  font: inherit;
-}
-
 button {
+  font: inherit;
   cursor: pointer;
   border: 0;
 }
@@ -41,6 +38,7 @@ button {
 
 .cover {
   object-fit: cover;
+  z-index: 0;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -48,12 +46,14 @@ button {
 }
 
 .shade {
-  background: linear-gradient(#0000001a, #00000047 42%, #000000e0);
+  z-index: 1;
+  background: linear-gradient(#0000001f, #00000057 42%, #000000e6);
   position: absolute;
   inset: 0;
 }
 
 .open {
+  z-index: 3;
   color: #f5f1e8;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -68,57 +68,8 @@ button {
   right: 10px;
 }
 
-.play {
-  color: #050505;
-  background: #f5f1e8eb;
-  border: 1px solid #f5f1e8db;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  font-size: 18px;
-  line-height: 1;
-  display: grid;
-  position: absolute;
-  top: 47%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.tile.is-playing .play, .play:hover {
-  background: #fc0;
-  border-color: #fc0;
-}
-
-.nav {
-  color: #f5f1e8;
-  background: #0a0a0a8c;
-  border: 1px solid #f5f1e88c;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  font-size: 12px;
-  line-height: 1;
-  display: grid;
-  position: absolute;
-  top: 47%;
-  transform: translateY(-50%);
-}
-
-.nav:hover {
-  color: #050505;
-  background: #fc0;
-  border-color: #fc0;
-}
-
-.prev {
-  left: 67px;
-}
-
-.next {
-  right: 67px;
-}
-
 .info {
+  z-index: 3;
   gap: 8px;
   display: grid;
   position: absolute;
@@ -146,161 +97,197 @@ button {
   overflow: hidden;
 }
 
-.controls {
-  grid-template-columns: auto 1fr;
+.nav-row {
+  grid-template-columns: 28px 1fr 28px;
   align-items: center;
   gap: 8px;
   display: grid;
 }
 
+.nav {
+  color: #f5f1e8;
+  background: #0a0a0a8c;
+  border: 1px solid #f5f1e88c;
+  place-items: center;
+  height: 24px;
+  font-size: 11px;
+  line-height: 1;
+  display: grid;
+}
+
+.nav:hover {
+  color: #050505;
+  background: #fc0;
+  border-color: #fc0;
+}
+
 .status {
   color: #fc0;
   letter-spacing: .14em;
+  text-align: center;
   text-transform: uppercase;
   font-size: 8px;
   line-height: 1;
 }
 
-.volume {
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  background: none;
-  width: 100%;
-  height: 18px;
+audio {
+  z-index: 4;
+  accent-color: #fc0;
+  opacity: .01;
+  width: 34px;
+  height: 24px;
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 12px;
 }
 
-.volume::-webkit-slider-runnable-track {
+.custom-player {
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: 8px;
+  display: grid;
+}
+
+.main-play {
+  color: #050505;
+  background: #f5f1e8eb;
+  border: 1px solid #f5f1e8db;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 1;
+  display: grid;
+}
+
+.main-play:hover, .main-play.is-on {
+  background: #fc0;
+  border-color: #fc0;
+}
+
+.fake-bar {
   background: #f5f1e84d;
   height: 2px;
+  overflow: hidden;
 }
 
-.volume::-webkit-slider-thumb {
-  -webkit-appearance: none;
+.fake-fill {
   background: #fc0;
-  width: 7px;
-  height: 13px;
-  margin-top: -5.5px;
+  width: 0%;
+  height: 100%;
 }
 </style>
 
-<div class="tile" id="tile">
-  <img class="cover" id="cover" src="https://webtiles.kicya.net/t/0entropy.top/assets/cp-cover.jpg" alt>
+<div class="tile">
+  <img class="cover" id="cover" src="cp-cover.jpg" alt>
   <div class="shade"></div>
-  <audio id="audio" preload="metadata"></audio>
   <a class="open" href="https://0entropy.top/" target="_blank">site</a>
-  <button class="nav prev" id="prev" type="button" aria-label="Previous track">&#9664;</button>
-  <button class="play" id="play" type="button" aria-label="Play">&#9654;</button>
-  <button class="nav next" id="next" type="button" aria-label="Next track">&#9654;</button>
+
   <div class="info">
     <div class="artist">Daniel Khakimov</div>
     <div class="title" id="title">Connecting People</div>
-    <div class="controls">
-      <div class="status" id="status">ready</div>
-      <input class="volume" id="volume" type="range" min="0" max="100" value="70" aria-label="Volume" autocomplete="off">
+    <audio id="audio" controls preload="metadata" src="connecting-people.mp3"></audio>
+    <div class="custom-player">
+      <button class="main-play" id="play" type="button" aria-label="Play">&#9654;</button>
+      <div class="fake-bar"><div class="fake-fill" id="fill"></div></div>
+    </div>
+    <div class="nav-row">
+      <button class="nav" id="prev" type="button" aria-label="Previous track">&#9664;</button>
+      <div class="status" id="status">01 / 03</div>
+      <button class="nav" id="next" type="button" aria-label="Next track">&#9654;</button>
     </div>
   </div>
 </div>
 
-<script type="text/tilescript">window.TILE_TRACKS = [
-  {
-    title: "Connecting People",
-    file: "assets/1.ogg",
-    cover: "assets/1.jpg"
-  },
-  {
-    title: "Dissolve",
-    file: "assets/dissolve.mp3",
-    cover: "assets/dissolve.png"
-  },
-  {
-    title: "Stairs",
-    file: "assets/stairs.mp3",
-    cover: "assets/stairs.jpg"
-  }
-];
-</script>
 <script type="text/tilescript">
-var tile=document.getElementById("tile");
+var tracks=[
+  {title:"Connecting People",file:"connecting-people.mp3",cover:"cp-cover.jpg"},
+  {title:"Dissolve",file:"dissolve.mp3",cover:"dissolve.png"},
+  {title:"Stairs",file:"stairs.mp3",cover:"stairs.jpg"}
+];
+var current=0;
 var audio=document.getElementById("audio");
 var cover=document.getElementById("cover");
 var title=document.getElementById("title");
-var play=document.getElementById("play");
+var statusEl=document.getElementById("status");
 var prev=document.getElementById("prev");
 var next=document.getElementById("next");
-var statusEl=document.getElementById("status");
-var volume=document.getElementById("volume");
-var tracks=window.TILE_TRACKS||[
-  {title:"Connecting People",file:"assets/connecting-people.mp3",cover:"assets/cp-cover.jpg"}
-];
-var current=0;
-var loaded=false;
+var play=document.getElementById("play");
+var fill=document.getElementById("fill");
+var isPlaying=false;
+var progressTimer=null;
 
-function currentTrack(){
-  return tracks[current]||tracks[0];
+function pad(n){return n<10?"0"+n:String(n)}
+
+function updateProgress(){
+  if(!audio.duration)return;
+  fill.style.width=(audio.currentTime/audio.duration*100)+"%";
 }
 
-function setTrack(index,autoplay){
-  current=(index+tracks.length)%tracks.length;
-  var track=currentTrack();
-  audio.pause();
-  audio.removeAttribute("src");
-  audio.load();
-  loaded=false;
-  cover.src=track.cover;
-  title.textContent=track.title;
-  stopUi("ready");
-  if(autoplay)playCurrent();
+function startProgress(){
+  if(progressTimer)return;
+  progressTimer=setInterval(updateProgress,250);
 }
 
-function loadAudio(){
-  if(loaded)return;
-  audio.src=currentTrack().file;
-  audio.volume=Number(volume.value)/100;
-  audio.load();
-  loaded=true;
+function stopProgress(){
+  if(!progressTimer)return;
+  clearInterval(progressTimer);
+  progressTimer=null;
 }
 
-function stopUi(text){
-  tile.classList.remove("is-playing");
-  play.innerHTML="&#9654;";
-  statusEl.textContent=text;
-}
-
-function playCurrent(){
-  if(audio.paused){
-    loadAudio();
-    statusEl.textContent="load";
-    audio.play().then(function(){
-      tile.classList.add("is-playing");
-      play.innerHTML="&#9632;";
-      statusEl.textContent="play";
-    }).catch(function(){
-      stopUi("n/a");
-    });
+function setPlayUi(on){
+  isPlaying=on;
+  play.innerHTML=on?"&#9632;":"&#9654;";
+  if(on){
+    play.classList.add("is-on");
+    startProgress();
   }else{
-    audio.pause();
-    stopUi("pause");
+    play.classList.remove("is-on");
+    stopProgress();
   }
 }
 
-play.addEventListener("click",playCurrent);
+function setTrack(index){
+  var resume=isPlaying;
+  current=(index+tracks.length)%tracks.length;
+  var track=tracks[current];
+  audio.pause();
+  audio.src=track.file;
+  audio.load();
+  cover.src=track.cover;
+  title.textContent=track.title;
+  statusEl.textContent=pad(current+1)+" / "+pad(tracks.length);
+  setPlayUi(false);
+  fill.style.width="0%";
+  if(resume){
+    audio.play();
+    setPlayUi(true);
+  }
+}
 
-prev.addEventListener("click",function(){
-  setTrack(current-1,true);
+play.addEventListener("click",function(){
+  if(!isPlaying){
+    audio.play();
+    setPlayUi(true);
+  }else{
+    audio.pause();
+    setPlayUi(false);
+  }
 });
-
-next.addEventListener("click",function(){
-  setTrack(current+1,true);
+prev.addEventListener("click",function(){setTrack(current-1)});
+next.addEventListener("click",function(){setTrack(current+1)});
+audio.addEventListener("ended",function(){setTrack(current+1)});
+audio.addEventListener("loadedmetadata",updateProgress);
+audio.addEventListener("timeupdate",function(){
+  updateProgress();
 });
-
-volume.addEventListener("input",function(){
-  audio.volume=Number(volume.value)/100;
+audio.addEventListener("pause",function(){
+  setPlayUi(false);
 });
-
-audio.addEventListener("ended",function(){setTrack(current+1,true)});
-audio.addEventListener("error",function(){stopUi("n/a")});
-setTrack(0,false);
+audio.addEventListener("play",function(){
+  setPlayUi(true);
+});
 </script>
 </body>
 </html>
