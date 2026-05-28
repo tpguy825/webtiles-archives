@@ -54,22 +54,25 @@
   padding-right: 8px;
 }
 
-.header-icon {
+.header-icon-btn {
   cursor: pointer;
   opacity: .8;
-  background-image: url("https://webtiles.kicya.net/t/floof192.nekoweb.org/webtiles.kicya.net/t/floof192.nekoweb.org/littlex.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 14px;
-  height: 14px;
+  justify-content: center;
+  align-items: center;
   margin-right: -2px;
+  text-decoration: none;
   transition: opacity .2s;
-  display: block;
+  display: flex;
 }
 
-.header-icon:hover {
+.header-icon-btn:hover {
   opacity: 1;
+}
+
+.header-x-img {
+  width: 25px;
+  height: 25px;
+  display: block;
 }
 
 .tile-body {
@@ -107,25 +110,34 @@
 </style>
   </head>
   <body>
-      <div class="tile-bg">
-    <div class="tile-card">
-      <div class="tile-header">
-  <span class="header-title">★ Dreamsicle Tile ★</span>
-  
-  <a href="https://floof192.nekoweb.org/" class="header-icon" title="Close / Home" target="_blank">
-    </a>
-</div>
+    <div class="tile-bg">
+      <div class="tile-card">
+        <div class="tile-header">
+          <span class="header-title">★ Dreamsicle Tile ★</span>
 
-      <div class="tile-body">
-        <div class="bio-box">
-          <p>
-            <strong>Hello visitor!</strong> Welcome to my little corner of the
-            WebTiles grid.
-          </p>
-          <p>Tile claimed 5/27/2026</p>
+          <a href="https://floof192.nekoweb.org/" class="header-icon-btn" title="Close / Home" target="_blank">
+            <img               src="https://webtiles.kicya.net/t/floof192.nekoweb.org/littlex.png"
+              alt="Close"
+              class="header-x-img"
+            >
+          </a>
+        </div>
+
+        <div class="tile-body">
+          <div class="bio-box">
+            <p>
+              <strong>Hello visitor!</strong> Welcome to my little corner of the
+              WebTiles grid.
+            </p>
+
+            <img               src="images/popcat.gif"
+              alt="cat"
+            >
+
+            <p>Tile claimed 5/27/2026</p>
+          </div>
         </div>
       </div>
     </div>
-      </div>
   </body>
 </html>
