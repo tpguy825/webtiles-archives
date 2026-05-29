@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>@font-face {
+  font-family: Willow;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local(willow), local(willow), url("fonts/willow-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Gothic Pixels;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local(GothicPixels), local(GothicPixels), url("fonts/GothicPixels-500.woff2") format("woff2");
+}
+
+.tile-body {
+  color: #77604a;
+  background: url("images/bg.png") 0 0 / 150px;
+  font-family: Willow;
+}
+
+#pixel {
+  width: 100px;
+  image-rendering: pixelated;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#title {
+  text-align: center;
+  text-transform: capitalize;
+  margin: 5px 0 3px;
+  font-family: Gothic Pixels;
+  font-size: 26px;
+}
+
+#title a {
+  color: #fff;
+}
+
+a {
+  color: #77604a;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline wavy;
+}
+
+#links {
+  border: 14px solid #0000;
+  border-image: url("images/lace_peach.png") 14 fill round;
+  width: 80%;
+  margin: 0 auto;
+  padding: 6px;
+  animation: none;
+}
+
+#links li {
+  margin-left: -28px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 8px;
+  list-style-type: ">";
+}
+
+* {
+  margin: 0;
+}
+</style>
+    <style>
+</style>
+</head>
+<body>
+<img src="images/bunny-pixel-transp.png" id="pixel">
+    
+<div id="title">
+	<a href="https://veronika.skin/" target="_blank">veronika.skin</a>
+</div>
+    
+<div id="links">
+	<ul>
+		<li><a href="https://blog.veronika.skin/" target="_blank">Blog</a></li>
+		<li><a href="https://guestbook.veronika.skin/" target="_blank">Guestbook</a></li>
+		<li><a href="https://pin.it/H170QUCgc" target="_blank">Pinterest</a></li>
+	</ul>
+</div>
+
+<script type="text/tilescript">// Only executes while your tile is active
+// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
+console.log("Hello world!");</script>
+</body>
+</html>
