@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-body {
+  color: #523f39;
+  background-color: #f7d7e2;
+  background-image: repeating-linear-gradient(#0000, #0000 25px, #fff3 25px 50px), repeating-linear-gradient(90deg, #0000, #0000 25px, #fff6 25px 50px);
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.container {
+  background-color: #f7edf1;
+  border: 1px solid #eda4bc;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+h2 {
+  border-bottom: 1px dashed #523f39;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+h2:not(:first-child) {
+  margin-top: 15px;
+}
+
+p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #bd4d4d;
+}
+
+.flex {
+  column-gap: 10px;
+  display: flex;
+}
+
+#pfp {
+  outline-offset: -3px;
+  float: right;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  outline: 1px solid #fff;
+  width: 90px;
+  height: 90px;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="flex">
+            <div>
+                <h2>Welcome</h2>
+                <p>to my webtile.</p>
+            </div>
+            <img id="pfp" src="pfp.webp">
+        </div>
+    </div>
+</body>
+</html>
