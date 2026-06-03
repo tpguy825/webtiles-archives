@@ -9,9 +9,66 @@
 </style>
 </head>
 <body>
-    <p>gotta work on this soon</p>
-    <script type="text/tilescript">// Only executes while your tile is active
-// Only ES5 is supported, limited subset of APIs - DOM, localStorage, XMLHttpRequest, Canvas.
-console.log("Hello world!");</script>
+    <p>some sort of windows media player visualiser wip</p>
+    <canvas id="cv" width="250" height="250"></canvas>
+    <script type="text/tilescript">var cv = document.getElementById("cv");
+var c  = cv.getContext('2d');
+var w = cv.width
+var h = cv.height
+
+var dot = new Array(w * h);
+
+for (var i = 0; i<dot.length; i++) {
+    dot[i] = 0    
+}
+
+
+// 1 = exist, 2 = exist and changed
+dot[0] = 2
+
+var debugColors = true;
+function loop() {
+    c.textBaseline = 'top'
+    c.fillText("is this working?",0,0)
+   c.clearRect(0,0,w,h)
+    
+    // update
+	for (var i = 0; i<dot.length; i++) {
+        if (Math.random() > 0.05) break;
+        if (dot[i] == 2) {
+            dot[i] = 2
+        } else if (dot[i] == 1) {
+            dot[i] = 0
+        }
+        
+        dot[i + w + 1] = 2
+    };
+    if (dot.length > w*h) {
+        var excessiveItems = dot.length - w*h
+        for (var i = 0; i < excessiveItems; i ++) {
+            dot.pop()
+        }
+    }
+
+    //  draw
+    for (var i = 0; i<dot.length; i++) {
+        //console.log(i)
+        if(dot[i] > 0) {
+            c.fillStyle = "#000";
+            if (debugColors) {
+                if (dot[i] == 2)
+                	c.fillStyle = "#555";
+            }
+            
+            var x = Math.floor(dot[i] % w);
+            var y = Math.floor(dot[i] / w)
+            c.fillRect(x,y, 1,1)
+        }
+    };
+    
+    loop()
+}
+
+loop()</script>
 </body>
 </html>
