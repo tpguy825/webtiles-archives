@@ -16,15 +16,29 @@ var c  = cv.getContext('2d');
 var w = cv.width
 var h = cv.height
 
-var dot = new Array(w * h);
+var size = 10
+var scrW = w / size;
+var scrH = h / size;
+var gird = new Array((scrW * scrH));
+var dot = new Array((scrW * scrH));
 
 for (var i = 0; i<dot.length; i++) {
     dot[i] = 0    
 }
 
+var errorText = '';
 
 // 1 = exist, 2 = exist and changed
-dot[0] = 2
+//dot[0] = 2
+dot[0] = [Math.floor(scrW*scrH/2), 2]
+
+function runCheck() {
+    try {
+        loop()
+    } catch(e) {
+        errorText = "Error running: " + e;
+    }
+}
 
 var debugColors = true;
 function loop() {
@@ -34,17 +48,19 @@ function loop() {
     
     // update
 	for (var i = 0; i<dot.length; i++) {
-        if (Math.random() > 0.05) break;
-        if (dot[i] == 2) {
-            dot[i] = 2
-        } else if (dot[i] == 1) {
-            dot[i] = 0
+        //if (Math.random() > 0.05) break;
+        var xy = dot[i][0];
+        var d = dot[i][1];
+        if (d == 2) {
+            dot[i][1] = 2
+        } else if (d == 1) {
+            dot[i][1] = 0
         }
         
-        dot[i + w + 1] = 2
+        dot[i + w + 1] = [xy - scrW - 1]
     };
-    if (dot.length > w*h) {
-        var excessiveItems = dot.length - w*h
+    if (dot.length > scrW*scrH) {
+        var excessiveItems = dot.length - scrW*scrH
         for (var i = 0; i < excessiveItems; i ++) {
             dot.pop()
         }
@@ -53,22 +69,27 @@ function loop() {
     //  draw
     for (var i = 0; i<dot.length; i++) {
         //console.log(i)
-        if(dot[i] > 0) {
+        var xy = dot[i][0];
+        var d  = dot[i][1];
+        if(d > 0) {
             c.fillStyle = "#000";
             if (debugColors) {
-                if (dot[i] == 2)
+                if (d == 2)
                 	c.fillStyle = "#555";
             }
             
-            var x = Math.floor(dot[i] % w);
-            var y = Math.floor(dot[i] / w)
-            c.fillRect(x,y, 1,1)
+            var x = Math.floor(xy % scrW);
+            var y = Math.floor(xy / scrH)
+            c.fillRect(x,y, size,size)
         }
     };
     
-    loop()
+    c.fillStyle = "#F00";
+    c.fillText(errorText, 0,0)
+    
+    runCheck()
 }
 
-loop()</script>
+runCheck()</script>
 </body>
 </html>
